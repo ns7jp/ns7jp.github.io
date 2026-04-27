@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸の作品ページ。HTML/CSSの企業サイト、Pythonアプリ、PHPの掲示板・SNSアプリなどの制作実績を掲載しています。">
+    <title>作品 | 島田則幸のポートフォリオ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <p class="res-menu">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </p>
+
+    <!-- Header -->
+    <header>
+        <h1 class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li class="active"><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero" style="background-image: url('image/works.jpg');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h2 class="page-title">
+                <span class="title-en">Works</span>
+                <span class="title-jp">作品</span>
+            </h2>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <article class="page-content">
+        <div class="container">
+            <!-- Works Intro -->
+            <section class="works-intro">
+                <div class="intro-content">
+                    <div class="intro-image">
+                        <img src="image/image.jpg" alt="プロフィール">
+                    </div>
+                    <div class="intro-text">
+                        <h3>職業訓練での制作実績</h3>
+                        <p>未経験から職業訓練でWebサイト・アプリ制作を学び、以下の作品を制作しました。HTML/CSS、Python、PHPなど、学習した技術を実際の作品に応用しています。</p>
+                        <p>各作品には使用技術と学習ポイントを記載しています。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter Tabs -->
+            <section class="filter-section">
+                <div class="filter-tabs">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="html">HTML/CSS</button>
+                    <button class="filter-btn" data-filter="python">Python</button>
+                    <button class="filter-btn" data-filter="php">PHP</button>
+                </div>
+            </section>
+
+            <!-- Works Grid -->
+            <section class="works-section">
+                <div class="works-showcase">
+                    <!-- Work Item 1 - HTML/CSS -->
+                    <div class="work-showcase-item" id="work-magic" data-category="html">
+                        <div class="work-image-container">
+                            <img src="image/magic.png" alt="サンプル企業サイト">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">HTML / CSS</span>
+                                    <h4>サンプル企業サイト</h4>
+                                    <p>レスポンシブ対応のサンプル企業サイト</p>
+                                    <div class="overlay-buttons">
+                                        <a href="http://shimada.atwebpages.com/magic/" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-brands fa-html5"></i> HTML/CSS</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>サンプル企業サイト</h4>
+                            <p>コーディング課題として作成したサンプル企業サイトです。JavaScriptで躍動感を表現し、レスポンシブデザインにも対応しています。Flexbox、CSS Gridを活用したモダンなレイアウトを採用しました。</p>
+                            <ul class="work-points">
+                                <li>レスポンシブ対応を意識し、PC・スマートフォンの両方で見やすい構成にしました。</li>
+                                <li>JavaScriptとjQueryを使い、静的なページに動きと操作感を加えました。</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>JavaScript</span>
+                                <span>jQuery</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Work Item 2 - Python -->
+                    <div class="work-showcase-item" id="work-notes" data-category="python">
+                        <div class="work-image-container">
+                            <img src="image/notes.png" alt="付箋アプリ">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Python</span>
+                                    <h4>付箋アプリ</h4>
+                                    <p>デスクトップ上で自由に使える付箋アプリ</p>
+                                    <div class="overlay-buttons">
+                                        <a href="https://github.com/ns7jp/works/blob/main/sticky_notes.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-code"></i> Code View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-brands fa-python"></i> Python</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>付箋アプリ</h4>
+                            <p>Pythonのtkinterを使った、デスクトップ上で自由に使える付箋アプリです。複数の付箋を作成・管理でき、メモやタスク管理に便利です。</p>
+                            <ul class="work-points">
+                                <li>tkinterでGUI部品の配置とイベント処理を学習しました。</li>
+                                <li>日常的に使える小さなツールとして、操作の分かりやすさを重視しました。</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>tkinter</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Work Item 3 - Python -->
+                    <div class="work-showcase-item" id="work-teikei" data-category="python">
+                        <div class="work-image-container">
+                            <img src="image/teikei.png" alt="定型文管理アプリ">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Python</span>
+                                    <h4>定型文管理アプリ</h4>
+                                    <p>Fletフレームワークを用いたテンプレート管理ツール</p>
+                                    <div class="overlay-buttons">
+                                        <a href="https://github.com/ns7jp/works/blob/main/teikei_kanri.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-code"></i> Code View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-brands fa-python"></i> Python</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>定型文管理アプリ</h4>
+                            <p>テンプレートの作成、編集、保存、削除ができます。テキスト形式の定型文（テンプレート）を新規作成したり、既存のものを編集・保存・削除したりできます。</p>
+                            <ul class="work-points">
+                                <li>Fletを使い、Pythonでデスクトップ寄りの画面UIを作成しました。</li>
+                                <li>定型文の保存・編集・削除という基本的なCRUD操作を実装しました。</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>flet</span>
+                                <span>pathlib</span>
+                                <span>pyperclip</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Work Item 4 - PHP -->
+                    <div class="work-showcase-item" id="work-post" data-category="php">
+                        <div class="work-image-container">
+                            <img src="image/post.png" alt="掲示板アプリ">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">PHP</span>
+                                    <h4>掲示板アプリ</h4>
+                                    <p>データベース連携の掲示板アプリ</p>
+                                    <div class="overlay-buttons">
+                                        <a href="http://shimada.atwebpages.com/post/login.php" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-brands fa-php"></i> PHP</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>掲示板アプリ</h4>
+                            <p>PHPとデータベースを使用した掲示板アプリです。ユーザー登録、ログイン、投稿、返信機能を備えています。セキュリティ対策として、SQLインジェクション対策やXSS対策も施しています。</p>
+                            <ul class="work-points">
+                                <li>ログイン、投稿、返信など、Webアプリに必要な基本機能を一通り実装しました。</li>
+                                <li>PDO、セッション管理、入力値の扱いなど、バックエンドの基礎を確認しました。</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span>PHP</span>
+                                <span>SQL</span>
+                                <span>PDO</span>
+                                <span>Session</span>
+                            </div>
+                        </div>
+                    </div>
+
+                        <!-- Work Item 5 - PHP -->
+                    <div class="work-showcase-item" id="work-pulse" data-category="php">
+                        <div class="work-image-container">
+                            <img src="image/pulse.png" alt="SNSアプリ">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">PHP</span>
+                                    <h4>SNSアプリ</h4>
+                                    <p>データベース連携のSNSアプリ</p>
+                                    <div class="overlay-buttons">
+                                        <a href="http://shimada.atwebpages.com/pulse/login.php" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-brands fa-php"></i> PHP</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>SNSアプリ</h4>
+                            <p>Pulse は、感情をベースにしたSNSです。投稿時に「喜び」「愛」「穏やか」「活力」「悲しみ」「怒り」「驚き」「不安」の8つのムードから今の気分を選び、メッセージと一緒に共有します。投稿カードはムードの色で彩られ、タイムラインが感情のグラデーションで表現されます。
+                                「いいね」の代わりに「共鳴」ボタンを搭載しており、共感した投稿に波紋エフェクト付きのリアクションを送れます。投稿への返信もムード付きで行えるため、言葉と感情の両方で対話が生まれます。
+                                匿名で投稿できる「ささやきモード」と、未来の日時に自動公開される「タイムカプセル」機能も備えています。
+                                サイドバーの「感情天気予報」では、直近24時間のコミュニティ全体のムード分布をグラフで確認できます。また、プロフィールページには直近7日間の感情傾向を可視化した「感情オーラ」が表示され、そのユーザーの感情の個性がひと目で伝わります。
+                                フォロー機能やムードフィルターによるタイムラインの絞り込みにも対応しており、プロフィールからはパルス履歴・フォロワー・フォロー中の詳細を確認できます。
+                            </p>
+                            <ul class="work-points">
+                                <li>投稿、返信、フォロー、フィルターなど、複数機能を組み合わせたSNS形式のアプリです。</li>
+                                <li>感情を軸にしたUI設計により、単なる掲示板ではなく体験の違いが伝わるようにしました。</li>
+                            </ul>
+                            <div class="tech-tags">
+                                <span>PHP</span>
+                                <span>SQL</span>
+                                <span>セキュリティ</span>
+                                <span>JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+
+            <!-- Coming Soon -->
+            <section class="coming-soon">
+                <div class="coming-soon-content">
+                    <i class="fa-solid fa-rocket"></i>
+                    <h3>More Works Coming Soon</h3>
+                    <p>現在も新しい作品を制作中です。学習を重ね、さらに多くの作品を追加していく予定です。</p>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="me.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="works.html">Works</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+
+<script>
+    // Loader
+    $(window).on('load', function() {
+        $('.loader').fadeOut(800);
+    });
+
+    // Mobile Menu
+    $(".res-menu").click(function () {
+        $("nav").toggleClass("show");
+        $(".res-menu").toggleClass("show2");
+    });
+
+    // Header scroll effect
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('header').addClass('scrolled');
+        } else {
+            $('header').removeClass('scrolled');
+        }
+    });
+
+    // Filter functionality
+    $('.filter-btn').click(function() {
+        $('.filter-btn').removeClass('active');
+        $(this).addClass('active');
+        
+        var filter = $(this).data('filter');
+        
+        if (filter === 'all') {
+            $('.work-showcase-item').fadeIn(400);
+        } else {
+            $('.work-showcase-item').fadeOut(200);
+            $('.work-showcase-item[data-category="' + filter + '"]').fadeIn(400);
+        }
+    });
+
+    // Animate on scroll
+    $(window).scroll(function() {
+        $('.work-showcase-item').each(function() {
+            var elementTop = $(this).offset().top;
+            var windowBottom = $(window).scrollTop() + $(window).height();
+            if (windowBottom > elementTop + 50) {
+                $(this).addClass('visible');
+            }
+        });
+    });
+</script>
+</body>
+</html>

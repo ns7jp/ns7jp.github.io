@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸のスキルページ。HTML/CSS、Python、PHP、JavaScriptなど、職業訓練で学習した技術を掲載しています。">
+    <title>スキル | 島田則幸のポートフォリオ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <p class="res-menu">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </p>
+
+    <!-- Header -->
+    <header>
+        <h1 class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li class="active"><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero" style="background-image: url('image/skills.jpg');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h2 class="page-title">
+                <span class="title-en">Skills</span>
+                <span class="title-jp">スキル</span>
+            </h2>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <article class="page-content">
+        <div class="container">
+            <!-- Skills Overview -->
+            <section class="skills-overview">
+                <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した技術スキルをご紹介します。<br>各技術はポートフォリオ作品として実際に活用しています。</p>
+            </section>
+
+            <!-- Technical Skills -->
+            <section class="technical-skills">
+                <h3 class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-code"></i></span>
+                    <span class="heading-text">Technical Skills</span>
+                </h3>
+                
+                <div class="skill-cards-grid">
+                    <!-- Office -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large office">
+                                <i class="fa-solid fa-file-word"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>Microsoft Office</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>社内文書作成</li>
+                                <li>参考資料、長文作成</li>
+                                <li>差し込み印刷</li>
+                                <li>Excel関数・マクロ基礎</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- HTML/CSS -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large html">
+                                <i class="fa-brands fa-html5"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>HTML / CSS</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>セマンティックHTML</li>
+                                <li>レスポンシブデザイン</li>
+                                <li>Flexbox / CSS Grid</li>
+                                <li>アニメーション</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- JavaScript -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large js">
+                                <i class="fa-brands fa-js"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>JavaScript</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 30%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>DOM操作</li>
+                                <li>イベントハンドリング</li>
+                                <li>jQuery</li>
+                                <li>非同期処理基礎</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Python -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large python">
+                                <i class="fa-brands fa-python"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>Python</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 80%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>基本文法</li>
+                                <li>データ処理</li>
+                                <li>ファイル操作</li>
+                                <li>ライブラリ活用</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- PHP -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large php">
+                                <i class="fa-brands fa-php"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>PHP</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>フォーム処理・PDO</li>
+                                <li>セッション認証</li>
+                                <li>CSRF・XSS対策</li>
+                                <li>bcryptパスワード管理</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Database -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large db">
+                                <i class="fa-solid fa-database"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>Database</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>SQLite（Pulse：PDO／自動生成）</li>
+                                <li>MySQL基礎（掲示板：XAMPP）</li>
+                                <li>SQL文・CRUD操作</li>
+                                <li>テーブル設計・外部キー</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tools & Software -->
+            <section class="tools-section">
+                <h3 class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-tools"></i></span>
+                    <span class="heading-text">Tools & Software</span>
+                </h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <i class="fa-brands fa-github"></i>
+                        <span>GitHub</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fa-solid fa-terminal"></i>
+                        <span>VS Code</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fa-solid fa-server"></i>
+                        <span>XAMPP</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fa-brands fa-chrome"></i>
+                        <span>DevTools</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Soft Skills -->
+            <section class="soft-skills-section">
+                <h3 class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-users"></i></span>
+                    <span class="heading-text">Soft Skills</span>
+                </h3>
+                <div class="soft-skills-grid">
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+                        <h4>学習意欲</h4>
+                        <p>新技術への興味と継続的な学習姿勢</p>
+                    </div>
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h4>問題解決力</h4>
+                        <p>論理的思考による課題の分析と解決</p>
+                    </div>
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <h4>時間管理</h4>
+                        <p>締め切りを守る計画的な作業進行</p>
+                    </div>
+                    <div class="soft-skill-item">
+                        <div class="soft-skill-icon">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <h4>コミュニケーション</h4>
+                        <p>少人数チームでの協力作業、要件の確認・共有</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="me.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="works.html">Works</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+
+<script>
+    // Loader
+    $(window).on('load', function() {
+        $('.loader').fadeOut(800);
+    });
+
+    // Mobile Menu
+    $(".res-menu").click(function () {
+        $("nav").toggleClass("show");
+        $(".res-menu").toggleClass("show2");
+    });
+
+    // Header scroll effect
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('header').addClass('scrolled');
+        } else {
+            $('header').removeClass('scrolled');
+        }
+
+        // Animate skill bars on scroll
+        $('.skill-detail-card').each(function() {
+            var elementTop = $(this).offset().top;
+            var windowBottom = $(window).scrollTop() + $(window).height();
+            if (windowBottom > elementTop + 50) {
+                $(this).addClass('visible');
+            }
+        });
+    });
+</script>
+</body>
+</html>

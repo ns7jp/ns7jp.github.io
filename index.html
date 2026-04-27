@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="島田則幸のポートフォリオ" > 
+    <meta property="og:type" content="website" >
+    <meta property="og:url" content="http://shimada.atwebpages.com/pf/" >
+    <meta name="description" content="島田則幸のポートフォリオ。職業訓練で制作したWebサイト、Pythonアプリ、PHPアプリの実績を掲載しています。">
+    <meta property="og:image" content="http://shimada.atwebpages.com/pf/image/works.jpg" >
+    <meta property="og:site_name" content="島田則幸のポートフォリオ" > 
+    <meta property="og:description" content="島田則幸のポートフォリオ。職業訓練で学習した内容をもとに作品を掲載しています。"> 
+    <title>島田則幸のポートフォリオ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/jquery.bgswitcher.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <p class="res-menu">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </p>
+
+    <!-- Header -->
+    <header>
+        <h1 class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-slider"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-greeting animate-fade-in">Welcome to my portfolio</p>
+            <h2 class="hero-title animate-slide-up">
+                <span class="line1">Creative</span>
+                <span class="line2">Web Developer</span>
+            </h2>
+            <p class="hero-description animate-fade-in-delay">職業訓練で学んだスキルを活かし、<br>機能的なWebサイトを制作しました</p>
+            <div class="hero-buttons animate-fade-in-delay2">
+                <a href="works.html" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View Works</a>
+                <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Quick Intro Section -->
+    <section class="quick-intro">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h3 class="section-title">
+                        <span class="title-en">About</span>
+                        <span class="title-jp">私について</span>
+                    </h3>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在ITエンジニアへの転職活動中です。HTML/CSS・Python・PHPを習得し、5作品を制作・公開しました。</p>
+                    <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <a href="me.html">
+                <div class="intro-image">
+                    <img src="image/image.jpg" alt="プロフィール画像">
+                </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Preview -->
+    <section class="skills-preview">
+        <div class="container">
+            <h3 class="section-title center">
+                <span class="title-en">Skills</span>
+                <span class="title-jp">スキル</span>
+            </h3>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-brands fa-html5"></i>
+                    </div>
+                    <h4>HTML/CSS</h4>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="60"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-brands fa-python"></i>
+                    </div>
+                    <h4>Python</h4>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="75"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-brands fa-php"></i>
+                    </div>
+                    <h4>PHP</h4>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="60"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-brands fa-js"></i>
+                    </div>
+                    <h4>JavaScript</h4>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="30"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-link">
+                <a href="skills.html" class="btn btn-secondary">すべてのスキルを見る <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Preview -->
+    <section class="works-preview">
+        <div class="container">
+            <h3 class="section-title center light">
+                <span class="title-en">Works</span>
+                <span class="title-jp">作品</span>
+            </h3>
+            <div class="works-grid">
+                <div class="work-card">
+                    <a href="works.html#work-magic">
+                    <div class="work-image" style="background-image: url('image/magic.png')">
+                        <div class="work-overlay">
+                            <span class="work-category">HTML/CSS</span>
+                            <h4>サンプル企業サイト</h4>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="work-card">
+                    <a href="works.html#work-notes">
+                    <div class="work-image" style="background-image: url('image/notes.png')">
+                        <div class="work-overlay">
+                            <span class="work-category">Python</span>
+                            <h4>付箋アプリ</h4>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="work-card">
+                    <a href="works.html#work-post">
+                    <div class="work-image" style="background-image: url('image/post.png')">
+                        <div class="work-overlay">
+                            <span class="work-category">PHP</span>
+                            <h4>掲示板アプリ</h4>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <div class="section-link">
+                <a href="works.html" class="btn btn-light">すべての作品を見る <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h3>作品や学習内容についてご確認いただけます</h3>
+                <p>応募・面談に関するご連絡は、連絡先ページからお願いいたします。</p>
+                <a href="contact.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-envelope"></i> 連絡先を見る</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="me.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="works.html">Works</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+
+<script>
+    // Loader
+    $(window).on('load', function() {
+        $('.loader').fadeOut(800);
+    });
+
+    // Mobile Menu
+    $(".res-menu").click(function () {
+        $("nav").toggleClass("show");
+        $(".res-menu").toggleClass("show2");
+    });
+
+    // Hero Background Slider
+    $(".hero-slider").bgswitcher({
+        images: [
+            "image/works.jpg",
+            "image/me.jpg",
+            "image/contact.jpg",
+            "image/skills.jpg",
+        ],
+        effect: "fade",
+        shuffle: true,
+        easing: "swing",
+        duration: 1500,
+        interval: 5000
+    });
+
+    // Scroll Animation
+    $(window).scroll(function() {
+        // Header shrink
+        if ($(this).scrollTop() > 100) {
+            $('header').addClass('scrolled');
+        } else {
+            $('header').removeClass('scrolled');
+        }
+
+        // Skill bars animation
+        $('.skill-progress').each(function() {
+            var elementTop = $(this).offset().top;
+            var windowBottom = $(window).scrollTop() + $(window).height();
+            if (windowBottom > elementTop) {
+                var progress = $(this).data('progress');
+                $(this).css('width', progress + '%');
+            }
+        });
+
+        // Fade in on scroll
+        $('.quick-intro, .skills-preview, .works-preview, .contact-cta').each(function() {
+            var elementTop = $(this).offset().top;
+            var windowBottom = $(window).scrollTop() + $(window).height();
+            if (windowBottom > elementTop + 100) {
+                $(this).addClass('visible');
+            }
+        });
+    });
+
+    // Smooth scroll
+    $('a[href^="#"]').on('click', function(e) {
+        e.preventDefault();
+        var target = $(this.getAttribute('href'));
+        if (target.length) {
+            $('html, body').animate({
+                scrollTop: target.offset().top - 80
+            }, 800);
+        }
+    });
+</script>
+</body>
+</html>
