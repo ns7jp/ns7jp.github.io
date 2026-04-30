@@ -113,6 +113,11 @@
                                 <li>CSRF・XSS・SQLインジェクション対策、bcryptパスワード管理など、セキュリティを意識した実装を行いました。</li>
                                 <li>SQLiteをPDO経由で操作し、DBファイルを自動生成することで環境構築の手間を省きました。</li>
                             </ul>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>開発環境と本番サーバーでSQLiteファイルの初期化挙動が異なり、デプロイ直後に「DBが存在しない」エラーが発生。</p>
+                                <p><span class="trouble-label solution">解決</span>起動時にDBファイルの有無を確認し、無ければスキーマを自動生成する処理を追加。環境ごとの手動セットアップが不要となった。</p>
+                            </div>
                             <div class="tech-tags">
                                 <span>PHP</span>
                                 <span>SQLite</span>
@@ -151,6 +156,11 @@
                                 <li>ログイン・投稿・返信などWebアプリに必要な基本機能を一通り実装しました。</li>
                                 <li>PDO・セッション管理・入力値サニタイズなど、バックエンドのセキュリティ基礎を学びました。</li>
                             </ul>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>DB認証情報を db.php に直接記述しており、GitHub公開時に漏洩リスクがあることが判明。</p>
+                                <p><span class="trouble-label solution">解決</span>db.php を .gitignore で除外し、プレースホルダ版 db.example.php を別途用意。READMEに環境構築手順を記載し、第三者が安全にローカル展開できる構成へ変更。</p>
+                            </div>
                             <div class="tech-tags">
                                 <span>PHP</span>
                                 <span>MySQL</span>
@@ -187,6 +197,11 @@
                                 <li>Fletを使い、PythonだけでGUIアプリを作れることを学びました。</li>
                                 <li>定型文の保存・編集・削除という基本的なCRUD操作を実装しました。</li>
                             </ul>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>JSON保存時に日本語が <code>\uXXXX</code> 形式でエスケープされ、ファイルを直接開いても内容を確認できない。</p>
+                                <p><span class="trouble-label solution">解決</span><code>json.dump(..., ensure_ascii=False, indent=2)</code> を指定し、日本語のまま整形保存。トラブル時のデータ確認が容易になった。</p>
+                            </div>
                             <div class="tech-tags">
                                 <span>Python</span>
                                 <span>Flet</span>
@@ -222,6 +237,11 @@
                                 <li>tkinterでGUI部品の配置とイベント処理を学習しました。</li>
                                 <li>日常的に使えるツールとして、操作のわかりやすさを重視しました。</li>
                             </ul>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>付箋を移動して配置を変えても、再起動すると毎回初期位置に戻ってしまう。</p>
+                                <p><span class="trouble-label solution">解決</span>ウィンドウ終了時のイベントで <code>geometry()</code> を取得しJSONに保存、起動時に読み込んで位置を復元する処理に変更。</p>
+                            </div>
                             <div class="tech-tags">
                                 <span>Python</span>
                                 <span>tkinter</span>
@@ -257,6 +277,11 @@
                                 <li>Flexbox・CSS Gridによるレスポンシブレイアウトと、モバイルファーストのCSS設計を学びました。</li>
                                 <li>jQuery不使用でVanilla JSによるDOM操作・IntersectionObserverを活用しました。</li>
                             </ul>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>モバイルでハンバーガーメニューを開いたまま画面幅を変えると、メニューが閉じずレイアウトが崩れる。</p>
+                                <p><span class="trouble-label solution">解決</span><code>resize</code> イベントを監視し、PC幅に戻った時点でメニュー状態をリセットする処理を追加。複数ブレイクポイントで動作確認を実施。</p>
+                            </div>
                             <div class="tech-tags">
                                 <span>HTML5</span>
                                 <span>CSS3</span>
