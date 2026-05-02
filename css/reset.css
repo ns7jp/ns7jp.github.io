@@ -1,8 +1,28 @@
 @charset "utf-8";
+/* ========================================================================
+   ファイル名 : reset.css
+   役割       : ブラウザごとのデフォルトスタイル差を「リセット」する
+   概要       : Chrome、Firefox、Safari、Edgeなどブラウザはそれぞれ独自の
+                標準スタイル（h1の文字サイズや余白など）を持っている。
+                それらをいったん0にそろえて、style.cssで思い通りに
+                スタイルを組み立てやすくするための土台ファイル。
+   読み込み順序：reset.css → style.css の順に読み込む（リセット→上書き）
+   ======================================================================== */
+
+/* ===== 基本フォントサイズ設定 =====
+   62.5% は10px相当（標準16px × 0.625 = 10px）。
+   こうしておくと、子要素で 1.6rem と書けば16pxになり、
+   px換算しやすくなる便利テクニック。
+   scroll-behaviorでアンカーリンクをスムーススクロールにする。 */
 html {
     font-size: 62.5%;
     scroll-behavior: smooth;
-    } 
+}
+
+/* ===== 主要タグの余白・余白・装飾を一括リセット =====
+   margin（外側余白）、padding（内側余白）、border（枠線）、
+   outline（フォーカス枠）を全て0にし、文字サイズや装飾も初期化。
+   こうすることで全ブラウザで「真っ白な状態」から組み立てられる。 */
 html, body, div, span, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 abbr, address, cite, code,
@@ -12,88 +32,111 @@ b, i,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
+article, aside, canvas, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section, summary,
 time, mark, audio, video {
-    margin:0;
-    padding:0;
-    border:0;
-    outline:0;
-    vertical-align:baseline;
-    background:transparent;
-    font-weight: normal;
+    margin: 0;             /* 外側の余白を0に */
+    padding: 0;            /* 内側の余白を0に */
+    border: 0;             /* 枠線を消す */
+    outline: 0;            /* フォーカス時の枠線を消す */
+    vertical-align: baseline; /* 縦方向の位置をベースラインにそろえる */
+    background: transparent;  /* 背景を透明に */
+    font-weight: normal;   /* 太字をリセット（h1〜h6も普通の太さになる） */
 }
 
+/* ===== body の行間 =====
+   line-height: 1 は「文字サイズと同じ高さ」になる設定。
+   後でstyle.cssで読みやすい行間に上書きする想定。 */
 body {
-    line-height:1;
+    line-height: 1;
 }
 
-article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section { 
-    display:block;
+/* ===== HTML5新タグをブロック要素として扱う =====
+   article、section、navなどのHTML5タグは、古いブラウザでは
+   インライン扱いされることがあるため、明示的にブロック表示にする。 */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
 }
 
+/* ===== ナビゲーション内のリストの「・」を消す =====
+   nav内の<ul><li>はメニュー項目として使うため、箇条書きの記号は不要。 */
 nav ul {
-    list-style:none;
+    list-style: none;
 }
 
+/* ===== blockquote / q の引用符を消す =====
+   ブラウザによっては引用要素に自動で「"」が入ることがあるためリセット。 */
 blockquote, q {
-    quotes:none;
+    quotes: none;
 }
-
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content:'';
-    content:none;
+    content: '';
+    content: none;
 }
 
+/* ===== aタグ（リンク）の装飾リセット =====
+   text-decoration: none で下線を消す。
+   後でstyle.cssでホバー時の色変化などを定義する。 */
 a {
-    margin:0;
-    padding:0;
-    font-size:100%;
-    vertical-align:baseline;
-    background:transparent;
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
     text-decoration: none;
 }
 
-/* change colours to suit your needs */
+/* ===== ins（追加テキスト）の表示色 =====
+   コメント通り「お好みで色を変更してください」という汎用設定。 */
 ins {
-    background-color:#ff9;
-    color:#000;
-    text-decoration:none;
+    background-color: #ff9;
+    color: #000;
+    text-decoration: none;
 }
 
-/* change colours to suit your needs */
+/* ===== mark（マーカー）の表示色 =====
+   蛍光ペンのように目立たせたい部分のスタイル。 */
 mark {
-    background-color:#ff9;
-    color:#000; 
-    font-style:italic;
-    font-weight:bold;
+    background-color: #ff9;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
 }
 
+/* ===== del（削除テキスト）に取り消し線 =====
+   <del>で囲まれた文字に取り消し線を引く。 */
 del {
     text-decoration: line-through;
 }
 
+/* ===== abbr / dfn（略語・定義）にホバー時のヘルプ表示 =====
+   下に点線、マウスを乗せるとヘルプカーソルに変わる。 */
 abbr[title], dfn[title] {
-    border-bottom:1px dotted;
-    cursor:help;
+    border-bottom: 1px dotted;
+    cursor: help;
 }
 
+/* ===== table（表）の枠線処理 =====
+   セル間の境界をくっつけて1本線にする（border-collapse）。 */
 table {
-    border-collapse:collapse;
-    border-spacing:0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-/* change border colour to suit your needs */
+/* ===== hr（横区切り線）のスタイル =====
+   ブラウザの初期スタイル（立体的な線）を消し、シンプルな1本線に。 */
 hr {
-    display:block;
-    border:0;   
-    border-top:1px solid #cccccc;
-    margin:1em 0;
-    padding:0;
+    display: block;
+    border: 0;
+    border-top: 1px solid #cccccc;
+    margin: 1em 0;
+    padding: 0;
 }
 
+/* ===== input / select の縦方向位置 =====
+   フォーム部品の縦位置を周囲のテキストに揃える。 */
 input, select {
-    vertical-align:middle;
+    vertical-align: middle;
 }
