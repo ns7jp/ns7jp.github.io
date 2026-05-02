@@ -1,10 +1,24 @@
 <!DOCTYPE html>
+<!--
+========================================================================
+  ファイル名 : skills.html
+  役割       : スキル一覧ページ
+  概要       : 技術スキル（Office・HTML/CSS・JS・Python・PHP・DB）、
+               ITサポートスキル、ツール、ソフトスキルの4ブロックを表示する。
+               各スキルは星評価＋進捗バー＋習得項目で構成。
+========================================================================
+-->
 <html lang="ja">
 <head>
+    <!-- 文字コード指定（UTF-8で日本語を正しく表示する） -->
     <meta charset="UTF-8">
+    <!-- スマホ対応のviewport設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 検索エンジン用の説明文 -->
     <meta name="description" content="島田則幸のスキルページ。HTML/CSS、Python、PHP、JavaScriptに加え、PC・IT基礎、セキュリティ・トラブル対応、ドキュメント整備などITサポート関連スキルも掲載しています。">
     <title>スキル | 島田則幸のポートフォリオ</title>
+
+    <!-- jQueryと共通スタイル類の読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
@@ -13,7 +27,8 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Loader -->
+
+    <!-- ===== ローダー（読み込み中の演出） ===== -->
     <div class="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
@@ -21,13 +36,13 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Toggle -->
+    <!-- ===== モバイル用メニュー切替ボタン ===== -->
     <p class="res-menu">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </p>
 
-    <!-- Header -->
+    <!-- ===== ヘッダー（全ページ共通） ===== -->
     <header>
         <h1 class="logo">
             <a href="index.html">
@@ -38,6 +53,7 @@
         <nav>
             <ul>
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <!-- 現在ページ「Skills」を active クラスで強調 -->
                 <li class="active"><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
@@ -45,7 +61,8 @@
         </nav>
     </header>
 
-    <!-- Page Hero -->
+    <!-- ===== ページヒーロー（ページ上部の見出しエリア） ===== -->
+    <!-- このページ専用の背景画像を style 属性で直接指定 -->
     <section class="page-hero" style="background-image: url('image/skills.jpg');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
@@ -56,30 +73,36 @@
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- ===== メインコンテンツ ===== -->
     <article class="page-content">
         <div class="container">
-            <!-- Skills Overview -->
+
+            <!-- ===== スキル概要文 ===== -->
             <section class="skills-overview">
                 <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発技術に加え、製造現場で培ったITサポート関連スキルをご紹介します。<br>各技術はポートフォリオ作品として実際に活用しています。</p>
             </section>
 
-            <!-- Technical Skills -->
+            <!-- ===== 技術スキル（プログラミング系）セクション ===== -->
             <section class="technical-skills">
                 <h3 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-code"></i></span>
                     <span class="heading-text">Technical Skills</span>
                 </h3>
-                
+
+                <!-- スキルカードを並べるグリッドコンテナ -->
                 <div class="skill-cards-grid">
-                    <!-- Office -->
+
+                    <!-- ----- Office スキルカード ----- -->
                     <div class="skill-detail-card">
+                        <!-- カード上部：アイコンと、スキル名・星評価 -->
                         <div class="skill-header">
+                            <!-- スキル種別ごとに色分けする識別クラス（office, html, jsなど） -->
                             <div class="skill-icon-large office">
                                 <i class="fa-solid fa-file-word"></i>
                             </div>
                             <div class="skill-title">
                                 <h4>Microsoft Office</h4>
+                                <!-- 星5段階評価。filledクラスが付いた星はCSSで色付き表示 -->
                                 <div class="skill-level">
                                     <span class="star filled"><i class="fa-solid fa-star"></i></span>
                                     <span class="star filled"><i class="fa-solid fa-star"></i></span>
@@ -89,9 +112,11 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 進捗バー（width%でスキル習熟度を視覚化） -->
                         <div class="skill-progress-bar">
                             <div class="progress" style="width: 60%"></div>
                         </div>
+                        <!-- 具体的な習得項目をリストで列挙 -->
                         <div class="skill-description">
                             <ul>
                                 <li>社内文書作成</li>
@@ -102,7 +127,7 @@
                         </div>
                     </div>
 
-                    <!-- HTML/CSS -->
+                    <!-- ----- HTML/CSS スキルカード ----- -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large html">
@@ -132,7 +157,7 @@
                         </div>
                     </div>
 
-                    <!-- JavaScript -->
+                    <!-- ----- JavaScript スキルカード ----- -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large js">
@@ -162,7 +187,7 @@
                         </div>
                     </div>
 
-                    <!-- Python -->
+                    <!-- ----- Python スキルカード ----- -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large python">
@@ -192,7 +217,7 @@
                         </div>
                     </div>
 
-                    <!-- PHP -->
+                    <!-- ----- PHP スキルカード ----- -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large php">
@@ -222,7 +247,7 @@
                         </div>
                     </div>
 
-                    <!-- Database -->
+                    <!-- ----- Database スキルカード ----- -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large db">
@@ -254,7 +279,8 @@
                 </div>
             </section>
 
-            <!-- IT Support Skills -->
+            <!-- ===== ITサポートスキルセクション ===== -->
+            <!-- プログラミング以外の、現場で役立つ運用・対応スキルを紹介 -->
             <section class="soft-skills-section">
                 <h3 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-headset"></i></span>
@@ -292,7 +318,8 @@
                 </div>
             </section>
 
-            <!-- Tools & Software -->
+            <!-- ===== ツール・ソフトウェアセクション ===== -->
+            <!-- 開発で日常的に使っているツールをアイコン付きで一覧表示 -->
             <section class="tools-section">
                 <h3 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-tools"></i></span>
@@ -318,7 +345,8 @@
                 </div>
             </section>
 
-            <!-- Soft Skills -->
+            <!-- ===== ソフトスキルセクション ===== -->
+            <!-- 技術以外の、人柄や働き方に関するスキル -->
             <section class="soft-skills-section">
                 <h3 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-users"></i></span>
@@ -358,7 +386,7 @@
         </div>
     </article>
 
-    <!-- Footer -->
+    <!-- ===== フッター（全ページ共通） ===== -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -381,30 +409,38 @@
         </div>
     </footer>
 
+<!-- ============================================================
+     JavaScript（jQuery）処理：このページに動きを付ける
+============================================================ -->
 <script>
-    // Loader
+    // ===== ローダーの非表示処理 =====
+    // ページ読み込み完了時に、ローディング画面をフェードアウト
     $(window).on('load', function() {
         $('.loader').fadeOut(800);
     });
 
-    // Mobile Menu
+    // ===== ハンバーガーメニュー開閉処理 =====
     $(".res-menu").click(function () {
         $("nav").toggleClass("show");
         $(".res-menu").toggleClass("show2");
     });
 
-    // Header scroll effect
+    // ===== スクロール時の演出 =====
     $(window).scroll(function() {
+        // ヘッダー縮小：100px以上スクロールでscrolledクラス付与
         if ($(this).scrollTop() > 100) {
             $('header').addClass('scrolled');
         } else {
             $('header').removeClass('scrolled');
         }
 
-        // Animate skill bars on scroll
+        // スキルカードを順番にフェードイン表示
+        // 各 .skill-detail-card が画面に入ったら「visible」クラスを付与
+        // → CSSで透明度や位置をアニメーションさせる
         $('.skill-detail-card').each(function() {
-            var elementTop = $(this).offset().top;
-            var windowBottom = $(window).scrollTop() + $(window).height();
+            var elementTop = $(this).offset().top;                            // 要素の上端位置
+            var windowBottom = $(window).scrollTop() + $(window).height();    // 画面下端位置
+            // 画面下端が要素の上端を50px以上越えたら、表示状態に切り替え
             if (windowBottom > elementTop + 50) {
                 $(this).addClass('visible');
             }

@@ -1,10 +1,21 @@
 <!DOCTYPE html>
+<!--
+========================================================================
+  ファイル名 : contact.html
+  役割       : 連絡先（お問い合わせ）ページ
+  概要       : メール・GitHub・所在地などの連絡情報をカード表示し、
+               採用担当者向けメッセージとFAQも掲載する。
+========================================================================
+-->
 <html lang="ja">
 <head>
+    <!-- 文字コードと表示設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="島田則幸の連絡先ページ。ポートフォリオ、作品、学習内容に関する連絡先を掲載しています。">
     <title>お問い合わせ | 島田則幸のポートフォリオ</title>
+
+    <!-- jQueryと共通スタイル類の読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
@@ -13,7 +24,8 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Loader -->
+
+    <!-- ===== ローダー ===== -->
     <div class="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
@@ -21,13 +33,13 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Toggle -->
+    <!-- ===== モバイル用メニュー切替ボタン ===== -->
     <p class="res-menu">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </p>
 
-    <!-- Header -->
+    <!-- ===== ヘッダー（共通） ===== -->
     <header>
         <h1 class="logo">
             <a href="index.html">
@@ -40,12 +52,13 @@
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <!-- 現在ページ「Contact」を active クラスで強調 -->
                 <li class="active"><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Page Hero -->
+    <!-- ===== ページヒーロー（ページ上部の見出しエリア） ===== -->
     <section class="page-hero" style="background-image: url('image/contact.jpg');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
@@ -56,33 +69,40 @@
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- ===== メインコンテンツ ===== -->
     <article class="page-content">
         <div class="container">
-            <!-- Contact Intro -->
+
+            <!-- ===== 連絡先イントロ ===== -->
             <section class="contact-intro">
                 <h1>連絡先</h1>
                 <p>作品や学習内容についてのご確認、応募・面談に関するご連絡は、以下の連絡先からお願いいたします。</p>
             </section>
 
-            <!-- Contact Section -->
+            <!-- ===== 連絡先カードセクション ===== -->
             <section class="contact-section">
+                <!-- 左：連絡情報カード／右：採用担当者向けメッセージカードの2カラム構成 -->
                 <div class="contact-grid">
-                    <!-- Contact Info -->
+
+                    <!-- ----- 左：連絡情報カード（Email・GitHub・所在地） ----- -->
                     <div class="contact-info-card">
                         <h3>Contact Information</h3>
                         <p class="info-description">現在確認できる連絡先を掲載しています</p>
-                        
+
+                        <!-- 連絡情報の一覧。アイコン＋ラベル＋値 の形式で並べる -->
                         <div class="contact-info-items">
+                            <!-- メール -->
                             <div class="info-item">
                                 <div class="info-icon">
                                     <i class="fa-solid fa-envelope"></i>
                                 </div>
                                 <div class="info-content">
                                     <span class="info-label">Email</span>
+                                    <!-- mailto: でクリックするとメーラーが起動 -->
                                     <a class="info-value" href="mailto:net7jp@gmail.com">net7jp@gmail.com</a>
                                 </div>
                             </div>
+                            <!-- GitHub -->
                             <div class="info-item">
                                 <div class="info-icon">
                                     <i class="fa-brands fa-github"></i>
@@ -92,6 +112,7 @@
                                     <a class="info-value" href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer">github.com/ns7jp</a>
                                 </div>
                             </div>
+                            <!-- 所在地（リンクなし） -->
                             <div class="info-item">
                                 <div class="info-icon">
                                     <i class="fa-solid fa-location-dot"></i>
@@ -103,20 +124,23 @@
                             </div>
                         </div>
 
+                        <!-- ソーシャルリンク（再掲。アイコンボタン形式） -->
                         <div class="social-links">
                             <h4>Links</h4>
                             <div class="social-icons">
+                                <!-- aria-labelはスクリーンリーダー用の代替テキスト（アクセシビリティ対応） -->
                                 <a href="https://github.com/ns7jp" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                                 <a href="mailto:net7jp@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Contact Message -->
+                    <!-- ----- 右：採用担当者向けメッセージカード ----- -->
                     <div class="contact-form-card contact-message-card">
                         <h3>For Recruiters</h3>
                         <p>ポートフォリオをご覧いただきありがとうございます。作品の内容、学習状況、面談日程などについてはメールでご連絡ください。</p>
                         <p>5作品すべてのソースコードをGitHubで公開しています（<a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer">github.com/ns7jp</a>）。デモサイトはWorksページから確認できます。</p>
+                        <!-- アクションボタン：メール送信／作品ページ -->
                         <div class="contact-actions">
                             <a href="mailto:net7jp@gmail.com" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> メールを送る</a>
                             <a href="works.html" class="btn btn-secondary"><i class="fa-solid fa-briefcase"></i> 作品を見る</a>
@@ -125,13 +149,15 @@
                 </div>
             </section>
 
-            <!-- FAQ Section -->
+            <!-- ===== FAQセクション ===== -->
+            <!-- よくある質問をQ&A形式で表示。アイコンで質問・回答を視覚的に区別。 -->
             <section class="faq-section">
                 <h3 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-circle-question"></i></span>
                     <span class="heading-text">よくある質問</span>
                 </h3>
                 <div class="faq-grid">
+                    <!-- FAQ項目1 -->
                     <div class="faq-item">
                         <div class="faq-question">
                             <i class="fa-solid fa-q"></i>
@@ -142,6 +168,7 @@
                             <span>メールでのご連絡をお願いいたします。</span>
                         </div>
                     </div>
+                    <!-- FAQ項目2 -->
                     <div class="faq-item">
                         <div class="faq-question">
                             <i class="fa-solid fa-q"></i>
@@ -157,7 +184,7 @@
         </div>
     </article>
 
-    <!-- Footer -->
+    <!-- ===== フッター（共通） ===== -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -180,19 +207,23 @@
         </div>
     </footer>
 
+<!-- ============================================================
+     JavaScript（jQuery）処理：このページに動きを付ける
+============================================================ -->
 <script>
-    // Loader
+    // ===== ローダーの非表示処理 =====
+    // 読み込み完了時にローダーを800ミリ秒かけてフェードアウト
     $(window).on('load', function() {
         $('.loader').fadeOut(800);
     });
 
-    // Mobile Menu
+    // ===== ハンバーガーメニュー開閉処理 =====
     $(".res-menu").click(function () {
         $("nav").toggleClass("show");
         $(".res-menu").toggleClass("show2");
     });
 
-    // Header scroll effect
+    // ===== スクロール連動：ヘッダーの縮小演出 =====
     $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
             $('header').addClass('scrolled');
@@ -201,7 +232,9 @@
         }
     });
 
-    // Form input animation
+    // ===== フォーム入力欄のフォーカス演出（このページでは未使用だが保持） =====
+    // 入力欄にフォーカスが入った時：親要素に「focused」クラスを付ける
+    // フォーカスが外れた時：値が空ならクラスを外す（フローティングラベル方式）
     $('.input-wrapper input, .textarea-wrapper textarea').focus(function() {
         $(this).parent().addClass('focused');
     }).blur(function() {

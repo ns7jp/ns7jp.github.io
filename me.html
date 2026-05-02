@@ -1,19 +1,39 @@
 <!DOCTYPE html>
+<!--
+========================================================================
+  ファイル名 : me.html
+  役割       : 自己紹介ページ
+  概要       : プロフィール画像・自己紹介文・経歴タイムライン・取得資格・
+               趣味の4ブロックで、人物像を伝えるページ。
+========================================================================
+-->
 <html lang="ja">
 <head>
+    <!-- 文字コード指定（日本語の文字化け防止） -->
     <meta charset="UTF-8">
+    <!-- スマホ対応：画面幅に合わせたサイズ調整 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 検索結果に表示されるページ説明文（SEO用） -->
     <meta name="description" content="島田則幸の自己紹介ページ。製造業での経験と、職業訓練で習得したHTML/CSS・Python・PHPの技術を活かしてITエンジニアへ転職活動中です。">
+    <!-- ブラウザのタブに表示されるタイトル -->
     <title>私について | 島田則幸のポートフォリオ</title>
+
+    <!-- jQuery本体（CDNから読み込み） -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- ブラウザ標準スタイルのリセット -->
     <link rel="stylesheet" href="css/reset.css">
+    <!-- このサイト独自のスタイル -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- アイコンフォント Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Googleフォント（日本語＋英字フォント） -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- ブラウザタブのアイコン -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Loader -->
+
+    <!-- ===== ローダー（読み込み中の画面） ===== -->
     <div class="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
@@ -21,13 +41,13 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Toggle -->
+    <!-- ===== モバイル用メニュートグル（ハンバーガーボタン） ===== -->
     <p class="res-menu">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </p>
 
-    <!-- Header -->
+    <!-- ===== ヘッダー（全ページ共通） ===== -->
     <header>
         <h1 class="logo">
             <a href="index.html">
@@ -37,6 +57,7 @@
         </h1>
         <nav>
             <ul>
+                <!-- 現在ページ「About Me」には class="active" を付けて、CSSで強調表示する -->
                 <li class="active"><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
@@ -45,8 +66,10 @@
         </nav>
     </header>
 
-    <!-- Page Hero -->
+    <!-- ===== ページヒーロー（各ページ上部の見出しエリア） ===== -->
+    <!-- インラインstyleで背景画像を直接指定（このページ専用の画像） -->
     <section class="page-hero" style="background-image: url('image/me.jpg');">
+        <!-- 背景画像の上に重ねる暗い半透明レイヤー（文字を読みやすくする） -->
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
             <h2 class="page-title">
@@ -56,28 +79,37 @@
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- ===== メインコンテンツ ===== -->
+    <!-- <article>はページの主要な独立コンテンツを表すセマンティックタグ -->
     <article class="page-content">
         <div class="container">
-            <!-- Profile Section -->
+
+            <!-- ===== プロフィールセクション ===== -->
             <section class="profile-section">
+                <!-- 画像エリアと文章エリアを2カラム構成にするGridレイアウト -->
                 <div class="profile-grid">
+                    <!-- 左：プロフィール画像 -->
                     <div class="profile-image">
+                        <!-- 画像をフレームで囲むデコレーション付き -->
                         <div class="image-frame">
                             <img src="image/image.jpg" alt="プロフィール画像">
                         </div>
+                        <!-- 画像の周りに飾り（角の装飾など）をCSSで追加するための空div -->
                         <div class="profile-decoration"></div>
                     </div>
+                    <!-- 右：氏名・自己紹介文・基本情報 -->
                     <div class="profile-text">
                         <h3 class="profile-name">
                             <span class="name-jp">島田 則幸</span>
                             <span class="name-en">Noriyuki Shimada</span>
                         </h3>
+                        <!-- 自己紹介文（複数の段落で構成） -->
                         <div class="profile-intro">
                             <p>はじめまして、島田則幸です。</p>
                             <p>2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了。HTML/CSS・Python・PHPを習得し、SNSアプリ・掲示板・静的サイトなど5作品のポートフォリオを制作・公開しました。現在はITエンジニア系への転職活動中です。</p>
-                            <p>製造業などで培った業務改善・在庫管理の視点と、新たに習得した技術を組み合わせ、現場で役立つシステムやサービスを作っていきたいと考えています。</p>
+                            <p>製造業などで18年間培った業務改善・在庫管理の視点と、新たに習得した技術を組み合わせ、現場で役立つシステムやサービスを作っていきたいと考えています。</p>
                         </div>
+                        <!-- 基本情報（場所・学歴・興味）をアイコン付きで表示 -->
                         <div class="profile-info">
                             <div class="info-item">
                                 <i class="fa-solid fa-location-dot"></i>
@@ -96,14 +128,17 @@
                 </div>
             </section>
 
-            <!-- Timeline Section -->
+            <!-- ===== タイムラインセクション（経歴・取得資格を時系列で表示） ===== -->
             <section class="timeline-section">
                 <h3 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-timeline"></i></span>
                     <span class="heading-text">Career Timeline</span>
                 </h3>
+                <!-- タイムライン本体。CSSで縦線と各項目を配置する。 -->
                 <div class="timeline">
+                    <!-- 各タイムライン項目（新しい順に並べる） -->
                     <div class="timeline-item">
+                        <!-- 縦線上の丸印（マーカー） -->
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">2026-1</span>
@@ -154,13 +189,15 @@
                 </div>
             </section>
 
-            <!-- License Section -->
+            <!-- ===== 資格セクション（取得資格をカード形式で表示） ===== -->
             <section class="license-section">
                 <h3 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-certificate"></i></span>
                     <span class="heading-text">License & Certification</span>
                 </h3>
+                <!-- 資格カードをCSS Gridで並べるエリア -->
                 <div class="license-grid">
+                    <!-- 資格カード1：取得年・名称・説明・アイコンの構成 -->
                     <div class="license-card">
                         <div class="license-year">2007-3</div>
                         <div class="license-info">
@@ -171,7 +208,7 @@
                             <i class="fa-solid fa-award"></i>
                         </div>
                     </div>
-                    <!-- 追加の資格がある場合はここに追加 -->
+                    <!-- 追加の資格がある場合はこの形式で並べる -->
                     <div class="license-card">
                         <div class="license-year">2025-12</div>
                         <div class="license-info">
@@ -205,12 +242,13 @@
                 </div>
             </section>
 
-            <!-- Hobbies Section -->
+            <!-- ===== 趣味セクション（人柄を伝えるアイコン付きカード） ===== -->
             <section class="hobbies-section">
                 <h3 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-star"></i></span>
                     <span class="heading-text">Interests & Hobbies</span>
                 </h3>
+                <!-- 趣味カードをCSS Gridで並べるエリア -->
                 <div class="hobbies-grid">
                     <div class="hobby-card">
                         <div class="hobby-icon">
@@ -245,7 +283,7 @@
         </div>
     </article>
 
-    <!-- Footer -->
+    <!-- ===== フッター（全ページ共通） ===== -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -268,19 +306,26 @@
         </div>
     </footer>
 
+<!-- ============================================================
+     JavaScript（jQuery）処理：このページに動きを付ける
+============================================================ -->
 <script>
-    // Loader
+    // ===== ローダーの非表示処理 =====
+    // ページ読み込み完了時に、ローディング画面を800ミリ秒かけてフェードアウト
     $(window).on('load', function() {
         $('.loader').fadeOut(800);
     });
 
-    // Mobile Menu
+    // ===== ハンバーガーメニュー開閉処理 =====
+    // ボタンをクリックするたびに、ナビとボタンに「show / show2」クラスを付け外し
     $(".res-menu").click(function () {
         $("nav").toggleClass("show");
         $(".res-menu").toggleClass("show2");
     });
 
-    // Header scroll effect
+    // ===== スクロール時のヘッダー縮小演出 =====
+    // 100px以上スクロールしたら header に「scrolled」クラスを追加
+    // → CSS側で背景の透明度・高さなどを変化させる
     $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
             $('header').addClass('scrolled');

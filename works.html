@@ -1,10 +1,21 @@
 <!DOCTYPE html>
+<!--
+========================================================================
+  ファイル名 : works.html
+  役割       : 作品紹介ページ
+  概要       : 5作品を「画像・概要・学習ポイント・トラブルと解決・技術タグ」の
+               構成で詳しく紹介する。フィルターボタンで技術別に絞り込み可能。
+========================================================================
+-->
 <html lang="ja">
 <head>
+    <!-- 文字コード（UTF-8）と画面サイズ調整の設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="島田則幸の作品ページ。HTML/CSSの企業サイト、Pythonアプリ、PHPの掲示板・SNSアプリなどの制作実績を掲載しています。">
     <title>作品 | 島田則幸のポートフォリオ</title>
+
+    <!-- jQueryと共通スタイル類の読み込み -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
@@ -13,7 +24,8 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <!-- Loader -->
+
+    <!-- ===== ローダー ===== -->
     <div class="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
@@ -21,13 +33,13 @@
         </div>
     </div>
 
-    <!-- Mobile Menu Toggle -->
+    <!-- ===== モバイル用メニュー切替ボタン ===== -->
     <p class="res-menu">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </p>
 
-    <!-- Header -->
+    <!-- ===== ヘッダー（共通） ===== -->
     <header>
         <h1 class="logo">
             <a href="index.html">
@@ -39,13 +51,14 @@
             <ul>
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <!-- 現在ページ「Works」を active クラスで強調 -->
                 <li class="active"><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Page Hero -->
+    <!-- ===== ページヒーロー（ページ上部の見出しエリア） ===== -->
     <section class="page-hero" style="background-image: url('image/works.jpg');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
@@ -56,10 +69,12 @@
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- ===== メインコンテンツ ===== -->
     <article class="page-content">
         <div class="container">
-            <!-- Works Intro -->
+
+            <!-- ===== 作品紹介イントロ ===== -->
+            <!-- ページ最上部の挨拶文と画像。これから5作品を紹介する旨を伝える。 -->
             <section class="works-intro">
                 <div class="intro-content">
                     <div class="intro-image">
@@ -73,9 +88,11 @@
                 </div>
             </section>
 
-            <!-- Filter Tabs -->
+            <!-- ===== フィルタータブ（技術別の絞り込みボタン） ===== -->
+            <!-- ボタンクリックで data-filter の値に応じた作品だけを表示する。 -->
             <section class="filter-section">
                 <div class="filter-tabs">
+                    <!-- data-filter属性の値はJSで参照され、対応するdata-categoryの作品だけ表示される -->
                     <button class="filter-btn active" data-filter="all">All</button>
                     <button class="filter-btn" data-filter="html">HTML/CSS</button>
                     <button class="filter-btn" data-filter="python">Python</button>
@@ -83,18 +100,26 @@
                 </div>
             </section>
 
-            <!-- Works Grid -->
+            <!-- ===== 作品一覧グリッド ===== -->
             <section class="works-section">
                 <div class="works-showcase">
-                    <!-- Work Item 1 - PHP / SNS -->
+
+                    <!-- ============================================================ -->
+                    <!-- 作品1：SNSアプリ「Pulse」（PHP / SQLite）                       -->
+                    <!-- id="work-pulse"  : 他ページから #work-pulse でリンクされる         -->
+                    <!-- data-category="php" : フィルター用カテゴリー識別子                  -->
+                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-pulse" data-category="php">
+                        <!-- 左：作品スクリーンショット＋ホバー時のオーバーレイ -->
                         <div class="work-image-container">
                             <img src="image/pulse.png" alt="SNSアプリ Pulse">
+                            <!-- 画像の上に重なるオーバーレイ。マウスを乗せると表示される。 -->
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">PHP / SQLite</span>
                                     <h4>SNSアプリ「Pulse」</h4>
                                     <p>感情ムードで繋がる独自コンセプトのSNS</p>
+                                    <!-- デモサイト・GitHubコードへのリンクボタン -->
                                     <div class="overlay-buttons">
                                         <a href="http://shimada.atwebpages.com/pulse/login.php" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> Demo</a>
                                         <a href="https://github.com/ns7jp/pulse" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
@@ -102,22 +127,27 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 右：作品の詳細（カテゴリ・タイトル・説明・ポイント・トラブル談） -->
                         <div class="work-details">
+                            <!-- カテゴリと制作年（メタ情報） -->
                             <div class="work-meta">
                                 <span class="category"><i class="fa-brands fa-php"></i> PHP / SQLite</span>
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>SNSアプリ「Pulse」</h4>
                             <p>「いいね」ではなく「共鳴」で繋がる、感情ムード投稿型のSNSアプリです。投稿時に8種のムードを選ぶと、カードの色がムードに対応して変化します。ささやきモード（匿名投稿）・タイムカプセル（未来日時公開）・感情天気予報（24時間分布）・感情オーラ（7日間傾向）など独自機能を実装しました。</p>
+                            <!-- 学習ポイント・特に頑張った点 -->
                             <ul class="work-points">
                                 <li>CSRF・XSS・SQLインジェクション対策、bcryptパスワード管理など、セキュリティを意識した実装を行いました。</li>
                                 <li>SQLiteをPDO経由で操作し、DBファイルを自動生成することで環境構築の手間を省きました。</li>
                             </ul>
+                            <!-- トラブルと解決の体験談（実装力をアピール） -->
                             <div class="work-troubleshoot">
                                 <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
                                 <p><span class="trouble-label">課題</span>開発環境と本番サーバーでSQLiteファイルの初期化挙動が異なり、デプロイ直後に「DBが存在しない」エラーが発生。</p>
                                 <p><span class="trouble-label solution">解決</span>起動時にDBファイルの有無を確認し、無ければスキーマを自動生成する処理を追加。環境ごとの手動セットアップが不要となった。</p>
                             </div>
+                            <!-- 使用技術タグ -->
                             <div class="tech-tags">
                                 <span>PHP</span>
                                 <span>SQLite</span>
@@ -129,7 +159,9 @@
                         </div>
                     </div>
 
-                    <!-- Work Item 2 - PHP / 掲示板 -->
+                    <!-- ============================================================ -->
+                    <!-- 作品2：掲示板アプリ（PHP / MySQL）                              -->
+                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-post" data-category="php">
                         <div class="work-image-container">
                             <img src="image/post.png" alt="掲示板アプリ">
@@ -171,7 +203,9 @@
                         </div>
                     </div>
 
-                    <!-- Work Item 3 - Python / 定型文管理 -->
+                    <!-- ============================================================ -->
+                    <!-- 作品3：定型文管理アプリ（Python / Flet）                        -->
+                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-teikei" data-category="python">
                         <div class="work-image-container">
                             <img src="image/teikei.png" alt="定型文管理アプリ">
@@ -181,6 +215,7 @@
                                     <h4>定型文管理アプリ</h4>
                                     <p>Fletフレームワークを用いたテンプレート管理ツール</p>
                                     <div class="overlay-buttons">
+                                        <!-- このアプリはデスクトップアプリのためデモなし。コードリンクのみ。 -->
                                         <a href="https://github.com/ns7jp/works/blob/main/teikei_kanri.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
                                     </div>
                                 </div>
@@ -211,7 +246,9 @@
                         </div>
                     </div>
 
-                    <!-- Work Item 4 - Python / 付箋 -->
+                    <!-- ============================================================ -->
+                    <!-- 作品4：付箋アプリ（Python / tkinter）                           -->
+                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-notes" data-category="python">
                         <div class="work-image-container">
                             <img src="image/notes.png" alt="付箋アプリ">
@@ -250,7 +287,9 @@
                         </div>
                     </div>
 
-                    <!-- Work Item 5 - HTML/CSS -->
+                    <!-- ============================================================ -->
+                    <!-- 作品5：サンプル企業サイト（HTML / CSS / Vanilla JS）            -->
+                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-magic" data-category="html">
                         <div class="work-image-container">
                             <img src="image/magic.png" alt="サンプル企業サイト">
@@ -293,9 +332,10 @@
                     </div>
                 </div>
             </section>
-        
 
-            <!-- Coming Soon -->
+
+            <!-- ===== Coming Soonセクション ===== -->
+            <!-- 「今後も作品を追加予定」というメッセージで継続的な学習意欲を表現 -->
             <section class="coming-soon">
                 <div class="coming-soon-content">
                     <i class="fa-solid fa-rocket"></i>
@@ -306,7 +346,7 @@
         </div>
     </article>
 
-    <!-- Footer -->
+    <!-- ===== フッター（共通） ===== -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -329,19 +369,22 @@
         </div>
     </footer>
 
+<!-- ============================================================
+     JavaScript（jQuery）処理：このページに動きを付ける
+============================================================ -->
 <script>
-    // Loader
+    // ===== ローダーの非表示処理 =====
     $(window).on('load', function() {
         $('.loader').fadeOut(800);
     });
 
-    // Mobile Menu
+    // ===== ハンバーガーメニュー開閉処理 =====
     $(".res-menu").click(function () {
         $("nav").toggleClass("show");
         $(".res-menu").toggleClass("show2");
     });
 
-    // Header scroll effect
+    // ===== ヘッダー縮小（スクロール時） =====
     $(window).scroll(function() {
         if ($(this).scrollTop() > 100) {
             $('header').addClass('scrolled');
@@ -350,26 +393,34 @@
         }
     });
 
-    // Filter functionality
+    // ===== 作品フィルター機能 =====
+    // フィルターボタンがクリックされたら、選択した技術カテゴリに該当する作品だけを表示する。
     $('.filter-btn').click(function() {
+        // 一旦すべてのボタンから「active」クラスを外し、押されたボタンにだけ付与
         $('.filter-btn').removeClass('active');
         $(this).addClass('active');
-        
+
+        // 押されたボタンの data-filter 属性の値を取得（例：'all', 'php', 'python', 'html'）
         var filter = $(this).data('filter');
-        
+
         if (filter === 'all') {
+            // 「All」の場合：全作品をフェードイン表示
             $('.work-showcase-item').fadeIn(400);
         } else {
+            // それ以外：いったん全部フェードアウトしてから、該当カテゴリだけフェードイン
             $('.work-showcase-item').fadeOut(200);
+            // 属性セレクター [data-category="..."] で該当する作品だけを選んで表示
             $('.work-showcase-item[data-category="' + filter + '"]').fadeIn(400);
         }
     });
 
-    // Animate on scroll
+    // ===== スクロール連動のフェードイン演出 =====
+    // 各作品が画面に入ったら「visible」クラスを付与してアニメーションさせる
     $(window).scroll(function() {
         $('.work-showcase-item').each(function() {
-            var elementTop = $(this).offset().top;
-            var windowBottom = $(window).scrollTop() + $(window).height();
+            var elementTop = $(this).offset().top;                            // 要素の上端位置
+            var windowBottom = $(window).scrollTop() + $(window).height();    // 画面下端位置
+            // 画面下端が要素の上端を50px以上越えたら、表示状態にする
             if (windowBottom > elementTop + 50) {
                 $(this).addClass('visible');
             }

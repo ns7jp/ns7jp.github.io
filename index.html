@@ -1,49 +1,89 @@
 <!DOCTYPE html>
+<!--
+========================================================================
+  ファイル名 : index.html
+  役割       : ポートフォリオサイトのトップページ
+  概要       : サイトの顔となるページ。ヒーロー画像のスライドショー、
+               自己紹介・スキル・作品の各プレビュー、CTA（連絡先誘導）を表示する。
+========================================================================
+-->
+<!-- 「<!DOCTYPE html>」はHTML5で書かれていることをブラウザに伝える宣言。必ず1行目に書く。 -->
+
+<!-- 「lang="ja"」は、このページの言語が日本語であることをブラウザや検索エンジンに伝える属性。 -->
 <html lang="ja">
 <head>
+    <!-- ===== 文字コード・表示設定（meta情報） ===== -->
+    <!-- 「charset="UTF-8"」で文字コードをUTF-8に指定。日本語の文字化けを防ぐ。 -->
     <meta charset="UTF-8">
+    <!-- スマホ対応の必須タグ。画面幅に合わせてピクセルサイズを調整する設定。 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="島田則幸のポートフォリオ" > 
+
+    <!-- ===== OGP（Open Graph Protocol）設定 ===== -->
+    <!-- SNSなどでURLが共有された時に表示されるタイトル・画像・説明文を指定する。 -->
+    <meta property="og:title" content="島田則幸のポートフォリオ" >
     <meta property="og:type" content="website" >
     <meta property="og:url" content="https://ns7jp.github.io/" >
+    <!-- 「description」は検索結果に表示される説明文。SEO（検索エンジン最適化）に重要。 -->
     <meta name="description" content="島田則幸のポートフォリオ。職業訓練で制作したWebサイト、Pythonアプリ、PHPアプリの実績を掲載しています。">
     <meta property="og:image" content="https://ns7jp.github.io/image/works.jpg" >
     <meta property="og:site_name" content="島田則幸のポートフォリオ" >
     <meta property="og:description" content="島田則幸のポートフォリオ。職業訓練で修了した技術をもとに5作品を制作・公開しています。">
+
+    <!-- ブラウザのタブに表示されるページタイトル。 -->
     <title>島田則幸のポートフォリオ</title>
+
+    <!-- ===== 外部スクリプト・CSSの読み込み ===== -->
+    <!-- jQuery本体（CDN経由）。$（ドルマーク）の記法でDOM操作を簡潔に書ける。 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 背景画像を自動切替するjQueryプラグイン（ローカルファイル）。 -->
     <script src="js/jquery.bgswitcher.js"></script>
+    <!-- ブラウザ標準スタイルをリセットするCSS。表示崩れを防ぐ目的で先に読み込む。 -->
     <link rel="stylesheet" href="css/reset.css">
+    <!-- このサイト独自のスタイルシート。色・レイアウト・アニメーションを定義。 -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- アイコンフォントFont Awesome（CDN経由）。<i class="fa-..."></i>でアイコンを表示できる。 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Googleフォント。日本語フォントと英字フォントを複数読み込んでいる。 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- ブラウザのタブに表示される小さなアイコン（favicon）の指定。 -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
+
+<!-- bodyタグの中が、実際にブラウザに表示される内容。 -->
 <body>
-    <!-- Loader -->
+
+    <!-- ===== ローダー（ページ読み込み中に表示するアニメーション） ===== -->
+    <!-- ページが完全に読み込まれるまで一時的に表示される画面。読み込み完了後、JSでフェードアウトする。 -->
     <div class="loader">
         <div class="loader-content">
+            <!-- くるくる回るアニメーション本体（CSSで動きを付けている） -->
             <div class="loader-spinner"></div>
             <span>Welcome</span>
         </div>
     </div>
 
-    <!-- Mobile Menu Toggle -->
+    <!-- ===== モバイル用メニュー切替ボタン（ハンバーガーメニュー） ===== -->
+    <!-- スマホ画面のときだけ表示される。タップするとナビゲーションが開閉する。 -->
     <p class="res-menu">
+        <!-- 三本線（メニューを開くアイコン） -->
         <i class="fa-solid fa-bars"></i>
+        <!-- バツ印（メニューを閉じるアイコン）。CSSで切替表示する。 -->
         <i class="fa-solid fa-xmark"></i>
     </p>
 
-    <!-- Header -->
+    <!-- ===== ヘッダー（サイト共通の上部エリア） ===== -->
     <header>
+        <!-- サイトロゴ（h1なのでSEO上、最重要見出し）。クリックでトップへ戻る。 -->
         <h1 class="logo">
             <a href="index.html">
                 <span class="logo-main">島田則幸のポートフォリオ</span>
                 <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
             </a>
         </h1>
+        <!-- グローバルナビゲーション（全ページ共通のメニュー） -->
         <nav>
             <ul>
+                <!-- li要素1つ＝メニュー項目1つ。aタグでリンク、iタグでアイコンを表示。 -->
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
@@ -52,42 +92,54 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- ===== ヒーローセクション（ページ最上部の大きなビジュアルエリア） ===== -->
     <section class="hero">
+        <!-- 背景画像が自動で切り替わるエリア（jQueryプラグインで制御） -->
         <div class="hero-slider"></div>
+        <!-- 背景画像の上に重ねる半透明のオーバーレイ（文字を読みやすくする） -->
         <div class="hero-overlay"></div>
+        <!-- ヒーローエリアの中央に表示するテキストとボタン -->
         <div class="hero-content">
+            <!-- アニメーションクラス「animate-fade-in」でCSS側でフェードイン演出 -->
             <p class="hero-greeting animate-fade-in">Welcome to my portfolio</p>
             <h2 class="hero-title animate-slide-up">
                 <span class="line1">Creative</span>
                 <span class="line2">Web Developer</span>
             </h2>
             <p class="hero-description animate-fade-in-delay">職業訓練で学んだスキルを活かし、<br>機能的なWebサイトを制作しました</p>
+            <!-- CTA（Call To Action）ボタン群。作品ページ・連絡先ページへの導線。 -->
             <div class="hero-buttons animate-fade-in-delay2">
                 <a href="works.html" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View Works</a>
                 <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact</a>
             </div>
         </div>
+        <!-- 「下にスクロールしてね」と促すアニメーション付きのインジケーター -->
         <div class="scroll-indicator">
             <span>Scroll</span>
             <i class="fa-solid fa-chevron-down"></i>
         </div>
     </section>
 
-    <!-- Quick Intro Section -->
+    <!-- ===== クイック自己紹介セクション ===== -->
+    <!-- 「私について」の概要を簡潔に伝え、me.htmlへの導線を作るブロック。 -->
     <section class="quick-intro">
         <div class="container">
+            <!-- 文章エリアと画像エリアを2カラムで横並びにするためのGridレイアウト。 -->
             <div class="intro-grid">
                 <div class="intro-text">
                     <h3 class="section-title">
+                        <!-- 英語見出しと日本語見出しを組み合わせた装飾的なタイトル。 -->
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h3>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在ITエンジニア系への転職活動中です。HTML/CSS・Python・PHPを習得し、5作品を制作・公開しました。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在ITエンジニアへの転職活動中です。HTML/CSS・Python・PHPを習得し、5作品を制作・公開しました。</p>
+                    <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
                     <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
+                <!-- プロフィール画像。クリックで自己紹介ページへ移動できる。 -->
                 <a href="me.html">
                 <div class="intro-image">
+                    <!-- alt属性は画像が表示されない時に表示する代替テキスト。アクセシビリティ・SEOで重要。 -->
                     <img src="image/image.jpg" alt="プロフィール画像">
                 </div>
                 </a>
@@ -95,20 +147,25 @@
         </div>
     </section>
 
-    <!-- Skills Preview -->
+    <!-- ===== スキルプレビューセクション ===== -->
+    <!-- 主要スキルを4枚のカードで簡潔に表示。データはdata-progress属性で渡す。 -->
     <section class="skills-preview">
         <div class="container">
             <h3 class="section-title center">
                 <span class="title-en">Skills</span>
                 <span class="title-jp">スキル</span>
             </h3>
+            <!-- 4つのスキルカードをCSS Gridで並べるエリア -->
             <div class="skills-grid">
+                <!-- 各カードはアイコン・スキル名・進捗バーで構成 -->
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-brands fa-html5"></i>
                     </div>
                     <h4>HTML/CSS</h4>
+                    <!-- スキルバーの外枠 -->
                     <div class="skill-bar">
+                        <!-- data-progress属性に進捗値（％）を入れておき、JSで幅を反映させる。 -->
                         <div class="skill-progress" data-progress="60"></div>
                     </div>
                 </div>
@@ -140,13 +197,15 @@
                     </div>
                 </div>
             </div>
+            <!-- スキル一覧ページへの誘導ボタン -->
             <div class="section-link">
                 <a href="skills.html" class="btn btn-secondary">すべてのスキルを見る <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- Works Preview -->
+    <!-- ===== 作品プレビューセクション ===== -->
+    <!-- 5作品をカード形式で表示。各カードはworks.htmlの該当作品にアンカーリンクで飛ぶ。 -->
     <section class="works-preview">
         <div class="container">
             <h3 class="section-title center light">
@@ -154,9 +213,13 @@
                 <span class="title-jp">作品</span>
             </h3>
             <div class="works-grid">
+                <!-- 作品カード1：SNSアプリ「Pulse」 -->
                 <div class="work-card">
+                    <!-- href="works.html#work-pulse"のように#でページ内の特定位置（id="work-pulse"）へジャンプ -->
                     <a href="works.html#work-pulse">
+                    <!-- インラインstyleで背景画像を指定。CSSのbackground-imageと同じ効果。 -->
                     <div class="work-image" style="background-image: url('image/pulse.png')">
+                        <!-- マウスホバー時にふわっと表示されるオーバーレイ -->
                         <div class="work-overlay">
                             <span class="work-category">PHP / SQLite</span>
                             <h4>SNSアプリ「Pulse」</h4>
@@ -164,6 +227,7 @@
                     </div>
                     </a>
                 </div>
+                <!-- 作品カード2：掲示板アプリ -->
                 <div class="work-card">
                     <a href="works.html#work-post">
                     <div class="work-image" style="background-image: url('image/post.png')">
@@ -174,6 +238,7 @@
                     </div>
                     </a>
                 </div>
+                <!-- 作品カード3：定型文管理アプリ -->
                 <div class="work-card">
                     <a href="works.html#work-teikei">
                     <div class="work-image" style="background-image: url('image/teikei.png')">
@@ -184,6 +249,7 @@
                     </div>
                     </a>
                 </div>
+                <!-- 作品カード4：付箋アプリ -->
                 <div class="work-card">
                     <a href="works.html#work-notes">
                     <div class="work-image" style="background-image: url('image/notes.png')">
@@ -194,6 +260,7 @@
                     </div>
                     </a>
                 </div>
+                <!-- 作品カード5：サンプル企業サイト -->
                 <div class="work-card">
                     <a href="works.html#work-magic">
                     <div class="work-image" style="background-image: url('image/magic.png')">
@@ -205,13 +272,15 @@
                     </a>
                 </div>
             </div>
+            <!-- 作品ページへの誘導ボタン -->
             <div class="section-link">
-                <a href="works.html" class="btn btn-light">すべての作品の詳細を見る <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="works.html" class="btn btn-light">すべての作品を見る <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- Contact CTA -->
+    <!-- ===== 連絡先CTA（Call To Action）セクション ===== -->
+    <!-- ページ最後で連絡先ページへ誘導するブロック。 -->
     <section class="contact-cta">
         <div class="container">
             <div class="cta-content">
@@ -222,76 +291,100 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== フッター（サイト共通の最下部エリア） ===== -->
     <footer>
         <div class="footer-content">
+            <!-- フッター左：ロゴ -->
             <div class="footer-logo">
                 <span class="logo-main">Noriyuki Shimada</span>
                 <span class="logo-sub">Portfolio</span>
             </div>
+            <!-- フッター中央：各ページへのテキストリンク -->
             <div class="footer-nav">
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
                 <a href="works.html">Works</a>
                 <a href="contact.html">Contact</a>
             </div>
+            <!-- フッター右：SNS・メールアイコン -->
             <div class="footer-social">
+                <!-- target="_blank"で別タブで開く。rel="noopener noreferrer"はセキュリティ対策（タブナビング防止）。 -->
                 <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <!-- mailto:でメーラーを起動 -->
                 <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
             </div>
         </div>
+        <!-- 著作権表示。&copy;は©（コピーライト記号）の実体参照。 -->
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
         </div>
     </footer>
 
+<!-- ============================================================
+     ここから下はJavaScript（jQuery）コード。
+     ページに「動き」を付けるための処理をまとめている。
+============================================================ -->
 <script>
-    // Loader
+    // ===== ローダーの非表示処理 =====
+    // window（ブラウザの画面全体）の load イベント＝ページが画像も含めて完全に読み込まれた瞬間。
+    // そのタイミングで .loader 要素を800ミリ秒かけてフェードアウトさせる。
     $(window).on('load', function() {
         $('.loader').fadeOut(800);
     });
 
-    // Mobile Menu
+    // ===== ハンバーガーメニューの開閉処理 =====
+    // .res-menu（三本線アイコン）がクリックされたら、
+    //  - <nav>に「show」クラスを付け外しする → ナビが表示/非表示される
+    //  - .res-menu自身に「show2」クラスを付け外し → アイコンが「×」と切替わる
     $(".res-menu").click(function () {
         $("nav").toggleClass("show");
         $(".res-menu").toggleClass("show2");
     });
 
-    // Hero Background Slider
+    // ===== ヒーロー背景の画像切替（bgswitcherプラグイン） =====
+    // .hero-slider要素に対して、4枚の画像を5秒ごとに自動でフェード切替する設定。
     $(".hero-slider").bgswitcher({
+        // 切り替えたい画像ファイルのパスを配列で指定
         images: [
             "image/works.jpg",
             "image/me.jpg",
             "image/contact.jpg",
             "image/skills.jpg",
         ],
-        effect: "fade",
-        shuffle: true,
-        easing: "swing",
-        duration: 1500,
-        interval: 5000
+        effect: "fade",      // 切替演出：フェード（じわっと変化）
+        shuffle: true,       // 画像順をランダムにシャッフル
+        easing: "swing",     // アニメーションの動きの緩急
+        duration: 1500,      // 1回の切替にかける時間（1.5秒）
+        interval: 5000       // 次の切替までの間隔（5秒）
     });
 
-    // Scroll Animation
+    // ===== スクロール時の各種演出 =====
+    // 画面をスクロールするたびに発火するイベント。
     $(window).scroll(function() {
-        // Header shrink
+        // ----- ヘッダーの縮小 -----
+        // 100px以上スクロールしたら header に「scrolled」クラスを付与
+        // → CSS側で背景色を濃くしたりサイズを小さくする
         if ($(this).scrollTop() > 100) {
             $('header').addClass('scrolled');
         } else {
             $('header').removeClass('scrolled');
         }
 
-        // Skill bars animation
+        // ----- スキルバーのアニメーション -----
+        // 各 .skill-progress について、画面内に入ったら data-progress の値を width として適用。
         $('.skill-progress').each(function() {
-            var elementTop = $(this).offset().top;
-            var windowBottom = $(window).scrollTop() + $(window).height();
+            var elementTop = $(this).offset().top;                            // 要素の上端位置
+            var windowBottom = $(window).scrollTop() + $(window).height();    // 画面下端位置
+            // 画面下端が要素の上端を超えたら＝要素が画面に入ってきた
             if (windowBottom > elementTop) {
-                var progress = $(this).data('progress');
-                $(this).css('width', progress + '%');
+                var progress = $(this).data('progress');                      // 例：60
+                $(this).css('width', progress + '%');                         // 「60%」と幅を設定
             }
         });
 
-        // Fade in on scroll
+        // ----- セクションのフェードイン -----
+        // 各セクションが画面下端から100px以上見えるようになったら「visible」クラスを付与。
+        // CSS側で .visible が付くとふわっと表示される設定にしている。
         $('.quick-intro, .skills-preview, .works-preview, .contact-cta').each(function() {
             var elementTop = $(this).offset().top;
             var windowBottom = $(window).scrollTop() + $(window).height();
@@ -301,11 +394,13 @@
         });
     });
 
-    // Smooth scroll
+    // ===== ページ内アンカーリンクのスムーススクロール =====
+    // href が「#」で始まるリンクをクリックした時、ジャンプではなく滑らかに移動させる。
     $('a[href^="#"]').on('click', function(e) {
-        e.preventDefault();
-        var target = $(this.getAttribute('href'));
+        e.preventDefault();                              // デフォルトのジャンプ動作をキャンセル
+        var target = $(this.getAttribute('href'));       // 飛び先の要素を取得
         if (target.length) {
+            // ヘッダー分（80px）上に余白を確保して、800ミリ秒かけて移動
             $('html, body').animate({
                 scrollTop: target.offset().top - 80
             }, 800);
