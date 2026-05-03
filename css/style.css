@@ -751,7 +751,7 @@ header nav ul li a i {
 /* ========================================
    12. Works Preview Section - トップ「作品」プレビュー
    ----------------------------------------
-   .works-grid で5作品をグリッド配置。
+   .works-grid で6作品をグリッド配置（5列＋折り返し1列＝3行2列）。
    .work-card は背景画像＋ホバー時オーバーレイで作品名を表示する作り。
    transform: scale() でホバー時にズーム効果も入れている。
 ======================================== */
@@ -1464,6 +1464,7 @@ footer {
 .skill-icon-large.python { background: #EBF5FB; }
 .skill-icon-large.php { background: #F4ECF7; }
 .skill-icon-large.db { background: #E8F8F5; }
+.skill-icon-large.infra { background: #EAF2F8; }   /* インフラ・サーバー運用カード用 */
 
 .skill-icon-large i {
     font-size: 2.5rem;
@@ -1920,6 +1921,73 @@ footer {
 
 .trouble-label.solution {
     background: var(--nature-green);
+}
+
+/* ========================================
+   Work Usage - 使用例・活用シーン
+   ----------------------------------------
+   各作品の「具体的にどんな場面で使えるか」を紹介するブロック。
+   トラブル談ボックスと似たデザインだが、色をオリーブ系にして区別する。
+======================================== */
+.work-usage {
+    margin: 0 0 22px;
+    padding: 18px 22px;
+    background: var(--bg-warm);
+    border-left: 3px solid var(--nature-olive);
+    border-radius: 2px;
+}
+
+.work-usage h5 {
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+}
+
+.work-usage h5 i {
+    color: var(--nature-olive);
+    margin-right: 8px;
+}
+
+/* 使用例リスト：箇条書き＋シーン名強調 */
+.usage-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.usage-list li {
+    position: relative;
+    padding: 8px 0 8px 22px;
+    font-size: 1.35rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    border-bottom: 1px dashed rgba(112, 130, 56, 0.2);
+}
+
+.usage-list li:last-child {
+    border-bottom: none;
+}
+
+/* 各項目の頭に小さな矢印アイコンを表示（::beforeで疑似要素として追加） */
+.usage-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    color: var(--nature-olive);
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+/* シーン名（<strong>でくくった部分）のスタイル */
+.usage-list li strong {
+    display: inline-block;
+    color: var(--text-dark);
+    font-weight: 600;
+    margin-right: 4px;
 }
 
 /* Coming Soon */
