@@ -3,8 +3,9 @@
 ========================================================================
   ファイル名 : works.html
   役割       : 作品紹介ページ
-  概要       : 5作品を「画像・概要・学習ポイント・トラブルと解決・技術タグ」の
+  概要       : 6作品を「画像・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
                構成で詳しく紹介する。フィルターボタンで技術別に絞り込み可能。
+               カテゴリ：HTML/CSS / Python / PHP / Infrastructure
 ========================================================================
 -->
 <html lang="ja">
@@ -74,16 +75,16 @@
         <div class="container">
 
             <!-- ===== 作品紹介イントロ ===== -->
-            <!-- ページ最上部の挨拶文と画像。これから5作品を紹介する旨を伝える。 -->
+            <!-- ページ最上部の挨拶文と画像。これから6作品（Webアプリ＋インフラ系含む）を紹介する旨を伝える。 -->
             <section class="works-intro">
                 <div class="intro-content">
                     <div class="intro-image">
                         <img src="image/image.jpg" alt="プロフィール">
                     </div>
                     <div class="intro-text">
-                        <h3>職業訓練での制作実績</h3>
-                        <p>未経験から職業訓練でWebサイト・アプリ制作を学び、以下の作品を制作しました。HTML/CSS、Python、PHPなど、学習した技術を実際の作品に応用しています。</p>
-                        <p>各作品には使用技術と学習ポイントを記載しています。</p>
+                        <h3>職業訓練での制作実績 + 自学プロジェクト</h3>
+                        <p>未経験から職業訓練でWebサイト・アプリ制作を学び、HTML/CSS・Python・PHPで5作品を制作。さらに自学でインフラ系志向のサーバー監視ダッシュボードを追加し、計6作品を公開しています。</p>
+                        <p>各作品には使用技術・学習ポイント・具体的な使用例・制作時のトラブルと解決過程を記載しています。</p>
                     </div>
                 </div>
             </section>
@@ -97,6 +98,7 @@
                     <button class="filter-btn" data-filter="html">HTML/CSS</button>
                     <button class="filter-btn" data-filter="python">Python</button>
                     <button class="filter-btn" data-filter="php">PHP</button>
+                    <button class="filter-btn" data-filter="infra">Infrastructure</button>
                 </div>
             </section>
 
@@ -387,6 +389,67 @@
                                 <span>Vanilla JS</span>
                                 <span>Lightbox2</span>
                                 <span>レスポンシブ</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================ -->
+                    <!-- 作品6：サーバー監視ダッシュボード（Python / Flask / psutil）   -->
+                    <!-- インフラ系志望をアピールするための実装。ブラウザから        -->
+                    <!-- リアルタイムでCPU・メモリ等を可視化する。                    -->
+                    <!-- ============================================================ -->
+                    <div class="work-showcase-item" id="work-monitor" data-category="infra">
+                        <div class="work-image-container">
+                            <!-- ダッシュボードのスクリーンショット -->
+                            <img src="image/server-monitor.png" alt="サーバー監視ダッシュボード">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Python / Flask / psutil</span>
+                                    <h4>サーバー監視ダッシュボード</h4>
+                                    <p>Webブラウザから動作中マシンのリソースをリアルタイム可視化</p>
+                                    <div class="overlay-buttons">
+                                        <a href="https://github.com/ns7jp/server-monitor" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-solid fa-server"></i> Python / Flask / psutil</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>サーバー監視ダッシュボード</h4>
+                            <p>Python（Flask）+ psutil + Chart.js で構築したリアルタイムサーバー監視ツールです。CPU使用率（円形ゲージ＋コア別バー）、メモリ・スワップ、ディスク（パーティション別）、ネットワークI/O（リアルタイム速度算出）、プロセスTOP15、CPU/メモリの60秒推移グラフを1画面に集約。しきい値に応じて緑→黄→橙→赤に自動配色されます。</p>
+                            <ul class="work-points">
+                                <li>Flask の JSON API（/api/stats、/api/processes）と Fetch API による非同期ポーリングでリアルタイム性を実現しました。</li>
+                                <li>psutilを使ってWindows / Linux / macOS で同じコードが動くクロスプラットフォームな実装にしました。</li>
+                                <li>Chart.jsでCPU・メモリの時系列グラフをローリングウィンドウ方式（過去30点保持）で描画しています。</li>
+                            </ul>
+                            <!-- 使用例・活用シーン -->
+                            <div class="work-usage">
+                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
+                                <ul class="usage-list">
+                                    <li><strong>個人PC・自宅サーバーの常時モニタ：</strong>サブモニターやブラウザの別タブに開きっぱなしにして、重い処理（動画エンコード・ビルド・学習タスク）の進行と負荷を一目で確認。</li>
+                                    <li><strong>小規模Webサーバーの簡易監視：</strong>Zabbix・Prometheusなど本格的監視ツール導入前の暫定モニタリング。LAN内に1台立てておけばブラウザだけで状態確認できる。</li>
+                                    <li><strong>障害対応時の状況把握：</strong>「いつから負荷が高いのか」を60秒履歴グラフで直感的に把握。プロセスTOP15で原因プロセスを即特定できる。</li>
+                                    <li><strong>負荷試験中の挙動確認：</strong>Apache JMeter等で負荷試験中に、対象サーバーのCPU・メモリが想定通り動いているかを別画面で確認。</li>
+                                    <li><strong>インフラ学習教材：</strong>psutilの使い方・Flask APIの設計・ポーリングと非同期通信・しきい値設計など、運用視点のWeb開発が一通り学べる。</li>
+                                    <li><strong>客先デモ・説明用：</strong>「サーバー監視とはこういうもの」を非エンジニアに説明するときの教材。視覚的なゲージ・色分けでイメージしやすい。</li>
+                                    <li><strong>社内ツールのテンプレート：</strong>このコードをベースに、独自指標（DBコネクション数・特定プロセスのみ等）を追加して社内専用ダッシュボードに発展可能。</li>
+                                </ul>
+                            </div>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span><code>psutil.cpu_percent()</code> を <code>interval=0</code> で呼ぶと前回呼び出しからの差分を返す仕様のため、初回が必ず0%になり、グラフが歪んで表示される。</p>
+                                <p><span class="trouble-label solution">解決</span>全体使用率の取得時のみ <code>interval=0.5</code> でサンプリングして基準点を作り、その直後にコア別を <code>interval=0</code> で取得することで、正確かつレスポンスを大きく落とさない構成に変更。</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>psutil</span>
+                                <span>Chart.js</span>
+                                <span>Fetch API</span>
+                                <span>SVG</span>
+                                <span>JSON API</span>
                             </div>
                         </div>
                     </div>

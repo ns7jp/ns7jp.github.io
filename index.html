@@ -18,19 +18,38 @@
     <!-- スマホ対応の必須タグ。画面幅に合わせてピクセルサイズを調整する設定。 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- ===== SEO関連 meta情報 ===== -->
+    <!-- 検索結果に表示される説明文（SEOで最重要） -->
+    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。HTML/CSS・Python・PHPで制作したSNS・掲示板・サーバー監視ダッシュボードなど6作品を公開中。職業訓練修了後、ITエンジニア（開発・インフラ運用）に転職活動中。">
+    <!-- 作者情報 -->
+    <meta name="author" content="Noriyuki Shimada">
+    <!-- 検索キーワード（補助的SEO） -->
+    <meta name="keywords" content="ポートフォリオ,Webエンジニア,インフラエンジニア,Python,PHP,Flask,HTML,CSS,JavaScript,サーバー監視,転職,島田則幸,Noriyuki Shimada">
+    <!-- スマホブラウザのアドレスバー色（ブランドカラーを反映） -->
+    <meta name="theme-color" content="#2C3E50">
+    <!-- 検索エンジン向けのインデックス指示（通常は省略可だが明示するとよい） -->
+    <meta name="robots" content="index, follow">
+    <!-- URL正規化：同内容に複数URLがある場合の代表URLを示す（重複コンテンツ対策） -->
+    <link rel="canonical" href="https://ns7jp.github.io/">
+
     <!-- ===== OGP（Open Graph Protocol）設定 ===== -->
     <!-- SNSなどでURLが共有された時に表示されるタイトル・画像・説明文を指定する。 -->
-    <meta property="og:title" content="島田則幸のポートフォリオ" >
-    <meta property="og:type" content="website" >
-    <meta property="og:url" content="https://ns7jp.github.io/" >
-    <!-- 「description」は検索結果に表示される説明文。SEO（検索エンジン最適化）に重要。 -->
-    <meta name="description" content="島田則幸のポートフォリオ。職業訓練で制作したWebサイト、Pythonアプリ、PHPアプリの実績を掲載しています。">
-    <meta property="og:image" content="https://ns7jp.github.io/image/works.jpg" >
-    <meta property="og:site_name" content="島田則幸のポートフォリオ" >
-    <meta property="og:description" content="島田則幸のポートフォリオ。職業訓練で修了した技術をもとに5作品を制作・公開しています。">
+    <meta property="og:title" content="島田則幸のポートフォリオ - Webアプリ＆インフラツール6作品">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/">
+    <meta property="og:image" content="https://ns7jp.github.io/image/works.jpg">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
+    <meta property="og:description" content="HTML/CSS・Python・PHPで制作したWebアプリ・サーバー監視ダッシュボードなど6作品を公開。ITエンジニア（開発・インフラ）に転職活動中。">
+    <meta property="og:locale" content="ja_JP">
 
-    <!-- ブラウザのタブに表示されるページタイトル。 -->
-    <title>島田則幸のポートフォリオ</title>
+    <!-- ===== Twitter カード設定（X 上で大きな画像付きカード表示） ===== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="島田則幸のポートフォリオ">
+    <meta name="twitter:description" content="Webアプリ・サーバー監視ツールなど6作品を公開中。ITエンジニア（開発・インフラ）に転職活動中。">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/works.jpg">
+
+    <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
+    <title>Top | 島田則幸のポートフォリオ - Webアプリ＆インフラツール6作品公開中</title>
 
     <!-- ===== 外部スクリプト・CSSの読み込み ===== -->
     <!-- jQuery本体（CDN経由）。$（ドルマーク）の記法でDOM操作を簡潔に書ける。 -->
@@ -132,7 +151,7 @@
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h3>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在ITエンジニア系への転職活動中です。HTML/CSS・Python・PHPを習得し、5作品を制作・公開しました。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在ITエンジニア系（開発・インフラ運用）への転職活動中です。HTML/CSS・Python・PHPを習得し、Webアプリ・サーバー監視ツールなど6作品を制作・公開しました。</p>
                     <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
                     <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
@@ -205,7 +224,7 @@
     </section>
 
     <!-- ===== 作品プレビューセクション ===== -->
-    <!-- 5作品をカード形式で表示。各カードはworks.htmlの該当作品にアンカーリンクで飛ぶ。 -->
+    <!-- 6作品をカード形式で表示。各カードはworks.htmlの該当作品にアンカーリンクで飛ぶ。 -->
     <section class="works-preview">
         <div class="container">
             <h3 class="section-title center light">
@@ -267,6 +286,17 @@
                         <div class="work-overlay">
                             <span class="work-category">HTML / CSS / JS</span>
                             <h4>サンプル企業サイト</h4>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <!-- 作品カード6：サーバー監視ダッシュボード（インフラ系） -->
+                <div class="work-card">
+                    <a href="works.html#work-monitor">
+                    <div class="work-image" style="background-image: url('image/server-monitor.png')">
+                        <div class="work-overlay">
+                            <span class="work-category">Python / Flask / psutil</span>
+                            <h4>サーバー監視ダッシュボード</h4>
                         </div>
                     </div>
                     </a>

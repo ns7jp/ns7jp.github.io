@@ -15,7 +15,7 @@
     <!-- スマホ対応のviewport設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 検索エンジン用の説明文 -->
-    <meta name="description" content="島田則幸のスキルページ。HTML/CSS、Python、PHP、JavaScriptに加え、PC・IT基礎、セキュリティ・トラブル対応、ドキュメント整備などITサポート関連スキルも掲載しています。">
+    <meta name="description" content="島田則幸のスキルページ。HTML/CSS、Python、PHP、JavaScript、Flaskに加え、PC・IT基礎、セキュリティ・トラブル対応、サーバー監視・インフラ運用、ドキュメント整備などITサポート・インフラ関連スキルも掲載しています。">
     <title>スキル | 島田則幸のポートフォリオ</title>
 
     <!-- jQueryと共通スタイル類の読み込み -->
@@ -79,7 +79,7 @@
 
             <!-- ===== スキル概要文 ===== -->
             <section class="skills-overview">
-                <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発技術に加え、製造現場で培ったITサポート関連スキルをご紹介します。<br>各技術はポートフォリオ作品として実際に活用しています。</p>
+                <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発技術に加え、製造現場で培ったITサポート関連スキル、自学で取り組むサーバー監視・インフラ自動化スキルをご紹介します。<br>各技術はポートフォリオ作品（全6作品）として実際に活用しています。</p>
             </section>
 
             <!-- ===== 技術スキル（プログラミング系）セクション ===== -->
@@ -209,10 +209,10 @@
                         </div>
                         <div class="skill-description">
                             <ul>
-                                <li>基本文法</li>
-                                <li>データ処理</li>
-                                <li>ファイル操作</li>
-                                <li>ライブラリ活用</li>
+                                <li>基本文法・データ処理・ファイル操作</li>
+                                <li>Flask（Web API・JSONレスポンス）</li>
+                                <li>tkinter / Flet（GUI）</li>
+                                <li>psutil（システム情報取得）</li>
                             </ul>
                         </div>
                     </div>
@@ -276,6 +276,37 @@
                             </ul>
                         </div>
                     </div>
+
+                    <!-- ----- Infrastructure / Server Ops スキルカード ----- -->
+                    <!-- 自学で取り組むサーバー運用・監視・自動化分野のスキル -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large infra">
+                                <i class="fa-solid fa-server"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>Server / Infra</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 35%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
+                                <li>Linuxコマンド基礎（ファイル権限・プロセス確認）</li>
+                                <li>XAMPP / Apache 環境構築</li>
+                                <li>レンタルサーバーへのデプロイ・運用</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -299,7 +330,7 @@
                             <i class="fa-solid fa-shield-halved"></i>
                         </div>
                         <h4>セキュリティ・トラブル対応</h4>
-                        <p>SQLi／XSS／CSRF対策、認証情報の安全な管理、エラーログからの原因特定。製造現場で培った「なぜなぜ分析」をIT現場の不具合解析にも応用。</p>
+                        <p>SQLi／XSS／CSRF対策、認証情報の安全な管理、エラーログからの原因特定、サーバー監視ダッシュボードでのリソース異常検知。製造現場で培った「なぜなぜ分析」をIT現場の不具合解析にも応用。</p>
                     </div>
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
@@ -336,11 +367,19 @@
                     </div>
                     <div class="tool-item">
                         <i class="fa-solid fa-server"></i>
-                        <span>XAMPP</span>
+                        <span>XAMPP / Apache</span>
                     </div>
                     <div class="tool-item">
                         <i class="fa-brands fa-chrome"></i>
                         <span>DevTools</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fa-solid fa-flask"></i>
+                        <span>Flask</span>
+                    </div>
+                    <div class="tool-item">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Chart.js</span>
                     </div>
                 </div>
             </section>
