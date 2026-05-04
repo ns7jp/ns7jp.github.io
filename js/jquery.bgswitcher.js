@@ -5,6 +5,13 @@
  * @author   rewish <rewish.org@gmail.com>
  * @license  MIT License (https://github.com/rewish/jquery-bgswitcher/blob/master/LICENSE.md)
  * @link     https://github.com/rewish/jquery-bgswitcher
+ *
+ * このサイトでの役割:
+ *   index.html のヒーロー背景画像を自動で切り替えるためのjQueryプラグイン。
+ * 初学者向けの読み方:
+ *   1. このファイルは外部由来の部品なので、基本は「使い方」をindex.html側で見る
+ *   2. $.fn.bgswitcher により、$(".hero-slider").bgswitcher(...) の形で呼べる
+ *   3. 画像配列、切替間隔、フェード時間などを設定値として受け取って動く
  */
 (function($) {
   'use strict';
