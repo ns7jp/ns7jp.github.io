@@ -46,11 +46,8 @@ pf/
 ├── skills.html              … スキル一覧ページ
 ├── works.html               … 作品一覧ページ
 ├── contact.html             … 連絡先ページ
-├── mail.php                 … お問い合わせフォームの送信処理（PHP対応サーバー用）
 ├── favicon.ico              … ブラウザのタブに表示される小さなアイコン
-├── sticky_notes_data.json   … 付箋アプリのサンプルデータ（参考用）
 ├── README.md                … このファイル（プロジェクトの説明書）
-├── .gitignore               … Gitに登録しないファイルを指定する設定
 │
 ├── css/
 │   ├── reset.css            … ブラウザごとのデフォルトスタイル差を消すリセットCSS
@@ -66,6 +63,7 @@ pf/
     ├── teikei.png           … 作品「定型文管理アプリ」のスクリーンショット
     ├── notes.png            … 作品「付箋アプリ」のスクリーンショット
     ├── magic.png            … 作品「サンプル企業サイト」のスクリーンショット
+    ├── server-monitor.png   … 作品「サーバー監視ダッシュボード」のスクリーンショット
     └── me.jpg / image.jpg ほか … 各ページのヒーロー画像・プロフィール画像
 ```
 
@@ -92,24 +90,6 @@ pf/
 - **Font Awesome 6.5.1**：アイコンフォント（CDN経由で読み込み）
 - **Google Fonts**：Noto Sans JP / Playfair Display / Montserrat（CDN経由で読み込み）
 - **GitHub Pages**：静的ファイルを無料公開できるホスティングサービス
-
----
-
-## ローカルで動かす方法（初学者向け）
-
-### 静的ページ（HTML/CSS/JSだけ）の場合
-1. このフォルダをそのままダウンロード
-2. `index.html` をダブルクリック → ブラウザで開く
-
-これだけで、PHP以外のページは動作確認できます。
-
-### お問い合わせフォーム（mail.php）も動かしたい場合
-PHPはサーバー側で動く言語なので、ブラウザだけでは動きません。
-ローカルで動作確認するには、**XAMPP** などのローカルサーバー環境が必要です。
-
-1. XAMPPをインストール → Apacheを起動
-2. このフォルダを `xampp/htdocs/` 内に配置
-3. ブラウザで `http://localhost/pf/index.html` にアクセス
 
 ---
 
