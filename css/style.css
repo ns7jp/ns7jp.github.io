@@ -1706,6 +1706,30 @@ footer {
     gap: 40px;
 }
 
+#work-monitor {
+    order: 1;
+}
+
+#work-teikei {
+    order: 2;
+}
+
+#work-notes {
+    order: 3;
+}
+
+#work-post {
+    order: 4;
+}
+
+#work-pulse {
+    order: 5;
+}
+
+#work-magic {
+    order: 6;
+}
+
 .work-showcase-item {
     background: var(--bg-white);
     border: 1px solid var(--bg-sand);
