@@ -3,14 +3,10 @@
 ========================================================================
   ファイル名 : skills.html
   役割       : スキル一覧ページ
-  概要       : 技術スキル（Office・HTML/CSS・JS・Python・PHP・DB）、
+  概要       : 技術スキル（Server/Infra・Python・PHP・DB・HTML/CSS・JS・Office）、
                ITサポートスキル、ツール、ソフトスキルの4ブロックを表示する。
+               IT運用・サポート寄りの並び順で、Server/Infra と Python を先頭に配置。
                各スキルは星評価＋進捗バー＋習得項目で構成。
-  初学者向けの読み方:
-    1. ITサポート系、技術系、ツール系、ソフトスキル系の分類を確認する
-    2. skill-detail-card の繰り返し構造で、カードUIの作り方を見る
-    3. 星評価や進捗バーがHTMLとCSSの組み合わせで表現される点を見る
-    4. 末尾のscriptで、スクロール時にカードへvisibleを付ける処理を見る
 ========================================================================
 -->
 <html lang="ja">
@@ -20,7 +16,7 @@
     <!-- スマホ対応のviewport設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 検索エンジン用の説明文 -->
-    <meta name="description" content="島田則幸のスキルページ。HTML/CSS、Python、PHP、JavaScript、Flaskに加え、PC・IT基礎、セキュリティ・トラブル対応、サーバー監視・インフラ運用、ドキュメント整備などITサポート・インフラ関連スキルも掲載しています。">
+    <meta name="description" content="島田則幸のスキルページ。サーバー監視・Linux/Apache・Python（Flask, psutil）・PHP・SQLなどIT運用・サポート寄りの技術を中心に、PC・IT基礎、セキュリティ・トラブル対応、ドキュメント・ナレッジ整備、HTML/CSS/JavaScriptなどの開発スキルも掲載しています。">
     <title>スキル | 島田則幸のポートフォリオ</title>
 
     <!-- jQueryと共通スタイル類の読み込み -->
@@ -84,7 +80,7 @@
 
             <!-- ===== スキル概要文 ===== -->
             <section class="skills-overview">
-                <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発技術に加え、製造現場で培ったITサポート関連スキル、自学で取り組むサーバー監視・インフラ自動化スキルをご紹介します。<br>各技術はポートフォリオ作品（全6作品）として実際に活用しています。</p>
+                <p class="overview-text">自学で取り組むサーバー監視・インフラ運用スキルと、製造現場で培ったITサポート関連スキルを軸に、公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発技術（Python・PHP・HTML/CSS）を組み合わせてご紹介します。<br>各技術はポートフォリオ作品（全6作品）として実際に活用しています。</p>
             </section>
 
             <!-- ===== 技術スキル（プログラミング系）セクション ===== -->
@@ -97,79 +93,15 @@
                 <!-- スキルカードを並べるグリッドコンテナ -->
                 <div class="skill-cards-grid">
 
-                    <!-- ----- Office スキルカード ----- -->
-                    <div class="skill-detail-card">
-                        <!-- カード上部：アイコンと、スキル名・星評価 -->
-                        <div class="skill-header">
-                            <!-- スキル種別ごとに色分けする識別クラス（office, html, jsなど） -->
-                            <div class="skill-icon-large office">
-                                <i class="fa-solid fa-file-word"></i>
-                            </div>
-                            <div class="skill-title">
-                                <h4>Microsoft Office</h4>
-                                <!-- 星5段階評価。filledクラスが付いた星はCSSで色付き表示 -->
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 進捗バー（width%でスキル習熟度を視覚化） -->
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 60%"></div>
-                        </div>
-                        <!-- 具体的な習得項目をリストで列挙 -->
-                        <div class="skill-description">
-                            <ul>
-                                <li>社内文書作成</li>
-                                <li>参考資料、長文作成</li>
-                                <li>差し込み印刷</li>
-                                <li>Excel関数・マクロ基礎</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- ----- HTML/CSS スキルカード ----- -->
+                    <!-- ----- Infrastructure / Server Ops スキルカード ----- -->
+                    <!-- 自学で取り組むサーバー運用・監視・自動化分野のスキル -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
-                            <div class="skill-icon-large html">
-                                <i class="fa-brands fa-html5"></i>
+                            <div class="skill-icon-large infra">
+                                <i class="fa-solid fa-server"></i>
                             </div>
                             <div class="skill-title">
-                                <h4>HTML / CSS</h4>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 60%"></div>
-                        </div>
-                        <div class="skill-description">
-                            <ul>
-                                <li>セマンティックHTML</li>
-                                <li>レスポンシブデザイン</li>
-                                <li>Flexbox / CSS Grid</li>
-                                <li>アニメーション</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- ----- JavaScript スキルカード ----- -->
-                    <div class="skill-detail-card">
-                        <div class="skill-header">
-                            <div class="skill-icon-large js">
-                                <i class="fa-brands fa-js"></i>
-                            </div>
-                            <div class="skill-title">
-                                <h4>JavaScript</h4>
+                                <h4>Server / Infra</h4>
                                 <div class="skill-level">
                                     <span class="star filled"><i class="fa-solid fa-star"></i></span>
                                     <span class="star filled"><i class="fa-solid fa-star"></i></span>
@@ -180,18 +112,17 @@
                             </div>
                         </div>
                         <div class="skill-progress-bar">
-                            <div class="progress" style="width: 30%"></div>
+                            <div class="progress" style="width: 35%"></div>
                         </div>
                         <div class="skill-description">
                             <ul>
-                                <li>DOM操作</li>
-                                <li>イベントハンドリング</li>
-                                <li>jQuery</li>
-                                <li>非同期処理基礎</li>
+                                <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
+                                <li>Linuxコマンド基礎（ファイル権限・プロセス確認）</li>
+                                <li>XAMPP / Apache 環境構築</li>
+                                <li>レンタルサーバーへのデプロイ・運用</li>
                             </ul>
                         </div>
                     </div>
-
                     <!-- ----- Python スキルカード ----- -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
@@ -282,15 +213,44 @@
                         </div>
                     </div>
 
-                    <!-- ----- Infrastructure / Server Ops スキルカード ----- -->
-                    <!-- 自学で取り組むサーバー運用・監視・自動化分野のスキル -->
+                    <!-- ----- HTML/CSS スキルカード ----- -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
-                            <div class="skill-icon-large infra">
-                                <i class="fa-solid fa-server"></i>
+                            <div class="skill-icon-large html">
+                                <i class="fa-brands fa-html5"></i>
                             </div>
                             <div class="skill-title">
-                                <h4>Server / Infra</h4>
+                                <h4>HTML / CSS</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>セマンティックHTML</li>
+                                <li>レスポンシブデザイン</li>
+                                <li>Flexbox / CSS Grid</li>
+                                <li>アニメーション</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ----- JavaScript スキルカード ----- -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large js">
+                                <i class="fa-brands fa-js"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>JavaScript</h4>
                                 <div class="skill-level">
                                     <span class="star filled"><i class="fa-solid fa-star"></i></span>
                                     <span class="star filled"><i class="fa-solid fa-star"></i></span>
@@ -301,17 +261,53 @@
                             </div>
                         </div>
                         <div class="skill-progress-bar">
-                            <div class="progress" style="width: 35%"></div>
+                            <div class="progress" style="width: 30%"></div>
                         </div>
                         <div class="skill-description">
                             <ul>
-                                <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
-                                <li>Linuxコマンド基礎（ファイル権限・プロセス確認）</li>
-                                <li>XAMPP / Apache 環境構築</li>
-                                <li>レンタルサーバーへのデプロイ・運用</li>
+                                <li>DOM操作</li>
+                                <li>イベントハンドリング</li>
+                                <li>jQuery</li>
+                                <li>非同期処理基礎</li>
                             </ul>
                         </div>
                     </div>
+
+                    <!-- ----- Office スキルカード ----- -->
+                    <div class="skill-detail-card">
+                        <!-- カード上部：アイコンと、スキル名・星評価 -->
+                        <div class="skill-header">
+                            <!-- スキル種別ごとに色分けする識別クラス（office, html, jsなど） -->
+                            <div class="skill-icon-large office">
+                                <i class="fa-solid fa-file-word"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>Microsoft Office</h4>
+                                <!-- 星5段階評価。filledクラスが付いた星はCSSで色付き表示 -->
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 進捗バー（width%でスキル習熟度を視覚化） -->
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 60%"></div>
+                        </div>
+                        <!-- 具体的な習得項目をリストで列挙 -->
+                        <div class="skill-description">
+                            <ul>
+                                <li>社内文書作成</li>
+                                <li>参考資料、長文作成</li>
+                                <li>差し込み印刷</li>
+                                <li>Excel関数・マクロ基礎</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </section>
 

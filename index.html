@@ -5,11 +5,6 @@
   役割       : ポートフォリオサイトのトップページ
   概要       : サイトの顔となるページ。ヒーロー画像のスライドショー、
                自己紹介・スキル・作品の各プレビュー、CTA（連絡先誘導）を表示する。
-  初学者向けの読み方:
-    1. head でSEO、CSS、jQuery、背景切替プラグインの読み込みを確認する
-    2. header/nav で全ページ共通メニュー、hero で最初に見せる訴求を読む
-    3. quick-intro / skills-preview / works-preview / contact-cta を順に追う
-    4. 末尾のscriptで、ローダー、メニュー、背景スライダー、スクロール演出を見る
 ========================================================================
 -->
 <!-- 「<!DOCTYPE html>」はHTML5で書かれていることをブラウザに伝える宣言。必ず1行目に書く。 -->
@@ -25,11 +20,11 @@
 
     <!-- ===== SEO関連 meta情報 ===== -->
     <!-- 検索結果に表示される説明文（SEOで最重要） -->
-    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。ITサポート・社内SE補助・インフラ運用を目指し、HTML/CSS・Python・PHPで制作した業務改善ツール、Webアプリ、サーバー監視ダッシュボードなど6作品を公開中。">
+    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。サーバー監視ダッシュボードなど運用・ITサポート系の作品を中心に、Python・PHP・HTML/CSSで全6作品を公開中。職業訓練修了後、ITエンジニア（運用・サポート〜開発）として転職活動中。">
     <!-- 作者情報 -->
     <meta name="author" content="Noriyuki Shimada">
     <!-- 検索キーワード（補助的SEO） -->
-    <meta name="keywords" content="ポートフォリオ,ITサポート,ヘルプデスク,社内SE,インフラ運用,Webエンジニア,Python,PHP,Flask,HTML,CSS,JavaScript,サーバー監視,転職,島田則幸,Noriyuki Shimada">
+    <meta name="keywords" content="ポートフォリオ,ITサポート,運用エンジニア,インフラエンジニア,ヘルプデスク,サーバー監視,Python,PHP,Flask,HTML,CSS,JavaScript,転職,島田則幸,Noriyuki Shimada">
     <!-- スマホブラウザのアドレスバー色（ブランドカラーを反映） -->
     <meta name="theme-color" content="#2C3E50">
     <!-- 検索エンジン向けのインデックス指示（通常は省略可だが明示するとよい） -->
@@ -39,22 +34,22 @@
 
     <!-- ===== OGP（Open Graph Protocol）設定 ===== -->
     <!-- SNSなどでURLが共有された時に表示されるタイトル・画像・説明文を指定する。 -->
-    <meta property="og:title" content="島田則幸のポートフォリオ - ITサポート・インフラ運用向け6作品">
+    <meta property="og:title" content="島田則幸のポートフォリオ - サーバー監視・運用ツール＆Webアプリ6作品">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/">
     <meta property="og:image" content="https://ns7jp.github.io/image/works.jpg">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツール、Webアプリ、サーバー監視ダッシュボードなど6作品を公開中。">
+    <meta property="og:description" content="サーバー監視ダッシュボードなど運用・ITサポート系作品を中心に、Python・PHP・HTML/CSSで6作品を公開。ITエンジニア（運用・サポート〜開発）として転職活動中。">
     <meta property="og:locale" content="ja_JP">
 
     <!-- ===== Twitter カード設定（X 上で大きな画像付きカード表示） ===== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="島田則幸のポートフォリオ">
-    <meta name="twitter:description" content="ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツールやサーバー監視ツールなど6作品を公開中。">
+    <meta name="twitter:description" content="サーバー監視ツール・Webアプリなど6作品を公開中。ITエンジニア（運用・サポート〜開発）として転職活動中。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/works.jpg">
 
     <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
-    <title>Top | 島田則幸のポートフォリオ - ITサポート・インフラ運用向け6作品公開中</title>
+    <title>Top | 島田則幸のポートフォリオ - サーバー監視・運用ツール＆Webアプリ6作品公開中</title>
 
     <!-- ===== 外部スクリプト・CSSの読み込み ===== -->
     <!-- jQuery本体（CDN経由）。$（ドルマーク）の記法でDOM操作を簡潔に書ける。 -->
@@ -89,9 +84,9 @@
     <!-- ===== モバイル用メニュー切替ボタン（ハンバーガーメニュー） ===== -->
     <!-- スマホ画面のときだけ表示される。タップするとナビゲーションが開閉する。 -->
     <p class="res-menu">
-        <!-- 三本線（メニューを開くアイコン） -->
+        <!-- 三本線(メニューを開くアイコン) -->
         <i class="fa-solid fa-bars"></i>
-        <!-- バツ印（メニューを閉じるアイコン）。CSSで切替表示する。 -->
+        <!-- バツ印(メニューを閉じるアイコン)。CSSで切替表示する。 -->
         <i class="fa-solid fa-xmark"></i>
     </p>
 
@@ -127,10 +122,10 @@
             <!-- アニメーションクラス「animate-fade-in」でCSS側でフェードイン演出 -->
             <p class="hero-greeting animate-fade-in">Welcome to my portfolio</p>
             <h2 class="hero-title animate-slide-up">
-                <span class="line1">IT Support</span>
-                <span class="line2">Infra Support</span>
+                <span class="line1">IT Engineer</span>
+                <span class="line2">Operations / Support / Development</span>
             </h2>
-            <p class="hero-description animate-fade-in-delay">現場経験と学習したITスキルを活かし、<br>PC・サーバー運用、問い合わせ対応、業務改善に役立つ作品をまとめています</p>
+            <p class="hero-description animate-fade-in-delay">サーバー監視・運用視点を軸に、<br>Webアプリ・業務ツールを制作しました</p>
             <!-- CTA（Call To Action）ボタン群。作品ページ・連絡先ページへの導線。 -->
             <div class="hero-buttons animate-fade-in-delay2">
                 <a href="works.html" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View Works</a>
@@ -156,7 +151,7 @@
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h3>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在はITサポート・社内SE補助・インフラ運用を軸に転職活動中です。製造・物流現場で培った改善視点と、HTML/CSS・Python・PHPで制作した業務改善ツールやサーバー監視ツールなど6作品を公開しています。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在ITエンジニア（運用・サポート〜開発）として転職活動中です。製造現場で18年培った業務改善・トラブル対応の視点と、職業訓練で習得したPython・PHP・HTML/CSSを組み合わせ、サーバー監視ツール・Webアプリなど6作品を制作・公開しました。</p>
                     <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
                     <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
@@ -180,26 +175,27 @@
                 <span class="title-jp">スキル</span>
             </h3>
             <!-- 4つのスキルカードをCSS Gridで並べるエリア -->
+            <!-- IT運用・サポート寄りの順序：Python(自動化) → Server/Infra(運用監視) → PHP → HTML/CSS -->
             <div class="skills-grid">
                 <!-- 各カードはアイコン・スキル名・進捗バーで構成 -->
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fa-brands fa-html5"></i>
-                    </div>
-                    <h4>HTML/CSS</h4>
-                    <!-- スキルバーの外枠 -->
-                    <div class="skill-bar">
-                        <!-- data-progress属性に進捗値（％）を入れておき、JSで幅を反映させる。 -->
-                        <div class="skill-progress" data-progress="60"></div>
-                    </div>
-                </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-brands fa-python"></i>
                     </div>
                     <h4>Python</h4>
+                    <!-- スキルバーの外枠 -->
                     <div class="skill-bar">
+                        <!-- data-progress属性に進捗値（％）を入れておき、JSで幅を反映させる。 -->
                         <div class="skill-progress" data-progress="75"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h4>Server / Infra</h4>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="35"></div>
                     </div>
                 </div>
                 <div class="skill-card">
@@ -213,11 +209,11 @@
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-brands fa-js"></i>
+                        <i class="fa-brands fa-html5"></i>
                     </div>
-                    <h4>JavaScript</h4>
+                    <h4>HTML/CSS</h4>
                     <div class="skill-bar">
-                        <div class="skill-progress" data-progress="30"></div>
+                        <div class="skill-progress" data-progress="60"></div>
                     </div>
                 </div>
             </div>
@@ -236,8 +232,11 @@
                 <span class="title-en">Works</span>
                 <span class="title-jp">作品</span>
             </h3>
+            <!-- 表示順は IT運用・サポート視点で並べ替え：
+                 サーバー監視 → 定型文管理（業務効率） → 付箋（業務メモ）
+                 → Pulse → 掲示板 → 企業サイト -->
             <div class="works-grid">
-                <!-- 作品カード1：サーバー監視ダッシュボード（インフラ・運用系） -->
+                <!-- 作品カード1：サーバー監視ダッシュボード（インフラ・運用） -->
                 <div class="work-card">
                     <a href="works.html#work-monitor">
                     <div class="work-image" style="background-image: url('image/server-monitor.png')">
@@ -248,7 +247,7 @@
                     </div>
                     </a>
                 </div>
-                <!-- 作品カード2：定型文管理アプリ -->
+                <!-- 作品カード2：定型文管理アプリ（業務効率化） -->
                 <div class="work-card">
                     <a href="works.html#work-teikei">
                     <div class="work-image" style="background-image: url('image/teikei.png')">
@@ -259,7 +258,7 @@
                     </div>
                     </a>
                 </div>
-                <!-- 作品カード3：付箋アプリ -->
+                <!-- 作品カード3：付箋アプリ（業務メモ） -->
                 <div class="work-card">
                     <a href="works.html#work-notes">
                     <div class="work-image" style="background-image: url('image/notes.png')">
@@ -349,7 +348,7 @@
                 <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
             </div>
         </div>
-        <!-- 著作権表示。&copy;は©（コピーライト記号）の実体参照。 -->
+        <!-- 著作権表示。&copy;は©(コピーライト記号)の実体参照。 -->
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
         </div>

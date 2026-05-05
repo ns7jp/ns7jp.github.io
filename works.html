@@ -5,12 +5,7 @@
   役割       : 作品紹介ページ
   概要       : 6作品を「画像・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
                構成で詳しく紹介する。フィルターボタンで技術別に絞り込み可能。
-               カテゴリ：HTML/CSS / Python / PHP / Infrastructure
-  初学者向けの読み方:
-    1. filter-btn の data-filter と作品カードの data-category の対応を見る
-    2. work-showcase-item 1つが、1作品分の紹介カードだと理解して読む
-    3. サーバー監視や業務改善ツールがITサポート向け訴求になる点を確認する
-    4. 末尾のscriptで、フィルター表示とフェードイン演出を追う
+               カテゴリ（IT運用・サポート寄りの並び順）：Infrastructure / Python / PHP / HTML/CSS
 ========================================================================
 -->
 <html lang="ja">
@@ -18,7 +13,7 @@
     <!-- 文字コード（UTF-8）と画面サイズ調整の設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸の作品ページ。ITサポート・社内SE補助・インフラ運用で活かせるサーバー監視ダッシュボード、業務改善向けPythonアプリ、PHPのWebアプリなどの制作実績を掲載しています。">
+    <meta name="description" content="島田則幸の作品ページ。サーバー監視ダッシュボード（Flask + psutil）を中心に、業務効率化用のPythonデスクトップアプリ、PHPの掲示板・SNSアプリ、HTML/CSSの企業サイトなど運用・開発計6作品を掲載しています。">
     <title>作品 | 島田則幸のポートフォリオ</title>
 
     <!-- jQueryと共通スタイル類の読み込み -->
@@ -80,16 +75,16 @@
         <div class="container">
 
             <!-- ===== 作品紹介イントロ ===== -->
-            <!-- ページ最上部の挨拶文と画像。これから6作品（Webアプリ＋インフラ系含む）を紹介する旨を伝える。 -->
+            <!-- ページ最上部の挨拶文と画像。運用・サポート寄りで全6作品を紹介する旨を伝える。 -->
             <section class="works-intro">
                 <div class="intro-content">
                     <div class="intro-image">
                         <img src="image/image.jpg" alt="プロフィール">
                     </div>
                     <div class="intro-text">
-                        <h3>ITサポート・業務改善を意識した制作実績</h3>
-                        <p>職業訓練でWebサイト・アプリ制作を学び、HTML/CSS・Python・PHPで5作品を制作。さらに自学でサーバー監視ダッシュボードを追加し、ITサポート・社内SE補助・インフラ運用で活かせる視点を意識して計6作品を公開しています。</p>
-                        <p>各作品には使用技術・学習ポイント・具体的な使用例・制作時のトラブルと解決過程を記載し、問題の切り分けや手順化の姿勢が伝わるようにしています。</p>
+                        <h3>運用・サポート視点の自学プロジェクト + 職業訓練での制作実績</h3>
+                        <p>自学で取り組んだサーバー監視ダッシュボード（Flask + psutil + Chart.js）を軸に、現場で役立つ業務効率化ツール（定型文管理・付箋）、職業訓練で制作したWebアプリ（PHP掲示板・SNS）・企業サイトを含む計6作品を公開しています。</p>
+                        <p>各作品には使用技術・学習ポイント・具体的な使用例・制作時のトラブルと解決過程を記載しています。運用・サポート業務で重視される「障害切り分け」「ナレッジ整備」「再現性のある手順」の意識も併記しています。</p>
                     </div>
                 </div>
             </section>
@@ -99,6 +94,7 @@
             <section class="filter-section">
                 <div class="filter-tabs">
                     <!-- data-filter属性の値はJSで参照され、対応するdata-categoryの作品だけ表示される -->
+                    <!-- IT運用・サポート寄りの並び順：Infrastructure → Python → PHP → HTML/CSS -->
                     <button class="filter-btn active" data-filter="all">All</button>
                     <button class="filter-btn" data-filter="infra">Infrastructure</button>
                     <button class="filter-btn" data-filter="python">Python</button>
@@ -112,7 +108,178 @@
                 <div class="works-showcase">
 
                     <!-- ============================================================ -->
-                    <!-- 作品1：SNSアプリ「Pulse」（PHP / SQLite）                       -->
+                    <!-- 作品1：サーバー監視ダッシュボード（Python / Flask / psutil）   -->
+                    <!-- インフラ系志望をアピールするための実装。ブラウザから        -->
+                    <!-- リアルタイムでCPU・メモリ等を可視化する。                    -->
+                    <!-- ============================================================ -->
+                    <div class="work-showcase-item" id="work-monitor" data-category="infra">
+                        <div class="work-image-container">
+                            <!-- ダッシュボードのスクリーンショット -->
+                            <img src="image/server-monitor.png" alt="サーバー監視ダッシュボード">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Python / Flask / psutil</span>
+                                    <h4>サーバー監視ダッシュボード</h4>
+                                    <p>Webブラウザから動作中マシンのリソースをリアルタイム可視化</p>
+                                    <div class="overlay-buttons">
+                                        <a href="https://github.com/ns7jp/server-monitor" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-solid fa-server"></i> Python / Flask / psutil</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>サーバー監視ダッシュボード</h4>
+                            <p>Python（Flask）+ psutil + Chart.js で構築したリアルタイムサーバー監視ツールです。CPU使用率（円形ゲージ＋コア別バー）、メモリ・スワップ、ディスク（パーティション別）、ネットワークI/O（リアルタイム速度算出）、プロセスTOP15、CPU/メモリの60秒推移グラフを1画面に集約。しきい値に応じて緑→黄→橙→赤に自動配色されます。</p>
+                            <ul class="work-points">
+                                <li>Flask の JSON API（/api/stats、/api/processes）と Fetch API による非同期ポーリングでリアルタイム性を実現しました。</li>
+                                <li>psutilを使ってWindows / Linux / macOS で同じコードが動くクロスプラットフォームな実装にしました。</li>
+                                <li>Chart.jsでCPU・メモリの時系列グラフをローリングウィンドウ方式（過去30点保持）で描画しています。</li>
+                            </ul>
+                            <!-- 使用例・活用シーン -->
+                            <div class="work-usage">
+                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
+                                <ul class="usage-list">
+                                    <li><strong>個人PC・自宅サーバーの常時モニタ：</strong>サブモニターやブラウザの別タブに開きっぱなしにして、重い処理（動画エンコード・ビルド・学習タスク）の進行と負荷を一目で確認。</li>
+                                    <li><strong>小規模Webサーバーの簡易監視：</strong>Zabbix・Prometheusなど本格的監視ツール導入前の暫定モニタリング。LAN内に1台立てておけばブラウザだけで状態確認できる。</li>
+                                    <li><strong>障害対応時の状況把握：</strong>「いつから負荷が高いのか」を60秒履歴グラフで直感的に把握。プロセスTOP15で原因プロセスを即特定できる。</li>
+                                    <li><strong>負荷試験中の挙動確認：</strong>Apache JMeter等で負荷試験中に、対象サーバーのCPU・メモリが想定通り動いているかを別画面で確認。</li>
+                                    <li><strong>インフラ学習教材：</strong>psutilの使い方・Flask APIの設計・ポーリングと非同期通信・しきい値設計など、運用視点のWeb開発が一通り学べる。</li>
+                                    <li><strong>客先デモ・説明用：</strong>「サーバー監視とはこういうもの」を非エンジニアに説明するときの教材。視覚的なゲージ・色分けでイメージしやすい。</li>
+                                    <li><strong>社内ツールのテンプレート：</strong>このコードをベースに、独自指標（DBコネクション数・特定プロセスのみ等）を追加して社内専用ダッシュボードに発展可能。</li>
+                                </ul>
+                            </div>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span><code>psutil.cpu_percent()</code> を <code>interval=0</code> で呼ぶと前回呼び出しからの差分を返す仕様のため、初回が必ず0%になり、グラフが歪んで表示される。</p>
+                                <p><span class="trouble-label solution">解決</span>全体使用率の取得時のみ <code>interval=0.5</code> でサンプリングして基準点を作り、その直後にコア別を <code>interval=0</code> で取得することで、正確かつレスポンスを大きく落とさない構成に変更。</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>Flask</span>
+                                <span>psutil</span>
+                                <span>Chart.js</span>
+                                <span>Fetch API</span>
+                                <span>SVG</span>
+                                <span>JSON API</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============================================================ -->
+                    <!-- 作品2：定型文管理アプリ（Python / Flet）                        -->
+                    <!-- ============================================================ -->
+                    <div class="work-showcase-item" id="work-teikei" data-category="python">
+                        <div class="work-image-container">
+                            <img src="image/teikei.png" alt="定型文管理アプリ">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Python / Flet</span>
+                                    <h4>定型文管理アプリ</h4>
+                                    <p>Fletフレームワークを用いたテンプレート管理ツール</p>
+                                    <div class="overlay-buttons">
+                                        <!-- このアプリはデスクトップアプリのためデモなし。コードリンクのみ。 -->
+                                        <a href="https://github.com/ns7jp/works/blob/main/teikei_kanri.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-brands fa-python"></i> Python / Flet</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>定型文管理アプリ</h4>
+                            <p>FletフレームワークでGUI画面を構築したデスクトップアプリです。定型文の新規作成・編集・保存・削除のCRUD操作と、ワンクリックでクリップボードにコピーできる機能を実装しました。データはJSONファイルで永続化しています。</p>
+                            <ul class="work-points">
+                                <li>Fletを使い、PythonだけでGUIアプリを作れることを学びました。</li>
+                                <li>定型文の保存・編集・削除という基本的なCRUD操作を実装しました。</li>
+                            </ul>
+                            <!-- 使用例・活用シーン -->
+                            <div class="work-usage">
+                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
+                                <ul class="usage-list">
+                                    <li><strong>カスタマーサポート：</strong>「お問い合わせありがとうございます」「ご返金処理について」など、よくある問い合わせへの返答テンプレートを登録。1クリックでコピーして、メール・チャットへ即貼り付けできる。</li>
+                                    <li><strong>営業メール：</strong>初回挨拶・見積書送付・フォローアップ・受注御礼の各テンプレを登録。商談フェーズに応じて選んで使い回せるため、メール作成時間を大幅短縮。</li>
+                                    <li><strong>採用担当：</strong>書類選考通過連絡・面接日程調整・不採用通知などのテンプレを登録。応募者ごとの差し替え部分だけ手直しして使える。</li>
+                                    <li><strong>講師・教育担当：</strong>頻出の解説文（用語定義・補足説明・参考リンク）を登録し、Q&A対応や教材作成時にすばやく挿入。</li>
+                                    <li><strong>ライター・ブロガー：</strong>記事冒頭の挨拶・SNS告知の定型文・署名・免責事項などを管理。執筆フローのテンプレ化で生産性アップ。</li>
+                                    <li><strong>個人利用：</strong>自宅住所・電話番号・メール署名・よく使うURLなど、何度も入力する個人情報を安全にローカル保存。コピー時のミスタイプを防止できる。</li>
+                                </ul>
+                            </div>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>JSON保存時に日本語が <code>\uXXXX</code> 形式でエスケープされ、ファイルを直接開いても内容を確認できない。</p>
+                                <p><span class="trouble-label solution">解決</span><code>json.dump(..., ensure_ascii=False, indent=2)</code> を指定し、日本語のまま整形保存。トラブル時のデータ確認が容易になった。</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>Flet</span>
+                                <span>JSON</span>
+                                <span>pyperclip</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============================================================ -->
+                    <!-- 作品3：付箋アプリ（Python / tkinter）                           -->
+                    <!-- ============================================================ -->
+                    <div class="work-showcase-item" id="work-notes" data-category="python">
+                        <div class="work-image-container">
+                            <img src="image/notes.png" alt="付箋アプリ">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Python / tkinter</span>
+                                    <h4>付箋アプリ</h4>
+                                    <p>デスクトップ上で自由に使える付箋アプリ</p>
+                                    <div class="overlay-buttons">
+                                        <a href="https://github.com/ns7jp/works/blob/main/sticky_notes.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-brands fa-python"></i> Python / tkinter</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>付箋アプリ</h4>
+                            <p>Pythonのtkinterで作ったデスクトップ付箋アプリです。複数の付箋を自由に配置・作成・削除でき、内容はJSONファイルに自動保存されます。再起動後も付箋が復元されます。</p>
+                            <ul class="work-points">
+                                <li>tkinterでGUI部品の配置とイベント処理を学習しました。</li>
+                                <li>日常的に使えるツールとして、操作のわかりやすさを重視しました。</li>
+                            </ul>
+                            <!-- 使用例・活用シーン -->
+                            <div class="work-usage">
+                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
+                                <ul class="usage-list">
+                                    <li><strong>今日のTODOリスト：</strong>朝起きてその日にやることを付箋に書き、画面端に貼っておく。完了したら削除して達成感を得る、シンプルなタスク管理。</li>
+                                    <li><strong>瞬発アイデアメモ：</strong>会議中・作業中にひらめいたアイデアや気づきを即座にキャプチャ。Excel・メーラーを開く手間なく、ワンキーで付箋追加できる。</li>
+                                    <li><strong>リマインダー：</strong>「14時に電話」「明日締切の書類」など忘れたくない情報を画面に貼る。自動保存・位置復元のため、PCを再起動しても消えない。</li>
+                                    <li><strong>ショッピングリスト：</strong>家族から頼まれた買い物・週末に買うものを書き出し。スマホがなくてもPCですぐ確認・追加・削除ができる。</li>
+                                    <li><strong>学習用メモ：</strong>覚えたい英単語・公式・ショートカットキーを付箋に貼って画面端に常駐。視界に入る位置に置くことで自然に頭に残る。</li>
+                                    <li><strong>パスワード等の一時メモ：</strong>セッション内で一時的に控えたい数字・コードのメモに（※機密情報の長期保存には不向き）。作業終了後はその場で削除。</li>
+                                    <li><strong>在宅勤務の集中サポート：</strong>「集中タイム中」「会議中」など自分への声かけメモを画面に貼り、気分の切り替えに活用。</li>
+                                </ul>
+                            </div>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>付箋を移動して配置を変えても、再起動すると毎回初期位置に戻ってしまう。</p>
+                                <p><span class="trouble-label solution">解決</span>ウィンドウ終了時のイベントで <code>geometry()</code> を取得しJSONに保存、起動時に読み込んで位置を復元する処理に変更。</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>Python</span>
+                                <span>tkinter</span>
+                                <span>JSON</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ============================================================ -->
+                    <!-- 作品4：SNSアプリ「Pulse」（PHP / SQLite）                       -->
                     <!-- id="work-pulse"  : 他ページから #work-pulse でリンクされる         -->
                     <!-- data-category="php" : フィルター用カテゴリー識別子                  -->
                     <!-- ============================================================ -->
@@ -178,7 +345,7 @@
                     </div>
 
                     <!-- ============================================================ -->
-                    <!-- 作品2：掲示板アプリ（PHP / MySQL）                              -->
+                    <!-- 作品5：掲示板アプリ（PHP / MySQL）                              -->
                     <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-post" data-category="php">
                         <div class="work-image-container">
@@ -234,116 +401,7 @@
                     </div>
 
                     <!-- ============================================================ -->
-                    <!-- 作品3：定型文管理アプリ（Python / Flet）                        -->
-                    <!-- ============================================================ -->
-                    <div class="work-showcase-item" id="work-teikei" data-category="python">
-                        <div class="work-image-container">
-                            <img src="image/teikei.png" alt="定型文管理アプリ">
-                            <div class="work-overlay-full">
-                                <div class="overlay-content">
-                                    <span class="work-tag">Python / Flet</span>
-                                    <h4>定型文管理アプリ</h4>
-                                    <p>Fletフレームワークを用いたテンプレート管理ツール</p>
-                                    <div class="overlay-buttons">
-                                        <!-- このアプリはデスクトップアプリのためデモなし。コードリンクのみ。 -->
-                                        <a href="https://github.com/ns7jp/works/blob/main/teikei_kanri.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-details">
-                            <div class="work-meta">
-                                <span class="category"><i class="fa-brands fa-python"></i> Python / Flet</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
-                            </div>
-                            <h4>定型文管理アプリ</h4>
-                            <p>FletフレームワークでGUI画面を構築したデスクトップアプリです。定型文の新規作成・編集・保存・削除のCRUD操作と、ワンクリックでクリップボードにコピーできる機能を実装しました。データはJSONファイルで永続化しています。</p>
-                            <ul class="work-points">
-                                <li>Fletを使い、PythonだけでGUIアプリを作れることを学びました。</li>
-                                <li>定型文の保存・編集・削除という基本的なCRUD操作を実装しました。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
-                                <ul class="usage-list">
-                                    <li><strong>カスタマーサポート：</strong>「お問い合わせありがとうございます」「ご返金処理について」など、よくある問い合わせへの返答テンプレートを登録。1クリックでコピーして、メール・チャットへ即貼り付けできる。</li>
-                                    <li><strong>営業メール：</strong>初回挨拶・見積書送付・フォローアップ・受注御礼の各テンプレを登録。商談フェーズに応じて選んで使い回せるため、メール作成時間を大幅短縮。</li>
-                                    <li><strong>採用担当：</strong>書類選考通過連絡・面接日程調整・不採用通知などのテンプレを登録。応募者ごとの差し替え部分だけ手直しして使える。</li>
-                                    <li><strong>講師・教育担当：</strong>頻出の解説文（用語定義・補足説明・参考リンク）を登録し、Q&A対応や教材作成時にすばやく挿入。</li>
-                                    <li><strong>ライター・ブロガー：</strong>記事冒頭の挨拶・SNS告知の定型文・署名・免責事項などを管理。執筆フローのテンプレ化で生産性アップ。</li>
-                                    <li><strong>個人利用：</strong>自宅住所・電話番号・メール署名・よく使うURLなど、何度も入力する個人情報を安全にローカル保存。コピー時のミスタイプを防止できる。</li>
-                                </ul>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
-                                <p><span class="trouble-label">課題</span>JSON保存時に日本語が <code>\uXXXX</code> 形式でエスケープされ、ファイルを直接開いても内容を確認できない。</p>
-                                <p><span class="trouble-label solution">解決</span><code>json.dump(..., ensure_ascii=False, indent=2)</code> を指定し、日本語のまま整形保存。トラブル時のデータ確認が容易になった。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Python</span>
-                                <span>Flet</span>
-                                <span>JSON</span>
-                                <span>pyperclip</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ============================================================ -->
-                    <!-- 作品4：付箋アプリ（Python / tkinter）                           -->
-                    <!-- ============================================================ -->
-                    <div class="work-showcase-item" id="work-notes" data-category="python">
-                        <div class="work-image-container">
-                            <img src="image/notes.png" alt="付箋アプリ">
-                            <div class="work-overlay-full">
-                                <div class="overlay-content">
-                                    <span class="work-tag">Python / tkinter</span>
-                                    <h4>付箋アプリ</h4>
-                                    <p>デスクトップ上で自由に使える付箋アプリ</p>
-                                    <div class="overlay-buttons">
-                                        <a href="https://github.com/ns7jp/works/blob/main/sticky_notes.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-details">
-                            <div class="work-meta">
-                                <span class="category"><i class="fa-brands fa-python"></i> Python / tkinter</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
-                            </div>
-                            <h4>付箋アプリ</h4>
-                            <p>Pythonのtkinterで作ったデスクトップ付箋アプリです。複数の付箋を自由に配置・作成・削除でき、内容はJSONファイルに自動保存されます。再起動後も付箋が復元されます。</p>
-                            <ul class="work-points">
-                                <li>tkinterでGUI部品の配置とイベント処理を学習しました。</li>
-                                <li>日常的に使えるツールとして、操作のわかりやすさを重視しました。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
-                                <ul class="usage-list">
-                                    <li><strong>今日のTODOリスト：</strong>朝起きてその日にやることを付箋に書き、画面端に貼っておく。完了したら削除して達成感を得る、シンプルなタスク管理。</li>
-                                    <li><strong>瞬発アイデアメモ：</strong>会議中・作業中にひらめいたアイデアや気づきを即座にキャプチャ。Excel・メーラーを開く手間なく、ワンキーで付箋追加できる。</li>
-                                    <li><strong>リマインダー：</strong>「14時に電話」「明日締切の書類」など忘れたくない情報を画面に貼る。自動保存・位置復元のため、PCを再起動しても消えない。</li>
-                                    <li><strong>ショッピングリスト：</strong>家族から頼まれた買い物・週末に買うものを書き出し。スマホがなくてもPCですぐ確認・追加・削除ができる。</li>
-                                    <li><strong>学習用メモ：</strong>覚えたい英単語・公式・ショートカットキーを付箋に貼って画面端に常駐。視界に入る位置に置くことで自然に頭に残る。</li>
-                                    <li><strong>パスワード等の一時メモ：</strong>セッション内で一時的に控えたい数字・コードのメモに（※機密情報の長期保存には不向き）。作業終了後はその場で削除。</li>
-                                    <li><strong>在宅勤務の集中サポート：</strong>「集中タイム中」「会議中」など自分への声かけメモを画面に貼り、気分の切り替えに活用。</li>
-                                </ul>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
-                                <p><span class="trouble-label">課題</span>付箋を移動して配置を変えても、再起動すると毎回初期位置に戻ってしまう。</p>
-                                <p><span class="trouble-label solution">解決</span>ウィンドウ終了時のイベントで <code>geometry()</code> を取得しJSONに保存、起動時に読み込んで位置を復元する処理に変更。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Python</span>
-                                <span>tkinter</span>
-                                <span>JSON</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ============================================================ -->
-                    <!-- 作品5：サンプル企業サイト（HTML / CSS / Vanilla JS）            -->
+                    <!-- 作品6：サンプル企業サイト（HTML / CSS / Vanilla JS）            -->
                     <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-magic" data-category="html">
                         <div class="work-image-container">
@@ -394,67 +452,6 @@
                                 <span>Vanilla JS</span>
                                 <span>Lightbox2</span>
                                 <span>レスポンシブ</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ============================================================ -->
-                    <!-- 作品6：サーバー監視ダッシュボード（Python / Flask / psutil）   -->
-                    <!-- インフラ系志望をアピールするための実装。ブラウザから        -->
-                    <!-- リアルタイムでCPU・メモリ等を可視化する。                    -->
-                    <!-- ============================================================ -->
-                    <div class="work-showcase-item" id="work-monitor" data-category="infra">
-                        <div class="work-image-container">
-                            <!-- ダッシュボードのスクリーンショット -->
-                            <img src="image/server-monitor.png" alt="サーバー監視ダッシュボード">
-                            <div class="work-overlay-full">
-                                <div class="overlay-content">
-                                    <span class="work-tag">Python / Flask / psutil</span>
-                                    <h4>サーバー監視ダッシュボード</h4>
-                                    <p>Webブラウザから動作中マシンのリソースをリアルタイム可視化</p>
-                                    <div class="overlay-buttons">
-                                        <a href="https://github.com/ns7jp/server-monitor" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="work-details">
-                            <div class="work-meta">
-                                <span class="category"><i class="fa-solid fa-server"></i> Python / Flask / psutil</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
-                            </div>
-                            <h4>サーバー監視ダッシュボード</h4>
-                            <p>Python（Flask）+ psutil + Chart.js で構築したリアルタイムサーバー監視ツールです。CPU使用率（円形ゲージ＋コア別バー）、メモリ・スワップ、ディスク（パーティション別）、ネットワークI/O（リアルタイム速度算出）、プロセスTOP15、CPU/メモリの60秒推移グラフを1画面に集約。しきい値に応じて緑→黄→橙→赤に自動配色されます。</p>
-                            <ul class="work-points">
-                                <li>Flask の JSON API（/api/stats、/api/processes）と Fetch API による非同期ポーリングでリアルタイム性を実現しました。</li>
-                                <li>psutilを使ってWindows / Linux / macOS で同じコードが動くクロスプラットフォームな実装にしました。</li>
-                                <li>Chart.jsでCPU・メモリの時系列グラフをローリングウィンドウ方式（過去30点保持）で描画しています。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
-                                <ul class="usage-list">
-                                    <li><strong>個人PC・自宅サーバーの常時モニタ：</strong>サブモニターやブラウザの別タブに開きっぱなしにして、重い処理（動画エンコード・ビルド・学習タスク）の進行と負荷を一目で確認。</li>
-                                    <li><strong>小規模Webサーバーの簡易監視：</strong>Zabbix・Prometheusなど本格的監視ツール導入前の暫定モニタリング。LAN内に1台立てておけばブラウザだけで状態確認できる。</li>
-                                    <li><strong>障害対応時の状況把握：</strong>「いつから負荷が高いのか」を60秒履歴グラフで直感的に把握。プロセスTOP15で原因プロセスを即特定できる。</li>
-                                    <li><strong>負荷試験中の挙動確認：</strong>Apache JMeter等で負荷試験中に、対象サーバーのCPU・メモリが想定通り動いているかを別画面で確認。</li>
-                                    <li><strong>インフラ学習教材：</strong>psutilの使い方・Flask APIの設計・ポーリングと非同期通信・しきい値設計など、運用視点のWeb開発が一通り学べる。</li>
-                                    <li><strong>客先デモ・説明用：</strong>「サーバー監視とはこういうもの」を非エンジニアに説明するときの教材。視覚的なゲージ・色分けでイメージしやすい。</li>
-                                    <li><strong>社内ツールのテンプレート：</strong>このコードをベースに、独自指標（DBコネクション数・特定プロセスのみ等）を追加して社内専用ダッシュボードに発展可能。</li>
-                                </ul>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
-                                <p><span class="trouble-label">課題</span><code>psutil.cpu_percent()</code> を <code>interval=0</code> で呼ぶと前回呼び出しからの差分を返す仕様のため、初回が必ず0%になり、グラフが歪んで表示される。</p>
-                                <p><span class="trouble-label solution">解決</span>全体使用率の取得時のみ <code>interval=0.5</code> でサンプリングして基準点を作り、その直後にコア別を <code>interval=0</code> で取得することで、正確かつレスポンスを大きく落とさない構成に変更。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Python</span>
-                                <span>Flask</span>
-                                <span>psutil</span>
-                                <span>Chart.js</span>
-                                <span>Fetch API</span>
-                                <span>SVG</span>
-                                <span>JSON API</span>
                             </div>
                         </div>
                     </div>
