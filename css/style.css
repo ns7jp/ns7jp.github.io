@@ -609,6 +609,69 @@ header nav ul li a i {
     transform: translateY(0);
 }
 
+/* ========================================
+   Support Scope Section - 任せられることを先に伝える
+======================================== */
+.support-scope {
+    padding: 100px 0 110px;
+    background: var(--bg-white);
+    opacity: 1;
+    transform: translateY(0);
+    transition: var(--transition-slow);
+}
+
+.support-scope.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.support-scope-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 50px;
+}
+
+.support-scope-card {
+    border: 1px solid var(--bg-sand);
+    background: var(--bg-cream);
+    padding: 34px 30px;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.support-scope-card:hover {
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-4px);
+}
+
+.support-scope-icon {
+    width: 62px;
+    height: 62px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--text-light);
+    font-size: 2.2rem;
+    margin-bottom: 22px;
+}
+
+.support-scope-card h4 {
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.support-scope-card p {
+    font-size: 1.4rem;
+    color: var(--text-medium);
+    line-height: 1.8;
+}
+
 .intro-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1627,6 +1690,56 @@ footer {
     color: var(--text-muted);
 }
 
+.support-cases-section {
+    padding: 80px 0;
+}
+
+.support-case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.support-case-card {
+    background: var(--bg-white);
+    border: 1px solid var(--bg-sand);
+    padding: 34px 30px;
+    transition: var(--transition-smooth);
+}
+
+.support-case-card:hover {
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-soft);
+}
+
+.case-label {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.support-case-card h4 {
+    font-size: 1.6rem;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+}
+
+.support-case-card ol {
+    padding-left: 20px;
+}
+
+.support-case-card li {
+    font-size: 1.3rem;
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin-bottom: 8px;
+}
+
 /* ========================================
    23. Works Page Styles - works.html 作品紹介
    ----------------------------------------
@@ -1636,6 +1749,14 @@ footer {
 ======================================== */
 .works-intro {
     padding: 50px 0;
+}
+
+.works-page-content {
+    padding-top: 60px;
+}
+
+.works-page-content .works-intro {
+    padding: 20px 0 30px;
 }
 
 .works-intro .intro-content {
@@ -1668,10 +1789,60 @@ footer {
     margin-bottom: 10px;
 }
 
+.priority-works {
+    padding: 0 0 20px;
+}
+
+.priority-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border: 1px solid var(--bg-sand);
+    background: var(--bg-white);
+    padding: 22px 28px;
+}
+
+.priority-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.priority-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.priority-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--bg-sand);
+    padding: 9px 14px;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    background: var(--bg-cream);
+}
+
+.priority-links a:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
 /* Filter Section */
 .filter-section {
     padding: 50px 0;
     text-align: center;
+}
+
+.works-page-content .filter-section {
+    padding: 25px 0 40px;
 }
 
 .filter-tabs {
@@ -1814,6 +1985,14 @@ footer {
     font-size: 1.4rem;
     margin-bottom: 25px;
     color: rgba(255, 255, 255, 0.7);
+}
+
+.overlay-content .demo-note {
+    margin-top: 14px;
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(253, 251, 247, 0.85);
 }
 
 .btn-sm {
@@ -2461,6 +2640,11 @@ article p {
     .soft-skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .support-scope-grid,
+    .support-case-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {
@@ -2611,6 +2795,15 @@ article p {
         flex-direction: column;
         text-align: center;
     }
+
+    .support-scope {
+        padding: 80px 0;
+    }
+
+    .priority-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
     
     .contact-grid {
         grid-template-columns: 1fr;
@@ -2681,6 +2874,12 @@ article p {
     .filter-tabs {
         flex-direction: column;
         align-items: center;
+    }
+
+    .support-scope-card,
+    .support-case-card,
+    .priority-card {
+        padding: 28px 22px;
     }
     
     .filter-btn {

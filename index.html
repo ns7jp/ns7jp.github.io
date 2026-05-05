@@ -8,7 +8,7 @@
   初学者向けの読み方:
     1. head でSEO、CSS、jQuery、背景切替プラグインの読み込みを確認する
     2. header/nav で全ページ共通メニュー、hero で最初に見せる訴求を読む
-    3. quick-intro / skills-preview / works-preview / contact-cta を順に追う
+    3. support-scope / quick-intro / skills-preview / works-preview / contact-cta を順に追う
     4. 末尾のscriptで、ローダー、メニュー、背景スライダー、スクロール演出を見る
 ========================================================================
 -->
@@ -141,6 +141,43 @@
         <div class="scroll-indicator">
             <span>Scroll</span>
             <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ===== 対応領域セクション ===== -->
+    <!-- ITサポート職で任せられることを、作品紹介より先に短く伝える。 -->
+    <section class="support-scope">
+        <div class="container">
+            <h3 class="section-title center">
+                <span class="title-en">Support Scope</span>
+                <span class="title-jp">対応できること</span>
+            </h3>
+            <div class="support-scope-grid">
+                <div class="support-scope-card">
+                    <div class="support-scope-icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h4>問い合わせの切り分け</h4>
+                    <p>状況確認、再現条件の整理、影響範囲の確認を行い、次に見るべき原因を絞り込みます。</p>
+                </div>
+                <div class="support-scope-card">
+                    <div class="support-scope-icon">
+                        <i class="fa-solid fa-desktop"></i>
+                    </div>
+                    <h4>PC・Office・周辺機器</h4>
+                    <p>Windows操作、Office利用、機器接続、初期設定など、利用者目線の基本サポートに対応します。</p>
+                </div>
+                <div class="support-scope-card">
+                    <div class="support-scope-icon">
+                        <i class="fa-solid fa-server"></i>
+                    </div>
+                    <h4>監視・ログ確認・手順化</h4>
+                    <p>リソース状況やエラー内容を確認し、対応履歴を残して再発時に追える形へ整理します。</p>
+                </div>
+            </div>
+            <div class="section-link">
+                <a href="skills.html#support-cases" class="btn btn-secondary">対応例を見る <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
         </div>
     </section>
 
@@ -420,7 +457,7 @@
         // ----- セクションのフェードイン -----
         // 各セクションが画面下端から100px以上見えるようになったら「visible」クラスを付与。
         // CSS側で .visible が付くとふわっと表示される設定にしている。
-        $('.quick-intro, .skills-preview, .works-preview, .contact-cta').each(function() {
+        $('.support-scope, .quick-intro, .skills-preview, .works-preview, .contact-cta').each(function() {
             var elementTop = $(this).offset().top;
             var windowBottom = $(window).scrollTop() + $(window).height();
             if (windowBottom > elementTop + 100) {
