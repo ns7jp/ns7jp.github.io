@@ -2939,3 +2939,55 @@ article p {
         font-size: 2.5rem;
     }
 }
+
+/* ========================================
+   N. Support Docs Link Callout - skills.html サポートドキュメント導線
+   ----------------------------------------
+   support-docs/ フォルダへのリンクをコールアウト風に表示。
+   背景色＋左ボーダー＋ボタンで詳細ドキュメントへの誘導を強化する。
+======================================== */
+.support-docs-link {
+    margin-top: 50px;
+    padding: 30px;
+    background: var(--bg-warm);
+    border-left: 4px solid var(--accent-gold);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.support-docs-text {
+    font-size: 1.4rem;
+    color: var(--text-medium);
+    line-height: 1.8;
+    margin: 0;
+}
+
+.support-docs-text i {
+    color: var(--accent-gold);
+    margin-right: 8px;
+}
+
+.support-docs-text strong {
+    color: var(--text-dark);
+}
+
+.support-docs-text code {
+    background: rgba(0, 0, 0, 0.06);
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.92em;
+    color: var(--accent-gold);
+}
+
+.support-docs-link .btn {
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .support-docs-link {
+        padding: 20px;
+    }
+}
