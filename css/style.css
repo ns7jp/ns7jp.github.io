@@ -1385,8 +1385,37 @@ footer {
     color: var(--nature-sage);
 }
 
+.license-subheading {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-medium);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.license-subheading i {
+    color: var(--accent-gold);
+    margin-right: 8px;
+}
+
+.license-card-studying {
+    background: var(--bg-warm);
+    border-style: dashed;
+}
+
+.license-card-studying .license-year {
+    color: var(--text-medium);
+}
+
+.license-card-studying .license-icon {
+    color: var(--accent-gold);
+}
+
 /* ========================================
-   21. Hobbies Section - me.html 趣味カード
+   21. Hobbies Section - me.html 趣味カード 
    ----------------------------------------
    趣味をアイコン付きカードで4枚並べる。
    ホバー時にアイコンの色や背景を変化させてインタラクションを表現。
@@ -1593,6 +1622,20 @@ footer {
     position: absolute;
     left: 0;
     color: var(--accent-gold);
+}
+
+.learning-tag {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.0rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent-gold);
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
 }
 
 /* Tools Section */
