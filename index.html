@@ -25,7 +25,7 @@
 
     <!-- ===== SEO関連 meta情報 ===== -->
     <!-- 検索結果に表示される説明文（SEOで最重要） -->
-    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。ITサポート・社内SE補助・インフラ運用を目指し、HTML/CSS・Python・PHPで制作した業務改善ツール、Webアプリ、サーバー監視ダッシュボードなど6作品を公開中。">
+    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツール、サーバー監視ダッシュボード、手順書、PowerShell確認スクリプトを公開中。">
     <!-- 作者情報 -->
     <meta name="author" content="Noriyuki Shimada">
     <!-- 検索キーワード（補助的SEO） -->
@@ -44,13 +44,13 @@
     <meta property="og:url" content="https://ns7jp.github.io/">
     <meta property="og:image" content="https://ns7jp.github.io/image/works.jpg">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツール、Webアプリ、サーバー監視ダッシュボードなど6作品を公開中。">
+    <meta property="og:description" content="ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツール、サーバー監視ダッシュボード、手順書、PowerShell確認スクリプトを公開中。">
     <meta property="og:locale" content="ja_JP">
 
     <!-- ===== Twitter カード設定（X 上で大きな画像付きカード表示） ===== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="島田則幸のポートフォリオ">
-    <meta name="twitter:description" content="ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツールやサーバー監視ツールなど6作品を公開中。">
+    <meta name="twitter:description" content="ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツール、サーバー監視、手順書、PowerShell確認スクリプトを公開中。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/works.jpg">
 
     <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
@@ -141,6 +141,36 @@
         <div class="scroll-indicator">
             <span>Scroll</span>
             <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section class="hiring-summary">
+        <div class="container">
+            <h3 class="section-title center">
+                <span class="title-en">1 Minute Summary</span>
+                <span class="title-jp">採用担当者向けサマリー</span>
+            </h3>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <span class="summary-label">Environment</span>
+                    <h4>Windows / M365 / AD を想定</h4>
+                    <p>PCキッティング、アカウント・権限、メール、Teams、OneDrive、共有フォルダなど、社内ITの基本環境を前提に整理しています。</p>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">Support Work</span>
+                    <h4>一次切り分けと手順化</h4>
+                    <p>問い合わせ内容、影響範囲、再現条件、確認コマンド、対応履歴を残し、同じ問題を次回すばやく追える形にします。</p>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">Portfolio Proof</span>
+                    <h4>6作品 + 実務ドキュメント</h4>
+                    <p>監視ダッシュボード、業務改善ツール、障害対応事例集、PowerShell確認スクリプトで、運用支援に近い成果物を公開しています。</p>
+                </div>
+            </div>
+            <div class="summary-actions">
+                <a href="works.html#work-monitor" class="btn btn-secondary"><i class="fa-solid fa-server"></i> 代表作品を見る</a>
+                <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> 実務スクリプトを見る</a>
+            </div>
         </div>
     </section>
 
@@ -457,7 +487,7 @@
         // ----- セクションのフェードイン -----
         // 各セクションが画面下端から100px以上見えるようになったら「visible」クラスを付与。
         // CSS側で .visible が付くとふわっと表示される設定にしている。
-        $('.support-scope, .quick-intro, .skills-preview, .works-preview, .contact-cta').each(function() {
+        $('.hiring-summary, .support-scope, .quick-intro, .skills-preview, .works-preview, .contact-cta').each(function() {
             var elementTop = $(this).offset().top;
             var windowBottom = $(window).scrollTop() + $(window).height();
             if (windowBottom > elementTop + 100) {

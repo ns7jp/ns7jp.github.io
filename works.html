@@ -90,6 +90,7 @@
                         <h3>ITサポート・業務改善に近い順で紹介しています</h3>
                         <p>まずサーバー監視ダッシュボード、定型文管理、付箋アプリを見せ、PC・サーバー運用、問い合わせ対応、業務改善に活かせる力が先に伝わる構成にしています。</p>
                         <p>各作品には使用技術・学習ポイント・具体的な使用例・制作時のトラブルと解決過程を記載し、問題の切り分けや手順化の姿勢が伝わるようにしています。</p>
+                        <p>各作品に「ITサポート関連度」を付け、運用・ヘルプデスク・業務改善にどのようにつながる成果物かを明確にしました。</p>
                     </div>
                 </div>
             </section>
@@ -119,18 +120,11 @@
                 </div>
             </section>
 
-            <!-- ===== 作品一覧グリッド ===== -->
             <section class="works-section">
                 <div class="works-showcase">
 
-                    <!-- ============================================================ -->
-                    <!-- 作品1：サーバー監視ダッシュボード（Python / Flask / psutil）   -->
-                    <!-- インフラ系志望をアピールするための実装。ブラウザから        -->
-                    <!-- リアルタイムでCPU・メモリ等を可視化する。                    -->
-                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-monitor" data-category="infra">
                         <div class="work-image-container">
-                            <!-- ダッシュボードのスクリーンショット -->
                             <img src="image/server-monitor.png" alt="サーバー監視ダッシュボード">
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
@@ -149,6 +143,10 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>サーバー監視ダッシュボード</h4>
+                            <div class="support-fit high">
+                                <span class="fit-label">ITサポート関連度: High</span>
+                                <p>負荷上昇・容量不足・プロセス高負荷の一次確認に直結。監視値を見て状況を説明する運用支援力を示せます。</p>
+                            </div>
                             <p>Python（Flask）+ psutil + Chart.js で構築したリアルタイムサーバー監視ツールです。CPU使用率（円形ゲージ＋コア別バー）、メモリ・スワップ、ディスク（パーティション別）、ネットワークI/O（リアルタイム速度算出）、プロセスTOP15、CPU/メモリの60秒推移グラフを1画面に集約。しきい値に応じて緑→黄→橙→赤に自動配色されます。</p>
                             <ul class="work-points">
                                 <li>Flask の JSON API（/api/stats、/api/processes）と Fetch API による非同期ポーリングでリアルタイム性を実現しました。</li>
@@ -184,9 +182,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================ -->
-                    <!-- 作品2：定型文管理アプリ（Python / Flet）                        -->
-                    <!-- ============================================================ -->
+
                     <div class="work-showcase-item" id="work-teikei" data-category="python">
                         <div class="work-image-container">
                             <img src="image/teikei.png" alt="定型文管理アプリ">
@@ -196,7 +192,6 @@
                                     <h4>定型文管理アプリ</h4>
                                     <p>Fletフレームワークを用いたテンプレート管理ツール</p>
                                     <div class="overlay-buttons">
-                                        <!-- このアプリはデスクトップアプリのためデモなし。コードリンクのみ。 -->
                                         <a href="https://github.com/ns7jp/works/blob/main/teikei_kanri.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
                                     </div>
                                 </div>
@@ -208,6 +203,10 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>定型文管理アプリ</h4>
+                            <div class="support-fit high">
+                                <span class="fit-label">ITサポート関連度: High</span>
+                                <p>問い合わせ返信、受付メモ、案内文を標準化し、回答品質のばらつきと入力時間を減らす用途に向いています。</p>
+                            </div>
                             <p>FletフレームワークでGUI画面を構築したデスクトップアプリです。定型文の新規作成・編集・保存・削除のCRUD操作と、ワンクリックでクリップボードにコピーできる機能を実装しました。データはJSONファイルで永続化しています。</p>
                             <ul class="work-points">
                                 <li>Fletを使い、PythonだけでGUIアプリを作れることを学びました。</li>
@@ -239,9 +238,6 @@
                         </div>
                     </div>
 
-                    <!-- ============================================================ -->
-                    <!-- 作品3：付箋アプリ（Python / tkinter）                           -->
-                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-notes" data-category="python">
                         <div class="work-image-container">
                             <img src="image/notes.png" alt="付箋アプリ">
@@ -262,6 +258,10 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>付箋アプリ</h4>
+                            <div class="support-fit medium">
+                                <span class="fit-label">ITサポート関連度: Medium</span>
+                                <p>一時メモや対応中タスクの見える化に有効。機密情報を残さない注意書きも含め、運用上の扱い方まで説明できます。</p>
+                            </div>
                             <p>Pythonのtkinterで作ったデスクトップ付箋アプリです。複数の付箋を自由に配置・作成・削除でき、内容はJSONファイルに自動保存されます。再起動後も付箋が復元されます。</p>
                             <ul class="work-points">
                                 <li>tkinterでGUI部品の配置とイベント処理を学習しました。</li>
@@ -293,40 +293,33 @@
                         </div>
                     </div>
 
-                    <!-- ============================================================ -->
-                    <!-- 作品4：SNSアプリ「Pulse」（PHP / SQLite）                       -->
-                    <!-- id="work-pulse"  : 他ページから #work-pulse でリンクされる         -->
-                    <!-- data-category="php" : フィルター用カテゴリー識別子                  -->
-                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-pulse" data-category="php">
-                        <!-- 左：作品スクリーンショット＋ホバー時のオーバーレイ -->
                         <div class="work-image-container">
                             <img src="image/pulse.png" alt="SNSアプリ Pulse">
-                            <!-- 画像の上に重なるオーバーレイ。マウスを乗せると表示される。 -->
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">PHP / SQLite</span>
                                     <h4>SNSアプリ「Pulse」</h4>
                                     <p>感情ムードで繋がる独自コンセプトのSNS</p>
-                                    <!-- デモサイト・GitHubコードへのリンクボタン -->
                                     <div class="overlay-buttons">
-                                        <a href="http://shimada.atwebpages.com/pulse/login.php" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> Demo</a>
+                                        <a href="image/pulse.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-image"></i> Screenshot</a>
                                         <a href="https://github.com/ns7jp/pulse" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
                                     </div>
-                                    <p class="demo-note">学習用デモです。実際のログイン情報は入力しないでください。</p>
+                                    <p class="demo-note">ログイン画面へのHTTP誘導は避け、画面確認はスクリーンショットで行えるようにしています。</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- 右：作品の詳細（カテゴリ・タイトル・説明・ポイント・トラブル談） -->
                         <div class="work-details">
-                            <!-- カテゴリと制作年（メタ情報） -->
                             <div class="work-meta">
                                 <span class="category"><i class="fa-brands fa-php"></i> PHP / SQLite</span>
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>SNSアプリ「Pulse」</h4>
+                            <div class="support-fit learning">
+                                <span class="fit-label">ITサポート関連度: Learning</span>
+                                <p>直接のヘルプデスク業務より、認証・入力チェック・DB初期化・公開時の注意点を学んだ開発学習作品として位置付けています。</p>
+                            </div>
                             <p>「いいね」ではなく「共鳴」で繋がる、感情ムード投稿型のSNSアプリです。投稿時に8種のムードを選ぶと、カードの色がムードに対応して変化します。ささやきモード（匿名投稿）・タイムカプセル（未来日時公開）・感情天気予報（24時間分布）・感情オーラ（7日間傾向）など独自機能を実装しました。</p>
-                            <!-- 学習ポイント・特に頑張った点 -->
                             <ul class="work-points">
                                 <li>CSRF・XSS・SQLインジェクション対策、bcryptパスワード管理など、セキュリティを意識した実装を行いました。</li>
                                 <li>SQLiteをPDO経由で操作し、DBファイルを自動生成することで環境構築の手間を省きました。</li>
@@ -342,13 +335,11 @@
                                     <li><strong>共感ベースのコミュニティ：</strong>同じムードを選んだ人の投稿が並ぶことで、似た気持ちの相手と自然に繋がれる。「いいね数」競争にならない、穏やかなSNS体験を提供する。</li>
                                 </ul>
                             </div>
-                            <!-- トラブルと解決の体験談（実装力をアピール） -->
                             <div class="work-troubleshoot">
                                 <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
                                 <p><span class="trouble-label">課題</span>開発環境と本番サーバーでSQLiteファイルの初期化挙動が異なり、デプロイ直後に「DBが存在しない」エラーが発生。</p>
                                 <p><span class="trouble-label solution">解決</span>起動時にDBファイルの有無を確認し、無ければスキーマを自動生成する処理を追加。環境ごとの手動セットアップが不要となった。</p>
                             </div>
-                            <!-- 使用技術タグ -->
                             <div class="tech-tags">
                                 <span>PHP</span>
                                 <span>SQLite</span>
@@ -360,9 +351,6 @@
                         </div>
                     </div>
 
-                    <!-- ============================================================ -->
-                    <!-- 作品5：掲示板アプリ（PHP / MySQL）                              -->
-                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-post" data-category="php">
                         <div class="work-image-container">
                             <img src="image/post.png" alt="掲示板アプリ">
@@ -372,10 +360,10 @@
                                     <h4>掲示板アプリ</h4>
                                     <p>ユーザー認証・投稿・返信機能を備えた掲示板</p>
                                     <div class="overlay-buttons">
-                                        <a href="http://shimada.atwebpages.com/post/login.php" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> Demo</a>
+                                        <a href="image/post.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-image"></i> Screenshot</a>
                                         <a href="https://github.com/ns7jp/post" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
                                     </div>
-                                    <p class="demo-note">学習用デモです。実際のログイン情報は入力しないでください。</p>
+                                    <p class="demo-note">ログイン画面へのHTTP誘導は避け、画面確認はスクリーンショットで行えるようにしています。</p>
                                 </div>
                             </div>
                         </div>
@@ -385,6 +373,10 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>掲示板アプリ</h4>
+                            <div class="support-fit medium">
+                                <span class="fit-label">ITサポート関連度: Medium</span>
+                                <p>社内FAQ・ナレッジ掲示板の原型として説明できます。権限管理、投稿履歴、入力値対策の基礎も示せます。</p>
+                            </div>
                             <p>PHPとMySQLを使った掲示板アプリです。ユーザー登録・ログイン・投稿・返信の基本機能を実装しました。PDOプリペアドステートメントによるSQLインジェクション対策、htmlspecialcharsによるXSS対策も施しています。</p>
                             <ul class="work-points">
                                 <li>ログイン・投稿・返信などWebアプリに必要な基本機能を一通り実装しました。</li>
@@ -417,9 +409,6 @@
                         </div>
                     </div>
 
-                    <!-- ============================================================ -->
-                    <!-- 作品6：サンプル企業サイト（HTML / CSS / Vanilla JS）            -->
-                    <!-- ============================================================ -->
                     <div class="work-showcase-item" id="work-magic" data-category="html">
                         <div class="work-image-container">
                             <img src="image/magic.png" alt="サンプル企業サイト">
@@ -441,6 +430,10 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>サンプル企業サイト</h4>
+                            <div class="support-fit learning">
+                                <span class="fit-label">ITサポート関連度: Learning</span>
+                                <p>社内ポータルや手順書ページの保守に必要なHTML/CSS/JSの基礎を示す作品。ITサポートでは補助スキルとして活かせます。</p>
+                            </div>
                             <p>訓練校提供のデザインカンプ（PDF）からコーディングした架空企業「MagicMoon」のコーポレートサイトです。ハンバーガーメニュー・スムーススクロール・パララックス・フェードインアニメーションをVanilla JS（jQuery不使用）で実装しました。事例ページではLightbox2によるギャラリーも実装しています。</p>
                             <ul class="work-points">
                                 <li>Flexbox・CSS Gridによるレスポンシブレイアウトと、モバイルファーストのCSS設計を学びました。</li>
