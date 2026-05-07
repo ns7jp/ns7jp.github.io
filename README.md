@@ -8,7 +8,7 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
-公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールを一覧できるようにし、各作品の概要・使用技術・学習ポイント・デモリンク・GitHub リンクへアクセスできる構成にしています。
+公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
 
 この README は、Web 初学者の方にも「このサイトが何を目的に作られているのか」「どのファイルが何を担当しているのか」「HTML / CSS / JavaScript がどう分担して動いているのか」が分かるように、できるだけ順を追って説明しています。
 
@@ -26,9 +26,9 @@
 |----------------|------|
 | 人物像 | 製造・物流現場で培った正確性、改善意識、職業訓練で学んだ内容 |
 | スキル | PC・IT基礎、HTML / CSS / JavaScript / Python / PHP / データベース、サーバー監視の基礎 |
-| 制作物 | 6作品の概要、使い方、使用技術、ITサポート業務への活かし方 |
+| 制作物 | Support Toolkit と6作品の概要、使い方、使用技術、ITサポート業務への活かし方 |
 | 学習姿勢 | トラブルに対して原因を切り分け、調査し、修正し、手順化した過程 |
-| 実務準備 | PCキッティング手順書、障害対応事例集、PowerShell確認スクリプト |
+| 実務準備 | PCキッティング手順書、障害対応事例集、PowerShell確認スクリプト、チケット形式の対応例 |
 | 連絡先 | GitHub やメールなど、連絡・確認に使える情報 |
 
 初学者向けに言い換えると、このポートフォリオは「自分の学習成果を Web 上で見せる履歴書」のようなものです。履歴書が職歴や資格を伝えるのに対し、このサイトでは実際に作ったページやアプリを通して、問い合わせ対応・運用確認・業務改善ツール作成に必要な基礎力を示しています。
@@ -67,7 +67,7 @@
    HTML / CSS、Python、PHP、JavaScript、データベースなど、学習した技術をカテゴリ別に整理しています。ITサポート対応例と詳細ドキュメントへのリンクも置いています。
 
 4. **Works**
-   制作した6作品を詳しく紹介しています。作品画像、概要、使用技術、デモまたはスクリーンショット、GitHubリンク、制作時のトラブルと解決過程を掲載しています。
+   Support Toolkit と制作した6作品を詳しく紹介しています。作品画像、成果サマリー、概要、使用技術、デモまたはスクリーンショット、GitHubリンク、制作時のトラブルと解決過程を掲載しています。
 
 5. **Contact**
    メールや GitHub など、連絡先情報をまとめています。
@@ -81,10 +81,11 @@
 | トップページ | `index.html` | サイトの入口。自己紹介・スキル・作品ページへの導線をまとめる |
 | 自己紹介ページ | `me.html` | プロフィール、経歴、職業訓練、資格を説明する |
 | スキルページ | `skills.html` | 学習した技術とITサポート系スキルをカテゴリ別に見せる |
-| 作品ページ | `works.html` | 6作品の詳細、スクリーンショット、ソースコード、学習ポイント、運用・業務改善への活用例を紹介する |
+| 作品ページ | `works.html` | Support Toolkit と6作品の詳細、スクリーンショット、ソースコード、学習ポイント、運用・業務改善への活用例を紹介する |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
+| Support Toolkit | `works.html#work-support-toolkit` | 手順書・PowerShell・チケット形式の対応例を、ITサポート実務に近い成果物としてまとめる |
 | サポート文書 | `support-docs/` | キッティング・退職対応・権限管理・ライセンス・障害事例・インシデント対応・マルウェア対応の7本を掲載する |
-| 実務スクリプト | `support-scripts/` | PC情報収集、ネットワーク確認、ログ抽出、ディスク容量確認のPowerShell例を掲載する |
+| 実務スクリプト | `support-scripts/` | PC情報収集、ネットワーク確認、ログ抽出、ディスク容量確認などのPowerShell例を掲載する |
 
 ### `index.html`
 
@@ -102,10 +103,11 @@
 
 ### `works.html`
 
-作品紹介ページです。このポートフォリオの中心となるページで、6つの制作物をカード形式で掲載しています。フィルターボタンにより、HTML/CSS、Python、PHP、Infrastructure のように技術カテゴリごとに作品を絞り込める構成です。
+作品紹介ページです。このポートフォリオの中心となるページで、Support Toolkit と6つの制作物をカード形式で掲載しています。フィルターボタンにより、Support Toolkit、Infrastructure、Python、PHP、HTML/CSS のようにカテゴリごとに作品を絞り込める構成です。
 
 各作品には、次の情報を載せています。
 
+- 成果サマリー
 - 作品スクリーンショット
 - 作品の概要
 - 使用技術
@@ -187,16 +189,17 @@ ns7jp.github.io/
 
 ---
 
-## 掲載作品
+## 掲載成果物
 
 | # | 作品名 | 主な技術 | ITサポート関連度 | 内容 | リポジトリ |
 |---|--------|----------|------------------|------|------------|
-| ① | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
-| ② | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
-| ③ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
-| ④ | 掲示板アプリ | PHP / MySQL | Medium | ユーザー登録、投稿、返信ができる掲示板 | [ns7jp/post](https://github.com/ns7jp/post) |
-| ⑤ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | Learning | 感情ムードを選んで投稿するSNS | [ns7jp/pulse](https://github.com/ns7jp/pulse) |
-| ⑥ | サンプル企業サイト | HTML / CSS / JavaScript | Learning | 架空企業のレスポンシブ対応コーポレートサイト | [ns7jp/magic](https://github.com/ns7jp/magic) |
+| ① | Support Toolkit | Markdown / PowerShell | High | 手順書7本、PowerShell確認スクリプト8本、チケット形式の対応例 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
+| ③ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
+| ④ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
+| ⑤ | 掲示板アプリ | PHP / MySQL | Medium | ユーザー登録、投稿、返信ができる掲示板 | [ns7jp/post](https://github.com/ns7jp/post) |
+| ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | Learning | 感情ムードを選んで投稿するSNS | [ns7jp/pulse](https://github.com/ns7jp/pulse) |
+| ⑦ | サンプル企業サイト | HTML / CSS / JavaScript | Learning | 架空企業のレスポンシブ対応コーポレートサイト | [ns7jp/magic](https://github.com/ns7jp/magic) |
 
 作品ページでは、単に「何を作ったか」だけでなく、「どんな場面で使えるか」「作る中で何に困ったか」「どう解決したか」も記載しています。これは、完成物だけでなく、問題解決の過程も伝えるためです。
 

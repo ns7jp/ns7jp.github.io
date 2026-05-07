@@ -3,9 +3,9 @@
 ========================================================================
   ファイル名 : works.html
   役割       : 作品紹介ページ
-  概要       : 6作品を「画像・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
+  概要       : Support Toolkit と6作品を「成果サマリー・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
                構成で詳しく紹介する。フィルターボタンで技術別に絞り込み可能。
-               カテゴリ（IT運用・サポート寄りの並び順）：Infrastructure / Python / PHP / HTML/CSS
+               カテゴリ（IT運用・サポート寄りの並び順）：Support / Infrastructure / Python / PHP / HTML/CSS
   初学者向けの読み方:
     1. filter-btn の data-filter と作品カードの data-category の対応を見る
     2. work-showcase-item 1つが、1作品分の紹介カードだと理解して読む
@@ -18,7 +18,7 @@
     <!-- 文字コード（UTF-8）と画面サイズ調整の設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸の作品ページ。ITサポート・社内SE補助・インフラ運用で活かせるサーバー監視ダッシュボード、業務改善向けPythonアプリ、PHPのWebアプリなどの制作実績を掲載しています。">
+    <meta name="description" content="島田則幸の作品ページ。ITサポート・社内SE補助・インフラ運用で活かせるSupport Toolkit、サーバー監視ダッシュボード、業務改善向けPythonアプリ、PHPのWebアプリなどの制作実績を掲載しています。">
     <title>作品 | 島田則幸のポートフォリオ</title>
 
     <!-- ===== OGP / Twitter カード ===== -->
@@ -26,7 +26,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/works.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta property="og:description" content="島田則幸の作品6点。サーバー監視ダッシュボード、業務改善向けPythonアプリ、PHPのWebアプリなど、ITサポート・社内SE補助・インフラ運用で活かせる制作実績。">
+    <meta property="og:description" content="島田則幸のSupport Toolkitと作品6点。手順書・PowerShellスクリプト、サーバー監視ダッシュボード、業務改善向けPythonアプリなど、ITサポート・社内SE補助・インフラ運用で活かせる制作実績。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -56,12 +56,13 @@
           "name": "島田則幸の制作物",
           "itemListOrder": "ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU/メモリ/ディスク/ネットワーク/プロセスをリアルタイム可視化する監視ダッシュボード" } },
-            { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Fletフレームワークで作成した定型文テンプレート管理ツール" } },
-            { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Tkinterで作成した付箋復元機能付きデスクトップアプリ" } },
-            { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "掲示板アプリ", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/post", "programmingLanguage": "PHP", "description": "PHP + MySQL によるユーザー登録・投稿・返信機能付き掲示板" } },
-            { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareApplication", "name": "SNSアプリ Pulse", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/pulse", "programmingLanguage": "PHP", "description": "PHP + SQLite + JavaScript によるムード投稿型SNS" } },
-            { "@type": "ListItem", "position": 6, "item": { "@type": "WebSite", "name": "サンプル企業サイト", "url": "https://github.com/ns7jp/magic", "description": "HTML/CSS/JavaScriptで作成した架空企業のレスポンシブコーポレートサイト" } }
+            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定した7本の手順書と8本のPowerShell確認スクリプト" } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU/メモリ/ディスク/ネットワーク/プロセスをリアルタイム可視化する監視ダッシュボード" } },
+            { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Fletフレームワークで作成した定型文テンプレート管理ツール" } },
+            { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Tkinterで作成した付箋復元機能付きデスクトップアプリ" } },
+            { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareApplication", "name": "掲示板アプリ", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/post", "programmingLanguage": "PHP", "description": "PHP + MySQL によるユーザー登録・投稿・返信機能付き掲示板" } },
+            { "@type": "ListItem", "position": 6, "item": { "@type": "SoftwareApplication", "name": "SNSアプリ Pulse", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/pulse", "programmingLanguage": "PHP", "description": "PHP + SQLite + JavaScript によるムード投稿型SNS" } },
+            { "@type": "ListItem", "position": 7, "item": { "@type": "WebSite", "name": "サンプル企業サイト", "url": "https://github.com/ns7jp/magic", "description": "HTML/CSS/JavaScriptで作成した架空企業のレスポンシブコーポレートサイト" } }
           ]
         }
       ]
@@ -100,6 +101,7 @@
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <!-- 現在ページ「Works」を active クラスで強調 -->
                 <li class="active"><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
@@ -121,7 +123,7 @@
         <div class="container">
 
             <!-- ===== 作品紹介イントロ ===== -->
-            <!-- ページ最上部の挨拶文と画像。これから6作品（Webアプリ＋インフラ系含む）を紹介する旨を伝える。 -->
+            <!-- ページ最上部の挨拶文と画像。Support Toolkit と6作品（Webアプリ＋インフラ系含む）を紹介する旨を伝える。 -->
             <section class="works-intro">
                 <div class="intro-content">
                     <div class="intro-image">
@@ -129,9 +131,9 @@
                     </div>
                     <div class="intro-text">
                         <h3>ITサポート・業務改善に近い順で紹介しています</h3>
-                        <p>まずサーバー監視ダッシュボード、定型文管理、付箋アプリを見せ、PC・サーバー運用、問い合わせ対応、業務改善に活かせる力が先に伝わる構成にしています。</p>
+                        <p>まずSupport Toolkit、サーバー監視ダッシュボード、定型文管理、付箋アプリを見せ、PC・サーバー運用、問い合わせ対応、業務改善に活かせる力が先に伝わる構成にしています。</p>
                         <p>各作品には使用技術・学習ポイント・具体的な使用例・制作時のトラブルと解決過程を記載し、問題の切り分けや手順化の姿勢が伝わるようにしています。</p>
-                        <p>各作品に「ITサポート関連度」を付け、運用・ヘルプデスク・業務改善にどのようにつながる成果物かを明確にしました。</p>
+                        <p>各作品に「成果サマリー」と「ITサポート関連度」を付け、運用・ヘルプデスク・業務改善にどのようにつながる成果物かを短時間で確認できるようにしました。</p>
                     </div>
                 </div>
             </section>
@@ -139,8 +141,9 @@
             <!-- ===== 優先して見てほしい作品 ===== -->
             <section class="priority-works">
                 <div class="priority-card">
-                    <span class="priority-label">まず見てほしい3作品</span>
+                    <span class="priority-label">まず見てほしい成果物</span>
                     <div class="priority-links">
+                        <a href="#work-support-toolkit"><i class="fa-solid fa-folder-tree"></i> Support Toolkit</a>
                         <a href="#work-monitor"><i class="fa-solid fa-server"></i> サーバー監視</a>
                         <a href="#work-teikei"><i class="fa-solid fa-message"></i> 定型文管理</a>
                         <a href="#work-notes"><i class="fa-solid fa-note-sticky"></i> 付箋アプリ</a>
@@ -154,6 +157,7 @@
                 <div class="filter-tabs">
                     <!-- data-filter属性の値はJSで参照され、対応するdata-categoryの作品だけ表示される -->
                     <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="support">Support Toolkit</button>
                     <button class="filter-btn" data-filter="infra">Infrastructure</button>
                     <button class="filter-btn" data-filter="python">Python</button>
                     <button class="filter-btn" data-filter="php">PHP</button>
@@ -163,6 +167,101 @@
 
             <section class="works-section">
                 <div class="works-showcase">
+
+                    <div class="work-showcase-item support-toolkit-item" id="work-support-toolkit" data-category="support">
+                        <div class="work-image-container">
+                            <div class="support-toolkit-visual" aria-label="Support Toolkitの構成">
+                                <div class="toolkit-visual-header">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="toolkit-visual-grid">
+                                    <div>
+                                        <i class="fa-solid fa-laptop"></i>
+                                        <strong>PC Kitting</strong>
+                                        <span>手順書</span>
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-user-shield"></i>
+                                        <strong>AD / M365</strong>
+                                        <span>棚卸し</span>
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-wifi"></i>
+                                        <strong>Network</strong>
+                                        <span>一次確認</span>
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-file-lines"></i>
+                                        <strong>Ticket</strong>
+                                        <span>記録の型</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Docs / PowerShell / Ticket Flow</span>
+                                    <h4>Support Toolkit</h4>
+                                    <p>手順書・確認スクリプト・対応ログの型をまとめた実務想定成果物</p>
+                                    <div class="overlay-buttons">
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> Docs</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-terminal"></i> Scripts</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-solid fa-headset"></i> IT Support / PowerShell / Docs</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>Support Toolkit</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>問い合わせ一次対応と運用手順の標準化</strong></div>
+                                <div><span>成果</span><strong>7手順書・8スクリプト・対応チケット例</strong></div>
+                                <div><span>活用</span><strong>受付、切り分け、証跡、引き継ぎ</strong></div>
+                            </div>
+                            <div class="support-fit high">
+                                <span class="fit-label">ITサポート関連度: High</span>
+                                <p>コードだけでなく、現場で求められる手順化・記録・確認観点をまとめた成果物。ヘルプデスク、社内SE補助、運用監視への適性を直接示せます。</p>
+                            </div>
+                            <div class="work-numbers" aria-label="主要スペック">
+                                <span class="num-chip"><strong>7</strong>手順書</span>
+                                <span class="num-chip"><strong>8</strong>PowerShell</span>
+                                <span class="num-chip"><strong>10</strong>障害ケース</span>
+                                <span class="num-chip">CI <strong>リンク検査</strong></span>
+                            </div>
+                            <p>Windows 11 / Microsoft 365 / Active Directory を想定し、PCキッティング、退職者アカウント停止、共有フォルダ権限管理、M365ライセンス管理、障害対応、重大インシデント、マルウェア感染疑い対応をドキュメント化しました。確認スクリプトは削除・設定変更を含めず、端末状態やログを読み取り中心で収集する構成です。</p>
+                            <ul class="work-points">
+                                <li>問い合わせ受付後に「何を、どの順番で、どの証跡として残すか」を意識して構成しました。</li>
+                                <li>JSON / CSV / HTML の出力を用意し、チケット添付や引き継ぎ資料へ転用しやすくしました。</li>
+                                <li>公開ポートフォリオとして、社内固有情報や認証情報を含めない安全なサンプルにしています。</li>
+                            </ul>
+                            <div class="work-usage">
+                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
+                                <ul class="usage-list">
+                                    <li><strong>新人受け入れ：</strong>PCキッティング手順書で、検品からAD参加、M365導入、引き渡しまでの抜け漏れを防ぐ。</li>
+                                    <li><strong>退職・異動対応：</strong>アカウント停止、権限剥奪、データ引き継ぎ、ライセンス回収を時系列で確認する。</li>
+                                    <li><strong>PC不調の一次確認：</strong>端末情報、イベントログ、ディスク、ネットワーク、セキュリティ状態を同じ形式で記録する。</li>
+                                    <li><strong>引き継ぎ：</strong>対応内容・判断・再発防止をチケットに残し、次回対応を早くする。</li>
+                                </ul>
+                            </div>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>実務に近づけようとすると、社内固有のサーバー名・ユーザーID・権限情報のような公開に不向きな情報が混ざりやすい。</p>
+                                <p><span class="trouble-label solution">解決</span>環境を Windows 11 / M365 / AD の汎用想定に固定し、スクリプトは読み取り中心・プレースホルダ中心で構成。注意事項もREADMEに明記しました。</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>PowerShell</span>
+                                <span>Windows 11</span>
+                                <span>Microsoft 365</span>
+                                <span>Active Directory</span>
+                                <span>Runbook</span>
+                                <span>Ticket</span>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="work-showcase-item" id="work-monitor" data-category="infra">
                         <div class="work-image-container">
@@ -184,6 +283,11 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>サーバー監視ダッシュボード</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>端末・サーバー状態の見える化</strong></div>
+                                <div><span>成果</span><strong>CPU / メモリ / ディスク / プロセス監視</strong></div>
+                                <div><span>活用</span><strong>負荷上昇時の一次確認と説明</strong></div>
+                            </div>
                             <div class="support-fit high">
                                 <span class="fit-label">ITサポート関連度: High</span>
                                 <p>負荷上昇・容量不足・プロセス高負荷の一次確認に直結。監視値を見て状況を説明する運用支援力を示せます。</p>
@@ -250,6 +354,11 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>定型文管理アプリ</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>問い合わせ返信の標準化</strong></div>
+                                <div><span>成果</span><strong>定型文のCRUDとワンクリックコピー</strong></div>
+                                <div><span>活用</span><strong>受付文・案内文・確認項目の品質統一</strong></div>
+                            </div>
                             <div class="support-fit high">
                                 <span class="fit-label">ITサポート関連度: High</span>
                                 <p>問い合わせ返信、受付メモ、案内文を標準化し、回答品質のばらつきと入力時間を減らす用途に向いています。</p>
@@ -305,6 +414,11 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>付箋アプリ</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>対応中タスクの一時メモ化</strong></div>
+                                <div><span>成果</span><strong>複数付箋の保存・復元</strong></div>
+                                <div><span>活用</span><strong>対応メモ、確認待ち、作業中TODO</strong></div>
+                            </div>
                             <div class="support-fit medium">
                                 <span class="fit-label">ITサポート関連度: Medium</span>
                                 <p>一時メモや対応中タスクの見える化に有効。機密情報を残さない注意書きも含め、運用上の扱い方まで説明できます。</p>
@@ -362,6 +476,11 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>SNSアプリ「Pulse」</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>認証・投稿・DB連携の学習</strong></div>
+                                <div><span>成果</span><strong>CSRF / XSS / bcryptを意識したWebアプリ</strong></div>
+                                <div><span>活用</span><strong>社内Webシステム理解の基礎</strong></div>
+                            </div>
                             <div class="support-fit learning">
                                 <span class="fit-label">ITサポート関連度: Learning</span>
                                 <p>直接のヘルプデスク業務より、認証・入力チェック・DB初期化・公開時の注意点を学んだ開発学習作品として位置付けています。</p>
@@ -426,6 +545,11 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>掲示板アプリ</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>社内FAQ・ナレッジ掲示板の原型</strong></div>
+                                <div><span>成果</span><strong>登録・ログイン・投稿・返信機能</strong></div>
+                                <div><span>活用</span><strong>ナレッジ共有とWebアプリ保守理解</strong></div>
+                            </div>
                             <div class="support-fit medium">
                                 <span class="fit-label">ITサポート関連度: Medium</span>
                                 <p>社内FAQ・ナレッジ掲示板の原型として説明できます。権限管理、投稿履歴、入力値対策の基礎も示せます。</p>
@@ -489,6 +613,11 @@
                                 <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
                             </div>
                             <h4>サンプル企業サイト</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>静的サイトの保守・改善スキル証明</strong></div>
+                                <div><span>成果</span><strong>レスポンシブ、DOM操作、軽量公開</strong></div>
+                                <div><span>活用</span><strong>社内ポータルや手順書ページの更新</strong></div>
+                            </div>
                             <div class="support-fit learning">
                                 <span class="fit-label">ITサポート関連度: Learning</span>
                                 <p>社内ポータルや手順書ページの保守に必要なHTML/CSS/JSの基礎を示す作品。ITサポートでは補助スキルとして活かせます。</p>
@@ -550,6 +679,7 @@
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
                 <a href="works.html">Works</a>
+                <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">

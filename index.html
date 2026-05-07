@@ -39,7 +39,7 @@
 
     <!-- ===== OGP（Open Graph Protocol）設定 ===== -->
     <!-- SNSなどでURLが共有された時に表示されるタイトル・画像・説明文を指定する。 -->
-    <meta property="og:title" content="島田則幸のポートフォリオ - ITサポート・インフラ運用向け6作品">
+    <meta property="og:title" content="島田則幸のポートフォリオ - ITサポート・インフラ運用向け成果物">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -54,7 +54,7 @@
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
 
     <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
-    <title>Top | 島田則幸のポートフォリオ - ITサポート・インフラ運用向け6作品公開中</title>
+    <title>Top | 島田則幸のポートフォリオ - ITサポート・インフラ運用向け成果物公開中</title>
 
     <!-- ===== 外部スクリプト・CSSの読み込み ===== -->
     <!-- jQuery本体（CDN経由）。$（ドルマーク）の記法でDOM操作を簡潔に書ける。 -->
@@ -147,6 +147,7 @@
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
@@ -167,9 +168,32 @@
                 <span class="line2">Infra Support</span>
             </h2>
             <p class="hero-description animate-fade-in-delay">現場経験と学習したITスキルを活かし、<br>PC・サーバー運用、問い合わせ対応、業務改善に役立つ作品をまとめています</p>
+            <div class="hero-proof-grid animate-fade-in-delay2" aria-label="ITサポート向けの公開成果">
+                <a href="works.html#work-monitor" class="hero-proof-item">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    <span>監視</span>
+                    <strong>Flask / psutil</strong>
+                </a>
+                <a href="works.html#work-support-toolkit" class="hero-proof-item">
+                    <i class="fa-solid fa-folder-tree"></i>
+                    <span>手順書</span>
+                    <strong>7 docs</strong>
+                </a>
+                <a href="works.html#work-support-toolkit" class="hero-proof-item">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span>自動化</span>
+                    <strong>8 scripts</strong>
+                </a>
+                <a href="skills.html#ticket-examples" class="hero-proof-item">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                    <span>一次対応</span>
+                    <strong>Ticket flow</strong>
+                </a>
+            </div>
             <!-- CTA（Call To Action）ボタン群。作品ページ・連絡先ページへの導線。 -->
             <div class="hero-buttons animate-fade-in-delay2">
                 <a href="works.html" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View Works</a>
+                <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-file-lines"></i> Resume</a>
                 <a href="contact.html" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Contact</a>
             </div>
         </div>
@@ -199,12 +223,14 @@
                 </div>
                 <div class="summary-card">
                     <span class="summary-label">Portfolio Proof</span>
-                    <h4>6作品 + 実務ドキュメント</h4>
-                    <p>監視ダッシュボード、業務改善ツール、障害対応事例集、PowerShell確認スクリプトで、運用支援に近い成果物を公開しています。</p>
+                    <h4>6作品 + Support Toolkit</h4>
+                    <p>監視ダッシュボード、業務改善ツール、7本の実務想定ドキュメント、8本のPowerShell確認スクリプトで、運用支援に近い成果物を公開しています。</p>
                 </div>
             </div>
             <div class="summary-actions">
                 <a href="works.html#work-monitor" class="btn btn-secondary"><i class="fa-solid fa-server"></i> 代表作品を見る</a>
+                <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 1ページ履歴書を見る</a>
+                <a href="works.html#work-support-toolkit" class="btn btn-outline-dark"><i class="fa-solid fa-folder-open"></i> Support Toolkitを見る</a>
                 <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> 実務スクリプトを見る</a>
             </div>
         </div>
@@ -247,6 +273,38 @@
         </div>
     </section>
 
+    <!-- ===== Support Toolkitセクション ===== -->
+    <!-- 採用担当者がITサポート実務への準備状況を短時間で確認できるよう、手順書・スクリプト・対応例を1ブロックに集約する。 -->
+    <section class="support-toolkit">
+        <div class="container">
+            <h3 class="section-title center">
+                <span class="title-en">Support Toolkit</span>
+                <span class="title-jp">実務想定の成果物</span>
+            </h3>
+            <div class="toolkit-grid">
+                <a href="works.html#work-support-toolkit" class="toolkit-card">
+                    <span class="toolkit-label">Docs</span>
+                    <strong>7本の手順書</strong>
+                    <p>PCキッティング、退職者対応、権限管理、M365ライセンス、障害・インシデント対応を整理。</p>
+                </a>
+                <a href="works.html#work-support-toolkit" class="toolkit-card">
+                    <span class="toolkit-label">Scripts</span>
+                    <strong>8本のPowerShell</strong>
+                    <p>端末情報、ネットワーク、イベントログ、容量、セキュリティ、AD/M365棚卸しを読み取り中心で確認。</p>
+                </a>
+                <a href="skills.html#ticket-examples" class="toolkit-card">
+                    <span class="toolkit-label">Tickets</span>
+                    <strong>対応ログの型</strong>
+                    <p>問い合わせ、確認、判断、対応、再発防止をチケット形式で残す流れを掲載。</p>
+                </a>
+            </div>
+            <div class="section-link">
+                <a href="works.html#work-support-toolkit" class="btn btn-secondary"><i class="fa-solid fa-folder-open"></i> 実務想定成果を見る</a>
+                <a href="skills.html#ticket-examples" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-list"></i> チケット例を見る</a>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== クイック自己紹介セクション ===== -->
     <!-- 「私について」の概要を簡潔に伝え、me.htmlへの導線を作るブロック。 -->
     <section class="quick-intro">
@@ -259,7 +317,7 @@
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h3>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在はITサポート・社内SE補助・インフラ運用を軸に転職活動中です。製造・物流現場で培った改善視点と、HTML/CSS・Python・PHPで制作した業務改善ツールやサーバー監視ツールなど6作品を公開しています。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在はITサポート・社内SE補助・インフラ運用を軸に転職活動中です。製造・物流現場で培った改善視点と、HTML/CSS・Python・PHPで制作した6作品、手順書・PowerShellスクリプトをまとめたSupport Toolkitを公開しています。</p>
                     <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
                     <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
@@ -332,7 +390,7 @@
     </section>
 
     <!-- ===== 作品プレビューセクション ===== -->
-    <!-- 6作品をカード形式で表示。各カードはworks.htmlの該当作品にアンカーリンクで飛ぶ。 -->
+    <!-- 代表作品をカード形式で表示。各カードはworks.htmlの該当作品にアンカーリンクで飛ぶ。 -->
     <section class="works-preview">
         <div class="container">
             <h3 class="section-title center light">
@@ -442,6 +500,7 @@
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
                 <a href="works.html">Works</a>
+                <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
             </div>
             <!-- フッター右：SNS・メールアイコン -->

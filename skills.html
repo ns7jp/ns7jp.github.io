@@ -85,6 +85,7 @@
                 <!-- 現在ページ「Skills」を active クラスで強調 -->
                 <li class="active"><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
@@ -108,7 +109,7 @@
 
             <!-- ===== スキル概要文 ===== -->
             <section class="skills-overview">
-                <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発技術に加え、製造現場で培ったITサポート関連スキル、自学で取り組むサーバー監視・インフラ自動化スキルをご紹介します。<br>各技術はポートフォリオ作品（全6作品）として実際に活用しています。</p>
+                <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発技術に加え、製造現場で培ったITサポート関連スキル、自学で取り組むサーバー監視・インフラ自動化スキルをご紹介します。<br>各技術はSupport Toolkitとポートフォリオ作品（全6作品）として実際に活用しています。</p>
             </section>
 
             <!-- ===== 技術スキル（プログラミング系）セクション ===== -->
@@ -439,6 +440,66 @@
                     </div>
                 </div>
 
+                <!-- ===== チケット形式の対応例 ===== -->
+                <!-- 受付後にどの情報を残すかを、採用担当者が確認しやすい短いチケット例として示す。 -->
+                <section class="ticket-examples" id="ticket-examples">
+                    <div class="ticket-heading">
+                        <span class="case-label">Ticket Format</span>
+                        <h4>問い合わせ対応ログの残し方</h4>
+                        <p>現象・確認・判断・対応・再発防止を同じ型で残し、次回対応や引き継ぎに使える情報へ整理します。</p>
+                    </div>
+                    <div class="ticket-grid">
+                        <article class="ticket-card">
+                            <div class="ticket-top">
+                                <span>Ticket 001</span>
+                                <strong>PCが重い</strong>
+                            </div>
+                            <dl>
+                                <dt>問い合わせ</dt>
+                                <dd>Excel起動とブラウザ操作が遅い。朝から複数回発生。</dd>
+                                <dt>確認</dt>
+                                <dd>CPU / メモリ / ディスク使用率、常駐アプリ、イベントログ、空き容量。</dd>
+                                <dt>判断</dt>
+                                <dd>ディスク空き容量不足と不要スタートアップが主因と仮説化。</dd>
+                                <dt>対応</dt>
+                                <dd>不要ファイル整理、スタートアップ見直し、再起動後の改善を確認。</dd>
+                            </dl>
+                        </article>
+                        <article class="ticket-card">
+                            <div class="ticket-top">
+                                <span>Ticket 002</span>
+                                <strong>共有フォルダに入れない</strong>
+                            </div>
+                            <dl>
+                                <dt>問い合わせ</dt>
+                                <dd>部署共有フォルダへアクセスすると権限エラーになる。</dd>
+                                <dt>確認</dt>
+                                <dd>対象パス、本人だけか、ADグループ、直近の異動・権限変更履歴。</dd>
+                                <dt>判断</dt>
+                                <dd>所属グループ未反映の可能性。申請情報と上長承認の有無を確認。</dd>
+                                <dt>対応</dt>
+                                <dd>権限付与依頼、再ログオン案内、棚卸し記録へ反映。</dd>
+                            </dl>
+                        </article>
+                        <article class="ticket-card">
+                            <div class="ticket-top">
+                                <span>Ticket 003</span>
+                                <strong>ネットワーク不可</strong>
+                            </div>
+                            <dl>
+                                <dt>問い合わせ</dt>
+                                <dd>社内システムと外部サイトの両方につながらない。</dd>
+                                <dt>確認</dt>
+                                <dd>本人のみか周辺も同じか、IP / DNS / ゲートウェイ、Wi-Fi / LAN状態。</dd>
+                                <dt>判断</dt>
+                                <dd>端末側かネットワーク側かを分離。周辺端末の状況から影響範囲を確認。</dd>
+                                <dt>対応</dt>
+                                <dd>疎通結果を添付し、機器再起動または上位担当へエスカレーション。</dd>
+                            </dl>
+                        </article>
+                    </div>
+                </section>
+
                 <!-- ===== 詳細ドキュメントへの導線 ===== -->
                 <!-- support-docs/ フォルダの詳細手順書・事例集へ案内するコールアウト -->
                 <div class="support-docs-link">
@@ -542,6 +603,7 @@
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
                 <a href="works.html">Works</a>
+                <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
