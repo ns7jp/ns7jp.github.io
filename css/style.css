@@ -3109,3 +3109,76 @@ article p {
         padding: 20px;
     }
 }
+
+/* ========================================================================
+   27. Accessibility ............ skipリンク・モーション低減設定
+   ------------------------------------------------------------------------
+   - .skip-link: Tabキーでフォーカスされるとメインコンテンツへ瞬時に移動
+                 できる支援リンク。スクリーンリーダー利用者のため画面外へ
+                 退避させ、:focus 時のみ表示する
+   - prefers-reduced-motion: ユーザーがOS設定で「視覚効果を減らす」を
+                             選んでいる場合、アニメーションを最小化する
+   ======================================================================== */
+
+.skip-link {
+    position: absolute;
+    left: -10000px;
+    top: 0;
+    background: #2C3E50;
+    color: #fff;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-weight: 600;
+    z-index: 10000;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+    left: 0;
+    outline: 2px solid #f4d160;
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ========================================================================
+   28. Work Numbers ............ 作品ごとの数値ハイライトチップ
+   ------------------------------------------------------------------------
+   各作品カードに「主要な数値スペック」を3〜4個のチップとして表示し、
+   業務改善・運用領域に求められる定量表現の意識を一目で伝える。
+   ======================================================================== */
+
+.work-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 18px;
+}
+
+.work-numbers .num-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    padding: 6px 12px;
+    background: rgba(44, 62, 80, 0.06);
+    border: 1px solid rgba(44, 62, 80, 0.15);
+    border-radius: 999px;
+    font-size: 0.85em;
+    color: var(--text-dark, #2C3E50);
+    line-height: 1.2;
+}
+
+.work-numbers .num-chip strong {
+    font-size: 1.1em;
+    color: var(--accent-gold, #c9a55c);
+    font-weight: 700;
+}

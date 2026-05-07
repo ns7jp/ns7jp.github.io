@@ -109,6 +109,9 @@
 <!-- bodyタグの中が、実際にブラウザに表示される内容。 -->
 <body>
 
+    <!-- ===== スクリーンリーダー / キーボード操作向け：メインへスキップ ===== -->
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
     <!-- ===== ローダー（ページ読み込み中に表示するアニメーション） ===== -->
     <!-- ページが完全に読み込まれるまで一時的に表示される画面。読み込み完了後、JSでフェードアウトする。 -->
     <div class="loader">
@@ -150,7 +153,7 @@
     </header>
 
     <!-- ===== ヒーローセクション（ページ最上部の大きなビジュアルエリア） ===== -->
-    <section class="hero">
+    <section class="hero" id="main" tabindex="-1">
         <!-- 背景画像が自動で切り替わるエリア（jQueryプラグインで制御） -->
         <div class="hero-slider"></div>
         <!-- 背景画像の上に重ねる半透明のオーバーレイ（文字を読みやすくする） -->
@@ -264,7 +267,7 @@
                 <a href="me.html">
                 <div class="intro-image">
                     <!-- alt属性は画像が表示されない時に表示する代替テキスト。アクセシビリティ・SEOで重要。 -->
-                    <img src="image/image.jpg" alt="プロフィール画像" width="800" height="600" loading="lazy" decoding="async">
+                    <img src="image/image.jpg" alt="島田則幸のプロフィール写真" width="800" height="600" loading="lazy" decoding="async">
                 </div>
                 </a>
             </div>
