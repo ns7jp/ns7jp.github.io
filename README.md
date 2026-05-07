@@ -138,11 +138,10 @@ ns7jp.github.io/
 │   └── jquery.bgswitcher.js ... 背景画像を切り替えるjQueryプラグイン
 │
 └── image/
-    ├── main.jpg / main1〜7.jpg ... トップページのヒーロースライダー用画像
-    ├── me.jpg / image.jpg      ... 自己紹介・プロフィール用画像
-    ├── skills.jpg              ... スキルページ用画像
-    ├── works.jpg / works1〜3.jpg ... 作品ページ用画像
-    ├── contact.jpg             ... 連絡先ページ用画像
+    ├── me.jpg / image.jpg      ... 自己紹介・プロフィール用画像（ヒーロースライダーにも使用）
+    ├── skills.jpg              ... スキルページ用画像（ヒーロースライダーにも使用）
+    ├── works.jpg               ... 作品ページ用画像（ヒーロースライダー・OGP画像にも使用）
+    ├── contact.jpg             ... 連絡先ページ用画像（ヒーロースライダーにも使用）
     ├── pulse.png               ... SNSアプリ「Pulse」のスクリーンショット
     ├── post.png                ... 掲示板アプリのスクリーンショット
     ├── teikei.png              ... 定型文管理アプリのスクリーンショット

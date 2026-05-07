@@ -195,7 +195,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 
 ```javascript
 $(".hero-slider").bgswitcher({
-    images: ["image/works.jpg", "image/main1.jpg", "..."],
+    images: ["image/works.jpg", "image/me.jpg", "image/contact.jpg", "image/skills.jpg"],
     interval: 5000,
     effect: "fade"
 });
