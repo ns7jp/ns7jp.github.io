@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# 履歴書1pagerと404ページはインデックス対象外（HTML側でnoindexを指定済み）
+Disallow: /resume.html
+Disallow: /404.html
+
+Sitemap: https://ns7jp.github.io/sitemap.xml
