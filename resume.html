@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸（Noriyuki Shimada）の1ページ履歴書（A4印刷対応）。ITサポート・社内SE補助・インフラ運用支援志望。経歴・取得資格・スキル・主な作品6点をまとめて閲覧でき、ブラウザの「PDFとして保存」でそのままPDF化できます。">
+    <meta name="robots" content="noindex">
+    <title>履歴書 1pager | 島田則幸のポートフォリオ</title>
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <style>
+        :root {
+            --r-primary: #2C3E50;
+            --r-accent: #c9a55c;
+            --r-text: #222;
+            --r-muted: #555;
+            --r-border: #d6d3ce;
+            --r-bg-soft: #f7f5f1;
+        }
+        * { box-sizing: border-box; }
+        body {
+            background: #e9e6e0;
+            color: var(--r-text);
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 14px;
+            line-height: 1.55;
+            padding: 24px 0;
+        }
+        .resume-toolbar {
+            max-width: 210mm;
+            margin: 0 auto 16px;
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+        .resume-toolbar .toolbar-info { color: var(--r-muted); }
+        .resume-toolbar .btn-print {
+            background: var(--r-primary);
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .resume-toolbar .btn-print:hover { background: #1f2d3d; }
+        .resume-toolbar a { color: var(--r-muted); text-decoration: underline; }
+
+        .resume {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 14mm 16mm;
+            background: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+        .resume-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 16px;
+            border-bottom: 2px solid var(--r-primary);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+        .resume-name {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--r-primary);
+            letter-spacing: 0.04em;
+        }
+        .resume-name .en {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--r-muted);
+            margin-left: 10px;
+        }
+        .resume-role {
+            font-size: 13px;
+            color: var(--r-accent);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        .resume-contact {
+            font-size: 12px;
+            color: var(--r-muted);
+            text-align: right;
+            line-height: 1.7;
+        }
+        .resume-contact i { color: var(--r-primary); margin-right: 4px; }
+        .resume-contact a { color: var(--r-muted); text-decoration: none; }
+
+        .resume-summary {
+            background: var(--r-bg-soft);
+            border-left: 3px solid var(--r-accent);
+            padding: 8px 12px;
+            font-size: 12.5px;
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .resume-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .resume-section h3 {
+            font-size: 13px;
+            color: var(--r-primary);
+            font-weight: 700;
+            border-bottom: 1px solid var(--r-border);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+        .resume-section h3 i { color: var(--r-accent); margin-right: 6px; }
+
+        .resume-section table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+        .resume-section table td {
+            padding: 3px 0;
+            vertical-align: top;
+        }
+        .resume-section td.year { width: 64px; color: var(--r-muted); white-space: nowrap; }
+
+        .resume-skills div { margin-bottom: 5px; font-size: 12px; }
+        .resume-skills strong { display: inline-block; min-width: 96px; color: var(--r-primary); }
+
+        .resume-works { font-size: 12px; }
+        .resume-works .work-item { margin-bottom: 6px; }
+        .resume-works .work-name {
+            font-weight: 700;
+            color: var(--r-primary);
+        }
+        .resume-works .work-tag {
+            font-size: 11px;
+            color: var(--r-accent);
+            margin-left: 4px;
+        }
+        .resume-works .work-desc { color: var(--r-muted); }
+
+        .resume-footer {
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--r-border);
+            font-size: 11px;
+            color: var(--r-muted);
+            text-align: center;
+        }
+        .resume-footer a { color: var(--r-primary); text-decoration: none; font-weight: 600; }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .resume-toolbar { display: none; }
+            .resume {
+                box-shadow: none;
+                width: auto;
+                min-height: auto;
+                margin: 0;
+                padding: 12mm 14mm;
+            }
+            @page { size: A4 portrait; margin: 0; }
+        }
+
+        @media (max-width: 800px) {
+            body { padding: 8px; }
+            .resume { width: 100%; padding: 16px; }
+            .resume-header, .resume-body { grid-template-columns: 1fr; }
+            .resume-contact { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="resume-toolbar">
+        <span class="toolbar-info">
+            <i class="fa-solid fa-circle-info"></i>
+            「印刷」→「PDF として保存」で A4 1 ページの PDF が出力できます
+        </span>
+        <span>
+            <a href="index.html"><i class="fa-solid fa-house"></i> ポートフォリオへ戻る</a>
+            &nbsp;&nbsp;
+            <button class="btn-print" onclick="window.print()" type="button">
+                <i class="fa-solid fa-print"></i> 印刷 / PDF保存
+            </button>
+        </span>
+    </div>
+
+    <article class="resume" lang="ja">
+        <header class="resume-header">
+            <div>
+                <div class="resume-name">島田 則幸<span class="en">Noriyuki Shimada</span></div>
+                <div class="resume-role">ITサポート・社内SE補助・インフラ運用支援 志望</div>
+            </div>
+            <div class="resume-contact">
+                <div><i class="fa-solid fa-envelope"></i><a href="mailto:net7jp@gmail.com">net7jp@gmail.com</a></div>
+                <div><i class="fa-brands fa-github"></i><a href="https://github.com/ns7jp">github.com/ns7jp</a></div>
+                <div><i class="fa-solid fa-globe"></i><a href="https://ns7jp.github.io/">ns7jp.github.io</a></div>
+                <div><i class="fa-solid fa-location-dot"></i>埼玉県</div>
+            </div>
+        </header>
+
+        <section class="resume-summary">
+            製造・物流現場で18年間培った業務改善・在庫管理・現場対応の視点と、公共職業訓練（2025年10月〜2026年1月）で習得したHTML/CSS・JavaScript・Python・PHPの技術を組み合わせ、<strong>PCサポート・問い合わせ一次対応・手順書整備・サーバー監視・小規模な業務改善ツールの内製</strong>に貢献したいと考えています。
+        </section>
+
+        <div class="resume-body">
+
+            <section class="resume-section">
+                <h3><i class="fa-solid fa-graduation-cap"></i>EDUCATION / 経歴</h3>
+                <table>
+                    <tr>
+                        <td class="year">2025-10<br>〜2026-01</td>
+                        <td>公共職業訓練「情報処理（Pythonエンジニア）コース」 修了<br>
+                            <span style="color:#666;font-size:11px;">HTML/CSS, JavaScript, Python, PHP, MySQL, Flask</span></td>
+                    </tr>
+                    <tr>
+                        <td class="year">〜2025</td>
+                        <td>製造・物流現場で 18 年間勤務<br>
+                            <span style="color:#666;font-size:11px;">業務改善、在庫管理、現場対応、トラブルシューティング</span></td>
+                    </tr>
+                </table>
+            </section>
+
+            <section class="resume-section">
+                <h3><i class="fa-solid fa-certificate"></i>CERTIFICATIONS / 資格</h3>
+                <table>
+                    <tr><td class="year">2026-01</td><td>Python3エンジニア認定実践試験 合格</td></tr>
+                    <tr><td class="year">2026-01</td><td>PHP8技術者認定初級試験 合格</td></tr>
+                    <tr><td class="year">2025-12</td><td>Python3エンジニア認定基礎試験 合格</td></tr>
+                    <tr><td class="year">2007-03</td><td>食品衛生管理者 取得</td></tr>
+                    <tr><td class="year">2026-06<br>予定</td><td>ITパスポート（学習中）</td></tr>
+                </table>
+            </section>
+
+            <section class="resume-section">
+                <h3><i class="fa-solid fa-laptop-code"></i>SKILLS / スキル</h3>
+                <div class="resume-skills">
+                    <div><strong>言語</strong>HTML / CSS / JavaScript / Python / PHP</div>
+                    <div><strong>フレームワーク</strong>Flask / Flet / Tkinter / jQuery</div>
+                    <div><strong>データベース</strong>MySQL / SQLite</div>
+                    <div><strong>インフラ・運用</strong>PowerShell / Windows管理 / サーバー監視 / Linux基礎</div>
+                    <div><strong>ツール</strong>Git / GitHub / VSCode / 仮想マシン / Chart.js</div>
+                </div>
+            </section>
+
+            <section class="resume-section">
+                <h3><i class="fa-solid fa-briefcase"></i>SELECTED WORKS / 主な作品（全6作品 GitHub公開）</h3>
+                <div class="resume-works">
+                    <div class="work-item">
+                        <span class="work-name">① サーバー監視ダッシュボード</span>
+                        <span class="work-tag">Python / Flask / psutil / Chart.js</span>
+                        <div class="work-desc">CPU/メモリ/ディスク/ネット/プロセスを1画面で可視化。プロセスTOP15、60秒履歴、しきい値4色配色。Win/Linux/macOS対応。</div>
+                    </div>
+                    <div class="work-item">
+                        <span class="work-name">② 定型文管理アプリ</span>
+                        <span class="work-tag">Python / Flet</span>
+                        <div class="work-desc">問い合わせ返信テンプレ等の一元管理。CRUD 4操作 + ワンクリックコピー。</div>
+                    </div>
+                    <div class="work-item">
+                        <span class="work-name">③ 付箋アプリ</span>
+                        <span class="work-tag">Python / Tkinter</span>
+                        <div class="work-desc">複数付箋の自由配置とJSON自動保存。再起動後の位置・内容を完全復元。</div>
+                    </div>
+                    <div class="work-item">
+                        <span class="work-name">④ 掲示板アプリ</span>
+                        <span class="work-tag">PHP / MySQL</span>
+                        <div class="work-desc">登録/ログイン/投稿/返信。PDOプリペアド + htmlspecialcharsでSQLi/XSS対策。</div>
+                    </div>
+                    <div class="work-item">
+                        <span class="work-name">⑤ SNSアプリ Pulse</span>
+                        <span class="work-tag">PHP / SQLite / JS</span>
+                        <div class="work-desc">8種ムード投稿型SNS。感情オーラ7日 / 天気予報24時間など独自4機能。</div>
+                    </div>
+                    <div class="work-item">
+                        <span class="work-name">⑥ サンプル企業サイト</span>
+                        <span class="work-tag">HTML / CSS / JavaScript</span>
+                        <div class="work-desc">架空企業のレスポンシブコーポレートサイト。デザインカンプから忠実再現。</div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <footer class="resume-footer">
+            最新の作品詳細・トラブル対応事例・PowerShellサポートスクリプトは
+            <a href="https://ns7jp.github.io/">ns7jp.github.io</a>
+            に公開しています。
+            最終更新: 2026年5月
+        </footer>
+    </article>
+
+</body>
+</html>

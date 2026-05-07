@@ -139,6 +139,7 @@ ns7jp.github.io/
 ├── skills.html              ... スキル一覧ページ
 ├── works.html               ... 作品一覧ページ
 ├── contact.html             ... 連絡先ページ
+├── resume.html              ... A4 1ページ履歴書（ブラウザの印刷からPDF保存可）
 ├── 404.html                 ... 存在しないURLにアクセスされた時のカスタム表示
 ├── favicon.ico              ... ブラウザのタブに表示される小さなアイコン
 ├── README.md                ... この説明ファイル

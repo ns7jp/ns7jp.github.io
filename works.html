@@ -60,6 +60,8 @@
 </head>
 <body>
 
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
     <!-- ===== ローダー ===== -->
     <div class="loader">
         <div class="loader-content">
@@ -105,7 +107,7 @@
     </section>
 
     <!-- ===== メインコンテンツ ===== -->
-    <article class="page-content works-page-content">
+    <article class="page-content works-page-content" id="main" tabindex="-1">
         <div class="container">
 
             <!-- ===== 作品紹介イントロ ===== -->
@@ -113,7 +115,7 @@
             <section class="works-intro">
                 <div class="intro-content">
                     <div class="intro-image">
-                        <img src="image/image.jpg" alt="プロフィール" width="800" height="600" loading="lazy" decoding="async">
+                        <img src="image/image.jpg" alt="島田則幸のプロフィール写真" width="800" height="600" loading="lazy" decoding="async">
                     </div>
                     <div class="intro-text">
                         <h3>ITサポート・業務改善に近い順で紹介しています</h3>
@@ -154,7 +156,7 @@
 
                     <div class="work-showcase-item" id="work-monitor" data-category="infra">
                         <div class="work-image-container">
-                            <img src="image/server-monitor.png" alt="サーバー監視ダッシュボード" width="782" height="959" loading="lazy" decoding="async">
+                            <img src="image/server-monitor.png" alt="サーバー監視ダッシュボードの画面: CPU・メモリ・ディスク・ネットワーク・プロセスをリアルタイム表示" width="782" height="959" loading="lazy" decoding="async">
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">Python / Flask / psutil</span>
@@ -175,6 +177,12 @@
                             <div class="support-fit high">
                                 <span class="fit-label">ITサポート関連度: High</span>
                                 <p>負荷上昇・容量不足・プロセス高負荷の一次確認に直結。監視値を見て状況を説明する運用支援力を示せます。</p>
+                            </div>
+                            <div class="work-numbers" aria-label="主要スペック">
+                                <span class="num-chip"><strong>6</strong>カテゴリ監視</span>
+                                <span class="num-chip"><strong>60</strong>秒履歴</span>
+                                <span class="num-chip">プロセス <strong>TOP15</strong></span>
+                                <span class="num-chip"><strong>3</strong>OS対応</span>
                             </div>
                             <p>Python（Flask）+ psutil + Chart.js で構築したリアルタイムサーバー監視ツールです。CPU使用率（円形ゲージ＋コア別バー）、メモリ・スワップ、ディスク（パーティション別）、ネットワークI/O（リアルタイム速度算出）、プロセスTOP15、CPU/メモリの60秒推移グラフを1画面に集約。しきい値に応じて緑→黄→橙→赤に自動配色されます。</p>
                             <ul class="work-points">
@@ -214,7 +222,7 @@
 
                     <div class="work-showcase-item" id="work-teikei" data-category="python">
                         <div class="work-image-container">
-                            <img src="image/teikei.png" alt="定型文管理アプリ" width="1400" height="788" loading="lazy" decoding="async">
+                            <img src="image/teikei.png" alt="定型文管理アプリの画面: テンプレート一覧と編集フォーム" width="1400" height="788" loading="lazy" decoding="async">
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">Python / Flet</span>
@@ -269,7 +277,7 @@
 
                     <div class="work-showcase-item" id="work-notes" data-category="python">
                         <div class="work-image-container">
-                            <img src="image/notes.png" alt="付箋アプリ" width="626" height="914" loading="lazy" decoding="async">
+                            <img src="image/notes.png" alt="付箋アプリの画面: 複数の付箋を画面上に配置" width="626" height="914" loading="lazy" decoding="async">
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">Python / tkinter</span>
@@ -324,7 +332,7 @@
 
                     <div class="work-showcase-item" id="work-pulse" data-category="php">
                         <div class="work-image-container">
-                            <img src="image/pulse.png" alt="SNSアプリ Pulse" width="566" height="544" loading="lazy" decoding="async">
+                            <img src="image/pulse.png" alt="SNSアプリ Pulseの画面: ムード別カラーで投稿カードを表示" width="566" height="544" loading="lazy" decoding="async">
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">PHP / SQLite</span>
@@ -347,6 +355,12 @@
                             <div class="support-fit learning">
                                 <span class="fit-label">ITサポート関連度: Learning</span>
                                 <p>直接のヘルプデスク業務より、認証・入力チェック・DB初期化・公開時の注意点を学んだ開発学習作品として位置付けています。</p>
+                            </div>
+                            <div class="work-numbers" aria-label="主要スペック">
+                                <span class="num-chip"><strong>8</strong>種ムード</span>
+                                <span class="num-chip"><strong>4</strong>独自機能</span>
+                                <span class="num-chip">天気予報 <strong>24</strong>h</span>
+                                <span class="num-chip">感情オーラ <strong>7</strong>日</span>
                             </div>
                             <p>「いいね」ではなく「共鳴」で繋がる、感情ムード投稿型のSNSアプリです。投稿時に8種のムードを選ぶと、カードの色がムードに対応して変化します。ささやきモード（匿名投稿）・タイムカプセル（未来日時公開）・感情天気予報（24時間分布）・感情オーラ（7日間傾向）など独自機能を実装しました。</p>
                             <ul class="work-points">
@@ -382,7 +396,7 @@
 
                     <div class="work-showcase-item" id="work-post" data-category="php">
                         <div class="work-image-container">
-                            <img src="image/post.png" alt="掲示板アプリ" width="1097" height="862" loading="lazy" decoding="async">
+                            <img src="image/post.png" alt="掲示板アプリの画面: スレッド一覧と投稿フォーム" width="1097" height="862" loading="lazy" decoding="async">
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">PHP / MySQL</span>
@@ -405,6 +419,12 @@
                             <div class="support-fit medium">
                                 <span class="fit-label">ITサポート関連度: Medium</span>
                                 <p>社内FAQ・ナレッジ掲示板の原型として説明できます。権限管理、投稿履歴、入力値対策の基礎も示せます。</p>
+                            </div>
+                            <div class="work-numbers" aria-label="主要スペック">
+                                <span class="num-chip">基本機能 <strong>4</strong>種</span>
+                                <span class="num-chip">セキュリティ対策 <strong>2</strong>種</span>
+                                <span class="num-chip">DB: <strong>MySQL</strong></span>
+                                <span class="num-chip"><strong>PDO</strong>プリペアド</span>
                             </div>
                             <p>PHPとMySQLを使った掲示板アプリです。ユーザー登録・ログイン・投稿・返信の基本機能を実装しました。PDOプリペアドステートメントによるSQLインジェクション対策、htmlspecialcharsによるXSS対策も施しています。</p>
                             <ul class="work-points">
@@ -440,7 +460,7 @@
 
                     <div class="work-showcase-item" id="work-magic" data-category="html">
                         <div class="work-image-container">
-                            <img src="image/magic.png" alt="サンプル企業サイト" width="1600" height="702" loading="lazy" decoding="async">
+                            <img src="image/magic.png" alt="サンプル企業サイトのトップページ: レスポンシブ対応のヒーロー画像とナビゲーション" width="1600" height="702" loading="lazy" decoding="async">
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">HTML / CSS / JS</span>
