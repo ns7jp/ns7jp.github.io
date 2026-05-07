@@ -510,6 +510,18 @@ header nav ul li a i {
     border-color: var(--text-light);
 }
 
+.btn-outline-dark {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid rgba(44, 62, 80, 0.25);
+}
+
+.btn-outline-dark:hover {
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-color: var(--primary-color);
+}
+
 .btn-secondary {
     background: var(--primary-color);
     color: var(--text-light);
@@ -588,6 +600,73 @@ header nav ul li a i {
 .section-link {
     text-align: center;
     margin-top: 60px;
+}
+
+/* ========================================
+   Hiring Summary Section - 採用担当者向け1分サマリー
+======================================== */
+.hiring-summary {
+    padding: 95px 0 100px;
+    background: var(--bg-warm);
+    opacity: 1;
+    transform: translateY(0);
+    transition: var(--transition-slow);
+}
+
+.hiring-summary.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+}
+
+.summary-card {
+    background: var(--bg-white);
+    border: 1px solid var(--bg-sand);
+    padding: 30px;
+    min-height: 245px;
+    transition: var(--transition-smooth);
+}
+
+.summary-card:hover {
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-4px);
+}
+
+.summary-label {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.summary-card h4 {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin-bottom: 14px;
+}
+
+.summary-card p {
+    font-size: 1.4rem;
+    color: var(--text-medium);
+    line-height: 1.85;
+}
+
+.summary-actions {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 48px;
 }
 
 /* ========================================
@@ -2077,6 +2156,42 @@ footer {
     margin-bottom: 20px;
 }
 
+.support-fit {
+    margin: 0 0 20px;
+    padding: 16px 18px;
+    background: var(--bg-warm);
+    border-left: 3px solid var(--nature-green);
+}
+
+.support-fit.high {
+    border-left-color: var(--nature-green);
+}
+
+.support-fit.medium {
+    border-left-color: var(--accent-gold);
+}
+
+.support-fit.learning {
+    border-left-color: var(--text-muted);
+}
+
+.support-fit .fit-label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+.support-fit p {
+    margin-bottom: 0;
+    font-size: 1.35rem;
+    line-height: 1.75;
+}
+
 .tech-tags {
     display: flex;
     flex-wrap: wrap;
@@ -2684,6 +2799,7 @@ article p {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .summary-grid,
     .support-scope-grid,
     .support-case-grid {
         grid-template-columns: 1fr;
@@ -2839,6 +2955,7 @@ article p {
         text-align: center;
     }
 
+    .hiring-summary,
     .support-scope {
         padding: 80px 0;
     }
@@ -2919,6 +3036,7 @@ article p {
         align-items: center;
     }
 
+    .summary-card,
     .support-scope-card,
     .support-case-card,
     .priority-card {
