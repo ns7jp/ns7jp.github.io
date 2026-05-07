@@ -27,6 +27,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- ===== 構造化データ（JSON-LD）===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Top", "item": "https://ns7jp.github.io/" },
+            { "@type": "ListItem", "position": 2, "name": "お問い合わせ", "item": "https://ns7jp.github.io/contact.html" }
+          ]
+        },
+        {
+          "@type": "ContactPage",
+          "url": "https://ns7jp.github.io/contact.html",
+          "about": { "@id": "https://ns7jp.github.io/#person" }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 

@@ -35,6 +35,40 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- ブラウザタブのアイコン -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- ===== 構造化データ（JSON-LD）===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://ns7jp.github.io/#person",
+          "name": "島田則幸",
+          "alternateName": "Noriyuki Shimada",
+          "url": "https://ns7jp.github.io/",
+          "image": "https://ns7jp.github.io/image/image.jpg",
+          "jobTitle": "ITサポート・社内SE補助・インフラ運用支援志望",
+          "description": "製造・物流現場での改善経験と、公共職業訓練で習得したHTML/CSS・Python・PHPの技術を活かして、ITサポート・社内SE補助・インフラ運用への転職活動中。",
+          "email": "mailto:net7jp@gmail.com",
+          "sameAs": ["https://github.com/ns7jp"],
+          "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "公共職業訓練 情報処理（Pythonエンジニア）コース",
+            "description": "2025年10月から2026年1月まで受講"
+          },
+          "knowsAbout": ["HTML", "CSS", "JavaScript", "Python", "PHP", "Flask", "PowerShell", "サーバー監視", "ITサポート", "ヘルプデスク"]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Top", "item": "https://ns7jp.github.io/" },
+            { "@type": "ListItem", "position": 2, "name": "私について", "item": "https://ns7jp.github.io/me.html" }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 

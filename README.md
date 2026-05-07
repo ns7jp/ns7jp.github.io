@@ -4,6 +4,7 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-jQuery-F7DF1E?logo=javascript&logoColor=black)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-success?logo=github)
+[![Static site check](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml)
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
@@ -138,6 +139,7 @@ ns7jp.github.io/
 ├── skills.html              ... スキル一覧ページ
 ├── works.html               ... 作品一覧ページ
 ├── contact.html             ... 連絡先ページ
+├── 404.html                 ... 存在しないURLにアクセスされた時のカスタム表示
 ├── favicon.ico              ... ブラウザのタブに表示される小さなアイコン
 ├── README.md                ... この説明ファイル
 │

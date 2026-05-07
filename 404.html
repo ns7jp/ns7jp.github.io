@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="お探しのページは見つかりませんでした。島田則幸のポートフォリオサイトのトップページから作品・スキル・連絡先をご確認ください。">
+    <meta name="robots" content="noindex">
+    <title>ページが見つかりません | 島田則幸のポートフォリオ</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <style>
+        .notfound {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 12rem 2rem 6rem;
+        }
+        .notfound-inner { max-width: 60rem; }
+        .notfound-code {
+            font-family: 'Playfair Display', serif;
+            font-size: 12rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--color-primary, #2C3E50);
+            letter-spacing: 0.05em;
+            margin-bottom: 1.5rem;
+        }
+        .notfound-title { font-size: 2.4rem; margin-bottom: 1.2rem; }
+        .notfound-desc { font-size: 1.5rem; color: #555; line-height: 1.8; margin-bottom: 3rem; }
+        .notfound-buttons { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+        @media (max-width: 600px) {
+            .notfound-code { font-size: 8rem; }
+            .notfound-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <p class="res-menu">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </p>
+
+    <header>
+        <h1 class="logo">
+            <a href="/index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="/me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="/skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li><a href="/works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="/contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="notfound">
+        <div class="notfound-inner">
+            <p class="notfound-code">404</p>
+            <h2 class="notfound-title">ページが見つかりませんでした</h2>
+            <p class="notfound-desc">
+                お探しのURLは存在しないか、移動・削除された可能性があります。<br>
+                下のボタンからトップページや作品一覧へ移動できます。
+            </p>
+            <div class="notfound-buttons">
+                <a href="/index.html" class="btn btn-primary"><i class="fa-solid fa-house"></i> トップへ戻る</a>
+                <a href="/works.html" class="btn btn-outline"><i class="fa-solid fa-briefcase"></i> 作品一覧</a>
+                <a href="/contact.html" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> お問い合わせ</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="/me.html">About</a>
+                <a href="/skills.html">Skills</a>
+                <a href="/works.html">Works</a>
+                <a href="/contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+
+<script>
+    $(window).on('load', function() {
+        $('.loader').fadeOut(800);
+    });
+    $(".res-menu").click(function () {
+        $("nav").toggleClass("show");
+        $(".res-menu").toggleClass("show2");
+    });
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('header').addClass('scrolled');
+        } else {
+            $('header').removeClass('scrolled');
+        }
+    });
+</script>
+</body>
+</html>
