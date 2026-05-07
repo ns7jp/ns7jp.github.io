@@ -18,3 +18,21 @@ jobs:
 
       - name: Check local HTML links
         run: node scripts/check-static-links.js
+
+  image-budget:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Enforce image folder size budget (max 1.5MB)
+        run: |
+          MAX_BYTES=$((1500 * 1024))
+          SIZE=$(du -sb image/ | cut -f1)
+          KB=$((SIZE / 1024))
+          MAX_KB=$((MAX_BYTES / 1024))
+          echo "image/ folder: ${KB}KB (limit: ${MAX_KB}KB)"
+          if [ "$SIZE" -gt "$MAX_BYTES" ]; then
+            echo "::error::image/ folder exceeds budget: ${KB}KB > ${MAX_KB}KB"
+            exit 1
+          fi

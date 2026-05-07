@@ -28,6 +28,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- ===== 構造化データ（JSON-LD）===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Top", "item": "https://ns7jp.github.io/" },
+            { "@type": "ListItem", "position": 2, "name": "作品", "item": "https://ns7jp.github.io/works.html" }
+          ]
+        },
+        {
+          "@type": "ItemList",
+          "name": "島田則幸の制作物",
+          "itemListOrder": "ItemListOrderAscending",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU/メモリ/ディスク/ネットワーク/プロセスをリアルタイム可視化する監視ダッシュボード" } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Fletフレームワークで作成した定型文テンプレート管理ツール" } },
+            { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Tkinterで作成した付箋復元機能付きデスクトップアプリ" } },
+            { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "掲示板アプリ", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/post", "programmingLanguage": "PHP", "description": "PHP + MySQL によるユーザー登録・投稿・返信機能付き掲示板" } },
+            { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareApplication", "name": "SNSアプリ Pulse", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/pulse", "programmingLanguage": "PHP", "description": "PHP + SQLite + JavaScript によるムード投稿型SNS" } },
+            { "@type": "ListItem", "position": 6, "item": { "@type": "WebSite", "name": "サンプル企業サイト", "url": "https://github.com/ns7jp/magic", "description": "HTML/CSS/JavaScriptで作成した架空企業のレスポンシブコーポレートサイト" } }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 

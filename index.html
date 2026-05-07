@@ -71,6 +71,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- ブラウザのタブに表示される小さなアイコン（favicon）の指定。 -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- ===== 構造化データ（JSON-LD）=====
+         検索エンジンに「このサイトの所有者」と「サイト自体」の関係を伝え、
+         ナレッジパネルやサイトリンク検索ボックスの生成材料とする。 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://ns7jp.github.io/#website",
+          "url": "https://ns7jp.github.io/",
+          "name": "島田則幸のポートフォリオ",
+          "description": "ITサポート・社内SE補助・インフラ運用支援を目指すポートフォリオサイト",
+          "inLanguage": "ja",
+          "publisher": { "@id": "https://ns7jp.github.io/#person" }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://ns7jp.github.io/#person",
+          "name": "島田則幸",
+          "alternateName": "Noriyuki Shimada",
+          "url": "https://ns7jp.github.io/",
+          "image": "https://ns7jp.github.io/image/image.jpg",
+          "jobTitle": "ITサポート・社内SE補助・インフラ運用支援志望",
+          "description": "公共職業訓練でHTML/CSS/JavaScript/Python/PHPを学び、業務改善ツール、サーバー監視ダッシュボード、PowerShell確認スクリプトを公開しています。",
+          "email": "mailto:net7jp@gmail.com",
+          "sameAs": ["https://github.com/ns7jp"],
+          "knowsAbout": ["HTML", "CSS", "JavaScript", "Python", "PHP", "Flask", "PowerShell", "サーバー監視", "ITサポート", "ヘルプデスク", "Active Directory", "Windows", "Microsoft 365"]
+        }
+      ]
+    }
+    </script>
 </head>
 
 <!-- bodyタグの中が、実際にブラウザに表示される内容。 -->

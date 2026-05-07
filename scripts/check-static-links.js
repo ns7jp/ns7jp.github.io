@@ -44,7 +44,10 @@ for (const file of htmlFiles) {
     if (!targetPart) continue;
 
     const normalized = decodeURIComponent(targetPart);
-    const targetPath = path.resolve(path.dirname(filePath), normalized);
+    // 先頭が "/" の絶対パスはサイトルートからの相対と解釈する（404.htmlなどで使用）。
+    const targetPath = normalized.startsWith("/")
+      ? path.resolve(root, normalized.slice(1))
+      : path.resolve(path.dirname(filePath), normalized);
 
     if (!targetPath.startsWith(root)) {
       failures.push(`${file}: ${rawLink} points outside the site root`);
