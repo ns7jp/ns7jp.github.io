@@ -83,7 +83,7 @@
 | スキルページ | `skills.html` | 学習した技術とITサポート系スキルをカテゴリ別に見せる |
 | 作品ページ | `works.html` | 6作品の詳細、スクリーンショット、ソースコード、学習ポイント、運用・業務改善への活用例を紹介する |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
-| サポート文書 | `support-docs/` | PCキッティング手順書、障害対応事例集を掲載する |
+| サポート文書 | `support-docs/` | キッティング・退職対応・権限管理・ライセンス・障害事例・インシデント対応・マルウェア対応の7本を掲載する |
 | 実務スクリプト | `support-scripts/` | PC情報収集、ネットワーク確認、ログ抽出、ディスク容量確認のPowerShell例を掲載する |
 
 ### `index.html`
@@ -121,7 +121,7 @@
 
 ### `support-docs/`
 
-ITサポート職で評価されやすい「手順書整備」「ナレッジ共有」「切り分けの型」を示すためのドキュメントです。PCキッティング手順書と障害対応事例集を掲載し、障害対応事例集には受付内容、確認コマンド、一次判断、対応時間目安、エスカレーション基準を追加しています。
+ITサポート職で評価されやすい「手順書整備」「ナレッジ共有」「切り分けの型」を示すためのドキュメントです。標準業務手順書 4 本（キッティング／退職対応／共有フォルダ権限管理／M365ライセンス管理）と、障害対応 3 本（10ケース事例集／重大インシデント対応プレイブック／マルウェア感染疑い対応フロー）の合計 7 本を掲載しています。各ドキュメントは想定環境・想定読者・チェックリスト形式で構成し、現場で参考にできる粒度を意識しました。
 
 ### `support-scripts/`
 
@@ -154,9 +154,14 @@ ns7jp.github.io/
 │   └── jquery.bgswitcher.js ... 背景画像を切り替えるjQueryプラグイン
 │
 ├── support-docs/
-│   ├── README.md                    ... ITサポート文書集の説明
-│   ├── pc-kitting-guide.md          ... PCキッティング手順書
-│   └── troubleshooting-case-studies.md ... 障害対応事例集
+│   ├── README.md                              ... ITサポート文書集の説明
+│   ├── pc-kitting-guide.md                    ... PCキッティング手順書
+│   ├── account-offboarding-guide.md           ... 退職者アカウント停止手順書
+│   ├── shared-folder-access-management.md     ... 共有フォルダ権限管理手順書
+│   ├── m365-license-management.md             ... Microsoft 365ライセンス管理手順書
+│   ├── troubleshooting-case-studies.md        ... 障害対応事例集（10ケース）
+│   ├── incident-response-playbook.md          ... 重大インシデント対応プレイブック
+│   └── malware-suspected-response.md          ... マルウェア感染疑い対応フロー
 │
 ├── support-scripts/
 │   ├── README.md                    ... PowerShellスクリプト集の説明
