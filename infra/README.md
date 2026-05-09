@@ -43,7 +43,8 @@ https://<EC2 パブリック IP>.sslip.io/
 ```text
 infra/
 ├── README.md                          ... このファイル
-├── Makefile                           ... terraform init/plan/apply/destroy のラッパ
+├── Makefile                           ... [Linux/macOS] terraform init/plan/apply/destroy のラッパ
+├── build.ps1                          ... [Windows PowerShell] Makefile 同等の操作を提供
 ├── .gitignore                         ... tfstate / tfvars をコミット対象外にする
 └── terraform/
     ├── main.tf                        ... VPC + IGW + Subnet + RT + SG + EC2 + AMI lookup
@@ -64,6 +65,9 @@ infra/
 - AWS 認証情報が環境変数 (`AWS_PROFILE` / `AWS_ACCESS_KEY_ID`+`AWS_SECRET_ACCESS_KEY`) で設定済み
 - AWS コンソールで EC2 Key Pair を 1 つ作成済み (秘密鍵をローカルに保存)
 - 自分の固定 IP (自宅・VPN 出口など) を `203.0.113.42/32` 形式で把握
+- リポジトリをローカルにクローン済み (`git clone https://github.com/ns7jp/ns7jp.github.io.git`)
+
+> **Windows ユーザー向けの初期セットアップ:** 詳細は下の [Windows (PowerShell) 環境向け](#windows-powershell-環境向け) セクションを参照してください。`make` の代わりに `build.ps1` を使います。
 
 ### 1. 値を設定
 
@@ -82,7 +86,7 @@ operator_pubkey  = "ssh-ed25519 AAAAC3..."     # ~/.ssh/id_ed25519.pub の中身
 
 > `0.0.0.0/0` を `allowed_ssh_cidr` に入れると Terraform 側の validation で拒否されます (全世界に SSH を開放するのは危険なため)。
 
-### 2. プラン → 適用
+### 2. プラン → 適用 (Linux / macOS)
 
 リポジトリルートから:
 
@@ -90,16 +94,27 @@ operator_pubkey  = "ssh-ed25519 AAAAC3..."     # ~/.ssh/id_ed25519.pub の中身
 cd infra
 make init     # terraform init (初回のみ)
 make plan     # 何が作られるかを確認 (7 リソース)
-make apply    # tfplan を適用 (3〜5 分)
+make apply    # tfplan を適用 (4〜6 分。Phase 2 含む)
+```
+
+### 2. プラン → 適用 (Windows PowerShell)
+
+```powershell
+cd infra
+.\build.ps1 doctor    # 前提環境を自動チェック
+.\build.ps1 init      # terraform init
+.\build.ps1 plan      # 変更プラン
+.\build.ps1 apply     # 適用 (4〜6 分)
 ```
 
 ### 3. 接続確認
 
 ```bash
-make ssh      # outputs.tf の ssh_command を実行し、operator_username で SSH
+make ssh              # Linux/macOS
+.\build.ps1 ssh       # Windows
 ```
 
-cloud-init が完了するまで 1〜3 分かかります。`cloud-init status --wait` で完了を待てます。
+cloud-init が完了するまで 4〜6 分かかります (Phase 2 の Caddy + Server Monitor 込み)。`cloud-init status --wait` で完了を待てます。
 
 ### 4. 動作確認 (Phase 1: 基本ハードニング)
 
@@ -145,10 +160,127 @@ https://<EC2 パブリック IP>.sslip.io/
 ### 5. 後片付け (重要)
 
 ```bash
-make destroy  # 全リソースを削除して課金を止める
+make destroy          # Linux/macOS
+.\build.ps1 destroy   # Windows
 ```
 
 `terraform destroy` を実行しないと Free Tier 期限後に EC2 と EBS で課金が続きます。**ポートフォリオ用にデモした後は必ず destroy** してください。
+
+---
+
+## 🪟 Windows (PowerShell) 環境向け
+
+`make` は Windows に標準搭載されていないため、同等の操作を **`infra/build.ps1`** で提供します。PowerShell 7+ を推奨 (Windows 11 標準) ですが PowerShell 5.1 でも動作します。
+
+### 0a. 必要なツールのインストール
+
+PowerShell を **管理者として** 起動し、winget で一括インストール:
+
+```powershell
+winget install Hashicorp.Terraform
+winget install Amazon.AWSCLI
+winget install Git.Git                    # 未インストールなら
+```
+
+インストール後、PowerShell を **一度閉じて開き直し** PATH を反映させてください。
+
+### 0b. SSH 鍵を生成 (まだ持っていない場合)
+
+```powershell
+ssh-keygen -t ed25519 -f $env:USERPROFILE\.ssh\id_ed25519
+# パスフレーズは Enter で空にしてもよい (簡易デモ用)
+```
+
+公開鍵 (`~\.ssh\id_ed25519.pub`) の中身を後で `terraform.tfvars` に貼り付けます。
+
+### 0c. AWS 認証情報の設定
+
+AWS マネジメントコンソールで IAM ユーザーを作成し、Access Key を発行してから:
+
+```powershell
+aws configure
+# AWS Access Key ID     [None]: <貼り付け>
+# AWS Secret Access Key [None]: <貼り付け>
+# Default region name   [None]: ap-northeast-1
+# Default output format [None]: json
+```
+
+### 1. リポジトリを取得
+
+```powershell
+cd $env:USERPROFILE\Documents              # 任意の作業ディレクトリ
+git clone https://github.com/ns7jp/ns7jp.github.io.git
+cd ns7jp.github.io\infra
+```
+
+> **このブランチがまだ main にマージされていない場合**:
+> ```powershell
+> git checkout claude/review-infra-portfolio-kSNmS
+> ```
+
+### 2. 前提を自動チェック
+
+```powershell
+.\build.ps1 doctor
+```
+
+terraform / AWS 認証 / `terraform.tfvars` / SSH 公開鍵の 4 項目を確認し、足りない場合は具体的な対応コマンドを出力します。
+
+### 3. terraform.tfvars を作成
+
+```powershell
+Copy-Item terraform\terraform.tfvars.example terraform\terraform.tfvars
+notepad terraform\terraform.tfvars
+```
+
+メモ帳が開くので、以下を最低限書き換える:
+
+```hcl
+ssh_key_name     = "my-tokyo-keypair"     # AWS コンソールで作った Key Pair 名
+allowed_ssh_cidr = "203.0.113.42/32"      # 自分の固定 IP / VPN 出口を /32 で
+operator_pubkey  = "ssh-ed25519 AAAAC3... your@host"   # id_ed25519.pub の中身を 1 行で
+```
+
+自分の IP は `(Invoke-WebRequest -Uri https://api.ipify.org).Content` で取得できます。
+
+### 4. デプロイ
+
+```powershell
+.\build.ps1 init
+.\build.ps1 plan
+.\build.ps1 apply           # 4〜6 分
+.\build.ps1 output          # server_monitor_url を確認
+```
+
+### 5. 公開デモを開く
+
+`output` で表示された `server_monitor_url`(例: `https://203.0.113.42.sslip.io/`) をブラウザで開きます。初回アクセスは Let's Encrypt の証明書発行で 30〜60 秒待つ場合があります。
+
+### 6. SSH で確認
+
+```powershell
+.\build.ps1 ssh             # outputs.tf の ssh_command を実行
+```
+
+Windows 10/11 標準の OpenSSH クライアントで接続できます。
+
+### 7. 後片付け (必須)
+
+```powershell
+.\build.ps1 destroy
+```
+
+destroy しないと Free Tier 期限後に EC2 と EBS で月額 $9-10 程度かかります。
+
+### よくあるエラー
+
+| 症状 | 対処 |
+|---|---|
+| `'make' is not recognized` | Windows には `make` が無い。`build.ps1` を使う (上記)。または WSL/Git Bash 経由で `make` を実行。 |
+| `Cannot find path 'C:\Windows\...\infra'` | PowerShell の作業ディレクトリがクローン先になっていない。 `cd $env:USERPROFILE\Documents\ns7jp.github.io\infra` 等で移動してください。 |
+| `terraform : The term 'terraform' is not recognized` | terraform が PATH に無い。`winget install Hashicorp.Terraform` 後 PowerShell を再起動。 |
+| `cannot execute scripts on this system` | 実行ポリシーがブロック。一時的に: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` |
+| `aws : The term 'aws'...` | aws CLI 未インストール。`winget install Amazon.AWSCLI`。または環境変数 `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` だけでも terraform は動く。 |
 
 ---
 
