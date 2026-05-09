@@ -219,7 +219,7 @@
                             <h4>Support Toolkit</h4>
                             <div class="work-summary">
                                 <div><span>目的</span><strong>問い合わせ一次対応と運用手順の標準化</strong></div>
-                                <div><span>成果</span><strong>7手順書・8スクリプト・対応チケット例</strong></div>
+                                <div><span>成果</span><strong>7手順書・13スクリプト・対応チケット例</strong></div>
                                 <div><span>活用</span><strong>受付、切り分け、証跡、引き継ぎ</strong></div>
                             </div>
                             <div class="support-fit high">
@@ -229,10 +229,11 @@
                             <div class="work-numbers" aria-label="主要スペック">
                                 <span class="num-chip"><strong>7</strong>手順書</span>
                                 <span class="num-chip"><strong>8</strong>PowerShell</span>
+                                <span class="num-chip"><strong>5</strong>Bash</span>
                                 <span class="num-chip"><strong>10</strong>障害ケース</span>
                                 <span class="num-chip">CI <strong>リンク検査</strong></span>
                             </div>
-                            <p>Windows 11 / Microsoft 365 / Active Directory を想定し、PCキッティング、退職者アカウント停止、共有フォルダ権限管理、M365ライセンス管理、障害対応、重大インシデント、マルウェア感染疑い対応をドキュメント化しました。確認スクリプトは削除・設定変更を含めず、端末状態やログを読み取り中心で収集する構成です。</p>
+                            <p>Windows 11 / Microsoft 365 / Active Directory に加え、Linux サーバー運用を想定して、PCキッティング、退職者アカウント停止、共有フォルダ権限管理、M365ライセンス管理、障害対応、重大インシデント、マルウェア感染疑い対応をドキュメント化しました。確認スクリプトは削除・設定変更を含めず、端末・サーバー状態やログを読み取り中心で収集する構成です。Linux 対応版は PowerShell 版と同じ思想 (read-only / JSON または CSV 出力 / `set -euo pipefail`) で実装し、cron / systemd timer 連携も想定しています。</p>
                             <div class="work-architecture">
                                 <h5><i class="fa-solid fa-sitemap"></i>想定環境とToolkit成果物の対応</h5>
                                 <figure class="architecture-figure">
@@ -261,9 +262,12 @@
                             </div>
                             <div class="tech-tags">
                                 <span>PowerShell</span>
+                                <span>Bash</span>
                                 <span>Windows 11</span>
+                                <span>Linux (Ubuntu / RHEL)</span>
                                 <span>Microsoft 365</span>
                                 <span>Active Directory</span>
+                                <span>systemd / journald</span>
                                 <span>Runbook</span>
                                 <span>Ticket</span>
                             </div>

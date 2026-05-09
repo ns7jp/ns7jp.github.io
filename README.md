@@ -166,11 +166,20 @@ ns7jp.github.io/
 │   └── malware-suspected-response.md          ... マルウェア感染疑い対応フロー
 │
 ├── support-scripts/
-│   ├── README.md                    ... PowerShellスクリプト集の説明
-│   ├── Collect-PcInventory.ps1      ... 端末情報収集
-│   ├── Test-NetworkTriage.ps1       ... ネットワーク一次切り分け
-│   ├── Get-RecentSupportEvents.ps1  ... 警告・エラーログ抽出
-│   └── Test-DiskCapacity.ps1        ... ディスク容量確認
+│   ├── README.md                          ... PowerShell + Bash スクリプト集の説明
+│   ├── Collect-PcInventory.ps1            ... [Windows] 端末情報収集
+│   ├── Test-NetworkTriage.ps1             ... [Windows] ネットワーク一次切り分け
+│   ├── Get-RecentSupportEvents.ps1        ... [Windows] 警告・エラーログ抽出
+│   ├── Test-DiskCapacity.ps1              ... [Windows] ディスク容量確認
+│   ├── Test-SecurityBaseline.ps1          ... [Windows] Defender/Firewall/BitLocker等の確認
+│   ├── New-EndpointDailyReport.ps1        ... [Windows] 日次レポート集約
+│   ├── Get-StaleUserAccounts.ps1          ... [Windows/AD] 休眠ユーザー棚卸し
+│   ├── Get-M365LicenseInventory.ps1       ... [Windows/M365] ライセンス棚卸し
+│   ├── collect-host-inventory.sh          ... [Linux] ホスト情報収集 (Bash)
+│   ├── test-network-triage.sh             ... [Linux] ネットワーク一次切り分け (Bash)
+│   ├── get-recent-support-events.sh       ... [Linux] journald から警告・エラー抽出 (Bash)
+│   ├── test-disk-capacity.sh              ... [Linux] 容量・inode・SMART 確認 (Bash)
+│   └── test-security-baseline.sh          ... [Linux] sshd/firewall/SELinux 等の確認 (Bash)
 │
 └── image/
     ├── me.jpg / image.jpg                 ... 自己紹介・プロフィール用画像（ヒーロースライダーにも使用）
