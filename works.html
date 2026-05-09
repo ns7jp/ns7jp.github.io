@@ -233,6 +233,13 @@
                                 <span class="num-chip">CI <strong>リンク検査</strong></span>
                             </div>
                             <p>Windows 11 / Microsoft 365 / Active Directory を想定し、PCキッティング、退職者アカウント停止、共有フォルダ権限管理、M365ライセンス管理、障害対応、重大インシデント、マルウェア感染疑い対応をドキュメント化しました。確認スクリプトは削除・設定変更を含めず、端末状態やログを読み取り中心で収集する構成です。</p>
+                            <div class="work-architecture">
+                                <h5><i class="fa-solid fa-sitemap"></i>想定環境とToolkit成果物の対応</h5>
+                                <figure class="architecture-figure">
+                                    <img src="image/support-toolkit-architecture.svg" alt="Support Toolkit想定環境構成図: クラウド層（Microsoft Entra ID・Exchange Online・SharePoint/OneDrive・Teams）、社内LAN層（Active Directory DC・ファイルサーバー・管理者端末）、エンドポイント層（Windows 11 クライアント、Defender・BitLocker・Firewall・Windows Update・Event Log）の3層構成と、各層に対応する手順書・PowerShellスクリプトを示す図" loading="lazy" decoding="async">
+                                    <figcaption>各成果物が「どのレイヤのどの問題に効くか」を 1 枚で確認できるよう、3 層構成と Toolkit の対応関係を整理しています。</figcaption>
+                                </figure>
+                            </div>
                             <ul class="work-points">
                                 <li>問い合わせ受付後に「何を、どの順番で、どの証跡として残すか」を意識して構成しました。</li>
                                 <li>JSON / CSV / HTML の出力を用意し、チケット添付や引き継ぎ資料へ転用しやすくしました。</li>

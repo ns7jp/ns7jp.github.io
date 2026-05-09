@@ -173,16 +173,17 @@ ns7jp.github.io/
 │   └── Test-DiskCapacity.ps1        ... ディスク容量確認
 │
 └── image/
-    ├── me.jpg / image.jpg      ... 自己紹介・プロフィール用画像（ヒーロースライダーにも使用）
-    ├── skills.jpg              ... スキルページ用画像（ヒーロースライダーにも使用）
-    ├── works.jpg               ... 作品ページ用画像（ヒーロースライダー・OGP画像にも使用）
-    ├── contact.jpg             ... 連絡先ページ用画像（ヒーロースライダーにも使用）
-    ├── pulse.png               ... SNSアプリ「Pulse」のスクリーンショット
-    ├── post.png                ... 掲示板アプリのスクリーンショット
-    ├── teikei.png              ... 定型文管理アプリのスクリーンショット
-    ├── notes.png               ... 付箋アプリのスクリーンショット
-    ├── magic.png               ... サンプル企業サイトのスクリーンショット
-    └── server-monitor.png      ... サーバー監視ダッシュボードのスクリーンショット
+    ├── me.jpg / image.jpg                 ... 自己紹介・プロフィール用画像（ヒーロースライダーにも使用）
+    ├── skills.jpg                         ... スキルページ用画像（ヒーロースライダーにも使用）
+    ├── works.jpg                          ... 作品ページ用画像（ヒーロースライダー・OGP画像にも使用）
+    ├── contact.jpg                        ... 連絡先ページ用画像（ヒーロースライダーにも使用）
+    ├── pulse.png                          ... SNSアプリ「Pulse」のスクリーンショット
+    ├── post.png                           ... 掲示板アプリのスクリーンショット
+    ├── teikei.png                         ... 定型文管理アプリのスクリーンショット
+    ├── notes.png                          ... 付箋アプリのスクリーンショット
+    ├── magic.png                          ... サンプル企業サイトのスクリーンショット
+    ├── server-monitor.png                 ... サーバー監視ダッシュボードのスクリーンショット
+    └── support-toolkit-architecture.svg   ... Support Toolkit想定環境構成図（works/support-docsから参照）
 ```
 
 初学者向けに説明すると、HTML ファイルは「ページごとの本文」、CSS フォルダは「見た目の設定」、JavaScript フォルダは「動きの設定」、image フォルダは「表示に使う画像置き場」です。

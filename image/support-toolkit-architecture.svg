@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" role="img"
+     aria-labelledby="diagTitle diagDesc" preserveAspectRatio="xMidYMid meet">
+  <title id="diagTitle">Support Toolkit 想定環境構成図</title>
+  <desc id="diagDesc">
+    Windows 11 / Microsoft 365 / Active Directory を想定した小〜中規模オフィスの構成図。
+    クラウド層 (Microsoft Entra ID・Exchange Online・SharePoint/OneDrive・Teams)、
+    社内LAN層 (Active Directory ドメインコントローラー・ファイルサーバー・管理者端末)、
+    エンドポイント層 (Windows 11 クライアント、Defender・BitLocker・Firewall・Windows Update・Event Log) の
+    3層構成と、各層に対応する Support Toolkit の 7 手順書および 8 本の PowerShell スクリプトを示す。
+  </desc>
+
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5D6D7E"/>
+    </marker>
+    <style>
+      <![CDATA[
+        .t-title       { font: 700 22px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
+        .t-sub         { font: 400 13px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D6D7E; }
+        .layer-cloud   { fill: #FAF4E8; stroke: #2C3E50; stroke-width: 1.2; }
+        .layer-onprem  { fill: #F2EBDF; stroke: #2C3E50; stroke-width: 1.2; }
+        .layer-end     { fill: #FAF4E8; stroke: #2C3E50; stroke-width: 1.2; }
+        .layer-label   { font: 700 16px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
+        .layer-sub     { font: 400 11px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D6D7E; }
+        .box           { fill: #FFFFFF; stroke: #2C3E50; stroke-width: 1.2; }
+        .box-key       { fill: #FFFCF1; stroke: #B8860B; stroke-width: 1.6; }
+        .box-title     { font: 600 14px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
+        .box-sub       { font: 400 11px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D6D7E; }
+        .conn          { stroke: #5D6D7E; stroke-width: 1.4; fill: none; }
+        .conn-dashed   { stroke: #5D6D7E; stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; }
+        .conn-label    { font: 500 11px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D6D7E; }
+        .legend-bg     { fill: #FFFFFF; stroke: #E8E0D5; stroke-width: 1; }
+        .legend-title  { font: 700 13px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
+        .legend-h      { font: 600 12px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #B8860B; }
+        .legend-text   { font: 400 11px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
+      ]]>
+    </style>
+  </defs>
+
+  <!-- ====================== Title ====================== -->
+  <text x="550" y="32" text-anchor="middle" class="t-title">Support Toolkit 想定環境構成図</text>
+  <text x="550" y="52" text-anchor="middle" class="t-sub">Windows 11 / Microsoft 365 / Active Directory を想定した小〜中規模オフィス構成</text>
+
+  <!-- ====================== Cloud Layer ====================== -->
+  <rect x="40" y="72" width="1020" height="100" rx="10" ry="10" class="layer-cloud"/>
+  <text x="56" y="92" class="layer-label">① クラウド層 — Microsoft 365</text>
+  <text x="56" y="108" class="layer-sub">SaaS テナント (テナント外サービス)</text>
+
+  <g transform="translate(80, 116)">
+    <rect x="0" y="0" width="200" height="50" rx="6" ry="6" class="box-key"/>
+    <text x="100" y="22" text-anchor="middle" class="box-title">Microsoft Entra ID</text>
+    <text x="100" y="40" text-anchor="middle" class="box-sub">クラウドID・ライセンス・MFA</text>
+  </g>
+  <g transform="translate(310, 116)">
+    <rect x="0" y="0" width="180" height="50" rx="6" ry="6" class="box"/>
+    <text x="90" y="22" text-anchor="middle" class="box-title">Exchange Online</text>
+    <text x="90" y="40" text-anchor="middle" class="box-sub">メール・予定表</text>
+  </g>
+  <g transform="translate(520, 116)">
+    <rect x="0" y="0" width="220" height="50" rx="6" ry="6" class="box"/>
+    <text x="110" y="22" text-anchor="middle" class="box-title">SharePoint / OneDrive</text>
+    <text x="110" y="40" text-anchor="middle" class="box-sub">ドキュメント共有・同期</text>
+  </g>
+  <g transform="translate(770, 116)">
+    <rect x="0" y="0" width="160" height="50" rx="6" ry="6" class="box"/>
+    <text x="80" y="22" text-anchor="middle" class="box-title">Teams</text>
+    <text x="80" y="40" text-anchor="middle" class="box-sub">チャット・会議</text>
+  </g>
+
+  <!-- Connector: Entra ID <-> AD (Entra Connect, bidirectional) -->
+  <path d="M 165 166 L 165 278" class="conn" marker-end="url(#arrowhead)"/>
+  <path d="M 195 278 L 195 168" class="conn" marker-end="url(#arrowhead)"/>
+  <text x="220" y="218" class="conn-label">Entra Connect</text>
+  <text x="220" y="232" class="conn-label">(双方向同期)</text>
+
+  <!-- ====================== On-prem Layer ====================== -->
+  <rect x="40" y="232" width="1020" height="180" rx="10" ry="10" class="layer-onprem"/>
+  <text x="56" y="252" class="layer-label">② 社内LAN — オンプレミス</text>
+  <text x="56" y="268" class="layer-sub">基幹サービス・運用拠点</text>
+
+  <g transform="translate(80, 280)">
+    <rect x="0" y="0" width="240" height="118" rx="6" ry="6" class="box-key"/>
+    <text x="120" y="24" text-anchor="middle" class="box-title">Active Directory / DC</text>
+    <text x="120" y="44" text-anchor="middle" class="box-sub">Windows Server</text>
+    <text x="120" y="62" text-anchor="middle" class="box-sub">ドメイン認証 / GPO 配布</text>
+    <text x="120" y="80" text-anchor="middle" class="box-sub">ユーザー・グループ管理</text>
+    <text x="120" y="98" text-anchor="middle" class="box-sub">DNS / DHCP</text>
+  </g>
+
+  <g transform="translate(360, 280)">
+    <rect x="0" y="0" width="240" height="118" rx="6" ry="6" class="box"/>
+    <text x="120" y="24" text-anchor="middle" class="box-title">ファイルサーバー</text>
+    <text x="120" y="44" text-anchor="middle" class="box-sub">SMB 共有フォルダ</text>
+    <text x="120" y="62" text-anchor="middle" class="box-sub">部署別 NTFS / 共有 ACL</text>
+    <text x="120" y="80" text-anchor="middle" class="box-sub">バックアップ対象</text>
+    <text x="120" y="98" text-anchor="middle" class="box-sub">アクセス監査</text>
+  </g>
+
+  <g transform="translate(640, 280)">
+    <rect x="0" y="0" width="380" height="118" rx="6" ry="6" class="box-key"/>
+    <text x="190" y="24" text-anchor="middle" class="box-title">管理者端末 — PowerShell 実行点</text>
+    <text x="190" y="44" text-anchor="middle" class="box-sub">RSAT-AD-PowerShell / Microsoft.Graph SDK</text>
+    <text x="190" y="62" text-anchor="middle" class="box-sub">Get-StaleUserAccounts ・ Get-M365LicenseInventory</text>
+    <text x="190" y="80" text-anchor="middle" class="box-sub">Test-SecurityBaseline ・ New-EndpointDailyReport</text>
+    <text x="190" y="98" text-anchor="middle" class="box-sub">CSV / JSON / HTML 出力 → タスクスケジューラ連携</text>
+  </g>
+
+  <!-- Connector: Admin → Entra ID (Microsoft Graph API, dashed) — drawn after on-prem so it overlays the fill -->
+  <path d="M 700 280 L 280 150" class="conn-dashed" marker-end="url(#arrowhead)"/>
+  <text x="540" y="200" class="conn-label">Microsoft Graph API</text>
+  <text x="540" y="214" class="conn-label">(M365 ライセンス棚卸し読み取り)</text>
+
+  <!-- ====================== Connectors: On-prem → Endpoints ====================== -->
+  <path d="M 200 398 L 200 466" class="conn" marker-end="url(#arrowhead)"/>
+  <text x="124" y="436" class="conn-label">認証 / GPO 配布</text>
+
+  <path d="M 480 398 L 480 466" class="conn" marker-end="url(#arrowhead)"/>
+  <text x="412" y="436" class="conn-label">共有フォルダ参照</text>
+
+  <path d="M 830 398 L 830 466" class="conn" marker-end="url(#arrowhead)"/>
+  <text x="752" y="436" class="conn-label">点検・状態取得</text>
+
+  <!-- ====================== Endpoint Layer ====================== -->
+  <rect x="40" y="468" width="1020" height="120" rx="10" ry="10" class="layer-end"/>
+  <text x="56" y="488" class="layer-label">③ エンドポイント — Windows 11 クライアント (× N 台)</text>
+  <text x="56" y="504" class="layer-sub">Defender / BitLocker / Firewall / Windows Update が前提</text>
+
+  <g transform="translate(80, 514)">
+    <rect x="0" y="0" width="170" height="58" rx="6" ry="6" class="box"/>
+    <text x="85" y="22" text-anchor="middle" class="box-title">Defender</text>
+    <text x="85" y="42" text-anchor="middle" class="box-sub">マルウェア対策</text>
+  </g>
+  <g transform="translate(270, 514)">
+    <rect x="0" y="0" width="170" height="58" rx="6" ry="6" class="box"/>
+    <text x="85" y="22" text-anchor="middle" class="box-title">BitLocker</text>
+    <text x="85" y="42" text-anchor="middle" class="box-sub">ディスク暗号化</text>
+  </g>
+  <g transform="translate(460, 514)">
+    <rect x="0" y="0" width="170" height="58" rx="6" ry="6" class="box"/>
+    <text x="85" y="22" text-anchor="middle" class="box-title">Firewall</text>
+    <text x="85" y="42" text-anchor="middle" class="box-sub">通信フィルタ</text>
+  </g>
+  <g transform="translate(650, 514)">
+    <rect x="0" y="0" width="180" height="58" rx="6" ry="6" class="box"/>
+    <text x="90" y="22" text-anchor="middle" class="box-title">Windows Update</text>
+    <text x="90" y="42" text-anchor="middle" class="box-sub">パッチ適用状態</text>
+  </g>
+  <g transform="translate(850, 514)">
+    <rect x="0" y="0" width="170" height="58" rx="6" ry="6" class="box"/>
+    <text x="85" y="22" text-anchor="middle" class="box-title">Event Log</text>
+    <text x="85" y="42" text-anchor="middle" class="box-sub">警告・エラー履歴</text>
+  </g>
+
+  <!-- ====================== Toolkit Mapping Footer ====================== -->
+  <rect x="40" y="608" width="1020" height="138" rx="6" ry="6" class="legend-bg"/>
+  <text x="56" y="630" class="legend-title">対応する Support Toolkit 成果物 (7 手順書 + 8 PowerShell スクリプト)</text>
+
+  <text x="60" y="654" class="legend-h">① クラウド層</text>
+  <text x="60" y="672" class="legend-text">• M365 ライセンス管理 (手順書)</text>
+  <text x="60" y="688" class="legend-text">• 退職アカウント停止 (M365 側)</text>
+  <text x="60" y="704" class="legend-text">• Get-M365LicenseInventory.ps1</text>
+  <text x="60" y="720" class="legend-text">  (Microsoft Graph 経由で読み取り)</text>
+
+  <text x="400" y="654" class="legend-h">② 社内LAN</text>
+  <text x="400" y="672" class="legend-text">• 退職アカウント停止 (AD 側)</text>
+  <text x="400" y="688" class="legend-text">• 共有フォルダ権限管理</text>
+  <text x="400" y="704" class="legend-text">• Get-StaleUserAccounts.ps1 (休眠 AD 棚卸し)</text>
+  <text x="400" y="720" class="legend-text">• New-EndpointDailyReport.ps1 (集約レポート)</text>
+
+  <text x="740" y="654" class="legend-h">③ エンドポイント</text>
+  <text x="740" y="672" class="legend-text">• PC キッティング / 障害対応事例 / マルウェア対応</text>
+  <text x="740" y="688" class="legend-text">• Collect-PcInventory / Test-NetworkTriage</text>
+  <text x="740" y="704" class="legend-text">• Get-RecentSupportEvents / Test-DiskCapacity</text>
+  <text x="740" y="720" class="legend-text">• Test-SecurityBaseline (Defender ほか)</text>
+</svg>
