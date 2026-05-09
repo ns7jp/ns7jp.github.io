@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" role="img"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 860" role="img"
      aria-labelledby="cloudTitle cloudDesc" preserveAspectRatio="xMidYMid meet">
-  <title id="cloudTitle">Cloud Server Bootstrap 構成図 (AWS Free Tier + Terraform + cloud-init)</title>
+  <title id="cloudTitle">Cloud Server Bootstrap 構成図 (AWS Free Tier + Terraform + cloud-init + Caddy)</title>
   <desc id="cloudDesc">
     AWS Free Tier 枠内で Linux サーバーを 1 台立ち上げる Terraform + cloud-init の構成図。
-    運用者の PC からインターネット越しに SSH 接続し、Internet Gateway 経由で AWS リージョン内の VPC、
-    Public Subnet、EC2 t3.micro (Ubuntu 22.04) に到達する。Security Group は運用者 CIDR からの 22/tcp のみ許可。
-    EC2 起動時に cloud-init が SSH ハードニング、ufw、fail2ban、unattended-upgrades、
-    support-toolkit クローンと cron 登録までを冪等に実行する。
+    運用者の PC からインターネット越しに SSH (22/tcp) で接続し、Internet Gateway 経由で AWS リージョン内の VPC、
+    Public Subnet、EC2 t3.micro (Ubuntu 22.04) に到達する。Security Group は運用者 CIDR からの 22/tcp と、
+    公開デモ ON 時の 0.0.0.0/0 からの 80/443/tcp を許可する。
+    EC2 内では Caddy が 443 で TLS 終端 (Let's Encrypt 自動取得) して Flask の Server Monitor (gunicorn 127.0.0.1:5000) へ
+    リバースプロキシする。cloud-init は Phase 1 (基本ハードニング 7 ステップ) と Phase 2 (Server Monitor + Caddy 公開デモ 5 ステップ) を
+    冪等に実行する。
   </desc>
 
   <defs>
-    <marker id="arrow2" viewBox="0 0 10 10" refX="8" refY="5"
+    <marker id="arrowB" viewBox="0 0 10 10" refX="8" refY="5"
             markerWidth="8" markerHeight="8" orient="auto">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#5D6D7E"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5D7A5D"/>
     </marker>
     <style>
       <![CDATA[
@@ -26,166 +32,216 @@
         .layer-sub     { font: 400 11px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D6D7E; }
         .box           { fill: #FFFFFF; stroke: #2C3E50; stroke-width: 1.2; }
         .box-key       { fill: #FFFCF1; stroke: #B8860B; stroke-width: 1.6; }
+        .box-app       { fill: #F2EFE6; stroke: #5D7A5D; stroke-width: 1.4; }
         .box-title     { font: 600 14px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
         .box-sub       { font: 400 11px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D6D7E; }
+        .box-port      { font: 600 11px 'Helvetica Neue', Arial, sans-serif; fill: #B8860B; }
         .conn          { stroke: #5D6D7E; stroke-width: 1.4; fill: none; }
+        .conn-tls      { stroke: #5D7A5D; stroke-width: 1.6; fill: none; }
         .conn-label    { font: 500 11px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D6D7E; }
-        .step-num      { fill: #B8860B; stroke: none; }
+        .conn-label-g  { font: 500 11px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D7A5D; }
+        .step-num-1    { fill: #B8860B; stroke: none; }
+        .step-num-2    { fill: #5D7A5D; stroke: none; }
         .step-num-text { font: 700 11px 'Helvetica Neue', Arial, sans-serif; fill: #FFFFFF; }
         .step-text     { font: 400 11.5px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
         .step-bold     { font: 600 11.5px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
         .footer-bg     { fill: #FFFFFF; stroke: #E8E0D5; stroke-width: 1; }
         .footer-title  { font: 700 13px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #2C3E50; }
+        .footer-sub    { font: 600 12px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #B8860B; }
+        .footer-sub-2  { font: 600 12px 'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif; fill: #5D7A5D; }
       ]]>
     </style>
   </defs>
 
   <!-- ====================== Title ====================== -->
-  <text x="550" y="32" text-anchor="middle" class="t-title">Cloud Server Bootstrap — AWS Free Tier + Terraform + cloud-init</text>
-  <text x="550" y="52" text-anchor="middle" class="t-sub">VPC + EC2 t3.micro (Ubuntu 22.04) を最小構成で立ち上げ、cloud-init で OS ハードニング・support-toolkit 連携まで自動化</text>
+  <text x="550" y="32" text-anchor="middle" class="t-title">Cloud Server Bootstrap — AWS Free Tier + Terraform + cloud-init + Caddy</text>
+  <text x="550" y="52" text-anchor="middle" class="t-sub">VPC + EC2 t3.micro (Ubuntu 22.04) を立ち上げ、Server Monitor を sslip.io で HTTPS 公開するまでを 1 コマンドで再現可能に</text>
 
   <!-- ====================== Operator (left) ====================== -->
-  <g transform="translate(40, 120)">
-    <rect x="0" y="0" width="220" height="100" rx="8" ry="8" class="box-key"/>
-    <text x="110" y="26" text-anchor="middle" class="box-title">運用者 PC</text>
-    <text x="110" y="46" text-anchor="middle" class="box-sub">SSH 公開鍵 (ed25519)</text>
-    <text x="110" y="62" text-anchor="middle" class="box-sub">terraform CLI (1.5+)</text>
-    <text x="110" y="78" text-anchor="middle" class="box-sub">AWS 認証情報</text>
-    <text x="110" y="94" text-anchor="middle" class="box-sub">固定 IP または VPN 出口</text>
+  <g transform="translate(30, 110)">
+    <rect x="0" y="0" width="200" height="100" rx="8" ry="8" class="box-key"/>
+    <text x="100" y="24" text-anchor="middle" class="box-title">運用者 PC</text>
+    <text x="100" y="42" text-anchor="middle" class="box-sub">SSH 公開鍵 (ed25519)</text>
+    <text x="100" y="58" text-anchor="middle" class="box-sub">terraform CLI (1.5+)</text>
+    <text x="100" y="74" text-anchor="middle" class="box-sub">AWS 認証情報</text>
+    <text x="100" y="90" text-anchor="middle" class="box-sub">固定 IP / VPN 出口</text>
   </g>
 
-  <!-- Operator → Internet -->
-  <path d="M 260 170 L 320 170" class="conn" marker-end="url(#arrow2)"/>
-  <text x="262" y="160" class="conn-label">SSH (port 22)</text>
-  <text x="262" y="186" class="conn-label">terraform apply</text>
-
-  <!-- Internet cloud (center) -->
-  <g transform="translate(320, 130)">
-    <ellipse cx="60" cy="40" rx="60" ry="32" fill="#F5F1EA" stroke="#5D6D7E" stroke-width="1.2"/>
-    <text x="60" y="38" text-anchor="middle" class="box-title">Internet</text>
-    <text x="60" y="54" text-anchor="middle" class="box-sub">公衆網</text>
+  <!-- ====================== Public Visitor (left, lower) ====================== -->
+  <g transform="translate(30, 230)">
+    <rect x="0" y="0" width="200" height="60" rx="8" ry="8" class="box-app"/>
+    <text x="100" y="24" text-anchor="middle" class="box-title">公開デモ閲覧者</text>
+    <text x="100" y="44" text-anchor="middle" class="box-sub">ブラウザ (HTTPS)</text>
   </g>
 
-  <!-- Internet → IGW -->
-  <path d="M 440 170 L 500 170" class="conn" marker-end="url(#arrow2)"/>
-  <text x="448" y="160" class="conn-label">運用者 CIDR のみ</text>
-  <text x="448" y="186" class="conn-label">22/tcp 許可</text>
+  <!-- ====================== Internet cloud (center) ====================== -->
+  <g transform="translate(280, 165)">
+    <ellipse cx="60" cy="50" rx="80" ry="50" fill="#F5F1EA" stroke="#5D6D7E" stroke-width="1.2"/>
+    <text x="60" y="46" text-anchor="middle" class="box-title">Internet</text>
+    <text x="60" y="64" text-anchor="middle" class="box-sub">公衆網</text>
+  </g>
+
+  <!-- Operator → Internet (SSH 22) -->
+  <path d="M 230 160 L 280 200" class="conn" marker-end="url(#arrowB)"/>
+  <text x="232" y="155" class="conn-label">SSH 22/tcp</text>
+  <text x="232" y="170" class="conn-label">terraform apply</text>
+
+  <!-- Visitor → Internet (HTTPS 443) -->
+  <path d="M 230 260 L 280 230" class="conn-tls" marker-end="url(#arrowGreen)"/>
+  <text x="232" y="280" class="conn-label-g">HTTPS 443/tcp</text>
 
   <!-- ====================== AWS Region ====================== -->
-  <rect x="500" y="80" width="560" height="320" rx="10" ry="10" class="layer-aws"/>
-  <text x="520" y="102" class="layer-label">☁ AWS Region — ap-northeast-1 (例)</text>
-  <text x="520" y="118" class="layer-sub">Free Tier: t3.micro 750h/月 + EBS gp3 30GB/月</text>
+  <rect x="450" y="80" width="630" height="320" rx="10" ry="10" class="layer-aws"/>
+  <text x="470" y="102" class="layer-label">☁ AWS Region — ap-northeast-1 (例)</text>
+  <text x="470" y="118" class="layer-sub">Free Tier: t3.micro 750h/月 + EBS gp3 30GB/月 + データ転送 1GB/月</text>
 
   <!-- IGW -->
-  <g transform="translate(520, 145)">
+  <g transform="translate(470, 145)">
     <rect x="0" y="0" width="120" height="50" rx="6" ry="6" class="box"/>
     <text x="60" y="22" text-anchor="middle" class="box-title">IGW</text>
     <text x="60" y="40" text-anchor="middle" class="box-sub">Internet Gateway</text>
   </g>
 
+  <!-- Internet → IGW (SSH from operator) -->
+  <path d="M 400 195 L 470 170" class="conn" marker-end="url(#arrowB)"/>
+  <text x="402" y="160" class="conn-label">22/tcp</text>
+  <text x="402" y="174" class="conn-label">運用者 CIDR のみ</text>
+
+  <!-- Internet → IGW (HTTPS public) -->
+  <path d="M 400 215 L 470 195" class="conn-tls" marker-end="url(#arrowGreen)"/>
+  <text x="402" y="234" class="conn-label-g">80/443</text>
+  <text x="402" y="248" class="conn-label-g">0.0.0.0/0 (公開)</text>
+
   <!-- IGW → Route Table -->
-  <path d="M 580 195 L 580 230" class="conn" marker-end="url(#arrow2)"/>
+  <path d="M 530 195 L 530 230" class="conn" marker-end="url(#arrowB)"/>
 
   <!-- Route Table -->
-  <g transform="translate(520, 230)">
+  <g transform="translate(470, 230)">
     <rect x="0" y="0" width="120" height="50" rx="6" ry="6" class="box"/>
     <text x="60" y="22" text-anchor="middle" class="box-title">Route Table</text>
     <text x="60" y="40" text-anchor="middle" class="box-sub">0.0.0.0/0 → IGW</text>
   </g>
 
   <!-- VPC box -->
-  <rect x="660" y="135" width="380" height="240" rx="8" ry="8" class="layer-vpc"/>
-  <text x="676" y="156" class="layer-label">VPC — 10.0.0.0/16</text>
+  <rect x="610" y="135" width="450" height="240" rx="8" ry="8" class="layer-vpc"/>
+  <text x="626" y="156" class="layer-label">VPC — 10.0.0.0/16</text>
 
   <!-- Public Subnet -->
-  <rect x="680" y="170" width="340" height="160" rx="6" ry="6" class="layer-subnet"/>
-  <text x="696" y="190" class="layer-label">Public Subnet — 10.0.1.0/24 (AZ: a)</text>
+  <rect x="630" y="170" width="410" height="180" rx="6" ry="6" class="layer-subnet"/>
+  <text x="646" y="190" class="layer-label">Public Subnet — 10.0.1.0/24 (AZ: a)</text>
 
-  <!-- EC2 Instance -->
-  <g transform="translate(710, 205)">
-    <rect x="0" y="0" width="280" height="115" rx="6" ry="6" class="box-key"/>
-    <text x="140" y="22" text-anchor="middle" class="box-title">EC2 t3.micro — Ubuntu 22.04 LTS</text>
-    <text x="140" y="40" text-anchor="middle" class="box-sub">Canonical 公式 AMI (data source 動的解決)</text>
-    <text x="140" y="58" text-anchor="middle" class="box-sub">EBS gp3 8GB / 暗号化</text>
-    <text x="140" y="76" text-anchor="middle" class="box-sub">IMDSv2 強制 (http_tokens = required)</text>
-    <text x="140" y="94" text-anchor="middle" class="box-sub">cloud-init bootstrap → support-toolkit cron</text>
+  <!-- EC2 Instance (with internal layers visible) -->
+  <g transform="translate(660, 205)">
+    <rect x="0" y="0" width="350" height="140" rx="6" ry="6" class="box-key"/>
+    <text x="175" y="22" text-anchor="middle" class="box-title">EC2 t3.micro — Ubuntu 22.04 LTS</text>
+    <text x="175" y="38" text-anchor="middle" class="box-sub">IMDSv2 強制 / EBS gp3 8GB 暗号化</text>
+
+    <!-- Caddy box -->
+    <rect x="20" y="50" width="140" height="74" rx="4" ry="4" class="box-app"/>
+    <text x="90" y="68" text-anchor="middle" class="box-title">Caddy v2</text>
+    <text x="90" y="84" text-anchor="middle" class="box-sub">TLS 終端 / リバプロ</text>
+    <text x="90" y="100" text-anchor="middle" class="box-sub">Let's Encrypt 自動</text>
+    <text x="90" y="116" text-anchor="middle" class="box-port">listen :80, :443</text>
+
+    <!-- Server Monitor box -->
+    <rect x="190" y="50" width="140" height="74" rx="4" ry="4" class="box-app"/>
+    <text x="260" y="68" text-anchor="middle" class="box-title">Server Monitor</text>
+    <text x="260" y="84" text-anchor="middle" class="box-sub">Flask + psutil</text>
+    <text x="260" y="100" text-anchor="middle" class="box-sub">gunicorn (systemd)</text>
+    <text x="260" y="116" text-anchor="middle" class="box-port">bind 127.0.0.1:5000</text>
+
+    <!-- Caddy → Server Monitor reverse proxy -->
+    <path d="M 160 87 L 190 87" stroke="#5D7A5D" stroke-width="1.4" fill="none" marker-end="url(#arrowGreen)"/>
   </g>
+
+  <!-- Connector: Route Table → EC2 -->
+  <path d="M 590 255 L 660 255" class="conn" marker-end="url(#arrowB)"/>
 
   <!-- Security Group label -->
-  <g transform="translate(680, 340)">
-    <rect x="0" y="0" width="340" height="28" rx="4" ry="4" fill="#FFFCF1" stroke="#B8860B" stroke-width="1.2"/>
-    <text x="170" y="18" text-anchor="middle" class="layer-label">Security Group: SSH 22/tcp from operator CIDR のみ</text>
+  <g transform="translate(630, 360)">
+    <rect x="0" y="0" width="410" height="28" rx="4" ry="4" fill="#FFFCF1" stroke="#B8860B" stroke-width="1.2"/>
+    <text x="205" y="18" text-anchor="middle" class="layer-label">Security Group: 22/tcp from operator CIDR + 80/443 from 0.0.0.0/0 (公開デモ ON 時)</text>
   </g>
 
-  <!-- Connector: Route Table → VPC/EC2 -->
-  <path d="M 640 255 L 700 255" class="conn" marker-end="url(#arrow2)"/>
-
   <!-- ====================== Footer: cloud-init steps ====================== -->
-  <rect x="40" y="430" width="1020" height="310" rx="6" ry="6" class="footer-bg"/>
-  <text x="56" y="454" class="footer-title">cloud-init bootstrap (EC2 初回起動時に 1 回だけ実行 — 冪等性を考慮)</text>
+  <rect x="30" y="430" width="1040" height="410" rx="6" ry="6" class="footer-bg"/>
+  <text x="46" y="454" class="footer-title">cloud-init bootstrap (EC2 初回起動時に 1 回だけ実行 — 冪等性を考慮)</text>
 
-  <!-- Steps in 2-column layout -->
-  <!-- Step 1 -->
-  <circle cx="74" cy="488" r="13" class="step-num"/>
-  <text x="74" y="492" text-anchor="middle" class="step-num-text">1</text>
-  <text x="98" y="486" class="step-bold">パッケージ更新</text>
-  <text x="98" y="502" class="step-text">apt update + upgrade、ufw / fail2ban / unattended-upgrades / smartmontools / git をインストール</text>
+  <!-- Phase 1 header (left column) -->
+  <text x="46" y="478" class="footer-sub">▍ Phase 1 — 基本ハードニング (常時実行)</text>
 
-  <!-- Step 2 -->
-  <circle cx="74" cy="538" r="13" class="step-num"/>
-  <text x="74" y="542" text-anchor="middle" class="step-num-text">2</text>
-  <text x="98" y="536" class="step-bold">運用ユーザー作成</text>
-  <text x="98" y="552" class="step-text">sudo NOPASSWD + SSH 公開鍵を authorized_keys に書き込み (default: ops)</text>
+  <!-- Phase 1 steps -->
+  <circle cx="64" cy="500" r="11" class="step-num-1"/>
+  <text x="64" y="504" text-anchor="middle" class="step-num-text">1</text>
+  <text x="84" y="500" class="step-bold">パッケージ更新</text>
+  <text x="84" y="514" class="step-text">apt update + upgrade、ufw / fail2ban / unattended-upgrades / git をインストール</text>
 
-  <!-- Step 3 -->
-  <circle cx="74" cy="588" r="13" class="step-num"/>
-  <text x="74" y="592" text-anchor="middle" class="step-num-text">3</text>
-  <text x="98" y="586" class="step-bold">SSH ハードニング (drop-in 設定)</text>
-  <text x="98" y="602" class="step-text">/etc/ssh/sshd_config.d/99-hardening.conf に PermitRootLogin no / PasswordAuthentication no 等を配置</text>
+  <circle cx="64" cy="540" r="11" class="step-num-1"/>
+  <text x="64" y="544" text-anchor="middle" class="step-num-text">2</text>
+  <text x="84" y="540" class="step-bold">運用ユーザー作成</text>
+  <text x="84" y="554" class="step-text">sudo NOPASSWD + SSH 公開鍵を authorized_keys に書き込み (default: ops)</text>
 
-  <!-- Step 4 -->
-  <circle cx="74" cy="638" r="13" class="step-num"/>
-  <text x="74" y="642" text-anchor="middle" class="step-num-text">4</text>
-  <text x="98" y="636" class="step-bold">ホストファイアウォール (ufw)</text>
-  <text x="98" y="652" class="step-text">default deny incoming + 22/tcp のみ許可。Security Group との二重防御。</text>
+  <circle cx="64" cy="580" r="11" class="step-num-1"/>
+  <text x="64" y="584" text-anchor="middle" class="step-num-text">3</text>
+  <text x="84" y="580" class="step-bold">SSH ハードニング (drop-in)</text>
+  <text x="84" y="594" class="step-text">/etc/ssh/sshd_config.d/99-hardening.conf に PermitRootLogin no / PasswordAuth no</text>
 
-  <!-- Step 5 -->
-  <circle cx="74" cy="688" r="13" class="step-num"/>
-  <text x="74" y="692" text-anchor="middle" class="step-num-text">5</text>
-  <text x="98" y="686" class="step-bold">ブルートフォース対策 (fail2ban)</text>
-  <text x="98" y="702" class="step-text">sshd jail を有効化。10 分以内 5 回失敗で 1 時間 ban。</text>
+  <circle cx="64" cy="620" r="11" class="step-num-1"/>
+  <text x="64" y="624" text-anchor="middle" class="step-num-text">4</text>
+  <text x="84" y="620" class="step-bold">ホスト FW (ufw)</text>
+  <text x="84" y="634" class="step-text">default deny incoming + 22/tcp 許可。Security Group との二重防御。</text>
 
-  <!-- Right column -->
-  <!-- Step 6 -->
-  <circle cx="574" cy="488" r="13" class="step-num"/>
-  <text x="574" y="492" text-anchor="middle" class="step-num-text">6</text>
-  <text x="598" y="486" class="step-bold">自動セキュリティ更新</text>
-  <text x="598" y="502" class="step-text">unattended-upgrades を有効化。/etc/apt/apt.conf.d/20auto-upgrades を配置。</text>
+  <circle cx="64" cy="660" r="11" class="step-num-1"/>
+  <text x="64" y="664" text-anchor="middle" class="step-num-text">5</text>
+  <text x="84" y="660" class="step-bold">ブルートフォース対策 (fail2ban)</text>
+  <text x="84" y="674" class="step-text">sshd jail を有効化。10 分以内 5 回失敗で 1 時間 ban。</text>
 
-  <!-- Step 7 -->
-  <circle cx="574" cy="538" r="13" class="step-num"/>
-  <text x="574" y="542" text-anchor="middle" class="step-num-text">7</text>
-  <text x="598" y="536" class="step-bold">support-toolkit クローン</text>
-  <text x="598" y="552" class="step-text">git clone --depth 1 → /opt/support-toolkit/ に Bash 5 本を配置</text>
+  <circle cx="64" cy="700" r="11" class="step-num-1"/>
+  <text x="64" y="704" text-anchor="middle" class="step-num-text">6</text>
+  <text x="84" y="700" class="step-bold">自動セキュリティ更新 + support-toolkit</text>
+  <text x="84" y="714" class="step-text">unattended-upgrades 有効化、support-scripts を /opt にクローン</text>
 
-  <!-- Step 8 -->
-  <circle cx="574" cy="588" r="13" class="step-num"/>
-  <text x="574" y="592" text-anchor="middle" class="step-num-text">8</text>
-  <text x="598" y="586" class="step-bold">cron 日次点検登録</text>
-  <text x="598" y="602" class="step-text">毎朝 06:00 に test-disk-capacity / test-security-baseline / collect-host-inventory を JSON 保存</text>
+  <circle cx="64" cy="740" r="11" class="step-num-1"/>
+  <text x="64" y="744" text-anchor="middle" class="step-num-text">7</text>
+  <text x="84" y="740" class="step-bold">cron 日次点検 + ログローテーション</text>
+  <text x="84" y="754" class="step-text">毎朝 06:00 に容量・セキュリティ・棚卸し JSON。logrotate で 90 日保持。</text>
 
-  <!-- Step 9 -->
-  <circle cx="574" cy="638" r="13" class="step-num"/>
-  <text x="574" y="642" text-anchor="middle" class="step-num-text">9</text>
-  <text x="598" y="636" class="step-bold">ログローテーション</text>
-  <text x="598" y="652" class="step-text">/var/log/support-toolkit/*.json を logrotate で 90 日保持・gzip 圧縮</text>
+  <!-- Phase 2 header (right column) -->
+  <text x="556" y="478" class="footer-sub-2">▍ Phase 2 — Server Monitor 公開デモ (enable_server_monitor_demo=true)</text>
 
-  <!-- Step 10 -->
-  <circle cx="574" cy="688" r="13" class="step-num"/>
-  <text x="574" y="692" text-anchor="middle" class="step-num-text">10</text>
-  <text x="598" y="686" class="step-bold">SSH リロード + 完了マーカー</text>
-  <text x="598" y="702" class="step-text">sshd -t で構文確認後 reload。.bootstrap-complete を作成し成否を確認可能に。</text>
+  <!-- Phase 2 steps -->
+  <circle cx="574" cy="500" r="11" class="step-num-2"/>
+  <text x="574" y="504" text-anchor="middle" class="step-num-text">8</text>
+  <text x="594" y="500" class="step-bold">Server Monitor を git clone + venv</text>
+  <text x="594" y="514" class="step-text">/opt/server-monitor に clone → python3 -m venv → pip install requirements.txt + gunicorn</text>
+
+  <circle cx="574" cy="540" r="11" class="step-num-2"/>
+  <text x="574" y="544" text-anchor="middle" class="step-num-text">9</text>
+  <text x="594" y="540" class="step-bold">gunicorn を systemd 管理に</text>
+  <text x="594" y="554" class="step-text">User=ops, ExecStart=gunicorn -w 2 -b 127.0.0.1:5000 app:app + 強化オプション</text>
+
+  <circle cx="574" cy="580" r="11" class="step-num-2"/>
+  <text x="574" y="584" text-anchor="middle" class="step-num-text">10</text>
+  <text x="594" y="580" class="step-bold">Caddy インストール (Cloudsmith repo)</text>
+  <text x="594" y="594" class="step-text">apt-get install caddy。署名鍵を /etc/apt/keyrings/ に配置 (deb822 推奨形式)</text>
+
+  <circle cx="574" cy="620" r="11" class="step-num-2"/>
+  <text x="574" y="624" text-anchor="middle" class="step-num-text">11</text>
+  <text x="594" y="620" class="step-bold">Caddyfile 動的生成 (sslip.io)</text>
+  <text x="594" y="634" class="step-text">IMDSv2 で取得した IP を &lt;ip&gt;.sslip.io にして Caddyfile に sed 置換</text>
+
+  <circle cx="574" cy="660" r="11" class="step-num-2"/>
+  <text x="574" y="664" text-anchor="middle" class="step-num-text">12</text>
+  <text x="594" y="660" class="step-bold">ufw 80/443 解放 + Caddy 起動</text>
+  <text x="594" y="674" class="step-text">Let's Encrypt 自動取得 → HTTPS 公開完了 (約 30〜60 秒)</text>
+
+  <!-- Final URL highlight -->
+  <rect x="556" y="690" width="500" height="60" rx="6" ry="6" fill="#F2EFE6" stroke="#5D7A5D" stroke-width="1.4"/>
+  <text x="566" y="710" class="footer-sub-2">公開 URL (terraform output server_monitor_url)</text>
+  <text x="566" y="730" class="step-text">https://&lt;EC2 パブリック IP&gt;.sslip.io/</text>
+  <text x="566" y="744" class="step-text">例: 203.0.113.42 → https://203.0.113.42.sslip.io/</text>
 
   <!-- Bottom note -->
-  <text x="56" y="730" class="layer-sub">想定月額: Free Tier 範囲内なら $0 (t3.micro 750h + EBS gp3 30GB)。期限後は約 $9-10/月。terraform destroy で完全削除可能。</text>
+  <text x="46" y="800" class="layer-sub">想定月額: Free Tier 範囲内なら $0 (t3.micro 750h + EBS gp3 30GB + データ転送 1GB)。期限後は約 $9-10/月。terraform destroy で完全削除可能。</text>
+  <text x="46" y="816" class="layer-sub">enable_server_monitor_demo = false にすれば Phase 2 をスキップし、22/tcp のみ開放のバニラサーバーとして動作。</text>
 </svg>

@@ -111,10 +111,13 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public.id
 }
 
-# --------------------------- Security Group (SSH のみ) ---------------------------
+# --------------------------- Security Group ---------------------------
+# - SSH: 運用者 CIDR からのみ許可
+# - HTTP/HTTPS: enable_server_monitor_demo = true のときだけ 0.0.0.0/0 を許可
+#   (Server Monitor を公開する demo 目的。dynamic ブロックでオン・オフ可能)
 resource "aws_security_group" "host" {
   name        = "support-toolkit-host-sg"
-  description = "Allow SSH only from the operator's CIDR. All other inbound is denied."
+  description = "SSH from operator CIDR; HTTP(S) from anywhere when public demo is enabled."
   vpc_id      = aws_vpc.main.id
 
   ingress {
@@ -125,8 +128,19 @@ resource "aws_security_group" "host" {
     cidr_blocks = [var.allowed_ssh_cidr]
   }
 
+  dynamic "ingress" {
+    for_each = var.enable_server_monitor_demo ? toset([80, 443]) : toset([])
+    content {
+      description = ingress.value == 80 ? "HTTP (Let's Encrypt ACME challenge / 301 redirect to HTTPS)" : "HTTPS (Server Monitor public demo via Caddy)"
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
   egress {
-    description = "All outbound (apt update, package install, monitoring egress)"
+    description = "All outbound (apt update, package install, ACME, monitoring egress)"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -147,9 +161,12 @@ resource "aws_instance" "host" {
   key_name               = var.ssh_key_name
 
   user_data = templatefile("${path.module}/cloud-init.yaml", {
-    operator_username = var.operator_username
-    operator_pubkey   = var.operator_pubkey
-    portfolio_repo    = var.portfolio_repo
+    operator_username          = var.operator_username
+    operator_pubkey            = var.operator_pubkey
+    portfolio_repo             = var.portfolio_repo
+    enable_server_monitor_demo = var.enable_server_monitor_demo
+    server_monitor_repo        = var.server_monitor_repo
+    acme_email                 = var.acme_email
   })
 
   # IMDSv2 強制 (SSRF 経由のメタデータ漏洩対策)

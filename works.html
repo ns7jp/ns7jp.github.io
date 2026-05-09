@@ -278,7 +278,7 @@
                     <!-- 作品カード: Cloud Server Bootstrap (Terraform + cloud-init) — Support Toolkit を実環境で動かす IaC サンプル -->
                     <div class="work-showcase-item" id="work-cloud-bootstrap" data-category="infra">
                         <div class="work-image-container">
-                            <img src="image/cloud-architecture.svg" alt="Cloud Server Bootstrap 構成図: 運用者 PC からインターネット越しに AWS Region (ap-northeast-1) の VPC 10.0.0.0/16・Public Subnet 10.0.1.0/24 内の EC2 t3.micro (Ubuntu 22.04) に SSH 接続。Security Group は運用者 CIDR からの 22/tcp のみ許可。cloud-init bootstrap が SSH ハードニング・ufw・fail2ban・unattended-upgrades・support-toolkit の cron 登録までを 10 ステップで実行する図" loading="lazy" decoding="async">
+                            <img src="image/cloud-architecture.svg" alt="Cloud Server Bootstrap 構成図: 運用者 PC は SSH 22/tcp で、公開デモ閲覧者は HTTPS 443/tcp で AWS Region (ap-northeast-1) の VPC 10.0.0.0/16・Public Subnet 10.0.1.0/24 内の EC2 t3.micro (Ubuntu 22.04) にアクセス。EC2 内部では Caddy v2 が 80/443 で TLS 終端し、Server Monitor (Flask + gunicorn 127.0.0.1:5000) にリバースプロキシする。cloud-init は Phase 1 (基本ハードニング 7 ステップ: パッケージ更新・運用ユーザー作成・SSH drop-in・ufw・fail2ban・自動更新+support-toolkit・cron+logrotate) と Phase 2 (公開デモ 5 ステップ: Server Monitor clone+venv・gunicorn systemd 化・Caddy 導入・sslip.io 用 Caddyfile 動的生成・80/443 解放) を冪等に実行する図。最終的な公開 URL は https://<EC2 パブリック IP>.sslip.io/ になる。" loading="lazy" decoding="async">
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
                                     <span class="work-tag">Terraform / cloud-init / AWS Free Tier</span>
@@ -299,25 +299,38 @@
                             <h4>Cloud Server Bootstrap</h4>
                             <div class="work-summary">
                                 <div><span>目的</span><strong>Linux サーバーの最小構成を IaC で再現可能に</strong></div>
-                                <div><span>成果</span><strong>Terraform 7 リソース + cloud-init 10 ステップ</strong></div>
+                                <div><span>成果</span><strong>Terraform 7 リソース + cloud-init 12 ステップ + 公開デモ URL</strong></div>
                                 <div><span>活用</span><strong>運用環境ごと立ち上げ・削除・差し替え</strong></div>
                             </div>
                             <div class="support-fit high">
                                 <span class="fit-label">ITサポート関連度: High</span>
-                                <p>Support Toolkit (Bash 版) を実際にどこで動かすかを示す、運用環境ごと IaC で再現する成果物。インフラ運用支援への適性を直接示せます。</p>
+                                <p>Support Toolkit (Bash 版) を実際にどこで動かすかを示し、Server Monitor を <strong>HTTPS で公開デモ化</strong>する IaC 成果物。インフラ運用・自動化への適性を直接示せます。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
                                 <span class="num-chip"><strong>7</strong>AWS リソース</span>
-                                <span class="num-chip"><strong>10</strong>bootstrap ステップ</span>
+                                <span class="num-chip"><strong>12</strong>bootstrap ステップ</span>
                                 <span class="num-chip"><strong>$0</strong>/月 (Free Tier)</span>
-                                <span class="num-chip"><strong>8</strong>セキュリティ防御層</span>
+                                <span class="num-chip"><strong>12</strong>セキュリティ防御層</span>
+                                <span class="num-chip">HTTPS 公開デモ</span>
                             </div>
-                            <p>AWS Free Tier 範囲内 (t3.micro 750h/月 + EBS gp3 30GB/月) で Linux サーバーを 1 台立ち上げる Terraform + cloud-init のサンプルです。VPC / Subnet / IGW / Route Table / Security Group / EC2 を Terraform で構築し、EC2 起動時に cloud-init が SSH ハードニング (drop-in 設定)、ufw、fail2ban、unattended-upgrades、support-toolkit (Bash 版) の cron 連携までを冪等に実行します。</p>
+                            <p>AWS Free Tier 範囲内 (t3.micro 750h/月 + EBS gp3 30GB/月) で Linux サーバーを 1 台立ち上げる Terraform + cloud-init のサンプルです。<strong>Phase 1</strong> で VPC / Subnet / IGW / Route Table / Security Group / EC2 を構築し、SSH ハードニング (drop-in 設定)、ufw、fail2ban、unattended-upgrades、support-toolkit (Bash 版) の cron 連携を行います。<strong>Phase 2</strong> では <a href="#work-monitor">Server Monitor (Flask)</a> を gunicorn + systemd で常駐化し、Caddy が sslip.io ホスト名で <strong>Let's Encrypt 証明書を自動取得して HTTPS 公開</strong>します。</p>
+                            <div class="work-livedemo">
+                                <h5><i class="fa-solid fa-globe"></i>公開デモ URL の生成パターン</h5>
+                                <p>デフォルトの <code>enable_server_monitor_demo = true</code> で <code>terraform apply</code> すると、EC2 のパブリック IP に対応した sslip.io ホスト名で <a href="#work-monitor">Server Monitor</a> が HTTPS 公開されます。</p>
+                                <ul class="livedemo-meta">
+                                    <li><strong>URL パターン:</strong> <code>https://&lt;EC2 パブリック IP&gt;.sslip.io/</code></li>
+                                    <li><strong>取得方法:</strong> <code>terraform output server_monitor_url</code></li>
+                                    <li><strong>停止方法:</strong> <code>make destroy</code> (= <code>terraform destroy</code>) で AWS リソースごと削除</li>
+                                </ul>
+                                <p class="livedemo-note">sslip.io は IP アドレスをそのまま FQDN として解決する無料 DNS サービス (例: <code>1.2.3.4.sslip.io</code> → <code>1.2.3.4</code>)。独自ドメインなしで Let's Encrypt 証明書取得が可能なため、<strong>追加コスト 0 で HTTPS 公開</strong>を実現しています。</p>
+                            </div>
                             <ul class="work-points">
                                 <li>AMI を <code>data "aws_ami"</code> で動的解決し、リージョンを変えても動く / 最新パッチ済みを自動取得する設計にしました。</li>
                                 <li>Security Group + ufw の <strong>二重防御</strong>、IMDSv2 強制、EBS 暗号化、ed25519 公開鍵認証で多層防御を実装しています。</li>
                                 <li><code>variable "allowed_ssh_cidr"</code> に <code>validation</code> ブロックを書き、<code>0.0.0.0/0</code> を <strong>Terraform 段階で拒否</strong>する誤設定ガードを入れています。</li>
                                 <li>cloud-init は SSH 設定を <code>/etc/ssh/sshd_config.d/99-hardening.conf</code> の drop-in で配置し、OS アップデートで上書きされても設定が残るようにしました。</li>
+                                <li>Server Monitor は <code>127.0.0.1:5000</code> にのみバインドし、Caddy のリバースプロキシ経由でのみ公開。<strong>アプリ層と TLS 層を分離</strong>することで責務を明確化しました。</li>
+                                <li>Caddy 設定は IP に依存するため、<code>sed</code> による <code>__HOSTNAME__</code> プレースホルダ置換を <code>setup-caddy.sh</code> でテンプレ化し、再起動で IP が変わっても再生成できる仕組みにしました。</li>
                                 <li><code>terraform.tfvars</code> と <code>*.tfstate</code> を <code>.gitignore</code> し、認証情報や個人 IP の誤コミットを防いでいます。</li>
                             </ul>
                             <div class="work-usage">
@@ -332,8 +345,12 @@
                             </div>
                             <div class="work-troubleshoot">
                                 <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
-                                <p><span class="trouble-label">課題</span>SSH ハードニングを <code>/etc/ssh/sshd_config</code> 本体に書くと、OS アップデートで上書きされる可能性がある。また、設定誤りで <code>sshd</code> が起動しなくなると、EC2 に再接続できなくなる。</p>
+                                <p><span class="trouble-label">課題 1</span>SSH ハードニングを <code>/etc/ssh/sshd_config</code> 本体に書くと、OS アップデートで上書きされる可能性がある。また、設定誤りで <code>sshd</code> が起動しなくなると、EC2 に再接続できなくなる。</p>
                                 <p><span class="trouble-label solution">解決</span>設定を <code>/etc/ssh/sshd_config.d/99-hardening.conf</code> の drop-in 形式に分離し、上書き耐性を持たせました。また、cloud-init の <code>runcmd</code> 内で <code>sshd -t</code> による構文チェック → <code>systemctl reload ssh</code> の順に実行し、構文エラー時はリロードしないように制御しています。</p>
+                                <p><span class="trouble-label">課題 2</span>HTTPS 公開には DNS 名と証明書が必要だが、独自ドメインを買うとコストが発生し、Free Tier の趣旨に反する。さらに EC2 のパブリック IP は再起動で変わる可能性があり、Caddyfile に固定値を書けない。</p>
+                                <p><span class="trouble-label solution">解決</span>sslip.io の <code>&lt;ip&gt;.sslip.io</code> 形式を採用し、独自ドメイン購入なしで Let's Encrypt 証明書を取得できるようにしました。Caddyfile は <code>__HOSTNAME__</code> プレースホルダ付きテンプレに分離し、起動時に <code>setup-caddy.sh</code> が IMDSv2 経由でパブリック IP を取得して <code>sed</code> で置換します。systemd の <code>caddy-hostname-refresh.service</code> として再起動時にも自動再生成される構成にしました。</p>
+                                <p><span class="trouble-label">課題 3</span>cloud-init.yaml を Terraform <code>templatefile()</code> で渡すと、bash の <code>$(...)</code> や <code>${VAR}</code> が Terraform の補間構文と衝突して解釈されてしまう。</p>
+                                <p><span class="trouble-label solution">解決</span>bash 変数は <code>$$(...)</code> / <code>$${VAR}</code> の二重ドル escape で記述し、Terraform 側のレンダリングで <code>$</code> ひとつに戻る運用にしました。条件分岐は <code>%{ if ... }</code> / <code>%{ endif }</code> ディレクティブを使い、<code>enable_server_monitor_demo = false</code> 時は Phase 2 の runcmd 自体を出力させない構成にしています。</p>
                             </div>
                             <div class="tech-tags">
                                 <span>Terraform</span>
@@ -342,6 +359,11 @@
                                 <span>Free Tier</span>
                                 <span>cloud-init</span>
                                 <span>Ubuntu 22.04</span>
+                                <span>Caddy v2</span>
+                                <span>Let's Encrypt</span>
+                                <span>sslip.io</span>
+                                <span>gunicorn</span>
+                                <span>systemd</span>
                                 <span>ufw</span>
                                 <span>fail2ban</span>
                                 <span>unattended-upgrades</span>
@@ -387,10 +409,22 @@
                                 <span class="num-chip"><strong>3</strong>OS対応</span>
                             </div>
                             <p>Python（Flask）+ psutil + Chart.js で構築したリアルタイムサーバー監視ツールです。CPU使用率（円形ゲージ＋コア別バー）、メモリ・スワップ、ディスク（パーティション別）、ネットワークI/O（リアルタイム速度算出）、プロセスTOP15、CPU/メモリの60秒推移グラフを1画面に集約。しきい値に応じて緑→黄→橙→赤に自動配色されます。</p>
+                            <div class="work-livedemo">
+                                <h5><i class="fa-solid fa-globe"></i>公開デモ (Cloud Bootstrap でデプロイ時のみ稼働)</h5>
+                                <p>このダッシュボードは <a href="#work-cloud-bootstrap">Cloud Server Bootstrap</a> で AWS Free Tier 上に常時公開できます。cloud-init が gunicorn (127.0.0.1:5000) を systemd 管理で起動し、<strong>Caddy</strong> が <code>sslip.io</code> ホスト名で <strong>Let's Encrypt 証明書を自動取得</strong>して HTTPS 終端します。</p>
+                                <ul class="livedemo-meta">
+                                    <li><strong>URL パターン:</strong> <code>https://&lt;EC2 パブリック IP&gt;.sslip.io/</code></li>
+                                    <li><strong>例:</strong> パブリック IP が <code>203.0.113.42</code> → <code>https://203.0.113.42.sslip.io/</code></li>
+                                    <li><strong>取得方法:</strong> <code>terraform output server_monitor_url</code></li>
+                                    <li><strong>セキュリティ:</strong> Caddy で HSTS / X-Frame-Options / X-Content-Type-Options ヘッダ送出。Flask は 127.0.0.1 のみバインドし直接公開しない構成。</li>
+                                </ul>
+                                <p class="livedemo-note">公開デモは <code>enable_server_monitor_demo = true</code> (Terraform 変数のデフォルト) で有効化されます。OFF にすると 80/443 を開けず、SSH のみのバニラサーバーとして稼働します。詳細は <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/infra" target="_blank" rel="noopener noreferrer">infra/</a> を参照。</p>
+                            </div>
                             <ul class="work-points">
                                 <li>Flask の JSON API（/api/stats、/api/processes）と Fetch API による非同期ポーリングでリアルタイム性を実現しました。</li>
                                 <li>psutilを使ってWindows / Linux / macOS で同じコードが動くクロスプラットフォームな実装にしました。</li>
                                 <li>Chart.jsでCPU・メモリの時系列グラフをローリングウィンドウ方式（過去30点保持）で描画しています。</li>
+                                <li>Cloud Bootstrap (Terraform + cloud-init) と組み合わせると、<code>terraform apply</code> 1 発で AWS 上に常時稼働の HTTPS 公開デモが立ち上がります。</li>
                             </ul>
                             <!-- 使用例・活用シーン -->
                             <div class="work-usage">

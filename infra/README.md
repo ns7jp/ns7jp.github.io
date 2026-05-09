@@ -10,8 +10,23 @@
 | インスタンス | EC2 t3.micro (Free Tier 対象) |
 | OS | Ubuntu 22.04 LTS (Canonical 公式 AMI、`data` source で動的解決) |
 | IaC ツール | Terraform 1.5+ / AWS Provider ~> 5.0 |
-| 想定月額 | **$0** (Free Tier 範囲内: t3.micro 750h + EBS gp3 30GB) / 期限後は約 $9-10 |
+| 公開デモ | **Phase 2 で Server Monitor (Flask) を Caddy + sslip.io 経由で HTTPS 公開** |
+| 想定月額 | **$0** (Free Tier 範囲内: t3.micro 750h + EBS gp3 30GB + データ転送 1GB) / 期限後は約 $9-10 |
 | 作成リソース数 | 7 個 (VPC / Subnet / IGW / Route Table / RTA / SG / EC2) |
+
+## 🌐 デプロイ後の公開デモ URL
+
+`enable_server_monitor_demo = true` (デフォルト) で `terraform apply` すると、cloud-init が [`ns7jp/server-monitor`](https://github.com/ns7jp/server-monitor) を `/opt/server-monitor` にクローンし、gunicorn を systemd 管理で起動した上で、Caddy がリバースプロキシとして HTTPS 終端と Let's Encrypt 証明書取得を行います。
+
+公開 URL は EC2 の **パブリック IP に対応した sslip.io ホスト** が使われます。
+
+```
+https://<EC2 パブリック IP>.sslip.io/
+```
+
+例: パブリック IP が `203.0.113.42` なら `https://203.0.113.42.sslip.io/` でアクセス可能。`terraform output server_monitor_url` でも同じ URL を取得できます。
+
+> **sslip.io** は IP アドレスをそのまま FQDN として解決する無料 DNS サービス (例: `203.0.113.42.sslip.io` → `203.0.113.42`)。独自ドメインなしで Let's Encrypt 証明書が取得できる。本サンプルではこれを使って **コスト 0 で HTTPS 公開** を実現しています。
 
 ---
 
@@ -86,7 +101,7 @@ make ssh      # outputs.tf の ssh_command を実行し、operator_username で 
 
 cloud-init が完了するまで 1〜3 分かかります。`cloud-init status --wait` で完了を待てます。
 
-### 4. 動作確認
+### 4. 動作確認 (Phase 1: 基本ハードニング)
 
 ```bash
 # 日次 cron が登録されている
@@ -103,6 +118,30 @@ systemctl is-active fail2ban unattended-upgrades
 sudo ufw status verbose
 ```
 
+### 4b. 動作確認 (Phase 2: Server Monitor 公開デモ)
+
+```bash
+# Server Monitor (gunicorn) が走っている
+systemctl is-active server-monitor
+sudo journalctl -u server-monitor -n 30 --no-pager
+
+# Caddy が起動して証明書を取得している
+systemctl is-active caddy
+sudo journalctl -u caddy -n 30 --no-pager | grep -i 'serving\|certificate'
+
+# 内部から疎通
+curl -I http://127.0.0.1:5000/   # 200 OK が返ること
+curl -I https://$(curl -s -H "X-aws-ec2-metadata-token: $(curl -s -X PUT http://169.254.169.254/latest/api/token -H 'X-aws-ec2-metadata-token-ttl-seconds: 60')" http://169.254.169.254/latest/meta-data/public-ipv4).sslip.io/   # 200 OK が返ること
+```
+
+ブラウザからアクセス:
+
+```
+https://<EC2 パブリック IP>.sslip.io/
+```
+
+`terraform output server_monitor_url` でこの URL をコピーできます。初回アクセス時に Let's Encrypt の証明書取得が走り、30〜60 秒待つ場合があります。
+
 ### 5. 後片付け (重要)
 
 ```bash
@@ -117,14 +156,18 @@ make destroy  # 全リソースを削除して課金を止める
 
 | 防御層 | 実装 |
 |---|---|
-| ① ネットワーク | Security Group で 22/tcp を運用者 CIDR からのみ許可。`0.0.0.0/0` は Terraform validation で拒否。 |
-| ② ホスト FW | ufw を `deny incoming` で起動し、22/tcp のみ allow。Security Group との二重防御。 |
-| ③ SSH 認証 | パスワード認証無効、root ログイン禁止、公開鍵 (ed25519 推奨) のみ。`drop-in` 設定で OS アップデートに耐える。 |
-| ④ ブルートフォース | fail2ban で 10 分以内 5 回失敗 → 1 時間 ban。 |
-| ⑤ パッチ | unattended-upgrades で自動セキュリティパッチ。 |
-| ⑥ メタデータ | IMDSv2 強制 (`http_tokens = required`) で SSRF 経由の漏洩対策。 |
-| ⑦ ストレージ | EBS root volume を `encrypted = true` で暗号化。 |
-| ⑧ 監査 | journald + cron 出力 + `support-toolkit` の日次 JSON が `/var/log/support-toolkit/` に蓄積。logrotate で 90 日保持。 |
+| ① ネットワーク (SSH) | Security Group で 22/tcp を運用者 CIDR からのみ許可。`0.0.0.0/0` は Terraform validation で拒否。 |
+| ② ネットワーク (Web) | 公開デモ ON 時のみ 80/443 を `0.0.0.0/0` から許可 (Caddy が TLS 終端)。OFF にすれば 22 のみに戻る。 |
+| ③ ホスト FW | ufw を `deny incoming` で起動し、22/tcp + (デモ時) 80/443 のみ allow。Security Group との二重防御。 |
+| ④ TLS / 暗号化通信 | Caddy v2 が Let's Encrypt から自動取得した証明書で HTTPS 終端。HSTS / X-Frame-Options / X-Content-Type-Options / Referrer-Policy ヘッダ送出。 |
+| ⑤ アプリ分離 | Server Monitor (gunicorn) は `127.0.0.1:5000` にのみバインド。直接公開はせず、Caddy 経由でのみ到達可能。 |
+| ⑥ プロセス分離 | systemd unit に `NoNewPrivileges` / `PrivateTmp` / `ProtectSystem=strict` / `ProtectHome` / `ProtectKernel*` を設定。 |
+| ⑦ SSH 認証 | パスワード認証無効、root ログイン禁止、公開鍵 (ed25519 推奨) のみ。`drop-in` 設定で OS アップデートに耐える。 |
+| ⑧ ブルートフォース | fail2ban で 10 分以内 5 回失敗 → 1 時間 ban。 |
+| ⑨ パッチ | unattended-upgrades で自動セキュリティパッチ。 |
+| ⑩ メタデータ | IMDSv2 強制 (`http_tokens = required`) で SSRF 経由の漏洩対策。 |
+| ⑪ ストレージ | EBS root volume を `encrypted = true` で暗号化。 |
+| ⑫ 監査 | journald + cron 出力 + `support-toolkit` の日次 JSON が `/var/log/support-toolkit/` に蓄積。Caddy アクセスログは `/var/log/caddy/access.log` に JSON で。logrotate で 90 日保持。 |
 
 ---
 
@@ -147,8 +190,10 @@ make destroy  # 全リソースを削除して課金を止める
 このサンプルは **「最小構成で安全な単発デモ」** を目的としているため、以下は意図的に含めていません。本番運用で必要になる要素として認識しています。
 
 - **マルチ AZ / Auto Scaling Group** — 単一インスタンスのため SPOF。
-- **ALB + Route53 + ACM** — TLS 終端と公開ホスト名。t3.micro 単体に Let's Encrypt を入れる代替もある。
-- **RDS / ElastiCache** — このデモは状態を持たない (運用ログだけ)。データベースが必要な系では別途。
+- **ALB + Route53 + ACM** — Caddy + sslip.io で代替。本番では独自ドメイン + ACM + ALB に置き換え。
+- **WAF / CloudFront** — 公開エンドポイントへの DDoS / 不正アクセス対策。デモでは Caddy のレートリミット程度。
+- **Basic 認証 / OIDC** — 公開デモなので開放しているが、本番では認証が必要。Caddy なら `basicauth` ディレクティブで簡単に追加可能。
+- **RDS / ElastiCache** — このデモは状態を持たない (運用ログ + Server Monitor の現在値のみ)。
 - **VPC Flow Logs / CloudTrail / GuardDuty** — 監査・脅威検知。本番では必須だが Free Tier 外。
 - **Terraform リモートバックエンド (S3 + DynamoDB lock)** — 複数人での state 共有と排他制御。
 - **CI/CD パイプライン** — `terraform plan` を PR 上で diff 表示する Atlantis / GitHub Actions など。

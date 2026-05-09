@@ -23,3 +23,16 @@ operator_pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... your-comment"
 
 # cloud-init がクローンする support-scripts のリポジトリ (デフォルトはこのポートフォリオ)
 # portfolio_repo = "https://github.com/ns7jp/ns7jp.github.io.git"
+
+# --- Server Monitor 公開デモ ---
+
+# Caddy + sslip.io で Server Monitor を https://<EC2 IP>.sslip.io/ に公開する
+# false にすると 80/443 を開けず、SSH のみのバニラサーバーとして起動する
+enable_server_monitor_demo = true
+
+# Server Monitor のクローン元 (公開リポジトリ)
+# server_monitor_repo = "https://github.com/ns7jp/server-monitor.git"
+
+# Let's Encrypt 証明書取得時の連絡先メール (期限切れ通知用)
+# デフォルトは "demo@example.invalid" のまま動作するが、実運用では自分のメールに変更を強く推奨
+# acme_email = "alice@example.com"

@@ -64,3 +64,28 @@ variable "portfolio_repo" {
   type        = string
   default     = "https://github.com/ns7jp/ns7jp.github.io.git"
 }
+
+# --------------------- Server Monitor 公開デモ関連 ---------------------
+
+variable "enable_server_monitor_demo" {
+  description = "Server Monitor (https://github.com/ns7jp/server-monitor) を Caddy + sslip.io 経由で公開デモとして起動する。true にすると 80/443 が 0.0.0.0/0 から許可される (公開デモ用途)。"
+  type        = bool
+  default     = true
+}
+
+variable "server_monitor_repo" {
+  description = "Server Monitor のクローン元 Git URL (公開リポジトリのみ対応)。"
+  type        = string
+  default     = "https://github.com/ns7jp/server-monitor.git"
+}
+
+variable "acme_email" {
+  description = "Let's Encrypt 証明書取得時の連絡先メール。期限切れ通知に使われる。デフォルトはダミーで動作するが、実運用では自分のメールに変更を強く推奨。"
+  type        = string
+  default     = "demo@example.invalid"
+
+  validation {
+    condition     = can(regex("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$", var.acme_email))
+    error_message = "acme_email はメールアドレス形式で指定してください (例: alice@example.com)。"
+  }
+}

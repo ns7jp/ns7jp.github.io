@@ -6,6 +6,7 @@
 # 実行タイミング: インスタンス初回起動時 (2 回目以降は再実行されない)
 #
 # 何をするか:
+#   --- Phase 1: 基本ハードニング (常時実行) ---
 #   1. パッケージ更新 (apt update + upgrade)
 #   2. 運用ユーザー作成 (sudo NOPASSWD + SSH 公開鍵)
 #   3. SSH ハードニング (root ログイン禁止 / パスワード認証無効 / セッションタイムアウト)
@@ -14,10 +15,21 @@
 #   6. unattended-upgrades で自動セキュリティパッチ
 #   7. support-toolkit (Bash 版) をクローンし、cron で日次点検
 #
+#   --- Phase 2: 公開デモ (enable_server_monitor_demo = true 時のみ) ---
+#   8.  Server Monitor (Flask) を /opt/server-monitor に clone + venv 構築
+#   9.  gunicorn を 127.0.0.1:5000 で systemd 管理に
+#   10. Caddy を Cloudsmith repo から install
+#   11. Caddyfile を sslip.io ホスト名で動的生成し、Let's Encrypt で HTTPS 化
+#   12. ufw 80/443 解放 (Security Group 側でも制御)
+#
 # 設計判断:
 #   - sshd_config 本体ではなく drop-in (sshd_config.d/) で上書きし、
 #     OS アップデートで上書きされても設定が残るようにする
 #   - support-toolkit のクローンは公開リポジトリから (private repo の SSH 鍵を持ち込まない)
+#   - Server Monitor は 127.0.0.1:5000 にバインドし Caddy がリバースプロキシ。
+#     直接 5000 を公開せず、TLS 終端と HTTP セキュリティヘッダを Caddy 側に集約する。
+#   - sslip.io の DNS は IP がそのまま FQDN になる無料サービス (1.2.3.4.sslip.io → 1.2.3.4)。
+#     独自ドメインなしで Let's Encrypt 証明書を取得できる。
 #   - すべてのアクションは冪等性を意識 (cloud-init の再実行に備えて)
 # ============================================================================
 
@@ -29,10 +41,15 @@ packages:
   - fail2ban
   - unattended-upgrades
   - python3
+  - python3-pip
+  - python3-venv
   - jq
   - smartmontools
   - git
   - curl
+  - debian-keyring
+  - debian-archive-keyring
+  - apt-transport-https
 
 users:
   - default
@@ -113,6 +130,118 @@ write_files:
           create 0644 ${operator_username} ${operator_username}
       }
 
+  # ---------- Server Monitor: systemd ユニット ----------
+  - path: /etc/systemd/system/server-monitor.service
+    permissions: '0644'
+    owner: root:root
+    content: |
+      [Unit]
+      Description=Server Monitor (Flask via gunicorn)
+      Documentation=https://github.com/ns7jp/server-monitor
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Type=simple
+      User=${operator_username}
+      Group=${operator_username}
+      WorkingDirectory=/opt/server-monitor
+      Environment="PATH=/opt/server-monitor/venv/bin:/usr/bin:/bin"
+      ExecStart=/opt/server-monitor/venv/bin/gunicorn -w 2 -b 127.0.0.1:5000 app:app --access-logfile /var/log/server-monitor/access.log --error-logfile /var/log/server-monitor/error.log
+      Restart=on-failure
+      RestartSec=5
+
+      # Hardening (psutil は /proc, /sys 読み取り中心なので互換)
+      NoNewPrivileges=true
+      PrivateTmp=true
+      ProtectSystem=strict
+      ProtectHome=true
+      ProtectKernelTunables=true
+      ProtectKernelModules=true
+      ProtectControlGroups=true
+      ReadWritePaths=/var/log/server-monitor
+
+      [Install]
+      WantedBy=multi-user.target
+
+  # ---------- Caddy: 設定テンプレ (起動時に IP で sed 置換) ----------
+  - path: /etc/caddy/Caddyfile.template
+    permissions: '0644'
+    owner: root:root
+    content: |
+      # Caddy v2 — Server Monitor リバースプロキシ + 自動 HTTPS
+      {
+          email ${acme_email}
+      }
+
+      __HOSTNAME__ {
+          reverse_proxy 127.0.0.1:5000
+
+          encode gzip zstd
+
+          log {
+              output file /var/log/caddy/access.log
+              format json
+          }
+
+          header {
+              # 公開デモ向けのセキュリティヘッダ
+              Strict-Transport-Security "max-age=31536000; includeSubDomains"
+              X-Content-Type-Options "nosniff"
+              X-Frame-Options "DENY"
+              Referrer-Policy "strict-origin-when-cross-origin"
+              -Server
+          }
+      }
+
+  # ---------- Caddyfile を IP から動的生成するスクリプト ----------
+  - path: /usr/local/sbin/setup-caddy.sh
+    permissions: '0755'
+    owner: root:root
+    content: |
+      #!/bin/bash
+      # IMDSv2 でパブリック IP を取得し、sslip.io ホスト名で Caddyfile を生成する。
+      # cloud-init 初回および再起動時に呼ぶ想定。
+      set -euo pipefail
+
+      TOKEN=$$(curl -s -X PUT 'http://169.254.169.254/latest/api/token' \
+          -H 'X-aws-ec2-metadata-token-ttl-seconds: 60')
+      PUBLIC_IP=$$(curl -s -H "X-aws-ec2-metadata-token: $${TOKEN}" \
+          http://169.254.169.254/latest/meta-data/public-ipv4)
+
+      if [[ -z "$${PUBLIC_IP}" ]]; then
+          echo "ERROR: failed to retrieve public IPv4 from IMDSv2" >&2
+          exit 1
+      fi
+
+      HOSTNAME="$${PUBLIC_IP}.sslip.io"
+      echo "Configuring Caddy for $${HOSTNAME}"
+
+      sed "s/__HOSTNAME__/$${HOSTNAME}/g" \
+          /etc/caddy/Caddyfile.template > /etc/caddy/Caddyfile
+      chown caddy:caddy /etc/caddy/Caddyfile
+
+      caddy validate --config /etc/caddy/Caddyfile
+      systemctl reload caddy 2>/dev/null || systemctl restart caddy
+
+  # ---------- Caddy 起動時のホスト名再生成 (IP が変わるたびに対応) ----------
+  - path: /etc/systemd/system/caddy-hostname-refresh.service
+    permissions: '0644'
+    owner: root:root
+    content: |
+      [Unit]
+      Description=Refresh Caddyfile with current public IPv4 (sslip.io hostname)
+      Wants=network-online.target
+      After=network-online.target
+      Before=caddy.service
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/local/sbin/setup-caddy.sh
+
+      [Install]
+      WantedBy=multi-user.target
+
 runcmd:
   # ---------- support-toolkit を /opt にクローン ----------
   - mkdir -p /opt/support-toolkit /var/log/support-toolkit
@@ -123,18 +252,54 @@ runcmd:
   - chown -R ${operator_username}:${operator_username} /opt/support-toolkit
   - rm -rf /tmp/portfolio
 
-  # ---------- ufw 設定 (SSH のみ許可) ----------
+  # ---------- ufw 設定 (Phase 1: SSH のみ許可) ----------
   - ufw default deny incoming
   - ufw default allow outgoing
   - ufw allow 22/tcp comment 'SSH from operator CIDR'
-  - ufw --force enable
 
-  # ---------- サービス有効化 ----------
+  # ---------- サービス有効化 (Phase 1) ----------
   - systemctl enable --now fail2ban
   - systemctl enable --now unattended-upgrades
 
   # ---------- SSH 設定リロード (ハードニング適用) ----------
   - sshd -t && systemctl reload ssh
+
+%{ if enable_server_monitor_demo ~}
+  # ============================================================================
+  # Phase 2: Server Monitor 公開デモ (enable_server_monitor_demo = true)
+  # ============================================================================
+
+  # ---------- Server Monitor をクローン → venv → systemd ----------
+  - mkdir -p /var/log/server-monitor
+  - chown ${operator_username}:${operator_username} /var/log/server-monitor
+  - sudo -u ${operator_username} git clone --depth 1 ${server_monitor_repo} /opt/server-monitor
+  - sudo -u ${operator_username} python3 -m venv /opt/server-monitor/venv
+  - sudo -u ${operator_username} /opt/server-monitor/venv/bin/pip install --upgrade pip
+  - sudo -u ${operator_username} /opt/server-monitor/venv/bin/pip install -r /opt/server-monitor/requirements.txt gunicorn
+  - systemctl daemon-reload
+  - systemctl enable --now server-monitor
+
+  # ---------- Caddy インストール (Cloudsmith repo) ----------
+  - install -d -m 0755 /etc/apt/keyrings
+  - curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | gpg --dearmor -o /etc/apt/keyrings/caddy-stable-archive-keyring.gpg
+  - bash -c "curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' > /etc/apt/sources.list.d/caddy-stable.list"
+  - apt-get update
+  - apt-get install -y caddy
+  - mkdir -p /var/log/caddy
+  - chown caddy:caddy /var/log/caddy
+
+  # ---------- Caddyfile を IP から生成し、Caddy 起動 ----------
+  - /usr/local/sbin/setup-caddy.sh
+  - systemctl enable caddy
+  - systemctl enable caddy-hostname-refresh.service
+
+  # ---------- ufw 80/443 解放 (公開デモ用) ----------
+  - ufw allow 80/tcp comment 'HTTP (ACME challenge / 301 redirect)'
+  - ufw allow 443/tcp comment 'HTTPS (Server Monitor public demo)'
+%{ endif ~}
+
+  # ---------- ufw 有効化 ----------
+  - ufw --force enable
 
   # ---------- 完了マーカー ----------
   - touch /var/log/support-toolkit/.bootstrap-complete

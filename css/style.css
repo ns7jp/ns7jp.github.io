@@ -2599,6 +2599,85 @@ footer {
     text-align: center;
 }
 
+/* ========================================
+   Work Live Demo — 公開デモURLの案内ブロック
+   ----------------------------------------
+   作品が外部に常時公開されている場合のURLパターン・取得方法・
+   関連IaCを示すブロック。緑系ボーダーで「生きてるリンク」を示す。
+======================================== */
+.work-livedemo {
+    margin: 0 0 22px;
+    padding: 18px 22px;
+    background: var(--bg-warm);
+    border-left: 3px solid var(--nature-green);
+    border-radius: 2px;
+}
+
+.work-livedemo h5 {
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.work-livedemo h5 i {
+    color: var(--nature-green);
+    margin-right: 8px;
+}
+
+.work-livedemo p {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    margin: 0 0 10px;
+}
+
+.work-livedemo .livedemo-meta {
+    list-style: none;
+    margin: 8px 0 12px;
+    padding: 10px 14px;
+    background: var(--bg-cream);
+    border-radius: 4px;
+}
+
+.work-livedemo .livedemo-meta li {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+    list-style: none;
+}
+
+.work-livedemo .livedemo-meta li:last-child {
+    margin-bottom: 0;
+}
+
+.work-livedemo .livedemo-meta code {
+    background: var(--bg-sand);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.95em;
+}
+
+.work-livedemo .livedemo-note {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+.work-livedemo a {
+    color: var(--nature-green);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--nature-green);
+}
+
+.work-livedemo a:hover {
+    color: var(--nature-olive);
+    border-bottom-style: solid;
+}
+
 /* Work Troubleshoot - 制作中のトラブルと解決過程 */
 .work-troubleshoot {
     margin: 0 0 22px;
