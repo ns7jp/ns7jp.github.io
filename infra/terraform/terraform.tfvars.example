@@ -1,0 +1,25 @@
+# terraform.tfvars.example
+# このファイルをコピーして terraform.tfvars にし、自分の値に書き換えてから terraform apply する。
+# .gitignore に terraform.tfvars を追加してコミットしないこと (公開鍵以外も含むため)。
+
+# AWS リージョン
+aws_region = "ap-northeast-1"
+
+# Free Tier 対象の最小インスタンス。RHEL 等を使う場合は変更。
+instance_type = "t3.micro"
+
+# AWS コンソールで作成済みの EC2 Key Pair 名 (ssh -i に使う秘密鍵側のペア)
+ssh_key_name = "your-ec2-keypair-name"
+
+# 自分の固定 IP / VPN 出口を /32 で指定。0.0.0.0/0 は validation で拒否される。
+allowed_ssh_cidr = "203.0.113.42/32"
+
+# cloud-init で作成する運用ユーザー名 (sudo NOPASSWD)
+operator_username = "ops"
+
+# operator_username の authorized_keys に書き込む SSH 公開鍵
+# `ssh-keygen -t ed25519` で生成した ~/.ssh/id_ed25519.pub の中身を貼る
+operator_pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... your-comment"
+
+# cloud-init がクローンする support-scripts のリポジトリ (デフォルトはこのポートフォリオ)
+# portfolio_repo = "https://github.com/ns7jp/ns7jp.github.io.git"

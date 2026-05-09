@@ -181,6 +181,17 @@ ns7jp.github.io/
 │   ├── test-disk-capacity.sh              ... [Linux] 容量・inode・SMART 確認 (Bash)
 │   └── test-security-baseline.sh          ... [Linux] sshd/firewall/SELinux 等の確認 (Bash)
 │
+├── infra/                                 ... Cloud Server Bootstrap (Terraform + cloud-init)
+│   ├── README.md                          ... 構成・デプロイ手順・セキュリティ設計・トレードオフ
+│   ├── Makefile                           ... terraform init/plan/apply/destroy のラッパ
+│   ├── .gitignore                         ... tfstate / tfvars をコミット対象外に
+│   └── terraform/
+│       ├── main.tf                        ... VPC + Subnet + IGW + RT + SG + EC2 + AMI lookup
+│       ├── variables.tf                   ... 入力変数 + validation (CIDR/公開鍵)
+│       ├── outputs.tf                     ... public_ip / ssh_command / 推定コスト
+│       ├── cloud-init.yaml                ... 初回起動時の OS ハードニング + support-toolkit 連携
+│       └── terraform.tfvars.example       ... 値の埋め方サンプル
+│
 └── image/
     ├── me.jpg / image.jpg                 ... 自己紹介・プロフィール用画像（ヒーロースライダーにも使用）
     ├── skills.jpg                         ... スキルページ用画像（ヒーロースライダーにも使用）
@@ -192,7 +203,8 @@ ns7jp.github.io/
     ├── notes.png                          ... 付箋アプリのスクリーンショット
     ├── magic.png                          ... サンプル企業サイトのスクリーンショット
     ├── server-monitor.png                 ... サーバー監視ダッシュボードのスクリーンショット
-    └── support-toolkit-architecture.svg   ... Support Toolkit想定環境構成図（works/support-docsから参照）
+    ├── support-toolkit-architecture.svg   ... Support Toolkit想定環境構成図（works/support-docsから参照）
+    └── cloud-architecture.svg             ... Cloud Server Bootstrap 構成図（works/infraから参照）
 ```
 
 初学者向けに説明すると、HTML ファイルは「ページごとの本文」、CSS フォルダは「見た目の設定」、JavaScript フォルダは「動きの設定」、image フォルダは「表示に使う画像置き場」です。
@@ -203,13 +215,14 @@ ns7jp.github.io/
 
 | # | 作品名 | 主な技術 | ITサポート関連度 | 内容 | リポジトリ |
 |---|--------|----------|------------------|------|------------|
-| ① | Support Toolkit | Markdown / PowerShell | High | 手順書7本、PowerShell確認スクリプト8本、チケット形式の対応例 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
-| ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
-| ③ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
-| ④ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
-| ⑤ | 掲示板アプリ | PHP / MySQL | Medium | ユーザー登録、投稿、返信ができる掲示板 | [ns7jp/post](https://github.com/ns7jp/post) |
-| ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | Learning | 感情ムードを選んで投稿するSNS | [ns7jp/pulse](https://github.com/ns7jp/pulse) |
-| ⑦ | サンプル企業サイト | HTML / CSS / JavaScript | Learning | 架空企業のレスポンシブ対応コーポレートサイト | [ns7jp/magic](https://github.com/ns7jp/magic) |
+| ① | Support Toolkit | Markdown / PowerShell / Bash | High | 手順書7本、PowerShell 8本、Bash 5本、チケット形式の対応例 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ② | Cloud Server Bootstrap | Terraform / cloud-init / AWS | High | AWS Free Tier 内に Linux サーバーを最小構成で立ち上げる IaC サンプル | [infra](./infra/) |
+| ③ | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
+| ④ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
+| ⑤ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
+| ⑥ | 掲示板アプリ | PHP / MySQL | Medium | ユーザー登録、投稿、返信ができる掲示板 | [ns7jp/post](https://github.com/ns7jp/post) |
+| ⑦ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | Learning | 感情ムードを選んで投稿するSNS | [ns7jp/pulse](https://github.com/ns7jp/pulse) |
+| ⑧ | サンプル企業サイト | HTML / CSS / JavaScript | Learning | 架空企業のレスポンシブ対応コーポレートサイト | [ns7jp/magic](https://github.com/ns7jp/magic) |
 
 作品ページでは、単に「何を作ったか」だけでなく、「どんな場面で使えるか」「作る中で何に困ったか」「どう解決したか」も記載しています。これは、完成物だけでなく、問題解決の過程も伝えるためです。
 

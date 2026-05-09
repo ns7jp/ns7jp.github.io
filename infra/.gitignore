@@ -1,0 +1,21 @@
+# Terraform state (機密情報を含む — リモートバックエンドを使うべき)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# 個人の設定値 (公開鍵以外も含むため)
+terraform.tfvars
+*.auto.tfvars
+
+# プロバイダプラグインとロックの一部
+.terraform/
+.terraform.lock.hcl
+
+# 作業ファイル
+tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json

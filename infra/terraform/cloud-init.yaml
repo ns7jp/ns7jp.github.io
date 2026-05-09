@@ -1,0 +1,142 @@
+#cloud-config
+# ============================================================================
+# support-toolkit-demo bootstrap (cloud-init / cloud-config 形式)
+#
+# 適用環境: Ubuntu 22.04 LTS on AWS EC2 (Free Tier t3.micro 想定)
+# 実行タイミング: インスタンス初回起動時 (2 回目以降は再実行されない)
+#
+# 何をするか:
+#   1. パッケージ更新 (apt update + upgrade)
+#   2. 運用ユーザー作成 (sudo NOPASSWD + SSH 公開鍵)
+#   3. SSH ハードニング (root ログイン禁止 / パスワード認証無効 / セッションタイムアウト)
+#   4. ufw でホスト FW を有効化 (SSH のみ許可)
+#   5. fail2ban でブルートフォース対策
+#   6. unattended-upgrades で自動セキュリティパッチ
+#   7. support-toolkit (Bash 版) をクローンし、cron で日次点検
+#
+# 設計判断:
+#   - sshd_config 本体ではなく drop-in (sshd_config.d/) で上書きし、
+#     OS アップデートで上書きされても設定が残るようにする
+#   - support-toolkit のクローンは公開リポジトリから (private repo の SSH 鍵を持ち込まない)
+#   - すべてのアクションは冪等性を意識 (cloud-init の再実行に備えて)
+# ============================================================================
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - ufw
+  - fail2ban
+  - unattended-upgrades
+  - python3
+  - jq
+  - smartmontools
+  - git
+  - curl
+
+users:
+  - default
+  - name: ${operator_username}
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    groups: [adm, sudo]
+    ssh_authorized_keys:
+      - ${operator_pubkey}
+
+write_files:
+  # ---------- SSH ハードニング (drop-in) ----------
+  - path: /etc/ssh/sshd_config.d/99-hardening.conf
+    permissions: '0644'
+    owner: root:root
+    content: |
+      # Managed by cloud-init / support-toolkit-demo
+      PermitRootLogin no
+      PasswordAuthentication no
+      PubkeyAuthentication yes
+      ChallengeResponseAuthentication no
+      UsePAM yes
+      ClientAliveInterval 300
+      ClientAliveCountMax 2
+      MaxAuthTries 3
+      MaxSessions 2
+      X11Forwarding no
+      AllowAgentForwarding no
+      AllowTcpForwarding no
+      LogLevel VERBOSE
+
+  # ---------- 自動セキュリティ更新 ----------
+  - path: /etc/apt/apt.conf.d/20auto-upgrades
+    permissions: '0644'
+    owner: root:root
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+      APT::Periodic::AutocleanInterval "7";
+
+  # ---------- fail2ban: SSH ブルートフォース対策 ----------
+  - path: /etc/fail2ban/jail.d/sshd.local
+    permissions: '0644'
+    owner: root:root
+    content: |
+      [sshd]
+      enabled = true
+      port    = 22
+      logpath = %(sshd_log)s
+      backend = systemd
+      maxretry = 5
+      findtime = 10m
+      bantime  = 1h
+
+  # ---------- 日次点検 cron (support-toolkit Bash) ----------
+  - path: /etc/cron.d/support-toolkit-daily
+    permissions: '0644'
+    owner: root:root
+    content: |
+      # 毎朝 06:00 にディスク・セキュリティを点検し /var/log/support-toolkit/ に JSON 保存
+      SHELL=/bin/bash
+      PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      0 6 * * * ${operator_username} /opt/support-toolkit/test-disk-capacity.sh -o /var/log/support-toolkit/disk-$(date +\%F).json
+      5 6 * * * ${operator_username} /opt/support-toolkit/test-security-baseline.sh -o /var/log/support-toolkit/security-$(date +\%F).json
+      10 6 * * * ${operator_username} /opt/support-toolkit/collect-host-inventory.sh -o /var/log/support-toolkit/inventory-$(date +\%F).json
+
+  # ---------- ログローテーション (90 日保持) ----------
+  - path: /etc/logrotate.d/support-toolkit
+    permissions: '0644'
+    owner: root:root
+    content: |
+      /var/log/support-toolkit/*.json {
+          daily
+          rotate 90
+          compress
+          missingok
+          notifempty
+          create 0644 ${operator_username} ${operator_username}
+      }
+
+runcmd:
+  # ---------- support-toolkit を /opt にクローン ----------
+  - mkdir -p /opt/support-toolkit /var/log/support-toolkit
+  - chown ${operator_username}:${operator_username} /var/log/support-toolkit
+  - git clone --depth 1 ${portfolio_repo} /tmp/portfolio
+  - cp /tmp/portfolio/support-scripts/*.sh /opt/support-toolkit/
+  - chmod 0755 /opt/support-toolkit/*.sh
+  - chown -R ${operator_username}:${operator_username} /opt/support-toolkit
+  - rm -rf /tmp/portfolio
+
+  # ---------- ufw 設定 (SSH のみ許可) ----------
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow 22/tcp comment 'SSH from operator CIDR'
+  - ufw --force enable
+
+  # ---------- サービス有効化 ----------
+  - systemctl enable --now fail2ban
+  - systemctl enable --now unattended-upgrades
+
+  # ---------- SSH 設定リロード (ハードニング適用) ----------
+  - sshd -t && systemctl reload ssh
+
+  # ---------- 完了マーカー ----------
+  - touch /var/log/support-toolkit/.bootstrap-complete
+
+final_message: "support-toolkit-demo bootstrap finished after $UPTIME seconds. Run 'cloud-init status --wait' to confirm."

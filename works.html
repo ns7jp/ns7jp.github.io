@@ -56,13 +56,14 @@
           "name": "島田則幸の制作物",
           "itemListOrder": "ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定した7本の手順書と8本のPowerShell確認スクリプト" } },
-            { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU/メモリ/ディスク/ネットワーク/プロセスをリアルタイム可視化する監視ダッシュボード" } },
-            { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Fletフレームワークで作成した定型文テンプレート管理ツール" } },
-            { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Tkinterで作成した付箋復元機能付きデスクトップアプリ" } },
-            { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareApplication", "name": "掲示板アプリ", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/post", "programmingLanguage": "PHP", "description": "PHP + MySQL によるユーザー登録・投稿・返信機能付き掲示板" } },
-            { "@type": "ListItem", "position": 6, "item": { "@type": "SoftwareApplication", "name": "SNSアプリ Pulse", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/pulse", "programmingLanguage": "PHP", "description": "PHP + SQLite + JavaScript によるムード投稿型SNS" } },
-            { "@type": "ListItem", "position": 7, "item": { "@type": "WebSite", "name": "サンプル企業サイト", "url": "https://github.com/ns7jp/magic", "description": "HTML/CSS/JavaScriptで作成した架空企業のレスポンシブコーポレートサイト" } }
+            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定した7本の手順書、8本のPowerShellスクリプト、5本のBashスクリプト" } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "CreativeWork", "name": "Cloud Server Bootstrap", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/infra", "description": "Terraform + cloud-init で AWS Free Tier 内に Linux サーバーを最小構成で立ち上げ、SSH ハードニング・ufw・fail2ban・support-toolkit の cron 連携まで自動化する IaC サンプル" } },
+            { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU/メモリ/ディスク/ネットワーク/プロセスをリアルタイム可視化する監視ダッシュボード" } },
+            { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Fletフレームワークで作成した定型文テンプレート管理ツール" } },
+            { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Tkinterで作成した付箋復元機能付きデスクトップアプリ" } },
+            { "@type": "ListItem", "position": 6, "item": { "@type": "SoftwareApplication", "name": "掲示板アプリ", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/post", "programmingLanguage": "PHP", "description": "PHP + MySQL によるユーザー登録・投稿・返信機能付き掲示板" } },
+            { "@type": "ListItem", "position": 7, "item": { "@type": "SoftwareApplication", "name": "SNSアプリ Pulse", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/pulse", "programmingLanguage": "PHP", "description": "PHP + SQLite + JavaScript によるムード投稿型SNS" } },
+            { "@type": "ListItem", "position": 8, "item": { "@type": "WebSite", "name": "サンプル企業サイト", "url": "https://github.com/ns7jp/magic", "description": "HTML/CSS/JavaScriptで作成した架空企業のレスポンシブコーポレートサイト" } }
           ]
         }
       ]
@@ -144,9 +145,9 @@
                     <span class="priority-label">まず見てほしい成果物</span>
                     <div class="priority-links">
                         <a href="#work-support-toolkit"><i class="fa-solid fa-folder-tree"></i> Support Toolkit</a>
+                        <a href="#work-cloud-bootstrap"><i class="fa-solid fa-cloud"></i> Cloud Bootstrap</a>
                         <a href="#work-monitor"><i class="fa-solid fa-server"></i> サーバー監視</a>
                         <a href="#work-teikei"><i class="fa-solid fa-message"></i> 定型文管理</a>
-                        <a href="#work-notes"><i class="fa-solid fa-note-sticky"></i> 付箋アプリ</a>
                     </div>
                 </div>
             </section>
@@ -270,6 +271,82 @@
                                 <span>systemd / journald</span>
                                 <span>Runbook</span>
                                 <span>Ticket</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 作品カード: Cloud Server Bootstrap (Terraform + cloud-init) — Support Toolkit を実環境で動かす IaC サンプル -->
+                    <div class="work-showcase-item" id="work-cloud-bootstrap" data-category="infra">
+                        <div class="work-image-container">
+                            <img src="image/cloud-architecture.svg" alt="Cloud Server Bootstrap 構成図: 運用者 PC からインターネット越しに AWS Region (ap-northeast-1) の VPC 10.0.0.0/16・Public Subnet 10.0.1.0/24 内の EC2 t3.micro (Ubuntu 22.04) に SSH 接続。Security Group は運用者 CIDR からの 22/tcp のみ許可。cloud-init bootstrap が SSH ハードニング・ufw・fail2ban・unattended-upgrades・support-toolkit の cron 登録までを 10 ステップで実行する図" loading="lazy" decoding="async">
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Terraform / cloud-init / AWS Free Tier</span>
+                                    <h4>Cloud Server Bootstrap</h4>
+                                    <p>VPC + EC2 を IaC で再現可能に立ち上げ、cloud-init で OS ハードニングまで自動化</p>
+                                    <div class="overlay-buttons">
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/infra" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/infra/terraform" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-cubes"></i> Terraform</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-solid fa-cloud"></i> Terraform / cloud-init / AWS</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>Cloud Server Bootstrap</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>Linux サーバーの最小構成を IaC で再現可能に</strong></div>
+                                <div><span>成果</span><strong>Terraform 7 リソース + cloud-init 10 ステップ</strong></div>
+                                <div><span>活用</span><strong>運用環境ごと立ち上げ・削除・差し替え</strong></div>
+                            </div>
+                            <div class="support-fit high">
+                                <span class="fit-label">ITサポート関連度: High</span>
+                                <p>Support Toolkit (Bash 版) を実際にどこで動かすかを示す、運用環境ごと IaC で再現する成果物。インフラ運用支援への適性を直接示せます。</p>
+                            </div>
+                            <div class="work-numbers" aria-label="主要スペック">
+                                <span class="num-chip"><strong>7</strong>AWS リソース</span>
+                                <span class="num-chip"><strong>10</strong>bootstrap ステップ</span>
+                                <span class="num-chip"><strong>$0</strong>/月 (Free Tier)</span>
+                                <span class="num-chip"><strong>8</strong>セキュリティ防御層</span>
+                            </div>
+                            <p>AWS Free Tier 範囲内 (t3.micro 750h/月 + EBS gp3 30GB/月) で Linux サーバーを 1 台立ち上げる Terraform + cloud-init のサンプルです。VPC / Subnet / IGW / Route Table / Security Group / EC2 を Terraform で構築し、EC2 起動時に cloud-init が SSH ハードニング (drop-in 設定)、ufw、fail2ban、unattended-upgrades、support-toolkit (Bash 版) の cron 連携までを冪等に実行します。</p>
+                            <ul class="work-points">
+                                <li>AMI を <code>data "aws_ami"</code> で動的解決し、リージョンを変えても動く / 最新パッチ済みを自動取得する設計にしました。</li>
+                                <li>Security Group + ufw の <strong>二重防御</strong>、IMDSv2 強制、EBS 暗号化、ed25519 公開鍵認証で多層防御を実装しています。</li>
+                                <li><code>variable "allowed_ssh_cidr"</code> に <code>validation</code> ブロックを書き、<code>0.0.0.0/0</code> を <strong>Terraform 段階で拒否</strong>する誤設定ガードを入れています。</li>
+                                <li>cloud-init は SSH 設定を <code>/etc/ssh/sshd_config.d/99-hardening.conf</code> の drop-in で配置し、OS アップデートで上書きされても設定が残るようにしました。</li>
+                                <li><code>terraform.tfvars</code> と <code>*.tfstate</code> を <code>.gitignore</code> し、認証情報や個人 IP の誤コミットを防いでいます。</li>
+                            </ul>
+                            <div class="work-usage">
+                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
+                                <ul class="usage-list">
+                                    <li><strong>検証環境の使い捨て：</strong>新しい OS / パッケージ / 設定を試す時に <code>terraform apply</code> で立ち上げ、確認後 <code>terraform destroy</code> で完全削除。手作業の構築・削除を排除する。</li>
+                                    <li><strong>support-toolkit の実演環境：</strong>Bash スクリプトが実際に Linux サーバー上で cron 駆動する様子をデモするためのインスタンスとして利用。日次 JSON ログが <code>/var/log/support-toolkit/</code> に蓄積される。</li>
+                                    <li><strong>SSH ハードニングの教材：</strong>drop-in 設定、ufw + Security Group の二重防御、fail2ban の jail.d 配置、unattended-upgrades の自動有効化を 1 ファイルで読み解ける。</li>
+                                    <li><strong>IaC 学習のスタート地点：</strong>VPC・Subnet・IGW・Route Table・SG・EC2 の依存関係と、Terraform の <code>resource</code> / <code>data</code> / <code>variable</code> / <code>output</code> / <code>validation</code> の最小例として読める。</li>
+                                    <li><strong>レビュー時の議論材料：</strong>「本番に持っていくには何が足りないか」(ALB / Multi-AZ / RDS / リモートバックエンド / CI 連携 / Bastion) を README に明記しているため、スキルレベルの議論用にそのまま使える。</li>
+                                </ul>
+                            </div>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>SSH ハードニングを <code>/etc/ssh/sshd_config</code> 本体に書くと、OS アップデートで上書きされる可能性がある。また、設定誤りで <code>sshd</code> が起動しなくなると、EC2 に再接続できなくなる。</p>
+                                <p><span class="trouble-label solution">解決</span>設定を <code>/etc/ssh/sshd_config.d/99-hardening.conf</code> の drop-in 形式に分離し、上書き耐性を持たせました。また、cloud-init の <code>runcmd</code> 内で <code>sshd -t</code> による構文チェック → <code>systemctl reload ssh</code> の順に実行し、構文エラー時はリロードしないように制御しています。</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>Terraform</span>
+                                <span>HCL</span>
+                                <span>AWS (VPC / EC2 / IGW / SG)</span>
+                                <span>Free Tier</span>
+                                <span>cloud-init</span>
+                                <span>Ubuntu 22.04</span>
+                                <span>ufw</span>
+                                <span>fail2ban</span>
+                                <span>unattended-upgrades</span>
+                                <span>IMDSv2</span>
+                                <span>IaC</span>
                             </div>
                         </div>
                     </div>
