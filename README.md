@@ -8,6 +8,18 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
+## 採用担当者向け: まず見る3点
+
+短時間で確認しやすいよう、応募先で見ていただきたい成果物を3つに絞ると次の通りです。
+
+| 優先 | 見るもの | 確認できること |
+|------|----------|----------------|
+| 1 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、志望領域、主な成果物の要約 |
+| 2 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 7本の手順書、8本のPowerShell、チケット形式の対応例 |
+| 3 | [サーバー監視ダッシュボード](https://github.com/ns7jp/server-monitor) | Flask / psutil / Chart.js による監視画面、API、pytest、GitHub Actions |
+
+成果の見え方としては、Support Toolkit で **7手順書・8スクリプト・10障害ケース・3種類のサンプル出力**を公開し、サーバー監視では **6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応**を示しています。
+
 公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
 
 この README は、Web 初学者の方にも「このサイトが何を目的に作られているのか」「どのファイルが何を担当しているのか」「HTML / CSS / JavaScript がどう分担して動いているのか」が分かるように、できるだけ順を追って説明しています。
@@ -193,7 +205,7 @@ ns7jp.github.io/
 
 | # | 作品名 | 主な技術 | ITサポート関連度 | 内容 | リポジトリ |
 |---|--------|----------|------------------|------|------------|
-| ① | Support Toolkit | Markdown / PowerShell | High | 手順書7本、PowerShell確認スクリプト8本、チケット形式の対応例 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ① | Support Toolkit | Markdown / PowerShell | High | 手順書7本、PowerShell確認スクリプト8本、チケット形式の対応例、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
 | ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
 | ③ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ④ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
@@ -313,6 +325,10 @@ http://localhost:8000/
 - 📧 net7jp@gmail.com
 - 📂 [作品リポジトリ一覧](https://github.com/ns7jp)
 - 🌐 [ポートフォリオサイト](https://ns7jp.github.io/)
+
+## ライセンス
+
+ライセンス方針は [LICENSE](./LICENSE) に記載しています。コード例・手順書・PowerShellサンプルは学習・ポートフォリオ確認向けに公開し、プロフィール文・履歴書内容・人物写真などの個人情報を含む素材は無断利用を避ける方針です。
 
 ---
 

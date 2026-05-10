@@ -33,7 +33,7 @@ function fileHasAnchor(filePath, anchor) {
 
 for (const file of htmlFiles) {
   const filePath = path.join(root, file);
-  const html = fs.readFileSync(filePath, "utf8");
+  const html = fs.readFileSync(filePath, "utf8").replace(/<!--[\s\S]*?-->/g, "");
   const matches = html.matchAll(/\b(?:href|src)=["']([^"']+)["']/g);
 
   for (const match of matches) {

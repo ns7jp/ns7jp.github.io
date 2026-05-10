@@ -50,7 +50,7 @@ P1 / P2 重大度の事案で発動する、検知から事後分析までの定
 
 #### 8. [support-scripts/](../support-scripts/)
 
-ドキュメントから参照される実行可能スクリプト集。端末一次確認、セキュリティ監査、AD/M365 棚卸しまで 8 本収録。
+ドキュメントから参照される実行可能スクリプト集。端末一次確認、セキュリティ監査、AD/M365 棚卸しまで 8 本収録し、JSON / CSV / HTML のサンプル出力も確認できます。
 
 ---
 
@@ -80,6 +80,7 @@ P1 / P2 重大度の事案で発動する、検知から事後分析までの定
 - 🌐 [ポートフォリオサイト](https://ns7jp.github.io/)
 - 📋 [Skills > Support Response Examples](https://ns7jp.github.io/skills.html#support-cases) — 短い切り分けフロー
 - 🧰 [support-scripts/](../support-scripts/) — PowerShell による確認・監査・棚卸しスクリプト
+- 📄 [support-scripts/samples/](../support-scripts/samples/) — チケット添付や日次点検を想定したサンプル出力
 - 📂 [作品リポジトリ一覧](https://github.com/ns7jp)
 
 ---

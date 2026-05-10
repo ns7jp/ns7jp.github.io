@@ -1,0 +1,5 @@
+"CheckedAt","ComputerName","CheckName","Target","Result","LatencyMs","Notes"
+"2026-05-10T09:05:00+09:00","PC-SAMPLE-001","DefaultGateway","192.0.2.1","Success","2","Gateway reachable"
+"2026-05-10T09:05:01+09:00","PC-SAMPLE-001","ExternalPing","8.8.8.8","Success","18","External ICMP reachable"
+"2026-05-10T09:05:02+09:00","PC-SAMPLE-001","DnsResolve","microsoft.com","Success","","Resolved to sample public addresses"
+"2026-05-10T09:05:03+09:00","PC-SAMPLE-001","WebAccess","https://www.microsoft.com","Success","132","HTTP 200"

@@ -19,6 +19,9 @@ jobs:
       - name: Check local HTML links
         run: node scripts/check-static-links.js
 
+      - name: Check HTML structure
+        run: node scripts/check-html-structure.js
+
   image-budget:
     runs-on: ubuntu-latest
     steps:

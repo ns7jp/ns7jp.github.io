@@ -1,0 +1,46 @@
+{
+  "CollectedAt": "2026-05-10T09:00:00+09:00",
+  "ComputerName": "PC-SAMPLE-001",
+  "LoggedOnUser": "CORP\\sample.user",
+  "Manufacturer": "Contoso",
+  "Model": "Latitude 5440",
+  "Domain": "corp.example.local",
+  "MemoryGB": 16,
+  "OperatingSystem": {
+    "Caption": "Microsoft Windows 11 Pro",
+    "Version": "10.0.22631",
+    "InstallDate": "2026-04-01T10:30:00+09:00",
+    "LastBootUpTime": "2026-05-10T08:12:00+09:00"
+  },
+  "Bios": {
+    "SerialNumber": "SAMPLE-SERIAL-001",
+    "Version": "1.12.0"
+  },
+  "Cpu": {
+    "Name": "13th Gen Intel(R) Core(TM) i5",
+    "Cores": 10,
+    "LogicalProcessors": 12
+  },
+  "Disks": [
+    {
+      "Drive": "C:",
+      "SizeGB": 476,
+      "FreeGB": 218,
+      "FreePercent": 45.8
+    }
+  ],
+  "NetworkAdapters": [
+    {
+      "Name": "Ethernet",
+      "MacAddress": "00-00-5E-00-53-01",
+      "IPv4Address": "192.0.2.25"
+    }
+  ],
+  "RecentHotfixes": [
+    {
+      "HotFixID": "KB5030000",
+      "InstalledOn": "2026-05-03"
+    }
+  ],
+  "TicketNote": "問い合わせ受付時の端末情報。公開用の架空データです。"
+}

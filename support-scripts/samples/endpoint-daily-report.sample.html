@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Endpoint Daily Report Sample</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; color: #24313f; margin: 32px; }
+    h1 { font-size: 24px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 16px; }
+    th, td { border: 1px solid #d8dee4; padding: 8px 10px; text-align: left; }
+    th { background: #f3f6f8; }
+    .ok { color: #16794c; font-weight: 700; }
+    .warning { color: #b26b00; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>Endpoint Daily Report Sample</h1>
+  <p>対象端末: PC-SAMPLE-001 / 確認日時: 2026-05-10 09:10 JST</p>
+  <table>
+    <thead>
+      <tr>
+        <th>カテゴリ</th>
+        <th>確認内容</th>
+        <th>判定</th>
+        <th>チケット添付メモ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Inventory</td>
+        <td>OS / CPU / Memory / Disk / Hotfix</td>
+        <td class="ok">OK</td>
+        <td>端末基本情報をJSONとして保存済み</td>
+      </tr>
+      <tr>
+        <td>Network</td>
+        <td>Gateway / External Ping / DNS / Web</td>
+        <td class="ok">OK</td>
+        <td>疎通結果をCSVとして保存済み</td>
+      </tr>
+      <tr>
+        <td>Disk</td>
+        <td>C: free 45.8%</td>
+        <td class="ok">OK</td>
+        <td>しきい値80%未満</td>
+      </tr>
+      <tr>
+        <td>Security</td>
+        <td>Defender / Firewall / BitLocker / Update</td>
+        <td class="warning">Warning</td>
+        <td>BitLocker未有効のため端末管理ポリシーを確認</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>このHTMLは公開ポートフォリオ用の架空サンプルです。実在の端末・ユーザー・IPアドレスは含みません。</p>
+</body>
+</html>
