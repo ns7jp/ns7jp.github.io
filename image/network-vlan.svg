@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <title>想定オフィスのネットワーク論理構成図 (VLAN ベース)</title>
+  <desc>Internet — Edge FW — DMZ VLAN10 / Core Switch L3 / Server VLAN20 / User VLAN30 / Guest+IoT VLAN40 と Microsoft 365 / Entra ID 連携の論理構成</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c3e50"/>
+      <stop offset="1" stop-color="#1a252f"/>
+    </linearGradient>
+    <linearGradient id="zoneDMZ" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5d4037" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#3e2723" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="zoneServer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2e7d32" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#1b5e20" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="zoneUser" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1565c0" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#0d47a1" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="zoneGuest" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6a1b9a" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#4a148c" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="zoneCloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0277bd" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#01579b" stop-opacity="0.35"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b8860b"/>
+    </marker>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="720" fill="url(#bg)"/>
+
+  <!-- タイトル -->
+  <text x="600" y="34" fill="#FDFBF7" font-size="20" font-weight="700" text-anchor="middle" letter-spacing="1">
+    想定中規模オフィス — ネットワーク論理構成
+  </text>
+  <text x="600" y="56" fill="#c9a55c" font-size="13" text-anchor="middle">
+    DMZ / Server / User / Guest の 4 VLAN ＋ Microsoft 365 (Entra ID) 連携
+  </text>
+
+  <!-- Internet -->
+  <g transform="translate(490,80)">
+    <rect width="220" height="44" rx="4" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)"/>
+    <text x="14" y="28" fill="#FDFBF7" font-size="14" font-weight="600">🌐  Internet</text>
+    <text x="206" y="28" fill="#FDFBF7" font-size="11" text-anchor="end">(WAN)</text>
+  </g>
+  <line x1="600" y1="124" x2="600" y2="148" stroke="#c9a55c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Edge FW -->
+  <g transform="translate(440,152)">
+    <rect width="320" height="46" rx="4" fill="rgba(184,134,11,0.18)" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="14" y="29" fill="#FDFBF7" font-size="14" font-weight="700">🛡  Edge Firewall / UTM</text>
+    <text x="306" y="29" fill="#FDFBF7" font-size="11" text-anchor="end">IDS/IPS · NAT · VPN GW</text>
+  </g>
+  <line x1="600" y1="198" x2="600" y2="226" stroke="#c9a55c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- DMZ -->
+  <g transform="translate(30,230)">
+    <rect width="1140" height="86" rx="4" fill="url(#zoneDMZ)" stroke="#8d6e63" stroke-dasharray="4,3"/>
+    <text x="14" y="22" fill="#FDFBF7" font-size="12" font-weight="600" letter-spacing="0.5">DMZ VLAN 10  ·  192.0.2.0/28</text>
+    <g transform="translate(70,38)">
+      <rect width="200" height="38" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="14" y="24" fill="#FDFBF7" font-size="12">🖥  Reverse Proxy</text>
+    </g>
+    <g transform="translate(310,38)">
+      <rect width="200" height="38" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="14" y="24" fill="#FDFBF7" font-size="12">📧  Mail Relay (Postfix)</text>
+    </g>
+    <g transform="translate(550,38)">
+      <rect width="200" height="38" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="14" y="24" fill="#FDFBF7" font-size="12">☁  VPN GW (WireGuard)</text>
+    </g>
+    <g transform="translate(790,38)">
+      <rect width="200" height="38" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="14" y="24" fill="#FDFBF7" font-size="12">🔍  WAF / Log Forwarder</text>
+    </g>
+  </g>
+  <line x1="600" y1="316" x2="600" y2="340" stroke="#c9a55c" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Core Switch -->
+  <g transform="translate(390,344)">
+    <rect width="420" height="46" rx="4" fill="rgba(184,134,11,0.25)" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="14" y="29" fill="#FDFBF7" font-size="14" font-weight="700">🔁  Core Switch (L3)</text>
+    <text x="406" y="29" fill="#FDFBF7" font-size="11" text-anchor="end">VLAN routing · ACL · QoS</text>
+  </g>
+
+  <!-- 分岐ライン -->
+  <line x1="600" y1="390" x2="600" y2="408" stroke="#c9a55c" stroke-width="2"/>
+  <line x1="200" y1="408" x2="1000" y2="408" stroke="#c9a55c" stroke-width="2"/>
+  <line x1="200" y1="408" x2="200" y2="430" stroke="#c9a55c" stroke-width="2"/>
+  <line x1="600" y1="408" x2="600" y2="430" stroke="#c9a55c" stroke-width="2"/>
+  <line x1="1000" y1="408" x2="1000" y2="430" stroke="#c9a55c" stroke-width="2"/>
+
+  <!-- Server VLAN 20 -->
+  <g transform="translate(30,434)">
+    <rect width="340" height="180" rx="4" fill="url(#zoneServer)" stroke="#4caf50" stroke-dasharray="4,3"/>
+    <text x="14" y="22" fill="#FDFBF7" font-size="12" font-weight="600">Server VLAN 20  ·  10.0.20.0/24</text>
+    <g transform="translate(20,38)">
+      <rect width="148" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">🪟 AD DS / DNS / DHCP</text>
+    </g>
+    <g transform="translate(174,38)">
+      <rect width="148" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">📂 File Server (fs01)</text>
+    </g>
+    <g transform="translate(20,88)">
+      <rect width="148" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">🖨 Print Server</text>
+    </g>
+    <g transform="translate(174,88)">
+      <rect width="148" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">📊 Monitoring (Prom)</text>
+    </g>
+    <g transform="translate(20,138)">
+      <rect width="302" height="34" rx="3" fill="rgba(76,175,80,0.18)" stroke="rgba(76,175,80,0.4)"/>
+      <text x="10" y="22" fill="#FDFBF7" font-size="10">ACL: Userからは必要ポートのみ / DMZへは戻りのみ</text>
+    </g>
+  </g>
+
+  <!-- User VLAN 30 -->
+  <g transform="translate(430,434)">
+    <rect width="340" height="180" rx="4" fill="url(#zoneUser)" stroke="#42a5f5" stroke-dasharray="4,3"/>
+    <text x="14" y="22" fill="#FDFBF7" font-size="12" font-weight="600">User VLAN 30  ·  10.0.30.0/23</text>
+    <g transform="translate(20,38)">
+      <rect width="302" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">💻  Windows 11 業務端末 × 数百台</text>
+    </g>
+    <g transform="translate(20,88)">
+      <rect width="148" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">📱 M365 デバイス</text>
+    </g>
+    <g transform="translate(174,88)">
+      <rect width="148" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">🔌 有線 / Wi-Fi</text>
+    </g>
+    <g transform="translate(20,138)">
+      <rect width="302" height="34" rx="3" fill="rgba(66,165,245,0.18)" stroke="rgba(66,165,245,0.4)"/>
+      <text x="10" y="22" fill="#FDFBF7" font-size="10">ACL: ServerVLAN へは必要ポート / Guest へは到達不可</text>
+    </g>
+  </g>
+
+  <!-- Guest / IoT VLAN 40 -->
+  <g transform="translate(830,434)">
+    <rect width="340" height="180" rx="4" fill="url(#zoneGuest)" stroke="#ab47bc" stroke-dasharray="4,3"/>
+    <text x="14" y="22" fill="#FDFBF7" font-size="12" font-weight="600">Guest / IoT VLAN 40  ·  10.0.40.0/24</text>
+    <g transform="translate(20,38)">
+      <rect width="148" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">📶 Guest Wi-Fi</text>
+    </g>
+    <g transform="translate(174,38)">
+      <rect width="148" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">📷 IoT / 複合機</text>
+    </g>
+    <g transform="translate(20,88)">
+      <rect width="302" height="40" rx="3" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.25)"/>
+      <text x="10" y="25" fill="#FDFBF7" font-size="11">🌐 Internet 出口のみ許可</text>
+    </g>
+    <g transform="translate(20,138)">
+      <rect width="302" height="34" rx="3" fill="rgba(171,71,188,0.18)" stroke="rgba(171,71,188,0.4)"/>
+      <text x="10" y="22" fill="#FDFBF7" font-size="10">ACL: 社内資産（VLAN 20/30）への到達不可</text>
+    </g>
+  </g>
+
+  <!-- Microsoft 365 / Entra ID -->
+  <g transform="translate(30,640)">
+    <rect width="1140" height="64" rx="4" fill="url(#zoneCloud)" stroke="#4fc3f7"/>
+    <text x="14" y="22" fill="#FDFBF7" font-size="12" font-weight="700">☁  Microsoft 365 / Entra ID (旧 Azure AD)</text>
+    <text x="14" y="42" fill="#FDFBF7" font-size="11">Entra Connect でオンプレ AD と同期 / Conditional Access / Defender for Endpoint / Intune</text>
+    <text x="14" y="58" fill="#c9a55c" font-size="10">User VLAN ↔ M365 サインインは Entra ID 経由、デバイス準拠を Conditional Access で強制</text>
+  </g>
+  <!-- Cloud uplink -->
+  <line x1="600" y1="614" x2="600" y2="640" stroke="#4fc3f7" stroke-width="2" stroke-dasharray="5,3"/>
+</svg>

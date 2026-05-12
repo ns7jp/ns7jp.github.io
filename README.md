@@ -19,9 +19,9 @@
 | 3 | [Linux Operation Lab](https://ns7jp.github.io/linux-lab.html) | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計と早見表 |
 | 4 | [Monitoring Stack](./monitoring-stack/) | Prometheus + Grafana + node_exporter の docker-compose 一式 + 4 アラート |
 | 5 | [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 の冪等ベースライン |
-| 6 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 7手順書、**8 PowerShell（Pester + GitHub Actions 付き）**、Postmortem 実例、Backup Runbook |
+| 6 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 9手順書、**9 スクリプト（Pester 25テスト + GitHub Actions 付き）**、Postmortem 実例、Backup Runbook |
 
-成果の見え方としては、Infra Operation Lab で **VLAN構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測」を一通り** 示し、Support Toolkit で **7手順書・8スクリプト・21 Pesterテスト・Postmortem 実例・Backup Runbook** を公開し、サーバー監視（自作）では **6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応** を示しています。
+成果の見え方としては、Infra Operation Lab で **VLAN構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測」を一通り** 示し、Support Toolkit で **9手順書・9スクリプト・25 Pesterテスト・Postmortem 実例・Backup Runbook** を公開し、サーバー監視（自作）では **6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応** を示しています。
 
 公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Infra Operation Lab（運用設計メモ）** と **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
 
@@ -198,7 +198,7 @@ ns7jp.github.io/
 │   ├── Get-M365LicenseInventory.ps1 ... M365 ライセンス棚卸し（Graph SDK）
 │   ├── linux-triage.sh              ... ★ Linux 一次切り分け bash
 │   ├── lib/Triage-Lib.ps1           ... ★ 純関数化された判定ロジック
-│   └── tests/Triage-Lib.Tests.ps1   ... ★ Pester ユニットテスト（21ケース）
+│   └── tests/Triage-Lib.Tests.ps1   ... ★ Pester ユニットテスト（25ケース）
 │
 ├── monitoring-stack/        ... ★ Prometheus + Grafana + node_exporter の docker-compose
 │   ├── docker-compose.yml

@@ -3142,6 +3142,60 @@ footer {
     color: var(--accent-gold);
 }
 
+/* ---- VLAN 構成図（SVG）+ 折りたたみのテキスト版 ---- */
+.network-figure {
+    margin: 0 0 18px;
+    padding: 12px;
+    background: var(--bg-white);
+    border: 1px solid var(--bg-sand);
+    text-align: center;
+}
+
+.network-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.network-figure figcaption {
+    margin-top: 8px;
+    font-size: 1.15rem;
+    color: var(--text-medium);
+}
+
+.diagram-alt {
+    margin-bottom: 12px;
+}
+
+.diagram-alt > summary {
+    cursor: pointer;
+    padding: 8px 14px;
+    background: var(--bg-warm);
+    border: 1px solid var(--bg-sand);
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-medium);
+    list-style: none;
+}
+
+.diagram-alt > summary::-webkit-details-marker { display: none; }
+.diagram-alt > summary::before {
+    content: "▸ ";
+    color: var(--accent-gold);
+}
+
+.diagram-alt[open] > summary::before {
+    content: "▾ ";
+}
+
+.diagram-alt[open] > summary {
+    background: var(--primary-color);
+    color: var(--text-light);
+}
+
 /* ---- ネットワーク論理構成図 ---- */
 .network-diagram {
     display: flex;

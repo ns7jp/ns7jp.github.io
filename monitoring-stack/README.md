@@ -4,6 +4,8 @@
 
 > 自作の Flask サーバー監視ダッシュボードと、業界標準のスタックの両方に触れていることを示すための Lab です。本番運用ではない検証用構成のため、認証・TLS・データ永続化・スケーリングは最小限です。
 
+![Grafana ダッシュボード「Node Overview (Lab)」のレイアウト概念図。CPU 使用率 23.4%, メモリ使用率 78.1%（warning しきい値超過）, ディスク空き 42.6% の Stat パネル 3 枚、Load average (1/5/15) と ネットワーク受信 (bytes/s) の time-series 2 枚、下部に HostHighMemory アラートのバナー。](../image/grafana-dashboard.svg)
+
 ---
 
 ## 構成
@@ -90,5 +92,6 @@ monitoring-stack/
 ## 注意
 
 - ポートフォリオ用の最小構成です。`GF_SECURITY_ADMIN_PASSWORD=changeme` を変更せずに公開ホストへ展開しないでください。
-- node_exporter はホストネットワークで動かしています。Docker Desktop (Mac/Windows) では `host.docker.internal` を使うか、`network_mode: host` を Linux 限定で利用する形にしてください。
+- node_exporter は `network_mode: host` でホストネットワーク上の :9100 に公開し、Prometheus 側は `host.docker.internal:9100` で読み取ります。Linux Docker Engine では `host.docker.internal` が自動解決されないため、Prometheus 側に `extra_hosts: "host.docker.internal:host-gateway"` を入れて両環境（Linux / Docker Desktop）で同じ設定が動くようにしています（Docker 20.10+）。
 - 永続化ボリュームは `prometheus_data` / `grafana_data` です。再構築時は `docker compose down -v` で初期化できます。
+- `docker compose config` で構文・ボリューム・ポートの整合が確認できます（CI でも回せます）。

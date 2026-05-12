@@ -1,0 +1,14 @@
+---
+# Ansible Galaxy 経由でインストールする collection の宣言。
+#
+# 事前準備:
+#   ansible-galaxy collection install -r requirements.yml
+#
+# ansible-core 2.16+ では多くの collection が同梱されなくなったため、
+# playbook で使う非組み込みモジュールは明示的に declare する。
+
+collections:
+  - name: ansible.posix
+    version: ">=1.5.0"     # authorized_key, mount, sysctl など
+  - name: community.general
+    version: ">=8.0.0"     # ufw, timezone, snap, htpasswd など

@@ -14,6 +14,11 @@ services:
       - --storage.tsdb.path=/prometheus
       - --storage.tsdb.retention.time=15d
       - --web.enable-lifecycle
+    # Linux Docker Engine では host.docker.internal が自動解決されないため、
+    # extra_hosts で host-gateway を渡してホスト上の node_exporter (9100) へ到達できるようにする。
+    # Docker Desktop (Mac / Windows) では元から解決できるので、この行があっても問題ない。
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
       - ./prometheus/alert.rules.yml:/etc/prometheus/alert.rules.yml:ro

@@ -311,7 +311,7 @@ PowerShell + bash + Pester を収めたスクリプト集。
 
 - ルート: PowerShell 8本 + `linux-triage.sh`
 - `lib/Triage-Lib.ps1`: しきい値判定・状態集約・メッセージ切り詰めなどの **純関数ヘルパー**
-- `tests/Triage-Lib.Tests.ps1`: Pester 5 系のユニットテスト（21ケース）
+- `tests/Triage-Lib.Tests.ps1`: Pester 5 系のユニットテスト（25ケース）
 - `samples/`: JSON / CSV / HTML のサンプル出力
 
 初学者が見るポイント:

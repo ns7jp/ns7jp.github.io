@@ -94,6 +94,13 @@
                     <span class="heading-text">Network Architecture（想定中規模オフィス）</span>
                 </div>
 
+                <figure class="network-figure">
+                    <img src="image/network-vlan.svg" alt="想定中規模オフィスのネットワーク論理構成図。Internet → Edge FW → DMZ VLAN10 → Core L3 → Server VLAN20 / User VLAN30 / Guest+IoT VLAN40 と Microsoft 365 (Entra ID) 連携。" loading="lazy">
+                    <figcaption>VLAN 構成図（ベクター SVG / 印刷時もぼやけない）</figcaption>
+                </figure>
+
+                <details class="diagram-alt">
+                    <summary>テキストベースの構成も見る（折りたたみ）</summary>
                 <div class="network-diagram" role="img" aria-label="想定する中規模オフィスのネットワーク論理構成図">
                     <div class="net-layer net-internet">
                         <div class="net-pill"><i class="fa-solid fa-globe"></i> Internet</div>
@@ -148,6 +155,7 @@
                         <div class="net-cloud-note">Entra Connect でオンプレ AD と同期 / Conditional Access / Defender for Endpoint</div>
                     </div>
                 </div>
+                </details>
 
                 <div class="lab-architecture-grid" style="margin-top:34px;">
                     <div class="architecture-notes">

@@ -3,7 +3,11 @@
 # Ubuntu 22.04 / 24.04 を想定した Linux サーバーの最小ハードニング playbook。
 # 目的: 「初期構築直後にやるべき設定」を Ansible で再現可能にする Lab。
 #
+# 事前準備（必須）:
+#   ansible-galaxy collection install -r requirements.yml
+#
 # 実行例:
+#   ansible-playbook playbook.yml --syntax-check
 #   ansible-playbook -i inventory.ini playbook.yml --check        # dry-run
 #   ansible-playbook -i inventory.ini playbook.yml                # 適用
 #   ansible-playbook -i inventory.ini playbook.yml --tags ssh     # SSH周りのみ
@@ -16,9 +20,19 @@
 #   5. fail2ban 導入と sshd jail 有効化
 #   6. auditd 有効化（基本ルール）と journald の persistent 保管
 #   7. タイムゾーン Asia/Tokyo / NTP (systemd-timesyncd)
+#
+# 使用 collection:
+#   - ansible.builtin (Ansible 本体に同梱)
+#   - ansible.posix  (authorized_key)
+#   - community.general (ufw / timezone)
 
-- hosts: linux_servers
+- name: Baseline hardening for Ubuntu hosts
+  hosts: linux_servers
   become: true
+  collections:
+    - ansible.builtin
+    - ansible.posix
+    - community.general
   vars:
     admin_user: opsadmin
     admin_pubkey: "ssh-ed25519 AAAA... ops@laptop"   # 実環境では Ansible Vault に分ける
@@ -31,14 +45,14 @@
 
   pre_tasks:
     - name: apt キャッシュ更新と全パッケージ upgrade
-      apt:
+      ansible.builtin.apt:
         update_cache: true
         upgrade: dist
         cache_valid_time: 3600
       tags: [apt]
 
     - name: 必須パッケージ
-      apt:
+      ansible.builtin.apt:
         name:
           - sudo
           - ufw
@@ -55,7 +69,7 @@
   tasks:
     # ---- 1. 自動セキュリティ更新 ------------------------------------------
     - name: unattended-upgrades を有効化
-      copy:
+      ansible.builtin.copy:
         dest: /etc/apt/apt.conf.d/20auto-upgrades
         owner: root
         group: root
@@ -68,13 +82,13 @@
 
     # ---- 2. 管理ユーザー + 公開鍵 ----------------------------------------
     - name: sudo グループの作成は不要だが、念のため確認
-      group:
+      ansible.builtin.group:
         name: sudo
         state: present
       tags: [user]
 
     - name: 管理ユーザーを作成
-      user:
+      ansible.builtin.user:
         name: "{{ admin_user }}"
         groups: sudo
         shell: /bin/bash
@@ -83,14 +97,14 @@
       tags: [user]
 
     - name: 公開鍵を authorized_keys に投入
-      authorized_key:
+      ansible.posix.authorized_key:
         user: "{{ admin_user }}"
         key: "{{ admin_pubkey }}"
         state: present
       tags: [user, ssh]
 
     - name: sudo パスワードレス（必要な場合のみ。鍵+多要素前提）
-      copy:
+      ansible.builtin.copy:
         dest: "/etc/sudoers.d/90-{{ admin_user }}"
         owner: root
         group: root
@@ -101,7 +115,7 @@
 
     # ---- 3. SSH 強化 ------------------------------------------------------
     - name: sshd_config を Ansible 管理下に置く
-      template:
+      ansible.builtin.template:
         src: sshd_config.j2
         dest: /etc/ssh/sshd_config
         owner: root
@@ -113,7 +127,7 @@
 
     # ---- 4. UFW ファイアウォール ----------------------------------------
     - name: UFW デフォルトを deny incoming / allow outgoing に
-      ufw:
+      community.general.ufw:
         direction: "{{ item.direction }}"
         policy: "{{ item.policy }}"
       loop:
@@ -122,7 +136,7 @@
       tags: [firewall]
 
     - name: UFW で必要な TCP ポートを許可
-      ufw:
+      community.general.ufw:
         rule: allow
         port: "{{ item }}"
         proto: tcp
@@ -130,14 +144,14 @@
       tags: [firewall]
 
     - name: UFW 有効化
-      ufw:
+      community.general.ufw:
         state: enabled
         logging: low
       tags: [firewall]
 
     # ---- 5. fail2ban ------------------------------------------------------
     - name: fail2ban の sshd jail を有効化
-      copy:
+      ansible.builtin.copy:
         dest: /etc/fail2ban/jail.d/sshd.local
         owner: root
         group: root
@@ -154,14 +168,14 @@
 
     # ---- 6. auditd / journald --------------------------------------------
     - name: auditd 起動と自動起動有効化
-      systemd:
+      ansible.builtin.systemd:
         name: auditd
         enabled: true
         state: started
       tags: [audit]
 
     - name: 基本 audit ルール（ログイン / sudo / passwd 変更）
-      copy:
+      ansible.builtin.copy:
         dest: /etc/audit/rules.d/99-baseline.rules
         owner: root
         group: root
@@ -176,7 +190,7 @@
       tags: [audit]
 
     - name: journald のログを永続保管にする
-      lineinfile:
+      ansible.builtin.lineinfile:
         path: /etc/systemd/journald.conf
         regexp: "^#?Storage="
         line: "Storage=persistent"
@@ -185,12 +199,12 @@
 
     # ---- 7. TZ / NTP ------------------------------------------------------
     - name: タイムゾーンを設定
-      timezone:
+      community.general.timezone:
         name: "{{ timezone }}"
       tags: [time]
 
     - name: systemd-timesyncd を有効化
-      systemd:
+      ansible.builtin.systemd:
         name: systemd-timesyncd
         enabled: true
         state: started
@@ -198,20 +212,20 @@
 
   handlers:
     - name: restart sshd
-      systemd:
+      ansible.builtin.systemd:
         name: ssh
         state: restarted
 
     - name: restart fail2ban
-      systemd:
+      ansible.builtin.systemd:
         name: fail2ban
         state: restarted
 
     - name: reload auditd rules
-      command: augenrules --load
+      ansible.builtin.command: augenrules --load
       changed_when: true
 
     - name: restart journald
-      systemd:
+      ansible.builtin.systemd:
         name: systemd-journald
         state: restarted
