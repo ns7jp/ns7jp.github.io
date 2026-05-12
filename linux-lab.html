@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸のLinux運用Lab。systemd / journalctl / cron / SSH鍵 / 権限 / logrotate / rsyncバックアップなど、Linuxサーバー一次運用に必要な確認項目とコマンド例を整理しています。">
+    <title>Linux Lab | 島田則幸のポートフォリオ</title>
+
+    <meta property="og:title" content="Linux Lab | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/linux-lab.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:description" content="Linuxサーバー一次運用の確認項目とコマンド例。journalctl / systemd / cron / SSH / logrotate / rsync をまとめています。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <p class="res-menu">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </p>
+
+    <header>
+        <h1 class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li class="active"><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h2 class="page-title">
+                <span class="title-en">Linux Operation Lab</span>
+                <span class="title-jp">Linux 一次運用メモ</span>
+            </h2>
+        </div>
+    </section>
+
+    <article class="page-content infra-lab-content" id="main" tabindex="-1">
+        <div class="container">
+
+            <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
+                <a href="infra-lab.html"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
+                <a href="linux-lab.html" class="active"><i class="fa-brands fa-linux"></i> Linux</a>
+                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack</a>
+                <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
+            </nav>
+
+            <section class="lab-intro">
+                <span class="case-label">Ubuntu / RHEL family Scenario</span>
+                <h3>「サーバーが重い」「ログインできない」を同じ順で確認するLab</h3>
+                <p>Linuxサーバー（Ubuntu / RHEL系）の一次運用で、まず見るべきところを <strong>負荷・ディスク・サービス・ログ・ネットワーク・認証・ファイアウォール</strong> の順に整理しました。すべて読み取り操作のみで構成し、設定変更や再起動は手順を分けています。</p>
+                <div class="lab-badges" aria-label="Labで確認できる領域">
+                    <span><i class="fa-solid fa-microchip"></i> systemd</span>
+                    <span><i class="fa-solid fa-book"></i> journalctl</span>
+                    <span><i class="fa-solid fa-clock"></i> cron</span>
+                    <span><i class="fa-solid fa-key"></i> SSH</span>
+                    <span><i class="fa-solid fa-floppy-disk"></i> rsync</span>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-table-list"></i></span>
+                    <span class="heading-text">Linux 一次切り分けコマンド早見表</span>
+                </div>
+                <div class="operation-table-wrap">
+                    <table class="operation-table">
+                        <thead>
+                            <tr>
+                                <th>対象</th>
+                                <th>確認観点</th>
+                                <th>主なコマンド</th>
+                                <th>判断基準 / 引き継ぎ目安</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>負荷</td>
+                                <td>load average / CPU / プロセス上位</td>
+                                <td><code>uptime</code><br><code>top -bn1 | head -n 20</code><br><code>ps -eo pid,user,pcpu,pmem,etime,comm --sort=-pcpu | head</code></td>
+                                <td>load5 が CPU 数を超えていれば負荷高。常駐プロセスが特定のものに偏る場合はそのサービスを担当へ。</td>
+                            </tr>
+                            <tr>
+                                <td>メモリ</td>
+                                <td>使用量 / available / swap</td>
+                                <td><code>free -h</code><br><code>vmstat 1 5</code></td>
+                                <td>available が物理の 10% を切る、swap が継続的に増える場合は OOM 注意。</td>
+                            </tr>
+                            <tr>
+                                <td>ディスク</td>
+                                <td>使用率 / inode / I/O</td>
+                                <td><code>df -hPT -x tmpfs</code><br><code>df -hPi -x tmpfs</code><br><code>iostat -x 1 3</code></td>
+                                <td>使用率 90% 以上、inode 80% 以上、await が継続的に高い場合は要対応。</td>
+                            </tr>
+                            <tr>
+                                <td>サービス</td>
+                                <td>失敗ユニット / 起動順序 / 自動起動</td>
+                                <td><code>systemctl --failed</code><br><code>systemctl status sshd</code><br><code>systemctl list-unit-files --state=enabled</code></td>
+                                <td>failed があれば即チケット。enabled だが inactive のサービスは設計と照合する。</td>
+                            </tr>
+                            <tr>
+                                <td>ログ</td>
+                                <td>直近のエラー / 該当サービス / 起動失敗</td>
+                                <td><code>journalctl -p err --since "30 min ago"</code><br><code>journalctl -u nginx -n 50</code><br><code>dmesg -T --level=err | tail</code></td>
+                                <td>同一エラーの反復、kernel oops、OOM killer 発火は重大として上位担当へ。</td>
+                            </tr>
+                            <tr>
+                                <td>ネットワーク</td>
+                                <td>経路 / DNS / リスニングポート</td>
+                                <td><code>ip route</code><br><code>resolvectl status</code><br><code>ss -tulnp</code></td>
+                                <td>同一セグメントから到達できない場合は L2/L3 の問題として切り出す。</td>
+                            </tr>
+                            <tr>
+                                <td>認証</td>
+                                <td>SSH 失敗 / ログイン履歴 / ロックアウト</td>
+                                <td><code>journalctl -u ssh -p warning</code><br><code>last -n 20</code><br><code>lastb -n 20</code></td>
+                                <td>同一IPからのbrute force兆候があれば fail2ban / firewall 担当へエスカレーション。</td>
+                            </tr>
+                            <tr>
+                                <td>ファイアウォール</td>
+                                <td>許可ポリシー / 適用状態</td>
+                                <td><code>ufw status verbose</code><br><code>firewall-cmd --list-all</code><br><code>iptables -L -n -v</code></td>
+                                <td>申請にない解放、想定外の許可、ルールの空状態は即確認対象。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <span class="heading-text">SSH / 権限 / cron 設計メモ</span>
+                </div>
+                <div class="lab-architecture-grid">
+                    <div class="architecture-notes">
+                        <h4>SSH 鍵運用</h4>
+                        <ul>
+                            <li>鍵は <code>ssh-keygen -t ed25519</code> で作成し、パスフレーズを必ず設定する。</li>
+                            <li>サーバー側 <code>~/.ssh/authorized_keys</code> は <code>chmod 600</code>、ディレクトリは <code>700</code>。</li>
+                            <li><code>/etc/ssh/sshd_config</code> で <code>PasswordAuthentication no</code>、<code>PermitRootLogin no</code>、<code>Port</code> は必要に応じて変更。</li>
+                            <li>退職・異動時は <code>authorized_keys</code> の該当行を削除し、運用台帳と突合する。</li>
+                        </ul>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>権限・ファイルシステム</h4>
+                        <ul>
+                            <li><code>chown</code> / <code>chmod</code> は最小権限。共有は POSIX ACL（<code>setfacl</code>）で個別付与。</li>
+                            <li>機密ファイルは <code>chmod 640</code> + 専用グループ。<code>ls -la</code> で確認。</li>
+                            <li>ディレクトリの SUID/SGID は棚卸し対象（<code>find / -perm /6000 -type f 2>/dev/null</code>）。</li>
+                        </ul>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>cron / systemd timer</h4>
+                        <ul>
+                            <li>OS全体: <code>/etc/cron.d/</code> / <code>/etc/cron.daily/</code>、ユーザー: <code>crontab -l</code>。</li>
+                            <li>新規はできるだけ systemd timer を選び、ログを <code>journalctl -u xxx.timer</code> で追えるようにする。</li>
+                            <li>ジョブ追加時は実行ユーザー、出力先、リトライ、タイムアウトを設計書に明記。</li>
+                        </ul>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>logrotate</h4>
+                        <ul>
+                            <li><code>/etc/logrotate.d/</code> 配下にサービス単位で配置。サイズ / 日付ローテ、保持世代、圧縮を指定。</li>
+                            <li>新規アプリ追加時は logrotate 設定とディスク使用率監視を同時に追加。</li>
+                            <li>動作確認は <code>logrotate -d /etc/logrotate.d/xxx</code> (dry-run)。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-floppy-disk"></i></span>
+                    <span class="heading-text">rsync によるバックアップ例</span>
+                </div>
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-terminal"></i> 日次差分バックアップのワンライナー</h4>
+                    <p>同一ホスト内の別ディスクへ /etc と /var/www を日次でバックアップし、削除も同期する例です。実運用ではバックアップ先を別筐体 / オフサイトにすること、定期的にリストアテストを行うことが前提です。</p>
+<pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
+# /usr/local/sbin/daily-backup.sh
+SRC1=/etc
+SRC2=/var/www
+DST=/mnt/backup/$(hostname)/$(date +%Y-%m-%d)
+LOG=/var/log/daily-backup.log
+
+mkdir -p "$DST"
+rsync -aHAX --delete --numeric-ids \
+      --link-dest=/mnt/backup/$(hostname)/latest \
+      "$SRC1" "$SRC2" "$DST"/ 2>&1 | tee -a "$LOG"
+
+ln -snf "$DST" /mnt/backup/$(hostname)/latest
+find /mnt/backup/$(hostname) -maxdepth 1 -type d -mtime +30 -exec rm -rf {} +
+</pre>
+                    <p style="margin-top:14px;">systemd timer 例（毎日 03:00 実行）:</p>
+<pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
+# /etc/systemd/system/daily-backup.service
+[Unit]
+Description=Daily rsync backup
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/daily-backup.sh
+
+# /etc/systemd/system/daily-backup.timer
+[Unit]
+Description=Run daily-backup.sh at 03:00
+[Timer]
+OnCalendar=*-*-* 03:00:00
+Persistent=true
+[Install]
+WantedBy=timers.target
+</pre>
+                    <p style="margin-top:14px;">詳しいリストア手順とテスト計画は <a href="support-docs/backup-restore-runbook.md">バックアップ/リストアRunbook</a> に分けて記載しています。</p>
+                </div>
+            </section>
+
+            <section class="lab-links-section">
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-terminal"></i> bash 一次切り分けスクリプト</h4>
+                    <p>ここまでの確認項目を1本にまとめた読み取り専用 bash です。問い合わせ受付直後に流して、結果をテキストでチケットに添付します。</p>
+                    <div class="contact-actions">
+                        <a href="support-scripts/linux-triage.sh" class="btn btn-secondary">linux-triage.sh を見る</a>
+                        <a href="support-scripts/" class="btn btn-outline-dark">support-scripts/ へ</a>
+                    </div>
+                </div>
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-gears"></i> 自動化 / 監視への入口</h4>
+                    <p>初期構築のIaCと、運用後の監視を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheusで継続的に観測する流れです。</p>
+                    <div class="next-scope-list">
+                        <span><a href="ansible/" style="color:inherit;">Ansible playbook</a></span>
+                        <span><a href="monitoring-stack/" style="color:inherit;">Prometheus + Grafana</a></span>
+                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup Runbook</a></span>
+                        <span><a href="support-docs/postmortem-example.md" style="color:inherit;">Postmortem 実例</a></span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="me.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="infra-lab.html">Infra Lab</a>
+                <a href="linux-lab.html">Linux Lab</a>
+                <a href="works.html">Works</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+
+<script>
+    $(window).on('load', function() {
+        $('.loader').fadeOut(800);
+    });
+
+    $(".res-menu").click(function () {
+        $("nav").toggleClass("show");
+        $(".res-menu").toggleClass("show2");
+    });
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('header').addClass('scrolled');
+        } else {
+            $('header').removeClass('scrolled');
+        }
+    });
+</script>
+</body>
+</html>

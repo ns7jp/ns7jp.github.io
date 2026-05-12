@@ -157,6 +157,71 @@
         }
         .resume-footer a { color: var(--r-primary); text-decoration: none; font-weight: 600; }
 
+        /* 想定業務 × 自分の備え（インフラ運用ジョブディスクリプション対応表） */
+        .resume-readiness {
+            grid-column: 1 / -1;
+            margin-top: 4px;
+        }
+        .resume-readiness table {
+            font-size: 11px;
+            line-height: 1.45;
+        }
+        .resume-readiness th,
+        .resume-readiness td {
+            padding: 4px 6px;
+            border-bottom: 1px solid var(--r-border);
+            vertical-align: top;
+            text-align: left;
+        }
+        .resume-readiness th {
+            background: var(--r-bg-soft);
+            color: var(--r-primary);
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .resume-readiness td.task { width: 30%; font-weight: 600; color: var(--r-primary); }
+        .resume-readiness td.evidence { color: var(--r-muted); }
+        .resume-readiness td a {
+            color: var(--r-primary);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* 学習ロードマップ */
+        .resume-roadmap {
+            grid-column: 1 / -1;
+        }
+        .roadmap-track {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            font-size: 11px;
+        }
+        .roadmap-step {
+            padding: 6px 8px;
+            border: 1px solid var(--r-border);
+            background: var(--r-bg-soft);
+            position: relative;
+        }
+        .roadmap-step.done { background: #eef5ec; border-color: #b6cdb1; }
+        .roadmap-step.current { background: #fdf5e3; border-color: var(--r-accent); }
+        .roadmap-step .step-period {
+            display: block;
+            color: var(--r-muted);
+            font-size: 10px;
+            margin-bottom: 2px;
+        }
+        .roadmap-step .step-name {
+            font-weight: 700;
+            color: var(--r-primary);
+            display: block;
+        }
+        .roadmap-step .step-note { color: var(--r-muted); display: block; margin-top: 2px; }
+
+        @media (max-width: 800px) {
+            .roadmap-track { grid-template-columns: 1fr 1fr; }
+        }
+
         @media print {
             body { background: #fff; padding: 0; }
             .resume-toolbar { display: none; }
@@ -293,10 +358,106 @@
                 </div>
             </section>
 
+            <section class="resume-section resume-readiness">
+                <h3><i class="fa-solid fa-table-list"></i>READINESS / 想定業務 × 自分の備え</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>想定業務</th>
+                            <th>用意している成果物</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="task">問い合わせ受付 / 一次切り分け</td>
+                            <td class="evidence">
+                                Win: <a href="support-scripts/">PowerShell 8本</a>（読み取り中心 / JSON・CSV・HTML 出力） /
+                                Linux: <a href="support-scripts/linux-triage.sh">linux-triage.sh</a> / 切り分けの型: <a href="infra-lab.html">Infra Lab</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">PC キッティング / オフボーディング</td>
+                            <td class="evidence">
+                                <a href="support-docs/pc-kitting-guide.md">pc-kitting-guide.md</a> /
+                                <a href="support-docs/account-offboarding-guide.md">account-offboarding-guide.md</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">AD / M365 棚卸し</td>
+                            <td class="evidence">
+                                <a href="support-scripts/Get-StaleUserAccounts.ps1">Get-StaleUserAccounts.ps1</a> /
+                                <a href="support-scripts/Get-M365LicenseInventory.ps1">Get-M365LicenseInventory.ps1</a> /
+                                <a href="support-docs/m365-license-management.md">月次ライセンス管理</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">監視 一次対応 / アラート判定</td>
+                            <td class="evidence">
+                                自作: <a href="https://github.com/ns7jp/server-monitor">Flask 監視ダッシュボード</a> /
+                                標準スタック: <a href="monitoring-stack/">Prometheus + Grafana + node_exporter</a>（4 アラート）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">サーバー初期構築 / 冪等運用</td>
+                            <td class="evidence">
+                                <a href="ansible/">Ansible playbook</a>（SSH強化 / UFW / fail2ban / auditd / 自動更新）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">バックアップ / リストア</td>
+                            <td class="evidence">
+                                <a href="support-docs/backup-restore-runbook.md">Backup/Restore Runbook</a>（Win VSS+Robocopy / Linux rsync+systemd timer / 月次リストアテスト計画）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">障害対応 / インシデント</td>
+                            <td class="evidence">
+                                型: <a href="support-docs/incident-response-playbook.md">プレイブック</a> /
+                                実例: <a href="support-docs/postmortem-example.md">Postmortem (P2)</a> /
+                                マルウェア: <a href="support-docs/malware-suspected-response.md">対応フロー</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">スクリプト品質 / CI</td>
+                            <td class="evidence">
+                                Pester 21テスト + PSScriptAnalyzer + GitHub Actions /
+                                判定ロジックを純関数化 <a href="support-scripts/lib/Triage-Lib.ps1">Triage-Lib.ps1</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="resume-section resume-roadmap">
+                <h3><i class="fa-solid fa-route"></i>LEARNING ROADMAP / 学習ロードマップ</h3>
+                <div class="roadmap-track">
+                    <div class="roadmap-step done">
+                        <span class="step-period">2026-01 取得済</span>
+                        <span class="step-name">Python3 実践 / 基礎</span>
+                        <span class="step-note">PHP8初級 同時取得</span>
+                    </div>
+                    <div class="roadmap-step current">
+                        <span class="step-period">2026-06 予定</span>
+                        <span class="step-name">IT パスポート</span>
+                        <span class="step-note">学習中・受験申込済</span>
+                    </div>
+                    <div class="roadmap-step">
+                        <span class="step-period">2026-09 目標</span>
+                        <span class="step-name">LPIC-1</span>
+                        <span class="step-note">Linux 運用の証跡として</span>
+                    </div>
+                    <div class="roadmap-step">
+                        <span class="step-period">2026-12 目標</span>
+                        <span class="step-name">CCNA または AZ-104</span>
+                        <span class="step-note">配属先のネット / クラウド比重で選択</span>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
         <footer class="resume-footer">
-            最新のInfra Lab・トラブル対応事例・PowerShellサポートスクリプトは
+            最新のInfra Lab・Linux Lab・Monitoring Stack・Ansible・トラブル対応事例・PowerShellサポートスクリプトは
             <a href="https://ns7jp.github.io/">ns7jp.github.io</a>
             に公開しています。
             最終更新: 2026年5月

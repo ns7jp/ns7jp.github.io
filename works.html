@@ -169,7 +169,7 @@
             <section class="works-section">
                 <div class="works-showcase">
 
-                    <div class="work-showcase-item support-toolkit-item" id="work-support-toolkit" data-category="support">
+                    <div class="work-showcase-item support-toolkit-item" id="work-support-toolkit" data-category="support infra">
                         <div class="work-image-container">
                             <div class="support-toolkit-visual" aria-label="Support Toolkitの構成">
                                 <div class="toolkit-visual-header">
@@ -261,6 +261,108 @@
                                 <span>Active Directory</span>
                                 <span>Runbook</span>
                                 <span>Ticket</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Infra Lab + Linux Lab + Monitoring Stack + Ansible を1つの「インフラ運用Lab」作品として掲示 -->
+                    <div class="work-showcase-item support-toolkit-item" id="work-infra-lab" data-category="infra support">
+                        <div class="work-image-container">
+                            <div class="support-toolkit-visual" aria-label="Infra Lab の構成">
+                                <div class="toolkit-visual-header">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="toolkit-visual-grid">
+                                    <div>
+                                        <i class="fa-brands fa-windows"></i>
+                                        <strong>Windows / M365 / AD</strong>
+                                        <span>監視・証跡</span>
+                                    </div>
+                                    <div>
+                                        <i class="fa-brands fa-linux"></i>
+                                        <strong>Linux</strong>
+                                        <span>systemd / journalctl</span>
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-chart-area"></i>
+                                        <strong>Prometheus + Grafana</strong>
+                                        <span>監視スタック</span>
+                                    </div>
+                                    <div>
+                                        <i class="fa-solid fa-gears"></i>
+                                        <strong>Ansible</strong>
+                                        <span>IaC / 冪等</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-overlay-full">
+                                <div class="overlay-content">
+                                    <span class="work-tag">Lab / Runbook / IaC / Observability</span>
+                                    <h4>Infra Operation Lab</h4>
+                                    <p>Windows / Linux 一次切り分け、監視スタック、IaC、Postmortem、Backup Runbook を1つの導線にまとめたLab</p>
+                                    <div class="overlay-buttons">
+                                        <a href="infra-lab.html" class="btn btn-sm btn-light"><i class="fa-brands fa-windows"></i> Infra Lab</a>
+                                        <a href="linux-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-linux"></i> Linux Lab</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/monitoring-stack" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-area"></i> Monitoring</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/ansible" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gears"></i> Ansible</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="work-details">
+                            <div class="work-meta">
+                                <span class="category"><i class="fa-solid fa-network-wired"></i> Infrastructure / Observability / IaC</span>
+                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                            </div>
+                            <h4>Infra Operation Lab</h4>
+                            <div class="work-summary">
+                                <div><span>目的</span><strong>「確認 → 適用 → 監視」を一通り見せる運用Lab</strong></div>
+                                <div><span>成果</span><strong>4Lab (Win/Linux/Monitor/IaC) + 2Runbook</strong></div>
+                                <div><span>活用</span><strong>一次切り分け・初期構築・継続観測・事後分析</strong></div>
+                            </div>
+                            <div class="support-fit high">
+                                <span class="fit-label">インフラ運用関連度: High</span>
+                                <p>「PowerShell でWindowsを確認」「bash でLinuxを確認」「Ansibleで Linux を整える」「Prometheus + Grafana で観測」「postmortem で振り返る」が同じリポジトリ内で繋がっています。</p>
+                            </div>
+                            <div class="work-numbers" aria-label="主要スペック">
+                                <span class="num-chip"><strong>4</strong>Lab</span>
+                                <span class="num-chip"><strong>2</strong>Runbook</span>
+                                <span class="num-chip"><strong>4</strong>監視アラート</span>
+                                <span class="num-chip"><strong>21</strong>Pesterテスト</span>
+                            </div>
+                            <p>「監視 → 切り分け → 証跡 → エスカレーション」を1ページに整理した Infra Lab を起点に、Linux 一次運用、Docker で起動できる Prometheus + Grafana 監視スタック、Ansible によるベースライン冪等化、rsync + systemd timer のバックアップ Runbook、共有フォルダ I/O 飽和を題材にした Postmortem 実例まで、インフラ運用支援に必要な4観点（観測 / 構築 / 復旧 / 事後分析）を相互参照可能な形で公開しています。</p>
+                            <ul class="work-points">
+                                <li><strong>VLAN論理構成図</strong>を Infra Lab に掲載し、DMZ / Server / User / Guest VLAN と Microsoft 365 / Entra 連携を明示。</li>
+                                <li><strong>判定ロジックを純関数化</strong>し Pester で単体テスト。GitHub Actions で自動実行（PSScriptAnalyzer 静的解析も併走）。</li>
+                                <li><strong>Postmortem 実例</strong>には MTTA / MTTR / 5 Whys / 応急対応 / 恒久対応を含め、振り返りの型を見せる構成。</li>
+                            </ul>
+                            <div class="work-usage">
+                                <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
+                                <ul class="usage-list">
+                                    <li><strong>問い合わせ受付直後：</strong>Windowsは PowerShell、Linux は <code>linux-triage.sh</code> を流して同じ形式で証跡を残す。</li>
+                                    <li><strong>新規サーバー構築：</strong>Ansible playbook で SSH / UFW / fail2ban / auditd / 自動更新を冪等に適用。</li>
+                                    <li><strong>継続観測：</strong>Prometheus + Grafana + node_exporter を docker compose で起動し、4アラート（CPU / メモリ / ディスク / exporter ダウン）を運用。</li>
+                                    <li><strong>事後対応：</strong>Postmortem テンプレートに合わせ、MTTR / 根本原因 / 応急 / 恒久 / 中期対応を分けて記録。</li>
+                                </ul>
+                            </div>
+                            <div class="work-troubleshoot">
+                                <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
+                                <p><span class="trouble-label">課題</span>PowerShell スクリプトはWindows実行が前提で、GitHub Actions のubuntu-latest上でテストを動かせるか不明だった。</p>
+                                <p><span class="trouble-label solution">解決</span>判定ロジック（しきい値判定、状態集約、メッセージ切り詰め等）を純関数化し <code>support-scripts/lib/Triage-Lib.ps1</code> に分離。pwsh はクロスプラットフォームで動くため、ubuntu-latest 上の Pester で実行可能になった。</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>PowerShell</span>
+                                <span>bash</span>
+                                <span>Ansible</span>
+                                <span>Docker Compose</span>
+                                <span>Prometheus</span>
+                                <span>Grafana</span>
+                                <span>node_exporter</span>
+                                <span>Pester</span>
+                                <span>GitHub Actions</span>
+                                <span>VLAN / DMZ</span>
                             </div>
                         </div>
                     </div>
@@ -735,8 +837,9 @@
         } else {
             // それ以外：いったん全部フェードアウトしてから、該当カテゴリだけフェードイン
             $('.work-showcase-item').fadeOut(200);
-            // 属性セレクター [data-category="..."] で該当する作品だけを選んで表示
-            $('.work-showcase-item[data-category="' + filter + '"]').fadeIn(400);
+            // 属性セレクター [data-category~="..."] は半角スペース区切りの値も一致するため、
+            // 1つの作品を複数カテゴリ（例：support + infra）に所属させられる。
+            $('.work-showcase-item[data-category~="' + filter + '"]').fadeIn(400);
         }
     });
 
