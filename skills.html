@@ -84,6 +84,7 @@
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <!-- 現在ページ「Skills」を active クラスで強調 -->
                 <li class="active"><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
                 <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
@@ -397,6 +398,14 @@
                             <li>不要なスタートアップ、容量不足、特定プロセスの高負荷を整理</li>
                             <li>対応内容と再発時の確認手順を記録</li>
                         </ol>
+                        <div class="case-evidence">
+                            <span>証跡</span>
+                            <ul>
+                                <li>確認: <code>Get-Process</code>、イベントログ、空き容量、スタートアップ</li>
+                                <li>添付: PC情報JSON、イベントログCSV、対応前後の状況メモ</li>
+                                <li>連携: 業務停止、同一エラー反復、ディスク90%以上なら上位担当へ共有</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="support-case-card">
                         <span class="case-label">ネットワーク不可</span>
@@ -407,6 +416,14 @@
                             <li>ブラウザ、社内システム、外部サイトの到達可否を分けて確認</li>
                             <li>機器再起動、ケーブル交換、障害情報確認へ進める</li>
                         </ol>
+                        <div class="case-evidence">
+                            <span>証跡</span>
+                            <ul>
+                                <li>確認: <code>ipconfig /all</code>、<code>Test-Connection</code>、DNS名前解決</li>
+                                <li>添付: network-triage CSV、対象端末、影響範囲、発生時刻</li>
+                                <li>連携: 複数端末・同一セグメントで発生ならネットワーク側として共有</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="support-case-card">
                         <span class="case-label">サーバー負荷上昇</span>
@@ -417,6 +434,14 @@
                             <li>ログとエラー内容を整理し、再現性と影響範囲を判断</li>
                             <li>一次対応、引き継ぎ内容、再発防止メモを残す</li>
                         </ol>
+                        <div class="case-evidence">
+                            <span>証跡</span>
+                            <ul>
+                                <li>確認: CPU / Memory / Disk / Network、プロセス上位、直近変更</li>
+                                <li>添付: 監視画面、時系列メモ、ログ抜粋、影響サービス</li>
+                                <li>連携: しきい値超過継続、再起動判断、顧客影響ありなら即時共有</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="support-case-card">
                         <span class="case-label">プリンタが印刷できない</span>
@@ -427,6 +452,14 @@
                             <li>印刷ジョブの滞留や他PCからの印刷可否で範囲を切り分け</li>
                             <li>ジョブ削除・再起動・ドライバ再インストールへ進める</li>
                         </ol>
+                        <div class="case-evidence">
+                            <span>証跡</span>
+                            <ul>
+                                <li>確認: 本体表示、IP、ジョブ状態、他PCからの印刷可否</li>
+                                <li>添付: エラー表示、対象プリンタ名、利用者範囲、試した操作</li>
+                                <li>連携: 複数利用者・機器エラー・ドライバ配布が必要なら担当へ共有</li>
+                            </ul>
+                        </div>
                     </div>
                                         <div class="support-case-card">
                         <span class="case-label">パスワードを忘れた</span>
@@ -437,6 +470,14 @@
                             <li>リセット実施、初期パスワード通知、変更を依頼</li>
                             <li>多要素認証や再発防止策（パスワード管理）を案内</li>
                         </ol>
+                        <div class="case-evidence">
+                            <span>証跡</span>
+                            <ul>
+                                <li>確認: 対象アカウント、本人確認、ロック状態、MFA状況</li>
+                                <li>添付: 依頼者、承認条件、実施時刻、初回変更案内の有無</li>
+                                <li>連携: 権限変更・退職者疑い・不審ログインがあれば管理者へ共有</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -463,6 +504,8 @@
                                 <dd>ディスク空き容量不足と不要スタートアップが主因と仮説化。</dd>
                                 <dt>対応</dt>
                                 <dd>不要ファイル整理、スタートアップ見直し、再起動後の改善を確認。</dd>
+                                <dt>証跡</dt>
+                                <dd>端末情報JSON、イベントログCSV、対応前後の空き容量をチケットへ添付。</dd>
                             </dl>
                         </article>
                         <article class="ticket-card">
@@ -479,6 +522,8 @@
                                 <dd>所属グループ未反映の可能性。申請情報と上長承認の有無を確認。</dd>
                                 <dt>対応</dt>
                                 <dd>権限付与依頼、再ログオン案内、棚卸し記録へ反映。</dd>
+                                <dt>証跡</dt>
+                                <dd>対象パス、ADグループ、申請・承認情報、再ログオン後の確認結果を記録。</dd>
                             </dl>
                         </article>
                         <article class="ticket-card">
@@ -495,6 +540,8 @@
                                 <dd>端末側かネットワーク側かを分離。周辺端末の状況から影響範囲を確認。</dd>
                                 <dt>対応</dt>
                                 <dd>疎通結果を添付し、機器再起動または上位担当へエスカレーション。</dd>
+                                <dt>証跡</dt>
+                                <dd>IP / DNS / ゲートウェイ、疎通CSV、本人のみか周辺も同じかを添付。</dd>
                             </dl>
                         </article>
                     </div>
@@ -602,6 +649,7 @@
             <div class="footer-nav">
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
+                <a href="infra-lab.html">Infra Lab</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>

@@ -297,6 +297,37 @@ header nav ul li a i {
     opacity: 0.7;
 }
 
+header {
+    padding: 0 44px;
+}
+
+.logo-main {
+    font-size: 1.9rem;
+    letter-spacing: 1.4px;
+    white-space: nowrap;
+}
+
+.logo-sub {
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+header nav ul {
+    gap: 2px;
+}
+
+header nav ul li a {
+    gap: 6px;
+    padding: 12px 16px;
+    font-size: 1.24rem;
+    white-space: nowrap;
+}
+
+header nav ul li a::after {
+    left: 16px;
+    right: 16px;
+}
+
 /* ========================================
    6. Mobile Menu - スマホ用ハンバーガーメニュー
    ----------------------------------------
@@ -1008,6 +1039,14 @@ header nav ul li a i {
     margin-bottom: 20px;
     color: var(--text-dark);
     letter-spacing: 1px;
+}
+
+.skill-card p {
+    min-height: 74px;
+    margin: 0 0 22px;
+    font-size: 1.28rem;
+    line-height: 1.75;
+    color: var(--text-medium);
 }
 
 .skill-bar {
@@ -1990,6 +2029,43 @@ footer {
     margin-bottom: 8px;
 }
 
+.case-evidence {
+    margin-top: 22px;
+    padding: 18px;
+    background: var(--bg-warm);
+    border-left: 3px solid var(--accent-gold);
+}
+
+.case-evidence span {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.case-evidence ul {
+    margin: 0;
+    padding-left: 17px;
+}
+
+.case-evidence li {
+    margin-bottom: 6px;
+    font-size: 1.22rem;
+    line-height: 1.75;
+}
+
+.case-evidence code {
+    padding: 2px 6px;
+    background: rgba(44, 62, 80, 0.08);
+    color: var(--text-dark);
+    font-family: 'Courier New', monospace;
+    font-size: 0.92em;
+}
+
 .ticket-examples {
     margin-top: 55px;
     padding: 42px;
@@ -2665,6 +2741,254 @@ footer {
     margin-right: 4px;
 }
 
+/* ========================================
+   Infra Lab Page Styles - infra-lab.html
+======================================== */
+.infra-hero {
+    background-position: center top;
+}
+
+.infra-hero .page-hero-overlay {
+    background: linear-gradient(135deg, rgba(26, 37, 47, 0.82), rgba(44, 62, 80, 0.58));
+}
+
+.infra-lab-content {
+    padding-top: 90px;
+}
+
+.lab-intro {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    text-align: center;
+}
+
+.lab-intro h3 {
+    font-family: 'Playfair Display', 'Noto Serif JP', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+}
+
+.lab-intro p {
+    font-size: 1.55rem;
+    line-height: 2.1;
+    color: var(--text-medium);
+}
+
+.lab-badges,
+.next-scope-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.lab-badges span,
+.next-scope-list span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    background: var(--bg-warm);
+    border: 1px solid var(--bg-sand);
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    letter-spacing: 0.6px;
+}
+
+.lab-badges i {
+    color: var(--accent-gold);
+}
+
+.lab-architecture,
+.operation-matrix-section,
+.incident-flow-section,
+.lab-links-section {
+    margin-bottom: 90px;
+}
+
+.lab-architecture-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 34px;
+    align-items: stretch;
+}
+
+.architecture-map {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    align-items: center;
+    gap: 12px;
+    padding: 34px;
+    background: var(--primary-color);
+    border: 1px solid rgba(253, 251, 247, 0.16);
+}
+
+.arch-node {
+    min-height: 150px;
+    padding: 22px 16px;
+    background: rgba(253, 251, 247, 0.08);
+    border: 1px solid rgba(253, 251, 247, 0.18);
+    color: var(--text-light);
+    text-align: center;
+}
+
+.arch-node i {
+    width: 46px;
+    height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    border-radius: 50%;
+    background: rgba(253, 251, 247, 0.12);
+    color: var(--accent-gold);
+    font-size: 1.9rem;
+}
+
+.arch-node strong,
+.arch-node span {
+    display: block;
+}
+
+.arch-node strong {
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 6px;
+}
+
+.arch-node span {
+    font-size: 1.15rem;
+    color: rgba(253, 251, 247, 0.68);
+}
+
+.arch-line {
+    height: 1px;
+    background: linear-gradient(90deg, rgba(253, 251, 247, 0.1), var(--accent-gold), rgba(253, 251, 247, 0.1));
+}
+
+.architecture-notes,
+.lab-link-card {
+    padding: 34px;
+    background: var(--bg-white);
+    border: 1px solid var(--bg-sand);
+}
+
+.architecture-notes h4,
+.lab-link-card h4 {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 18px;
+}
+
+.architecture-notes ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.architecture-notes li {
+    font-size: 1.4rem;
+    line-height: 1.9;
+    color: var(--text-medium);
+    margin-bottom: 10px;
+}
+
+.operation-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--bg-sand);
+    background: var(--bg-white);
+}
+
+.operation-table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+}
+
+.operation-table th,
+.operation-table td {
+    padding: 20px;
+    border-bottom: 1px solid var(--bg-sand);
+    vertical-align: top;
+    text-align: left;
+}
+
+.operation-table th {
+    background: var(--primary-color);
+    color: var(--text-light);
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.operation-table td {
+    font-size: 1.35rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+}
+
+.operation-table td:first-child {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.operation-table a {
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.incident-flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+}
+
+.flow-step {
+    min-height: 220px;
+    padding: 26px 22px;
+    background: var(--bg-warm);
+    border: 1px solid var(--bg-sand);
+}
+
+.flow-step span {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: 1.2px;
+}
+
+.flow-step h4 {
+    font-size: 1.7rem;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.flow-step p,
+.lab-link-card p {
+    font-size: 1.35rem;
+    line-height: 1.85;
+    color: var(--text-medium);
+}
+
+.lab-links-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+.lab-link-card h4 i {
+    color: var(--accent-gold);
+    margin-right: 10px;
+}
+
 /* Coming Soon */
 .coming-soon {
     padding: 100px 0;
@@ -3084,8 +3408,24 @@ article p {
      - 768px以下 ：スマホ横置き／小型タブレット
      - 480px以下 ：スマホ縦置き
    PC基準のレイアウトを書き、@mediaで小さい画面用に上書きする
-   「デスクトップファースト」の方式を採用している。
+    「デスクトップファースト」の方式を採用している。
 ======================================== */
+@media (max-width: 1180px) {
+    header {
+        padding: 0 32px;
+    }
+
+    .logo-main {
+        font-size: 1.8rem;
+    }
+
+    header nav ul li a {
+        gap: 6px;
+        padding: 12px 14px;
+        font-size: 1.2rem;
+    }
+}
+
 @media (max-width: 1024px) {
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -3113,6 +3453,15 @@ article p {
     .toolkit-grid,
     .ticket-grid {
         grid-template-columns: 1fr;
+    }
+
+    .lab-architecture-grid,
+    .lab-links-section {
+        grid-template-columns: 1fr;
+    }
+
+    .incident-flow {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -3155,6 +3504,17 @@ article p {
     
     header nav ul li a::after {
         display: none;
+    }
+
+    .hero {
+        height: auto;
+        min-height: 780px;
+        align-items: flex-start;
+        padding: 110px 0 48px;
+    }
+
+    .hero-content {
+        margin-top: 24px;
     }
     
     .hero-title {
@@ -3317,29 +3677,125 @@ article p {
     .container {
         padding: 0 25px;
     }
+
+    .architecture-map {
+        grid-template-columns: 1fr;
+    }
+
+    .arch-line {
+        width: 1px;
+        height: 28px;
+        margin: 0 auto;
+        background: linear-gradient(180deg, rgba(253, 251, 247, 0.1), var(--accent-gold), rgba(253, 251, 247, 0.1));
+    }
 }
 
 @media (max-width: 480px) {
+    header {
+        padding: 0 18px;
+    }
+
+    .logo-main {
+        font-size: 1.45rem;
+        letter-spacing: 0.4px;
+    }
+
+    .logo-sub {
+        max-width: 190px;
+        font-size: 0.7rem;
+        letter-spacing: 0.45px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .res-menu {
+        top: 22px;
+        right: 18px;
+        width: 46px;
+        height: 46px;
+    }
+
+    .hero {
+        min-height: 720px;
+        padding: 76px 0 28px;
+    }
+
+    .hero-content {
+        margin-top: 18px;
+        padding: 0 18px;
+    }
+
+    .hero-greeting {
+        margin-bottom: 12px;
+        font-size: 1rem;
+        letter-spacing: 3px;
+    }
+
     .hero-title {
         font-size: 3rem;
+        margin-bottom: 14px;
     }
     
     .hero-title .line1 {
         font-size: 1.2rem;
         letter-spacing: 5px;
+        margin-bottom: 10px;
+    }
+
+    .hero-description {
+        margin-bottom: 16px;
+        font-size: 1.22rem;
+        line-height: 1.85;
     }
 
     .hero-proof-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 18px;
     }
 
     .hero-proof-item {
-        padding: 12px 14px;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "label"
+            "value";
+        padding: 10px 9px;
+        text-align: center;
+    }
+
+    .hero-proof-item i {
+        display: none;
+    }
+
+    .hero-proof-item span {
+        font-size: 0.9rem;
+        letter-spacing: 0.6px;
+    }
+
+    .hero-proof-item strong {
+        font-size: 1rem;
     }
     
     .btn {
         padding: 14px 30px;
         font-size: 1.2rem;
+    }
+
+    .hero-buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: 260px;
+        margin: 0 auto;
+        gap: 10px;
+    }
+
+    .hero-buttons .btn {
+        justify-content: center;
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1.05rem;
+        letter-spacing: 1px;
     }
     
     .section-title .title-en {
@@ -3397,6 +3853,21 @@ article p {
     
     .cta-content h3 {
         font-size: 2.5rem;
+    }
+
+    .lab-intro h3 {
+        font-size: 2.4rem;
+    }
+
+    .architecture-map,
+    .architecture-notes,
+    .lab-link-card,
+    .flow-step {
+        padding: 24px 20px;
+    }
+
+    .incident-flow {
+        grid-template-columns: 1fr;
     }
 }
 

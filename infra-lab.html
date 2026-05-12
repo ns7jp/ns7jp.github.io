@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸のインフラ運用Lab。Windows 11 / Microsoft 365 / Active Directory を想定し、監視、一次切り分け、証跡保存、エスカレーションまでの運用設計メモをまとめています。">
+    <title>Infra Lab | 島田則幸のポートフォリオ</title>
+
+    <meta property="og:title" content="Infra Lab | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/infra-lab.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:description" content="Windows / M365 / AD を想定したインフラ運用Lab。監視項目、一次切り分け、証跡、エスカレーション基準をまとめています。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <p class="res-menu">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </p>
+
+    <header>
+        <h1 class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li class="active"><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h2 class="page-title">
+                <span class="title-en">Infra Operation Lab</span>
+                <span class="title-jp">インフラ運用設計メモ</span>
+            </h2>
+        </div>
+    </section>
+
+    <article class="page-content infra-lab-content" id="main" tabindex="-1">
+        <div class="container">
+            <section class="lab-intro">
+                <span class="case-label">Windows / M365 / AD Scenario</span>
+                <h3>監視、一次切り分け、証跡保存までを1つの流れで見せるLab</h3>
+                <p>社内ITサポート・運用監視で求められる「どこを見るか」「何を残すか」「いつ上位担当へ渡すか」を、公開可能なサンプル環境として整理しました。実機情報や社内固有情報は含めず、Windows 11、Microsoft 365、Active Directory、共有フォルダを想定した運用メモとしてまとめています。</p>
+                <div class="lab-badges" aria-label="Labで確認できる領域">
+                    <span><i class="fa-solid fa-desktop"></i> Endpoint</span>
+                    <span><i class="fa-solid fa-id-card"></i> Account</span>
+                    <span><i class="fa-solid fa-wifi"></i> Network</span>
+                    <span><i class="fa-solid fa-chart-line"></i> Monitoring</span>
+                </div>
+            </section>
+
+            <section class="lab-architecture">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                    <span class="heading-text">Lab Architecture</span>
+                </div>
+                <div class="lab-architecture-grid">
+                    <div class="architecture-map" aria-label="想定インフラ構成図">
+                        <div class="arch-node user-node">
+                            <i class="fa-solid fa-user"></i>
+                            <strong>User</strong>
+                            <span>問い合わせ</span>
+                        </div>
+                        <div class="arch-line"></div>
+                        <div class="arch-node endpoint-node">
+                            <i class="fa-solid fa-laptop"></i>
+                            <strong>Windows 11</strong>
+                            <span>端末確認</span>
+                        </div>
+                        <div class="arch-line"></div>
+                        <div class="arch-node core-node">
+                            <i class="fa-solid fa-server"></i>
+                            <strong>AD / M365 / File</strong>
+                            <span>権限・利用状況</span>
+                        </div>
+                        <div class="arch-line"></div>
+                        <div class="arch-node evidence-node">
+                            <i class="fa-solid fa-file-shield"></i>
+                            <strong>Ticket Evidence</strong>
+                            <span>JSON / CSV / HTML</span>
+                        </div>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>想定運用シナリオ</h4>
+                        <ul>
+                            <li>問い合わせ受付後、端末・ネットワーク・アカウント・ライセンスを順に確認する。</li>
+                            <li>確認結果はチケットへ添付しやすい JSON / CSV / HTML に残す。</li>
+                            <li>利用者影響、再現性、変更履歴、セキュリティ影響を見てエスカレーションを判断する。</li>
+                            <li>対応後は再発防止メモとナレッジ更新候補を残す。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-table-list"></i></span>
+                    <span class="heading-text">Monitoring & Evidence Matrix</span>
+                </div>
+                <div class="operation-table-wrap">
+                    <table class="operation-table">
+                        <thead>
+                            <tr>
+                                <th>対象</th>
+                                <th>確認観点</th>
+                                <th>使用スクリプト・証跡</th>
+                                <th>一次対応 / 引き継ぎ基準</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>端末ヘルス</td>
+                                <td>OS、空き容量、更新、Defender、Firewall、BitLocker</td>
+                                <td><a href="support-scripts/Collect-PcInventory.ps1">Collect-PcInventory.ps1</a><br><a href="support-scripts/Test-SecurityBaseline.ps1">Test-SecurityBaseline.ps1</a></td>
+                                <td>警告項目をチケットへ添付し、設定変更が必要な場合は管理者へ引き継ぐ。</td>
+                            </tr>
+                            <tr>
+                                <td>ネットワーク</td>
+                                <td>本人のみか全体か、IP、DNS、ゲートウェイ、外部到達性</td>
+                                <td><a href="support-scripts/Test-NetworkTriage.ps1">Test-NetworkTriage.ps1</a><br><a href="support-scripts/samples/network-triage.sample.csv">network-triage.sample.csv</a></td>
+                                <td>複数端末で不可ならネットワーク機器・回線側として上位担当へ連携する。</td>
+                            </tr>
+                            <tr>
+                                <td>性能・ログ</td>
+                                <td>CPU、メモリ、ディスク、直近エラー、発生時刻</td>
+                                <td><a href="support-scripts/Test-DiskCapacity.ps1">Test-DiskCapacity.ps1</a><br><a href="support-scripts/Get-RecentSupportEvents.ps1">Get-RecentSupportEvents.ps1</a></td>
+                                <td>ディスク90%以上、同一エラー反復、業務停止がある場合は影響範囲を添えて引き継ぐ。</td>
+                            </tr>
+                            <tr>
+                                <td>AD / M365</td>
+                                <td>休眠アカウント、所属グループ、ライセンス割当、利用率</td>
+                                <td><a href="support-scripts/Get-StaleUserAccounts.ps1">Get-StaleUserAccounts.ps1</a><br><a href="support-scripts/Get-M365LicenseInventory.ps1">Get-M365LicenseInventory.ps1</a></td>
+                                <td>権限変更・停止・ライセンス回収は申請情報と承認の有無を確認してから実施担当へ渡す。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="incident-flow-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-route"></i></span>
+                    <span class="heading-text">Ticket Flow</span>
+                </div>
+                <div class="incident-flow">
+                    <div class="flow-step">
+                        <span>01</span>
+                        <h4>受付</h4>
+                        <p>現象、発生時刻、対象者、業務影響、再現条件を確認。</p>
+                    </div>
+                    <div class="flow-step">
+                        <span>02</span>
+                        <h4>切り分け</h4>
+                        <p>端末、ネットワーク、アカウント、サービス側を順に分離。</p>
+                    </div>
+                    <div class="flow-step">
+                        <span>03</span>
+                        <h4>証跡保存</h4>
+                        <p>確認コマンド、ログ、スクリーンショット、出力ファイルを添付。</p>
+                    </div>
+                    <div class="flow-step">
+                        <span>04</span>
+                        <h4>対応・連携</h4>
+                        <p>一次対応で収まらない場合は影響範囲と仮説を添えて引き継ぎ。</p>
+                    </div>
+                    <div class="flow-step">
+                        <span>05</span>
+                        <h4>再発防止</h4>
+                        <p>手順書更新、FAQ化、監視項目追加、棚卸し対象化を検討。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lab-links-section">
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-folder-open"></i> 公開済みの証跡サンプル</h4>
+                    <p>実行後に何が残るかを確認しやすいよう、架空端末・架空ユーザーのサンプル出力を用意しています。</p>
+                    <div class="contact-actions">
+                        <a href="support-scripts/samples/pc-inventory.sample.json" class="btn btn-secondary">JSONを見る</a>
+                        <a href="support-scripts/samples/network-triage.sample.csv" class="btn btn-outline-dark">CSVを見る</a>
+                        <a href="support-scripts/samples/endpoint-daily-report.sample.html" class="btn btn-outline-dark">HTMLレポートを見る</a>
+                    </div>
+                </div>
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-seedling"></i> 次に広げる領域</h4>
+                    <p>今後は Linux ログ確認、バックアップ/リストア手順、Docker 配布、Ansible など、運用自動化に近い成果物へ段階的に広げます。</p>
+                    <div class="next-scope-list">
+                        <span>Linux log triage</span>
+                        <span>Backup / restore</span>
+                        <span>Docker deploy</span>
+                        <span>Ansible basics</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="me.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="infra-lab.html">Infra Lab</a>
+                <a href="works.html">Works</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+
+<script>
+    $(window).on('load', function() {
+        $('.loader').fadeOut(800);
+    });
+
+    $(".res-menu").click(function () {
+        $("nav").toggleClass("show");
+        $(".res-menu").toggleClass("show2");
+    });
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('header').addClass('scrolled');
+        } else {
+            $('header').removeClass('scrolled');
+        }
+    });
+</script>
+</body>
+</html>

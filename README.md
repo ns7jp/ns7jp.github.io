@@ -8,19 +8,20 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
-## 採用担当者向け: まず見ていただきたい3点
+## 採用担当者向け: まず見ていただきたい4点
 
-短時間で確認しやすいよう、応募先で見ていただきたい成果物を3つに絞ると次の通りです。
+短時間で確認しやすいよう、応募先で見ていただきたい成果物を4つに絞ると次の通りです。
 
 | 優先 | 見るもの | 確認できること |
 |------|----------|----------------|
 | 1 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、志望領域、主な成果物の要約 |
-| 2 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 7本の手順書、8本のPowerShell、チケット形式の対応例 |
-| 3 | [サーバー監視ダッシュボード](https://github.com/ns7jp/server-monitor) | Flask / psutil / Chart.js による監視画面、API、pytest、GitHub Actions |
+| 2 | [Infra Operation Lab](https://ns7jp.github.io/infra-lab.html) | Windows / M365 / AD を想定した監視項目、証跡、一次対応、エスカレーション基準 |
+| 3 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 7本の手順書、8本のPowerShell、チケット形式の対応例 |
+| 4 | [サーバー監視ダッシュボード](https://github.com/ns7jp/server-monitor) | Flask / psutil / Chart.js による監視画面、API、pytest、GitHub Actions |
 
-成果の見え方としては、Support Toolkit で **7手順書・8スクリプト・10障害ケース・3種類のサンプル出力**を公開し、サーバー監視では **6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応**を示しています。
+成果の見え方としては、Infra Operation Lab で **監視項目・証跡保存・一次対応・引き継ぎ基準**をまとめ、Support Toolkit で **7手順書・8スクリプト・10障害ケース・3種類のサンプル出力**を公開し、サーバー監視では **6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応**を示しています。
 
-公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
+公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Infra Operation Lab（運用設計メモ）** と **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
 
 この README は、Web 初学者の方にも「このサイトが何を目的に作られているのか」「どのファイルが何を担当しているのか」「HTML / CSS / JavaScript がどう分担して動いているのか」が分かるように、できるだけ順を追って説明しています。
 
@@ -37,8 +38,8 @@
 | 見てほしいこと | 内容 |
 |----------------|------|
 | 人物像 | 製造・物流現場で培った正確性、改善意識、職業訓練で学んだ内容 |
-| スキル | PC・IT基礎、HTML / CSS / JavaScript / Python / PHP / データベース、サーバー監視の基礎 |
-| 制作物 | Support Toolkit と6作品の概要、使い方、使用技術、ITサポート業務への活かし方 |
+| スキル | Windows / Microsoft 365 / Active Directory 想定、PowerShell、ネットワーク一次切り分け、Linux・サーバー監視の基礎 |
+| 制作物 | Infra Operation Lab、Support Toolkit と6作品の概要、使い方、使用技術、ITサポート業務への活かし方 |
 | 学習姿勢 | トラブルに対して原因を切り分け、調査し、修正し、手順化した過程 |
 | 実務準備 | PCキッティング手順書、障害対応事例集、PowerShell確認スクリプト、チケット形式の対応例 |
 | 連絡先 | GitHub やメールなど、連絡・確認に使える情報 |
@@ -76,12 +77,15 @@
    これまでの経歴、職業訓練で学んだこと、取得資格を確認できます。
 
 3. **Skills**
-   HTML / CSS、Python、PHP、JavaScript、データベースなど、学習した技術をカテゴリ別に整理しています。ITサポート対応例と詳細ドキュメントへのリンクも置いています。
+   Windows / M365 / AD、PowerShell、ネットワーク一次切り分け、Linux・監視基礎、開発技術などをカテゴリ別に整理しています。ITサポート対応例と詳細ドキュメントへのリンクも置いています。
 
-4. **Works**
+4. **Infra Lab**
+   Windows 11 / Microsoft 365 / Active Directory を想定した運用設計メモです。監視項目、証跡保存、一次対応、エスカレーション基準を1ページで確認できます。
+
+5. **Works**
    Support Toolkit と制作した6作品を詳しく紹介しています。作品画像、成果サマリー、概要、使用技術、デモまたはスクリーンショット、GitHubリンク、制作時のトラブルと解決過程を掲載しています。
 
-5. **Contact**
+6. **Contact**
    メールや GitHub など、連絡先情報をまとめています。
 
 ---
@@ -93,6 +97,7 @@
 | トップページ | `index.html` | サイトの入口。自己紹介・スキル・作品ページへの導線をまとめる |
 | 自己紹介ページ | `me.html` | プロフィール、経歴、職業訓練、資格を説明する |
 | スキルページ | `skills.html` | 学習した技術とITサポート系スキルをカテゴリ別に見せる |
+| インフラ運用Lab | `infra-lab.html` | Windows / M365 / AD を想定し、監視・証跡・一次対応・引き継ぎ基準を見せる |
 | 作品ページ | `works.html` | Support Toolkit と6作品の詳細、スクリーンショット、ソースコード、学習ポイント、運用・業務改善への活用例を紹介する |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
 | Support Toolkit | `works.html#work-support-toolkit` | 手順書・PowerShell・チケット形式の対応例を、ITサポート実務に近い成果物としてまとめる |
