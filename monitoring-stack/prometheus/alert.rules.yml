@@ -1,0 +1,41 @@
+# Prometheus アラートルール
+# Lab 用に最小限の4ルールを定義。実運用ではしきい値・for 時間・ラベルを環境に合わせる。
+
+groups:
+  - name: host-baseline
+    rules:
+      - alert: HostHighCpu
+        expr: 100 - (avg by (host) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.host }} CPU 使用率が 85% を継続"
+          description: "5分平均で 85% を超過。プロセス上位とイベントログを確認してください。"
+
+      - alert: HostHighMemory
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{ $labels.host }} メモリ available が 10% 未満"
+          description: "OOM Killer 発火の兆候を確認し、対象プロセスを特定してください。"
+
+      - alert: HostLowDisk
+        expr: (node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes) * 100 < 10
+        for: 10m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $labels.host }} {{ $labels.mountpoint }} の空き容量が 10% 未満"
+          description: "logrotate / 古いバックアップ / コアダンプの蓄積を確認してください。"
+
+      - alert: NodeExporterDown
+        expr: up{job="node"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "node_exporter 到達不能 ({{ $labels.instance }})"
+          description: "サーバー本体ダウンか、node_exporter 障害の可能性。SSHでホスト疎通を確認してください。"

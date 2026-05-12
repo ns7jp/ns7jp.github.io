@@ -32,19 +32,27 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 2. `index.html`
    - トップページの構成を読みます。最初に見せたい情報と、各ページへの導線を確認します。
 3. `me.html`
-   - 経歴、資格、人物像を伝えるページ構成を確認します。
+   - 経歴、資格、人物像、**学習ロードマップ** を伝えるページ構成を確認します。
 4. `skills.html`
    - ITサポート、インフラ運用、Web制作、Python/PHP などのスキル分類を確認します。
-5. `works.html`
+5. `infra-lab.html`
+   - Windows / M365 / AD を想定した運用Lab。**VLAN論理構成図** と監視・証跡・一次対応マトリクス。
+6. `linux-lab.html`
+   - Linux 一次運用Lab。systemd / journalctl / SSH / rsync 早見表。
+7. `works.html`
    - 作品紹介カード、フィルター機能、ITサポートに関連する作品の見せ方を確認します。
-6. `contact.html`
+8. `resume.html`
+   - A4 1pager。**想定業務 × 自分の備えマトリクス**、学習ロードマップ。
+9. `contact.html`
    - 連絡先と問い合わせ導線を確認します。
-7. `css/reset.css` → `css/style.css`
-   - ブラウザ差のリセット、サイト全体のデザイン、レスポンシブ対応を確認します。
-8. `js/jquery.bgswitcher.js`
-   - トップページの背景画像を切り替える jQuery プラグインの役割を確認します。
-9. `image/` と `favicon.ico`
-   - 背景画像、プロフィール画像、作品スクリーンショット、ブラウザタブ用アイコンの役割を確認します。
+10. `css/reset.css` → `css/style.css`
+    - ブラウザ差のリセット、サイト全体のデザイン、レスポンシブ対応を確認します。
+11. `js/jquery.bgswitcher.js`
+    - トップページの背景画像を切り替える jQuery プラグインの役割を確認します。
+12. `image/` と `favicon.ico`
+    - 背景画像、プロフィール画像、作品スクリーンショット、ブラウザタブ用アイコンの役割を確認します。
+13. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/`
+    - **HTML 以外** の成果物。手順書 / PowerShell + bash / Pester / Prometheus / Ansible playbook。インフラ運用ポートフォリオの本体です。
 
 ---
 
@@ -123,19 +131,75 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 
 ### `works.html`
 
-作品紹介ページです。6つの作品を、画像・概要・学習ポイント・使用例・トラブルと解決方法・技術タグで紹介します。
+作品紹介ページです。Support Toolkit、Infra Operation Lab、6つの作品を、画像・概要・学習ポイント・使用例・トラブルと解決方法・技術タグで紹介します。
 
 主な構成:
 - `.filter-section`: 技術カテゴリ別の絞り込みボタン
 - `.work-showcase-item`: 1作品分の紹介カード
-- `data-category`: フィルター処理で使うカテゴリ情報
+- `data-category`: フィルター処理で使うカテゴリ情報（**スペース区切りで複数所属可**。例: `data-category="support infra"`）
 - 各作品のリンク: デモサイト、GitHub リポジトリ
 - 末尾の `<script>`: フィルター、フェードイン、ヘッダー縮小演出
 
 初学者が見るポイント:
 - `data-filter` と `data-category` を対応させることで、JavaScript から絞り込みできる
+- `[data-category~="infra"]` は **空白区切りのトークン一致** を行う jQuery セレクター。1作品を複数カテゴリに所属させられる
 - `fadeIn()` / `fadeOut()` は jQuery の表示・非表示アニメーション
 - ITサポート寄りには、サーバー監視、定型文管理、付箋、掲示板など「業務改善・運用支援」と結びつけて読む
+
+---
+
+### `infra-lab.html`
+
+Windows / M365 / AD を想定した **インフラ運用Lab** ページです。VLAN 論理構成図、監視・証跡マトリクス、チケットフローを1ページで見せます。
+
+主な構成:
+- `.lab-subnav`: Windows / Linux / Monitoring Stack / Ansible のサブナビ
+- `.network-diagram`: DMZ / Server / User / Guest VLAN と Microsoft 365 / Entra ID 連携の論理構成図
+- `.operation-table`: 端末ヘルス / ネットワーク / 性能・ログ / AD・M365 ごとの確認観点と PowerShell リンク
+- `.incident-flow`: 受付 → 切り分け → 証跡保存 → 対応・連携 → 再発防止 の5ステップ
+- `.lab-links-section`: 証跡サンプル と 関連Lab (Linux / Monitoring / Ansible / Postmortem / Backup) へのリンクカード
+
+初学者が見るポイント:
+- 構成図は SVG ではなく **CSS Grid で組まれた論理図**。アクセシビリティのため `role="img"` と `aria-label` を付与
+- `.lab-subnav .active` で現在ページを強調
+- `<code>` で囲んだコマンド表記はそのまま等幅フォントで表示される
+
+---
+
+### `linux-lab.html`
+
+Linux サーバー一次運用のLabです。`infra-lab.html` のサブナビから遷移します。
+
+主な構成:
+- `.lab-subnav`: 4Lab 間のサブナビ（active が `linux-lab.html` に切り替わる）
+- `.operation-table`: 負荷 / メモリ / ディスク / サービス / ログ / ネット / 認証 / FW の確認コマンド早見表
+- `.lab-architecture-grid`: SSH鍵 / 権限 / cron / logrotate の運用メモを 2x2 カードで配置
+- `.lab-link-card` 内の `<pre>`: rsync + systemd timer のコード例（コードブロック装飾はインライン）
+
+初学者が見るポイント:
+- 同じ `infra-lab-content` スタイルを共有し、ページ間の見た目を統一
+- コードブロックはダーク背景のインラインスタイル。CSS変数に頼らないため移植性が高い
+- bash スクリプト本体（`support-scripts/linux-triage.sh`）は別ファイルにし、ページからリンクで誘導
+
+---
+
+### `resume.html`
+
+A4 1ページの履歴書（印刷で PDF 化可）。`<meta name="robots" content="noindex">` で検索インデックスから除外しています。
+
+主な構成:
+- `.resume-toolbar`: 印刷ボタンとサイトへ戻るリンク
+- `.resume-header`: 氏名、志望領域、連絡先
+- `.resume-summary`: 3行サマリー
+- `.resume-body`: 2カラムで EDUCATION / CERTIFICATIONS / SKILLS / SELECTED WORKS
+- `.resume-readiness`: **想定業務 × 自分の備えマトリクス**（行=想定業務、列=用意している成果物）
+- `.resume-roadmap`: 4ステップの学習ロードマップ
+- `@media print`: 印刷時にツールバー非表示、A4ポートレート
+
+初学者が見るポイント:
+- レイアウトCSSは `<head>` 内の `<style>` に同居しており、ファイル単独でも完結
+- `width: 210mm / min-height: 297mm` で A4 サイズを再現
+- 印刷時の挙動は `@page` ルールでマージンも制御
 
 ---
 
@@ -223,6 +287,81 @@ $(".hero-slider").bgswitcher({
 - HTML の `src="image/..."` や CSS の背景画像指定から参照される
 - 画像ファイル名と参照パスが一致しないと表示されない
 - 作品スクリーンショットは、ポートフォリオで成果物を直感的に伝える重要な素材
+
+---
+
+### `support-docs/`
+
+ITサポート・社内SE・運用監視で実際に使われる手順書・事例集（全 9 本）。
+
+- 標準業務 4本（キッティング / オフボーディング / 共有フォルダ権限 / M365 ライセンス）
+- 障害対応 3本（10ケース事例集 / 重大インシデント・プレイブック / マルウェア対応）
+- 事後分析・運用 2本（Postmortem 実例 / Backup・Restore Runbook）
+
+初学者が見るポイント:
+- すべて Markdown ファイル。GitHub 上でそのまま読める
+- 「型」と「実例」をペアで持つ（プレイブック ↔ Postmortem、運用方針 ↔ Runbook）
+- Front matter は無く、純粋な Markdown のみ
+
+---
+
+### `support-scripts/`
+
+PowerShell + bash + Pester を収めたスクリプト集。
+
+- ルート: PowerShell 8本 + `linux-triage.sh`
+- `lib/Triage-Lib.ps1`: しきい値判定・状態集約・メッセージ切り詰めなどの **純関数ヘルパー**
+- `tests/Triage-Lib.Tests.ps1`: Pester 5 系のユニットテスト（25ケース）
+- `samples/`: JSON / CSV / HTML のサンプル出力
+
+初学者が見るポイント:
+- すべて **読み取り中心**。削除・設定変更・サービス再起動は含めない
+- 動詞-名詞 (`Get-` / `Test-` / `Collect-` / `New-`) で意味を表す PowerShell の命名規則
+- `lib/` と `tests/` を分けて、ロジックだけテスト可能にしている
+
+---
+
+### `monitoring-stack/`
+
+Prometheus + Grafana + node_exporter の最小監視スタック (docker-compose)。
+
+- `docker-compose.yml`: 3 コンテナの構成
+- `prometheus/prometheus.yml` + `prometheus/alert.rules.yml`: スクレイプ設定とアラート
+- `grafana/provisioning/`: 起動時に Prometheus データソースとダッシュボードを自動登録
+
+初学者が見るポイント:
+- `docker compose up -d` だけで起動する Lab 構成
+- 認証情報は Lab 用の弱いものなので、本番転用しないこと
+- アラートルールは CPU / メモリ / ディスク / exporter ダウン の 4 つだけにし、最小から始める設計
+
+---
+
+### `ansible/`
+
+Ubuntu ベースラインの冪等化 Playbook。
+
+- `playbook.yml`: SSH 強化 / UFW / fail2ban / auditd / unattended-upgrades / TZ
+- `inventory.ini`: Lab 用インベントリ
+- `templates/sshd_config.j2`: Ansible 管理下の sshd_config
+
+初学者が見るポイント:
+- `--check --diff` で事前に差分を確認するワークフロー
+- `tags` を全タスクに付与し、SSH のみ / firewall のみの段階適用が可能
+- `handlers` で「変更があったときだけサービス再起動」する
+
+---
+
+### `.github/workflows/`
+
+GitHub Actions の CI 設定。
+
+- `static-check.yml`: HTML 構造 + ローカルリンク + 画像バジェット（既存）
+- `pwsh-tests.yml`: `support-scripts/` 変更時に Pester + PSScriptAnalyzer を pwsh で実行（新規）
+
+初学者が見るポイント:
+- `paths:` で、関連ファイルが変わったときだけ CI を走らせている
+- ubuntu-latest 上の `pwsh` で PowerShell スクリプトをテストできる
+- 静的解析 (PSScriptAnalyzer) はエラーがあれば失敗、警告のみは通す方針
 
 ---
 

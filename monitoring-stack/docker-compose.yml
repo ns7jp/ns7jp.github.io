@@ -1,0 +1,70 @@
+# 最小構成の監視スタック
+# Prometheus + node_exporter + Grafana の3コンテナを 1 ホスト内で起動するLab用 compose ファイル。
+# 想定: 自宅検証VM / 1台のLinuxサーバー / 評価環境。
+# 本番では node_exporter を監視対象側へ分けて配置し、Prometheus と Grafana のデータを永続化する。
+
+services:
+  prometheus:
+    # 監視データの収集とアラート評価を担当
+    image: prom/prometheus:v2.54.1
+    container_name: lab-prometheus
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=15d
+      - --web.enable-lifecycle
+    # Linux Docker Engine では host.docker.internal が自動解決されないため、
+    # extra_hosts で host-gateway を渡してホスト上の node_exporter (9100) へ到達できるようにする。
+    # Docker Desktop (Mac / Windows) では元から解決できるので、この行があっても問題ない。
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/alert.rules.yml:/etc/prometheus/alert.rules.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+
+  node_exporter:
+    # ホストのCPU / メモリ / ディスク / ネットワーク統計を Prometheus が読み取れる形式で公開
+    image: prom/node-exporter:v1.8.2
+    container_name: lab-node-exporter
+    restart: unless-stopped
+    command:
+      - --path.rootfs=/host
+      - --collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)
+    pid: host
+    network_mode: host
+    volumes:
+      - /:/host:ro,rslave
+
+  grafana:
+    # ダッシュボード表示
+    image: grafana/grafana:11.2.0
+    container_name: lab-grafana
+    restart: unless-stopped
+    environment:
+      # 公開検証なので簡易パスワード。実運用では .env で必ず変更する。
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=changeme
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  grafana_data:

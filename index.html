@@ -25,7 +25,7 @@
 
     <!-- ===== SEO関連 meta情報 ===== -->
     <!-- 検索結果に表示される説明文（SEOで最重要） -->
-    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツール、サーバー監視ダッシュボード、手順書、PowerShell確認スクリプトを公開中。">
+    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。ITサポート・社内SE補助・インフラ運用を目指し、Windows / Linux 運用Lab、Prometheus 監視スタック、Ansible Playbook、9本の手順書、9本のスクリプト（Pester CI付き）を公開中。">
     <!-- 作者情報 -->
     <meta name="author" content="Noriyuki Shimada">
     <!-- 検索キーワード（補助的SEO） -->
@@ -44,13 +44,13 @@
     <meta property="og:url" content="https://ns7jp.github.io/">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツール、サーバー監視ダッシュボード、手順書、PowerShell確認スクリプトを公開中。">
+    <meta property="og:description" content="ITサポート・社内SE補助・インフラ運用を目指し、Windows / Linux 運用Lab、Prometheus 監視スタック、Ansible Playbook、9本の手順書、9本のスクリプト（Pester CI付き）を公開中。">
     <meta property="og:locale" content="ja_JP">
 
     <!-- ===== Twitter カード設定（X 上で大きな画像付きカード表示） ===== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="島田則幸のポートフォリオ">
-    <meta name="twitter:description" content="ITサポート・社内SE補助・インフラ運用を目指し、業務改善ツール、サーバー監視、手順書、PowerShell確認スクリプトを公開中。">
+    <meta name="twitter:description" content="ITサポート・社内SE補助・インフラ運用を目指し、Win + Linux運用Lab、Prometheus監視、Ansible、9手順書、9スクリプト（Pester CI付き）を公開中。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
 
     <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
@@ -170,25 +170,25 @@
             </h2>
             <p class="hero-description animate-fade-in-delay">現場経験と学習したITスキルを活かし、<br>PC・サーバー運用、問い合わせ対応、業務改善に役立つ作品をまとめています</p>
             <div class="hero-proof-grid animate-fade-in-delay2" aria-label="ITサポート向けの公開成果">
-                <a href="works.html#work-monitor" class="hero-proof-item">
-                    <i class="fa-solid fa-gauge-high"></i>
-                    <span>監視</span>
-                    <strong>Flask / psutil</strong>
+                <a href="infra-lab.html" class="hero-proof-item">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <span>運用Lab</span>
+                    <strong>Win + Linux</strong>
                 </a>
                 <a href="works.html#work-support-toolkit" class="hero-proof-item">
                     <i class="fa-solid fa-folder-tree"></i>
                     <span>手順書</span>
-                    <strong>7 docs</strong>
+                    <strong>9 docs</strong>
                 </a>
                 <a href="works.html#work-support-toolkit" class="hero-proof-item">
                     <i class="fa-solid fa-terminal"></i>
                     <span>自動化</span>
-                    <strong>8 scripts</strong>
+                    <strong>9 scripts</strong>
                 </a>
-                <a href="skills.html#ticket-examples" class="hero-proof-item">
-                    <i class="fa-solid fa-clipboard-check"></i>
-                    <span>一次対応</span>
-                    <strong>Ticket flow</strong>
+                <a href="works.html#work-infra-lab" class="hero-proof-item">
+                    <i class="fa-solid fa-chart-area"></i>
+                    <span>監視 + IaC</span>
+                    <strong>Prom / Ansible</strong>
                 </a>
             </div>
             <!-- CTA（Call To Action）ボタン群。作品ページ・連絡先ページへの導線。 -->
@@ -286,18 +286,18 @@
             <div class="toolkit-grid">
                 <a href="works.html#work-support-toolkit" class="toolkit-card">
                     <span class="toolkit-label">Docs</span>
-                    <strong>7本の手順書</strong>
-                    <p>PCキッティング、退職者対応、権限管理、M365ライセンス、障害・インシデント対応を整理。</p>
+                    <strong>9本の手順書</strong>
+                    <p>PCキッティング、退職者対応、権限管理、M365ライセンス、障害・インシデント、Postmortem、Backup Runbook を整理。</p>
                 </a>
                 <a href="works.html#work-support-toolkit" class="toolkit-card">
                     <span class="toolkit-label">Scripts</span>
-                    <strong>8本のPowerShell</strong>
-                    <p>端末情報、ネットワーク、イベントログ、容量、セキュリティ、AD/M365棚卸しを読み取り中心で確認。</p>
+                    <strong>9本のスクリプト + Pester</strong>
+                    <p>PowerShell 8本 + Linux bash 1本。Pester 25テスト + PSScriptAnalyzer を GitHub Actions で自動実行。</p>
                 </a>
-                <a href="skills.html#ticket-examples" class="toolkit-card">
-                    <span class="toolkit-label">Tickets</span>
-                    <strong>対応ログの型</strong>
-                    <p>問い合わせ、確認、判断、対応、再発防止をチケット形式で残す流れを掲載。</p>
+                <a href="works.html#work-infra-lab" class="toolkit-card">
+                    <span class="toolkit-label">Lab / IaC</span>
+                    <strong>Monitoring + Ansible</strong>
+                    <p>Prometheus + Grafana + node_exporter (docker-compose) と Ubuntu ベースライン冪等化 Playbook。</p>
                 </a>
             </div>
             <div class="section-link">

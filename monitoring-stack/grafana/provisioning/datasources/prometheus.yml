@@ -1,0 +1,12 @@
+# Grafana 起動時に自動登録するデータソース
+# 手動UI操作なしで Prometheus を Grafana に取り込むための provisioning ファイル
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false

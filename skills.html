@@ -123,15 +123,49 @@
                 <!-- スキルカードを並べるグリッドコンテナ -->
                 <div class="skill-cards-grid">
 
-                    <!-- ----- Infrastructure / Server Ops スキルカード ----- -->
-                    <!-- 自学で取り組むサーバー運用・監視・自動化分野のスキル -->
+                    <!-- ----- Windows / M365 / AD 運用支援 スキルカード ----- -->
+                    <!-- ITサポート実務の主戦場：端末・AD・M365・ネットワーク一次対応 -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large infra">
-                                <i class="fa-solid fa-server"></i>
+                                <i class="fa-brands fa-windows"></i>
                             </div>
                             <div class="skill-title">
-                                <h4>Server / Infra</h4>
+                                <h4>Windows / M365 / AD 運用支援</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 55%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>PowerShell 8本（読み取り中心、JSON/CSV/HTML出力、Pesterテスト + CI付き）</li>
+                                <li>Active Directory 棚卸し（休眠ユーザー抽出、所属グループ確認）</li>
+                                <li>Microsoft 365 ライセンス棚卸し（Microsoft Graph PowerShell SDK）</li>
+                                <li>PCキッティング / 退職オフボーディング手順書（Support Docs 7本）</li>
+                                <li>ネットワーク基礎（TCP/IP・DNS・DHCP・Wi-Fi 接続トラブル）</li>
+                                <li>セキュリティベースライン確認（Defender / Firewall / BitLocker / Update）</li>
+                                <li>リモートサポート（Quick Assist・TeamViewer・AnyDesk）<span class="learning-tag">学習中</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ----- Linux / 監視 / 自動化 スキルカード ----- -->
+                    <!-- 自学で取り組むサーバー運用・監視・IaC分野のスキル（Lab中心） -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large infra">
+                                <i class="fa-brands fa-linux"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>Linux / 監視 / 自動化</h4>
                                 <div class="skill-level">
                                     <span class="star filled"><i class="fa-solid fa-star"></i></span>
                                     <span class="star filled"><i class="fa-solid fa-star"></i></span>
@@ -146,12 +180,13 @@
                         </div>
                         <div class="skill-description">
                             <ul>
+                                <li>Linux 一次切り分け bash スクリプト（systemd / journalctl / load / disk / ss）</li>
+                                <li>Prometheus + Grafana + node_exporter 監視スタック（Docker Compose で起動）</li>
+                                <li>Ansible playbook（SSH 強化 / UFW / fail2ban / auditd / unattended-upgrades）</li>
+                                <li>rsync + systemd timer によるバックアップ / 月次リストアテスト計画</li>
                                 <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
-                                <li>Linuxコマンド基礎（ファイル権限・プロセス確認・ログ確認）</li>
                                 <li>XAMPP / Apache 環境構築・レンタルサーバーへのデプロイ運用</li>
-                                <li>ネットワーク基礎（TCP/IP・DNS・DHCP・Wi-Fi 接続トラブル）</li>
-                                <li>社内IT基礎（Active Directory・Microsoft 365・周辺機器設定）<span class="learning-tag">学習中</span></li>
-                                <li>リモートサポート（Quick Assist・TeamViewer・AnyDesk）<span class="learning-tag">学習中</span></li>
+                                <li>Terraform / Kubernetes <span class="learning-tag">学習中</span></li>
                             </ul>
                         </div>
                     </div>

@@ -1,0 +1,74 @@
+name: PowerShell tests
+
+on:
+  push:
+    paths:
+      - 'support-scripts/**'
+      - '.github/workflows/pwsh-tests.yml'
+  pull_request:
+    paths:
+      - 'support-scripts/**'
+      - '.github/workflows/pwsh-tests.yml'
+
+jobs:
+  pester:
+    name: Pester unit tests (cross-platform PowerShell)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show pwsh version
+        shell: pwsh
+        run: $PSVersionTable | Format-List
+
+      - name: Install Pester 5
+        shell: pwsh
+        run: |
+          Install-Module Pester -MinimumVersion 5.5.0 -Force -SkipPublisherCheck -Scope CurrentUser
+          Get-Module Pester -ListAvailable | Select-Object Name, Version
+
+      - name: Run Pester
+        shell: pwsh
+        run: |
+          $config = New-PesterConfiguration
+          $config.Run.Path = 'support-scripts/tests'
+          $config.Run.Exit = $true
+          $config.Output.Verbosity = 'Detailed'
+          $config.TestResult.Enabled = $true
+          $config.TestResult.OutputPath = 'pester-results.xml'
+          Invoke-Pester -Configuration $config
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pester-results
+          path: pester-results.xml
+
+  psscriptanalyzer:
+    name: PSScriptAnalyzer (static lint)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Install-Module PSScriptAnalyzer -Force -SkipPublisherCheck -Scope CurrentUser
+
+      - name: Run analyzer on support-scripts/
+        shell: pwsh
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path support-scripts -Recurse -Severity Error,Warning
+          if ($results) {
+            $results | Format-Table -AutoSize | Out-String | Write-Host
+            $errors = $results | Where-Object Severity -eq 'Error'
+            if ($errors) {
+              throw "PSScriptAnalyzer found $($errors.Count) error(s)."
+            }
+            Write-Host "Warnings only ($($results.Count)). Not failing build."
+          } else {
+            Write-Host "PSScriptAnalyzer: clean."
+          }

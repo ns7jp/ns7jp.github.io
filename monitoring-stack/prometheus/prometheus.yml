@@ -1,0 +1,28 @@
+# Prometheus 本体設定
+# - 15 秒間隔でターゲットをスクレイプ
+# - node_exporter はホストネットワークで動かしているため、host.docker.internal で参照
+# - alert.rules.yml にしきい値ベースのアラート定義を集約
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: lab-monitor
+
+rule_files:
+  - /etc/prometheus/alert.rules.yml
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+
+  - job_name: node
+    static_configs:
+      - targets:
+          # docker-compose では host.docker.internal を extra_hosts なしで使えない場合があるため、
+          # Linuxホストでは host-gateway か、172.17.0.1 のような docker0 IP を直接指定する。
+          - host.docker.internal:9100
+        labels:
+          host: lab-host-01

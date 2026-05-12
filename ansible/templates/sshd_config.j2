@@ -1,0 +1,45 @@
+# Ansible 管理下の sshd_config
+# baseline.yml から生成。手動編集すると次回 playbook 実行で上書きされる点に注意。
+#
+# 設計方針:
+#  - 鍵認証のみ（パスワード無効）
+#  - root 直接ログイン無効
+#  - X11 / GatewayPorts / TCP forwarding は不要なら無効
+#  - LoginGraceTime / MaxAuthTries を引き締め、fail2ban と併用
+
+Port {{ ssh_port }}
+AddressFamily any
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+# ---- 認証 ----
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+KbdInteractiveAuthentication no
+UsePAM yes
+PermitEmptyPasswords no
+
+# ---- 制限 ----
+MaxAuthTries 3
+LoginGraceTime 30
+MaxSessions 4
+ClientAliveInterval 300
+ClientAliveCountMax 2
+
+# ---- 不要機能を抑止 ----
+AllowAgentForwarding no
+AllowTcpForwarding no
+GatewayPorts no
+X11Forwarding no
+PermitTunnel no
+
+# ---- ログ / 表示 ----
+SyslogFacility AUTH
+LogLevel VERBOSE
+Banner /etc/issue.net
+PrintMotd no
+
+# ---- Subsystem ----
+Subsystem sftp /usr/lib/openssh/sftp-server
