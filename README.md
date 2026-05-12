@@ -228,7 +228,7 @@ ns7jp.github.io/
 
 | # | 作品名 | 主な技術 | ITサポート関連度 | 内容 | リポジトリ |
 |---|--------|----------|------------------|------|------------|
-| ① | Support Toolkit | Markdown / PowerShell | High | 手順書7本、PowerShell確認スクリプト8本、チケット形式の対応例、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ① | Support Toolkit | Markdown / PowerShell / bash | High | 手順書9本、確認スクリプト9本、Pester 25テスト、チケット形式の対応例、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
 | ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
 | ③ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ④ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
