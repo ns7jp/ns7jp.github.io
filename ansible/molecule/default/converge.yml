@@ -1,0 +1,10 @@
+---
+# Molecule の converge: 実際に検証対象の playbook を実行する。
+# ../playbook.yml を直接 import すれば、本物のコードがテストされる。
+
+- name: Converge
+  hosts: all
+  become: true
+  tasks:
+    - name: Import production playbook
+      ansible.builtin.import_playbook: ../../playbook.yml

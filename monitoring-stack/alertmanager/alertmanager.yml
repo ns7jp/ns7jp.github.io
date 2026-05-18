@@ -1,0 +1,58 @@
+# Alertmanager 設定 (Lab 用)
+# - 重大度ごとにルーティング (critical → 即時 / warning → 営業時間内)
+# - inhibit_rules で「node ダウン中の他アラート」 をミュート
+# - receivers は webhook の例。実運用では Slack / Teams / PagerDuty に差し替える。
+# - templates でメッセージを日本語化
+
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: default-slack
+  group_by: ['alertname', 'host']
+  group_wait: 30s            # 同じグループの初回通知を 30 秒待ち、まとめて送る
+  group_interval: 5m         # グループ内で次の通知が出るまでの間隔
+  repeat_interval: 12h       # 解決していないアラートの再通知間隔
+  routes:
+    - matchers:
+        - severity = "critical"
+      receiver: oncall-pager
+      group_wait: 0s         # critical は即時
+      repeat_interval: 1h
+      continue: true         # Slack にも流す
+    - matchers:
+        - severity = "warning"
+      receiver: default-slack
+      active_time_intervals:
+        - business-hours
+
+time_intervals:
+  - name: business-hours
+    time_intervals:
+      - weekdays: ['monday:friday']
+        times:
+          - start_time: '09:00'
+            end_time: '18:00'
+        location: 'Asia/Tokyo'
+
+# 「ホストダウン」 が鳴っている間は、同ホストの CPU/メモリ アラートは抑止する
+# (ダウンしているのだから当然鳴っている、を重複通知しない)
+inhibit_rules:
+  - source_matchers:
+      - alertname = "NodeExporterDown"
+    target_matchers:
+      - severity =~ "warning|critical"
+    equal: ['host']
+
+receivers:
+  # 公開リポジトリにそのまま書けないため webhook のプレースホルダ。
+  # 実運用では環境変数 / Secret から差し込み、URL を Git に入れない。
+  - name: default-slack
+    webhook_configs:
+      - url: 'http://localhost:5001/webhook/slack'
+        send_resolved: true
+
+  - name: oncall-pager
+    webhook_configs:
+      - url: 'http://localhost:5001/webhook/pager'
+        send_resolved: true

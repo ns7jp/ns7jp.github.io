@@ -299,14 +299,14 @@
                             </div>
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
-                                    <span class="work-tag">Lab / Runbook / IaC / Observability</span>
+                                    <span class="work-tag">Lab / Runbook / IaC / Cloud / Observability / Container</span>
                                     <h4>Infra Operation Lab</h4>
-                                    <p>Windows / Linux 一次切り分け、監視スタック、IaC、Postmortem、Backup Runbook を1つの導線にまとめたLab</p>
+                                    <p>Windows / Linux 一次切り分け、Prom+Loki 監視、Terraform / Kubernetes / Docker、SRE 設計メモを 1 つの導線にまとめた Lab</p>
                                     <div class="overlay-buttons">
                                         <a href="infra-lab.html" class="btn btn-sm btn-light"><i class="fa-brands fa-windows"></i> Infra Lab</a>
-                                        <a href="linux-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-linux"></i> Linux Lab</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/terraform-lab" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-cloud"></i> Terraform</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/k8s-lab" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</a>
                                         <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/monitoring-stack" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-area"></i> Monitoring</a>
-                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/ansible" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gears"></i> Ansible</a>
                                     </div>
                                 </div>
                             </div>
@@ -318,25 +318,27 @@
                             </div>
                             <h4>Infra Operation Lab</h4>
                             <div class="work-summary">
-                                <div><span>目的</span><strong>「確認 → 適用 → 監視」を一通り見せる運用Lab</strong></div>
-                                <div><span>成果</span><strong>4Lab (Win/Linux/Monitor/IaC) + 2Runbook</strong></div>
-                                <div><span>活用</span><strong>一次切り分け・初期構築・継続観測・事後分析</strong></div>
+                                <div><span>目的</span><strong>「IaC で建てる → 適用 → 監視 → 振り返る」を一通り見せる Lab</strong></div>
+                                <div><span>成果</span><strong>7 Lab (Win / Linux / Monitor / Ansible / Terraform / K8s / Docker) + 5 Runbook</strong></div>
+                                <div><span>活用</span><strong>クラウド構築・コンテナ運用・監視 / ログ・SRE 設計・事後分析</strong></div>
                             </div>
                             <div class="support-fit high">
                                 <span class="fit-label">インフラ運用関連度: High</span>
-                                <p>「PowerShell でWindowsを確認」「bash でLinuxを確認」「Ansibleで Linux を整える」「Prometheus + Grafana で観測」「postmortem で振り返る」が同じリポジトリ内で繋がっています。</p>
+                                <p>「Terraform で Azure に VM を立てる → Ansible でハードニング → Docker でアプリをコンテナ化 → Kubernetes でデプロイ → Prometheus + Loki で監視 → Postmortem で振り返る」 という IaC ベースの一連の流れが、同じリポジトリ内で完結します。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip"><strong>4</strong>Lab</span>
-                                <span class="num-chip"><strong>2</strong>Runbook</span>
+                                <span class="num-chip"><strong>7</strong>Lab</span>
+                                <span class="num-chip"><strong>5</strong>Runbook</span>
                                 <span class="num-chip"><strong>4</strong>監視アラート</span>
                                 <span class="num-chip"><strong>25</strong>Pesterテスト</span>
+                                <span class="num-chip"><strong>4</strong>CIワークフロー</span>
                             </div>
-                            <p>「監視 → 切り分け → 証跡 → エスカレーション」を1ページに整理した Infra Lab を起点に、Linux 一次運用、Docker で起動できる Prometheus + Grafana 監視スタック、Ansible によるベースライン冪等化、rsync + systemd timer のバックアップ Runbook、共有フォルダ I/O 飽和を題材にした Postmortem 実例まで、インフラ運用支援に必要な4観点（観測 / 構築 / 復旧 / 事後分析）を相互参照可能な形で公開しています。</p>
+                            <p>「観測 → 切り分け → 証跡 → エスカレーション」 を 1 ページに整理した Infra Lab を起点に、<strong>Terraform による Azure VM プロビジョニング</strong>（NSG 最小権限、cloud-init で node_exporter 自動セットアップ）、<strong>Kubernetes マニフェスト</strong>（Deployment + HPA + PDB + NetworkPolicy + securityContext を本番グレードで実装）、<strong>multi-stage Dockerfile</strong>（non-root, HEALTHCHECK, OCI labels, Trivy 連携）、<strong>Loki + Promtail を組み合わせた監視スタック</strong>（メトリクスとログの統合）、<strong>SLO / SLI 定義書</strong>（burn-rate 式、アラート閾値の根拠）、<strong>ネットワーク / ファイアウォール設計書</strong>（nftables / iptables / NSG / Windows Firewall）、<strong>DB 運用ランブック</strong>（MySQL / PostgreSQL のバックアップ・PITR・レプリケーション・チューニング）まで、運用基盤に必要な領域を相互参照可能な形で公開しています。</p>
                             <ul class="work-points">
-                                <li><strong>VLAN論理構成図</strong>を Infra Lab に掲載し、DMZ / Server / User / Guest VLAN と Microsoft 365 / Entra 連携を明示。</li>
-                                <li><strong>判定ロジックを純関数化</strong>し Pester で単体テスト。GitHub Actions で自動実行（PSScriptAnalyzer 静的解析も併走）。</li>
-                                <li><strong>Postmortem 実例</strong>には MTTA / MTTR / 5 Whys / 応急対応 / 恒久対応を含め、振り返りの型を見せる構成。</li>
+                                <li><strong>VLAN 論理構成図</strong>を Infra Lab に掲載し、DMZ / Server / User / Guest VLAN と Microsoft 365 / Entra 連携を明示。</li>
+                                <li><strong>4 つの CI ワークフロー</strong> (PowerShell tests / Static check / IaC validate / Docker publish) で、Pester / PSScriptAnalyzer / terraform fmt+validate+tflint+tfsec / ansible-lint / kubeconform / kubesec / hadolint / Trivy を自動実行。</li>
+                                <li><strong>Postmortem 実例</strong>に MTTA / MTTR / 5 Whys / 応急対応 / 恒久対応を含め、振り返りの型を見せる構成。</li>
+                                <li><strong>SLO / SLI 定義</strong>では Google SRE Workbook の multi-window multi-burn-rate を採用し、「なぜ CPU 85%」「なぜ 10 分」 という閾値根拠を明文化。</li>
                             </ul>
                             <div class="work-usage">
                                 <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
@@ -356,12 +358,22 @@
                                 <span>PowerShell</span>
                                 <span>bash</span>
                                 <span>Ansible</span>
+                                <span>Terraform</span>
+                                <span>Azure</span>
+                                <span>Kubernetes</span>
+                                <span>Kustomize</span>
+                                <span>Docker</span>
                                 <span>Docker Compose</span>
                                 <span>Prometheus</span>
                                 <span>Grafana</span>
+                                <span>Loki</span>
+                                <span>Promtail</span>
                                 <span>node_exporter</span>
                                 <span>Pester</span>
+                                <span>Trivy</span>
+                                <span>tfsec</span>
                                 <span>GitHub Actions</span>
+                                <span>SLO / SLI</span>
                                 <span>VLAN / DMZ</span>
                             </div>
                         </div>

@@ -39,3 +39,35 @@ groups:
         annotations:
           summary: "node_exporter 到達不能 ({{ $labels.instance }})"
           description: "サーバー本体ダウンか、node_exporter 障害の可能性。SSHでホスト疎通を確認してください。"
+
+  # Google SRE Workbook の multi-window multi-burn-rate を簡易再現。
+  # availability 目標 99.5% に対し、1h で 14.4x ペースで消費したら fast-burn、
+  # 6h で 6x ペースで消費したら slow-burn として鳴らす。
+  # (実運用には HTTP 5xx 等の SLI が必要。Lab では up{} で代用。)
+  - name: slo-burn-rate
+    rules:
+      - alert: SLOFastBurn
+        expr: |
+          (
+            1 - avg_over_time(up{job="node"}[1h])
+          ) > (1 - 0.995) * 14.4
+        for: 2m
+        labels:
+          severity: critical
+          slo: availability
+        annotations:
+          summary: "{{ $labels.host }} エラーバジェット fast-burn (1h 窓)"
+          description: "1h 窓で 14.4x の速度でエラーバジェットを消費中。2 日でバジェット使い切るペース。即対応。"
+
+      - alert: SLOSlowBurn
+        expr: |
+          (
+            1 - avg_over_time(up{job="node"}[6h])
+          ) > (1 - 0.995) * 6
+        for: 15m
+        labels:
+          severity: warning
+          slo: availability
+        annotations:
+          summary: "{{ $labels.host }} エラーバジェット slow-burn (6h 窓)"
+          description: "6h 窓で 6x の速度でエラーバジェットを消費中。月内バジェット枯渇の前兆。"

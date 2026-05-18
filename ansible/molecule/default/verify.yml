@@ -1,0 +1,54 @@
+---
+# Molecule の verify: converge 後に「設定が実際に効いているか」 を確認する。
+# 単に冪等であることだけでなく、振る舞いベースのアサーションを並べる。
+
+- name: Verify
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: SSH の PasswordAuthentication が no になっていること
+      ansible.builtin.command: sshd -T
+      register: sshd_config
+      changed_when: false
+
+    - name: PasswordAuthentication=no を確認
+      ansible.builtin.assert:
+        that:
+          - "'passwordauthentication no' in sshd_config.stdout | lower"
+        fail_msg: "SSH パスワード認証が無効化されていません"
+
+    - name: PermitRootLogin=no を確認
+      ansible.builtin.assert:
+        that:
+          - "'permitrootlogin no' in sshd_config.stdout | lower"
+        fail_msg: "root の SSH ログインが拒否されていません"
+
+    - name: UFW がインストールされていること
+      ansible.builtin.command: which ufw
+      register: ufw_check
+      changed_when: false
+      failed_when: ufw_check.rc != 0
+
+    - name: fail2ban サービスが enabled であること
+      ansible.builtin.command: systemctl is-enabled fail2ban
+      register: fail2ban_status
+      changed_when: false
+      failed_when: "'enabled' not in fail2ban_status.stdout"
+
+    - name: auditd サービスが active であること
+      ansible.builtin.command: systemctl is-active auditd
+      register: auditd_status
+      changed_when: false
+      failed_when: "'active' not in auditd_status.stdout"
+
+    - name: unattended-upgrades が enabled であること
+      ansible.builtin.stat:
+        path: /etc/apt/apt.conf.d/20auto-upgrades
+      register: auto_upgrades
+
+    - name: 自動更新設定ファイルの存在を確認
+      ansible.builtin.assert:
+        that:
+          - auto_upgrades.stat.exists
+        fail_msg: "unattended-upgrades の有効化設定が見つかりません"

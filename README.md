@@ -8,20 +8,25 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
-## 採用担当者向け: まず見ていただきたい6点
+## 採用担当者向け: まず見ていただきたい 9 点
 
-短時間で確認しやすいよう、応募先で見ていただきたい成果物を6つに絞ると次の通りです。
+短時間で確認しやすいよう、応募先で見ていただきたい成果物を 9 つに絞ると次の通りです。
 
 | 優先 | 見るもの | 確認できること |
 |------|----------|----------------|
 | 1 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、志望領域、**想定業務 × 自分の備えマトリクス**、学習ロードマップ |
-| 2 | [Infra Operation Lab](https://ns7jp.github.io/infra-lab.html) | Windows / M365 / AD 想定の **VLAN 論理構成図**、監視項目、証跡、一次対応 |
-| 3 | [Linux Operation Lab](https://ns7jp.github.io/linux-lab.html) | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計と早見表 |
-| 4 | [Monitoring Stack](./monitoring-stack/) | Prometheus + Grafana + node_exporter の docker-compose 一式 + 4 アラート |
-| 5 | [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 の冪等ベースライン |
-| 6 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 9手順書、**9 スクリプト（Pester 25テスト + GitHub Actions 付き）**、Postmortem 実例、Backup Runbook |
+| 2 | [Infra Operation Lab](https://ns7jp.github.io/infra-lab.html) | Windows / M365 / AD 想定の **VLAN 論理構成図**、監視項目、証跡、一次対応、**Lab 横断アーキ図** |
+| 3 | [Terraform Lab (Azure)](./terraform-lab/) | Azure VM を IaC で構築。NSG 最小権限、cloud-init で node_exporter 自動セットアップ |
+| 4 | [Kubernetes Lab](./k8s-lab/) | **本番グレード** の Deployment (HPA / PDB / NetworkPolicy / securityContext / Kustomize) |
+| 5 | [Docker Lab](./docker-lab/) | multi-stage Dockerfile (non-root, HEALTHCHECK, OCI labels, Trivy/hadolint CI) |
+| 6 | [Monitoring Stack](./monitoring-stack/) | Prometheus + Alertmanager + Grafana + **Loki + Promtail** の 6 コンテナ統合監視 |
+| 7 | [Ansible Playbook + Molecule](./ansible/) | SSH 強化 / UFW / fail2ban / auditd / 自動更新の冪等ベースライン + 振る舞いテスト |
+| 8 | [SRE / 設計ドキュメント](./support-docs/) | **SLO/SLI 定義**、ネットワーク / ファイアウォール設計、**DB 運用ランブック**、CIS セキュリティベースライン |
+| 9 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 9 手順書、**9 スクリプト（Pester 25 テスト + GitHub Actions 付き）**、Postmortem 実例 |
 
-成果の見え方としては、Infra Operation Lab で **VLAN構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測」を一通り** 示し、Support Toolkit で **9手順書・9スクリプト・25 Pesterテスト・Postmortem 実例・Backup Runbook** を公開し、サーバー監視（自作）では **6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応** を示しています。
+成果の見え方としては、「**Terraform で Azure に VM を建てる → Ansible でハードニング → Docker でアプリをコンテナ化 → Kubernetes でデプロイ → Prometheus + Loki で観測 → Alertmanager で通知 → Postmortem で振り返る**」 という IaC ベース運用の一連の流れが、すべて同じリポジトリ内で完結します。
+
+`make help` でローカル検証コマンド一覧を確認できます。`make validate` で全 Lab を一括検証 (実機 apply はしません)。
 
 公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Infra Operation Lab（運用設計メモ）** と **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
 

@@ -181,12 +181,16 @@
                         <div class="skill-description">
                             <ul>
                                 <li>Linux 一次切り分け bash スクリプト（systemd / journalctl / load / disk / ss）</li>
-                                <li>Prometheus + Grafana + node_exporter 監視スタック（Docker Compose で起動）</li>
+                                <li>Prometheus + Grafana + node_exporter + <strong>Loki + Promtail</strong> 監視スタック（Docker Compose で起動、メトリクスとログを統合）</li>
                                 <li>Ansible playbook（SSH 強化 / UFW / fail2ban / auditd / unattended-upgrades）</li>
+                                <li><strong>Terraform で Azure VM をコード管理</strong>（NSG / cloud-init / variable validation、tflint / tfsec を CI で実行）</li>
+                                <li><strong>Kubernetes マニフェスト</strong>（Deployment / HPA / PDB / NetworkPolicy / securityContext / Kustomize）</li>
+                                <li><strong>Docker マルチステージビルド</strong>（non-root, HEALTHCHECK, OCI labels, Trivy / hadolint を CI で実行）</li>
+                                <li><strong>SLO / SLI / アラート閾値根拠の設計</strong>（Google SRE Workbook ベース、burn-rate 式）</li>
                                 <li>rsync + systemd timer によるバックアップ / 月次リストアテスト計画</li>
                                 <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
                                 <li>XAMPP / Apache 環境構築・レンタルサーバーへのデプロイ運用</li>
-                                <li>Terraform / Kubernetes <span class="learning-tag">学習中</span></li>
+                                <li>AZ-104 / CKAD <span class="learning-tag">学習中</span></li>
                             </ul>
                         </div>
                     </div>
@@ -244,8 +248,8 @@
                             <ul>
                                 <li>SQLite（Pulse：PDO／自動生成）</li>
                                 <li>MySQL基礎（掲示板：XAMPP）</li>
-                                <li>SQL文・CRUD操作</li>
-                                <li>テーブル設計・外部キー</li>
+                                <li>SQL文・CRUD操作 / テーブル設計・外部キー</li>
+                                <li><strong>運用設計メモ</strong>: MySQL/PostgreSQL のバックアップ戦略（mysqldump / xtrabackup / pg_basebackup）、PITR（binlog / WAL archiving）、Source-Replica レプリケーション、slow query 分析・チューニングを <a href="support-docs/database-operations.md">DB Operations</a> に整理</li>
                             </ul>
                         </div>
                     </div>

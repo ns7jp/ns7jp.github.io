@@ -1,5 +1,5 @@
 # 最小構成の監視スタック
-# Prometheus + node_exporter + Grafana + Loki + Promtail の 5 コンテナを 1 ホスト内で起動する Lab 用 compose ファイル。
+# Prometheus + Alertmanager + node_exporter + Grafana + Loki + Promtail の 6 コンテナを 1 ホスト内で起動する Lab 用 compose ファイル。
 # 想定: 自宅検証 VM / 1 台の Linux サーバー / 評価環境。
 # 本番では node_exporter / Promtail を監視対象側へ分けて配置し、Prometheus と Grafana と Loki のデータを永続化する。
 # メトリクス (Prometheus) と ログ (Loki) の両方を集約することで、
@@ -27,6 +27,24 @@ services:
       - prometheus_data:/prometheus
     ports:
       - "9090:9090"
+    depends_on:
+      - alertmanager
+    networks:
+      - monitoring
+
+  alertmanager:
+    # アラート通知ルーティング (Slack / PagerDuty / Webhook)
+    image: prom/alertmanager:v0.27.0
+    container_name: lab-alertmanager
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+      - --storage.path=/alertmanager
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - alertmanager_data:/alertmanager
+    ports:
+      - "9093:9093"
     networks:
       - monitoring
 
@@ -103,3 +121,4 @@ volumes:
   prometheus_data:
   grafana_data:
   loki_data:
+  alertmanager_data:
