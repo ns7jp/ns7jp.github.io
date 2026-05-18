@@ -1,0 +1,26 @@
+# 期待される結果: Grafana Explore > Loki で次のクエリを実行した結果のサマリ
+
+# 1. journald で err 以上のログ
+Query: {job="systemd-journal"} | severity=~"err|crit|alert|emerg"
+Time range: Last 1 hour
+Result: 0-5 行程度。健康なホストなら少ない。
+
+# 2. SSH 認証失敗
+Query: {unit="ssh.service"} |= "Failed password"
+Time range: Last 24 hours
+Result: 公開 IP に置いたサーバーなら数百〜数千件 (BOT のスキャン)。
+        プライベートなら 0 件のはず。
+
+# 3. Docker コンテナログから error/warn
+Query: {job="docker"} |~ "(?i)(error|warn)"
+Time range: Last 1 hour
+Result: lab-grafana / lab-prometheus 自体のログ含む。
+        起動直後は数件、安定後は ほぼ 0 件。
+
+# 4. ログ流量 (秒間)
+Query: sum by (job) (rate({job=~".+"}[1m]))
+Time range: Last 15 min
+Result:
+  job="docker"            ~0.5 lines/sec
+  job="systemd-journal"   ~0.1 lines/sec
+  job="varlogs"           ~0.01 lines/sec

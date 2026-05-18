@@ -1,0 +1,65 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# dev 環境: kind ローカルクラスタを想定。
+# - namespace: lab-dev (本番と分離)
+# - replicas を 1 に削減 (リソース節約)
+# - image tag は latest (常に最新を取りに行く)
+# - resources を絞る (kind ノードは弱いので)
+# - ingress は localhost:8080 を想定
+
+namespace: lab-dev
+
+resources:
+  - ../../base
+  - ingress.yaml
+
+namePrefix: dev-
+
+labels:
+  - pairs:
+      environment: dev
+      app.kubernetes.io/instance: web-dev
+    includeSelectors: false
+
+images:
+  - name: nginxinc/nginx-unprivileged
+    newTag: 1.27-alpine
+
+replicas:
+  - name: web
+    count: 1
+
+patches:
+  - target:
+      kind: Deployment
+      name: web
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: 25m
+            memory: 32Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: web
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 1
+      - op: replace
+        path: /spec/maxReplicas
+        value: 2
+
+  - target:
+      kind: Namespace
+      name: lab
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: lab-dev

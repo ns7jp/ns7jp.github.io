@@ -1,0 +1,247 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: web-stg
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/part-of: portfolio-lab
+    environment: stg
+    owner: ns7jp
+    purpose: portfolio-lab
+  name: lab-stg
+---
+apiVersion: v1
+data:
+  index.html: |
+    <!doctype html>
+    <html lang="ja">
+    <head><meta charset="utf-8"><title>K8s Lab</title></head>
+    <body>
+      <h1>Kubernetes Lab</h1>
+      <p>nginx + ConfigMap で配信されている静的ページです。Pod 名は環境変数で参照できます。</p>
+    </body>
+    </html>
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: web-stg
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/part-of: portfolio-lab
+    environment: stg
+  name: stg-web-config
+  namespace: lab-stg
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web
+    app.kubernetes.io/instance: web-stg
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/part-of: portfolio-lab
+    environment: stg
+  name: stg-web
+  namespace: lab-stg
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: web
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web
+    app.kubernetes.io/instance: web-stg
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/part-of: portfolio-lab
+    environment: stg
+  name: stg-web
+  namespace: lab-stg
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/port: "9113"
+        prometheus.io/scrape: "true"
+      labels:
+        app: web
+    spec:
+      containers:
+      - image: nginxinc/nginx-unprivileged:1.27.1-alpine
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        name: nginx
+        ports:
+        - containerPort: 8080
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 2
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 200m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: web-content
+          readOnly: true
+        - mountPath: /var/cache/nginx
+          name: nginx-cache
+        - mountPath: /var/run
+          name: nginx-run
+      securityContext:
+        fsGroup: 101
+        runAsNonRoot: true
+        runAsUser: 101
+        seccompProfile:
+          type: RuntimeDefault
+      topologySpreadConstraints:
+      - labelSelector:
+          matchLabels:
+            app: web
+        maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: ScheduleAnyway
+      volumes:
+      - configMap:
+          name: stg-web-config
+        name: web-content
+      - emptyDir: {}
+        name: nginx-cache
+      - emptyDir: {}
+        name: nginx-run
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    app.kubernetes.io/instance: web-stg
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/part-of: portfolio-lab
+    environment: stg
+  name: stg-web
+  namespace: lab-stg
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: web
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app.kubernetes.io/instance: web-stg
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/part-of: portfolio-lab
+    environment: stg
+  name: stg-web
+  namespace: lab-stg
+spec:
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+    scaleUp:
+      stabilizationWindowSeconds: 30
+  maxReplicas: 5
+  metrics:
+  - resource:
+      name: cpu
+      target:
+        averageUtilization: 70
+        type: Utilization
+    type: Resource
+  minReplicas: 2
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: stg-web
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: internal-ca-issuer
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  labels:
+    app.kubernetes.io/instance: web-stg
+    environment: stg
+  name: stg-web
+  namespace: lab-stg
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: web.stg.example.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: stg-web
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - web.stg.example.internal
+    secretName: web-stg-tls
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    app.kubernetes.io/instance: web-stg
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/part-of: portfolio-lab
+    environment: stg
+  name: stg-web-allow-internal
+  namespace: lab-stg
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: lab
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: ingress-nginx
+    ports:
+    - port: 8080
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      app: web
+  policyTypes:
+  - Ingress

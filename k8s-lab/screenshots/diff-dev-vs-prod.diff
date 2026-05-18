@@ -1,0 +1,153 @@
+5c5
+<     app.kubernetes.io/instance: web-dev
+---
+>     app.kubernetes.io/instance: web-prod
+8c8
+<     environment: dev
+---
+>     environment: prod
+11c11
+<   name: lab-dev
+---
+>   name: lab-prod
+27c27
+<     app.kubernetes.io/instance: web-dev
+---
+>     app.kubernetes.io/instance: web-prod
+30,32c30,32
+<     environment: dev
+<   name: dev-web-config
+<   namespace: lab-dev
+---
+>     environment: prod
+>   name: prod-web-config
+>   namespace: lab-prod
+39c39
+<     app.kubernetes.io/instance: web-dev
+---
+>     app.kubernetes.io/instance: web-prod
+42,44c42,44
+<     environment: dev
+<   name: dev-web
+<   namespace: lab-dev
+---
+>     environment: prod
+>   name: prod-web
+>   namespace: lab-prod
+60c60
+<     app.kubernetes.io/instance: web-dev
+---
+>     app.kubernetes.io/instance: web-prod
+63,65c63,65
+<     environment: dev
+<   name: dev-web
+<   namespace: lab-dev
+---
+>     environment: prod
+>   name: prod-web
+>   namespace: lab-prod
+67c67
+<   replicas: 1
+---
+>   replicas: 3
+85c85
+<       - image: nginxinc/nginx-unprivileged:1.27-alpine
+---
+>       - image: nginxinc/nginx-unprivileged:1.27.1-alpine
+105,106c105,106
+<             cpu: 100m
+<             memory: 64Mi
+---
+>             cpu: 500m
+>             memory: 256Mi
+108,109c108,109
+<             cpu: 25m
+<             memory: 32Mi
+---
+>             cpu: 100m
+>             memory: 128Mi
+139c139
+<           name: dev-web-config
+---
+>           name: prod-web-config
+150c150
+<     app.kubernetes.io/instance: web-dev
+---
+>     app.kubernetes.io/instance: web-prod
+153,155c153,155
+<     environment: dev
+<   name: dev-web
+<   namespace: lab-dev
+---
+>     environment: prod
+>   name: prod-web
+>   namespace: lab-prod
+157c157
+<   minAvailable: 1
+---
+>   minAvailable: 2
+166c166
+<     app.kubernetes.io/instance: web-dev
+---
+>     app.kubernetes.io/instance: web-prod
+169,171c169,171
+<     environment: dev
+<   name: dev-web
+<   namespace: lab-dev
+---
+>     environment: prod
+>   name: prod-web
+>   namespace: lab-prod
+178c178
+<   maxReplicas: 2
+---
+>   maxReplicas: 10
+186c186
+<   minReplicas: 1
+---
+>   minReplicas: 3
+190c190
+<     name: dev-web
+---
+>     name: prod-web
+196,201c196,203
+<     nginx.ingress.kubernetes.io/rewrite-target: /
+<   labels:
+<     app.kubernetes.io/instance: web-dev
+<     environment: dev
+<   name: dev-web
+<   namespace: lab-dev
+---
+>     cert-manager.io/cluster-issuer: letsencrypt-prod
+>     nginx.ingress.kubernetes.io/proxy-body-size: 8m
+>     nginx.ingress.kubernetes.io/ssl-redirect: "true"
+>   labels:
+>     app.kubernetes.io/instance: web-prod
+>     environment: prod
+>   name: prod-web
+>   namespace: lab-prod
+205c207
+<   - host: web.dev.local
+---
+>   - host: web.example.com
+210c212
+<             name: dev-web
+---
+>             name: prod-web
+214a217,220
+>   tls:
+>   - hosts:
+>     - web.example.com
+>     secretName: web-prod-tls
+220c226
+<     app.kubernetes.io/instance: web-dev
+---
+>     app.kubernetes.io/instance: web-prod
+223,225c229,231
+<     environment: dev
+<   name: dev-web-allow-internal
+<   namespace: lab-dev
+---
+>     environment: prod
+>   name: prod-web-allow-internal
+>   namespace: lab-prod

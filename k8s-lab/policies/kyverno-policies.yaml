@@ -1,0 +1,144 @@
+# Kyverno ClusterPolicy: lab-* namespace に対する最小限のセキュリティ・運用ポリシー。
+# Kyverno は OPA/Gatekeeper より構文が簡単で、CRD ベース。
+#
+# インストール: kubectl create -f https://github.com/kyverno/kyverno/releases/latest/download/install.yaml
+# 適用: kubectl apply -f k8s-lab/policies/kyverno-policies.yaml
+# 検証: kubectl get cpol
+
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-non-root
+  annotations:
+    policies.kyverno.io/title: コンテナは root で動かさない
+    policies.kyverno.io/category: Pod Security
+    policies.kyverno.io/severity: high
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: validate-runAsNonRoot
+      match:
+        any:
+          - resources:
+              kinds: [Pod]
+              namespaces: ['lab-*']
+      validate:
+        message: "Pod の securityContext.runAsNonRoot は true でなければなりません"
+        pattern:
+          spec:
+            securityContext:
+              runAsNonRoot: true
+
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-privilege-escalation
+  annotations:
+    policies.kyverno.io/title: 特権昇格を許可しない
+    policies.kyverno.io/severity: high
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: validate-allowPrivilegeEscalation
+      match:
+        any:
+          - resources:
+              kinds: [Pod]
+              namespaces: ['lab-*']
+      validate:
+        message: "container.securityContext.allowPrivilegeEscalation は false でなければなりません"
+        pattern:
+          spec:
+            containers:
+              - securityContext:
+                  allowPrivilegeEscalation: false
+
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-resource-limits
+  annotations:
+    policies.kyverno.io/title: コンテナは resources.requests/limits を必須
+    policies.kyverno.io/severity: medium
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: validate-resources
+      match:
+        any:
+          - resources:
+              kinds: [Pod]
+              namespaces: ['lab-*']
+      validate:
+        message: "container には resources.requests と limits の両方を指定してください"
+        pattern:
+          spec:
+            containers:
+              - resources:
+                  requests:
+                    memory: "?*"
+                    cpu: "?*"
+                  limits:
+                    memory: "?*"
+                    cpu: "?*"
+
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-latest-tag
+  annotations:
+    policies.kyverno.io/title: image tag の latest を禁止
+    policies.kyverno.io/severity: medium
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: validate-image-tag
+      match:
+        any:
+          - resources:
+              kinds: [Pod]
+              namespaces: ['lab-*']
+      validate:
+        message: "image tag に latest を使うとロールバック困難。semver か sha256 で pin してください。"
+        pattern:
+          spec:
+            containers:
+              - image: "!*:latest"
+
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-probes
+  annotations:
+    policies.kyverno.io/title: livenessProbe と readinessProbe を必須
+    policies.kyverno.io/severity: medium
+spec:
+  validationFailureAction: Audit   # 既存リソース壊さないよう Audit から始める運用例
+  background: true
+  rules:
+    - name: validate-probes
+      match:
+        any:
+          - resources:
+              kinds: [Deployment, StatefulSet]
+              namespaces: ['lab-*']
+      validate:
+        message: "Deployment/StatefulSet には livenessProbe と readinessProbe を設定してください"
+        pattern:
+          spec:
+            template:
+              spec:
+                containers:
+                  - livenessProbe:
+                      "?*": "?*"
+                    readinessProbe:
+                      "?*": "?*"

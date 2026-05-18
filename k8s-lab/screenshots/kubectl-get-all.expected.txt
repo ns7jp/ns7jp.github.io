@@ -1,0 +1,32 @@
+# 期待される出力: kubectl apply -k overlays/dev/ 後、約 30 秒後
+# このファイルは「実機で実行した結果と答え合わせするための期待値」 です。
+
+$ kubectl get all,ingress,configmap,networkpolicy,pdb -n lab-dev
+
+NAME                          READY   STATUS    RESTARTS   AGE
+pod/dev-web-7b9c4d8f5-xk2pn   1/1     Running   0          47s
+
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/dev-web   ClusterIP   10.96.142.211   <none>        80/TCP    47s
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dev-web   1/1     1            1           47s
+
+NAME                                DESIRED   CURRENT   READY   AGE
+replicaset.apps/dev-web-7b9c4d8f5   1         1         1       47s
+
+NAME                                          REFERENCE            TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/dev-web   Deployment/dev-web   2%/70%          1         2         1          47s
+
+NAME                                CLASS   HOSTS           ADDRESS     PORTS   AGE
+ingress.networking.k8s.io/dev-web   nginx   web.dev.local   localhost   80      47s
+
+NAME                          DATA   AGE
+configmap/dev-web-config      1      47s
+configmap/kube-root-ca.crt    1      47s
+
+NAME                                                      POD-SELECTOR   AGE
+networkpolicy.networking.k8s.io/dev-web-allow-internal    app=web        47s
+
+NAME                                       MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+poddisruptionbudget.policy/dev-web         1               N/A               0                     47s

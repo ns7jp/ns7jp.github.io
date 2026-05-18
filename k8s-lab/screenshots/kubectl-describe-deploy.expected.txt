@@ -1,0 +1,70 @@
+# 期待される出力: kubectl describe deploy/prod-web -n lab-prod
+# 本番想定 overlay の Deployment が「本番グレードの設定」 を持っていることを確認するための答え合わせ。
+
+$ kubectl describe deployment.apps/prod-web -n lab-prod
+
+Name:                   prod-web
+Namespace:              lab-prod
+CreationTimestamp:      ...
+Labels:                 app=web
+                        app.kubernetes.io/instance=web-prod
+                        app.kubernetes.io/managed-by=kustomize
+                        app.kubernetes.io/part-of=portfolio-lab
+                        environment=prod
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=web
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  0 max unavailable, 1 max surge
+Pod Template:
+  Labels:           app=web
+  Annotations:      prometheus.io/port: 9113
+                    prometheus.io/scrape: true
+  Containers:
+   nginx:
+    Image:        nginxinc/nginx-unprivileged:1.27.1-alpine
+    Port:         8080/TCP
+    Limits:
+      cpu:     500m
+      memory:  256Mi
+    Requests:
+      cpu:        100m
+      memory:     128Mi
+    Liveness:     http-get http://:http/ delay=5s timeout=1s period=10s #success=1 #failure=3
+    Readiness:    http-get http://:http/ delay=2s timeout=1s period=5s #success=1 #failure=3
+    Environment:  <none>
+    Mounts:
+      /usr/share/nginx/html from web-content (ro)
+      /var/cache/nginx from nginx-cache (rw)
+      /var/run from nginx-run (rw)
+  Volumes:
+   web-content:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      prod-web-config
+    Optional:  false
+   nginx-cache:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+   nginx-run:
+    Type:       EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:
+    SizeLimit:  <unset>
+  Topology Spread Constraints:  kubernetes.io/hostname:1, when may not be scheduled
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   prod-web-6c8b9d5f4 (3/3 replicas created)
+Events:          <none>
+
+# 注目ポイント:
+#   - Replicas: 3 desired (overlay の patch で base の 2 から 3 へ)
+#   - cpu: 500m / memory: 256Mi (prod overlay の patch で本番値)
+#   - Image tag: 1.27.1-alpine (latest を使わず pin)
+#   - RollingUpdateStrategy: 0 max unavailable (無停止デプロイ)
+#   - Topology Spread Constraints: 同一ノードに集中させない
+#   - readOnlyRootFilesystem 用に nginx-cache / nginx-run の EmptyDir マウント

@@ -1,0 +1,39 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# stg 環境: 本番に近い構成だが、外部公開せず内部のみ。
+# - namespace: lab-stg
+# - replicas は本番と同じ 2
+# - image tag は git sha 固定 (一度決めたら動かさない)
+# - resources は本番に近づける
+
+namespace: lab-stg
+
+resources:
+  - ../../base
+  - ingress.yaml
+
+namePrefix: stg-
+
+labels:
+  - pairs:
+      environment: stg
+      app.kubernetes.io/instance: web-stg
+    includeSelectors: false
+
+images:
+  - name: nginxinc/nginx-unprivileged
+    newTag: 1.27.1-alpine
+
+replicas:
+  - name: web
+    count: 2
+
+patches:
+  - target:
+      kind: Namespace
+      name: lab
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: lab-stg

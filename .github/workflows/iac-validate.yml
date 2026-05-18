@@ -95,8 +95,13 @@ jobs:
           curl -sSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz" -o /tmp/kustomize.tar.gz
           tar -xzf /tmp/kustomize.tar.gz -C /usr/local/bin/ kustomize
 
-      - name: kustomize build
-        run: kustomize build k8s-lab/manifests/ > /tmp/rendered.yaml
+      - name: kustomize build (base + 3 overlays)
+        run: |
+          for d in base overlays/dev overlays/stg overlays/prod; do
+            echo "=== rendering $d ==="
+            kustomize build "k8s-lab/$d" > "/tmp/rendered-$(basename $d).yaml"
+          done
+          cat /tmp/rendered-*.yaml > /tmp/rendered.yaml
 
       - name: kubeconform (schema validation)
         run: |
@@ -108,6 +113,23 @@ jobs:
         run: |
           curl -sSL https://github.com/controlplaneio/kubesec/releases/download/v2.14.0/kubesec_linux_amd64.tar.gz | tar -xz -C /usr/local/bin/ kubesec
           kubesec scan /tmp/rendered.yaml || true   # 助言扱い (deployment は OK / configmap など score 対象外あり)
+
+  pytest:
+    name: docker-lab pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run unit tests
+        working-directory: docker-lab
+        run: pytest -ra
 
   docker:
     name: hadolint / build / trivy

@@ -1,0 +1,21 @@
+# dev 用 Ingress: localhost:8080 で待ち受ける。
+# kind の extraPortMappings と組み合わせて使う前提。
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: web.dev.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-web
+                port:
+                  number: 80

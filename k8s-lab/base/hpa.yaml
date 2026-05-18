@@ -4,7 +4,6 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web
-  namespace: lab
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

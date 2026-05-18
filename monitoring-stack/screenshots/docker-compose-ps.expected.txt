@@ -1,0 +1,21 @@
+# 期待される出力: docker compose up -d 後、約 30 秒で安定する。
+
+$ cd monitoring-stack
+$ docker compose up -d
+[+] Running 7/7
+ ✔ Network monitoring-stack_monitoring  Created
+ ✔ Container lab-loki                   Started
+ ✔ Container lab-node-exporter          Started
+ ✔ Container lab-alertmanager           Started
+ ✔ Container lab-prometheus             Started
+ ✔ Container lab-promtail               Started
+ ✔ Container lab-grafana                Started
+
+$ docker compose ps
+NAME                  IMAGE                          STATUS              PORTS
+lab-alertmanager      prom/alertmanager:v0.27.0      Up (healthy)        0.0.0.0:9093->9093/tcp
+lab-grafana           grafana/grafana:11.2.0         Up (healthy)        0.0.0.0:3000->3000/tcp
+lab-loki              grafana/loki:3.2.0             Up                  0.0.0.0:3100->3100/tcp
+lab-node-exporter     prom/node-exporter:v1.8.2      Up                  (host network)
+lab-prometheus        prom/prometheus:v2.54.1        Up (healthy)        0.0.0.0:9090->9090/tcp
+lab-promtail          grafana/promtail:3.2.0         Up

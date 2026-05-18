@@ -1,0 +1,52 @@
+# cert-manager の ClusterIssuer 定義。
+# - letsencrypt-staging: テスト用 (rate limit が緩い)
+# - letsencrypt-prod: 本番用
+# - internal-ca-issuer: 社内 CA 想定 (stg overlay が参照)
+#
+# 事前準備:
+#   kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.15.3/cert-manager.yaml
+#
+# 本番 issuer を使う前に、必ず staging で 1 回流して証明書取得が通ることを確認する。
+# Let's Encrypt の rate limit (1 ドメインあたり週 50 件) を消費しないようにするため。
+
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    email: ops@example.com
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: ops@example.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-prod-key
+    solvers:
+      - http01:
+          ingress:
+            class: nginx
+
+---
+# 社内 CA Issuer の例 (CA 証明書を別途 Secret として apply する前提)
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: internal-ca-issuer
+spec:
+  ca:
+    secretName: internal-ca-key-pair

@@ -83,22 +83,40 @@ ansible/check: ## dry-run (--check --diff)
 
 # ----- Kubernetes -----
 .PHONY: k8s/render
-k8s/render: ## kustomize で全リソースを 1 ファイルにレンダリング
-	kustomize build k8s-lab/manifests/
+k8s/render: ## base + 3 overlays を全レンダリング
+	@for d in base overlays/dev overlays/stg overlays/prod; do \
+		echo "=== $$d ==="; \
+		kustomize build "k8s-lab/$$d"; \
+	done
 
 .PHONY: k8s/validate
-k8s/validate: ## kubeconform でスキーマ検証
-	kustomize build k8s-lab/manifests/ | kubeconform -summary
+k8s/validate: ## kubeconform で base + 3 overlays をスキーマ検証
+	@for d in base overlays/dev overlays/stg overlays/prod; do \
+		echo "=== $$d ==="; \
+		kustomize build "k8s-lab/$$d" | kubeconform -summary; \
+	done
 
-.PHONY: k8s/apply
-k8s/apply: ## 現在のコンテキストに適用
-	kubectl apply -k k8s-lab/manifests/
+.PHONY: k8s/apply-dev
+k8s/apply-dev: ## dev overlay を現在のコンテキストへ apply
+	kubectl apply -k k8s-lab/overlays/dev/
 
-.PHONY: k8s/delete
-k8s/delete: ## 現在のコンテキストから削除
-	kubectl delete -k k8s-lab/manifests/
+.PHONY: k8s/apply-prod
+k8s/apply-prod: ## prod overlay を現在のコンテキストへ apply (実機注意)
+	kubectl apply -k k8s-lab/overlays/prod/
+
+.PHONY: k8s/delete-dev
+k8s/delete-dev: ## dev overlay を削除
+	kubectl delete -k k8s-lab/overlays/dev/
+
+.PHONY: k8s/diff
+k8s/diff: ## dev と prod の差分を表示
+	@diff <(kustomize build k8s-lab/overlays/dev) <(kustomize build k8s-lab/overlays/prod) || true
 
 # ----- Docker -----
+.PHONY: docker/test
+docker/test: ## docker-lab の pytest を実行
+	cd docker-lab && pytest -ra
+
 .PHONY: docker/build
 docker/build: ## healthcheck-cli をビルド
 	DOCKER_BUILDKIT=1 docker build -t healthcheck-cli:dev docker-lab/
@@ -127,6 +145,6 @@ scripts/lint: ## PSScriptAnalyzer で静的解析
 
 # ----- まとめ -----
 .PHONY: validate
-validate: site/check monitoring/validate tf/fmt tf/validate ansible/lint k8s/validate docker/lint ## 全 Lab を一括検証 (apply はしない)
+validate: site/check monitoring/validate tf/fmt tf/validate ansible/lint k8s/validate docker/lint docker/test ## 全 Lab を一括検証 (apply はしない)
 	@echo ""
 	@echo "All labs validated."

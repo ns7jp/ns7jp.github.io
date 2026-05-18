@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# base には環境共通の最小単位だけを置く。
+# replicas / image tag / resources / ingress host / namespace は overlay で差分管理する。
+
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+  - hpa.yaml
+  - pdb.yaml
+  - networkpolicy.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: portfolio-lab
+      app.kubernetes.io/managed-by: kustomize
+    includeSelectors: false

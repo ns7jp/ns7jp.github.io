@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: portfolio-lab
+  namespace: argocd
+spec:
+  description: ns7jp portfolio lab project
+
+  # source: Git リポジトリ allowlist
+  sourceRepos:
+    - https://github.com/ns7jp/ns7jp.github.io
+
+  # destination: 配備可能なクラスタ / namespace を制限
+  destinations:
+    - namespace: lab-dev
+      server: https://kubernetes.default.svc
+    - namespace: lab-stg
+      server: https://kubernetes.default.svc
+    - namespace: lab-prod
+      server: https://kubernetes.default.svc
+
+  # cluster-scoped リソースは Namespace のみ許可
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+
+  # namespace-scoped は標準的なワークロード系のみ
+  namespaceResourceWhitelist:
+    - group: ""
+      kind: ConfigMap
+    - group: ""
+      kind: Service
+    - group: apps
+      kind: Deployment
+    - group: autoscaling
+      kind: HorizontalPodAutoscaler
+    - group: policy
+      kind: PodDisruptionBudget
+    - group: networking.k8s.io
+      kind: NetworkPolicy
+    - group: networking.k8s.io
+      kind: Ingress
+
+  roles:
+    - name: read-only
+      description: 全 Application を閲覧のみ
+      policies:
+        - p, proj:portfolio-lab:read-only, applications, get, portfolio-lab/*, allow
+      groups:
+        - ns7jp:portfolio-readers

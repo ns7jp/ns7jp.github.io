@@ -1,0 +1,11 @@
+# 期待される結果: http://localhost:9090/targets
+# Prometheus が node_exporter を正常スクレイプしている状態。
+
+Endpoint                              State   Labels                                 Last Scrape   Scrape Duration   Error
+http://host.docker.internal:9100/metrics  UP    host="lab-host-01" job="node"      8.214s ago    12.421ms          (none)
+http://localhost:9090/metrics             UP    job="prometheus"                    14.682s ago   3.821ms           (none)
+
+
+# alertmanager との連携 (http://localhost:9090/alertmanagers):
+Endpoint                       Labels                                  Last Update
+http://alertmanager:9093/api/v2/alerts  -    8.412s ago

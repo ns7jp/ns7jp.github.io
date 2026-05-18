@@ -1,0 +1,26 @@
+# stg 用 Ingress: 社内 DNS で web.stg.example.internal を解決する想定。
+# cert-manager で社内 CA から TLS 証明書を発行する。
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web
+  annotations:
+    cert-manager.io/cluster-issuer: internal-ca-issuer
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - web.stg.example.internal
+      secretName: web-stg-tls
+  rules:
+    - host: web.stg.example.internal
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: stg-web
+                port:
+                  number: 80
