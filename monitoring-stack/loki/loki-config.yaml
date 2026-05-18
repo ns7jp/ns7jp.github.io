@@ -1,0 +1,58 @@
+# Loki 単一ノード構成 (Lab 用)
+# 本番では S3/GCS バックエンド + memberlist で複数 ingester に冗長化する。
+# ここでは filesystem に保存し、保持期間 7 日で割り切る。
+
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+  grpc_listen_port: 9096
+  log_level: info
+
+common:
+  instance_addr: 127.0.0.1
+  path_prefix: /loki
+  storage:
+    filesystem:
+      chunks_directory: /loki/chunks
+      rules_directory: /loki/rules
+  replication_factor: 1
+  ring:
+    kvstore:
+      store: inmemory
+
+schema_config:
+  configs:
+    - from: 2024-01-01
+      store: tsdb
+      object_store: filesystem
+      schema: v13
+      index:
+        prefix: index_
+        period: 24h
+
+limits_config:
+  retention_period: 168h         # 7 日。本番では 30-90 日を Object Storage で。
+  reject_old_samples: true
+  reject_old_samples_max_age: 168h
+  max_query_series: 5000
+  ingestion_rate_mb: 8           # 単一ノードの保護
+  ingestion_burst_size_mb: 16
+
+compactor:
+  working_directory: /loki/compactor
+  compaction_interval: 10m
+  retention_enabled: true
+  retention_delete_delay: 2h
+  delete_request_store: filesystem
+
+ruler:
+  storage:
+    type: local
+    local:
+      directory: /loki/rules
+  rule_path: /loki/rules-temp
+  ring:
+    kvstore:
+      store: inmemory
+  enable_api: true

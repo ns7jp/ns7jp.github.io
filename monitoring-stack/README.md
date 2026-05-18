@@ -1,6 +1,8 @@
-# Monitoring Stack — Prometheus + Grafana + node_exporter (Lab)
+# Monitoring Stack — Prometheus + Grafana + node_exporter + Loki + Promtail (Lab)
 
-自宅検証VMや評価Linux 1台にすぐ立てられる、**最小構成の監視スタック**です。`docker compose up -d` だけで Prometheus / Grafana / node_exporter が起動し、Grafana を開けば CPU / メモリ / ディスク / Load / ネットワーク のダッシュボードが表示されます。
+自宅検証 VM や評価 Linux 1 台にすぐ立てられる、**メトリクス と ログ を 1 セットで集約する監視スタック**です。`docker compose up -d` だけで Prometheus / Grafana / node_exporter / Loki / Promtail が起動し、Grafana を開けば CPU / メモリ / ディスク / Load / ネットワークのダッシュボードと、ホストの journald / Docker コンテナログを LogQL で横断検索できます。
+
+> 「グラフで異常を検知 → そのままダッシュボードから該当時刻のログにドリルダウン」 という運用フローを 1 ホストで完結させるのが目的です。
 
 > 自作の Flask サーバー監視ダッシュボードと、業界標準のスタックの両方に触れていることを示すための Lab です。本番運用ではない検証用構成のため、認証・TLS・データ永続化・スケーリングは最小限です。
 
@@ -14,9 +16,12 @@
 |---|---|---|
 | `prom/prometheus:v2.54.1` | メトリクス収集、アラート評価 | `9090` |
 | `prom/node-exporter:v1.8.2` | ホストの CPU/メモリ/ディスク/ネット 指標を公開 | `9100` (host network) |
-| `grafana/grafana:11.2.0` | ダッシュボード表示 | `3000` |
+| `grafana/grafana:11.2.0` | ダッシュボード表示 (メトリクス + ログ) | `3000` |
+| `grafana/loki:3.2.0` | ログ集約 / LogQL クエリ | `3100` |
+| `grafana/promtail:3.2.0` | journald / /var/log / Docker ログを Loki へ送信 | (内部のみ) |
 
 ```
+                        メトリクス
 +----------+    scrape     +-------------+
 | node_    |<--------------|  Prometheus |
 | exporter |   (15s)       |  9090       |
@@ -26,7 +31,19 @@
                             +-----+-----+
                             |  Grafana  |
                             |  3000     |
+                            +-----+-----+
+                                  ^
+                                  | datasource
+                            +-----+-----+
+                            |   Loki    |
+                            |   3100    |
+                            +-----+-----+
+                                  ^ push
+                            +-----+-----+
+                            | Promtail  |
                             +-----------+
+                          journald + /var/log + docker
+                            ログ
 ```
 
 ---
@@ -55,13 +72,37 @@ monitoring-stack/
 ├── prometheus/
 │   ├── prometheus.yml          ... スクレイプ設定
 │   └── alert.rules.yml         ... アラートルール（CPU/メモリ/ディスク/exporterダウン）
+├── loki/
+│   └── loki-config.yaml        ... 単一ノード filesystem 構成 (保持 7 日)
+├── promtail/
+│   └── promtail-config.yaml    ... journald / varlogs / Docker の 3 ソース
 └── grafana/
     └── provisioning/
         ├── datasources/
-        │   └── prometheus.yml          ... Prometheusを起動時に自動登録
+        │   └── prometheus.yml          ... Prometheus + Loki を起動時に自動登録
         └── dashboards/
             ├── dashboards.yml          ... ダッシュボード読込設定
-            └── node-overview.json      ... 4パネル構成の基本ダッシュボード
+            └── node-overview.json      ... 4 パネル構成の基本ダッシュボード
+```
+
+---
+
+## LogQL クエリ例
+
+Grafana > Explore > Data source: Loki から実行できます。
+
+```logql
+# sshd の失敗ログだけ
+{unit="ssh.service"} |= "Failed password"
+
+# Docker コンテナで error / warn を含む行
+{job="docker"} |~ "(?i)(error|warn)"
+
+# 直近 5 分の syslog レート (行/秒)
+rate({job="varlogs"}[5m])
+
+# 重要度 err 以上の journal だけ
+{job="systemd-journal"} | severity=~"err|crit|alert|emerg"
 ```
 
 ---

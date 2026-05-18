@@ -1,7 +1,9 @@
 # 最小構成の監視スタック
-# Prometheus + node_exporter + Grafana の3コンテナを 1 ホスト内で起動するLab用 compose ファイル。
-# 想定: 自宅検証VM / 1台のLinuxサーバー / 評価環境。
-# 本番では node_exporter を監視対象側へ分けて配置し、Prometheus と Grafana のデータを永続化する。
+# Prometheus + node_exporter + Grafana + Loki + Promtail の 5 コンテナを 1 ホスト内で起動する Lab 用 compose ファイル。
+# 想定: 自宅検証 VM / 1 台の Linux サーバー / 評価環境。
+# 本番では node_exporter / Promtail を監視対象側へ分けて配置し、Prometheus と Grafana と Loki のデータを永続化する。
+# メトリクス (Prometheus) と ログ (Loki) の両方を集約することで、
+# 「Grafana で異常を検知 → そのまま該当時刻のログをドリルダウン」 という運用フローが実現する。
 
 services:
   prometheus:
@@ -58,6 +60,38 @@ services:
       - "3000:3000"
     depends_on:
       - prometheus
+      - loki
+    networks:
+      - monitoring
+
+  loki:
+    # ログ集約 (LogQL でクエリ)
+    image: grafana/loki:3.2.0
+    container_name: lab-loki
+    restart: unless-stopped
+    command: -config.file=/etc/loki/loki-config.yaml
+    volumes:
+      - ./loki/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki_data:/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - monitoring
+
+  promtail:
+    # ホストの journald / /var/log / Docker コンテナログを Loki へ転送
+    image: grafana/promtail:3.2.0
+    container_name: lab-promtail
+    restart: unless-stopped
+    command: -config.file=/etc/promtail/promtail-config.yaml
+    volumes:
+      - ./promtail/promtail-config.yaml:/etc/promtail/promtail-config.yaml:ro
+      - /var/log:/var/log:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /run/log/journal:/run/log/journal:ro
+      - /etc/machine-id:/etc/machine-id:ro
+    depends_on:
+      - loki
     networks:
       - monitoring
 
@@ -68,3 +102,4 @@ networks:
 volumes:
   prometheus_data:
   grafana_data:
+  loki_data:

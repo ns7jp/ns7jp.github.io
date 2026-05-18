@@ -74,6 +74,9 @@
                 <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux</a>
                 <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack</a>
                 <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
+                <a href="terraform-lab/"><i class="fa-solid fa-cloud"></i> Terraform (Azure)</a>
+                <a href="k8s-lab/"><i class="fa-solid fa-dharmachakra"></i> Kubernetes</a>
+                <a href="docker-lab/"><i class="fa-brands fa-docker"></i> Docker</a>
             </nav>
 
             <section class="lab-intro">
@@ -271,14 +274,43 @@
                 </div>
                 <div class="lab-link-card">
                     <h4><i class="fa-solid fa-arrows-spin"></i> 関連 Lab / Runbook</h4>
-                    <p>Windows / M365 / AD のこのページから、Linux運用・監視スタック・IaC・障害事後分析・バックアップへ横展開できる構成にしています。</p>
+                    <p>Windows / M365 / AD のこのページから、Linux運用・監視・IaC・コンテナ・SRE 設計・障害事後分析・バックアップへ横展開できる構成にしています。</p>
                     <div class="next-scope-list">
                         <span><a href="linux-lab.html" style="color:inherit;">Linux Lab</a></span>
-                        <span><a href="monitoring-stack/" style="color:inherit;">Monitoring Stack</a></span>
+                        <span><a href="monitoring-stack/" style="color:inherit;">Monitoring Stack (Prom/Graf/Loki)</a></span>
                         <span><a href="ansible/" style="color:inherit;">Ansible Playbook</a></span>
+                        <span><a href="terraform-lab/" style="color:inherit;">Terraform Lab (Azure)</a></span>
+                        <span><a href="k8s-lab/" style="color:inherit;">Kubernetes Lab</a></span>
+                        <span><a href="docker-lab/" style="color:inherit;">Docker Lab</a></span>
+                        <span><a href="support-docs/slo-sli-definitions.md" style="color:inherit;">SLO / SLI 定義</a></span>
+                        <span><a href="support-docs/network-firewall-design.md" style="color:inherit;">Network / Firewall 設計</a></span>
+                        <span><a href="support-docs/database-operations.md" style="color:inherit;">DB 運用メモ (MySQL/PG)</a></span>
                         <span><a href="support-docs/postmortem-example.md" style="color:inherit;">Postmortem 実例</a></span>
                         <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup Runbook</a></span>
                     </div>
+                </div>
+            </section>
+
+            <section class="lab-links-section" style="margin-top:30px;">
+                <div class="lab-link-card" style="grid-column:1 / -1;">
+                    <h4><i class="fa-solid fa-layer-group"></i> Lab 横断アーキテクチャ</h4>
+                    <p>各 Lab は単独で動くだけでなく、「<strong>Terraform で VM 構築 → Ansible でハードニング → Docker でアプリをコンテナ化 → Kubernetes でデプロイ → Prometheus + Loki で観測</strong>」 という IaC ベース運用の一連の流れを再現できるよう設計しています。</p>
+                    <pre style="background:#f6f8fa;padding:14px 18px;border-radius:8px;overflow-x:auto;font-size:0.85em;line-height:1.6;">
+[terraform-lab]   ──apply──▶  Azure VM (Ubuntu 22.04, node_exporter 自動セットアップ)
+       │
+       ▼
+[ansible]         ──run────▶  OS ハードニング (SSH / UFW / fail2ban / auditd)
+       │
+       ▼
+[docker-lab]      ──build──▶  ghcr.io/ns7jp/healthcheck-cli:&lt;sha&gt;  (multi-arch, SBOM, Trivy)
+       │
+       ▼
+[k8s-lab]         ──apply──▶  Deployment (HPA, PDB, NetworkPolicy, securityContext)
+       │
+       ▼
+[monitoring-stack] ─scrape─▶  Prometheus (metrics) + Loki (logs) ─▶ Grafana
+                              └ alert.rules + SLO/SLI 定義
+                    </pre>
                 </div>
             </section>
         </div>

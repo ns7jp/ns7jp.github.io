@@ -1,0 +1,12 @@
+# PodDisruptionBudget: ノードメンテ時も最低 1 Pod は残るよう保証。
+# replicas=2 で minAvailable=1 なので、ローリング更新やノードドレインに耐える。
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: web
+  namespace: lab
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: web

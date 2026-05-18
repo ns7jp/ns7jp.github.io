@@ -1,0 +1,49 @@
+#cloud-config
+# VM 起動時に node_exporter を自動セットアップし、9100 で公開する。
+# 既存の monitoring-stack/ Prometheus からスクレイプできるようにする。
+
+package_update: true
+package_upgrade: false
+
+packages:
+  - curl
+  - tar
+  - ufw
+
+users:
+  - name: node_exporter
+    system: true
+    shell: /usr/sbin/nologin
+
+write_files:
+  - path: /etc/systemd/system/node_exporter.service
+    permissions: "0644"
+    content: |
+      [Unit]
+      Description=Prometheus Node Exporter
+      Wants=network-online.target
+      After=network-online.target
+
+      [Service]
+      User=node_exporter
+      Group=node_exporter
+      Type=simple
+      ExecStart=/usr/local/bin/node_exporter
+      Restart=on-failure
+      RestartSec=5
+
+      [Install]
+      WantedBy=multi-user.target
+
+runcmd:
+  - curl -fsSL -o /tmp/node_exporter.tar.gz "https://github.com/prometheus/node_exporter/releases/download/v${node_exporter_version}/node_exporter-${node_exporter_version}.linux-amd64.tar.gz"
+  - tar -xzf /tmp/node_exporter.tar.gz -C /tmp
+  - install -m 0755 /tmp/node_exporter-${node_exporter_version}.linux-amd64/node_exporter /usr/local/bin/node_exporter
+  - rm -rf /tmp/node_exporter.tar.gz /tmp/node_exporter-${node_exporter_version}.linux-amd64
+  - systemctl daemon-reload
+  - systemctl enable --now node_exporter
+  - ufw default deny incoming
+  - ufw default allow outgoing
+  - ufw allow 22/tcp
+  - ufw allow 9100/tcp
+  - ufw --force enable

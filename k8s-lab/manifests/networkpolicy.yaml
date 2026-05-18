@@ -1,0 +1,24 @@
+# NetworkPolicy: lab ネームスペース内の Pod だけが web Pod の 8080 にアクセス可能。
+# 外部からは Ingress 経由のみを想定。最小権限の例。
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: web-allow-internal
+  namespace: lab
+spec:
+  podSelector:
+    matchLabels:
+      app: web
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: lab
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      ports:
+        - protocol: TCP
+          port: 8080

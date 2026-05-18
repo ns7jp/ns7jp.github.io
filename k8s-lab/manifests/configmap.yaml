@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-config
+  namespace: lab
+data:
+  index.html: |
+    <!doctype html>
+    <html lang="ja">
+    <head><meta charset="utf-8"><title>K8s Lab</title></head>
+    <body>
+      <h1>Kubernetes Lab</h1>
+      <p>nginx + ConfigMap で配信されている静的ページです。Pod 名は環境変数で参照できます。</p>
+    </body>
+    </html>

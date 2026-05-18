@@ -1,0 +1,154 @@
+name: IaC validate
+
+# IaC (Terraform / Ansible / Kubernetes) と コンテナ周りを、
+# 「fmt → lint → security scan → dry-run」 の順で検証する。
+# 本番 apply はしない。CI が apply まで触れる構成にはしない (review→manual 承認の世界観)。
+
+on:
+  push:
+    paths:
+      - 'terraform-lab/**'
+      - 'ansible/**'
+      - 'k8s-lab/**'
+      - 'docker-lab/**'
+      - 'monitoring-stack/**'
+      - '.github/workflows/iac-validate.yml'
+  pull_request:
+    paths:
+      - 'terraform-lab/**'
+      - 'ansible/**'
+      - 'k8s-lab/**'
+      - 'docker-lab/**'
+      - 'monitoring-stack/**'
+      - '.github/workflows/iac-validate.yml'
+
+jobs:
+  terraform:
+    name: Terraform fmt / validate / tflint / tfsec
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform-lab
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
+
+      - name: terraform fmt
+        run: terraform fmt -check -recursive
+
+      - name: terraform init (no backend)
+        run: terraform init -backend=false
+
+      - name: terraform validate
+        run: terraform validate -no-color
+
+      - name: Setup tflint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.53.0
+
+      - name: tflint
+        run: |
+          tflint --init
+          tflint --format compact
+
+      - name: tfsec (security)
+        uses: aquasecurity/tfsec-action@v1.0.3
+        with:
+          working_directory: terraform-lab
+          soft_fail: false
+
+  ansible:
+    name: ansible-lint / syntax-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Ansible + lint
+        run: |
+          pip install ansible-core==2.17.* ansible-lint==24.*
+
+      - name: ansible --syntax-check
+        run: ansible-playbook ansible/playbook.yml --syntax-check -i ansible/inventory.ini
+
+      - name: ansible-lint
+        run: ansible-lint ansible/
+
+  kubernetes:
+    name: kubeconform / kustomize build / kubesec
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          curl -sSL -o /tmp/kubeconform.tar.gz https://github.com/yannh/kubeconform/releases/download/v0.6.7/kubeconform-linux-amd64.tar.gz
+          tar -xzf /tmp/kubeconform.tar.gz -C /usr/local/bin/ kubeconform
+
+          curl -sSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv5.4.3/kustomize_v5.4.3_linux_amd64.tar.gz" -o /tmp/kustomize.tar.gz
+          tar -xzf /tmp/kustomize.tar.gz -C /usr/local/bin/ kustomize
+
+      - name: kustomize build
+        run: kustomize build k8s-lab/manifests/ > /tmp/rendered.yaml
+
+      - name: kubeconform (schema validation)
+        run: |
+          kubeconform -summary -schema-location default -schema-location \
+            'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{ .Group }}/{{ .ResourceKind }}_{{ .ResourceAPIVersion }}.json' \
+            /tmp/rendered.yaml
+
+      - name: kubesec scan (security best practices)
+        run: |
+          curl -sSL https://github.com/controlplaneio/kubesec/releases/download/v2.14.0/kubesec_linux_amd64.tar.gz | tar -xz -C /usr/local/bin/ kubesec
+          kubesec scan /tmp/rendered.yaml || true   # 助言扱い (deployment は OK / configmap など score 対象外あり)
+
+  docker:
+    name: hadolint / build / trivy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: hadolint (Dockerfile lint)
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: docker-lab/Dockerfile
+          failure-threshold: warning
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: docker-lab
+          push: false
+          load: true
+          tags: healthcheck-cli:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          image-ref: healthcheck-cli:ci
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: '1'
+          ignore-unfixed: true
+
+  compose:
+    name: monitoring-stack docker compose config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate docker-compose
+        working-directory: monitoring-stack
+        run: docker compose config --quiet
