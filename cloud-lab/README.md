@@ -53,11 +53,13 @@ terraform init -backend=false
 terraform validate
 ```
 
-管理端末の接続元を限定して plan する例:
+`fmt` / `init -backend=false` / `validate` は変数値を必要としません。
+
+`plan` / `apply` を行う場合は、**`admin_cidr` を必ず自分の管理元 CIDR で明示指定** してください。`variables.tf` ではあえて default を設定しておらず、未指定で `apply` できない設計にしています（RFC 5737 のドキュメント用 CIDR が誤って残ったまま SG を作成されることを防ぐため）。`0.0.0.0/0` は validation でブロックされます。
 
 ```bash
 terraform plan \
-  -var='admin_cidr=203.0.113.10/32' \
+  -var='admin_cidr=YOUR.ADMIN.CIDR/32' \
   -var='project=portfolio-cloud-lab'
 ```
 
