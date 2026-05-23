@@ -39,20 +39,22 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
    - Windows / M365 / AD を想定した運用Lab。**VLAN論理構成図** と監視・証跡・一次対応マトリクス。
 6. `linux-lab.html`
    - Linux 一次運用Lab。systemd / journalctl / SSH / rsync 早見表。
-7. `works.html`
+7. `cloud-lab.html`
+   - AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail の設計メモ。
+8. `works.html`
    - 作品紹介カード、フィルター機能、ITサポートに関連する作品の見せ方を確認します。
-8. `resume.html`
+9. `resume.html`
    - A4 1pager。**想定業務 × 自分の備えマトリクス**、学習ロードマップ。
-9. `contact.html`
+10. `contact.html`
    - 連絡先と問い合わせ導線を確認します。
-10. `css/reset.css` → `css/style.css`
+11. `css/reset.css` → `css/style.css`
     - ブラウザ差のリセット、サイト全体のデザイン、レスポンシブ対応を確認します。
-11. `js/jquery.bgswitcher.js`
+12. `js/jquery.bgswitcher.js`
     - トップページの背景画像を切り替える jQuery プラグインの役割を確認します。
-12. `image/` と `favicon.ico`
+13. `image/` と `favicon.ico`
     - 背景画像、プロフィール画像、作品スクリーンショット、ブラウザタブ用アイコンの役割を確認します。
-13. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/`
-    - **HTML 以外** の成果物。手順書 / PowerShell + bash / Pester / Prometheus / Ansible playbook。インフラ運用ポートフォリオの本体です。
+14. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
+    - **HTML 以外** の成果物。手順書 / PowerShell + bash / Pester / Prometheus / Ansible playbook / Terraform / 実行証跡。インフラ運用ポートフォリオの本体です。
 
 ---
 
@@ -171,7 +173,7 @@ Windows / M365 / AD を想定した **インフラ運用Lab** ページです。
 Linux サーバー一次運用のLabです。`infra-lab.html` のサブナビから遷移します。
 
 主な構成:
-- `.lab-subnav`: 4Lab 間のサブナビ（active が `linux-lab.html` に切り替わる）
+- `.lab-subnav`: Windows / Linux / Cloud / Monitoring / Ansible 間のサブナビ（active が `linux-lab.html` に切り替わる）
 - `.operation-table`: 負荷 / メモリ / ディスク / サービス / ログ / ネット / 認証 / FW の確認コマンド早見表
 - `.lab-architecture-grid`: SSH鍵 / 権限 / cron / logrotate の運用メモを 2x2 カードで配置
 - `.lab-link-card` 内の `<pre>`: rsync + systemd timer のコード例（コードブロック装飾はインライン）
@@ -292,7 +294,7 @@ $(".hero-slider").bgswitcher({
 
 ### `support-docs/`
 
-ITサポート・社内SE・運用監視で実際に使われる手順書・事例集（全 9 本）。
+ITサポート・社内SE・運用監視で実際に使われる手順書・事例集（全 10 本）。
 
 - 標準業務 4本（キッティング / オフボーディング / 共有フォルダ権限 / M365 ライセンス）
 - 障害対応 3本（10ケース事例集 / 重大インシデント・プレイブック / マルウェア対応）

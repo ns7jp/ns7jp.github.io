@@ -1,0 +1,102 @@
+name: Infrastructure checks
+
+on:
+  push:
+    paths:
+      - 'ansible/**'
+      - 'cloud-lab/**'
+      - 'monitoring-stack/**'
+      - 'support-scripts/linux-triage.sh'
+      - '.github/workflows/infra-check.yml'
+  pull_request:
+    paths:
+      - 'ansible/**'
+      - 'cloud-lab/**'
+      - 'monitoring-stack/**'
+      - 'support-scripts/linux-triage.sh'
+      - '.github/workflows/infra-check.yml'
+
+jobs:
+  monitoring:
+    name: Docker Compose and Prometheus config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show Docker Compose version
+        run: docker compose version
+
+      - name: Validate docker compose file
+        run: docker compose -f monitoring-stack/docker-compose.yml config --quiet
+
+      - name: Check Prometheus config
+        run: |
+          docker run --rm \
+            -v "$PWD/monitoring-stack/prometheus:/etc/prometheus:ro" \
+            prom/prometheus:v2.54.1 \
+            promtool check config /etc/prometheus/prometheus.yml
+
+      - name: Check Prometheus alert rules
+        run: |
+          docker run --rm \
+            -v "$PWD/monitoring-stack/prometheus:/etc/prometheus:ro" \
+            prom/prometheus:v2.54.1 \
+            promtool check rules /etc/prometheus/alert.rules.yml
+
+  ansible:
+    name: Ansible syntax and lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Ansible tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ansible-core ansible-lint
+
+      - name: Install Ansible collections
+        run: ansible-galaxy collection install -r ansible/requirements.yml
+
+      - name: Syntax check playbook
+        run: ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --syntax-check
+
+      - name: Run ansible-lint
+        run: ansible-lint --profile min ansible/playbook.yml
+
+  cloud-terraform:
+    name: Cloud Lab Terraform validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      - name: Check Terraform formatting
+        run: terraform -chdir=cloud-lab/terraform fmt -check
+
+      - name: Terraform init without backend
+        run: terraform -chdir=cloud-lab/terraform init -backend=false
+
+      - name: Terraform validate
+        run: terraform -chdir=cloud-lab/terraform validate
+
+  shell:
+    name: Linux triage shell syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Bash syntax check
+        run: bash -n support-scripts/linux-triage.sh

@@ -1,0 +1,21 @@
+# Static site and PowerShell test evidence sample
+
+$ node scripts/check-static-links.js
+Checked 10 HTML files. Local links look good.
+
+$ node scripts/check-html-structure.js
+Checked 10 HTML files. Structural tags look balanced.
+
+$ pwsh -NoProfile
+PS> $config = New-PesterConfiguration
+PS> $config.Run.Path = 'support-scripts/tests'
+PS> $config.Run.Exit = $true
+PS> Invoke-Pester -Configuration $config
+
+Starting discovery in 1 files.
+Discovery found 25 tests in 1 files.
+Tests completed in 1.4s
+Tests Passed: 25, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+
+PS> Invoke-ScriptAnalyzer -Path support-scripts -Recurse -Severity Error,Warning
+PSScriptAnalyzer: clean.

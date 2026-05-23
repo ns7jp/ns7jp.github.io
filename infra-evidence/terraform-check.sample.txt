@@ -1,0 +1,10 @@
+# Cloud Lab Terraform evidence sample
+
+$ terraform -chdir=cloud-lab/terraform fmt -check
+# exit code 0
+
+$ terraform -chdir=cloud-lab/terraform init -backend=false
+Terraform has been successfully initialized!
+
+$ terraform -chdir=cloud-lab/terraform validate
+Success! The configuration is valid.

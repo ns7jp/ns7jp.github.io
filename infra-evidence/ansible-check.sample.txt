@@ -1,0 +1,15 @@
+# Ansible evidence sample
+
+$ ansible-galaxy collection install -r ansible/requirements.yml
+Starting galaxy collection install process
+Process install dependency map
+ansible.posix: installed
+community.general: installed
+
+$ ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --syntax-check
+
+playbook: ansible/playbook.yml
+
+$ ansible-lint --profile min ansible/playbook.yml
+
+Passed: 0 failure(s), 0 warning(s) in 1 files processed of 1 encountered.

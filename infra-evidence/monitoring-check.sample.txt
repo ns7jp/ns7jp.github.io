@@ -1,0 +1,21 @@
+# Monitoring Stack evidence sample
+
+$ docker compose -f monitoring-stack/docker-compose.yml config --quiet
+# exit code 0
+
+$ docker run --rm \
+  -v "$PWD/monitoring-stack/prometheus:/etc/prometheus:ro" \
+  prom/prometheus:v2.54.1 \
+  promtool check config /etc/prometheus/prometheus.yml
+
+Checking /etc/prometheus/prometheus.yml
+ SUCCESS: /etc/prometheus/prometheus.yml is valid prometheus config file syntax
+ SUCCESS: 1 rule files found
+
+$ docker run --rm \
+  -v "$PWD/monitoring-stack/prometheus:/etc/prometheus:ro" \
+  prom/prometheus:v2.54.1 \
+  promtool check rules /etc/prometheus/alert.rules.yml
+
+Checking /etc/prometheus/alert.rules.yml
+  SUCCESS: 4 rules found

@@ -72,6 +72,7 @@
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
                 <a href="infra-lab.html"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
                 <a href="linux-lab.html" class="active"><i class="fa-brands fa-linux"></i> Linux</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
                 <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack</a>
                 <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
             </nav>
@@ -256,10 +257,13 @@ WantedBy=timers.target
                 </div>
                 <div class="lab-link-card">
                     <h4><i class="fa-solid fa-gears"></i> 自動化 / 監視への入口</h4>
-                    <p>初期構築のIaCと、運用後の監視を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheusで継続的に観測する流れです。</p>
+                    <p>初期構築のIaC、Cloud Network、運用後の監視、検証証跡を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheusで継続的に観測する流れです。</p>
                     <div class="next-scope-list">
                         <span><a href="ansible/" style="color:inherit;">Ansible playbook</a></span>
+                        <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>
                         <span><a href="monitoring-stack/" style="color:inherit;">Prometheus + Grafana</a></span>
+                        <span><a href="infra-evidence/" style="color:inherit;">Infra Evidence</a></span>
+                        <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
                         <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup Runbook</a></span>
                         <span><a href="support-docs/postmortem-example.md" style="color:inherit;">Postmortem 実例</a></span>
                     </div>

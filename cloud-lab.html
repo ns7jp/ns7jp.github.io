@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸のCloud Network Lab。AWS VPC / Subnet / Route / Security Group / Terraform validate を、オンプレのVLANやACLと対応づけて整理しています。">
+    <title>Cloud Lab | 島田則幸のポートフォリオ</title>
+
+    <meta property="og:title" content="Cloud Lab | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/cloud-lab.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:description" content="AWS VPC / Subnet / Route / Security Group / Terraform validate を、オンプレのVLANやACLと対応づけて整理したCloud Network Lab。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <p class="res-menu">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </p>
+
+    <header>
+        <h1 class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li class="active"><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero infra-hero" style="background-image: url('image/network-vlan.svg');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h2 class="page-title">
+                <span class="title-en">Cloud Network Lab</span>
+                <span class="title-jp">AWS VPC / Terraform 設計メモ</span>
+            </h2>
+        </div>
+    </section>
+
+    <article class="page-content infra-lab-content" id="main" tabindex="-1">
+        <div class="container">
+
+            <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
+                <a href="infra-lab.html"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux</a>
+                <a href="cloud-lab.html" class="active"><i class="fa-solid fa-cloud"></i> Cloud</a>
+                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack</a>
+                <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
+            </nav>
+
+            <section class="lab-intro">
+                <span class="case-label">AWS VPC / Terraform Scenario</span>
+                <h3>オンプレの VLAN / ACL とクラウドの VPC / SG を対応づけるLab</h3>
+                <p>クラウド運用の入口として、AWS VPC、Public / Private Subnet、Route Table、Security Group を最小構成で整理しました。Terraform は構文検証までを CI に乗せ、課金インパクトが出やすい EC2 / NAT Gateway / Elastic IP は初期構成から外しています。</p>
+                <div class="lab-badges" aria-label="Cloud Labで確認できる領域">
+                    <span><i class="fa-brands fa-aws"></i> AWS</span>
+                    <span><i class="fa-solid fa-diagram-project"></i> VPC</span>
+                    <span><i class="fa-solid fa-shield-halved"></i> Security Group</span>
+                    <span><i class="fa-solid fa-code"></i> Terraform</span>
+                    <span><i class="fa-solid fa-coins"></i> Cost Guardrail</span>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-network-wired"></i></span>
+                    <span class="heading-text">Cloud Network Design</span>
+                </div>
+                <div class="operation-table-wrap">
+                    <table class="operation-table">
+                        <thead>
+                            <tr>
+                                <th>要素</th>
+                                <th>設計値</th>
+                                <th>オンプレ対応</th>
+                                <th>運用で見るポイント</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>VPC</td>
+                                <td><code>10.20.0.0/16</code></td>
+                                <td>拠点 / データセンターのL3ネットワーク</td>
+                                <td>将来の拡張、他拠点・VPNとのCIDR重複を避ける。</td>
+                            </tr>
+                            <tr>
+                                <td>Public Subnet</td>
+                                <td><code>10.20.10.0/24</code></td>
+                                <td>DMZ / 踏み台セグメント</td>
+                                <td>Internet Gateway への経路を持つ。SSH は管理CIDRのみに限定。</td>
+                            </tr>
+                            <tr>
+                                <td>Private Subnet</td>
+                                <td><code>10.20.20.0/24</code></td>
+                                <td>Server VLAN</td>
+                                <td>直接インターネット公開しない。Bastion SG 経由の必要ポートのみ許可。</td>
+                            </tr>
+                            <tr>
+                                <td>Security Group</td>
+                                <td>Bastion / Private App を分離</td>
+                                <td>ACL / FW ルール</td>
+                                <td>送信元CIDRではなくSG参照を使い、意図しない横展開を防ぐ。</td>
+                            </tr>
+                            <tr>
+                                <td>Terraform</td>
+                                <td><code>cloud-lab/terraform/</code></td>
+                                <td>構成管理台帳 / 変更差分</td>
+                                <td><code>fmt</code>、<code>init -backend=false</code>、<code>validate</code> をCIで確認。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-clipboard-check"></i></span>
+                    <span class="heading-text">Change / Verify / Cost Guardrail</span>
+                </div>
+                <div class="lab-architecture-grid">
+                    <div class="architecture-notes">
+                        <h4>変更前確認</h4>
+                        <ul>
+                            <li><code>terraform fmt -check</code> で書式を揃える。</li>
+                            <li><code>terraform init -backend=false</code> で provider 取得と初期化を検証。</li>
+                            <li><code>terraform validate</code> で構文と参照関係を確認。</li>
+                        </ul>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>セキュリティ</h4>
+                        <ul>
+                            <li>SSH は <code>admin_cidr</code> のみに限定し、<code>0.0.0.0/0</code> を禁止。</li>
+                            <li>Private 側は Bastion SG からの SSH / node_exporter のみ許可。</li>
+                            <li>本番では SSM Session Manager / VPN / Zero Trust Access を優先。</li>
+                        </ul>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>コスト</h4>
+                        <ul>
+                            <li>初期構成では EC2 / NAT Gateway / Elastic IP を作らない。</li>
+                            <li>追加する場合は Budget Alert と削除手順を先に用意する。</li>
+                            <li>検証目的のリソースには <code>Project</code> / <code>Environment</code> タグを必須化。</li>
+                        </ul>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>本番化差分</h4>
+                        <ul>
+                            <li>CloudTrail、VPC Flow Logs、GuardDuty、Security Hub を追加。</li>
+                            <li>CloudWatch Alarm と通知先を Runbook に紐づける。</li>
+                            <li>AWS Backup とリストアテストを月次運用に入れる。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lab-links-section">
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-code-branch"></i> Terraform と検証証跡</h4>
+                    <p>Cloud Lab の詳細設計、Terraform、CIで実行する検証コマンドを確認できます。</p>
+                    <div class="contact-actions">
+                        <a href="cloud-lab/" class="btn btn-secondary">Cloud Lab README</a>
+                        <a href="cloud-lab/terraform/main.tf" class="btn btn-outline-dark">Terraformを見る</a>
+                        <a href="infra-evidence/" class="btn btn-outline-dark">証跡を見る</a>
+                    </div>
+                </div>
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-shield"></i> 本番化で足すもの</h4>
+                    <p>Lab と本番運用の差分を、監視、通知、認証、秘密情報、バックアップ、変更管理の観点で整理しています。</p>
+                    <div class="next-scope-list">
+                        <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
+                        <span><a href="support-docs/ad-m365-change-case.md" style="color:inherit;">AD / M365 変更ケース</a></span>
+                        <span><a href="monitoring-stack/" style="color:inherit;">Monitoring Stack</a></span>
+                        <span><a href="ansible/" style="color:inherit;">Ansible Playbook</a></span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="me.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="infra-lab.html">Infra Lab</a>
+                <a href="works.html">Works</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+
+<script>
+    $(window).on('load', function() {
+        $('.loader').fadeOut(800);
+    });
+
+    $(".res-menu").click(function () {
+        $("nav").toggleClass("show");
+        $(".res-menu").toggleClass("show2");
+    });
+
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('header').addClass('scrolled');
+        } else {
+            $('header').removeClass('scrolled');
+        }
+    });
+</script>
+</body>
+</html>

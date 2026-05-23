@@ -75,6 +75,7 @@ collection 経由になるため、`requirements.yml` で明示宣言してい�
 - 自作 PowerShell スクリプトが **Windows 系の "状態確認"** の入り口
 - この Ansible playbook が **Linux 系の "状態適用"** の入り口
 - セットで「**確認 → 適用 → 監視**」が一通り示せる構成（監視は [monitoring-stack/](../monitoring-stack/)）
+- [infra-check.yml](../.github/workflows/infra-check.yml) で collection install、`ansible-playbook --syntax-check`、`ansible-lint --profile min` を自動検証
 
 ---
 
@@ -82,3 +83,8 @@ collection 経由になるため、`requirements.yml` で明示宣言してい�
 
 - 公開リポジトリ向けの Lab サンプルです。`admin_pubkey` はダミーで、`NOPASSWD:ALL` も Lab 用の妥協です。本番では `ansible-vault encrypt` で機密分離し、`NOPASSWD` 範囲を最小化してください。
 - `ufw` の有効化は SSH 接続を切る可能性があります。**事前に SSH 許可ルールが入っているか必ず `--check --diff` で確認**してから適用してください。
+
+## 検証証跡 / 本番化差分
+
+- [Infra Evidence](../infra-evidence/) — Ansible syntax-check / ansible-lint の検証コマンドとサンプル出力
+- [Production Readiness](../production-readiness.md) — Vault、秘密情報、ロールバック、監査ログなど、本番化で足す観点

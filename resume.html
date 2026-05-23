@@ -338,8 +338,8 @@
                     <div><strong>言語</strong>HTML / CSS / JavaScript / Python / PHP</div>
                     <div><strong>フレームワーク</strong>Flask / Flet / Tkinter / jQuery</div>
                     <div><strong>データベース</strong>MySQL / SQLite</div>
-                    <div><strong>インフラ・運用</strong>PowerShell / Windows管理 / サーバー監視 / Linux基礎</div>
-                    <div><strong>ツール</strong>Git / GitHub / VSCode / 仮想マシン / Chart.js</div>
+                    <div><strong>インフラ・運用</strong>PowerShell / Windows管理 / サーバー監視 / Linux基礎 / AWS VPC基礎</div>
+                    <div><strong>ツール</strong>Git / GitHub / VSCode / 仮想マシン / Terraform / Chart.js</div>
                 </div>
             </section>
 
@@ -348,13 +348,13 @@
                 <div class="resume-works">
                     <div class="work-item">
                         <span class="work-name">① Infra Operation Lab</span>
-                        <span class="work-tag">Win / Linux / Prom / Ansible</span>
-                        <div class="work-desc">Win / Linux 一次切り分け、Prometheus + Grafana 監視、Ansible 冪等化、Postmortem 実例、Backup Runbook を1リポジトリに統合。</div>
+                        <span class="work-tag">Win / Linux / Cloud / Prom / Ansible</span>
+                        <div class="work-desc">Win / Linux 一次切り分け、AWS VPC/Terraform、Prometheus + Grafana、Ansible、証跡、Postmortem、Backup Runbook を統合。</div>
                     </div>
                     <div class="work-item">
                         <span class="work-name">② Support Toolkit</span>
                         <span class="work-tag">Docs / PowerShell / bash / Pester</span>
-                        <div class="work-desc">9手順書・9確認スクリプト・25 Pesterテスト・PSScriptAnalyzer 静的解析を GitHub Actions で自動実行。</div>
+                        <div class="work-desc">10手順書・9確認スクリプト・25 Pesterテスト・PSScriptAnalyzer 静的解析を GitHub Actions で自動実行。</div>
                     </div>
                     <div class="work-item">
                         <span class="work-name">③ サーバー監視ダッシュボード</span>
@@ -389,7 +389,13 @@
                         <tr>
                             <td class="task">PCキッティング / オフボーディング / AD・M365棚卸し</td>
                             <td class="evidence">
-                                <a href="support-docs/pc-kitting-guide.md">pc-kitting</a> / <a href="support-docs/account-offboarding-guide.md">offboarding</a> / <a href="support-scripts/Get-StaleUserAccounts.ps1">stale users</a> / <a href="support-scripts/Get-M365LicenseInventory.ps1">M365 license</a>
+                                <a href="support-docs/pc-kitting-guide.md">pc-kitting</a> / <a href="support-docs/account-offboarding-guide.md">offboarding</a> / <a href="support-docs/ad-m365-change-case.md">AD/M365 change</a> / <a href="support-scripts/Get-StaleUserAccounts.ps1">stale users</a> / <a href="support-scripts/Get-M365LicenseInventory.ps1">M365 license</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">クラウド基礎 / IaC 検証</td>
+                            <td class="evidence">
+                                <a href="cloud-lab.html">Cloud Lab</a>（AWS VPC / Subnet / Security Group） / <a href="cloud-lab/terraform/">Terraform</a>（fmt / init / validate） / <a href="infra-evidence/">Infra Evidence</a>
                             </td>
                         </tr>
                         <tr>
@@ -445,7 +451,7 @@
         </div>
 
         <footer class="resume-footer">
-            最新の Infra / Linux Lab・Monitoring・Ansible・Postmortem・Runbook は <a href="https://ns7jp.github.io/">ns7jp.github.io</a> に公開 / 最終更新 2026-05
+            最新の Infra / Linux / Cloud Lab・Monitoring・Ansible・Evidence・Runbook は <a href="https://ns7jp.github.io/">ns7jp.github.io</a> に公開 / 最終更新 2026-05
         </footer>
     </article>
 

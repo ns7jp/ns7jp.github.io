@@ -94,4 +94,9 @@ monitoring-stack/
 - ポートフォリオ用の最小構成です。`GF_SECURITY_ADMIN_PASSWORD=changeme` を変更せずに公開ホストへ展開しないでください。
 - node_exporter は `network_mode: host` でホストネットワーク上の :9100 に公開し、Prometheus 側は `host.docker.internal:9100` で読み取ります。Linux Docker Engine では `host.docker.internal` が自動解決されないため、Prometheus 側に `extra_hosts: "host.docker.internal:host-gateway"` を入れて両環境（Linux / Docker Desktop）で同じ設定が動くようにしています（Docker 20.10+）。
 - 永続化ボリュームは `prometheus_data` / `grafana_data` です。再構築時は `docker compose down -v` で初期化できます。
-- `docker compose config` で構文・ボリューム・ポートの整合が確認できます（CI でも回せます）。
+- `docker compose config` と `promtool check config/rules` で構文・ボリューム・ポート・アラート定義の整合を確認できます（[infra-check.yml](../.github/workflows/infra-check.yml) でも自動実行）。
+
+## 検証証跡 / 本番化差分
+
+- [Infra Evidence](../infra-evidence/) — `docker compose config` / `promtool` の検証コマンドとサンプル出力
+- [Production Readiness](../production-readiness.md) — Alertmanager、通知先、SLO、秘密情報、バックアップなど、本番化で足す観点

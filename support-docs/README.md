@@ -6,7 +6,7 @@ ITサポート・社内SE・運用監視業務で実際に使われる手順書�
 
 ---
 
-## 📂 収録ドキュメント（全 9 本）
+## 📂 収録ドキュメント（全 10 本）
 
 ### 🛠 標準業務 手順書（4 本）
 
@@ -28,19 +28,27 @@ ITサポート・社内SE・運用監視業務で実際に使われる手順書�
 
 ---
 
+### 🔁 変更作業ケース（1 本）
+
+#### 5. [AD / Microsoft 365 変更作業ケース](./ad-m365-change-case.md)
+
+部署異動に伴う AD 属性、所属グループ、共有フォルダ権限、M365 ライセンス確認を、**変更申請 → 事前確認 → 作業 → 検証 → 証跡保存 → ロールバック** の流れで整理した実務寄りのケースです。
+
+---
+
 ### 🚨 障害対応 / インシデント対応（3 本）
 
-#### 5. [障害対応事例集（10 ケース）](./troubleshooting-case-studies.md)
+#### 6. [障害対応事例集（10 ケース）](./troubleshooting-case-studies.md)
 
 ヘルプデスクでよく問い合わせを受ける10ケースを「**現象 → 影響範囲 → 切り分け → 想定原因 → 対応 → 再発防止**」の6項目で整理した事例集。
 
 **含まれるケース**：PC起動不可 / ネット接続不可 / メール送受信不可 / 印刷不可 / パスワードロック / Office ライセンスエラー / VPN接続不可 / 共有フォルダアクセス不可 / PC低速化 / ファイル破損
 
-#### 6. [重大インシデント対応プレイブック](./incident-response-playbook.md)
+#### 7. [重大インシデント対応プレイブック](./incident-response-playbook.md)
 
 P1 / P2 重大度の事案で発動する、検知から事後分析までの定型フロー。役割分担（IC / Tech Lead / Comms / Scribe）、標準タイムライン、報告テンプレート、ポストモーテムの進め方をまとめています。
 
-#### 7. [マルウェア感染疑い対応フロー](./malware-suspected-response.md)
+#### 8. [マルウェア感染疑い対応フロー](./malware-suspected-response.md)
 
 感染兆候の判断基準から、即時隔離（5 分以内）、影響範囲の特定、検体保全、復旧、事後対応まで。電源切断 vs シャットダウンの判断基準、横展開検知の PowerShell クエリ等を収録。
 
@@ -48,11 +56,11 @@ P1 / P2 重大度の事案で発動する、検知から事後分析までの定
 
 ### 📓 事後分析 / 復旧運用（2 本）
 
-#### 8. [Postmortem 実例（共有フォルダ I/O 飽和、P2）](./postmortem-example.md)
+#### 9. [Postmortem 実例（共有フォルダ I/O 飽和、P2）](./postmortem-example.md)
 
 重大インシデント対応プレイブックの「型」を、実際の振り返りに当てはめた架空のサンプル。**MTTA / MTTR / MTTM、5 Whys、応急 / 恒久 / 中期対応** を含む。`incident-response-playbook.md` と組み合わせると「型 → 実例」が一通り読めます。
 
-#### 9. [バックアップ / リストア Runbook](./backup-restore-runbook.md)
+#### 10. [バックアップ / リストア Runbook](./backup-restore-runbook.md)
 
 Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsync + systemd timer）の 2 系統を載せ、**月次リストアテスト計画** までを含めた運用Runbook。「取れている」だけでなく「**必ず戻せる**」の証明を意識した構成。
 
@@ -92,9 +100,12 @@ Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsy
 
 - 🌐 [ポートフォリオサイト](https://ns7jp.github.io/)
 - 🪟 [Infra Lab (Windows / M365 / AD)](https://ns7jp.github.io/infra-lab.html) — VLAN 論理構成図、監視・証跡マトリクス
+- ☁️ [Cloud Lab](https://ns7jp.github.io/cloud-lab.html) — AWS VPC / Security Group / Terraform validate
 - 🐧 [Linux Lab](https://ns7jp.github.io/linux-lab.html) — systemd / journalctl / SSH / rsync の一次運用
 - 📊 [Monitoring Stack](../monitoring-stack/) — Prometheus + Grafana + node_exporter (docker-compose)
 - ⚙️ [Ansible Playbook](../ansible/) — Linux ベースライン冪等化
+- ✅ [Infra Evidence](../infra-evidence/) — 実行証跡サンプルとCI検証観点
+- 🛡 [Production Readiness](../production-readiness.md) — 本番化で足す運用観点
 - 🧰 [support-scripts/](../support-scripts/) — PowerShell + bash の確認・監査・棚卸しスクリプト
 - 📂 [作品リポジトリ一覧](https://github.com/ns7jp)
 
