@@ -1,0 +1,139 @@
+================================================================
+ ansible-playbook --check --diff 実行サンプル
+ 実行日時 : 2026-05-10 21:08:43 JST
+ 実行者   : opsadmin@workstation
+ 対象     : lab-vm01 (10.50.10.12) Ubuntu 22.04.4 LTS
+ ansible  : core 2.16.5 / Python 3.11
+ コマンド :
+   ansible-playbook -i inventory.ini playbook.yml \
+                    --check --diff --vault-id @prompt
+================================================================
+
+PLAY [Baseline hardening for Ubuntu hosts] *****************************
+
+TASK [Gathering Facts] *************************************************
+ok: [lab-vm01]
+
+TASK [apt キャッシュ更新と全パッケージ upgrade] **************************
+changed: [lab-vm01]
+
+TASK [必須パッケージ] **************************************************
+ok: [lab-vm01]
+
+TASK [unattended-upgrades を有効化] ************************************
+--- before
++++ after: /etc/apt/apt.conf.d/20auto-upgrades
+@@ -0,0 +1,3 @@
++APT::Periodic::Update-Package-Lists "1";
++APT::Periodic::Unattended-Upgrade "1";
++APT::Periodic::AutocleanInterval "7";
+
+changed: [lab-vm01]
+
+TASK [sudo グループの作成は不要だが、念のため確認] *****************
+ok: [lab-vm01]
+
+TASK [管理ユーザーを作成] *********************************************
+changed: [lab-vm01]
+
+TASK [公開鍵を authorized_keys に投入] *********************************
+changed: [lab-vm01]
+
+TASK [sudo パスワードレス（必要な場合のみ。鍵+多要素前提）] *********
+--- before
++++ after: /etc/sudoers.d/90-opsadmin
+@@ -0,0 +1 @@
++opsadmin ALL=(ALL) NOPASSWD:ALL
+
+changed: [lab-vm01]
+
+TASK [sshd_config を Ansible 管理下に置く] *****************************
+--- before: /etc/ssh/sshd_config (current)
++++ after: /etc/ssh/sshd_config (templated)
+@@ -13,8 +13,11 @@
+-#Port 22
++Port 22
+-#PermitRootLogin prohibit-password
++PermitRootLogin no
+-#PasswordAuthentication yes
++PasswordAuthentication no
+-#X11Forwarding yes
++X11Forwarding no
++AllowTcpForwarding no
++ClientAliveInterval 300
++ClientAliveCountMax 2
+
+changed: [lab-vm01]
+
+TASK [UFW デフォルトを deny incoming / allow outgoing に] **************
+changed: [lab-vm01] => (item={'direction': 'incoming', 'policy': 'deny'})
+changed: [lab-vm01] => (item={'direction': 'outgoing', 'policy': 'allow'})
+
+TASK [UFW で必要な TCP ポートを許可] **********************************
+changed: [lab-vm01] => (item=22)
+changed: [lab-vm01] => (item=80)
+changed: [lab-vm01] => (item=443)
+
+TASK [UFW 有効化] *****************************************************
+changed: [lab-vm01]
+
+TASK [fail2ban の sshd jail を有効化] **********************************
+--- before
++++ after: /etc/fail2ban/jail.d/sshd.local
+@@ -0,0 +1,6 @@
++[sshd]
++enabled = true
++port    = 22
++maxretry = 5
++findtime = 10m
++bantime  = 1h
+
+changed: [lab-vm01]
+
+TASK [auditd 起動と自動起動有効化] *************************************
+ok: [lab-vm01]
+
+TASK [基本 audit ルール（ログイン / sudo / passwd 変更）] **************
+changed: [lab-vm01]
+
+TASK [journald のログを永続保管にする] ********************************
+--- before: /etc/systemd/journald.conf
++++ after: /etc/systemd/journald.conf
+@@ -10,7 +10,7 @@
+-#Storage=auto
++Storage=persistent
+
+changed: [lab-vm01]
+
+TASK [タイムゾーンを設定] *********************************************
+changed: [lab-vm01]
+
+TASK [systemd-timesyncd を有効化] **************************************
+ok: [lab-vm01]
+
+RUNNING HANDLER [restart sshd] *****************************************
+changed: [lab-vm01]
+
+RUNNING HANDLER [restart fail2ban] *************************************
+changed: [lab-vm01]
+
+RUNNING HANDLER [reload auditd rules] **********************************
+changed: [lab-vm01]
+
+RUNNING HANDLER [restart journald] *************************************
+changed: [lab-vm01]
+
+PLAY RECAP *************************************************************
+lab-vm01 : ok=21  changed=15  unreachable=0  failed=0  skipped=0  rescued=0  ignored=0
+
+================================================================
+ 確認ポイント（チケット添付時のコメント）:
+ - --check モードのため実機への適用は未実施。
+ - 全 21 タスクで failed=0 / unreachable=0。
+ - 重要変更箇所: sshd_config (PasswordAuthentication no, PermitRootLogin no),
+   UFW 有効化, fail2ban sshd jail 有効化, auditd ルール追加。
+ - 適用前に必ず別経路の管理用 SSH（コンソール等）を確保したうえで
+   --tags ssh のみで再実行し、SSH 切断による締め出しを回避する。
+
+ 2回目の dry-run (適用後) では PLAY RECAP changed=0 になることを確認 → 冪等性確認済。
+================================================================

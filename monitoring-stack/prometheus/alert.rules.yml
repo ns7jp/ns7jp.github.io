@@ -39,3 +39,21 @@ groups:
         annotations:
           summary: "node_exporter 到達不能 ({{ $labels.instance }})"
           description: "サーバー本体ダウンか、node_exporter 障害の可能性。SSHでホスト疎通を確認してください。"
+
+      - alert: AlertmanagerDown
+        expr: up{job="alertmanager"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Alertmanager 到達不能"
+          description: "アラート通知経路が機能していない。Lab 内で alertmanager コンテナの状態を確認してください。"
+
+      - alert: LokiDown
+        expr: up{job="loki"} == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Loki 到達不能 — ログ集約停止"
+          description: "ログが Promtail から Loki へ届かなくなっている可能性。docker compose logs loki を確認してください。"

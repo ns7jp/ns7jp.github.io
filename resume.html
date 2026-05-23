@@ -383,7 +383,7 @@
                             <td class="task">問い合わせ受付 / 一次切り分け</td>
                             <td class="evidence">
                                 Win: <a href="support-scripts/">PowerShell 8本</a>（読み取り中心 / JSON・CSV・HTML 出力） /
-                                Linux: <a href="support-scripts/linux-triage.sh">linux-triage.sh</a> / 切り分けの型: <a href="infra-lab.html">Infra Lab</a>
+                                Linux: <a href="support-scripts/linux-triage.sh">linux-triage.sh</a> + <a href="support-scripts/samples/linux-triage.sample.txt">実行サンプル</a> / 型: <a href="infra-lab.html">Infra Lab</a>
                             </td>
                         </tr>
                         <tr>
@@ -393,15 +393,34 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="task">監視 一次対応 / アラート判定</td>
+                            <td class="task">監視 一次対応 / アラート判定 / 通知設計</td>
                             <td class="evidence">
-                                自作 <a href="https://github.com/ns7jp/server-monitor">Flask 監視</a> + 標準 <a href="monitoring-stack/">Prometheus + Grafana + node_exporter</a>（4 アラート）
+                                自作 <a href="https://github.com/ns7jp/server-monitor">Flask 監視</a> + 標準 <a href="monitoring-stack/">Prometheus + Loki + Alertmanager + Grafana</a>（6 アラート / Slack+Mail 経路 / silence 検証ログ）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">SLO / SLI / エラーバジェット設計</td>
+                            <td class="evidence">
+                                <a href="support-docs/slo-definitions.md">SLO 定義書</a>（4 サービス分の SLI / 閾値の根拠 / 凍結フロー）
                             </td>
                         </tr>
                         <tr>
                             <td class="task">サーバー初期構築 / 冪等運用 / バックアップ</td>
                             <td class="evidence">
-                                <a href="ansible/">Ansible</a>（SSH/UFW/fail2ban/auditd/自動更新） / <a href="support-docs/backup-restore-runbook.md">Backup Runbook</a>（VSS+Robocopy / rsync+systemd timer / 月次リストアテスト）
+                                <a href="ansible/">Ansible</a>（SSH/UFW/fail2ban/auditd/自動更新） + <a href="ansible/samples/check-run.sample.log">--check 実行ログ</a> + <a href="ansible/samples/idempotency-rerun.sample.log">冪等性ログ</a> /
+                                <a href="support-docs/backup-restore-runbook.md">Backup Runbook</a> + <a href="support-docs/dr-test-log.md">DR 演習記録（6ヶ月分）</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">クラウド / IaC（ハイブリッド前提）</td>
+                            <td class="evidence">
+                                <a href="azure-lab/">Azure Lab</a>（Terraform で VNet / NSG / Bastion / VM、オンプレ Ansible を Bastion 経由で再利用可能な構成）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">ネットワーク設計 / セグメント分離</td>
+                            <td class="evidence">
+                                <a href="infra-lab.html">VLAN 論理構成図</a> + <a href="support-docs/network-acl-vpn-examples.md">ACL / S2S VPN / WireGuard 例 + L1→L7 切り分け順序</a>
                             </td>
                         </tr>
                         <tr>
@@ -411,9 +430,15 @@
                             </td>
                         </tr>
                         <tr>
+                            <td class="task">変更管理 / RFC / CAB</td>
+                            <td class="evidence">
+                                <a href="support-docs/change-management-rfc.md">RFC テンプレート + 実例（CR-2026-014）</a> / 緊急変更の事後 RFC 運用
+                            </td>
+                        </tr>
+                        <tr>
                             <td class="task">スクリプト品質 / CI</td>
                             <td class="evidence">
-                                <a href="support-scripts/lib/Triage-Lib.ps1">純関数化</a> + Pester 25テスト + PSScriptAnalyzer 静的解析（GitHub Actions）
+                                <a href="support-scripts/lib/Triage-Lib.ps1">純関数化</a> + Pester 25テスト + PSScriptAnalyzer + ansible-lint + yamllint + terraform fmt/validate + promtool/amtool check（GitHub Actions 4 workflow）
                             </td>
                         </tr>
                     </tbody>

@@ -85,6 +85,7 @@ PowerShell では、コマンド名が `動詞-名詞` の形になっていま�
 | [`samples/pc-inventory.sample.json`](./samples/pc-inventory.sample.json) | `Collect-PcInventory.ps1` | 問い合わせ受付時の端末情報をチケットへ添付 |
 | [`samples/network-triage.sample.csv`](./samples/network-triage.sample.csv) | `Test-NetworkTriage.ps1` | ネットワーク不可の一次切り分け結果を共有 |
 | [`samples/endpoint-daily-report.sample.html`](./samples/endpoint-daily-report.sample.html) | `New-EndpointDailyReport.ps1` | 日次点検のHTMLサマリーとして引き継ぎ |
+| [`samples/linux-triage.sample.txt`](./samples/linux-triage.sample.txt) | `linux-triage.sh` | Linux サーバー「Web が遅い」問い合わせの一次切り分け結果（負荷高 → php-fpm 設定起因の特定までを 8 セクションで記録） |
 
 サンプルは公開用に作成したダミーデータです。実在の端末名、ユーザーID、IPアドレス、社内サーバー名、認証情報は含めていません。
 

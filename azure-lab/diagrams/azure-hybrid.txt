@@ -1,0 +1,57 @@
+Azure ハイブリッド構成（Lab）
+
+                              ┌───────────────────────┐
+                              │     Internet          │
+                              └───────────┬───────────┘
+                                          │ 443 only
+                                          ▼
+                              ┌───────────────────────┐
+                              │   Azure Bastion       │
+                              │   AzureBastionSubnet  │
+                              │   10.50.255.0/27      │
+                              └───────────┬───────────┘
+                                          │ SSH (private)
+       ┌──────────────────────────────────┼─────────────────────────────────┐
+       │  VNet  10.50.0.0/16              │                                 │
+       │                                  ▼                                 │
+       │  ┌──────── snet-app  10.50.10.0/24 ────────────────────────────┐  │
+       │  │                                                             │  │
+       │  │  Linux VM   (Ubuntu 22.04, Standard_B1s, No Public IP)      │  │
+       │  │  ── NSG: Allow Bastion 22  /  Deny Internet *               │  │
+       │  │                                                             │  │
+       │  └─────────────────────────────────────────────────────────────┘  │
+       │                                                                   │
+       └────────────────────────┬──────────────────────────────────────────┘
+                                │ ExpressRoute or Site-to-Site VPN（将来）
+                                │ → support-docs/network-acl-vpn-examples.md
+                                ▼
+                  ┌─────────────────────────────┐
+                  │   On-Prem (VLAN 20)         │
+                  │   AD DS / DNS / DHCP        │
+                  │   10.0.20.10                │
+                  └──────────────┬──────────────┘
+                                 │ Entra Connect (ハイブリッド ID)
+                                 ▼
+                  ┌─────────────────────────────┐
+                  │   Entra ID テナント         │
+                  │   ─ Conditional Access      │
+                  │   ─ Defender for Endpoint   │
+                  │   ─ M365 ライセンス管理     │
+                  └─────────────────────────────┘
+
+
+設計上の判断
+─────────
+1. パブリック IP は Bastion のみ。VM 直接公開しない（攻撃面最小化）
+2. NSG は implicit deny に頼らず明示拒否ルールを priority 4000 で配置
+3. オンプレ Ansible Playbook の対象 (Ubuntu 22.04) と OS を一致させ、再利用可能
+4. オンプレ AD と Entra ID は Entra Connect で片方向同期
+5. リソースタグ env=lab / owner / purpose を全リソースに付与（コスト棚卸し用）
+
+
+関連ドキュメント
+─────────
+- オンプレ VLAN: infra-lab.html  (Server VLAN 20 / User VLAN 30 / Guest VLAN 40)
+- VPN/ACL 例   : support-docs/network-acl-vpn-examples.md
+- SLO 定義     : support-docs/slo-definitions.md
+- Ansible      : ansible/playbook.yml

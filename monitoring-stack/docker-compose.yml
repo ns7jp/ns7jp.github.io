@@ -41,6 +41,52 @@ services:
     volumes:
       - /:/host:ro,rslave
 
+  alertmanager:
+    # Prometheus からのアラートを受け取り、ルーティング・抑制・通知を行う
+    image: prom/alertmanager:v0.27.0
+    container_name: lab-alertmanager
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+      - --storage.path=/alertmanager
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - alertmanager_data:/alertmanager
+    ports:
+      - "9093:9093"
+    networks:
+      - monitoring
+
+  loki:
+    # ログ集約（Prometheus と同じラベルベース）
+    image: grafana/loki:3.1.1
+    container_name: lab-loki
+    restart: unless-stopped
+    command:
+      - -config.file=/etc/loki/loki-config.yml
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/loki-config.yml:ro
+      - loki_data:/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - monitoring
+
+  promtail:
+    # ホストの /var/log を Loki へ転送するエージェント
+    image: grafana/promtail:3.1.1
+    container_name: lab-promtail
+    restart: unless-stopped
+    command:
+      - -config.file=/etc/promtail/promtail-config.yml
+    volumes:
+      - ./promtail/promtail-config.yml:/etc/promtail/promtail-config.yml:ro
+      - /var/log:/var/log:ro
+    depends_on:
+      - loki
+    networks:
+      - monitoring
+
   grafana:
     # ダッシュボード表示
     image: grafana/grafana:11.2.0
@@ -58,6 +104,7 @@ services:
       - "3000:3000"
     depends_on:
       - prometheus
+      - loki
     networks:
       - monitoring
 
@@ -68,3 +115,5 @@ networks:
 volumes:
   prometheus_data:
   grafana_data:
+  alertmanager_data:
+  loki_data:

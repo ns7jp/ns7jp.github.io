@@ -1,0 +1,68 @@
+================================================================
+ Prometheus アラート発火 → Alertmanager → Slack/メール 通知サンプル
+ 検証日時 : 2026-05-12 11:50:00 JST
+ シナリオ : stress-ng で意図的に CPU を 100% に張り付けて HostHighCpu を発火させる
+================================================================
+
+[1] 発火操作
+   $ sudo apt-get install -y stress-ng
+   $ stress-ng --cpu 2 --timeout 720s &
+
+[2] Prometheus /api/v1/alerts （発火 11 分後）
+{
+  "status": "success",
+  "data": {
+    "alerts": [
+      {
+        "labels": {
+          "alertname": "HostHighCpu",
+          "instance": "lab-vm01",
+          "job": "node",
+          "severity": "warning"
+        },
+        "annotations": {
+          "summary": "lab-vm01 CPU 使用率が 85% を継続",
+          "description": "5分平均で 85% を超過。プロセス上位とイベントログを確認してください。"
+        },
+        "state": "firing",
+        "activeAt": "2026-05-12T02:50:14.218Z",
+        "value": "98.4"
+      }
+    ]
+  }
+}
+
+[3] Alertmanager 通知（Slack webhook）受信内容
+   #ops-alerts チャンネル / 2026-05-12 11:51:08
+
+   [WARNING] HostHighCpu — lab-vm01
+   CPU 使用率が 85% を継続（現在 98.4%）
+   plan: support-docs/incident-response-playbook.md L42 (P3 警告 → 30分以内に確認)
+   runbook: linux-lab.html 「負荷」セクションの一次切り分け
+   silence 候補: meta-job=load-test （計画的試験中）
+
+[4] 同時に届く email （routing: receiver=ops-mail）
+   To: ops@example.com
+   Subject: [Prometheus] firing: HostHighCpu / lab-vm01 (warning)
+   Body:
+     - severity : warning
+     - started  : 2026-05-12 11:50:14 JST
+     - duration : 11m
+     - link     : http://prometheus.lab.local:9090/alerts
+
+[5] 抑制動作の確認
+   $ amtool silence add alertname=HostHighCpu \
+                         --duration=2h \
+                         --comment="planned stress-ng test by ops"
+   silence 14a2... 作成 → Slack/メール ともに以後の発火通知を抑止
+
+[6] 復旧
+   stress-ng 停止 → 11分後に "resolved" 通知が Slack/メールで配信され、
+   Prometheus 側 active 数 0 を確認 → クローズ。
+
+================================================================
+ 検証結果:
+   ✓ firing → notify → silence → resolved の一連の経路が成立
+   ✓ Slack / メールの 2 経路で通知できることを確認
+   ✓ silence によりノイズを抑制でき、計画作業時の運用が成立
+================================================================

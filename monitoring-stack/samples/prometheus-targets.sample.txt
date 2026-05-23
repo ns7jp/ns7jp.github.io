@@ -1,0 +1,61 @@
+================================================================
+ Prometheus /api/v1/targets 出力サンプル
+ 取得日時 : 2026-05-12 11:24:08 JST
+ URL      : http://localhost:9090/api/v1/targets
+ 用途     : Lab 起動直後にスクレイプ対象が UP になっていることの確認
+================================================================
+
+{
+  "status": "success",
+  "data": {
+    "activeTargets": [
+      {
+        "discoveredLabels": {
+          "__address__": "host.docker.internal:9100",
+          "__metrics_path__": "/metrics",
+          "__scheme__": "http",
+          "job": "node"
+        },
+        "labels": {
+          "instance": "lab-vm01",
+          "job": "node"
+        },
+        "scrapePool": "node",
+        "scrapeUrl": "http://host.docker.internal:9100/metrics",
+        "globalUrl": "http://host.docker.internal:9100/metrics",
+        "lastError": "",
+        "lastScrape": "2026-05-12T02:24:03.218Z",
+        "lastScrapeDuration": 0.034812165,
+        "health": "up"
+      },
+      {
+        "discoveredLabels": {
+          "__address__": "localhost:9090",
+          "__metrics_path__": "/metrics",
+          "__scheme__": "http",
+          "job": "prometheus"
+        },
+        "labels": {
+          "instance": "localhost:9090",
+          "job": "prometheus"
+        },
+        "scrapePool": "prometheus",
+        "scrapeUrl": "http://localhost:9090/metrics",
+        "globalUrl": "http://lab-prometheus:9090/metrics",
+        "lastError": "",
+        "lastScrape": "2026-05-12T02:24:01.005Z",
+        "lastScrapeDuration": 0.005121472,
+        "health": "up"
+      }
+    ],
+    "droppedTargets": []
+  }
+}
+
+================================================================
+ 確認結果:
+   ✓ health=up が 2/2
+   ✓ lastError 空
+   ✓ scrape 所要時間 35ms 未満
+   → Grafana ダッシュボード「Node Overview (Lab)」で値が描画されることを確認済
+================================================================

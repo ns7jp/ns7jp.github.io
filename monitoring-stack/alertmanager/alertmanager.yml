@@ -1,0 +1,62 @@
+# Alertmanager 設定
+# - severity ラベルに応じて経路を分岐
+# - critical は Slack + メール、warning は Slack のみ
+# - silence によりノイズ抑制が可能（amtool silence add で操作）
+#
+# 注意: Lab 用にダミーの webhook と SMTP 設定を入れています。
+# 実運用では Vault / .env で機密分離してください。
+
+global:
+  resolve_timeout: 5m
+  smtp_from: ops-bot@example.com
+  smtp_smarthost: smtp.example.com:587
+  smtp_auth_username: ops-bot@example.com
+  smtp_auth_password: changeme
+  smtp_require_tls: true
+
+# 通知抑制ルール: critical 発火中は同インスタンスの warning を抑制（重複通知防止）
+inhibit_rules:
+  - source_matchers:
+      - severity = "critical"
+    target_matchers:
+      - severity = "warning"
+    equal:
+      - alertname
+      - instance
+
+route:
+  receiver: ops-slack
+  group_by: ["alertname", "instance"]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+
+  routes:
+    - matchers:
+        - severity = "critical"
+      receiver: ops-critical
+      continue: true
+
+    - matchers:
+        - severity = "warning"
+      receiver: ops-slack
+
+receivers:
+  # Lab では webhook 受信のみ示す。本番では Slack 公式の slack_configs を使用。
+  - name: ops-slack
+    webhook_configs:
+      - url: https://hooks.slack.com/services/T000/B000/XXXX
+        send_resolved: true
+
+  - name: ops-critical
+    webhook_configs:
+      - url: https://hooks.slack.com/services/T000/B000/XXXX
+        send_resolved: true
+    email_configs:
+      - to: ops@example.com
+        send_resolved: true
+        headers:
+          Subject: '[CRITICAL] {{ .GroupLabels.alertname }} / {{ .GroupLabels.instance }}'
+
+templates:
+  - /etc/alertmanager/templates/*.tmpl

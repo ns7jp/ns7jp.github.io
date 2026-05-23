@@ -1,0 +1,101 @@
+name: IaC lint (Ansible / Terraform / Compose / YAML)
+
+on:
+  push:
+    paths:
+      - 'ansible/**'
+      - 'azure-lab/**'
+      - 'monitoring-stack/**'
+      - '.github/workflows/iac-lint.yml'
+  pull_request:
+    paths:
+      - 'ansible/**'
+      - 'azure-lab/**'
+      - 'monitoring-stack/**'
+      - '.github/workflows/iac-lint.yml'
+
+jobs:
+  yamllint:
+    name: yamllint (Ansible / Compose / Prometheus / Loki)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install yamllint
+        run: pip install yamllint==1.35.1
+
+      - name: Run yamllint
+        run: |
+          yamllint -d "{extends: relaxed, rules: {line-length: {max: 160, level: warning}}}" \
+            ansible/ monitoring-stack/
+
+  ansible-lint:
+    name: ansible-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install ansible + ansible-lint + collections
+        run: |
+          pip install ansible-core==2.16.* ansible-lint==24.*
+          ansible-galaxy collection install -r ansible/requirements.yml
+
+      - name: ansible-playbook syntax-check
+        run: ansible-playbook ansible/playbook.yml --syntax-check
+
+      - name: ansible-lint
+        run: ansible-lint ansible/playbook.yml
+
+  compose-config:
+    name: docker compose config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: docker compose config (monitoring-stack)
+        working-directory: monitoring-stack
+        run: docker compose config --quiet
+
+      - name: promtool check rules
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}/monitoring-stack/prometheus":/work \
+            -w /work \
+            prom/prometheus:v2.54.1 \
+            promtool check rules alert.rules.yml
+
+      - name: amtool check config
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}/monitoring-stack/alertmanager":/work \
+            -w /work \
+            --entrypoint amtool \
+            prom/alertmanager:v0.27.0 \
+            check-config alertmanager.yml
+
+  terraform:
+    name: Terraform fmt + validate (azure-lab)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: azure-lab/terraform
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.5"
+
+      - name: terraform fmt
+        run: terraform fmt -check -recursive
+
+      - name: terraform init (no backend)
+        run: terraform init -backend=false
+
+      - name: terraform validate
+        run: terraform validate -no-color

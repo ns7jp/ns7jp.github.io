@@ -8,20 +8,22 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
-## 採用担当者向け: まず見ていただきたい6点
+## 採用担当者向け: まず見ていただきたい8点
 
-短時間で確認しやすいよう、応募先で見ていただきたい成果物を6つに絞ると次の通りです。
+短時間で確認しやすいよう、応募先で見ていただきたい成果物を 8 つに絞ると次の通りです。
 
 | 優先 | 見るもの | 確認できること |
 |------|----------|----------------|
-| 1 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、志望領域、**想定業務 × 自分の備えマトリクス**、学習ロードマップ |
+| 1 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、志望領域、**想定業務 × 自分の備えマトリクス（10 項目）**、学習ロードマップ |
 | 2 | [Infra Operation Lab](https://ns7jp.github.io/infra-lab.html) | Windows / M365 / AD 想定の **VLAN 論理構成図**、監視項目、証跡、一次対応 |
 | 3 | [Linux Operation Lab](https://ns7jp.github.io/linux-lab.html) | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計と早見表 |
-| 4 | [Monitoring Stack](./monitoring-stack/) | Prometheus + Grafana + node_exporter の docker-compose 一式 + 4 アラート |
-| 5 | [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 の冪等ベースライン |
-| 6 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 9手順書、**9 スクリプト（Pester 25テスト + GitHub Actions 付き）**、Postmortem 実例、Backup Runbook |
+| 4 | [Azure Lab (Cloud)](./azure-lab/) | Terraform で **VNet / NSG / Bastion / VM** を最小単位で構築するハイブリッド前提 IaC |
+| 5 | [Monitoring Stack](./monitoring-stack/) | Prometheus + **Alertmanager + Loki** + Grafana + node_exporter / 6 アラート / firing→silence→resolved の検証ログ |
+| 6 | [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 + **--check 実行ログ** + **冪等性 (changed=0) ログ** |
+| 7 | [SLO / DR / RFC 三点セット](./support-docs/) | [SLO 定義](./support-docs/slo-definitions.md)・[DR 演習 6ヶ月分](./support-docs/dr-test-log.md)・[変更管理 RFC 実例](./support-docs/change-management-rfc.md) |
+| 8 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 12 手順書、9 スクリプト、Pester 25テスト、Postmortem 実例、Backup Runbook |
 
-成果の見え方としては、Infra Operation Lab で **VLAN構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測」を一通り** 示し、Support Toolkit で **9手順書・9スクリプト・25 Pesterテスト・Postmortem 実例・Backup Runbook** を公開し、サーバー監視（自作）では **6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応** を示しています。
+成果の見え方としては、Infra Operation Lab で **VLAN構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Linux Lab・Azure Lab・Monitoring Stack・Ansible で **「確認 → 適用 → 観測 → クラウド拡張」を一通り** 示し、Support Toolkit と SLO/DR/RFC ドキュメントで **「設計の根拠 → 実行の証跡 → 振り返り」** までを公開しています。サーバー監視（自作）では 6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応 を示しています。
 
 公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Infra Operation Lab（運用設計メモ）** と **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
 
@@ -105,10 +107,11 @@
 | 履歴書 | `resume.html` | A4 1pager。**想定業務 × 自分の備えマトリクス** と **学習ロードマップ** を含む |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
 | Support Toolkit | `works.html#work-support-toolkit` | 手順書・PowerShell・チケット形式の対応例を、ITサポート実務に近い成果物としてまとめる |
-| サポート文書 | `support-docs/` | 標準業務4本 + 障害対応3本 + **Postmortem 実例** + **Backup/Restore Runbook** の計9本 |
-| 実務スクリプト | `support-scripts/` | PowerShell 8本 + bash 1本（Linux一次切り分け）+ **Triage-Lib 純関数ライブラリ + Pester テスト** |
-| Monitoring Stack | `monitoring-stack/` | Prometheus + Grafana + node_exporter の docker-compose 一式 + 4 アラートルール |
-| Ansible Playbook | `ansible/` | Ubuntu ベースライン冪等化 (SSH / UFW / fail2ban / auditd / unattended-upgrades) |
+| サポート文書 | `support-docs/` | 標準業務4 + 障害対応3 + **Postmortem実例** + **Backup Runbook** + **SLO定義** + **DR演習記録** + **変更管理RFC** + **Network ACL/VPN** の計 12 本 |
+| 実務スクリプト | `support-scripts/` | PowerShell 8本 + bash 1本（Linux一次切り分け）+ **Triage-Lib 純関数ライブラリ + Pester テスト** + **bash 実行サンプル** |
+| Monitoring Stack | `monitoring-stack/` | **Prometheus + Alertmanager + Loki + Promtail + Grafana + node_exporter** の docker-compose 一式 + 6 アラート + firing→silence→resolved 検証ログ |
+| Ansible Playbook | `ansible/` | Ubuntu ベースライン冪等化 (SSH / UFW / fail2ban / auditd / unattended-upgrades) + **--check 実行ログ + 冪等性確認ログ** |
+| Azure Lab | `azure-lab/` | Terraform で **VNet / NSG / Bastion / VM** を最小単位で構築するクラウド検証 Lab（AZ-104 学習用） |
 
 ### `index.html`
 
@@ -184,8 +187,12 @@ ns7jp.github.io/
 │   ├── troubleshooting-case-studies.md        ... 障害対応事例集（10ケース）
 │   ├── incident-response-playbook.md          ... 重大インシデント対応プレイブック
 │   ├── malware-suspected-response.md          ... マルウェア感染疑い対応フロー
-│   ├── postmortem-example.md                  ... ★ 共有フォルダI/O飽和のPostmortem実例（架空）
-│   └── backup-restore-runbook.md              ... ★ Win VSS + Linux rsync のバックアップ運用
+│   ├── postmortem-example.md                  ... 共有フォルダI/O飽和のPostmortem実例（架空）
+│   ├── backup-restore-runbook.md              ... Win VSS + Linux rsync のバックアップ運用
+│   ├── dr-test-log.md                         ... ★ DR / リストア演習記録（6ヶ月分）
+│   ├── slo-definitions.md                     ... ★ SLO/SLI/エラーバジェット定義（4サービス）
+│   ├── change-management-rfc.md               ... ★ 変更管理 RFC テンプレート + 実例
+│   └── network-acl-vpn-examples.md            ... ★ Network ACL / S2S VPN / WireGuard
 │
 ├── support-scripts/
 │   ├── Collect-PcInventory.ps1      ... 端末情報収集
@@ -196,29 +203,41 @@ ns7jp.github.io/
 │   ├── New-EndpointDailyReport.ps1  ... 日次CSV/HTMLレポート
 │   ├── Get-StaleUserAccounts.ps1    ... AD 休眠ユーザー抽出
 │   ├── Get-M365LicenseInventory.ps1 ... M365 ライセンス棚卸し（Graph SDK）
-│   ├── linux-triage.sh              ... ★ Linux 一次切り分け bash
-│   ├── lib/Triage-Lib.ps1           ... ★ 純関数化された判定ロジック
-│   └── tests/Triage-Lib.Tests.ps1   ... ★ Pester ユニットテスト（25ケース）
+│   ├── linux-triage.sh              ... Linux 一次切り分け bash
+│   ├── lib/Triage-Lib.ps1           ... 純関数化された判定ロジック
+│   ├── tests/Triage-Lib.Tests.ps1   ... Pester ユニットテスト（25ケース）
+│   └── samples/                     ... ★ JSON / CSV / HTML / TXT 各種サンプル出力
 │
-├── monitoring-stack/        ... ★ Prometheus + Grafana + node_exporter の docker-compose
-│   ├── docker-compose.yml
-│   ├── prometheus/prometheus.yml
-│   ├── prometheus/alert.rules.yml
-│   └── grafana/provisioning/
+├── monitoring-stack/        ... Prometheus + Loki + Alertmanager + Grafana + node_exporter
+│   ├── docker-compose.yml             ... ★ Loki / Promtail / Alertmanager を追加
+│   ├── prometheus/prometheus.yml      ... ★ alerting.alertmanagers + loki ジョブ追加
+│   ├── prometheus/alert.rules.yml     ... ★ 6 アラート（+ AM / Loki 死活）
+│   ├── alertmanager/alertmanager.yml  ... ★ ルーティング + 抑制 (critical→Slack+Mail, warning→Slack)
+│   ├── loki/loki-config.yml           ... ★ 14日保管のログ集約
+│   ├── promtail/promtail-config.yml   ... ★ syslog / auth / nginx / apt の転送
+│   ├── samples/                       ... ★ targets / firing→silence→resolved 検証ログ
+│   └── grafana/provisioning/          ... ★ Prometheus + Loki + Alertmanager データソース自動登録
 │
-├── ansible/                 ... ★ Linux ベースライン冪等化 playbook
+├── ansible/                 ... Linux ベースライン冪等化 playbook
 │   ├── playbook.yml
 │   ├── inventory.ini
-│   └── templates/sshd_config.j2
+│   ├── templates/sshd_config.j2
+│   └── samples/                       ... ★ --check 実行 + 冪等性確認ログ
+│
+├── azure-lab/               ... ★ クラウド (Azure) Terraform Lab
+│   ├── README.md                      ... ハイブリッド前提アーキテクチャ
+│   ├── terraform/                     ... main / variables / outputs / providers + 実行手順
+│   └── diagrams/azure-hybrid.txt      ... オンプレ AD ↔ Entra ID 同期図
 │
 ├── .github/workflows/
 │   ├── static-check.yml     ... HTML 構造 + リンク + 画像バジェット
-│   └── pwsh-tests.yml       ... ★ Pester + PSScriptAnalyzer
+│   ├── pwsh-tests.yml       ... Pester + PSScriptAnalyzer
+│   └── iac-lint.yml         ... ★ yamllint + ansible-lint + docker compose config + promtool/amtool + terraform fmt/validate
 │
 └── image/                   ... ヒーロー画像・スクリーンショット
 ```
 
-★ は本ブランチで追加した成果物。
+★ は本フェーズで追加した成果物。
 
 初学者向けに説明すると、HTML ファイルは「ページごとの本文」、CSS フォルダは「見た目の設定」、JavaScript フォルダは「動きの設定」、image フォルダは「表示に使う画像置き場」です。
 
@@ -228,7 +247,7 @@ ns7jp.github.io/
 
 | # | 作品名 | 主な技術 | ITサポート関連度 | 内容 | リポジトリ |
 |---|--------|----------|------------------|------|------------|
-| ① | Support Toolkit | Markdown / PowerShell / bash | High | 手順書9本、確認スクリプト9本、Pester 25テスト、チケット形式の対応例、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ① | Support Toolkit | Markdown / PowerShell / bash | High | **手順書12本**、確認スクリプト9本、Pester 25テスト、SLO定義、DR演習記録、変更管理RFC、Network ACL/VPN、Postmortem 実例、サンプル出力4種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
 | ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
 | ③ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ④ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |

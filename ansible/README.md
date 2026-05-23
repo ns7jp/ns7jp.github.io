@@ -28,8 +28,11 @@ ansible/
 ├── playbook.yml                ... メイン playbook（21タスク + 4ハンドラ）
 ├── requirements.yml            ... 必要な collection 宣言（ansible.posix / community.general）
 ├── inventory.ini               ... 対象ホスト一覧（Lab用）
-└── templates/
-    └── sshd_config.j2          ... Ansible 管理下の sshd_config テンプレート
+├── templates/
+│   └── sshd_config.j2          ... Ansible 管理下の sshd_config テンプレート
+└── samples/
+    ├── check-run.sample.log         ... --check --diff 実行サンプル（差分の見え方）
+    └── idempotency-rerun.sample.log ... 適用後の2回目実行で changed=0 を確認したログ
 ```
 
 ---
@@ -75,6 +78,8 @@ collection 経由になるため、`requirements.yml` で明示宣言してい�
 - 自作 PowerShell スクリプトが **Windows 系の "状態確認"** の入り口
 - この Ansible playbook が **Linux 系の "状態適用"** の入り口
 - セットで「**確認 → 適用 → 監視**」が一通り示せる構成（監視は [monitoring-stack/](../monitoring-stack/)）
+- クラウド側でも同 playbook を **Azure Bastion 経由で適用** 可能（手順は [../azure-lab/terraform/README.md](../azure-lab/terraform/README.md) の §7）
+- 適用差分と冪等性の検証は [samples/](./samples/) に出力ログを保管
 
 ---
 

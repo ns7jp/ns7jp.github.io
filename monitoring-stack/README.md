@@ -1,6 +1,6 @@
-# Monitoring Stack — Prometheus + Grafana + node_exporter (Lab)
+# Monitoring Stack — Prometheus + Alertmanager + Loki + Grafana + node_exporter (Lab)
 
-自宅検証VMや評価Linux 1台にすぐ立てられる、**最小構成の監視スタック**です。`docker compose up -d` だけで Prometheus / Grafana / node_exporter が起動し、Grafana を開けば CPU / メモリ / ディスク / Load / ネットワーク のダッシュボードが表示されます。
+自宅検証VMや評価Linux 1台にすぐ立てられる、**メトリクス + ログ + アラート通知 を一通り揃えた監視スタック**です。`docker compose up -d` だけで全コンテナが起動し、Grafana を開けば CPU / メモリ / ディスク / Load / ネットワーク のダッシュボードと、`/var/log` のログ検索が利用できます。
 
 > 自作の Flask サーバー監視ダッシュボードと、業界標準のスタックの両方に触れていることを示すための Lab です。本番運用ではない検証用構成のため、認証・TLS・データ永続化・スケーリングは最小限です。
 
@@ -14,19 +14,29 @@
 |---|---|---|
 | `prom/prometheus:v2.54.1` | メトリクス収集、アラート評価 | `9090` |
 | `prom/node-exporter:v1.8.2` | ホストの CPU/メモリ/ディスク/ネット 指標を公開 | `9100` (host network) |
-| `grafana/grafana:11.2.0` | ダッシュボード表示 | `3000` |
+| `prom/alertmanager:v0.27.0` | アラートのルーティング・抑制・通知 | `9093` |
+| `grafana/loki:3.1.1` | ログ集約（Prometheus と同じラベル思想） | `3100` |
+| `grafana/promtail:3.1.1` | `/var/log` を Loki へ転送するエージェント | `9080` |
+| `grafana/grafana:11.2.0` | ダッシュボード表示（メトリクス + ログ） | `3000` |
 
 ```
-+----------+    scrape     +-------------+
-| node_    |<--------------|  Prometheus |
-| exporter |   (15s)       |  9090       |
-+----------+               +------+------+
-   (host metrics)                 | datasource
-                                  v
-                            +-----+-----+
-                            |  Grafana  |
-                            |  3000     |
-                            +-----------+
+                       +-------------+
++----------+   scrape  |  Prometheus |  alerts   +---------------+
+| node_    |---------> |    9090     |---------> |  Alertmanager |
+| exporter |           +------+------+           |     9093      |
++----------+                  |                  +-------+-------+
+                              | datasource               |
++----------+   push           |                          | Slack / Email
+| promtail |-------> +--------+----+                     v
+| (logs)   |         |    Loki     |              [ Slack #ops-alerts ]
++----------+         |    3100     |              [ ops@example.com  ]
+                     +------+------+
+                            |
+                            v
+                     +------+------+
+                     |   Grafana   |
+                     |   3000      |
+                     +-------------+
 ```
 
 ---
@@ -40,10 +50,13 @@ docker compose up -d
 
 ブラウザで以下を開きます。
 
-- Prometheus: http://localhost:9090
-- Grafana:    http://localhost:3000  （admin / changeme）
+- Prometheus  : http://localhost:9090
+- Alertmanager: http://localhost:9093
+- Loki API    : http://localhost:3100/ready
+- Grafana     : http://localhost:3000  （admin / changeme）
 
 Grafana 左メニュー > Dashboards > Lab > **Node Overview (Lab)** に、CPU / メモリ / ディスク / Load / ネットワーク のパネルが表示されます。
+Explore メニューで Loki を選び `{job="syslog"}` などを入力すると `/var/log` のログを検索できます。
 
 ---
 
@@ -53,12 +66,21 @@ Grafana 左メニュー > Dashboards > Lab > **Node Overview (Lab)** に、CPU /
 monitoring-stack/
 ├── docker-compose.yml
 ├── prometheus/
-│   ├── prometheus.yml          ... スクレイプ設定
-│   └── alert.rules.yml         ... アラートルール（CPU/メモリ/ディスク/exporterダウン）
+│   ├── prometheus.yml          ... スクレイプ設定 + alertmanagers + loki ジョブ
+│   └── alert.rules.yml         ... アラートルール（CPU/メモリ/ディスク/exporterダウン + AM/Loki監視）
+├── alertmanager/
+│   └── alertmanager.yml        ... ルーティング (critical → Slack+Email, warning → Slack)、抑制ルール
+├── loki/
+│   └── loki-config.yml         ... 単一バイナリ構成、14日保管
+├── promtail/
+│   └── promtail-config.yml     ... syslog / auth / nginx / apt の 4 ジョブ
+├── samples/
+│   ├── prometheus-targets.sample.txt   ... /api/v1/targets 出力
+│   └── alert-firing.sample.txt         ... firing → Slack/Email → silence → resolved の検証ログ
 └── grafana/
     └── provisioning/
         ├── datasources/
-        │   └── prometheus.yml          ... Prometheusを起動時に自動登録
+        │   └── prometheus.yml          ... Prometheus / Loki / Alertmanager を起動時に自動登録
         └── dashboards/
             ├── dashboards.yml          ... ダッシュボード読込設定
             └── node-overview.json      ... 4パネル構成の基本ダッシュボード
@@ -68,7 +90,8 @@ monitoring-stack/
 
 ## アラートの考え方
 
-`alert.rules.yml` には Lab 用の最小ルールを4本だけ書いています。
+`alert.rules.yml` に Lab 用のルールを 6本 定義しています。しきい値の根拠は
+[`../support-docs/slo-definitions.md`](../support-docs/slo-definitions.md) で SLO から逆算しています。
 
 | アラート名 | 条件 | 重大度 | 想定アクション |
 |---|---|---|---|
@@ -76,8 +99,20 @@ monitoring-stack/
 | `HostHighMemory` | available < 10% が15分継続 | warning | OOM兆候とswap傾向を確認 |
 | `HostLowDisk` | 空き < 10% が10分継続 | critical | logrotate / 古いバックアップを精査 |
 | `NodeExporterDown` | up{job="node"} == 0 が5分継続 | critical | サーバー疎通とサービス状態を確認 |
+| `AlertmanagerDown` | up{job="alertmanager"} == 0 が5分継続 | critical | 通知経路死活。compose ログ確認 |
+| `LokiDown` | up{job="loki"} == 0 が5分継続 | warning | ログ集約停止。Promtail も併せて確認 |
 
-実運用ではここに **アラートマネージャー (Alertmanager)** を足し、しきい値や通知先（メール / Slack / Teams）を環境ごとに分けます。
+### Alertmanager 経路
+
+`alertmanager/alertmanager.yml` でルーティングを定義しています。
+
+| severity | 経路 | 抑制 |
+|---|---|---|
+| `critical` | Slack `#ops-alerts` + メール `ops@example.com` | — |
+| `warning` | Slack `#ops-alerts` | 同 alertname + instance の critical 発火中は抑制 |
+
+検証用に **firing → Slack/Email → silence → resolved** の一連の動作ログを
+[`samples/alert-firing.sample.txt`](./samples/alert-firing.sample.txt) に置いています。
 
 ---
 

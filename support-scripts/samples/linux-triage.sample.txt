@@ -1,0 +1,86 @@
+================================================================
+ linux-triage.sh — 一次切り分けサンプル出力
+ 実行日時 : 2026-05-12 09:42:11 JST
+ 実行者   : opsadmin@lab-vm01
+ OS       : Ubuntu 22.04.4 LTS (kernel 5.15.0-119-generic)
+ 用途     : 問い合わせ「Webサイト表示が断続的に遅い」の一次確認
+ 出力先   : /var/log/triage/2026-05-12-094211.txt（チケット添付想定）
+================================================================
+
+[1/8] uptime ----------------------------------------------------
+ 09:42:11 up 27 days,  3:11,  2 users,  load average: 4.21, 3.85, 2.14
+
+  >> 判定: load5 = 3.85 / CPU 2コア → 負荷高（基準: load5 > コア数）
+
+[2/8] CPU プロセス上位 ------------------------------------------
+  PID  USER     %CPU %MEM   ELAPSED COMMAND
+ 2841  www-data 72.3 12.1   02:14:30 php-fpm: pool www
+ 2839  www-data 64.1 11.8   02:14:30 php-fpm: pool www
+ 1024  mysql    18.5 22.4   27d      mysqld
+  812  root      0.4  0.5   27d      systemd
+
+  >> 判定: php-fpm 2プロセスで CPU 136%。Web 側の処理滞留が疑わしい。
+
+[3/8] メモリ ----------------------------------------------------
+               total        used        free      shared  buff/cache   available
+ Mem:          3.8Gi       2.6Gi       0.2Gi        12Mi       1.0Gi       0.9Gi
+ Swap:         2.0Gi       128Mi       1.9Gi
+
+  >> 判定: available 23% で許容範囲内。swap は微量、OOM 兆候なし。
+
+[4/8] ディスク使用率 / inode ------------------------------------
+ Filesystem     Type     Size  Used Avail Use% Mounted on
+ /dev/sda1      ext4      30G   24G  4.5G  85% /
+ /dev/sdb1      ext4     100G   42G   54G  44% /var/www
+ tmpfs          tmpfs    1.9G  4.0K  1.9G   1% /tmp
+
+ Filesystem     Type     Inodes IUsed IFree IUse% Mounted on
+ /dev/sda1      ext4       1.9M  412K  1.5M   22% /
+ /dev/sdb1      ext4       6.4M  124K  6.3M    2% /var/www
+
+  >> 判定: / が 85%（90%まで猶予あり）。/var/www は余裕。
+  >> /var/log/ サイズを別途確認推奨。
+
+[5/8] systemd --failed -------------------------------------------
+  UNIT                  LOAD   ACTIVE SUB    DESCRIPTION
+  ondemand.service      loaded failed failed Set the CPU Frequency Scaling governor
+
+  >> 判定: ondemand.service が failed。CPU 周波数調整に失敗の可能性。
+  >> 負荷高との関連性を確認するため上位担当へ証跡として残す。
+
+[6/8] journalctl エラー (直近30分) -------------------------------
+ 5月 12 09:38:14 lab-vm01 php-fpm[2841]: WARNING: [pool www] server reached pm.max_children setting (10), consider raising it
+ 5月 12 09:39:02 lab-vm01 php-fpm[2841]: WARNING: [pool www] server reached pm.max_children setting (10), consider raising it
+ 5月 12 09:39:55 lab-vm01 php-fpm[2841]: WARNING: [pool www] server reached pm.max_children setting (10), consider raising it
+ 5月 12 09:41:28 lab-vm01 nginx[1856]: 2026/05/12 09:41:28 [error] 1856#0: *4218 upstream timed out (110: Connection timed out) while reading response header from upstream
+
+  >> 判定: php-fpm の max_children=10 に到達。Webリクエスト処理が詰まっている。
+  >> 上流タイムアウトが連動して発生。
+
+[7/8] リスニングポート / 経路 -----------------------------------
+ LISTEN 0  511  0.0.0.0:80      0.0.0.0:* users:(("nginx",pid=1856,fd=6))
+ LISTEN 0  511  0.0.0.0:443     0.0.0.0:* users:(("nginx",pid=1856,fd=7))
+ LISTEN 0  128  127.0.0.1:3306  0.0.0.0:* users:(("mysqld",pid=1024,fd=22))
+ LISTEN 0  128  0.0.0.0:22      0.0.0.0:* users:(("sshd",pid=812,fd=3))
+
+ default via 10.50.10.1 dev eth0 proto dhcp metric 100
+ 10.50.10.0/24 dev eth0 proto kernel scope link src 10.50.10.12
+
+  >> 判定: 不審なリスニングポートなし。経路正常。
+
+[8/8] 認証 / fail2ban -------------------------------------------
+ 直近のログイン失敗（lastb -n 10）: 0 件
+ fail2ban-client status sshd:
+   Total failed: 0  /  Total banned: 0
+
+  >> 判定: ブルートフォースの兆候なし。
+
+================================================================
+ 結論（チケット引き継ぎコメント）:
+ - 症状: Webサイト表示が断続的に遅い
+ - 主要因の仮説: php-fpm の pm.max_children=10 に対しリクエストが上回り処理待ち発生
+ - 副次: 高負荷が ondemand.service の failed と連動している可能性あり
+ - 一次対応では設定変更を行わず、本ログをチケットに添付して
+   アプリ運用担当（php-fpm 設定変更権限あり）へ引き継ぎ
+ - エスカレーション基準該当: 「業務影響あり」「再現性あり」「設定変更を伴う」
+================================================================

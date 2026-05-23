@@ -6,7 +6,7 @@ ITサポート・社内SE・運用監視業務で実際に使われる手順書�
 
 ---
 
-## 📂 収録ドキュメント（全 9 本）
+## 📂 収録ドキュメント（全 12 本）
 
 ### 🛠 標準業務 手順書（4 本）
 
@@ -58,6 +58,26 @@ Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsy
 
 ---
 
+### 📐 運用設計 / 変更管理（3 本）
+
+#### 10. [DR / リストア演習記録](./dr-test-log.md)
+
+`backup-restore-runbook.md` の手順が **机上ではなく実際に動くこと** を月次演習で検証する記録。直近 6 ヶ月分（Win VSS / Linux 単体復元 / 全停止再構築）を載せ、所要時間・RTO/RPO 達成・発見した課題・反映状況まで残しています。「Runbook 自体が腐っていないか」を継続検証する仕組み。
+
+#### 11. [SLO / SLI / エラーバジェット定義書](./slo-definitions.md)
+
+ファイルサーバー / Web/App / AD・DNS / 社外向け Web の **4 サービス分の SLI・SLO・エラーバジェット** を定義。`alert.rules.yml` のしきい値がどこから来ているのかを SLO から逆算した根拠付きで記述し、バジェット消費率による変更凍結フローまで含めています。
+
+#### 12. [変更管理 / RFC テンプレート + 実例](./change-management-rfc.md)
+
+CAB 承認を伴う構成変更プロセスのテンプレート + 実例 1 件（CR-2026-014 fs01 VSS 領域拡張）。**何を / いつ / どう変えるか / 失敗したらどう戻すか** を変更前に合意するための型と、緊急変更の事後 RFC 運用を併記。
+
+#### 補助: [ネットワーク設計メモ — ACL / VPN / セグメント分離](./network-acl-vpn-examples.md)
+
+`infra-lab.html` の VLAN 論理構成図に対する **L3/L4 のフィルタ設計**（Edge FW ACL 例 / VLAN 間アクセスマトリクス）と、Site-to-Site VPN・WireGuard のクライアント VPN 構成例。切り分け時の L1 → L7 の順序付きチェックも収録。
+
+---
+
 ### 🧰 関連: 実務 PowerShell + bash スクリプト
 
 #### → [support-scripts/](../support-scripts/)
@@ -93,8 +113,9 @@ Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsy
 - 🌐 [ポートフォリオサイト](https://ns7jp.github.io/)
 - 🪟 [Infra Lab (Windows / M365 / AD)](https://ns7jp.github.io/infra-lab.html) — VLAN 論理構成図、監視・証跡マトリクス
 - 🐧 [Linux Lab](https://ns7jp.github.io/linux-lab.html) — systemd / journalctl / SSH / rsync の一次運用
-- 📊 [Monitoring Stack](../monitoring-stack/) — Prometheus + Grafana + node_exporter (docker-compose)
-- ⚙️ [Ansible Playbook](../ansible/) — Linux ベースライン冪等化
+- 📊 [Monitoring Stack](../monitoring-stack/) — Prometheus + Alertmanager + Loki + Grafana + node_exporter (docker-compose)
+- ⚙️ [Ansible Playbook](../ansible/) — Linux ベースライン冪等化（実行ログサンプル付き）
+- ☁️ [Azure Lab](../azure-lab/) — Terraform でハイブリッド前提の VNet / NSG / Bastion / VM を構築
 - 🧰 [support-scripts/](../support-scripts/) — PowerShell + bash の確認・監査・棚卸しスクリプト
 - 📂 [作品リポジトリ一覧](https://github.com/ns7jp)
 

@@ -1,0 +1,46 @@
+# Promtail: ホストの /var/log を Loki に転送
+# - syslog / auth / nginx / apt の 4 つを別ジョブとしてラベル付け
+# - 構造化していない一般 log はラベルだけで分類
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: syslog
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: syslog
+          host: lab-host-01
+          __path__: /var/log/syslog
+
+  - job_name: auth
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: auth
+          host: lab-host-01
+          __path__: /var/log/auth.log
+
+  - job_name: nginx
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: nginx
+          host: lab-host-01
+          __path__: /var/log/nginx/*.log
+
+  - job_name: apt
+    static_configs:
+      - targets: [localhost]
+        labels:
+          job: apt
+          host: lab-host-01
+          __path__: /var/log/apt/history.log
