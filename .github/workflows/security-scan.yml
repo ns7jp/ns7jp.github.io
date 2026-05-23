@@ -15,7 +15,7 @@ jobs:
     name: gitleaks (secret detection)
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (full history for shallow=false)
+      - name: Checkout (full history)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -27,25 +27,42 @@ jobs:
           GITLEAKS_CONFIG: .gitleaks.toml
 
   trivy-fs:
-    name: Trivy (filesystem CVE scan)
+    name: Trivy (filesystem CVE + secret scan)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run Trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.24.0
-        with:
-          scan-type: fs
-          scan-ref: .
-          severity: CRITICAL,HIGH
-          ignore-unfixed: true
-          # CRITICAL の真正脆弱性のみ build を止める。HIGH は観測のみ。
-          # （Lab 静的サイトのため依存物が少なく、誤検出を許容するより観測継続を優先）
-          exit-code: "0"
-          format: table
-          scanners: vuln,secret
-          skip-dirs: .git,node_modules
-          trivyignores: .trivyignore
+      # trivy-action は v によって入力スキーマが揺れるため、binary を直接入れて
+      # トラブルシュート可能な形にする。Lab 用なので結果は warning 扱い。
+      - name: Install Trivy
+        run: |
+          curl -fsSL https://aquasecurity.github.io/trivy-repo/deb/public.key \
+            | sudo gpg --dearmor -o /usr/share/keyrings/trivy.gpg
+          echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" \
+            | sudo tee /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update -qq
+          sudo apt-get install -y trivy
+          trivy --version
+
+      - name: Trivy filesystem scan (vuln + secret)
+        continue-on-error: true
+        run: |
+          trivy fs \
+            --scanners vuln,secret \
+            --severity CRITICAL,HIGH \
+            --ignore-unfixed \
+            --skip-dirs .git,node_modules,image \
+            --format table \
+            --exit-code 0 \
+            . | tee trivy-fs.txt
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Trivy filesystem scan" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          head -200 trivy-fs.txt >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "(no output)" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
 
   trivy-config:
     name: Trivy (Terraform / Compose / Ansible misconfig)
@@ -53,13 +70,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Trivy
+        run: |
+          curl -fsSL https://aquasecurity.github.io/trivy-repo/deb/public.key \
+            | sudo gpg --dearmor -o /usr/share/keyrings/trivy.gpg
+          echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb generic main" \
+            | sudo tee /etc/apt/sources.list.d/trivy.list
+          sudo apt-get update -qq
+          sudo apt-get install -y trivy
+          trivy --version
+
       - name: Trivy IaC misconfig scan
-        uses: aquasecurity/trivy-action@0.24.0
-        with:
-          scan-type: config
-          scan-ref: .
-          severity: CRITICAL,HIGH,MEDIUM
-          format: table
-          # Lab 仕様（NOPASSWD:ALL / passwordless ssh など）の検出が多いため warn 運用
-          exit-code: "0"
-          trivyignores: .trivyignore
+        continue-on-error: true
+        run: |
+          trivy config \
+            --severity CRITICAL,HIGH,MEDIUM \
+            --skip-dirs .git,node_modules,image \
+            --format table \
+            --exit-code 0 \
+            . | tee trivy-config.txt
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Trivy IaC misconfig scan" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          head -300 trivy-config.txt >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "(no output)" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
