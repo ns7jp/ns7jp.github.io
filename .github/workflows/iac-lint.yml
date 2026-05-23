@@ -66,8 +66,9 @@ jobs:
           docker run --rm \
             -v "${{ github.workspace }}/monitoring-stack/prometheus":/work \
             -w /work \
+            --entrypoint promtool \
             prom/prometheus:v2.54.1 \
-            promtool check rules alert.rules.yml
+            check rules alert.rules.yml
 
       - name: amtool check config
         run: |
