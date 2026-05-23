@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <title>Azure Portal で表示した Lab リソースグループの概念図</title>
+  <desc>Terraform で apply した結果 shimada-lab-rg リソースグループに作成された 9 リソース（VNet、2サブネット、NSG、NIC、Linux VM、Public IP、Bastion ホスト）と、Terraform plan 出力サンプル、Bastion 経由 SSH 接続イメージを Azure Portal 風の UI で示す概念図。</desc>
+
+  <defs>
+    <linearGradient id="azBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f5f5f5"/>
+      <stop offset="1" stop-color="#e8e8e8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="760" fill="url(#azBg)"/>
+
+  <!-- Azure Portal トップバー -->
+  <rect x="0" y="0" width="1200" height="48" fill="#0078d4"/>
+  <text x="20" y="30" fill="#ffffff" font-size="14" font-weight="600">Microsoft Azure</text>
+  <text x="160" y="30" fill="#cfe4f7" font-size="11">› Resource groups › shimada-lab-rg</text>
+  <text x="1180" y="30" fill="#cfe4f7" font-size="11" text-anchor="end">net7jp@gmail.com</text>
+
+  <!-- サイドバー -->
+  <rect x="0" y="48" width="220" height="712" fill="#0c3a6e"/>
+  <text x="20" y="78" fill="#ffffff" font-size="11" font-weight="600">★ Favorites</text>
+  <text x="20" y="100" fill="#cfe4f7" font-size="11">Resource groups</text>
+  <text x="20" y="120" fill="#cfe4f7" font-size="11">Virtual machines</text>
+  <text x="20" y="140" fill="#cfe4f7" font-size="11">Virtual networks</text>
+  <text x="20" y="160" fill="#cfe4f7" font-size="11">Network security groups</text>
+  <text x="20" y="180" fill="#cfe4f7" font-size="11">Bastions</text>
+  <text x="20" y="200" fill="#cfe4f7" font-size="11">All resources</text>
+  <text x="20" y="220" fill="#cfe4f7" font-size="11">Cost Management</text>
+
+  <!-- メインタイトル -->
+  <text x="240" y="80" fill="#1a1a1a" font-size="20" font-weight="700">shimada-lab-rg</text>
+  <text x="240" y="100" fill="#666" font-size="11">Resource group · Japan East · Subscription: Lab</text>
+
+  <!-- タグチップ -->
+  <g transform="translate(240,110)">
+    <rect width="68" height="20" rx="10" fill="#e1f0fa" stroke="#0078d4"/>
+    <text x="34" y="14" fill="#0078d4" font-size="10" text-anchor="middle">env: lab</text>
+    <rect x="74" width="80" height="20" rx="10" fill="#e1f0fa" stroke="#0078d4"/>
+    <text x="114" y="14" fill="#0078d4" font-size="10" text-anchor="middle">owner: ns7jp</text>
+    <rect x="160" width="120" height="20" rx="10" fill="#e1f0fa" stroke="#0078d4"/>
+    <text x="220" y="14" fill="#0078d4" font-size="10" text-anchor="middle">purpose: az104-study</text>
+  </g>
+
+  <!-- リソース一覧 -->
+  <g transform="translate(240,150)">
+    <rect width="690" height="430" fill="#ffffff" stroke="#d0d0d0"/>
+    <rect width="690" height="40" fill="#fafafa" stroke="#d0d0d0"/>
+    <text x="14" y="25" fill="#1a1a1a" font-size="13" font-weight="600">Resources (9)</text>
+    <text x="676" y="25" fill="#0078d4" font-size="11" text-anchor="end">⟳ Refresh</text>
+
+    <!-- ヘッダ -->
+    <line x1="0" y1="40" x2="690" y2="40" stroke="#d0d0d0"/>
+    <text x="14" y="62" fill="#666" font-size="10" font-weight="600">Name</text>
+    <text x="220" y="62" fill="#666" font-size="10" font-weight="600">Type</text>
+    <text x="430" y="62" fill="#666" font-size="10" font-weight="600">Location</text>
+    <text x="540" y="62" fill="#666" font-size="10" font-weight="600">Status</text>
+    <line x1="0" y1="70" x2="690" y2="70" stroke="#e0e0e0"/>
+
+    <!-- 行 1: VNet -->
+    <rect x="14" y="84" width="14" height="14" fill="#0078d4"/>
+    <text x="34" y="95" fill="#0078d4" font-size="11" font-weight="600">shimada-lab-vnet</text>
+    <text x="220" y="95" fill="#1a1a1a" font-size="11">Virtual network</text>
+    <text x="430" y="95" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="95" fill="#107c10" font-size="11">✓ Active</text>
+    <line x1="0" y1="106" x2="690" y2="106" stroke="#f0f0f0"/>
+
+    <!-- 行 2: subnet app -->
+    <rect x="14" y="116" width="14" height="14" fill="#5c2d91"/>
+    <text x="34" y="127" fill="#0078d4" font-size="11">shimada-lab-vnet/snet-app</text>
+    <text x="220" y="127" fill="#1a1a1a" font-size="11">Subnet · 10.50.10.0/24</text>
+    <text x="430" y="127" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="127" fill="#107c10" font-size="11">✓ Active</text>
+    <line x1="0" y1="138" x2="690" y2="138" stroke="#f0f0f0"/>
+
+    <!-- 行 3: subnet bastion -->
+    <rect x="14" y="148" width="14" height="14" fill="#5c2d91"/>
+    <text x="34" y="159" fill="#0078d4" font-size="11">shimada-lab-vnet/AzureBastionSubnet</text>
+    <text x="220" y="159" fill="#1a1a1a" font-size="11">Subnet · 10.50.255.0/27</text>
+    <text x="430" y="159" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="159" fill="#107c10" font-size="11">✓ Active</text>
+    <line x1="0" y1="170" x2="690" y2="170" stroke="#f0f0f0"/>
+
+    <!-- 行 4: NSG -->
+    <rect x="14" y="180" width="14" height="14" fill="#d83b01"/>
+    <text x="34" y="191" fill="#0078d4" font-size="11" font-weight="600">shimada-lab-app-nsg</text>
+    <text x="220" y="191" fill="#1a1a1a" font-size="11">Network security group</text>
+    <text x="430" y="191" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="191" fill="#107c10" font-size="11">✓ Active (2 rules)</text>
+    <line x1="0" y1="202" x2="690" y2="202" stroke="#f0f0f0"/>
+
+    <!-- 行 5: NIC -->
+    <rect x="14" y="212" width="14" height="14" fill="#0078d4"/>
+    <text x="34" y="223" fill="#0078d4" font-size="11">shimada-lab-vm-nic</text>
+    <text x="220" y="223" fill="#1a1a1a" font-size="11">Network interface · 10.50.10.4</text>
+    <text x="430" y="223" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="223" fill="#107c10" font-size="11">✓ Active</text>
+    <line x1="0" y1="234" x2="690" y2="234" stroke="#f0f0f0"/>
+
+    <!-- 行 6: VM -->
+    <rect x="14" y="244" width="14" height="14" fill="#7fba00"/>
+    <text x="34" y="255" fill="#0078d4" font-size="11" font-weight="600">shimada-lab-vm</text>
+    <text x="220" y="255" fill="#1a1a1a" font-size="11">Virtual machine · Standard_B1s</text>
+    <text x="430" y="255" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="255" fill="#107c10" font-size="11">✓ Running</text>
+    <line x1="0" y1="266" x2="690" y2="266" stroke="#f0f0f0"/>
+
+    <!-- 行 7: OS disk -->
+    <rect x="14" y="276" width="14" height="14" fill="#7fba00"/>
+    <text x="34" y="287" fill="#0078d4" font-size="11">shimada-lab-vm-osdisk</text>
+    <text x="220" y="287" fill="#1a1a1a" font-size="11">Disk · Standard_LRS · 30 GiB</text>
+    <text x="430" y="287" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="287" fill="#107c10" font-size="11">✓ Attached</text>
+    <line x1="0" y1="298" x2="690" y2="298" stroke="#f0f0f0"/>
+
+    <!-- 行 8: Public IP -->
+    <rect x="14" y="308" width="14" height="14" fill="#0078d4"/>
+    <text x="34" y="319" fill="#0078d4" font-size="11">shimada-lab-bastion-pip</text>
+    <text x="220" y="319" fill="#1a1a1a" font-size="11">Public IP · Standard · 20.27.x.x</text>
+    <text x="430" y="319" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="319" fill="#107c10" font-size="11">✓ Allocated</text>
+    <line x1="0" y1="330" x2="690" y2="330" stroke="#f0f0f0"/>
+
+    <!-- 行 9: Bastion -->
+    <rect x="14" y="340" width="14" height="14" fill="#e3008c"/>
+    <text x="34" y="351" fill="#0078d4" font-size="11" font-weight="600">shimada-lab-bastion</text>
+    <text x="220" y="351" fill="#1a1a1a" font-size="11">Bastion · Basic SKU</text>
+    <text x="430" y="351" fill="#1a1a1a" font-size="11">Japan East</text>
+    <text x="540" y="351" fill="#107c10" font-size="11">✓ Succeeded</text>
+
+    <!-- フッタ -->
+    <line x1="0" y1="390" x2="690" y2="390" stroke="#e0e0e0"/>
+    <text x="14" y="410" fill="#666" font-size="10">Deployed by Terraform 1.9.5 · azurerm provider ~&gt; 4.0 · 9 resources / 0 changes / 0 destroys</text>
+    <text x="14" y="424" fill="#666" font-size="10">Estimated cost: ~ ¥1,200 / month (Bastion Basic dominates — destroy after lab)</text>
+  </g>
+
+  <!-- 右ペイン: Terraform apply 出力 -->
+  <g transform="translate(950,150)">
+    <rect width="230" height="430" fill="#1e1e1e"/>
+    <text x="14" y="22" fill="#dcdcdc" font-size="11" font-weight="600">$ terraform apply</text>
+    <text x="14" y="44" fill="#7eb26d" font-size="9" font-family="monospace">+ resource_group.lab</text>
+    <text x="14" y="58" fill="#7eb26d" font-size="9" font-family="monospace">+ virtual_network.lab</text>
+    <text x="14" y="72" fill="#7eb26d" font-size="9" font-family="monospace">+ subnet.app</text>
+    <text x="14" y="86" fill="#7eb26d" font-size="9" font-family="monospace">+ subnet.bastion</text>
+    <text x="14" y="100" fill="#7eb26d" font-size="9" font-family="monospace">+ nsg.app</text>
+    <text x="14" y="114" fill="#7eb26d" font-size="9" font-family="monospace">+ nsg.association</text>
+    <text x="14" y="128" fill="#7eb26d" font-size="9" font-family="monospace">+ nic.vm</text>
+    <text x="14" y="142" fill="#7eb26d" font-size="9" font-family="monospace">+ linux_vm.lab</text>
+    <text x="14" y="156" fill="#7eb26d" font-size="9" font-family="monospace">+ public_ip.bastion</text>
+    <text x="14" y="170" fill="#7eb26d" font-size="9" font-family="monospace">+ bastion_host.lab</text>
+    <text x="14" y="194" fill="#dcdcdc" font-size="9" font-family="monospace">Plan: 10 to add</text>
+
+    <line x1="14" y1="210" x2="216" y2="210" stroke="#444"/>
+
+    <text x="14" y="232" fill="#5794f2" font-size="9" font-family="monospace">apply: 4m 38s elapsed</text>
+    <text x="14" y="248" fill="#dcdcdc" font-size="9" font-family="monospace">Outputs:</text>
+    <text x="14" y="266" fill="#dcdcdc" font-size="9" font-family="monospace">resource_group_name</text>
+    <text x="22" y="280" fill="#a4a8b0" font-size="9" font-family="monospace">= "shimada-lab-rg"</text>
+    <text x="14" y="298" fill="#dcdcdc" font-size="9" font-family="monospace">vm_private_ip</text>
+    <text x="22" y="312" fill="#a4a8b0" font-size="9" font-family="monospace">= "10.50.10.4"</text>
+    <text x="14" y="330" fill="#dcdcdc" font-size="9" font-family="monospace">bastion_fqdn</text>
+    <text x="22" y="344" fill="#a4a8b0" font-size="9" font-family="monospace">= "bst-a1b2.bastion</text>
+    <text x="22" y="358" fill="#a4a8b0" font-size="9" font-family="monospace">  .azure.com"</text>
+
+    <line x1="14" y1="375" x2="216" y2="375" stroke="#444"/>
+    <text x="14" y="395" fill="#eab839" font-size="9" font-family="monospace">$ az network bastion</text>
+    <text x="14" y="409" fill="#eab839" font-size="9" font-family="monospace">  ssh -n shimada-lab-</text>
+    <text x="14" y="423" fill="#eab839" font-size="9" font-family="monospace">  bastion ...</text>
+  </g>
+
+  <!-- 下部: NSG ルール詳細 -->
+  <g transform="translate(240,600)">
+    <rect width="940" height="140" fill="#ffffff" stroke="#d0d0d0"/>
+    <rect width="940" height="32" fill="#fafafa" stroke="#d0d0d0"/>
+    <text x="14" y="22" fill="#1a1a1a" font-size="12" font-weight="600">shimada-lab-app-nsg / Inbound security rules</text>
+
+    <line x1="0" y1="32" x2="940" y2="32" stroke="#d0d0d0"/>
+    <text x="14" y="50" fill="#666" font-size="10" font-weight="600">Priority</text>
+    <text x="80" y="50" fill="#666" font-size="10" font-weight="600">Name</text>
+    <text x="240" y="50" fill="#666" font-size="10" font-weight="600">Source</text>
+    <text x="420" y="50" fill="#666" font-size="10" font-weight="600">Destination</text>
+    <text x="560" y="50" fill="#666" font-size="10" font-weight="600">Service</text>
+    <text x="700" y="50" fill="#666" font-size="10" font-weight="600">Action</text>
+    <text x="820" y="50" fill="#666" font-size="10" font-weight="600">Status</text>
+    <line x1="0" y1="58" x2="940" y2="58" stroke="#e0e0e0"/>
+
+    <text x="14" y="76" fill="#1a1a1a" font-size="10" font-family="monospace">1000</text>
+    <text x="80" y="76" fill="#0078d4" font-size="10" font-weight="600">AllowBastionSSHIn</text>
+    <text x="240" y="76" fill="#1a1a1a" font-size="10" font-family="monospace">10.50.255.0/27 (Bastion)</text>
+    <text x="420" y="76" fill="#1a1a1a" font-size="10" font-family="monospace">Any</text>
+    <text x="560" y="76" fill="#1a1a1a" font-size="10" font-family="monospace">TCP/22</text>
+    <text x="700" y="76" fill="#107c10" font-size="10" font-weight="600">✓ Allow</text>
+    <text x="820" y="76" fill="#107c10" font-size="10">✓ Applied</text>
+    <line x1="0" y1="84" x2="940" y2="84" stroke="#f0f0f0"/>
+
+    <text x="14" y="102" fill="#1a1a1a" font-size="10" font-family="monospace">4000</text>
+    <text x="80" y="102" fill="#0078d4" font-size="10" font-weight="600">DenyInternetIn</text>
+    <text x="240" y="102" fill="#1a1a1a" font-size="10" font-family="monospace">Internet</text>
+    <text x="420" y="102" fill="#1a1a1a" font-size="10" font-family="monospace">Any</text>
+    <text x="560" y="102" fill="#1a1a1a" font-size="10" font-family="monospace">Any</text>
+    <text x="700" y="102" fill="#d83b01" font-size="10" font-weight="600">✗ Deny</text>
+    <text x="820" y="102" fill="#107c10" font-size="10">✓ Applied</text>
+    <line x1="0" y1="110" x2="940" y2="110" stroke="#f0f0f0"/>
+
+    <text x="14" y="128" fill="#1a1a1a" font-size="10" font-family="monospace">65500</text>
+    <text x="80" y="128" fill="#666" font-size="10" font-style="italic">DenyAllInbound (default)</text>
+    <text x="240" y="128" fill="#1a1a1a" font-size="10" font-family="monospace">Any</text>
+    <text x="420" y="128" fill="#1a1a1a" font-size="10" font-family="monospace">Any</text>
+    <text x="560" y="128" fill="#1a1a1a" font-size="10" font-family="monospace">Any</text>
+    <text x="700" y="128" fill="#666" font-size="10">✗ Deny</text>
+    <text x="820" y="128" fill="#666" font-size="10">implicit</text>
+  </g>
+</svg>

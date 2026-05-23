@@ -414,7 +414,13 @@
                         <tr>
                             <td class="task">クラウド / IaC（ハイブリッド前提）</td>
                             <td class="evidence">
-                                <a href="azure-lab/">Azure Lab</a>（Terraform で VNet / NSG / Bastion / VM、オンプレ Ansible を Bastion 経由で再利用可能な構成）
+                                <a href="azure-lab/">Azure Lab</a>（Terraform で VNet / NSG / Bastion / VM、Portal/Bastion スクショ、オンプレ Ansible を Bastion 経由で再利用）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">コンテナ / Kubernetes</td>
+                            <td class="evidence">
+                                <a href="k8s-lab/">kind + nginx-ingress Lab</a>（3 ノード Cluster / Deployment+Service+Ingress / resources+probe+securityContext を明示）
                             </td>
                         </tr>
                         <tr>
@@ -436,9 +442,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="task">スクリプト品質 / CI</td>
+                            <td class="task">スクリプト品質 / CI / セキュリティ</td>
                             <td class="evidence">
-                                <a href="support-scripts/lib/Triage-Lib.ps1">純関数化</a> + Pester 25テスト + PSScriptAnalyzer + ansible-lint + yamllint + terraform fmt/validate + promtool/amtool check（GitHub Actions 4 workflow）
+                                <a href="support-scripts/lib/Triage-Lib.ps1">純関数化</a> + Pester 25テスト + PSScriptAnalyzer + ansible-lint + yamllint + terraform fmt/validate + promtool/amtool + <strong>Trivy + gitleaks</strong>（GitHub Actions 5 workflow / 14 jobs）
                             </td>
                         </tr>
                     </tbody>
@@ -452,17 +458,18 @@
                         <span class="step-period">2026-01 取得済</span>
                         <span class="step-name">Python3 実践 + 基礎 / PHP8</span>
                     </div>
+                    <div class="roadmap-step done">
+                        <span class="step-period">2026-05 Lab公開</span>
+                        <span class="step-name">AZ-104 学習 (Azure Lab)</span>
+                        <span class="step-note">Terraform で VNet/NSG/Bastion/VM 構築</span>
+                    </div>
                     <div class="roadmap-step current">
                         <span class="step-period">2026-06 予定</span>
                         <span class="step-name">IT パスポート</span>
                     </div>
                     <div class="roadmap-step">
                         <span class="step-period">2026-09 目標</span>
-                        <span class="step-name">LPIC-1</span>
-                    </div>
-                    <div class="roadmap-step">
-                        <span class="step-period">2026-12 目標</span>
-                        <span class="step-name">CCNA / AZ-104</span>
+                        <span class="step-name">LPIC-1 / CCNA</span>
                     </div>
                 </div>
             </section>

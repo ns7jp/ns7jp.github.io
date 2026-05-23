@@ -20,6 +20,10 @@
 
 ## 想定アーキテクチャ
 
+![Azure Portal で表示した Lab リソースグループの概念図。Terraform で apply した結果 shimada-lab-rg リソースグループに作成された 9 リソース（VNet、2サブネット、NSG、NIC、Linux VM、Public IP、Bastion）と、Terraform plan/apply 出力、NSG ルール（AllowBastionSSHIn 1000 → Allow / DenyInternetIn 4000 → Deny / DenyAllInbound 65500 → Implicit）の詳細を Azure Portal 風のスタイルで示すレイアウト概念図。](../image/azure-portal.svg)
+
+![Azure Bastion 経由で Linux VM へ SSH 接続したターミナル画面の概念図。左ペインで Bastion 接続フォーム（Username opsadmin、SSH 秘密鍵 id_ed25519）と Security posture（VM has no public IP、NSG blocks Internet、SSH key-only、Session logged）を表示。右ペインで uname/uptime/ip/systemctl/ss/sshd_config/ufw/fail2ban 出力により、Ansible playbook 適用後の状態を確認している様子を示す。](../image/azure-bastion-ssh.svg)
+
 ```
                        Internet
                           │

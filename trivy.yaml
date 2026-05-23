@@ -1,0 +1,35 @@
+# Trivy 設定
+# Lab 用ポートフォリオなので、誤検出が多い領域は除外する。
+# 本番では除外せず、別途 .trivyignore で個別 CVE を承認する運用が望ましい。
+
+scan:
+  skip-dirs:
+    - .git
+    - node_modules
+    - image
+    - js
+  skip-files:
+    - "**/*.sample.json"
+    - "**/*.sample.csv"
+    - "**/*.sample.html"
+    - "**/*.sample.txt"
+    - "**/*.sample.log"
+
+# CVE データベースの更新は CI で常に実行
+db:
+  no-progress: true
+
+# misconfig は IaC のみを対象に
+misconfiguration:
+  scanners:
+    - terraform
+    - dockerfile
+    - kubernetes
+    - ansible
+  # Lab 用の妥協は warning 扱いにする
+  helm:
+    values: []
+
+# 機密スキャンは strict
+secret:
+  config: .gitleaks.toml

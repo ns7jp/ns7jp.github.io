@@ -99,13 +99,73 @@
         }
       ],
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 6 }
+    },
+    {
+      "type": "logs",
+      "title": "Syslog / auth.log (Loki)",
+      "datasource": "Loki",
+      "targets": [
+        {
+          "expr": "{job=~\"syslog|auth\", host=\"lab-host-01\"} |~ \"(?i)(error|warn|fail|denied|critical)\"",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "showTime": true,
+        "showLabels": false,
+        "wrapLogMessage": true,
+        "sortOrder": "Descending",
+        "dedupStrategy": "none"
+      },
+      "gridPos": { "h": 10, "w": 16, "x": 0, "y": 14 }
+    },
+    {
+      "type": "alertlist",
+      "title": "Alertmanager — 現在のアラート",
+      "datasource": "Alertmanager",
+      "options": {
+        "alertInstanceLabelFilter": "",
+        "alertName": "",
+        "dashboardAlerts": false,
+        "groupBy": ["alertname"],
+        "groupMode": "default",
+        "maxItems": 20,
+        "sortOrder": 3,
+        "stateFilter": {
+          "active": true,
+          "pending": true,
+          "noData": false,
+          "normal": false,
+          "error": true
+        },
+        "viewMode": "list"
+      },
+      "gridPos": { "h": 10, "w": 8, "x": 16, "y": 14 }
+    },
+    {
+      "type": "timeseries",
+      "title": "ログ流入量 / job 別 (Loki)",
+      "datasource": "Loki",
+      "targets": [
+        {
+          "expr": "sum by (job) (rate({host=\"lab-host-01\"}[5m]))",
+          "legendFormat": "{{job}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "logs/sec"
+        }
+      },
+      "gridPos": { "h": 7, "w": 24, "x": 0, "y": 24 }
     }
   ],
   "schemaVersion": 39,
-  "tags": ["lab", "node"],
+  "tags": ["lab", "node", "logs", "alerts"],
   "templating": { "list": [] },
   "time": { "from": "now-1h", "to": "now" },
   "title": "Node Overview (Lab)",
   "uid": "node-overview-lab",
-  "version": 1
+  "version": 2
 }

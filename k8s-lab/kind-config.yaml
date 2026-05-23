@@ -1,0 +1,27 @@
+# kind クラスタ設定
+# control-plane × 1 + worker × 2 の 3 ノード構成
+# ingress-nginx を control-plane に立てるための label と、host:80/443 への port mapping を行う
+
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: lab-cluster
+
+nodes:
+  - role: control-plane
+    # ingress-nginx の kind 公式マニフェストは ingress-ready=true ラベルのノードに pod を配置する
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "ingress-ready=true"
+    extraPortMappings:
+      - containerPort: 80
+        hostPort: 80
+        protocol: TCP
+      - containerPort: 443
+        hostPort: 443
+        protocol: TCP
+
+  - role: worker
+  - role: worker

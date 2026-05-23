@@ -8,9 +8,9 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
-## 採用担当者向け: まず見ていただきたい8点
+## 採用担当者向け: まず見ていただきたい9点
 
-短時間で確認しやすいよう、応募先で見ていただきたい成果物を 8 つに絞ると次の通りです。
+短時間で確認しやすいよう、応募先で見ていただきたい成果物を 9 つに絞ると次の通りです。
 
 | 優先 | 見るもの | 確認できること |
 |------|----------|----------------|
@@ -21,7 +21,8 @@
 | 5 | [Monitoring Stack](./monitoring-stack/) | Prometheus + **Alertmanager + Loki** + Grafana + node_exporter / 6 アラート / firing→silence→resolved の検証ログ |
 | 6 | [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 + **--check 実行ログ** + **冪等性 (changed=0) ログ** |
 | 7 | [SLO / DR / RFC 三点セット](./support-docs/) | [SLO 定義](./support-docs/slo-definitions.md)・[DR 演習 6ヶ月分](./support-docs/dr-test-log.md)・[変更管理 RFC 実例](./support-docs/change-management-rfc.md) |
-| 8 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 12 手順書、9 スクリプト、Pester 25テスト、Postmortem 実例、Backup Runbook |
+| 8 | [Kubernetes Lab](./k8s-lab/) | kind + nginx-ingress の最小クラスタ Lab。複数コンテナのオーケストレーション観点 |
+| 9 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 12 手順書、9 スクリプト、Pester 25テスト、Postmortem 実例、Backup Runbook |
 
 成果の見え方としては、Infra Operation Lab で **VLAN構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Linux Lab・Azure Lab・Monitoring Stack・Ansible で **「確認 → 適用 → 観測 → クラウド拡張」を一通り** 示し、Support Toolkit と SLO/DR/RFC ドキュメントで **「設計の根拠 → 実行の証跡 → 振り返り」** までを公開しています。サーバー監視（自作）では 6カテゴリ監視・60秒履歴・プロセスTOP15・3OS対応 を示しています。
 
@@ -225,16 +226,22 @@ ns7jp.github.io/
 │   └── samples/                       ... ★ --check 実行 + 冪等性確認ログ
 │
 ├── azure-lab/               ... ★ クラウド (Azure) Terraform Lab
-│   ├── README.md                      ... ハイブリッド前提アーキテクチャ
+│   ├── README.md                      ... ハイブリッド前提アーキテクチャ + Portal/Bastion スクショ
 │   ├── terraform/                     ... main / variables / outputs / providers + 実行手順
 │   └── diagrams/azure-hybrid.txt      ... オンプレ AD ↔ Entra ID 同期図
+│
+├── k8s-lab/                 ... ★ Kubernetes (kind + nginx-ingress) ミニ Lab
+│   ├── README.md                      ... 3ノードクラスタ構築 → 動作確認手順
+│   ├── kind-config.yaml               ... 3 nodes + host port 80/443 mapping
+│   └── manifests/                     ... nginx Deployment / Service / Ingress
 │
 ├── .github/workflows/
 │   ├── static-check.yml     ... HTML 構造 + リンク + 画像バジェット
 │   ├── pwsh-tests.yml       ... Pester + PSScriptAnalyzer
-│   └── iac-lint.yml         ... ★ yamllint + ansible-lint + docker compose config + promtool/amtool + terraform fmt/validate
+│   ├── iac-lint.yml         ... yamllint + ansible-lint + docker compose config + promtool/amtool + terraform fmt/validate
+│   └── security-scan.yml    ... ★ Trivy (vuln/secret/misconfig) + gitleaks (secret detection)
 │
-└── image/                   ... ヒーロー画像・スクリーンショット
+└── image/                   ... ヒーロー画像・スクリーンショット (+ ★ azure-portal.svg / azure-bastion-ssh.svg)
 ```
 
 ★ は本フェーズで追加した成果物。
