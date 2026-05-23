@@ -1,0 +1,19 @@
+# ansible-lint settings
+#
+# 任意プロファイル: production ではなく moderate を要求し、
+# 日本語タスク名は許容する。FQCN（ansible.posix.authorized_key 等）は必須のまま。
+
+profile: moderate
+
+skip_list:
+  # Japanese / non-Latin characters are valid as task names in this codebase.
+  # ansible-lint の name[casing] は ASCII 大文字始まりを要求するため、
+  # 日本語名のタスク向けにこのルールだけ除外する。
+  - name[casing]
+
+exclude_paths:
+  - .github/
+  - support-docs/
+  - support-scripts/
+  - azure-lab/
+  - monitoring-stack/
