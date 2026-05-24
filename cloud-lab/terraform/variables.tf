@@ -35,7 +35,11 @@ variable "private_subnet_cidr" {
 }
 
 variable "admin_cidr" {
-  description = "Approved source CIDR for SSH to the bastion security group. Replace before applying."
+  description = "Approved source CIDR for SSH to the bastion security group. No default: a value must be supplied via -var or *.tfvars so that an accidental `terraform apply` cannot reuse the documentation CIDR from RFC 5737. Example: 203.0.113.10/32."
   type        = string
-  default     = "203.0.113.10/32"
+
+  validation {
+    condition     = can(cidrnetmask(var.admin_cidr)) && var.admin_cidr != "0.0.0.0/0"
+    error_message = "admin_cidr must be a valid CIDR and must not be 0.0.0.0/0 (SSH must never be opened to the world)."
+  }
 }
