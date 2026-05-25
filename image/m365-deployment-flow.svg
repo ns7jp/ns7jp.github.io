@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <title>M365 ポリシー リング展開フロー</title>
+  <desc>JSON 編集 → Git で PR → CI 検証 → レビュー → Test リング → 24h 監視 → Pilot リング → 1 週間監視 → Prod リング → 棚卸し、というリング展開ワークフロー。</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbfaf6"/>
+      <stop offset="1" stop-color="#f3f1ea"/>
+    </linearGradient>
+    <linearGradient id="stepBox" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e7f0fd"/>
+      <stop offset="1" stop-color="#c5dcf7"/>
+    </linearGradient>
+    <linearGradient id="testRing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff8e1"/>
+      <stop offset="1" stop-color="#ffe082"/>
+    </linearGradient>
+    <linearGradient id="pilotRing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff3e0"/>
+      <stop offset="1" stop-color="#ffcc80"/>
+    </linearGradient>
+    <linearGradient id="prodRing" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8f5e9"/>
+      <stop offset="1" stop-color="#a5d6a7"/>
+    </linearGradient>
+    <linearGradient id="rollback" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde0e0"/>
+      <stop offset="1" stop-color="#ef9a9a"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5d6066"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c62828"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="460" fill="url(#bg)"/>
+
+  <text x="600" y="36" fill="#2C3E50" font-size="20" font-weight="700" text-anchor="middle">M365 ポリシー リング展開ワークフロー</text>
+  <text x="600" y="58" fill="#7a5e3a" font-size="12" text-anchor="middle">JSON 編集 → Git PR → CI → Test → Pilot → Prod、各段階で 24h / 1週間 の監視期間を確保</text>
+
+  <!-- Row 1: dev flow -->
+  <g transform="translate(40,92)">
+    <rect width="140" height="62" rx="6" fill="url(#stepBox)" stroke="#1565c0"/>
+    <text x="70" y="28" fill="#1565c0" font-size="14" font-weight="700" text-anchor="middle">JSON 編集</text>
+    <text x="70" y="48" fill="#0d4a8a" font-size="11" text-anchor="middle">policies.json</text>
+  </g>
+  <line x1="180" y1="123" x2="216" y2="123" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(220,92)">
+    <rect width="140" height="62" rx="6" fill="url(#stepBox)" stroke="#1565c0"/>
+    <text x="70" y="28" fill="#1565c0" font-size="14" font-weight="700" text-anchor="middle">Git で PR</text>
+    <text x="70" y="48" fill="#0d4a8a" font-size="11" text-anchor="middle">レビュー依頼</text>
+  </g>
+  <line x1="360" y1="123" x2="396" y2="123" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(400,92)">
+    <rect width="160" height="62" rx="6" fill="url(#stepBox)" stroke="#1565c0"/>
+    <text x="80" y="28" fill="#1565c0" font-size="14" font-weight="700" text-anchor="middle">CI 検証</text>
+    <text x="80" y="48" fill="#0d4a8a" font-size="11" text-anchor="middle">JSON 構文 + 必須キー</text>
+  </g>
+  <line x1="560" y1="123" x2="596" y2="123" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(600,92)">
+    <polygon points="0,31 90,0 180,31 90,62" fill="#fff7e6" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="90" y="36" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">レビュー OK?</text>
+  </g>
+  <line x1="780" y1="123" x2="816" y2="123" stroke="#28a745" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="798" y="115" fill="#28a745" font-size="12" font-weight="700">はい</text>
+
+  <!-- Loop back NO -->
+  <line x1="690" y1="92" x2="690" y2="76" stroke="#c62828" stroke-width="1.5"/>
+  <line x1="690" y1="76" x2="110" y2="76" stroke="#c62828" stroke-width="1.5"/>
+  <line x1="110" y1="76" x2="110" y2="89" stroke="#c62828" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+  <text x="400" y="71" fill="#c62828" font-size="12" font-weight="700" text-anchor="middle">いいえ → JSON を直す</text>
+
+  <!-- Row 2: ring deploy -->
+  <g transform="translate(820,92)">
+    <rect width="160" height="62" rx="6" fill="url(#testRing)" stroke="#f9a825" stroke-width="1.8"/>
+    <text x="80" y="26" fill="#7a5e00" font-size="14" font-weight="700" text-anchor="middle">Test リング適用</text>
+    <text x="80" y="46" fill="#7a5e00" font-size="11" text-anchor="middle">Graph SDK / Apply-IntunePolicy.ps1</text>
+  </g>
+  <line x1="980" y1="123" x2="1016" y2="123" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(1020,92)">
+    <polygon points="0,31 70,0 140,31 70,62" fill="#fff7e6" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="70" y="36" fill="#2C3E50" font-size="12" font-weight="600" text-anchor="middle">24h 異常なし?</text>
+  </g>
+
+  <!-- Row 3: pilot -->
+  <line x1="1090" y1="155" x2="1090" y2="200" stroke="#28a745" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1100" y="180" fill="#28a745" font-size="12" font-weight="700">はい</text>
+
+  <g transform="translate(820,202)">
+    <rect width="160" height="62" rx="6" fill="url(#pilotRing)" stroke="#ef6c00" stroke-width="1.8"/>
+    <text x="80" y="26" fill="#7a3a00" font-size="14" font-weight="700" text-anchor="middle">Pilot リング適用</text>
+    <text x="80" y="46" fill="#7a3a00" font-size="11" text-anchor="middle">2-3 部署、約 20% ユーザー</text>
+  </g>
+  <line x1="980" y1="234" x2="1016" y2="234" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(1020,202)">
+    <polygon points="0,31 70,0 140,31 70,62" fill="#fff7e6" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="70" y="36" fill="#2C3E50" font-size="12" font-weight="600" text-anchor="middle">1週間異常なし?</text>
+  </g>
+
+  <!-- Row 4: prod -->
+  <line x1="1090" y1="266" x2="1090" y2="310" stroke="#28a745" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1100" y="290" fill="#28a745" font-size="12" font-weight="700">はい</text>
+
+  <g transform="translate(820,312)">
+    <rect width="160" height="62" rx="6" fill="url(#prodRing)" stroke="#2e7d32" stroke-width="1.8"/>
+    <text x="80" y="26" fill="#1b4f1d" font-size="14" font-weight="700" text-anchor="middle">Prod リング適用</text>
+    <text x="80" y="46" fill="#1b4f1d" font-size="11" text-anchor="middle">全社, 100%</text>
+  </g>
+  <line x1="820" y1="343" x2="780" y2="343" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(620,312)">
+    <rect width="160" height="62" rx="6" fill="url(#stepBox)" stroke="#1565c0"/>
+    <text x="80" y="26" fill="#1565c0" font-size="14" font-weight="700" text-anchor="middle">適用状況棚卸し</text>
+    <text x="80" y="46" fill="#0d4a8a" font-size="11" text-anchor="middle">Get-PolicyAssignmentReport.ps1</text>
+  </g>
+
+  <!-- Rollback path -->
+  <g transform="translate(620,212)">
+    <rect width="160" height="62" rx="6" fill="url(#rollback)" stroke="#c62828" stroke-width="1.8"/>
+    <text x="80" y="26" fill="#7a1f1f" font-size="14" font-weight="700" text-anchor="middle">ロールバック</text>
+    <text x="80" y="46" fill="#7a1f1f" font-size="11" text-anchor="middle">前バージョン再適用</text>
+  </g>
+
+  <!-- Lines from "24h?" → No → rollback (left arrow) -->
+  <line x1="1020" y1="234" x2="780" y2="234" stroke="#c62828" stroke-width="1.5" marker-end="url(#arrowRed)" stroke-dasharray="4,3"/>
+  <text x="900" y="226" fill="#c62828" font-size="11" font-weight="700">いいえ → ロールバック</text>
+
+  <!-- Bottom legend -->
+  <g transform="translate(40,400)">
+    <text x="0" y="0" fill="#2C3E50" font-size="13" font-weight="700">凡例:</text>
+    <rect x="60" y="-12" width="14" height="14" fill="url(#stepBox)" stroke="#1565c0"/>
+    <text x="80" y="0" fill="#2C3E50" font-size="12">開発フロー</text>
+    <rect x="170" y="-12" width="14" height="14" fill="url(#testRing)" stroke="#f9a825"/>
+    <text x="190" y="0" fill="#2C3E50" font-size="12">Test (10% 程度)</text>
+    <rect x="310" y="-12" width="14" height="14" fill="url(#pilotRing)" stroke="#ef6c00"/>
+    <text x="330" y="0" fill="#2C3E50" font-size="12">Pilot (20% 程度)</text>
+    <rect x="460" y="-12" width="14" height="14" fill="url(#prodRing)" stroke="#2e7d32"/>
+    <text x="480" y="0" fill="#2C3E50" font-size="12">Prod (100%)</text>
+    <rect x="600" y="-12" width="14" height="14" fill="url(#rollback)" stroke="#c62828"/>
+    <text x="620" y="0" fill="#2C3E50" font-size="12">ロールバック</text>
+  </g>
+  <text x="40" y="438" fill="#5d6066" font-size="11" font-style="italic">※ Break-glass アカウントは Conditional Access から除外を維持。本番展開前に exclusion を必ず確認すること。</text>
+</svg>

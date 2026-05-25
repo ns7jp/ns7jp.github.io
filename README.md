@@ -38,9 +38,12 @@
 | [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md) | サービス別 RTO / RPO 表、月次リストアテスト、年次 DR ドリル |
 | [物理層 設計](./support-docs/office-it-physical-layer.md) | ラック / LAN / UPS / 無線AP / 複合機の棚卸と切り分け |
 | [M365 ポリシー定義](./support-docs/m365-policy-examples/) | Intune / 条件付きアクセス / Defender ASR の JSON 定義 |
-| [Infra Evidence](./infra-evidence/) / [Production Readiness](./production-readiness.md) | 検証コマンド、失敗 → 修正サンプル、本番化差分 |
+| [Infra Evidence](./infra-evidence/) | 検証コマンド、失敗 → 修正サンプル、実行トレース、ビジュアル証跡 |
+| [視覚証跡 (Grafana / Prometheus 画面)](./infra-evidence/screenshots/) | 実機実行時の表示を高精度 SVG モックアップで再現 |
+| [Production Readiness](./production-readiness.md) | 本番化で足す Alertmanager / SSO / ログ長期保管 |
 | [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 の冪等ベースライン |
-| [面接 想定 FAQ](./support-docs/interview-faq.md) | 製造業 18 年からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等の自答 |
+| [業種別 追記](./support-docs/industry-fit/) | 製造業 / SaaS / SIer / 中小情シス 4 種の見せ方 |
+| [面接 想定 FAQ](./support-docs/interview-faq.md) | 製造業 18 年からなぜ IT、強み弱み、3 ヶ月の週次計画、採用しない理由への反論 |
 
 成果の見え方としては、Infra Operation Lab で **VLAN 構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Cloud Lab で **VPC / Subnet / Security Group / Terraform 検証** を補い、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測（Metrics + Logs）」を一通り** 示しています。Support Toolkit では **15 手順書・9 PowerShell + 1 bash・25 Pesterテスト・AD/M365変更ケース・Postmortem 実例・Backup/RTO/RPO/DR ドリル・SLO・チケット分類・物理層・M365 ポリシー JSON** を公開し、Infra Evidence と Production Readiness で **検証証跡と本番化差分** も追えるようにしました。
 
@@ -229,7 +232,13 @@ ns7jp.github.io/
 │   ├── slo-error-budget.md                    ... ★ SLO / Error Budget / バーンレート アラート
 │   ├── ticket-taxonomy.md                     ... ★ ITIL 4 区分の受付フローと記入テンプレ
 │   ├── office-it-physical-layer.md            ... ★ 物理層（ラック / LAN / UPS / AP / 複合機）
-│   ├── interview-faq.md                       ... ★ 面接 想定 FAQ（自答メモ）
+│   ├── interview-faq.md                       ... ★ 面接 想定 FAQ（自答メモ、週次計画、不採用理由への反論）
+│   ├── industry-fit/                          ... ★ 業種別 追記 (製造業 / SaaS / SIer / 中小情シス)
+│   │   ├── README.md
+│   │   ├── manufacturing-it.md
+│   │   ├── saas-sre.md
+│   │   ├── sier-msp.md
+│   │   └── small-it-team.md
 │   └── m365-policy-examples/                  ... ★ Intune / 条件付きアクセス / Defender ASR JSON
 │       ├── README.md
 │       ├── intune-windows-compliance-policy.json
@@ -271,9 +280,10 @@ ns7jp.github.io/
 │   ├── README.md
 │   └── terraform/
 │
-├── infra-evidence/          ... ★ 実行証跡サンプルとCI検証観点
+├── infra-evidence/          ... ★ 実行証跡 + 視覚証跡 + 失敗→修正対比 + 実機実行トレース
 │   ├── README.md
-│   └── *.sample.txt
+│   ├── *.sample.txt
+│   └── screenshots/         ★ Grafana / Prometheus 画面の SVG モックアップ + 実機キャプチャ手順
 │
 ├── .github/workflows/
 │   ├── static-check.yml     ... HTML 構造 + リンク + 画像バジェット

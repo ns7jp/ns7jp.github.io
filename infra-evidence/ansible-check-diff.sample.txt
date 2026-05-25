@@ -1,0 +1,178 @@
+# Ansible Playbook --check --diff 実行サンプル
+#
+# 想定: Ubuntu 22.04 LTS の新規 VM に対し、ansible/playbook.yml を --check --diff
+# モードで適用したときの典型出力です。実適用前の事前確認 (Dry-run) の証跡として残します。
+
+
+$ ansible-galaxy collection install -r requirements.yml
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/.../ansible-posix-1.5.4.tar.gz to /tmp/...
+Installing 'ansible.posix:1.5.4' to '/home/shimada/.ansible/collections/ansible_collections/ansible/posix'
+ansible.posix:1.5.4 was installed successfully
+Downloading https://galaxy.ansible.com/.../community-general-7.5.1.tar.gz to /tmp/...
+Installing 'community.general:7.5.1' to '/home/shimada/.ansible/collections/ansible_collections/community/general'
+community.general:7.5.1 was installed successfully
+
+$ ansible-playbook playbook.yml --syntax-check
+playbook: playbook.yml
+
+$ ansible-playbook -i inventory.ini playbook.yml --check --diff
+
+PLAY [Linux baseline] **********************************************************************
+
+TASK [Gathering Facts] *********************************************************************
+ok: [labhost01]
+
+TASK [apt | Update apt cache] **************************************************************
+ok: [labhost01]
+
+TASK [apt | Upgrade all packages (check mode reports only)] ********************************
+changed: [labhost01]
+
+TASK [apt | Install baseline packages] *****************************************************
+ok: [labhost01]
+
+TASK [updates | Install unattended-upgrades] ***********************************************
+ok: [labhost01]
+
+TASK [updates | Configure 50unattended-upgrades] *******************************************
+--- before: /etc/apt/apt.conf.d/50unattended-upgrades
++++ after: /home/shimada/.ansible/tmp/ansible-local-1234/tmpabc.j2
+@@ -1,8 +1,12 @@
+ Unattended-Upgrade::Allowed-Origins {
+-    "${distro_id}:${distro_codename}-security";
++    "${distro_id}:${distro_codename}";
++    "${distro_id}:${distro_codename}-security";
++    "${distro_id}ESMApps:${distro_codename}-apps-security";
++    "${distro_id}ESM:${distro_codename}-infra-security";
+ };
++Unattended-Upgrade::Package-Blacklist {};
++Unattended-Upgrade::DevRelease "false";
++Unattended-Upgrade::Automatic-Reboot "false";
+
+changed: [labhost01]
+
+TASK [user | Create administrative user] ***************************************************
+changed: [labhost01]
+
+TASK [user | Add public key to authorized_keys] ********************************************
+changed: [labhost01]
+
+TASK [user | Grant sudo without password (lab only)] ***************************************
+changed: [labhost01]
+
+TASK [ssh | Render hardened sshd_config] ***************************************************
+--- before: /etc/ssh/sshd_config
++++ after: /home/shimada/.ansible/tmp/ansible-local-1234/tmpdef.j2
+@@ -32,7 +32,7 @@
+ # Authentication:
+
+ #LoginGraceTime 2m
+-#PermitRootLogin prohibit-password
++PermitRootLogin no
+ #StrictModes yes
+ #MaxAuthTries 6
+ #MaxSessions 10
+@@ -52,7 +52,7 @@
+ #IgnoreRhosts yes
+
+ # To disable tunneled clear text passwords, change to no here!
+-#PasswordAuthentication yes
++PasswordAuthentication no
+ #PermitEmptyPasswords no
+
+ # Change to yes to enable challenge-response passwords (beware issues with
+@@ -100,3 +100,7 @@
+ #VersionAddendum none
+
+ # no default banner path
++
++AllowTcpForwarding no
++X11Forwarding no
++ClientAliveInterval 300
+
+changed: [labhost01]
+
+TASK [ssh | Validate sshd config syntax before restart] ************************************
+ok: [labhost01]
+
+RUNNING HANDLER [Restart sshd] *************************************************************
+changed: [labhost01]
+
+TASK [firewall | Install ufw] **************************************************************
+ok: [labhost01]
+
+TASK [firewall | Default deny incoming] ****************************************************
+changed: [labhost01]
+
+TASK [firewall | Default allow outgoing] ***************************************************
+ok: [labhost01]
+
+TASK [firewall | Allow SSH (22)] ***********************************************************
+changed: [labhost01]
+
+TASK [firewall | Allow HTTP (80)] **********************************************************
+changed: [labhost01]
+
+TASK [firewall | Allow HTTPS (443)] ********************************************************
+changed: [labhost01]
+
+TASK [firewall | Enable ufw] ***************************************************************
+changed: [labhost01]
+
+TASK [fail2ban | Install fail2ban] *********************************************************
+ok: [labhost01]
+
+TASK [fail2ban | Configure sshd jail] ******************************************************
+--- before: /etc/fail2ban/jail.d/sshd.local
++++ after: /home/shimada/.ansible/tmp/ansible-local-1234/tmpghi.j2
+@@ -0,0 +1,6 @@
++[sshd]
++enabled  = true
++port     = ssh
++filter   = sshd
++maxretry = 5
++bantime  = 1h
+
+changed: [labhost01]
+
+TASK [audit | Install auditd and audispd-plugins] ******************************************
+ok: [labhost01]
+
+TASK [audit | Set journald persistent storage] *********************************************
+changed: [labhost01]
+
+TASK [audit | Place baseline audit rules] **************************************************
+--- before: /etc/audit/rules.d/baseline.rules
++++ after: /home/shimada/.ansible/tmp/ansible-local-1234/tmpjkl.j2
+@@ -0,0 +1,12 @@
++## Baseline audit rules (lab)
++-w /etc/passwd -p wa -k identity
++-w /etc/shadow -p wa -k identity
++-w /etc/group  -p wa -k identity
++-w /etc/sudoers -p wa -k privilege
++-w /etc/ssh/sshd_config -p wa -k sshd
++-w /var/log/auth.log -p wa -k logins
++
++-a always,exit -F arch=b64 -S execve -k exec_log
++-a always,exit -F arch=b32 -S execve -k exec_log
++
++## Make audit configuration immutable until next reboot
++-e 2
+
+changed: [labhost01]
+
+TASK [time | Set timezone to Asia/Tokyo] ***************************************************
+changed: [labhost01]
+
+PLAY RECAP *********************************************************************************
+labhost01                  : ok=21   changed=14   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+
+# 解釈:
+# - changed=14 はすべて意図した設定差分（SSH強化、UFW、fail2ban、auditd、自動更新）
+# - --check --diff モードのため、実際の変更は適用されていない（証跡として diff のみ）
+# - ssh 設定変更前に "Validate sshd config syntax before restart" が走り、構文 NG なら handler は実行されない
+# - 本番適用は --check を外して再実行する。事前にこの diff を関係者でレビュー

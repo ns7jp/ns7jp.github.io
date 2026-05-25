@@ -45,6 +45,11 @@
 
 ## 3. 適用フロー（推奨）
 
+![M365 ポリシーリング展開フロー: JSON 編集 → Git PR → CI → Test → Pilot → Prod、各段階で 24h / 1週間 の監視期間を確保し、異常時はロールバック。](../../image/m365-deployment-flow.svg)
+
+<details>
+<summary>テキスト版（Mermaid フローチャート）</summary>
+
 ```mermaid
 flowchart LR
     A[JSON 編集] --> B[Git で PR]
@@ -60,6 +65,8 @@ flowchart LR
     I -- はい --> J[Prod リング適用]
     J --> K[適用状況棚卸し]
 ```
+
+</details>
 
 ### 適用コマンド例
 

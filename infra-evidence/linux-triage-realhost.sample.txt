@@ -1,0 +1,203 @@
+# linux-triage.sh 実機実行サンプル
+#
+# 想定: Ubuntu 22.04 LTS の負荷上昇中サーバー (app01) に対し、
+# support-scripts/linux-triage.sh を流して一次切り分け結果を取得した想定の出力。
+# このまま .txt のままチケットへ添付できる粒度です。
+
+
+$ ./linux-triage.sh
+================================================================================
+ linux-triage.sh — Linux 一次切り分け (read-only)
+ host : labhost01
+ user : shimada
+ date : Sun May 25 16:42:18 JST 2026
+================================================================================
+
+--------------------------------------------------------------------------------
+ [1/8] OS / uptime / 負荷
+--------------------------------------------------------------------------------
+NAME="Ubuntu"
+VERSION="22.04.4 LTS (Jammy Jellyfish)"
+VERSION_ID="22.04"
+PRETTY_NAME="Ubuntu 22.04.4 LTS"
+Kernel : 5.15.0-105-generic #115-Ubuntu SMP x86_64 GNU/Linux
+
+ 16:42:18 up 41 days,  3:12,  1 user,  load average: 2.41, 1.85, 1.32
+[判定] load5 (1.85) < CPU 数 (4)  → 一時的な高負荷の可能性
+
+CPU/メモリ 上位プロセス:
+  PID   USER     %CPU %MEM COMMAND
+  8421  www-data 78.2 38.4 /usr/sbin/php-fpm: pool www
+  8330  www-data 12.1 22.0 /usr/sbin/php-fpm: pool www
+  1     root      0.1  0.1 /sbin/init
+  ...
+
+--------------------------------------------------------------------------------
+ [2/8] メモリ / swap
+--------------------------------------------------------------------------------
+               total        used        free      shared  buff/cache   available
+Mem:           3.8Gi       3.2Gi       108Mi        12Mi       512Mi       380Mi
+Swap:          2.0Gi       1.6Gi       407Mi
+[判定] available 380MiB (約 9.9%)  → ★ メモリ逼迫
+[判定] swap 使用量増加中           → ★ 監視対象
+
+vmstat 1 5:
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 2  0 1648320 110848  18432 524288   45   80    32    18 1840 3520 62 18 18  2  0
+ 3  0 1648320 108228  18432 525056   12   65    16    24 1980 3680 71 16 12  1  0
+ 2  1 1648432 105920  18432 525824   18   72    16    32 1820 3450 65 19 14  2  0
+ 3  0 1648432 104012  18432 526400   24   60    32    20 1900 3580 69 17 12  2  0
+ 2  0 1648432 102160  18432 527040   18   55    20    18 1880 3520 67 18 13  2  0
+
+--------------------------------------------------------------------------------
+ [3/8] ディスク / inode / I/O
+--------------------------------------------------------------------------------
+df -hPT -x tmpfs (使用率):
+Filesystem     Type      Size  Used Avail Use% Mounted on
+/dev/sda1      ext4       49G   23G   25G  48% /
+/dev/sdb1      ext4       99G   91G  4.4G  96% /srv/data   ★★★
+/dev/sdc1      ext4       19G   12G  6.2G  66% /var/log
+
+df -hPi (inode):
+Filesystem     Inodes IUsed IFree IUse% Mounted on
+/dev/sda1        3.1M  271K  2.8M    9% /
+/dev/sdb1        6.2M  4.9M  1.4M   78% /srv/data       (要監視)
+/dev/sdc1        1.2M  185K  1.0M   16% /var/log
+
+[判定] /srv/data 96% 使用 → ★★★ 容量逼迫、即対応推奨
+[判定] /srv/data inode 78% 使用 → 棚卸し検討
+
+iostat -x 1 3 (要約):
+Device  r/s   w/s    rkB/s  wkB/s  await  %util
+sda     12.4  3.1    248    44     2.1    8.4
+sdb    104.2 28.5   3120    742   18.8   72.1  ★ I/O 競合の兆候
+sdc      1.2  0.8     12      8    1.0    1.2
+
+--------------------------------------------------------------------------------
+ [4/8] systemd ユニット
+--------------------------------------------------------------------------------
+$ systemctl --failed
+  UNIT                          LOAD   ACTIVE   SUB    DESCRIPTION
+● mysql.service                 loaded failed  failed MySQL Community Server
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state.
+SUB    = The low-level unit activation state, values depend on unit type.
+
+1 loaded units listed.
+[判定] mysql.service が failed → ★★ 影響範囲確認必須
+
+$ systemctl status mysql.service --no-pager -l
+× mysql.service - MySQL Community Server
+     Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+     Active: failed (Result: exit-code) since Sun 2026-05-25 16:35:14 JST; 7min ago
+    Process: 4528 ExecStartPre=/usr/share/mysql/mysql-systemd-start pre (code=exited, status=0/SUCCESS)
+    Process: 4602 ExecStart=/usr/sbin/mysqld (code=exited, status=1/FAILURE)
+   Main PID: 4602 (code=exited, status=1/FAILURE)
+        CPU: 220ms
+
+May 25 16:35:14 labhost01 systemd[1]: mysql.service: Main process exited, code=exited, status=1/FAILURE
+May 25 16:35:14 labhost01 systemd[1]: mysql.service: Failed with result 'exit-code'.
+
+--------------------------------------------------------------------------------
+ [5/8] 直近のエラーログ
+--------------------------------------------------------------------------------
+$ journalctl -p err --since "30 min ago" --no-pager
+May 25 16:35:14 labhost01 mysqld[4602]: [ERROR] [MY-010187] InnoDB: Cannot allocate buffer pool memory
+May 25 16:35:14 labhost01 mysqld[4602]: [ERROR] [MY-013183] InnoDB: Plugin initialization aborted with error
+May 25 16:35:14 labhost01 mysqld[4602]: [ERROR] [MY-010334] Failed to initialize DD Storage Engine
+May 25 16:35:14 labhost01 mysqld[4602]: [ERROR] [MY-010119] Aborting
+
+$ dmesg -T --level=err | tail -3
+[Sun May 25 16:34:21 2026] Out of memory: Killed process 8421 (php-fpm) total-vm:1.2GB anon-rss:980MB
+[Sun May 25 16:35:08 2026] Out of memory: Killed process 4528 (mysqld) total-vm:1.8GB anon-rss:1.5GB
+
+[判定] OOM Killer 発火 → メモリ逼迫が原因で mysqld が殺された
+
+--------------------------------------------------------------------------------
+ [6/8] ネットワーク
+--------------------------------------------------------------------------------
+$ ip route
+default via 10.0.30.1 dev ens3 proto static
+10.0.30.0/23 dev ens3 proto kernel scope link src 10.0.30.42
+
+$ resolvectl status (要約)
+Global
+       Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+resolv.conf mode: stub
+       Link 2 (ens3)
+   DNS Servers: 10.0.20.5 10.0.20.6
+DNS Domain: corp.local
+
+$ ss -tulnp
+Netid State    Recv-Q Send-Q   Local Address:Port    Peer Address:Port   Process
+tcp   LISTEN   0      4096           0.0.0.0:22           0.0.0.0:*       users:(("sshd",pid=1180,fd=3))
+tcp   LISTEN   0      511            0.0.0.0:80           0.0.0.0:*       users:(("nginx",pid=1521,fd=6))
+tcp   LISTEN   0      4096         127.0.0.1:9100         0.0.0.0:*       users:(("node_exporter",pid=2280,fd=3))
+
+[判定] 想定外の listen ポートなし
+
+--------------------------------------------------------------------------------
+ [7/8] SSH 認証 / 直近ログイン
+--------------------------------------------------------------------------------
+$ journalctl -u ssh -p warning --since "1 hour ago" --no-pager
+May 25 15:42:18 labhost01 sshd[8512]: Failed password for invalid user admin from 203.0.113.42 port 51234 ssh2
+May 25 15:41:55 labhost01 sshd[8520]: Failed password for invalid user oracle from 203.0.113.42 port 33214 ssh2
+May 25 15:35:08 labhost01 sshd[8530]: Failed password for root from 198.51.100.7 port 39812 ssh2
+
+[判定] 直近 1h に Failed 3 件 → fail2ban で自動 ban 候補
+
+$ last -n 5
+shimada  pts/0       10.0.30.42      Sun May 25 15:18  still logged in
+shimada  pts/0       10.0.30.42      Sun May 25 12:42 - 14:08 (01:25)
+shimada  pts/0       10.0.30.42      Sun May 24 18:00 - 20:14 (02:14)
+
+$ lastb -n 3
+root        ssh:notty  198.51.100.7   Sun May 25 15:35    gone - no logout
+admin       ssh:notty  203.0.113.42   Sun May 25 15:42    gone - no logout
+oracle      ssh:notty  203.0.113.42   Sun May 25 15:41    gone - no logout
+
+--------------------------------------------------------------------------------
+ [8/8] ファイアウォール
+--------------------------------------------------------------------------------
+$ ufw status verbose
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp                     ALLOW IN    Anywhere
+80/tcp                     ALLOW IN    Anywhere
+443/tcp                    ALLOW IN    Anywhere
+22/tcp (v6)                ALLOW IN    Anywhere (v6)
+80/tcp (v6)                ALLOW IN    Anywhere (v6)
+443/tcp (v6)               ALLOW IN    Anywhere (v6)
+
+[判定] 想定通り (22 / 80 / 443 のみ)
+
+================================================================================
+ 結論 (1次切り分け)
+================================================================================
+
+ ★ メモリ枯渇 (available 9.9%) → OOM Killer で mysqld + php-fpm を kill
+ ★ /srv/data 96% 使用 → ディスク容量逼迫
+ ★ mysql.service が failed 状態 → 業務 DB 影響あり
+ SSH ブルートフォース兆候 → fail2ban で対応想定
+
+ 推奨アクション:
+   1) mysql.service 復旧前に、まず /srv/data の不要ファイル削除でメモリと
+      ディスクを確保 (logrotate / 古いバックアップ確認)
+   2) メモリ逼迫の根本原因 = php-fpm の worker プロセスが大量 (38.4% MEM)
+      → 設定値 pm.max_children を見直し
+   3) mysqld を再起動し、復旧確認後にチケットへ証跡添付
+   4) ブルートフォースの ban 状況を fail2ban-client status sshd で確認
+
+ 添付対象:
+   - このログ全文
+   - /var/log/mysql/error.log の該当時刻周辺 (mysqld[4602] のスタック)
+   - dmesg の OOM Killer 発火行
+
+================================================================================

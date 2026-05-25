@@ -27,7 +27,11 @@
 1. まず [../README.md](../README.md) の「採用担当者向け」表で全体像を見る。
 2. [../infra-lab.html](../infra-lab.html) と [../linux-lab.html](../linux-lab.html) で一次切り分けの流れを見る。
 3. このフォルダで「検証コマンド」と「CIで確認する対象」を確認する。
-4. 本番化の差分は [../production-readiness.md](../production-readiness.md) を見る。
+4. [screenshots/](./screenshots/) で **実機実行時に Grafana / Prometheus がどう見えるか** を SVG モックアップで確認する。
+5. [lab-execution-trace.sample.txt](./lab-execution-trace.sample.txt) で `docker compose up -d` 以降のリアルな出力を確認する。
+6. 本番化の差分は [../production-readiness.md](../production-readiness.md) を見る。
+
+> **実機の "本物の" スクリーンショットを見たい場合**: [screenshots/README.md](./screenshots/README.md) の「ローカルで実機キャプチャを撮る手順 (10 分)」を参考に、自分の環境で `docker compose up -d` を実行して撮影し、本リポジトリの SVG と差し替えてください。
 
 ---
 
@@ -40,7 +44,11 @@
 | [ansible-check.sample.txt](./ansible-check.sample.txt) | Ansible collection install、syntax-check、ansible-lint の出力例 |
 | [terraform-check.sample.txt](./terraform-check.sample.txt) | Cloud Lab Terraform の fmt / init / validate 出力例 |
 | [m365-policy-check.sample.txt](./m365-policy-check.sample.txt) | M365 ポリシー JSON の構文検証 + Apply-IntunePolicy.ps1 dry-run 出力例 |
-| [validation-failure-and-fix.sample.txt](./validation-failure-and-fix.sample.txt) | ★ promtool / ansible-lint / terraform validate の**失敗 → 修正 → 成功**の対比証跡 |
+| [validation-failure-and-fix.sample.txt](./validation-failure-and-fix.sample.txt) | promtool / ansible-lint / terraform validate の**失敗 → 修正 → 成功**の対比証跡 |
+| [lab-execution-trace.sample.txt](./lab-execution-trace.sample.txt) | ★ `docker compose up -d` から監視データ取得までの実行トレース全体 |
+| [ansible-check-diff.sample.txt](./ansible-check-diff.sample.txt) | ★ `ansible-playbook --check --diff` を Ubuntu 22.04 に当てた想定の差分出力 |
+| [linux-triage-realhost.sample.txt](./linux-triage-realhost.sample.txt) | ★ `linux-triage.sh` を負荷上昇中ホストに当てた想定の全項目出力 |
+| [screenshots/](./screenshots/) | ★ Grafana / Prometheus 画面の高精度 SVG モックアップ + 実機キャプチャ手順 |
 
 ---
 

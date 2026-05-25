@@ -127,3 +127,5 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 - [物理層](./support-docs/office-it-physical-layer.md) — ラック / LAN / UPS / 複合機
 - [M365 ポリシー定義](./support-docs/m365-policy-examples/) — Intune / 条件付きアクセス / Defender JSON
 - [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md) — RTO / RPO / DR ドリル計画
+- [視覚証跡](./infra-evidence/screenshots/) — Grafana / Prometheus 画面の高精度 SVG モックアップ
+- [業種別 追記](./support-docs/industry-fit/) — 製造業 / SaaS / SIer / 中小情シス 4 種

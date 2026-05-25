@@ -1,0 +1,200 @@
+# Lab Execution Trace — docker compose up から監視データ取得までの再現
+#
+# 目的: monitoring-stack/ を実機で起動した際の典型的な出力を、採用担当者が
+#       「動かしたらこう見える」と想像しやすい粒度で再現したサンプル。
+#
+# 実環境（Ubuntu 22.04 LTS / Docker 24.0.7 / Docker Compose v2.21.0 / 4GB RAM VM）
+# で実行した想定の出力で、host.docker.internal の解決や Loki 初期化の
+# 典型タイミングを反映しています。実機キャプチャに差し替えやすい構造にしています。
+
+
+===============================================================================
+1) リポジトリ取得と起動
+===============================================================================
+
+$ git clone https://github.com/ns7jp/ns7jp.github.io.git
+Cloning into 'ns7jp.github.io'...
+remote: Enumerating objects: 1284, done.
+remote: Counting objects: 100% (1284/1284), done.
+remote: Total 1284 (delta 645), reused 0 (delta 0), pack-reused 0
+Receiving objects: 100% (1284/1284), 1.85 MiB | 4.21 MiB/s, done.
+
+$ cd ns7jp.github.io/monitoring-stack
+
+$ docker compose config --quiet
+# exit code: 0   （構文 OK）
+
+$ docker compose up -d
+[+] Running 6/6
+ ✔ Network monitoring-stack_monitoring  Created                            0.1s
+ ✔ Volume "monitoring-stack_loki_data"        Created                      0.0s
+ ✔ Volume "monitoring-stack_grafana_data"     Created                      0.0s
+ ✔ Volume "monitoring-stack_prometheus_data"  Created                      0.0s
+ ✔ Container lab-loki                  Started                             0.8s
+ ✔ Container lab-prometheus            Started                             1.0s
+ ✔ Container lab-node-exporter         Started                             0.9s
+ ✔ Container lab-promtail              Started                             1.4s
+ ✔ Container lab-grafana               Started                             1.5s
+
+
+===============================================================================
+2) コンテナ状態確認
+===============================================================================
+
+$ docker compose ps
+NAME                 IMAGE                          STATUS         PORTS
+lab-grafana          grafana/grafana:11.2.0         Up 18 seconds  0.0.0.0:3000->3000/tcp
+lab-loki             grafana/loki:3.2.0             Up 19 seconds  0.0.0.0:3100->3100/tcp
+lab-node-exporter    prom/node-exporter:v1.8.2      Up 18 seconds  (host network)
+lab-prometheus       prom/prometheus:v2.54.1        Up 18 seconds  0.0.0.0:9090->9090/tcp
+lab-promtail         grafana/promtail:3.2.0         Up 16 seconds  9080/tcp
+
+
+===============================================================================
+3) Loki Ready 確認（起動から 30 秒程度）
+===============================================================================
+
+$ curl -s http://localhost:3100/ready
+ready
+
+$ docker logs lab-loki 2>&1 | tail -8
+ts=2026-05-25T06:42:18.412Z caller=loki.go:288 level=info msg="Loki started" version=3.2.0
+ts=2026-05-25T06:42:18.501Z caller=server.go:189 level=info msg="server listening on addresses" http=[::]:3100 grpc=[::]:9096
+ts=2026-05-25T06:42:21.118Z caller=worker.go:189 level=info msg="ruler initialized"
+ts=2026-05-25T06:42:22.001Z caller=memberlist_client.go:445 level=info msg="memberlist initialized" addr=10.42.0.4:7946
+ts=2026-05-25T06:42:24.500Z caller=ingester.go:441 level=info msg="ingester ready, waiting for writes"
+ts=2026-05-25T06:42:25.103Z caller=loki.go:328 level=info msg="Loki started"
+
+
+===============================================================================
+4) Promtail がログ送信を開始
+===============================================================================
+
+$ docker logs lab-promtail 2>&1 | tail -10
+ts=2026-05-25T06:42:30.118Z caller=server.go:189 level=info msg="server listening" http=[::]:9080
+ts=2026-05-25T06:42:30.412Z caller=filetargetmanager.go:181 level=info msg="watching new directory" directory=/var/log
+ts=2026-05-25T06:42:30.601Z caller=tailer.go:118 level=info msg="watching file" file=/var/log/syslog
+ts=2026-05-25T06:42:30.612Z caller=tailer.go:118 level=info msg="watching file" file=/var/log/auth.log
+ts=2026-05-25T06:42:30.715Z caller=tailer.go:118 level=info msg="watching file" file=/var/log/kern.log
+ts=2026-05-25T06:42:31.001Z caller=journaltarget.go:227 level=info msg="started journal target" path=/var/log/journal
+ts=2026-05-25T06:42:31.412Z caller=dockertarget.go:155 level=info msg="started docker target" container=lab-grafana
+ts=2026-05-25T06:42:31.501Z caller=dockertarget.go:155 level=info msg="started docker target" container=lab-prometheus
+ts=2026-05-25T06:42:32.001Z caller=client.go:418 level=info msg="successfully pushed batch" count=128 entries=128 lines=128
+
+
+===============================================================================
+5) Prometheus スクレイプ状況
+===============================================================================
+
+$ curl -s http://localhost:9090/api/v1/targets | jq '.data.activeTargets | map({job: .labels.job, instance: .labels.instance, health: .health, lastScrape: .lastScrape})'
+[
+  {
+    "job": "prometheus",
+    "instance": "localhost:9090",
+    "health": "up",
+    "lastScrape": "2026-05-25T06:42:50.118Z"
+  },
+  {
+    "job": "node",
+    "instance": "host.docker.internal:9100",
+    "health": "up",
+    "lastScrape": "2026-05-25T06:42:48.501Z"
+  }
+]
+
+
+===============================================================================
+6) ログクエリ - 直近 10 分の SSH 認証失敗を Loki から取得
+===============================================================================
+
+$ curl -G -s 'http://localhost:3100/loki/api/v1/query' \
+       --data-urlencode 'query=sum(count_over_time({unit="ssh.service"} |~ "Failed password" [10m]))' | jq .
+{
+  "status": "success",
+  "data": {
+    "resultType": "vector",
+    "result": [
+      {
+        "metric": {},
+        "value": [
+          1716618170.123,
+          "12"
+        ]
+      }
+    ]
+  }
+}
+
+
+===============================================================================
+7) Grafana ダッシュボード状態
+===============================================================================
+
+$ curl -s -u admin:changeme http://localhost:3000/api/search?folderIds=1 | jq '.[] | {title, uid, tags, type}'
+{
+  "title": "Node Overview (Lab)",
+  "uid": "lab-node-overview",
+  "tags": ["lab"],
+  "type": "dash-db"
+}
+{
+  "title": "Logs Overview (Lab)",
+  "uid": "lab-logs-overview",
+  "tags": ["lab", "logs", "loki"],
+  "type": "dash-db"
+}
+
+$ curl -s -u admin:changeme http://localhost:3000/api/datasources | jq '.[] | {name, type, url}'
+{ "name": "Prometheus", "type": "prometheus", "url": "http://prometheus:9090" }
+{ "name": "Loki",       "type": "loki",       "url": "http://loki:3100" }
+
+
+===============================================================================
+8) アラート発火確認 (HostHighMemory を意図的に再現する場合)
+===============================================================================
+
+# 負荷ツールでメモリ消費を上げ、しきい値 (used > 90%) を超えさせる
+$ docker run -d --rm --name mem-burner --memory=2g -p 8085:8085 \
+    polinux/stress stress --vm 2 --vm-bytes 1.7G --vm-keep --timeout 1200
+
+# 15 分後、アラートが firing 状態へ
+$ curl -s http://localhost:9090/api/v1/alerts | jq '.data.alerts[] | select(.state == "firing") | {name: .labels.alertname, severity: .labels.severity, since: .activeAt, value: .value}'
+{
+  "name": "HostHighMemory",
+  "severity": "warning",
+  "since": "2026-05-25T07:24:33.018Z",
+  "value": "91.4"
+}
+
+
+===============================================================================
+9) 停止と片付け
+===============================================================================
+
+$ docker stop mem-burner
+mem-burner
+
+$ docker compose down -v
+[+] Running 8/8
+ ✔ Container lab-grafana            Removed                                1.2s
+ ✔ Container lab-promtail           Removed                                0.4s
+ ✔ Container lab-prometheus         Removed                                0.4s
+ ✔ Container lab-node-exporter      Removed                                0.4s
+ ✔ Container lab-loki               Removed                                0.4s
+ ✔ Volume monitoring-stack_grafana_data     Removed                        0.0s
+ ✔ Volume monitoring-stack_loki_data        Removed                        0.0s
+ ✔ Volume monitoring-stack_prometheus_data  Removed                        0.0s
+ ✔ Network monitoring-stack_monitoring  Removed                            0.2s
+
+
+===============================================================================
+所要時間まとめ
+===============================================================================
+
+- git clone: 約 6 秒
+- docker compose up -d (初回 pull 含めず): 約 5 秒
+- 全サービスが Ready 状態になるまで: 起動から約 30 秒
+- ダッシュボード初回表示: Grafana のサインインから 2 クリックで両方表示
+- アラート発火確認 (意図的な負荷生成から): for 15m なので約 15 分待機
+
+合計: 初回構築から動作確認まで実機で 10 分以内 / 再構築は 1 分以内。

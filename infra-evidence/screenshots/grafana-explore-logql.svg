@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <title>Grafana Explore (Loki LogQL) クエリ画面イメージ</title>
+  <desc>Grafana > Explore で Loki データソースを選び、LogQL クエリ `{unit="ssh.service"} |~ "Failed password"` を実行した結果。クエリエディタ、ヒストグラム、ログラインを含む。</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#181b1f"/>
+      <stop offset="1" stop-color="#0f1114"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#22252b"/>
+      <stop offset="1" stop-color="#181b1f"/>
+    </linearGradient>
+    <linearGradient id="logsBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13161a"/>
+      <stop offset="1" stop-color="#0d1013"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1400" height="820" fill="url(#bg)"/>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="1400" height="48" fill="#0b0c0e"/>
+  <g transform="translate(20,15)">
+    <circle cx="14" cy="9" r="11" fill="#f15a29"/>
+    <text x="36" y="14" fill="#dfe1e6" font-size="14" font-weight="600">Grafana</text>
+    <text x="100" y="14" fill="#5d6066" font-size="13">/</text>
+    <text x="115" y="14" fill="#dfe1e6" font-size="13" font-weight="600">Explore</text>
+  </g>
+  <g transform="translate(1100,15)">
+    <text x="0" y="14" fill="#8e9297" font-size="12">⏱ Last 1 hour</text>
+    <text x="120" y="14" fill="#8e9297" font-size="12">⟳ off</text>
+    <rect x="170" y="-2" width="78" height="22" rx="3" fill="#1f4d8a"/>
+    <text x="209" y="13" fill="#fff" font-size="11" font-weight="600" text-anchor="middle">▶ Run query</text>
+  </g>
+
+  <!-- Side nav -->
+  <rect x="0" y="48" width="56" height="772" fill="#111316"/>
+  <g transform="translate(28,76)">
+    <text x="0" y="0" fill="#8e9297" font-size="16" text-anchor="middle">⌂</text>
+    <text x="0" y="40" fill="#8e9297" font-size="16" text-anchor="middle">▦</text>
+    <text x="0" y="80" fill="#7eb26d" font-size="16" text-anchor="middle">⊜</text>
+    <text x="0" y="120" fill="#8e9297" font-size="16" text-anchor="middle">⚠</text>
+    <text x="0" y="160" fill="#8e9297" font-size="16" text-anchor="middle">⚙</text>
+  </g>
+
+  <!-- Data source selector -->
+  <g transform="translate(76,60)">
+    <rect width="160" height="32" rx="3" fill="#22252b" stroke="#2c3035"/>
+    <text x="14" y="20" fill="#dfe1e6" font-size="12" font-weight="600">Loki</text>
+    <text x="146" y="20" fill="#5d6066" font-size="12" text-anchor="end">▼</text>
+  </g>
+
+  <!-- Query editor -->
+  <g transform="translate(252,60)">
+    <rect width="1130" height="32" rx="3" fill="#1a1d22" stroke="#5794f2" stroke-width="1.2"/>
+    <text x="14" y="20" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace"
+          font-size="12" fill="#dfe1e6">{unit="ssh.service"} |~ "Failed password"</text>
+  </g>
+
+  <!-- Tabs row -->
+  <g transform="translate(76,108)">
+    <text x="0" y="14" fill="#dfe1e6" font-size="12" font-weight="600">▼ Logs volume</text>
+    <text x="120" y="14" fill="#8e9297" font-size="12">▶ Logs</text>
+    <text x="210" y="14" fill="#8e9297" font-size="12">▶ Patterns</text>
+    <text x="300" y="14" fill="#8e9297" font-size="12">▶ Builder</text>
+  </g>
+
+  <!-- Logs volume (histogram) -->
+  <g transform="translate(76,128)">
+    <rect width="1304" height="180" rx="3" fill="url(#panel)" stroke="#2c3035"/>
+    <text x="18" y="22" fill="#c4c6c9" font-size="13" font-weight="600">Logs volume</text>
+    <text x="1286" y="22" fill="#5d6066" font-size="11" text-anchor="end">14 matched lines, 1h</text>
+
+    <!-- y-axis -->
+    <text x="36" y="52" fill="#5d6066" font-size="10" text-anchor="end">5</text>
+    <text x="36" y="92" fill="#5d6066" font-size="10" text-anchor="end">3</text>
+    <text x="36" y="132" fill="#5d6066" font-size="10" text-anchor="end">1</text>
+    <line x1="40" y1="46"  x2="1286" y2="46"  stroke="#2c3035" stroke-dasharray="2,3"/>
+    <line x1="40" y1="86"  x2="1286" y2="86"  stroke="#2c3035" stroke-dasharray="2,3"/>
+    <line x1="40" y1="126" x2="1286" y2="126" stroke="#2c3035" stroke-dasharray="2,3"/>
+    <line x1="40" y1="156" x2="1286" y2="156" stroke="#2c3035"/>
+
+    <!-- bars (1m buckets) -->
+    <g>
+      <rect x="60"   y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="80"   y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="100"  y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="120"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="140"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="160"  y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="180"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="200"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="220"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="240"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="260"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="280"  y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="300"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="320"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="340"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="360"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="380"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="400"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="420"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="440"  y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="460"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="480"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="500"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="520"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="540"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="560"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="580"  y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="600"  y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="620"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="640"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="660"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="680"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="700"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="720"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="740"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="760"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="780"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="800"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="820"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="840"  y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="860"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="880"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="900"  y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="920"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="940"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="960"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="980"  y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="1000" y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="1020" y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="1040" y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="1060" y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="1080" y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="1100" y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="1120" y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="1140" y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="1160" y="146" width="14" height="10" fill="#e24d42"/>
+      <rect x="1180" y="156" width="14" height="0"  fill="#e24d42"/>
+      <rect x="1200" y="126" width="14" height="30" fill="#e24d42"/>
+      <rect x="1220" y="106" width="14" height="50" fill="#e24d42"/>
+      <rect x="1240" y="126" width="14" height="30" fill="#e24d42"/>
+      <rect x="1260" y="146" width="14" height="10" fill="#e24d42"/>
+    </g>
+    <text x="60"   y="170" fill="#5d6066" font-size="10">-60m</text>
+    <text x="380"  y="170" fill="#5d6066" font-size="10">-45m</text>
+    <text x="700"  y="170" fill="#5d6066" font-size="10">-30m</text>
+    <text x="1020" y="170" fill="#5d6066" font-size="10">-15m</text>
+    <text x="1260" y="170" fill="#5d6066" font-size="10">now</text>
+  </g>
+
+  <!-- Logs panel -->
+  <g transform="translate(76,328)">
+    <rect width="1304" height="468" rx="3" fill="url(#panel)" stroke="#2c3035"/>
+    <text x="18" y="22" fill="#c4c6c9" font-size="13" font-weight="600">Logs</text>
+    <text x="1286" y="22" fill="#5d6066" font-size="11" text-anchor="end">Order: Newest first  |  Wrap: on  |  Common labels: unit, host</text>
+    <rect x="14" y="32" width="1276" height="426" rx="2" fill="url(#logsBg)" stroke="#2c3035"/>
+
+    <g font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace" font-size="11.5">
+      <text x="22" y="52" fill="#e24d42">2026-05-25 15:42:18.123</text>
+      <text x="232" y="52" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="err"}</text>
+      <text x="640" y="52" fill="#dfe1e6">Failed password for invalid user admin from 203.0.113.42 port 51234 ssh2</text>
+
+      <text x="22" y="76" fill="#e24d42">2026-05-25 15:42:08.501</text>
+      <text x="232" y="76" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="info"}</text>
+      <text x="640" y="76" fill="#dfe1e6">Disconnected from invalid user admin 203.0.113.42 port 51234 [preauth]</text>
+
+      <text x="22" y="100" fill="#e24d42">2026-05-25 15:41:55.221</text>
+      <text x="232" y="100" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="err"}</text>
+      <text x="640" y="100" fill="#dfe1e6">Failed password for invalid user oracle from 203.0.113.42 port 33214 ssh2</text>
+
+      <text x="22" y="124" fill="#e24d42">2026-05-25 15:35:08.412</text>
+      <text x="232" y="124" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="err"}</text>
+      <text x="640" y="124" fill="#dfe1e6">Failed password for root from 198.51.100.7 port 39812 ssh2</text>
+
+      <text x="22" y="148" fill="#e24d42">2026-05-25 15:30:54.001</text>
+      <text x="232" y="148" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="info"}</text>
+      <text x="640" y="148" fill="#dfe1e6">Invalid user test from 198.51.100.7 port 41008 ssh2</text>
+
+      <text x="22" y="172" fill="#e24d42">2026-05-25 15:21:44.118</text>
+      <text x="232" y="172" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="info"}</text>
+      <text x="640" y="172" fill="#dfe1e6">Invalid user test from 198.51.100.7 port 41008 ssh2</text>
+
+      <text x="22" y="196" fill="#7eb26d">2026-05-25 15:18:09.733</text>
+      <text x="232" y="196" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="info"}</text>
+      <text x="640" y="196" fill="#dfe1e6">Accepted publickey for shimada from 10.0.30.42 port 56812 ssh2: ED25519 SHA256:abc123...</text>
+
+      <text x="22" y="220" fill="#7eb26d">2026-05-25 15:05:33.118</text>
+      <text x="232" y="220" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="info"}</text>
+      <text x="640" y="220" fill="#dfe1e6">Accepted publickey for shimada from 10.0.30.42 port 51234 ssh2: ED25519 SHA256:abc123...</text>
+
+      <text x="22" y="244" fill="#e24d42">2026-05-25 14:58:42.601</text>
+      <text x="232" y="244" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="err"}</text>
+      <text x="640" y="244" fill="#dfe1e6">Failed password for invalid user postgres from 192.0.2.88 port 42120 ssh2</text>
+
+      <text x="22" y="268" fill="#e24d42">2026-05-25 14:55:01.213</text>
+      <text x="232" y="268" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="err"}</text>
+      <text x="640" y="268" fill="#dfe1e6">Failed password for invalid user postgres from 192.0.2.88 port 42120 ssh2</text>
+
+      <text x="22" y="292" fill="#e24d42">2026-05-25 14:45:18.001</text>
+      <text x="232" y="292" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="err"}</text>
+      <text x="640" y="292" fill="#dfe1e6">Failed password for invalid user ubuntu from 192.0.2.88 port 42008 ssh2</text>
+
+      <text x="22" y="316" fill="#e24d42">2026-05-25 14:42:35.412</text>
+      <text x="232" y="316" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="err"}</text>
+      <text x="640" y="316" fill="#dfe1e6">Failed password for invalid user oracle from 192.0.2.88 port 41998 ssh2</text>
+
+      <text x="22" y="340" fill="#5d6066">2026-05-25 14:35:18.601</text>
+      <text x="232" y="340" fill="#bbbf25">{host="lab-host-01", unit="ssh.service", severity="info"}</text>
+      <text x="640" y="340" fill="#dfe1e6">PAM 5 more authentication failures; logname= uid=0 euid=0 tty=ssh ruser= rhost=198.51.100.7</text>
+
+      <text x="22" y="380" fill="#8e9297" font-size="11">▶ <tspan fill="#5794f2">Add comment</tspan>  ·  Permalink  ·  Live tailing</text>
+    </g>
+  </g>
+
+  <text x="76" y="810" fill="#5d6066" font-size="10">Data source: Loki  ·  Query: `{unit="ssh.service"} |~ "Failed password"`  ·  14 matched lines</text>
+  <text x="1380" y="810" fill="#5d6066" font-size="10" text-anchor="end">Grafana 11.2.0  ·  Lab</text>
+</svg>

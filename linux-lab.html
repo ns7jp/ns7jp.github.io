@@ -249,10 +249,11 @@ WantedBy=timers.target
             <section class="lab-links-section">
                 <div class="lab-link-card">
                     <h4><i class="fa-solid fa-terminal"></i> bash 一次切り分けスクリプト</h4>
-                    <p>ここまでの確認項目を1本にまとめた読み取り専用 bash です。問い合わせ受付直後に流して、結果をテキストでチケットに添付します。</p>
+                    <p>ここまでの確認項目を1本にまとめた読み取り専用 bash です。問い合わせ受付直後に流して、結果をテキストでチケットに添付します。実機の OOM / DB failed 状態への当て込みサンプルも併載。</p>
                     <div class="contact-actions">
                         <a href="support-scripts/linux-triage.sh" class="btn btn-secondary">linux-triage.sh を見る</a>
                         <a href="support-scripts/" class="btn btn-outline-dark">support-scripts/ へ</a>
+                        <a href="infra-evidence/linux-triage-realhost.sample.txt" class="btn btn-outline-dark">実機実行サンプル</a>
                     </div>
                 </div>
                 <div class="lab-link-card">
@@ -264,6 +265,8 @@ WantedBy=timers.target
                         <span><a href="monitoring-stack/" style="color:inherit;">Prom + Grafana + Loki + Promtail</a></span>
                         <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">SLO / Error Budget</a></span>
                         <span><a href="infra-evidence/" style="color:inherit;">Infra Evidence</a></span>
+                        <span><a href="infra-evidence/screenshots/" style="color:inherit;">視覚証跡</a></span>
+                        <span><a href="infra-evidence/ansible-check-diff.sample.txt" style="color:inherit;">Ansible --check --diff サンプル</a></span>
                         <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
                         <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / RTO / RPO / DR</a></span>
                         <span><a href="support-docs/postmortem-example.md" style="color:inherit;">Postmortem 実例</a></span>

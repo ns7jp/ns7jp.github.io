@@ -2,13 +2,123 @@ Portfolio License Notice
 
 Copyright (c) 2026 Noriyuki Shimada
 
-Source code examples, HTML, CSS, JavaScript, Markdown documentation, and
-PowerShell sample scripts in this repository may be referenced for learning
-and portfolio review purposes.
+This repository contains multiple content types with different licensing
+intent. Read each section before reusing or referencing material from this
+repository.
 
-Personal profile text, resume content, portrait/profile images, and branding
-assets are not licensed for reuse without permission.
+================================================================================
+1. CODE — MIT-style permissive
+================================================================================
 
-No warranty is provided. Use any sample code or operational document at your
-own risk and adapt it to your own security policy, environment, and legal
-requirements before using it in production.
+The following items are released under MIT-style permissive terms. You may
+copy, modify, and redistribute them with attribution and without warranty.
+
+  - PowerShell scripts under support-scripts/ and
+    support-docs/m365-policy-examples/*.ps1
+  - Bash scripts under support-scripts/
+  - Ansible playbook and templates under ansible/
+  - Terraform configuration under cloud-lab/terraform/
+  - JSON configuration samples under support-docs/m365-policy-examples/*.json,
+    monitoring-stack/grafana/provisioning/dashboards/*.json
+  - YAML configuration under monitoring-stack/{prometheus,loki,promtail}/
+  - GitHub Actions workflows under .github/workflows/
+  - Node.js link / structure checkers under scripts/
+  - Visual evidence SVG mockups under infra-evidence/screenshots/ (the SVG
+    source itself, not the trade dress of Grafana / Prometheus which they
+    represent)
+
+License text (applies to the items above):
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+
+================================================================================
+2. DOCUMENTATION — CC BY 4.0
+================================================================================
+
+Markdown documents under support-docs/, README.md, CODE_WALKTHROUGH.md,
+production-readiness.md, infra-evidence/*.md and infra-evidence/*.sample.txt,
+ansible/README.md, cloud-lab/README.md, monitoring-stack/README.md are
+licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+
+You may share and adapt these documents for any purpose, including
+commercially, provided you give appropriate attribution to "Noriyuki Shimada"
+with a link to https://ns7jp.github.io/ or this repository.
+
+Full license text: https://creativecommons.org/licenses/by/4.0/
+
+================================================================================
+3. HTML / CSS / JAVASCRIPT (SITE TEMPLATE) — Permissive with attribution
+================================================================================
+
+The HTML files (index.html, me.html, skills.html, works.html, resume.html,
+contact.html, infra-lab.html, linux-lab.html, cloud-lab.html, 404.html),
+CSS under css/, JavaScript under js/ may be used as a layout reference. If
+you reuse a substantial portion of the visual design or layout, please retain
+a small attribution comment ("Layout inspired by Noriyuki Shimada portfolio").
+
+The third-party libraries (jQuery, Font Awesome, Google Fonts, Chart.js,
+bgswitcher.js) retain their own upstream licenses.
+
+================================================================================
+4. PERSONAL IMAGES AND PROFILE TEXT — All rights reserved
+================================================================================
+
+The following items are NOT licensed for reuse. Please contact the author
+before any redistribution or derivative use.
+
+  - Portrait / profile photographs (image/image.jpg, image/me.jpg and any
+    other photographs of the author)
+  - First-person profile narrative text in me.html, resume.html, and
+    support-docs/interview-faq.md (specifically the answers about personal
+    history, motivations, and self-assessment)
+  - Personal contact information (email address, location)
+
+================================================================================
+5. ARCHITECTURAL DIAGRAMS — CC BY 4.0
+================================================================================
+
+SVG diagrams under image/ (network-vlan.svg, office-physical.svg,
+ticket-taxonomy-flow.svg, m365-deployment-flow.svg, grafana-dashboard.svg)
+are licensed under CC BY 4.0, the same as documentation.
+
+================================================================================
+6. THIRD-PARTY TRADEMARKS
+================================================================================
+
+This repository references the following third-party products solely for
+educational and portfolio purposes. All trademarks belong to their respective
+owners and no endorsement is claimed:
+
+  - Microsoft 365, Active Directory, Intune, Defender, Entra ID, Conditional
+    Access (Microsoft Corporation)
+  - Amazon Web Services, VPC, Terraform (AWS / HashiCorp)
+  - Grafana, Prometheus, Loki, Promtail (Grafana Labs)
+  - Docker, Docker Compose (Docker, Inc.)
+  - Ansible (Red Hat)
+  - VMware, Hyper-V, ITIL, PagerDuty, ServiceNow, Datadog, New Relic, etc.
+
+================================================================================
+NO WARRANTY (applies to all sections)
+================================================================================
+
+All materials in this repository are provided "AS IS" for learning and
+portfolio purposes. No warranty of fitness for any particular purpose is
+implied. Operational documents are samples and may need adaptation to your
+security policy, regulatory environment, and infrastructure. Test thoroughly
+in non-production environments before using in production.

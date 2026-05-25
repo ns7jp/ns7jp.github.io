@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <title>チケット分類フローチャート (ITIL 4 区分)</title>
+  <desc>問い合わせ受付から、利用者から見たサービス状態 → 標準カタログの有無 → 構成変更の有無 → 過去類似事象 の順で、インシデント / サービスリクエスト / 変更 / 問題 のいずれかへ振り分けるフロー図。</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbfaf6"/>
+      <stop offset="1" stop-color="#f3f1ea"/>
+    </linearGradient>
+    <linearGradient id="diamond" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff7e6"/>
+      <stop offset="1" stop-color="#fde9c4"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5d6066"/>
+    </marker>
+  </defs>
+
+  <rect width="1100" height="760" fill="url(#bg)"/>
+
+  <text x="550" y="36" fill="#2C3E50" font-size="20" font-weight="700" text-anchor="middle">チケット分類フローチャート (ITIL 4 区分)</text>
+  <text x="550" y="58" fill="#7a5e3a" font-size="12" text-anchor="middle">受付 → サービス状態 → カタログ有無 → 構成変更の有無 → 過去類似事象 の順で振り分け</text>
+
+  <!-- Start -->
+  <g transform="translate(440,82)">
+    <rect width="220" height="50" rx="25" fill="#2C3E50"/>
+    <text x="110" y="32" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">問い合わせ受付</text>
+  </g>
+  <line x1="550" y1="132" x2="550" y2="158" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Decision 1: Service running? -->
+  <g transform="translate(390,162)">
+    <polygon points="160,0 320,55 160,110 0,55" fill="url(#diamond)" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="160" y="50" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">利用者から見て</text>
+    <text x="160" y="68" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">サービスは動いているか?</text>
+  </g>
+
+  <!-- "No" path → INCIDENT (left) -->
+  <line x1="390" y1="217" x2="240" y2="217" stroke="#c62828" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="318" y="210" fill="#c62828" font-size="12" font-weight="700">いいえ / 一部停止</text>
+  <g transform="translate(80,180)">
+    <rect width="220" height="74" rx="6" fill="#fde0e0" stroke="#c62828" stroke-width="1.8"/>
+    <text x="110" y="30" fill="#c62828" font-size="16" font-weight="700" text-anchor="middle">インシデント</text>
+    <text x="110" y="50" fill="#7a1f1f" font-size="11" text-anchor="middle">Incident</text>
+    <text x="110" y="65" fill="#7a1f1f" font-size="11" text-anchor="middle">影響範囲 → P1/P2/P3 判定</text>
+  </g>
+
+  <!-- "Yes" path down -->
+  <line x1="550" y1="272" x2="550" y2="312" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="558" y="295" fill="#2C3E50" font-size="12">はい / 正常</text>
+
+  <!-- Decision 2: in catalog? -->
+  <g transform="translate(390,316)">
+    <polygon points="160,0 320,55 160,110 0,55" fill="url(#diamond)" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="160" y="50" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">依頼内容は</text>
+    <text x="160" y="68" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">標準カタログにあるか?</text>
+  </g>
+
+  <!-- "Yes" path → SERVICE REQUEST (left) -->
+  <line x1="390" y1="371" x2="240" y2="371" stroke="#1565c0" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="320" y="364" fill="#1565c0" font-size="12" font-weight="700">はい</text>
+  <g transform="translate(80,334)">
+    <rect width="220" height="74" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.8"/>
+    <text x="110" y="30" fill="#1565c0" font-size="16" font-weight="700" text-anchor="middle">サービスリクエスト</text>
+    <text x="110" y="50" fill="#0d4a8a" font-size="11" text-anchor="middle">Service Request</text>
+    <text x="110" y="65" fill="#0d4a8a" font-size="11" text-anchor="middle">申請者 / 承認者 / 期日 確認</text>
+  </g>
+
+  <!-- "No" path down -->
+  <line x1="550" y1="426" x2="550" y2="466" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="558" y="449" fill="#2C3E50" font-size="12">いいえ</text>
+
+  <!-- Decision 3: change config? -->
+  <g transform="translate(390,470)">
+    <polygon points="160,0 320,55 160,110 0,55" fill="url(#diamond)" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="160" y="50" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">構成 / 設定を意図して</text>
+    <text x="160" y="68" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">変える必要があるか?</text>
+  </g>
+
+  <!-- "Yes" path → CHANGE (right) -->
+  <line x1="710" y1="525" x2="860" y2="525" stroke="#f9a825" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="780" y="518" fill="#f9a825" font-size="12" font-weight="700">はい</text>
+  <g transform="translate(880,488)">
+    <rect width="200" height="74" rx="6" fill="#fff8e1" stroke="#f9a825" stroke-width="1.8"/>
+    <text x="100" y="30" fill="#f9a825" font-size="16" font-weight="700" text-anchor="middle">変更</text>
+    <text x="100" y="50" fill="#7a5e00" font-size="11" text-anchor="middle">Change</text>
+    <text x="100" y="65" fill="#7a5e00" font-size="11" text-anchor="middle">標準 / 通常 / 緊急 で分岐</text>
+  </g>
+
+  <!-- "No" path down -->
+  <line x1="550" y1="580" x2="550" y2="620" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="558" y="603" fill="#2C3E50" font-size="12">いいえ</text>
+
+  <!-- Decision 4: recurring? -->
+  <g transform="translate(390,624)">
+    <polygon points="160,0 320,55 160,110 0,55" fill="url(#diamond)" stroke="#c9a55c" stroke-width="1.5"/>
+    <text x="160" y="50" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">過去に類似事象が</text>
+    <text x="160" y="68" fill="#2C3E50" font-size="13" font-weight="600" text-anchor="middle">繰り返し発生?</text>
+  </g>
+
+  <!-- "Yes" path → PROBLEM (left) -->
+  <line x1="390" y1="679" x2="240" y2="679" stroke="#2e7d32" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="320" y="672" fill="#2e7d32" font-size="12" font-weight="700">はい</text>
+  <g transform="translate(80,642)">
+    <rect width="220" height="74" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1.8"/>
+    <text x="110" y="30" fill="#2e7d32" font-size="16" font-weight="700" text-anchor="middle">問題</text>
+    <text x="110" y="50" fill="#1b4f1d" font-size="11" text-anchor="middle">Problem</text>
+    <text x="110" y="65" fill="#1b4f1d" font-size="11" text-anchor="middle">RCA / 暫定対応 / 恒久対応</text>
+  </g>
+
+  <!-- "No" path → escalate -->
+  <line x1="710" y1="679" x2="860" y2="679" stroke="#5d6066" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="780" y="672" fill="#5d6066" font-size="12">いいえ</text>
+  <g transform="translate(880,642)">
+    <rect width="200" height="74" rx="6" fill="#f5f5f5" stroke="#5d6066" stroke-width="1.8"/>
+    <text x="100" y="30" fill="#2C3E50" font-size="14" font-weight="700" text-anchor="middle">要相談</text>
+    <text x="100" y="50" fill="#5d6066" font-size="11" text-anchor="middle">上位担当へ</text>
+    <text x="100" y="65" fill="#5d6066" font-size="11" text-anchor="middle">エスカレーション</text>
+  </g>
+</svg>

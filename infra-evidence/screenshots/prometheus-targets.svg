@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 540" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <title>Prometheus Targets ページ実機表示イメージ</title>
+  <desc>Prometheus の Status > Targets ページで、prometheus と node の 2 ジョブのスクレイプ先一覧を表示。どちらも UP 状態。</desc>
+
+  <rect width="1400" height="540" fill="#f5f7fa"/>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="1400" height="48" fill="#e6522c"/>
+  <g transform="translate(20,15)">
+    <text x="0" y="20" fill="#fff" font-size="14" font-weight="700">Prometheus</text>
+  </g>
+  <g transform="translate(140,15)">
+    <text x="0" y="20" fill="rgba(255,255,255,0.7)" font-size="13">Alerts</text>
+    <text x="60" y="20" fill="rgba(255,255,255,0.7)" font-size="13">Graph</text>
+    <text x="120" y="20" fill="#fff" font-size="13">Status ▼</text>
+    <text x="200" y="20" fill="rgba(255,255,255,0.7)" font-size="13">Help</text>
+  </g>
+
+  <text x="20" y="84" fill="#212529" font-size="22" font-weight="700">Targets</text>
+  <g transform="translate(20,108)">
+    <rect width="100" height="28" rx="3" fill="#fff" stroke="#1f4d8a"/>
+    <text x="50" y="18" fill="#1f4d8a" font-size="12" font-weight="600" text-anchor="middle">All</text>
+    <rect x="110" width="100" height="28" rx="3" fill="#d4f4dd" stroke="#28a745"/>
+    <text x="160" y="18" fill="#155724" font-size="12" font-weight="600" text-anchor="middle">Up (2)</text>
+    <rect x="220" width="100" height="28" rx="3" fill="#ffe6e6" stroke="#e24d42"/>
+    <text x="270" y="18" fill="#a31515" font-size="12" font-weight="600" text-anchor="middle">Down (0)</text>
+    <rect x="340" width="180" height="28" rx="3" fill="#fff" stroke="#ced4da"/>
+    <text x="354" y="18" fill="#495057" font-size="12">🔍 Filter targets...</text>
+  </g>
+
+  <!-- Job: prometheus -->
+  <g transform="translate(20,156)">
+    <rect width="1360" height="40" rx="3" fill="#fff" stroke="#dee2e6"/>
+    <text x="14" y="26" fill="#212529" font-size="14" font-weight="600">▼ prometheus</text>
+    <text x="200" y="26" fill="#6c757d" font-size="12">(1 active target)</text>
+  </g>
+
+  <g transform="translate(20,204)">
+    <rect width="1360" height="56" rx="3" fill="#fff" stroke="#dee2e6"/>
+    <rect width="6" height="56" fill="#28a745"/>
+    <!-- columns -->
+    <text x="20"   y="22" fill="#6c757d" font-size="11" font-weight="600">Endpoint</text>
+    <text x="20"   y="44" fill="#212529" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace">http://localhost:9090/metrics</text>
+
+    <text x="380"  y="22" fill="#6c757d" font-size="11" font-weight="600">State</text>
+    <rect x="380" y="34" width="44" height="18" rx="3" fill="#28a745"/>
+    <text x="402" y="46" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">UP</text>
+
+    <text x="460"  y="22" fill="#6c757d" font-size="11" font-weight="600">Labels</text>
+    <text x="460"  y="44" fill="#212529" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace">instance=localhost:9090  job=prometheus</text>
+
+    <text x="900"  y="22" fill="#6c757d" font-size="11" font-weight="600">Last Scrape</text>
+    <text x="900"  y="44" fill="#212529" font-size="11">5.123s ago</text>
+
+    <text x="1040" y="22" fill="#6c757d" font-size="11" font-weight="600">Scrape Duration</text>
+    <text x="1040" y="44" fill="#212529" font-size="11">14.2ms</text>
+
+    <text x="1200" y="22" fill="#6c757d" font-size="11" font-weight="600">Error</text>
+    <text x="1200" y="44" fill="#28a745" font-size="11">—</text>
+  </g>
+
+  <!-- Job: node -->
+  <g transform="translate(20,276)">
+    <rect width="1360" height="40" rx="3" fill="#fff" stroke="#dee2e6"/>
+    <text x="14" y="26" fill="#212529" font-size="14" font-weight="600">▼ node</text>
+    <text x="200" y="26" fill="#6c757d" font-size="12">(1 active target)</text>
+  </g>
+
+  <g transform="translate(20,324)">
+    <rect width="1360" height="56" rx="3" fill="#fff" stroke="#dee2e6"/>
+    <rect width="6" height="56" fill="#28a745"/>
+    <text x="20"   y="22" fill="#6c757d" font-size="11" font-weight="600">Endpoint</text>
+    <text x="20"   y="44" fill="#212529" font-size="12" font-family="ui-monospace, SFMono-Regular, monospace">http://host.docker.internal:9100/metrics</text>
+
+    <text x="380"  y="22" fill="#6c757d" font-size="11" font-weight="600">State</text>
+    <rect x="380" y="34" width="44" height="18" rx="3" fill="#28a745"/>
+    <text x="402" y="46" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">UP</text>
+
+    <text x="460"  y="22" fill="#6c757d" font-size="11" font-weight="600">Labels</text>
+    <text x="460"  y="44" fill="#212529" font-size="11" font-family="ui-monospace, SFMono-Regular, monospace">host=lab-host-01  instance=host.docker.internal:9100  job=node</text>
+
+    <text x="900"  y="22" fill="#6c757d" font-size="11" font-weight="600">Last Scrape</text>
+    <text x="900"  y="44" fill="#212529" font-size="11">3.842s ago</text>
+
+    <text x="1040" y="22" fill="#6c757d" font-size="11" font-weight="600">Scrape Duration</text>
+    <text x="1040" y="44" fill="#212529" font-size="11">22.7ms</text>
+
+    <text x="1200" y="22" fill="#6c757d" font-size="11" font-weight="600">Error</text>
+    <text x="1200" y="44" fill="#28a745" font-size="11">—</text>
+  </g>
+
+  <!-- info bar -->
+  <g transform="translate(20,400)">
+    <rect width="1360" height="80" rx="3" fill="#e7f0fd" stroke="#5794f2"/>
+    <text x="20" y="26" fill="#1f4d8a" font-size="13" font-weight="700">ℹ Service Discovery</text>
+    <text x="20" y="48" fill="#1f4d8a" font-size="12">All 2 targets are healthy. 2 active, 0 dropped.</text>
+    <text x="20" y="68" fill="#1f4d8a" font-size="11">Configured via prometheus.yml &gt; scrape_configs. Re-evaluate every 15s (global.scrape_interval).</text>
+  </g>
+
+  <text x="20" y="520" fill="#6c757d" font-size="11">Prometheus v2.54.1  ·  Configuration loaded from /etc/prometheus/prometheus.yml</text>
+</svg>

@@ -146,5 +146,7 @@ Grafana > Explore で Loki を選び、以下のクエリで現場と同じ調�
 ## 検証証跡 / 本番化差分
 
 - [Infra Evidence](../infra-evidence/) — `docker compose config` / `promtool` の検証コマンドとサンプル出力 + [失敗→修正サンプル](../infra-evidence/validation-failure-and-fix.sample.txt)
+- [視覚証跡 (screenshots/)](../infra-evidence/screenshots/) — Grafana Node / Logs Overview ダッシュボード、Loki Explore、Prometheus Alerts / Targets 画面の **高精度 SVG モックアップ**
+- [実行トレース全体](../infra-evidence/lab-execution-trace.sample.txt) — `docker compose up -d` から監視データ取得までの想定 CLI 出力
 - [SLO / Error Budget](../support-docs/slo-error-budget.md) — このスタックで観測したデータを**運用品質の数値**に落とす設計
 - [Production Readiness](../production-readiness.md) — Alertmanager、通知先、SLO、秘密情報、バックアップなど、本番化で足す観点

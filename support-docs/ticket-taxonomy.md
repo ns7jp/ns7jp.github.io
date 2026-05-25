@@ -21,6 +21,11 @@
 
 ## 2. 受付時の分類フローチャート
 
+![チケット分類フローチャート: 問い合わせ受付 → 利用者から見たサービス状態 → 標準カタログ有無 → 構成変更の有無 → 過去類似事象 の順で、インシデント / サービスリクエスト / 変更 / 問題 / 要相談 のいずれかに振り分ける図。](../image/ticket-taxonomy-flow.svg)
+
+<details>
+<summary>テキスト版（Mermaid フローチャート）</summary>
+
 ```mermaid
 flowchart TD
     A[問い合わせ受付] --> B{利用者から見て<br/>サービスは動いているか?}
@@ -33,18 +38,13 @@ flowchart TD
     H -- はい --> I[問題]
     H -- いいえ --> J[要相談: 上位担当へエスカレ]
 
-    C --> K[影響範囲 / 業務影響を確認<br/>→ P1/P2/P3 判定]
-    E --> L[申請者 / 承認者 / 期日確認<br/>→ カタログ別 SLA]
-    G --> M[CAB / 影響範囲 / ロールバック<br/>→ 標準 / 通常 / 緊急で分岐]
-    I --> N[インシデント履歴の集約<br/>→ RCA / 暫定対応 / 恒久対応]
-
     style C fill:#fde0e0,stroke:#c62828
     style E fill:#e3f2fd,stroke:#1565c0
     style G fill:#fff8e1,stroke:#f9a825
     style I fill:#e8f5e9,stroke:#2e7d32
 ```
 
-> Mermaid 図が表示されない GitHub クライアントでは、上のコードブロックがそのまま見えます。GitHub の Web UI、VS Code Preview、`mdr` 等で自動描画されます。
+</details>
 
 ### 補足 — 判断に迷う典型例
 
