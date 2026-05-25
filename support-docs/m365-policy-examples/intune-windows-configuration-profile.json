@@ -1,0 +1,77 @@
+{
+  "_comment": "Intune Configuration Profile (Settings catalog) for Windows 11 lab baseline. POST /deviceManagement/configurationPolicies",
+  "name": "Win11-Config-Baseline-2026Q2",
+  "description": "業務 PC の標準設定: 電源プラン / Edge SmartScreen / USB ストレージ書き込み制限",
+  "platforms": "windows10",
+  "technologies": "mdm",
+  "templateReference": {
+    "templateId": ""
+  },
+  "settings": [
+    {
+      "_comment": "Edge SmartScreen を有効化",
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_browser_smartscreenenabled",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_browser_smartscreenenabled_1"
+        }
+      }
+    },
+    {
+      "_comment": "Edge: HTTPS 強制 / 安全でないコンテンツのブロック",
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_browser_preventsmartscreenpromptoverride",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_browser_preventsmartscreenpromptoverride_1"
+        }
+      }
+    },
+    {
+      "_comment": "電源プラン: スリープ 30分 / 画面オフ 10分 / 電源接続時は無効化しない",
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_power_acstandbytimeout",
+        "simpleSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationIntegerSettingValue",
+          "value": 1800
+        }
+      }
+    },
+    {
+      "_comment": "USB ストレージへの書き込みを既定でブロック（読み取りは許可）",
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_policy_config_storage_removabledisksdenywriteaccess",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_policy_config_storage_removabledisksdenywriteaccess_1"
+        }
+      }
+    },
+    {
+      "_comment": "BitLocker 起動時 PIN を要求（TPM + PIN）",
+      "settingInstance": {
+        "@odata.type": "#microsoft.graph.deviceManagementConfigurationSettingInstance",
+        "settingDefinitionId": "device_vendor_msft_bitlocker_systemdrivesrequirestartupauthentication",
+        "choiceSettingValue": {
+          "@odata.type": "#microsoft.graph.deviceManagementConfigurationChoiceSettingValue",
+          "value": "device_vendor_msft_bitlocker_systemdrivesrequirestartupauthentication_1"
+        }
+      }
+    }
+  ],
+  "_assignmentExample": {
+    "assignments": [
+      {
+        "target": {
+          "@odata.type": "#microsoft.graph.groupAssignmentTarget",
+          "groupId": "<ring-test-group-id>"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "_comment": "Intune Compliance Policy for Windows 11 (Lab sample). Graph API endpoint: POST /deviceManagement/deviceCompliancePolicies. テスト用テナントで動作確認後、リング展開してください。",
+  "@odata.type": "#microsoft.graph.windows10CompliancePolicy",
+  "displayName": "Win11-Compliance-Baseline-2026Q2",
+  "description": "Lab baseline: BitLocker / Defender / Firewall / Update / Secure Boot を必須化",
+  "scheduledActionsForRule": [
+    {
+      "ruleName": "PasswordRequired",
+      "scheduledActionConfigurations": [
+        {
+          "_comment": "違反検出から 24h は通知のみ。それ以降に非準拠フラグを立てる",
+          "actionType": "notification",
+          "gracePeriodHours": 0,
+          "notificationTemplateId": "<notification-template-id-here>",
+          "notificationMessageCCList": []
+        },
+        {
+          "actionType": "block",
+          "gracePeriodHours": 24,
+          "notificationTemplateId": "",
+          "notificationMessageCCList": []
+        }
+      ]
+    }
+  ],
+  "passwordRequired": true,
+  "passwordBlockSimple": true,
+  "passwordRequiredToUnlockFromIdle": true,
+  "passwordMinutesOfInactivityBeforeLock": 15,
+  "passwordExpirationDays": null,
+  "passwordMinimumLength": 12,
+  "passwordPreviousPasswordBlockCount": 5,
+  "passwordRequiredType": "alphanumeric",
+  "requireHealthyDeviceReport": true,
+  "osMinimumVersion": "10.0.22631.0",
+  "osMaximumVersion": null,
+  "mobileOsMinimumVersion": null,
+  "mobileOsMaximumVersion": null,
+  "earlyLaunchAntiMalwareDriverEnabled": true,
+  "bitLockerEnabled": true,
+  "secureBootEnabled": true,
+  "codeIntegrityEnabled": true,
+  "storageRequireEncryption": true,
+  "activeFirewallRequired": true,
+  "defenderEnabled": true,
+  "defenderVersion": null,
+  "signatureOutOfDate": false,
+  "rtpEnabled": true,
+  "antivirusRequired": true,
+  "antiSpywareRequired": true,
+  "deviceThreatProtectionEnabled": true,
+  "deviceThreatProtectionRequiredSecurityLevel": "medium",
+  "configurationManagerComplianceRequired": false,
+  "tpmRequired": true,
+  "_assignmentExample": {
+    "_comment": "適用先グループ ID は実テナントの object id に置換。リング展開のため Test → Pilot → Prod の順で割当。",
+    "assignments": [
+      {
+        "target": {
+          "@odata.type": "#microsoft.graph.groupAssignmentTarget",
+          "groupId": "<ring-test-group-id>"
+        }
+      }
+    ]
+  }
+}

@@ -6,7 +6,7 @@ ITサポート・社内SE・運用監視業務で実際に使われる手順書�
 
 ---
 
-## 📂 収録ドキュメント（全 10 本）
+## 📂 収録ドキュメント（全 15 本 + M365 ポリシー定義 7 ファイル）
 
 ### 🛠 標準業務 手順書（4 本）
 
@@ -62,7 +62,39 @@ P1 / P2 重大度の事案で発動する、検知から事後分析までの定
 
 #### 10. [バックアップ / リストア Runbook](./backup-restore-runbook.md)
 
-Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsync + systemd timer）の 2 系統を載せ、**月次リストアテスト計画** までを含めた運用Runbook。「取れている」だけでなく「**必ず戻せる**」の証明を意識した構成。
+Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsync + systemd timer）の 2 系統を載せ、**サービス別 RTO/RPO 表**、**月次リストアテスト計画**、**年次 DR ドリル計画（火災 / DC 障害 / ランサムウェア）** までを含めた運用Runbook。「取れている」だけでなく「**目標時間内に必ず戻せる**」の証明を意識した構成。
+
+---
+
+### 🎯 運用設計 / SRE (3 本)
+
+#### 11. [SLO / Error Budget](./slo-error-budget.md)
+
+Lab 内サービスを題材に、**SLI 定義 → SLO 値 → Error Budget 計算 → 月中の運用判断**までを 1 本で示した SLO 設計の具体例。マルチウィンドウ・バーンレート Prometheus ルールも記載。
+
+#### 12. [チケット分類 / 受付の型（ITIL 4 区分）](./ticket-taxonomy.md)
+
+**インシデント / サービスリクエスト / 問題 / 変更**の 4 区分と、受付フローチャート（Mermaid）、それぞれの受付テンプレート（時系列タイムライン形式）。
+
+#### 13. [オフィス IT / 物理層](./office-it-physical-layer.md)
+
+[VLAN 論理構成図](../infra-lab.html) の対となる**物理層**ドキュメント。ラック搭載 / LAN 配線 / UPS A/B 系統 / 無線AP / 複合機 / 物理セキュリティの棚卸テンプレと切り分け順。
+
+---
+
+### 🎤 面接 / 自答 (1 本)
+
+#### 14. [面接 想定 FAQ](./interview-faq.md)
+
+選考で問われやすい 10 問の自答メモ（製造業 18 年からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等）。
+
+---
+
+### 🔐 M365 ポリシー定義サンプル (7 ファイル)
+
+#### 15. [M365 / Intune / Entra ID / Defender ポリシー](./m365-policy-examples/)
+
+Intune Compliance Policy / Configuration Profile、Conditional Access、Defender ASR を **JSON 定義**で公開。Graph SDK 経由で適用する PowerShell サンプル、棚卸しレポートスクリプトも収録。
 
 ---
 

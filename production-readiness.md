@@ -10,9 +10,11 @@ Lab では「学習しやすさ」「公開しやすさ」「安全に読める�
 
 | Lab の状態 | 本番で足すもの | 理由 |
 |---|---|---|
-| Prometheus + Grafana + 4アラート | Alertmanager / 通知先 / 抑止 / エスカレーション | アラートを見えるだけでなく、担当者へ届く状態にする |
-| 固定しきい値 | ベースライン収集 / SLO / エラーバジェット | 環境ごとの正常値に合わせる |
+| Prometheus + Grafana + Loki + 4 アラート | Alertmanager / 通知先 / 抑止 / エスカレーション | アラートを見えるだけでなく、担当者へ届く状態にする |
+| 固定しきい値 | ベースライン収集 / SLO / エラーバジェット ([具体例](./support-docs/slo-error-budget.md)) | 環境ごとの正常値に合わせる |
 | node_exporter 単体 | blackbox_exporter / windows_exporter / アプリメトリクス | 外形監視とOS別監視を追加する |
+| Loki + Promtail (Lab) | retention 90 日 / S3 オブジェクトストレージ / X-Scope-OrgID 認証 | ログの長期保管とテナント分離 |
+| Metrics + Logs のみ | Traces (OpenTelemetry / Tempo) | 観測性の三本柱を揃える |
 | 手動確認 | Runbook link / ダッシュボードURL / 初動手順 | アラートから初動へ直結させる |
 
 最小本番化例:
@@ -117,7 +119,11 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 - [Infra Operation Lab](./infra-lab.html)
 - [Linux Lab](./linux-lab.html)
 - [Cloud Network Lab](./cloud-lab.html)
-- [Monitoring Stack](./monitoring-stack/)
+- [Monitoring Stack](./monitoring-stack/) — Prometheus + Grafana + Loki + Promtail
 - [Ansible Playbook](./ansible/)
-- [Infra Evidence](./infra-evidence/)
-- [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md)
+- [Infra Evidence](./infra-evidence/) — 検証コマンドサンプル + 失敗→修正対比
+- [SLO / Error Budget](./support-docs/slo-error-budget.md) — 運用品質の数値設計（具体例）
+- [チケット分類](./support-docs/ticket-taxonomy.md) — ITIL 4 区分の受付テンプレ
+- [物理層](./support-docs/office-it-physical-layer.md) — ラック / LAN / UPS / 複合機
+- [M365 ポリシー定義](./support-docs/m365-policy-examples/) — Intune / 条件付きアクセス / Defender JSON
+- [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md) — RTO / RPO / DR ドリル計画

@@ -1,4 +1,4 @@
-# Monitoring Stack evidence sample
+# Monitoring Stack evidence sample (Prometheus + Loki + Promtail)
 
 $ docker compose -f monitoring-stack/docker-compose.yml config --quiet
 # exit code 0
@@ -21,3 +21,32 @@ $ docker run --rm \
 
 Checking /etc/prometheus/alert.rules.yml
   SUCCESS: 4 rules found
+
+$ docker run --rm \
+  -v "$PWD/monitoring-stack/loki:/etc/loki:ro" \
+  grafana/loki:3.2.0 \
+  -config.file=/etc/loki/loki-config.yml \
+  -verify-config
+
+ts=2026-05-25T... level=info msg="Loaded config file" file=/etc/loki/loki-config.yml
+ts=2026-05-25T... level=info msg="Config has been verified successfully."
+# exit code 0
+
+$ docker run --rm \
+  -v "$PWD/monitoring-stack/promtail:/etc/promtail:ro" \
+  grafana/promtail:3.2.0 \
+  -config.file=/etc/promtail/promtail-config.yml \
+  -check-syntax
+
+ts=2026-05-25T... level=info msg="Loaded config file"
+ts=2026-05-25T... level=info msg="Config syntax is valid"
+# exit code 0
+
+$ for f in monitoring-stack/grafana/provisioning/dashboards/*.json; do
+    echo "Checking $f"
+    jq -e . "$f" > /dev/null
+  done
+
+Checking monitoring-stack/grafana/provisioning/dashboards/node-overview.json
+Checking monitoring-stack/grafana/provisioning/dashboards/logs-overview.json
+# exit code 0

@@ -54,7 +54,9 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 13. `image/` と `favicon.ico`
     - 背景画像、プロフィール画像、作品スクリーンショット、ブラウザタブ用アイコンの役割を確認します。
 14. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
-    - **HTML 以外** の成果物。手順書 / PowerShell + bash / Pester / Prometheus / Ansible playbook / Terraform / 実行証跡。インフラ運用ポートフォリオの本体です。
+    - **HTML 以外** の成果物。手順書 / PowerShell + bash / Pester / Prometheus + Loki + Promtail / Ansible playbook / Terraform / M365 ポリシー JSON / 実行証跡。インフラ運用ポートフォリオの本体です。
+15. `support-docs/slo-error-budget.md` / `support-docs/ticket-taxonomy.md` / `support-docs/office-it-physical-layer.md` / `support-docs/m365-policy-examples/` / `support-docs/interview-faq.md`
+    - **運用品質を数値で語る系**の成果物。SLO / Error Budget、ITIL 4 区分のチケット分類、物理層 (ラック / LAN / UPS)、Intune + 条件付きアクセス + Defender ASR の JSON 定義、面接想定 FAQ。
 
 ---
 

@@ -1,0 +1,62 @@
+# Promtail 設定（Lab 用）
+# - ホストの /var/log を読み取り、Loki に送信
+# - systemd journal も読み取り（journalctl と同等）
+# - docker コンテナログも収集
+# 本番では: rsyslog / vector / fluentbit との比較、TLS、認証、tenant 分離を検討
+
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+  log_level: info
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+    backoff_config:
+      min_period: 500ms
+      max_period: 5m
+      max_retries: 10
+    timeout: 10s
+
+scrape_configs:
+  # 1) ホストの /var/log を収集（syslog / auth.log / kern.log 等）
+  - job_name: varlog
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlog
+          host: lab-host-01
+          __path__: /var/log/*.log
+
+  # 2) systemd journal
+  - job_name: journal
+    journal:
+      max_age: 12h
+      path: /var/log/journal
+      labels:
+        job: systemd-journal
+        host: lab-host-01
+    relabel_configs:
+      - source_labels: ['__journal__systemd_unit']
+        target_label: 'unit'
+      - source_labels: ['__journal_priority_keyword']
+        target_label: 'severity'
+
+  # 3) Docker コンテナのログ
+  - job_name: docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 15s
+    relabel_configs:
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/(.*)'
+        target_label: 'container'
+      - source_labels: ['__meta_docker_container_log_stream']
+        target_label: 'stream'
+    pipeline_stages:
+      - docker: {}
+      - labels:
+          stream:

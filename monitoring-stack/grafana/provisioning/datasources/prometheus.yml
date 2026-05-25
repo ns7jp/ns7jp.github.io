@@ -1,5 +1,6 @@
 # Grafana 起動時に自動登録するデータソース
-# 手動UI操作なしで Prometheus を Grafana に取り込むための provisioning ファイル
+# 手動UI操作なしで Prometheus / Loki を Grafana に取り込むための provisioning ファイル
+# Prometheus は Metrics、Loki は Logs を扱う
 
 apiVersion: 1
 
@@ -10,3 +11,17 @@ datasources:
     url: http://prometheus:9090
     isDefault: true
     editable: false
+
+  - name: Loki
+    type: loki
+    access: proxy
+    url: http://loki:3100
+    isDefault: false
+    editable: false
+    jsonData:
+      # Prometheus と Loki を ID で紐付け、メトリクスから関連ログへワンクリック遷移できるようにする
+      derivedFields:
+        - datasourceUid: loki
+          matcherRegex: 'host="(\w+)"'
+          name: host
+          url: '$${__value.raw}'

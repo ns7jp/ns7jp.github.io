@@ -1,7 +1,8 @@
-# 最小構成の監視スタック
-# Prometheus + node_exporter + Grafana の3コンテナを 1 ホスト内で起動するLab用 compose ファイル。
+# 最小構成の監視スタック（Metrics + Logs）
+# Prometheus + node_exporter + Grafana に加え、Loki + Promtail を追加した Lab 用 compose ファイル。
 # 想定: 自宅検証VM / 1台のLinuxサーバー / 評価環境。
-# 本番では node_exporter を監視対象側へ分けて配置し、Prometheus と Grafana のデータを永続化する。
+# 観測性の三本柱のうち「Metrics」「Logs」をここで網羅し、Traces は本番化差分で扱う。
+# 本番では node_exporter を監視対象側へ分けて配置し、Loki のストレージを S3 / GCS に切替、認証 + TLS を有効化する。
 
 services:
   prometheus:
@@ -42,7 +43,7 @@ services:
       - /:/host:ro,rslave
 
   grafana:
-    # ダッシュボード表示
+    # ダッシュボード表示（Prometheus メトリクス + Loki ログを 1 つの UI に統合）
     image: grafana/grafana:11.2.0
     container_name: lab-grafana
     restart: unless-stopped
@@ -58,6 +59,42 @@ services:
       - "3000:3000"
     depends_on:
       - prometheus
+      - loki
+    networks:
+      - monitoring
+
+  loki:
+    # ログ集約。Promtail から流れてきたログを保存し、Grafana から LogQL で検索可能にする
+    image: grafana/loki:3.2.0
+    container_name: lab-loki
+    restart: unless-stopped
+    command:
+      - -config.file=/etc/loki/loki-config.yml
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/loki-config.yml:ro
+      - loki_data:/loki
+    ports:
+      - "3100:3100"
+    networks:
+      - monitoring
+
+  promtail:
+    # ホストの /var/log と systemd journal、Docker コンテナログを Loki に送信
+    image: grafana/promtail:3.2.0
+    container_name: lab-promtail
+    restart: unless-stopped
+    command:
+      - -config.file=/etc/promtail/promtail-config.yml
+    volumes:
+      - ./promtail/promtail-config.yml:/etc/promtail/promtail-config.yml:ro
+      - /var/log:/var/log:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # systemd journal （Lab Linux ホスト向け。Docker Desktop / Mac では空でも問題なし）
+      - /run/log/journal:/run/log/journal:ro
+      - /etc/machine-id:/etc/machine-id:ro
+    depends_on:
+      - loki
     networks:
       - monitoring
 
@@ -68,3 +105,4 @@ networks:
 volumes:
   prometheus_data:
   grafana_data:
+  loki_data:

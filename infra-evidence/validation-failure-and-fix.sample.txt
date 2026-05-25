@@ -1,0 +1,163 @@
+# Validation Failure → Fix Evidence Sample
+#
+# 「常にグリーン」では「変更ゲートが機能しているか分からない」ため、CI が
+# 実際にエラーを検出し、それを直して再度グリーンになる工程を 1 セットで残します。
+# このファイルは 3 種類の検証ツール (promtool / ansible-lint / terraform validate)
+# それぞれについて、「エラー出力 → 修正 → 再実行で成功」を時系列でまとめたサンプルです。
+#
+# 公開ポートフォリオ用の架空シナリオで、リアルなコミット差分は含めていません。
+
+
+===============================================================================
+Case 1) promtool check rules — 不正な PromQL 式 → 修正
+===============================================================================
+
+[ 失敗時のコミット ]
+- alert: HostHighCpu
+  expr: 100 - avg by host (rate(node_cpu_seconds_total{mode="idle"}[5m]) * 100) > 85
+         #                       ^^^^^^^^ by の引数括弧抜け
+
+[ promtool 実行 (失敗) ]
+
+$ docker run --rm --entrypoint promtool \
+    -v "$PWD/monitoring-stack/prometheus:/etc/prometheus:ro" \
+    prom/prometheus:v2.54.1 \
+    check rules /etc/prometheus/alert.rules.yml
+
+Checking /etc/prometheus/alert.rules.yml
+  FAILED:
+    group "host-baseline", rule 1, "HostHighCpu":
+      could not parse expression: 1:33: parse error: unexpected identifier "host" in aggregation, expected "(" or "{"
+
+exit code: 1
+
+[ 修正コミット ]
+- alert: HostHighCpu
+  expr: 100 - (avg by (host) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+              #          ^^^^^^                                                    OK
+
+[ 再実行 (成功) ]
+
+$ docker run --rm --entrypoint promtool ... check rules /etc/prometheus/alert.rules.yml
+
+Checking /etc/prometheus/alert.rules.yml
+  SUCCESS: 4 rules found
+
+exit code: 0
+
+[ 学び ]
+- aggregation の by はカッコ必須。promtool は構文段階で検出してくれる
+- CI で grep -q FAILED を入れて、SUCCESS でない場合に明示的に exit 1 する設計が望ましい
+
+
+===============================================================================
+Case 2) ansible-lint --profile min — yaml[truthy] / risky-shell-pipe → 修正
+===============================================================================
+
+[ 失敗時のタスク ]
+  - name: Ensure UFW is enabled
+    ufw:
+      state: enabled
+      logging: on        # ← yaml[truthy] 警告
+  - name: Tail dmesg
+    shell: dmesg | tail  # ← risky-shell-pipe (pipefail 無し)
+
+[ ansible-lint 実行 (失敗) ]
+
+$ ansible-lint --profile min ansible/playbook.yml
+
+WARNING  Listing 2 violation(s) that are fatal
+yaml[truthy]: Truthy value should be one of [false, true]
+ansible/playbook.yml:42
+
+risky-shell-pipe: Shells that use pipes should set the pipefail option
+ansible/playbook.yml:68
+
+Read documentation for instructions on how to ignore specific rule violations.
+
+Rule Violation Summary
+  count tag                         profile rule associated tags
+      1 yaml[truthy]                basic   formatting
+      1 risky-shell-pipe            basic   command-shell, risk
+
+Failed: 2 failure(s), 0 warning(s) on 1 files. Last profile that met the validation criteria was 'min'.
+
+exit code: 2
+
+[ 修正コミット ]
+  - name: Ensure UFW is enabled
+    ufw:
+      state: enabled
+      logging: 'on'                                # 引用符で string 化
+  - name: Tail dmesg
+    shell: |
+      set -o pipefail
+      dmesg | tail
+    args:
+      executable: /bin/bash                        # bash で pipefail を有効に
+
+[ 再実行 (成功) ]
+
+$ ansible-lint --profile min ansible/playbook.yml
+
+Passed: 0 failure(s), 0 warning(s) on 1 files. Last profile that met the validation criteria was 'min'.
+
+exit code: 0
+
+[ 学び ]
+- yaml[truthy] は YAML の仕様による落とし穴。'on'/'off' は YAML 1.1 で bool 解釈
+- shell モジュールはパイプを使う場合に pipefail を入れないと、失敗を見落とす
+- ansible-lint は --profile min から始めて段階的に厳しくするのが安全
+
+
+===============================================================================
+Case 3) terraform validate — 未宣言変数 / プロバイダ未取得 → 修正
+===============================================================================
+
+[ 失敗時の main.tf 断片 ]
+resource "aws_vpc" "lab" {
+  cidr_block = var.vpc_cidr_block      # variables.tf には vpc_cidr しか無い
+}
+
+[ terraform validate 実行 (失敗) ]
+
+$ terraform -chdir=cloud-lab/terraform init -backend=false
+$ terraform -chdir=cloud-lab/terraform validate
+
+╷
+│ Error: Reference to undeclared input variable
+│
+│   on main.tf line 26, in resource "aws_vpc" "lab":
+│   26:   cidr_block = var.vpc_cidr_block
+│
+│ An input variable with the name "vpc_cidr_block" has not been declared.
+│ This variable can be declared with a variable "vpc_cidr_block" {} block.
+╵
+
+exit code: 1
+
+[ 修正コミット ]
+resource "aws_vpc" "lab" {
+  cidr_block = var.vpc_cidr             # ← variables.tf と整合
+}
+
+[ 再実行 (成功) ]
+
+$ terraform -chdir=cloud-lab/terraform validate
+Success! The configuration is valid.
+
+exit code: 0
+
+[ 学び ]
+- terraform validate は変数参照 / リソース参照のタイポを構文段階で検出
+- init -backend=false で provider のみ取得すれば、認証情報なしで validate 可能
+- CI ではこの順 (fmt -check → init -backend=false → validate) が定石
+
+
+===============================================================================
+まとめ
+===============================================================================
+
+- 「常にグリーン」は、変更ゲートが機能しているかを判断できない
+- 上記のような「失敗 → 修正 → 再実行で成功」が積み重なって、CI の価値が出る
+- 失敗例は **チームの学習素材** として残し、Onboarding に組み込む

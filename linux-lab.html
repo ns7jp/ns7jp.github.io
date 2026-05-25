@@ -256,16 +256,18 @@ WantedBy=timers.target
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h4><i class="fa-solid fa-gears"></i> 自動化 / 監視への入口</h4>
-                    <p>初期構築のIaC、Cloud Network、運用後の監視、検証証跡を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheusで継続的に観測する流れです。</p>
+                    <h4><i class="fa-solid fa-gears"></i> 自動化 / 観測 / 運用品質への入口</h4>
+                    <p>初期構築のIaC、Cloud Network、運用後の観測性（Metrics + Logs）、運用品質の数値化、検証証跡を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheus + Loki で継続観測し、SLO で品質を語る流れです。</p>
                     <div class="next-scope-list">
                         <span><a href="ansible/" style="color:inherit;">Ansible playbook</a></span>
                         <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>
-                        <span><a href="monitoring-stack/" style="color:inherit;">Prometheus + Grafana</a></span>
+                        <span><a href="monitoring-stack/" style="color:inherit;">Prom + Grafana + Loki + Promtail</a></span>
+                        <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">SLO / Error Budget</a></span>
                         <span><a href="infra-evidence/" style="color:inherit;">Infra Evidence</a></span>
                         <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
-                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup Runbook</a></span>
+                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / RTO / RPO / DR</a></span>
                         <span><a href="support-docs/postmortem-example.md" style="color:inherit;">Postmortem 実例</a></span>
+                        <span><a href="support-docs/office-it-physical-layer.md" style="color:inherit;">物理層</a></span>
                     </div>
                 </div>
             </section>

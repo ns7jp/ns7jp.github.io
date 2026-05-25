@@ -247,8 +247,10 @@
             .resume-works .work-name { font-size: 9.5px; }
             .resume-works .work-desc { line-height: 1.35; }
             .resume-readiness { margin-top: 0; }
-            .resume-readiness td { padding: 0px 4px; font-size: 8.5px; line-height: 1.25; }
-            .resume-readiness td.task { font-size: 9px; }
+            .resume-readiness th,
+            .resume-readiness td { padding: 0px 3px; font-size: 7px; line-height: 1.15; }
+            .resume-readiness td.task { font-size: 7.5px; }
+            .resume-readiness th { font-size: 7.5px; }
             .resume-roadmap { margin-top: 0; }
             .roadmap-track { gap: 3px; }
             .roadmap-step { padding: 2px 4px; font-size: 8px; }
@@ -348,13 +350,13 @@
                 <div class="resume-works">
                     <div class="work-item">
                         <span class="work-name">① Infra Operation Lab</span>
-                        <span class="work-tag">Win / Linux / Cloud / Prom / Ansible</span>
-                        <div class="work-desc">Win / Linux 一次切り分け、AWS VPC/Terraform、Prometheus + Grafana、Ansible、証跡、Postmortem、Backup Runbook を統合。</div>
+                        <span class="work-tag">Win / Linux / Cloud / Prom+Loki / Ansible / SLO</span>
+                        <div class="work-desc">Win / Linux 一次切り分け、AWS VPC/Terraform、Prometheus + Grafana + Loki + Promtail、Ansible、SLO/Error Budget、RTO/RPO/DR ドリル、Postmortem を統合。</div>
                     </div>
                     <div class="work-item">
                         <span class="work-name">② Support Toolkit</span>
-                        <span class="work-tag">Docs / PowerShell / bash / Pester</span>
-                        <div class="work-desc">10手順書・9確認スクリプト・25 Pesterテスト・PSScriptAnalyzer 静的解析を GitHub Actions で自動実行。</div>
+                        <span class="work-tag">Docs15 / PS9+bash1 / Pester / M365 JSON</span>
+                        <div class="work-desc">15手順書・10スクリプト（DB一次対応含む）・25 Pesterテスト・PSScriptAnalyzer・チケット分類(ITIL)・物理層・M365ポリシーJSONをGitHub Actionsで自動検証。</div>
                     </div>
                     <div class="work-item">
                         <span class="work-name">③ サーバー監視ダッシュボード</span>
@@ -399,15 +401,45 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="task">監視 一次対応 / アラート判定</td>
+                            <td class="task">観測性 (Metrics + Logs) / 一次対応</td>
                             <td class="evidence">
-                                自作 <a href="https://github.com/ns7jp/server-monitor">Flask 監視</a> + 標準 <a href="monitoring-stack/">Prometheus + Grafana + node_exporter</a>（4 アラート）
+                                自作 <a href="https://github.com/ns7jp/server-monitor">Flask 監視</a> + 標準 <a href="monitoring-stack/">Prometheus + Grafana + node_exporter + Loki + Promtail</a>（4 アラート + 2 ダッシュボード）
                             </td>
                         </tr>
                         <tr>
-                            <td class="task">サーバー初期構築 / 冪等運用 / バックアップ</td>
+                            <td class="task">運用品質の数値化 / SLO</td>
                             <td class="evidence">
-                                <a href="ansible/">Ansible</a>（SSH/UFW/fail2ban/auditd/自動更新） / <a href="support-docs/backup-restore-runbook.md">Backup Runbook</a>（VSS+Robocopy / rsync+systemd timer / 月次リストアテスト）
+                                <a href="support-docs/slo-error-budget.md">SLO / Error Budget</a>（SLI 定義 / バーンレート / バジェット運用判断）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">チケット受付 / 分類 (ITIL)</td>
+                            <td class="evidence">
+                                <a href="support-docs/ticket-taxonomy.md">分類フロー</a> + Incident / Request / Problem / Change の受付テンプレ
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">サーバー初期構築 / 冪等運用 / バックアップ / DR</td>
+                            <td class="evidence">
+                                <a href="ansible/">Ansible</a>（SSH/UFW/fail2ban/auditd/自動更新） / <a href="support-docs/backup-restore-runbook.md">Backup Runbook</a>（VSS+Robocopy / rsync+systemd timer / <strong>サービス別 RTO/RPO 表 / 年次 DR ドリル計画</strong>）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">物理層 / オフィスIT</td>
+                            <td class="evidence">
+                                <a href="support-docs/office-it-physical-layer.md">物理層</a>（ラック / LAN / UPS / 無線AP / 複合機 / 物理セキュリティ）
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">M365 ポリシーのコード化</td>
+                            <td class="evidence">
+                                <a href="support-docs/m365-policy-examples/">Intune / 条件付きアクセス / Defender ASR の JSON 定義</a> + <a href="support-docs/m365-policy-examples/Apply-IntunePolicy.ps1">Graph SDK 適用スクリプト</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="task">DB 一次対応 (SQL Server / Azure SQL)</td>
+                            <td class="evidence">
+                                <a href="support-scripts/Test-DatabaseHealth.ps1">Test-DatabaseHealth.ps1</a>（接続 / DB 一覧 / Wait Stats / スロークエリ / バックアップ最新性）
                             </td>
                         </tr>
                         <tr>
@@ -419,7 +451,7 @@
                         <tr>
                             <td class="task">スクリプト品質 / CI</td>
                             <td class="evidence">
-                                <a href="support-scripts/lib/Triage-Lib.ps1">純関数化</a> + Pester 25テスト + PSScriptAnalyzer 静的解析（GitHub Actions）
+                                <a href="support-scripts/lib/Triage-Lib.ps1">純関数化</a> + Pester 25テスト + PSScriptAnalyzer + <a href="infra-evidence/validation-failure-and-fix.sample.txt">失敗→修正対比</a>（GitHub Actions）
                             </td>
                         </tr>
                     </tbody>
