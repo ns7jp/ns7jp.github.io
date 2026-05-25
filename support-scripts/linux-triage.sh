@@ -61,6 +61,7 @@ echo "hostname : $(hostname)"
 echo "datetime : $(date -Is)"
 echo "uptime   : $(uptime -p 2>/dev/null || uptime)"
 if [[ -r /etc/os-release ]]; then
+  # shellcheck source=/dev/null
   . /etc/os-release
   echo "os       : ${PRETTY_NAME:-unknown}"
 fi
@@ -70,7 +71,7 @@ section "LOAD / CPU"
 CPU_CORES=$(nproc 2>/dev/null || echo 1)
 echo "cpu cores: ${CPU_CORES}"
 LOAD5=$(awk '{print $2}' /proc/loadavg)
-echo "loadavg  : $(cat /proc/loadavg)"
+echo "loadavg  : $(< /proc/loadavg)"
 # load5 が CPU 数を超えていたら警告
 awk -v l="$LOAD5" -v c="$CPU_CORES" 'BEGIN { if (l+0 > c+0) exit 1; else exit 0 }' || {
   echo "WARN: load5 ($LOAD5) exceeds CPU count ($CPU_CORES)"
