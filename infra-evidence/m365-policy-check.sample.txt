@@ -1,0 +1,56 @@
+# M365 Policy JSON validation evidence sample
+#
+# JSON 構文 + 必須キー (displayName または name) の存在を検証
+
+$ find support-docs/m365-policy-examples -name "*.json"
+
+support-docs/m365-policy-examples/intune-windows-compliance-policy.json
+support-docs/m365-policy-examples/intune-windows-configuration-profile.json
+support-docs/m365-policy-examples/conditional-access-baseline.json
+support-docs/m365-policy-examples/conditional-access-break-glass.json
+support-docs/m365-policy-examples/defender-attack-surface-reduction.json
+
+$ for f in $(find support-docs/m365-policy-examples -name "*.json"); do
+    echo "Checking $f"
+    jq -e . "$f" > /dev/null
+  done
+
+Checking support-docs/m365-policy-examples/intune-windows-compliance-policy.json
+Checking support-docs/m365-policy-examples/intune-windows-configuration-profile.json
+Checking support-docs/m365-policy-examples/conditional-access-baseline.json
+Checking support-docs/m365-policy-examples/conditional-access-break-glass.json
+Checking support-docs/m365-policy-examples/defender-attack-surface-reduction.json
+# exit code 0
+
+$ for f in $(find support-docs/m365-policy-examples -name "*.json"); do
+    has_name=$(jq -e '.displayName // .name | strings | length > 0' "$f")
+    if [ "$has_name" != "true" ]; then
+      echo "FAIL: $f missing displayName or name"
+      exit 1
+    fi
+  done
+  echo "All policy files have displayName or name."
+
+All policy files have displayName or name.
+# exit code 0
+
+
+# PowerShell サンプル（適用スクリプト）の dry-run 動作例
+$ pwsh -NoProfile -File ./support-docs/m365-policy-examples/Apply-IntunePolicy.ps1 \
+    -PolicyFile ./support-docs/m365-policy-examples/intune-windows-compliance-policy.json \
+    -TargetGroupName 'Ring-Test'
+
+===== Apply-IntunePolicy.ps1 =====
+Policy file   : ./support-docs/m365-policy-examples/intune-windows-compliance-policy.json
+Target group  : Ring-Test
+Apply mode    : False
+
+Policy kind   : Compliance
+Display name  : Win11-Compliance-Baseline-2026Q2
+
+[Dry-run] 実際の Graph 呼び出しは行いません。
+[Dry-run] -Apply を付けると以下を実行します:
+          - Connect-MgGraph -Scopes DeviceManagementConfiguration.ReadWrite.All
+          - Get-MgGroup -Filter "displayName eq 'Ring-Test'"
+          - Invoke-MgGraphRequest -Method POST -Uri /v1.0/deviceManagement/<endpoint>
+          - 適用後の status を Get-MgDevice... で確認

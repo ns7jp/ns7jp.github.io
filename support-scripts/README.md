@@ -48,7 +48,7 @@ PowerShell では、コマンド名が `動詞-名詞` の形になっていま�
 
 ## 収録スクリプト
 
-### Windows / PowerShell (8 本)
+### Windows / PowerShell (9 本)
 
 | ファイル | 用途 | 使う場面 |
 |---|---|---|
@@ -58,6 +58,7 @@ PowerShell では、コマンド名が `動詞-名詞` の形になっていま�
 | `Test-DiskCapacity.ps1` | ディスク使用率と物理ディスク状態を確認 | PC低速化、容量不足、監視前の棚卸し |
 | `Test-SecurityBaseline.ps1` | Defender / Firewall / BitLocker / Windows Update の状態を一括確認 | セキュリティ監査、棚卸し前の一括チェック |
 | `New-EndpointDailyReport.ps1` | 上記全スクリプトを実行し CSV/HTML サマリーを生成 | 日次点検、引き継ぎ資料作成、タスクスケジューラ連携 |
+| `Test-DatabaseHealth.ps1` | ★ SQL Server の接続性 / DB 一覧 / Wait Stats / スロークエリ / ブロッキング / バックアップ最新性を JSON 出力 | 小規模業務 DB の一次調査、業務遅延の問い合わせ受付 |
 | `Get-StaleUserAccounts.ps1` | Active Directory の休眠ユーザーを検出（読み取り専用） | 退職者・長期休職者アカウントの棚卸し、内部監査 |
 | `Get-M365LicenseInventory.ps1` | Microsoft Graph 経由で M365 ライセンス割当を CSV 出力 | ライセンス棚卸し、コスト最適化、部署別利用状況の把握 |
 
@@ -176,6 +177,26 @@ Microsoft Graph PowerShell SDK を使って、Microsoft 365 のライセンス�
 - `Get-MgUser` でユーザーごとのライセンス割当を取得する
 - 利用率から `NearlyFull` / `Underutilized` / `Normal` を判定している
 
+### `Test-DatabaseHealth.ps1`
+
+SQL Server / Azure SQL の一次ヘルスチェック（読み取り専用）を行うスクリプトです。社内 SE 補助で「業務システムが遅い」「DB に繋がらない」と問い合わせを受けたとき、最初に流すための一本です。
+
+取得する項目:
+
+- サーバー情報（バージョン / Edition / Collation）
+- データベース一覧と**最終バックアップ日時**（Full / Diff / Log）
+- Wait Stats 上位（待機種別と総待機時間）
+- スロークエリ TOP N（経過時間 / 実行回数 / 平均ミリ秒）
+- ブロッキングセッション（誰が誰を待っているか）
+- ボリュームごとの空き容量
+
+初学者向けの見どころ:
+
+- `Invoke-Sqlcmd` で T-SQL クエリを実行している（読み取りのみ）
+- DMV（`sys.dm_os_wait_stats`, `sys.dm_exec_query_stats`, `sys.dm_exec_sessions`）を活用
+- バックアップ最新性は `msdb.dbo.backupset` から判定
+- 結果は JSON 化してチケット添付しやすくしている
+
 ---
 
 ## 実行例
@@ -239,6 +260,14 @@ Microsoft 365 のライセンス割当一覧を取得します（Microsoft Graph
 .\Get-M365LicenseInventory.ps1 -OutputDir .\m365-inventory
 ```
 
+SQL Server インスタンスの一次ヘルスチェックを行います（SqlServer モジュールが必要）。
+
+```powershell
+# 初回のみ: Install-Module -Name SqlServer -Scope CurrentUser
+.\Test-DatabaseHealth.ps1 -ServerInstance 'sqldb01' -SlowQueryTopN 20
+# → db-health-yyyyMMdd-HHmmss.json が出力される
+```
+
 ---
 
 ## タスクスケジューラ連携例
@@ -260,6 +289,7 @@ Register-ScheduledTask -TaskName "Endpoint Daily Report" `
 | 端末系 6本 | Windows PowerShell 5.1 以上 | 管理者権限（Get-WinEvent等） |
 | `Get-StaleUserAccounts.ps1` | RSAT-AD-PowerShell（または DC 上） | ドメインユーザーの読み取り権限 |
 | `Get-M365LicenseInventory.ps1` | Microsoft.Graph PowerShell SDK | User.Read.All / Organization.Read.All / Directory.Read.All |
+| `Test-DatabaseHealth.ps1` | SqlServer モジュール (Install-Module SqlServer) | DB 読み取り権限 (db_datareader + VIEW SERVER STATE) |
 | `linux-triage.sh` | bash / `ss` または `netstat` / 一部 `journalctl` | 一般ユーザーで可。`journalctl` 全件読み取りは root 推奨 |
 | `tests/Triage-Lib.Tests.ps1` | PowerShell 7.x (pwsh) + Pester 5.x | CIで自動実行（要件をローカル満たせば手動可） |
 

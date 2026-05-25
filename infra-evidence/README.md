@@ -15,8 +15,10 @@
 | PowerShell 静的解析 | `Invoke-ScriptAnalyzer -Path support-scripts -Recurse` | `pwsh-tests.yml` |
 | Linux triage script | `bash -n support-scripts/linux-triage.sh` | `infra-check.yml` |
 | Monitoring Stack | `docker compose config` / `promtool check config` / `promtool check rules` | `infra-check.yml` |
+| Loki / Promtail | `docker run loki -verify-config` / `docker run promtail -check-syntax` | `infra-check.yml` |
 | Ansible | `ansible-galaxy collection install` / `ansible-playbook --syntax-check` / `ansible-lint` | `infra-check.yml` |
 | Cloud Lab Terraform | `terraform fmt -check` / `terraform init -backend=false` / `terraform validate` | `infra-check.yml` |
+| M365 ポリシー JSON | `jq -e . *.json` (構文検証) / 必須キー検査 | `infra-check.yml` |
 
 ---
 
@@ -37,6 +39,8 @@
 | [monitoring-check.sample.txt](./monitoring-check.sample.txt) | Docker Compose と Prometheus ルール検証の出力例 |
 | [ansible-check.sample.txt](./ansible-check.sample.txt) | Ansible collection install、syntax-check、ansible-lint の出力例 |
 | [terraform-check.sample.txt](./terraform-check.sample.txt) | Cloud Lab Terraform の fmt / init / validate 出力例 |
+| [m365-policy-check.sample.txt](./m365-policy-check.sample.txt) | M365 ポリシー JSON の構文検証 + Apply-IntunePolicy.ps1 dry-run 出力例 |
+| [validation-failure-and-fix.sample.txt](./validation-failure-and-fix.sample.txt) | ★ promtool / ansible-lint / terraform validate の**失敗 → 修正 → 成功**の対比証跡 |
 
 ---
 

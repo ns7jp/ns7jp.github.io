@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - 'support-scripts/**'
+      - 'support-docs/m365-policy-examples/**.ps1'
       - '.github/workflows/pwsh-tests.yml'
   pull_request:
     paths:
       - 'support-scripts/**'
+      - 'support-docs/m365-policy-examples/**.ps1'
       - '.github/workflows/pwsh-tests.yml'
 
 jobs:
@@ -58,10 +60,15 @@ jobs:
         run: |
           Install-Module PSScriptAnalyzer -Force -SkipPublisherCheck -Scope CurrentUser
 
-      - name: Run analyzer on support-scripts/
+      - name: Run analyzer on support-scripts/ and m365-policy-examples/
         shell: pwsh
         run: |
-          $results = Invoke-ScriptAnalyzer -Path support-scripts -Recurse -Severity Error,Warning
+          $paths = @('support-scripts', 'support-docs/m365-policy-examples')
+          $results = foreach ($p in $paths) {
+            if (Test-Path $p) {
+              Invoke-ScriptAnalyzer -Path $p -Recurse -Severity Error,Warning
+            }
+          }
           if ($results) {
             $results | Format-Table -AutoSize | Out-String | Write-Host
             $errors = $results | Where-Object Severity -eq 'Error'

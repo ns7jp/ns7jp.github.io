@@ -7,6 +7,7 @@ on:
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
+      - 'support-docs/m365-policy-examples/**'
       - '.github/workflows/infra-check.yml'
   pull_request:
     paths:
@@ -14,6 +15,7 @@ on:
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
+      - 'support-docs/m365-policy-examples/**'
       - '.github/workflows/infra-check.yml'
 
 jobs:
@@ -45,6 +47,29 @@ jobs:
             -v "$PWD/monitoring-stack/prometheus:/etc/prometheus:ro" \
             prom/prometheus:v2.54.1 \
             check rules /etc/prometheus/alert.rules.yml
+
+      - name: Verify Loki config
+        run: |
+          docker run --rm \
+            -v "$PWD/monitoring-stack/loki:/etc/loki:ro" \
+            grafana/loki:3.2.0 \
+            -config.file=/etc/loki/loki-config.yml \
+            -verify-config
+
+      - name: Verify Promtail config
+        run: |
+          docker run --rm \
+            -v "$PWD/monitoring-stack/promtail:/etc/promtail:ro" \
+            grafana/promtail:3.2.0 \
+            -config.file=/etc/promtail/promtail-config.yml \
+            -check-syntax
+
+      - name: Validate Grafana dashboards JSON
+        run: |
+          for f in monitoring-stack/grafana/provisioning/dashboards/*.json; do
+            echo "Checking $f"
+            jq -e . "$f" > /dev/null
+          done
 
   ansible:
     name: Ansible syntax and lint
@@ -102,3 +127,41 @@ jobs:
 
       - name: Bash syntax check
         run: bash -n support-scripts/linux-triage.sh
+
+  m365-policies:
+    name: M365 / Intune policy JSON
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate JSON syntax for all policy files
+        run: |
+          set -e
+          dir=support-docs/m365-policy-examples
+          if [ ! -d "$dir" ]; then
+            echo "Policy directory not found: $dir"
+            exit 1
+          fi
+          json_files=$(find "$dir" -name "*.json")
+          if [ -z "$json_files" ]; then
+            echo "No JSON files found in $dir"
+            exit 0
+          fi
+          for f in $json_files; do
+            echo "Checking $f"
+            jq -e . "$f" > /dev/null
+          done
+
+      - name: Verify required keys (displayName or name)
+        run: |
+          set -e
+          dir=support-docs/m365-policy-examples
+          for f in $(find "$dir" -name "*.json"); do
+            has_name=$(jq -e '.displayName // .name | strings | length > 0' "$f" || echo "false")
+            if [ "$has_name" != "true" ]; then
+              echo "FAIL: $f missing displayName or name"
+              exit 1
+            fi
+          done
+          echo "All policy files have displayName or name."
