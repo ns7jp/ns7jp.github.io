@@ -53,9 +53,10 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_subnet" "private" {
-  vpc_id            = aws_vpc.lab.id
-  cidr_block        = var.private_subnet_cidr
-  availability_zone = var.availability_zone
+  vpc_id                  = aws_vpc.lab.id
+  cidr_block              = var.private_subnet_cidr
+  availability_zone       = var.availability_zone
+  map_public_ip_on_launch = false
 
   tags = merge(local.common_tags, {
     Name = "${var.project}-private-a"

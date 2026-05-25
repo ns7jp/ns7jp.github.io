@@ -6,5 +6,20 @@ $ terraform -chdir=cloud-lab/terraform fmt -check
 $ terraform -chdir=cloud-lab/terraform init -backend=false
 Terraform has been successfully initialized!
 
+$ terraform test
+tests/network.tftest.hcl... in progress
+  run "plans_segmented_network_with_restricted_ssh"... pass
+  run "rejects_world_open_bastion_ssh"... pass
+tests/network.tftest.hcl... tearing down
+tests/network.tftest.hcl... pass
+
+Success! 2 passed, 0 failed.
+
+$ tflint
+# no findings
+
+# Trivy configuration scan is executed in CI and remains review-visible.
+# The scan is informational while expected Lab networking findings are triaged.
+
 $ terraform -chdir=cloud-lab/terraform validate
 Success! The configuration is valid.

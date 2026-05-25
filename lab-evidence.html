@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸のInfrastructure Validation Evidence。CIで検証済みの範囲、再現コマンド、演習と本番化差分を区別して公開しています。">
+    <title>Validation Evidence | 島田則幸のポートフォリオ</title>
+    <meta property="og:title" content="Validation Evidence | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/lab-evidence.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:description" content="PowerShell、Monitoring、Ansible、Terraform、Linux shell の検証証跡と、確認済み範囲の一覧。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+    <div class="loader">
+        <div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div>
+    </div>
+    <p class="res-menu"><i class="fa-solid fa-bars"></i><i class="fa-solid fa-xmark"></i></p>
+    <header>
+        <h1 class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li class="active"><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero infra-hero" style="background-image: url('image/grafana-dashboard.svg');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h2 class="page-title">
+                <span class="title-en">Validation Evidence</span>
+                <span class="title-jp">検証済み範囲と再現方法</span>
+            </h2>
+        </div>
+    </section>
+
+    <article class="page-content infra-lab-content" id="main" tabindex="-1">
+        <div class="container">
+            <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
+                <a href="infra-lab.html"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
+                <a href="lab-evidence.html" class="active"><i class="fa-solid fa-circle-check"></i> Evidence</a>
+                <a href="incident-drill.html"><i class="fa-solid fa-bell"></i> Drill</a>
+            </nav>
+
+            <section class="lab-intro">
+                <span class="case-label">Reproducible Infrastructure Lab</span>
+                <h3>「用意した構成」と「検証された範囲」を分けて示す</h3>
+                <p>公開リポジトリの設定ファイルを GitHub Actions で継続検証しています。このページでは、CIで機械的に確認できる事項、演習として記録した事項、実環境で別途必要な事項を区別します。</p>
+                <div class="lab-badges" aria-label="証跡の分類">
+                    <span><i class="fa-solid fa-circle-check"></i> CI Verified</span>
+                    <span><i class="fa-solid fa-flask"></i> Lab Configuration</span>
+                    <span><i class="fa-solid fa-bell"></i> Simulated Drill</span>
+                    <span><i class="fa-solid fa-shield"></i> Production Gap</span>
+                </div>
+            </section>
+
+            <div class="evidence-banner">
+                <strong>検証ステータス:</strong> `main` の Static site check / Infrastructure checks / Pages deployment は 2026-05-24 に成功しています。ここでの CI 成功は構文・ルール・テストの合格を示すもので、AWS への apply や本番環境への適用完了を意味しません。
+            </div>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-list-check"></i></span>
+                    <span class="heading-text">Validation Matrix</span>
+                </div>
+                <div class="operation-table-wrap">
+                    <table class="operation-table">
+                        <thead>
+                            <tr>
+                                <th>対象</th>
+                                <th>公開しているもの</th>
+                                <th>自動検証</th>
+                                <th>ステータス / 境界</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PowerShell</td>
+                                <td>一次確認スクリプト、純関数ライブラリ、25テスト</td>
+                                <td>Pester / PSScriptAnalyzer</td>
+                                <td><span class="verification-state verified">CI VERIFIED</span><br>実テナント操作は行わない。</td>
+                            </tr>
+                            <tr>
+                                <td>Monitoring</td>
+                                <td>Prometheus / Grafana / node_exporter、4アラート</td>
+                                <td>Docker Compose config / promtool rules</td>
+                                <td><span class="verification-state verified">CI VERIFIED</span><br>通知・TLS・SSO は本番化項目。</td>
+                            </tr>
+                            <tr>
+                                <td>Ansible</td>
+                                <td>Ubuntu ベースライン Playbook</td>
+                                <td>syntax-check / ansible-lint</td>
+                                <td><span class="verification-state verified">CI VERIFIED</span><br>適用・冪等実行記録は実VMで採取対象。</td>
+                            </tr>
+                            <tr>
+                                <td>Terraform</td>
+                                <td>AWS VPC / Subnet / Route / Security Group</td>
+                                <td>fmt / validate / mocked plan test / TFLint / Trivy config scan</td>
+                                <td><span class="verification-state verified">CI VERIFIED</span><br>`apply` は行わず課金を発生させない。</td>
+                            </tr>
+                            <tr>
+                                <td>Linux triage</td>
+                                <td>読み取り中心の bash スクリプト</td>
+                                <td>`bash -n` / ShellCheck</td>
+                                <td><span class="verification-state verified">CI VERIFIED</span><br>出力例は匿名化サンプル。</td>
+                            </tr>
+                            <tr>
+                                <td>Incident response</td>
+                                <td>監視から復旧、Postmortem、Runbook</td>
+                                <td>シナリオと成果物リンクの静的検査</td>
+                                <td><span class="verification-state drill">SIMULATED DRILL</span><br>架空障害として明示。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-terminal"></i></span>
+                    <span class="heading-text">Reproduce the Checks</span>
+                </div>
+                <div class="lab-architecture-grid">
+                    <div class="lab-link-card">
+                        <h4>CI で実行する主要コマンド</h4>
+                        <pre class="code-evidence">node scripts/check-static-links.js
+Invoke-Pester -Path support-scripts/tests
+docker compose -f monitoring-stack/docker-compose.yml config --quiet
+ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --syntax-check
+terraform -chdir=cloud-lab/terraform test
+shellcheck support-scripts/linux-triage.sh</pre>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>読み方</h4>
+                        <ul>
+                            <li>CI の合格は、公開成果物が再現可能な検証対象になっている証拠です。</li>
+                            <li>Terraform は mock provider による plan テストで、世界公開 SSH を拒否する入力検証も確認します。</li>
+                            <li>本番の通知、秘密管理、バックアップ復旧は <a href="production-readiness.html">Production Readiness</a> に分離しています。</li>
+                            <li>障害対応の流れは <a href="incident-drill.html">Incident Drill</a> で確認できます。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lab-links-section">
+                <div class="lab-link-card">
+                    <h4><i class="fa-brands fa-github"></i> CI の公開履歴</h4>
+                    <p>各ワークフローの最新結果と実行ログは GitHub Actions から確認できます。</p>
+                    <div class="contact-actions">
+                        <a href="https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Infrastructure checks</a>
+                        <a href="https://github.com/ns7jp/ns7jp.github.io/actions/workflows/pwsh-tests.yml" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer">PowerShell tests</a>
+                        <a href="https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer">Static site check</a>
+                    </div>
+                </div>
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-folder-open"></i> 詳細証跡</h4>
+                    <p>匿名化サンプル出力、検証観点、構成ファイルはリポジトリで読めます。</p>
+                    <div class="next-scope-list">
+                        <span><a href="infra-evidence/" style="color:inherit;">Evidence README</a></span>
+                        <span><a href="monitoring-stack/" style="color:inherit;">Monitoring</a></span>
+                        <span><a href="ansible/" style="color:inherit;">Ansible</a></span>
+                        <span><a href="cloud-lab/" style="color:inherit;">Terraform</a></span>
+                        <span><a href="incident-drill.html" style="color:inherit;">Incident Drill</a></span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div>
+            <div class="footer-nav">
+                <a href="me.html">About</a><a href="skills.html">Skills</a><a href="infra-lab.html">Infra Lab</a><a href="works.html">Works</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom"><small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small></div>
+    </footer>
+    <script>
+        $(window).on('load', function() { $('.loader').fadeOut(800); });
+        $(".res-menu").click(function () { $("nav").toggleClass("show"); $(".res-menu").toggleClass("show2"); });
+        $(window).scroll(function() { $('header').toggleClass('scrolled', $(this).scrollTop() > 100); });
+    </script>
+</body>
+</html>

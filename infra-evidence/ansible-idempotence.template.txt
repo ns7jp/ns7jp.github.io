@@ -1,0 +1,31 @@
+# Ansible Idempotence Evidence Template (to be captured on an isolated Ubuntu VM)
+# This template is intentionally unfilled: syntax/lint is CI-verified, while
+# application and idempotence require a disposable target VM.
+
+Environment:
+- VM image:
+- Ansible version:
+- Test date:
+- Snapshot / rollback point:
+
+First apply:
+$ ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --check --diff
+$ ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+PLAY RECAP:
+lab-host : ok=__ changed=__ unreachable=0 failed=0 skipped=__
+
+Second apply (idempotence check):
+$ ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+PLAY RECAP:
+lab-host : ok=__ changed=0 unreachable=0 failed=0 skipped=__
+
+Verification:
+$ sudo sshd -t
+$ sudo ufw status verbose
+$ sudo systemctl is-active fail2ban auditd systemd-timesyncd
+
+Result:
+- [ ] Second apply reported changed=0
+- [ ] SSH access was retained through the approved test path
+- [ ] Firewall rules match the intended baseline
+- [ ] Snapshot rollback was tested or confirmed available

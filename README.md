@@ -5,6 +5,7 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-jQuery-F7DF1E?logo=javascript&logoColor=black)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-success?logo=github)
 [![Static site check](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml)
+[![PowerShell tests](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/pwsh-tests.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/pwsh-tests.yml)
 [![Infrastructure checks](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml)
 
 🔗 **公開サイト**: https://ns7jp.github.io/
@@ -16,15 +17,25 @@
 | 優先 | 見るもの | 確認できること |
 |------|----------|----------------|
 | 1 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、志望領域、**想定業務 × 自分の備えマトリクス**、学習ロードマップ |
-| 2 | [Infra Operation Lab](https://ns7jp.github.io/infra-lab.html) | Windows / M365 / AD 想定の **VLAN 論理構成図**、監視項目、証跡、一次対応 |
-| 3 | [Cloud Network Lab](https://ns7jp.github.io/cloud-lab.html) | AWS VPC / Subnet / Security Group / Terraform validate とコスト配慮 |
-| 4 | [Linux Operation Lab](https://ns7jp.github.io/linux-lab.html) | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計と早見表 |
-| 5 | [Monitoring Stack](./monitoring-stack/) | Prometheus + Grafana + node_exporter の docker-compose 一式 + 4 アラート |
-| 6 | [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 の冪等ベースライン |
+| 2 | [Validation Evidence](https://ns7jp.github.io/lab-evidence.html) | **CI検証済み**の範囲、再現コマンド、実VMで追加取得すべき証跡 |
+| 3 | [Infra Operation Lab](https://ns7jp.github.io/infra-lab.html) | Windows / M365 / AD 想定の **VLAN 論理構成図**、監視項目、証跡、一次対応 |
+| 4 | [Cloud Network Lab](https://ns7jp.github.io/cloud-lab.html) | AWS VPC / Subnet / Security Group / Terraform test とコスト配慮 |
+| 5 | [Incident Drill](https://ns7jp.github.io/incident-drill.html) | **架空障害演習**として、アラート検知、切り分け、復旧、Postmortem、Restore Check を接続 |
+| 6 | [Monitoring Stack](./monitoring-stack/) / [Ansible Playbook](./ansible/) | Prometheus + Grafana の4アラートと Linux ベースライン設定 |
 | 7 | [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 10手順書、**9 スクリプト（Pester 25テスト + GitHub Actions 付き）**、AD/M365変更ケース |
-| 8 | [Infra Evidence](./infra-evidence/) / [Production Readiness](./production-readiness.md) | 実行証跡サンプル、CI検証観点、本番化で足す監視・通知・秘密情報・バックアップ |
+| 8 | [Production Readiness](https://ns7jp.github.io/production-readiness.html) | Lab から本番へ足す通知、認証、秘密情報、復元試験、変更管理 |
 
-成果の見え方としては、Infra Operation Lab で **VLAN構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Cloud Lab で **VPC / Subnet / Security Group / Terraform 検証** を補い、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測」を一通り** 示しています。Support Toolkit では **10手順書・9スクリプト・25 Pesterテスト・AD/M365変更ケース・Postmortem 実例・Backup Runbook** を公開し、Infra Evidence と Production Readiness で **検証証跡と本番化差分** も追えるようにしました。
+成果の見え方としては、Infra Operation Lab と Cloud Lab で **設計と確認観点** を示し、Validation Evidence で **CI が実際に検証する範囲** を明確化し、Incident Drill で **監視 → 切り分け → 復旧 → 記録** を架空シナリオとして接続しています。Support Toolkit では **10手順書・9スクリプト・25 Pesterテスト・AD/M365変更ケース** を公開し、Production Readiness で **Lab と本番運用の差分** を明示しています。
+
+### 証跡の表示方針
+
+| 表示 | 意味 |
+|------|------|
+| `CI VERIFIED` | GitHub Actions でテスト、lint、構成検査を実行する対象 |
+| `SIMULATED DRILL` | 公開可能な架空シナリオで、対応順序と残す記録を示すもの |
+| `PRODUCTION GAP` | 実環境へ適用する前に追加すべき通知、認証、監査、復元確認 |
+
+AWS への `terraform apply` や実ホストへの Ansible 適用を、実施済みの経験として表示していません。公開リポジトリ上で再現可能な検証と、実環境で別途必要な証跡を区別しています。
 
 公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Infra Operation Lab（運用設計メモ）** と **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
 
@@ -84,8 +95,8 @@
 3. **Skills**
    Windows / M365 / AD、PowerShell、ネットワーク一次切り分け、Linux・監視基礎、開発技術などをカテゴリ別に整理しています。ITサポート対応例と詳細ドキュメントへのリンクも置いています。
 
-4. **Infra Lab**
-   Windows 11 / Microsoft 365 / Active Directory を想定した運用設計メモです。VLAN論理構成図、監視項目、証跡保存、一次対応、エスカレーション基準を1ページで確認できます。サブナビから **Linux Lab / Cloud Lab / Monitoring Stack / Ansible** へ横展開できます。
+4. **Infra Lab / Evidence / Incident Drill**
+   Windows 11 / Microsoft 365 / Active Directory を想定した運用設計メモを入口に、**Linux Lab / Cloud Lab / Validation Evidence / Incident Drill / Production Readiness** へ進めます。構成、CI検証、対応演習、本番化差分を分けて確認できます。
 
 5. **Works**
    Support Toolkit と制作した6作品を詳しく紹介しています。作品画像、成果サマリー、概要、使用技術、デモまたはスクリーンショット、GitHubリンク、制作時のトラブルと解決過程を掲載しています。
@@ -104,7 +115,10 @@
 | スキルページ | `skills.html` | 学習した技術とITサポート系スキルをカテゴリ別に見せる（Windows / Linux 系を別カードに分割） |
 | インフラ運用Lab | `infra-lab.html` | Windows / M365 / AD を想定し、**VLAN論理構成図**、監視・証跡・一次対応・引き継ぎ基準を見せる |
 | Linux 運用Lab | `linux-lab.html` | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計メモ |
-| Cloud Network Lab | `cloud-lab.html` | AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail を見せる |
+| Cloud Network Lab | `cloud-lab.html` | AWS VPC / Subnet / Security Group / Terraform test / Cost Guardrail を見せる |
+| 検証証跡ページ | `lab-evidence.html` | CI検証済み範囲、再現コマンド、実環境での追加確認を区別して見せる |
+| 障害対応演習ページ | `incident-drill.html` | 架空のディスク逼迫を題材に監視、切り分け、復旧、振り返りをつなぐ |
+| 本番化差分ページ | `production-readiness.html` | 生 Markdown ではなく、主要差分と優先ロードマップを読みやすく提示する |
 | 作品ページ | `works.html` | Support Toolkit、**Infra Operation Lab**、6作品の詳細を紹介。Infrastructure カテゴリで絞り込み可能 |
 | 履歴書 | `resume.html` | A4 1pager。**想定業務 × 自分の備えマトリクス** と **学習ロードマップ** を含む |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
@@ -113,8 +127,8 @@
 | 実務スクリプト | `support-scripts/` | PowerShell 8本 + bash 1本（Linux一次切り分け）+ **Triage-Lib 純関数ライブラリ + Pester テスト** |
 | Monitoring Stack | `monitoring-stack/` | Prometheus + Grafana + node_exporter の docker-compose 一式 + 4 アラートルール |
 | Ansible Playbook | `ansible/` | Ubuntu ベースライン冪等化 (SSH / UFW / fail2ban / auditd / unattended-upgrades) |
-| 実行証跡 | `infra-evidence/` | Static / Pester / Prometheus / Ansible / Terraform の検証コマンドとサンプル出力 |
-| 本番化差分 | `production-readiness.md` | Lab から本番運用へ足す監視、通知、認証、秘密情報、バックアップ、変更管理 |
+| 実行証跡 | `infra-evidence/` | Static / Pester / Prometheus / Ansible / Terraform / ShellCheck の検証コマンドと演習出力 |
+| 本番化差分 詳細版 | `production-readiness.md` | HTML 要約ページの根拠となる詳細ドキュメント |
 
 ### `index.html`
 
@@ -172,6 +186,9 @@ ns7jp.github.io/
 ├── infra-lab.html           ... Windows / M365 / AD Lab（VLAN論理構成図）
 ├── linux-lab.html           ... Linux 一次運用Lab（systemd / journalctl / SSH / rsync）
 ├── cloud-lab.html           ... Cloud Network Lab（AWS VPC / Terraform）
+├── lab-evidence.html        ... CI検証済み範囲と再現コマンドの閲覧ページ
+├── incident-drill.html      ... 監視から復旧までの架空障害演習ページ
+├── production-readiness.html ... Lab と本番運用の差分を示す閲覧ページ
 ├── production-readiness.md  ... Lab を本番化する際に足す運用観点
 ├── contact.html             ... 連絡先ページ
 ├── resume.html              ... A4 1ページ履歴書 + 想定業務マトリクス + 学習ロードマップ
@@ -220,18 +237,19 @@ ns7jp.github.io/
 │   ├── inventory.ini
 │   └── templates/sshd_config.j2
 │
-├── cloud-lab/               ... ★ AWS VPC / Security Group / Terraform validate
+├── cloud-lab/               ... ★ AWS VPC / Security Group / Terraform validate + test
 │   ├── README.md
-│   └── terraform/
+│   └── terraform/tests/network.tftest.hcl ... ★ mock provider による設計テスト
 │
 ├── infra-evidence/          ... ★ 実行証跡サンプルとCI検証観点
 │   ├── README.md
-│   └── *.sample.txt
+│   ├── incident-drill.sample.txt           ... ★ 架空の監視・復旧演習ログ
+│   └── ansible-idempotence.template.txt    ... ★ 実VM証跡採取用テンプレート
 │
 ├── .github/workflows/
 │   ├── static-check.yml     ... HTML 構造 + リンク + 画像バジェット
 │   ├── pwsh-tests.yml       ... ★ Pester + PSScriptAnalyzer
-│   └── infra-check.yml      ... ★ Docker Compose / promtool / Ansible / Terraform / bash 構文検証
+│   └── infra-check.yml      ... ★ Compose / promtool / Ansible / Terraform test+lint / Trivy / ShellCheck
 │
 └── image/                   ... ヒーロー画像・スクリーンショット
 ```

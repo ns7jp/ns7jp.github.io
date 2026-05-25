@@ -1,0 +1,43 @@
+# Incident Drill Evidence Sample (SIMULATED / sanitized)
+# Scenario: lab-app01 disk pressure alert
+# This is a portfolio exercise transcript, not a production incident log.
+
+[09:00:12 JST] DETECT
+alert=HostLowDisk severity=critical instance=lab-app01 mountpoint=/var
+condition="available space < 10% for 10m"
+ticket=DRILL-2026-0525-DISK-001
+
+[09:04:03 JST] TRIAGE
+$ df -h /var
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda2        20G   19G  820M  96% /var
+
+$ sudo du -xh /var/log | sort -h | tail -3
+420M    /var/log/journal
+2.1G    /var/log/app
+2.6G    /var/log
+
+hypothesis="application debug logs grew without expected rotation"
+service_impact="HTTP health endpoint responds; risk of write failure if growth continues"
+
+[09:12:18 JST] RECOVER
+action="preserve current app logs, compress rotated logs, verify logrotate config"
+before_use_percent=96
+after_use_percent=61
+change_record="logrotate review required; no application data deleted"
+
+[09:18:40 JST] VERIFY
+$ curl -I http://localhost/health
+HTTP/1.1 200 OK
+
+prometheus_alert_state=resolved
+user_impact="none observed in simulated scenario"
+
+[09:35:00 JST] IMPROVE
+action_items:
+- review application log rotation interval and retention
+- add runbook link to HostLowDisk alert annotation
+- record monthly restore check for backup data
+- review threshold after baseline collection
+
+classification="SIMULATED DRILL: demonstrates response order and evidence handling only"

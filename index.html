@@ -165,35 +165,35 @@
             <!-- アニメーションクラス「animate-fade-in」でCSS側でフェードイン演出 -->
             <p class="hero-greeting animate-fade-in">Welcome to my portfolio</p>
             <h2 class="hero-title animate-slide-up">
-                <span class="line1">IT Support</span>
-                <span class="line2">Infra Support</span>
+                <span class="line1">Infrastructure</span>
+                <span class="line2">Operations</span>
             </h2>
-            <p class="hero-description animate-fade-in-delay">現場経験と学習したITスキルを活かし、<br>PC・サーバー運用、問い合わせ対応、業務改善に役立つ作品をまとめています</p>
+            <p class="hero-description animate-fade-in-delay">インフラ運用・社内SE補助・クラウド運用補助を志望し、<br>構成、検証、切り分け、復旧までを追える成果物を公開しています</p>
             <div class="hero-proof-grid animate-fade-in-delay2" aria-label="ITサポート向けの公開成果">
                 <a href="infra-lab.html" class="hero-proof-item">
                     <i class="fa-solid fa-network-wired"></i>
                     <span>運用Lab</span>
-                    <strong>Win + Linux</strong>
+                    <strong>Win/Linux/Cloud</strong>
                 </a>
-                <a href="works.html#work-support-toolkit" class="hero-proof-item">
-                    <i class="fa-solid fa-folder-tree"></i>
-                    <span>手順書</span>
-                    <strong>10 docs</strong>
+                <a href="lab-evidence.html" class="hero-proof-item">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>検証証跡</span>
+                    <strong>CI verified</strong>
                 </a>
-                <a href="works.html#work-support-toolkit" class="hero-proof-item">
-                    <i class="fa-solid fa-terminal"></i>
-                    <span>自動化</span>
-                    <strong>9 scripts</strong>
+                <a href="incident-drill.html" class="hero-proof-item">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>障害演習</span>
+                    <strong>Triage/Restore</strong>
                 </a>
-                <a href="works.html#work-infra-lab" class="hero-proof-item">
-                    <i class="fa-solid fa-chart-area"></i>
-                    <span>監視 + IaC</span>
-                    <strong>Prom / TF</strong>
+                <a href="cloud-lab.html" class="hero-proof-item">
+                    <i class="fa-solid fa-cloud"></i>
+                    <span>Cloud / IaC</span>
+                    <strong>AWS / TF</strong>
                 </a>
             </div>
             <!-- CTA（Call To Action）ボタン群。作品ページ・連絡先ページへの導線。 -->
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="works.html" class="btn btn-primary"><i class="fa-solid fa-eye"></i> View Works</a>
+                <a href="lab-evidence.html" class="btn btn-primary"><i class="fa-solid fa-circle-check"></i> View Evidence</a>
                 <a href="infra-lab.html" class="btn btn-outline"><i class="fa-solid fa-network-wired"></i> Infra Lab</a>
                 <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-file-lines"></i> Resume</a>
             </div>
@@ -213,9 +213,9 @@
             </h3>
             <div class="summary-grid">
                 <div class="summary-card">
-                    <span class="summary-label">Environment</span>
-                    <h4>Windows / M365 / AD を想定</h4>
-                    <p>PCキッティング、アカウント・権限、メール、Teams、OneDrive、共有フォルダなど、社内ITの基本環境を前提に整理しています。</p>
+                    <span class="summary-label">Target Role</span>
+                    <h4>インフラ運用 / 社内SE補助</h4>
+                    <p>Windows / M365 / AD の運用支援を入口に、Linux 監視と AWS ネットワーク基礎へ業務範囲を広げる志望です。</p>
                 </div>
                 <div class="summary-card">
                     <span class="summary-label">Support Work</span>
@@ -224,8 +224,8 @@
                 </div>
                 <div class="summary-card">
                     <span class="summary-label">Portfolio Proof</span>
-                    <h4>6作品 + Support Toolkit</h4>
-                    <p>監視ダッシュボード、業務改善ツール、10本の実務想定ドキュメント、9本の確認スクリプト、Cloud/Terraform Labで、運用支援に近い成果物を公開しています。</p>
+                    <h4>3代表成果 + 検証証跡</h4>
+                    <p>Infra Lab、Cloud/Terraform、監視・復旧演習を中心に、10本の手順書と9本の確認スクリプトを関連づけて公開しています。</p>
                 </div>
             </div>
             <div class="summary-actions">
@@ -233,8 +233,37 @@
                 <a href="infra-lab.html" class="btn btn-outline-dark"><i class="fa-solid fa-network-wired"></i> インフラ運用Labを見る</a>
                 <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 1ページ履歴書を見る</a>
                 <a href="cloud-lab.html" class="btn btn-outline-dark"><i class="fa-solid fa-cloud"></i> Cloud Labを見る</a>
+                <a href="lab-evidence.html" class="btn btn-outline-dark"><i class="fa-solid fa-circle-check"></i> 検証証跡を見る</a>
+                <a href="incident-drill.html" class="btn btn-outline-dark"><i class="fa-solid fa-bell"></i> 障害対応演習を見る</a>
                 <a href="works.html#work-support-toolkit" class="btn btn-outline-dark"><i class="fa-solid fa-folder-open"></i> Support Toolkitを見る</a>
                 <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> 実務スクリプトを見る</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="evidence-first">
+        <div class="container">
+            <h3 class="section-title center">
+                <span class="title-en">Evidence First</span>
+                <span class="title-jp">主張の範囲と確認方法</span>
+            </h3>
+            <p class="evidence-lead">構築したい構成、CIで検証できている範囲、障害対応の演習、実環境で追加確認すべき項目を分けて示します。未実施の本番運用を経験として扱わない方針です。</p>
+            <div class="verification-grid">
+                <a class="verification-card" href="lab-evidence.html">
+                    <span class="verification-state verified">CI VERIFIED</span>
+                    <h4>自動検証の証跡</h4>
+                    <p>PowerShell テスト、Prometheus 設定、Ansible lint、Terraform test / lint、ShellCheck の実行範囲を一覧化。</p>
+                </a>
+                <a class="verification-card" href="incident-drill.html">
+                    <span class="verification-state drill">SIMULATED DRILL</span>
+                    <h4>監視から復旧まで</h4>
+                    <p>アラート検知、切り分け、復旧、記録、再発防止を、架空障害シナリオとして1本に接続。</p>
+                </a>
+                <a class="verification-card" href="production-readiness.html">
+                    <span class="verification-state planned">PRODUCTION GAP</span>
+                    <h4>本番化の差分</h4>
+                    <p>通知、認証、秘密情報、バックアップ、監査など、Lab から実運用へ足す項目を明示。</p>
+                </a>
             </div>
         </div>
     </section>

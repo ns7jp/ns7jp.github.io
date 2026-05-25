@@ -7,6 +7,7 @@ on:
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
+      - 'infra-evidence/**'
       - '.github/workflows/infra-check.yml'
   pull_request:
     paths:
@@ -14,7 +15,11 @@ on:
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
+      - 'infra-evidence/**'
       - '.github/workflows/infra-check.yml'
+
+permissions:
+  contents: read
 
 jobs:
   monitoring:
@@ -73,7 +78,7 @@ jobs:
         run: ansible-lint --profile min ansible/playbook.yml
 
   cloud-terraform:
-    name: Cloud Lab Terraform validate
+    name: Cloud Lab Terraform tests and security
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -93,6 +98,29 @@ jobs:
       - name: Terraform validate
         run: terraform -chdir=cloud-lab/terraform validate
 
+      - name: Terraform mocked plan tests
+        run: terraform -chdir=cloud-lab/terraform test -verbose
+
+      - name: Set up TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.55.1
+
+      - name: Run TFLint
+        run: tflint --chdir=cloud-lab/terraform
+
+      - name: Scan Terraform configuration for security findings
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: config
+          scan-ref: cloud-lab/terraform
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: '0'
+          hide-progress: true
+        # This lab intentionally describes a public subnet and SSH bastion.
+        # Findings remain visible in logs until accepted risks are documented.
+
   shell:
     name: Linux triage shell syntax
     runs-on: ubuntu-latest
@@ -102,3 +130,10 @@ jobs:
 
       - name: Bash syntax check
         run: bash -n support-scripts/linux-triage.sh
+
+      - name: ShellCheck
+        run: |
+          docker run --rm \
+            -v "$PWD:/work:ro" \
+            koalaman/shellcheck-alpine:v0.10.0 \
+            shellcheck /work/support-scripts/linux-triage.sh

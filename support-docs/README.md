@@ -104,8 +104,9 @@ Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsy
 - 🐧 [Linux Lab](https://ns7jp.github.io/linux-lab.html) — systemd / journalctl / SSH / rsync の一次運用
 - 📊 [Monitoring Stack](../monitoring-stack/) — Prometheus + Grafana + node_exporter (docker-compose)
 - ⚙️ [Ansible Playbook](../ansible/) — Linux ベースライン冪等化
-- ✅ [Infra Evidence](../infra-evidence/) — 実行証跡サンプルとCI検証観点
-- 🛡 [Production Readiness](../production-readiness.md) — 本番化で足す運用観点
+- ✅ [Validation Evidence](../lab-evidence.html) — CI検証済み範囲と追加取得すべき証跡
+- 🚨 [Incident Drill](../incident-drill.html) — 監視から復旧、振り返りを接続した架空演習
+- 🛡 [Production Readiness](../production-readiness.html) — 本番化で足す運用観点
 - 🧰 [support-scripts/](../support-scripts/) — PowerShell + bash の確認・監査・棚卸しスクリプト
 - 📂 [作品リポジトリ一覧](https://github.com/ns7jp)
 

@@ -763,6 +763,88 @@ header nav ul li a::after {
 }
 
 /* ========================================
+   Evidence First - 検証済み範囲を先に示す
+======================================== */
+.evidence-first {
+    padding: 100px 0 110px;
+    background: var(--bg-white);
+}
+
+.evidence-lead {
+    max-width: 820px;
+    margin: -10px auto 48px;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2;
+    color: var(--text-medium);
+}
+
+.verification-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.verification-card {
+    display: block;
+    min-height: 235px;
+    padding: 30px;
+    border: 1px solid var(--bg-sand);
+    background: var(--bg-cream);
+    transition: var(--transition-smooth);
+}
+
+.verification-card:hover {
+    color: inherit;
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-4px);
+}
+
+.verification-state {
+    display: inline-flex;
+    padding: 6px 12px;
+    margin-bottom: 20px;
+    border-radius: 999px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.verification-state.verified {
+    color: #166534;
+    background: #dcfce7;
+}
+
+.verification-state.drill {
+    color: #92400e;
+    background: #fef3c7;
+}
+
+.verification-state.planned {
+    color: #334155;
+    background: #e2e8f0;
+}
+
+.verification-card h4 {
+    margin-bottom: 13px;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+}
+
+.verification-card p {
+    margin: 0;
+    font-size: 1.38rem;
+    line-height: 1.85;
+    color: var(--text-medium);
+}
+
+.operation-table .verification-state {
+    margin-bottom: 6px;
+}
+
+/* ========================================
    10. Quick Intro Section - トップ「私について」プレビュー
    ----------------------------------------
    index.html の自己紹介エリア。grid-template-columnsで
@@ -3140,6 +3222,62 @@ footer {
 
 .lab-subnav a:hover i {
     color: var(--accent-gold);
+}
+
+.evidence-banner {
+    margin: 0 auto 54px;
+    padding: 22px 26px;
+    border-left: 4px solid var(--accent-gold);
+    background: var(--bg-warm);
+    color: var(--text-medium);
+    font-size: 1.4rem;
+    line-height: 1.9;
+}
+
+.evidence-banner strong {
+    color: var(--text-dark);
+}
+
+.code-evidence {
+    margin: 18px 0 0;
+    padding: 20px;
+    overflow-x: auto;
+    background: #1e293b;
+    color: #e2e8f0;
+    font-family: 'Courier New', monospace;
+    font-size: 1.25rem;
+    line-height: 1.75;
+}
+
+.roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.roadmap-card {
+    padding: 28px;
+    border: 1px solid var(--bg-sand);
+    background: var(--bg-white);
+}
+
+.roadmap-card h4 {
+    margin-bottom: 12px;
+    font-size: 1.7rem;
+    color: var(--text-dark);
+}
+
+.roadmap-card p {
+    font-size: 1.35rem;
+    line-height: 1.85;
+    color: var(--text-medium);
+}
+
+@media (max-width: 900px) {
+    .verification-grid,
+    .roadmap-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ---- VLAN 構成図（SVG）+ 折りたたみのテキスト版 ---- */

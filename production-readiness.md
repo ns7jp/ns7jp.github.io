@@ -85,11 +85,11 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 |---|---|
 | Static site | リンク切れ、HTML構造、画像サイズ |
 | PowerShell | Pester、PSScriptAnalyzer |
-| Linux script | `bash -n`、将来的には ShellCheck |
+| Linux script | `bash -n`、ShellCheck |
 | Prometheus | `promtool check config` / `promtool check rules` |
 | Docker Compose | `docker compose config` |
 | Ansible | collection install、syntax-check、ansible-lint |
-| Terraform | fmt、init without backend、validate |
+| Terraform | fmt、init without backend、validate、mock provider による `terraform test`、TFLint、Trivy config scan |
 
 追加した workflow:
 
@@ -107,7 +107,7 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 | P1 | Secrets / Vault / SSO | 公開サンプルから本番運用へ移る際の最低条件 |
 | P1 | リストアテスト記録 | バックアップの実効性を示す |
 | P2 | CloudTrail / Flow Logs / GuardDuty | クラウド監査と検知を補う |
-| P2 | ansible-lint / Terraform validate のCI強化 | IaC変更の安全性を上げる |
+| P2 | plan artifact / policy gate / 承認制 apply | CI 検証後の適用プロセスまで管理する |
 | P3 | SLO / Error Budget | 運用品質を数値で説明できるようにする |
 
 ---

@@ -294,6 +294,8 @@ GitHub Actions（[.github/workflows/pwsh-tests.yml](../.github/workflows/pwsh-te
 - [Postmortem 実例（共有フォルダ I/O 飽和、P2）](../support-docs/postmortem-example.md)
 - [バックアップ/リストア Runbook](../support-docs/backup-restore-runbook.md)
 - [Linux Lab](https://ns7jp.github.io/linux-lab.html) — `linux-triage.sh` の使いどころ
+- [Validation Evidence](https://ns7jp.github.io/lab-evidence.html) — Pester / ShellCheck / IaC 検証を含む証跡入口
+- [Incident Drill](https://ns7jp.github.io/incident-drill.html) — 監視から復旧までの架空演習
 - [Monitoring Stack](../monitoring-stack/) — Prometheus + Grafana + node_exporter (docker-compose)
 - [Ansible Playbook](../ansible/) — Linux ベースライン冪等化
 - [ポートフォリオサイト > Skills](https://ns7jp.github.io/skills.html#support-cases)

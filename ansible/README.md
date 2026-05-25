@@ -86,5 +86,5 @@ collection 経由になるため、`requirements.yml` で明示宣言してい�
 
 ## 検証証跡 / 本番化差分
 
-- [Infra Evidence](../infra-evidence/) — Ansible syntax-check / ansible-lint の検証コマンドとサンプル出力
-- [Production Readiness](../production-readiness.md) — Vault、秘密情報、ロールバック、監査ログなど、本番化で足す観点
+- [Validation Evidence](../lab-evidence.html) — Ansible syntax-check / ansible-lint と、実VMで採取すべき冪等性証跡の境界
+- [Production Readiness](../production-readiness.html) — Vault、秘密情報、ロールバック、監査ログなど、本番化で足す観点

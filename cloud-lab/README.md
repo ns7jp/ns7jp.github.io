@@ -2,7 +2,7 @@
 
 ITサポート・社内SE補助・インフラ運用支援からクラウド運用へ接続するための、小さな AWS ネットワーク Lab です。目的は「クラウドを触ったことがある」と大きく見せることではなく、**VPC / Subnet / Route / Security Group / Cost Guardrail を、オンプレの VLAN や ACL と対応づけて説明できること**を示すことです。
 
-この Lab は Terraform の構文検証までを公開対象にしています。`terraform apply` は AWS 認証情報、課金、削除手順、リージョン制限を確認してから実施します。
+この Lab は Terraform の構文検証と mock provider による設計テストまでを公開対象にしています。`terraform apply` は AWS 認証情報、課金、削除手順、リージョン制限を確認してから実施します。
 
 ---
 
@@ -51,6 +51,7 @@ cd cloud-lab/terraform
 terraform fmt -check
 terraform init -backend=false
 terraform validate
+terraform test
 ```
 
 `fmt` / `init -backend=false` / `validate` は変数値を必要としません。
@@ -71,7 +72,7 @@ terraform plan \
 |---|---|
 | セグメント分離 | Public / Private subnet を分け、Private 側へ Internet Gateway の直接経路を作らない |
 | 最小権限 | SSH は `admin_cidr`、Private 側は Bastion SG からのみ許可 |
-| 変更前検証 | `terraform fmt` / `init -backend=false` / `validate` を CI で実行 |
+| 変更前検証 | `terraform fmt` / `validate` / `test` / TFLint / Trivy config scan を CI で実行 |
 | コスト管理 | NAT Gateway / EC2 / Elastic IP をデフォルトで作らない |
 | 本番化差分 | Flow Logs、CloudTrail、GuardDuty、AWS Backup、SSM Session Manager を追加候補として整理 |
 
@@ -94,6 +95,8 @@ terraform plan \
 
 - [Cloud Lab ページ](../cloud-lab.html)
 - [Terraform files](./terraform/)
-- [Infra Evidence](../infra-evidence/)
+- [Validation Evidence](../lab-evidence.html)
+- [Incident Drill](../incident-drill.html)
+- [Production Readiness](../production-readiness.html)
 - [Infra Operation Lab](../infra-lab.html)
 - [Ansible Playbook](../ansible/)

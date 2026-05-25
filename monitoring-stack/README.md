@@ -98,5 +98,6 @@ monitoring-stack/
 
 ## 検証証跡 / 本番化差分
 
-- [Infra Evidence](../infra-evidence/) — `docker compose config` / `promtool` の検証コマンドとサンプル出力
-- [Production Readiness](../production-readiness.md) — Alertmanager、通知先、SLO、秘密情報、バックアップなど、本番化で足す観点
+- [Validation Evidence](../lab-evidence.html) — `docker compose config` / `promtool` の検証範囲とCI履歴への入口
+- [Incident Drill](../incident-drill.html) — アラートから一次対応、復旧、Postmortem へ進む架空演習
+- [Production Readiness](../production-readiness.html) — Alertmanager、通知先、SLO、秘密情報、バックアップなど、本番化で足す観点

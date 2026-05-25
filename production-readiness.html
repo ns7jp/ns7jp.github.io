@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸のProduction Readiness。公開Labを本番運用に近づける際に必要な通知、認証、秘密情報、バックアップ、変更管理を整理しています。">
+    <title>Production Readiness | 島田則幸のポートフォリオ</title>
+    <meta property="og:title" content="Production Readiness | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/production-readiness.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:description" content="Lab と本番の差分を、監視、アクセス制御、秘密情報、バックアップ、変更管理で整理。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+    <div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+    <p class="res-menu"><i class="fa-solid fa-bars"></i><i class="fa-solid fa-xmark"></i></p>
+    <header>
+        <h1 class="logo"><a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a></h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li class="active"><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero infra-hero" style="background-image: url('image/network-vlan.svg');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h2 class="page-title"><span class="title-en">Production Readiness</span><span class="title-jp">Lab から本番運用へ足すもの</span></h2>
+        </div>
+    </section>
+
+    <article class="page-content infra-lab-content" id="main" tabindex="-1">
+        <div class="container">
+            <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
+                <a href="infra-lab.html"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
+                <a href="lab-evidence.html"><i class="fa-solid fa-circle-check"></i> Evidence</a>
+                <a href="incident-drill.html"><i class="fa-solid fa-bell"></i> Drill</a>
+                <a href="production-readiness.html" class="active"><i class="fa-solid fa-shield"></i> Readiness</a>
+            </nav>
+
+            <section class="lab-intro">
+                <span class="verification-state planned">PRODUCTION GAP</span>
+                <h3>公開しやすい Lab と、任せられる本番運用を混同しない</h3>
+                <p>Lab は構成と検証方法の提示に絞っています。本番では、通知、認証、秘密情報管理、復元試験、承認を伴う変更管理まで加えて初めて運用可能な状態になると考えています。</p>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-shield-halved"></i></span><span class="heading-text">Lab to Production Matrix</span></div>
+                <div class="operation-table-wrap">
+                    <table class="operation-table">
+                        <thead><tr><th>領域</th><th>公開 Lab の状態</th><th>本番で加えるもの</th><th>優先</th></tr></thead>
+                        <tbody>
+                            <tr><td>監視 / 通知</td><td>Prometheus + Grafana + 4アラート</td><td>Alertmanager、Teams/メール通知、Runbook link、抑止ルール</td><td>P1</td></tr>
+                            <tr><td>認証 / 接続</td><td>SSH / SG の設計サンプル</td><td>MFA、SSM/VPN、SSO/RBAC、管理アカウント分離</td><td>P1</td></tr>
+                            <tr><td>Secrets</td><td>ダミー鍵・初期パスワードを明示</td><td>Vault / Secret Manager、ローテーション、GitHub Secrets</td><td>P1</td></tr>
+                            <tr><td>Backup</td><td>VSS / rsync の Runbook</td><td>オフサイト保管、暗号化、月次リストア証跡</td><td>P1</td></tr>
+                            <tr><td>Cloud audit</td><td>VPC / SG / Terraform</td><td>CloudTrail、Flow Logs、GuardDuty、Budget Alert</td><td>P2</td></tr>
+                            <tr><td>Quality gate</td><td>CI 構文・テスト検証</td><td>承認制 apply、plan artifact、変更ウィンドウ、rollback</td><td>P2</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-road"></i></span><span class="heading-text">Priority Roadmap</span></div>
+                <div class="roadmap-grid">
+                    <div class="roadmap-card"><span class="verification-state planned">P1</span><h4>通知と初動</h4><p>Alertmanager と Runbook link を導入し、検知から一次対応までを途切れなくします。</p></div>
+                    <div class="roadmap-card"><span class="verification-state planned">P1</span><h4>秘密管理と認証</h4><p>Secrets、MFA、SSO、接続経路を整え、公開サンプルと本番値を分離します。</p></div>
+                    <div class="roadmap-card"><span class="verification-state planned">P1</span><h4>復元の証明</h4><p>取得したバックアップを月次で戻し、ハッシュ、ACL、所要時間を記録します。</p></div>
+                </div>
+            </section>
+
+            <section class="lab-links-section">
+                <div class="lab-link-card">
+                    <h4><i class="fa-solid fa-rotate"></i> 対応演習との接続</h4>
+                    <p>監視アラートを受け、復旧して記録する流れは Incident Drill として読みやすくまとめています。</p>
+                    <div class="contact-actions">
+                        <a href="incident-drill.html" class="btn btn-secondary">Incident Drill</a>
+                        <a href="incident-drill.html#restore" class="btn btn-outline-dark">Restore Check</a>
+                    </div>
+                </div>
+                <div class="lab-link-card">
+                    <h4><i class="fa-brands fa-github"></i> 詳細ドキュメント</h4>
+                    <p>一覧表の根拠や変更管理フェーズを含む詳細版は、GitHub の整形済み Markdown で確認できます。</p>
+                    <div class="contact-actions">
+                        <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/production-readiness.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">詳細版を見る</a>
+                        <a href="lab-evidence.html" class="btn btn-outline-dark">Validation Evidence</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div>
+            <div class="footer-nav"><a href="me.html">About</a><a href="skills.html">Skills</a><a href="infra-lab.html">Infra Lab</a><a href="works.html">Works</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom"><small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small></div>
+    </footer>
+    <script>
+        $(window).on('load', function() { $('.loader').fadeOut(800); });
+        $(".res-menu").click(function () { $("nav").toggleClass("show"); $(".res-menu").toggleClass("show2"); });
+        $(window).scroll(function() { $('header').toggleClass('scrolled', $(this).scrollTop() > 100); });
+    </script>
+</body>
+</html>

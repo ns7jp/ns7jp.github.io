@@ -306,6 +306,8 @@
                                         <a href="infra-lab.html" class="btn btn-sm btn-light"><i class="fa-brands fa-windows"></i> Infra Lab</a>
                                         <a href="linux-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-linux"></i> Linux Lab</a>
                                         <a href="cloud-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-cloud"></i> Cloud</a>
+                                        <a href="lab-evidence.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-circle-check"></i> Evidence</a>
+                                        <a href="incident-drill.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-bell"></i> Drill</a>
                                         <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/monitoring-stack" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-area"></i> Monitoring</a>
                                         <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/ansible" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gears"></i> Ansible</a>
                                     </div>
@@ -325,30 +327,30 @@
                             </div>
                             <div class="support-fit high">
                                 <span class="fit-label">インフラ運用関連度: High</span>
-                                <p>「PowerShell でWindowsを確認」「bash でLinuxを確認」「TerraformでCloud Networkを検証」「Ansibleで Linux を整える」「Prometheus + Grafana で観測」「postmortem で振り返る」が同じリポジトリ内で繋がっています。</p>
+                                <p>「PowerShell でWindowsを確認」「bash でLinuxを確認」「TerraformでCloud Networkを検証」「Ansibleの設定を lint」「Prometheus 設定を検証」「演習を postmortem で振り返る」が同じリポジトリ内で繋がっています。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
                                 <span class="num-chip"><strong>5</strong>Lab</span>
-                                <span class="num-chip"><strong>4</strong>CI領域</span>
+                                <span class="num-chip"><strong>5</strong>CI領域</span>
                                 <span class="num-chip"><strong>4</strong>監視アラート</span>
                                 <span class="num-chip"><strong>25</strong>Pesterテスト</span>
                             </div>
-                            <p>「監視 → 切り分け → 証跡 → エスカレーション」を1ページに整理した Infra Lab を起点に、Linux 一次運用、AWS VPC / Terraform の Cloud Lab、Docker で起動できる Prometheus + Grafana 監視スタック、Ansible によるベースライン冪等化、rsync + systemd timer のバックアップ Runbook、共有フォルダ I/O 飽和を題材にした Postmortem 実例、本番化で足す運用観点まで、インフラ運用支援に必要な観点を相互参照可能な形で公開しています。</p>
+                            <p>「監視 → 切り分け → 証跡 → エスカレーション」を整理した Infra Lab を起点に、Linux 一次運用、AWS VPC / Terraform、Prometheus + Grafana 設定、Ansible ベースライン、バックアップ Runbook、障害対応演習、本番化差分を相互参照できる形で公開しています。検証済み範囲と演習の境界は Validation Evidence に明記しています。</p>
                             <ul class="work-points">
                                 <li><strong>VLAN論理構成図</strong>を Infra Lab に掲載し、DMZ / Server / User / Guest VLAN と Microsoft 365 / Entra 連携を明示。</li>
                                 <li><strong>Cloud Network Lab</strong>では AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail を整理。</li>
                                 <li><strong>判定ロジックを純関数化</strong>し Pester で単体テスト。GitHub Actions で自動実行（PSScriptAnalyzer 静的解析も併走）。</li>
-                                <li><strong>infra-check.yml</strong>で Docker Compose / promtool / Ansible / Terraform / bash 構文検証を自動化。</li>
-                                <li><strong>Postmortem 実例</strong>には MTTA / MTTR / 5 Whys / 応急対応 / 恒久対応を含め、振り返りの型を見せる構成。</li>
+                                <li><strong>infra-check.yml</strong>で Docker Compose / promtool / Ansible / Terraform test / TFLint / Trivy / ShellCheck の検証を自動化。</li>
+                                <li><strong>Incident Drill</strong>は架空障害と明示し、アラート検知から復旧、MTTA / MTTR / 5 Whys の振り返りまでを接続。</li>
                             </ul>
                             <div class="work-usage">
                                 <h5><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h5>
                                 <ul class="usage-list">
                                     <li><strong>問い合わせ受付直後：</strong>Windowsは PowerShell、Linux は <code>linux-triage.sh</code> を流して同じ形式で証跡を残す。</li>
                                     <li><strong>クラウド設計確認：</strong>Cloud Lab の Terraform を <code>fmt</code> / <code>validate</code> し、Public / Private subnet と Security Group の意図を説明する。</li>
-                                    <li><strong>新規サーバー構築：</strong>Ansible playbook で SSH / UFW / fail2ban / auditd / 自動更新を冪等に適用。</li>
-                                    <li><strong>継続観測：</strong>Prometheus + Grafana + node_exporter を docker compose で起動し、4アラート（CPU / メモリ / ディスク / exporter ダウン）を運用。</li>
-                                    <li><strong>事後対応：</strong>Postmortem テンプレートに合わせ、MTTR / 根本原因 / 応急 / 恒久 / 中期対応を分けて記録。</li>
+                                    <li><strong>新規サーバー構築：</strong>Ansible playbook で SSH / UFW / fail2ban / auditd / 自動更新の設定方針を作成し、CIで lint と構文を検証。</li>
+                                    <li><strong>継続観測：</strong>Prometheus + Grafana + node_exporter の構成と4アラート（CPU / メモリ / ディスク / exporter ダウン）を公開し、promtool で検証。</li>
+                                    <li><strong>障害対応演習：</strong>架空シナリオで、アラート確認、切り分け、復旧、Postmortem を順に記録。</li>
                                 </ul>
                             </div>
                             <div class="work-troubleshoot">

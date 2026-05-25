@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="島田則幸の監視・復旧演習。Prometheus アラートを入口に、切り分け、復旧、証跡、Postmortem、バックアップ確認までを架空シナリオで示します。">
+    <title>Incident Drill | 島田則幸のポートフォリオ</title>
+    <meta property="og:title" content="Incident Drill | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/incident-drill.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:description" content="監視から切り分け、復旧、証跡、振り返りまでを接続したインフラ運用演習。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+    <div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+    <p class="res-menu"><i class="fa-solid fa-bars"></i><i class="fa-solid fa-xmark"></i></p>
+    <header>
+        <h1 class="logo">
+            <a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a>
+        </h1>
+        <nav>
+            <ul>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li class="active"><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h2 class="page-title">
+                <span class="title-en">Incident Drill</span>
+                <span class="title-jp">監視・一次対応・復旧の演習記録</span>
+            </h2>
+        </div>
+    </section>
+
+    <article class="page-content infra-lab-content" id="main" tabindex="-1">
+        <div class="container">
+            <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
+                <a href="infra-lab.html"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
+                <a href="lab-evidence.html"><i class="fa-solid fa-circle-check"></i> Evidence</a>
+                <a href="incident-drill.html" class="active"><i class="fa-solid fa-bell"></i> Drill</a>
+            </nav>
+
+            <section class="lab-intro">
+                <span class="verification-state drill">SIMULATED DRILL</span>
+                <h3>ディスク逼迫アラートから復旧・振り返りへつなぐ</h3>
+                <p>公開可能な架空環境 `app01` を対象に、`HostLowDisk` アラートを検知した場合の初動を演習として構成しています。本番障害の対応実績ではなく、判断順序と残す証跡を示すものです。</p>
+                <div class="lab-badges" aria-label="演習の観点">
+                    <span><i class="fa-solid fa-chart-area"></i> Prometheus Alert</span>
+                    <span><i class="fa-solid fa-terminal"></i> Linux Triage</span>
+                    <span><i class="fa-solid fa-rotate"></i> Restore Check</span>
+                    <span><i class="fa-solid fa-clipboard"></i> Postmortem</span>
+                </div>
+            </section>
+
+            <section class="incident-flow-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-route"></i></span>
+                    <span class="heading-text">Alert to Close Flow</span>
+                </div>
+                <div class="incident-flow">
+                    <div class="flow-step"><span>01 DETECT</span><h4>検知</h4><p>`HostLowDisk` が critical。マウントポイントと継続時間を記録。</p></div>
+                    <div class="flow-step"><span>02 TRIAGE</span><h4>切り分け</h4><p>`linux-triage.sh` と `journalctl` で容量増加元とサービス影響を確認。</p></div>
+                    <div class="flow-step"><span>03 RECOVER</span><h4>復旧</h4><p>対象ログを退避・圧縮し、容量回復とサービス応答を検証。</p></div>
+                    <div class="flow-step"><span>04 EVIDENCE</span><h4>証跡</h4><p>アラート、実行コマンド、前後容量、確認結果をチケットへ添付。</p></div>
+                    <div class="flow-step"><span>05 IMPROVE</span><h4>再発防止</h4><p>logrotate、容量閾値、バックアップ復元確認を更新。</p></div>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-clipboard-list"></i></span>
+                    <span class="heading-text">Exercise Record</span>
+                </div>
+                <div class="operation-table-wrap">
+                    <table class="operation-table">
+                        <thead>
+                            <tr><th>時刻例</th><th>判断 / 操作</th><th>確認する証跡</th><th>完了条件</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>09:00</td><td>Prometheus で `HostLowDisk` を確認</td><td>アラート名、対象、severity、開始時刻</td><td>影響範囲と優先度を起票</td></tr>
+                            <tr><td>09:04</td><td>`df -h`, `du`, `journalctl` を確認</td><td>ディスク使用率と増加ディレクトリ</td><td>容量消費元の仮説を記録</td></tr>
+                            <tr><td>09:12</td><td>古いログを退避し logrotate を実行</td><td>作業前後の容量、退避ファイル一覧</td><td>空き容量が警告閾値を上回る</td></tr>
+                            <tr><td>09:18</td><td>HTTP 応答と監視復旧を確認</td><td>`systemctl`, `curl`, Prometheus 状態</td><td>アラート解除と利用影響なし</td></tr>
+                            <tr><td>09:35</td><td>恒久対策を記録</td><td>閾値見直し、Runbook 更新案</td><td>変更候補と担当を残す</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-terminal"></i></span>
+                    <span class="heading-text">First Response Commands</span>
+                </div>
+                <div class="lab-architecture-grid">
+                    <div class="lab-link-card">
+                        <h4>読み取り中心の確認</h4>
+                        <pre class="code-evidence">./support-scripts/linux-triage.sh
+df -h
+sudo du -xh /var/log | sort -h | tail
+systemctl --failed
+journalctl -p err -S "-30 min"
+curl -I http://localhost/health</pre>
+                    </div>
+                    <div class="architecture-notes">
+                        <h4>変更前の判断</h4>
+                        <ul>
+                            <li>削除前に、ログの保全要否とセキュリティインシデントの疑いを確認します。</li>
+                            <li>復旧作業で変更したファイル、容量、時刻をチケットに残します。</li>
+                            <li>アラート解除だけで閉じず、原因と再発防止を <a href="#postmortem">Postmortem</a> に残します。</li>
+                            <li>データ欠損があれば <a href="#restore">Restore Check</a> の手順へ切り替えます。</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section" id="restore">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-floppy-disk"></i></span>
+                    <span class="heading-text">Restore Check / Backup Runbook</span>
+                </div>
+                <div class="lab-links-section">
+                    <div class="lab-link-card">
+                        <h4>復旧テストの観点</h4>
+                        <p>バックアップの取得成否だけでなく、別ディレクトリへの復元、内容確認、ハッシュ一致、所要時間の記録までを月次確認事項にします。</p>
+                        <div class="next-scope-list">
+                            <span>日次30世代</span><span>3-2-1</span><span>月次Restore</span><span>ACL確認</span>
+                        </div>
+                    </div>
+                    <div class="lab-link-card">
+                        <h4>詳細 Runbook</h4>
+                        <p>Windows VSS + Robocopy と Linux rsync + systemd timer の詳細な手順は、GitHub の整形表示で閲覧できます。</p>
+                        <div class="contact-actions">
+                            <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/backup-restore-runbook.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Backup Runbook 詳細</a>
+                            <a href="production-readiness.html" class="btn btn-outline-dark">本番化差分</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="operation-matrix-section" id="postmortem">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-file-circle-check"></i></span>
+                    <span class="heading-text">Postmortem / Learning Loop</span>
+                </div>
+                <div class="lab-links-section">
+                    <div class="lab-link-card">
+                        <h4>記録する指標</h4>
+                        <p>MTTA、MTTR、影響人数、データ損失有無、根本原因、応急対応、恒久対応、未完了アクションを分離して記録します。</p>
+                        <div class="next-scope-list">
+                            <span>MTTA</span><span>MTTR</span><span>5 Whys</span><span>Action Items</span>
+                        </div>
+                    </div>
+                    <div class="lab-link-card">
+                        <h4>既存の架空事例</h4>
+                        <p>共有フォルダの I/O 飽和を題材にした P2 Postmortem を、詳細資料として公開しています。</p>
+                        <div class="contact-actions">
+                            <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/postmortem-example.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Postmortem 詳細</a>
+                            <a href="lab-evidence.html" class="btn btn-outline-dark">検証証跡へ戻る</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div>
+            <div class="footer-nav"><a href="me.html">About</a><a href="skills.html">Skills</a><a href="infra-lab.html">Infra Lab</a><a href="works.html">Works</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom"><small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small></div>
+    </footer>
+    <script>
+        $(window).on('load', function() { $('.loader').fadeOut(800); });
+        $(".res-menu").click(function () { $("nav").toggleClass("show"); $(".res-menu").toggleClass("show2"); });
+        $(window).scroll(function() { $('header').toggleClass('scrolled', $(this).scrollTop() > 100); });
+    </script>
+</body>
+</html>
