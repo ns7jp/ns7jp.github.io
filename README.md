@@ -27,7 +27,7 @@
 | [Cloud Network Lab](https://ns7jp.github.io/cloud-lab.html) | AWS VPC / Subnet / Security Group / Terraform validate / コスト配慮 |
 | [Linux Operation Lab](https://ns7jp.github.io/linux-lab.html) | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計と早見表 |
 | [Monitoring Stack](./monitoring-stack/) | Prometheus + Grafana + Loki + Promtail + node_exporter + 4 アラート |
-| [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 15 手順書、9 PowerShell + 1 bash（Pester 25 テスト + GitHub Actions） |
+| [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 17 手順書（**Failover Runbook / Network 切り分け証跡** 含む）、9 PowerShell + 1 bash（Pester 25 テスト + GitHub Actions） |
 
 ### ⏱ 30 分で見る（運用品質の数値化まで含めて確認）
 
@@ -36,13 +36,15 @@
 | [SLO / Error Budget](./support-docs/slo-error-budget.md) | SLI 定義 → SLO 値 → Error Budget → 月中の運用判断 |
 | [チケット分類 (ITIL 4 区分)](./support-docs/ticket-taxonomy.md) | インシデント / リクエスト / 問題 / 変更 の受付フローと記入テンプレ |
 | [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md) | サービス別 RTO / RPO 表、月次リストアテスト、年次 DR ドリル |
+| [フェイルオーバー Runbook](./support-docs/failover-runbook.md) | AD / ファイル / DB / VIP / DNS の **副系切替コマンド + 切り戻し** |
+| [ネットワーク切り分け証跡](./support-docs/network-triage-evidence.md) | L2 〜 L7 を機械的に当てる切り分けコマンドと想定出力例 |
 | [物理層 設計](./support-docs/office-it-physical-layer.md) | ラック / LAN / UPS / 無線AP / 複合機の棚卸と切り分け |
 | [M365 ポリシー定義](./support-docs/m365-policy-examples/) | Intune / 条件付きアクセス / Defender ASR の JSON 定義 |
 | [Infra Evidence](./infra-evidence/) / [Production Readiness](./production-readiness.md) | 検証コマンド、失敗 → 修正サンプル、本番化差分 |
-| [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 の冪等ベースライン |
+| [Ansible Playbook](./ansible/) / [CIS Benchmark マッピング](./ansible/cis-benchmark-mapping.md) | SSH強化 / UFW / fail2ban / auditd / 自動更新 + **CIS L1 主要項目 約 65% カバー** |
 | [面接 想定 FAQ](./support-docs/interview-faq.md) | 製造業 18 年からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等の自答 |
 
-成果の見え方としては、Infra Operation Lab で **VLAN 構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Cloud Lab で **VPC / Subnet / Security Group / Terraform 検証** を補い、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測（Metrics + Logs）」を一通り** 示しています。Support Toolkit では **15 手順書・9 PowerShell + 1 bash・25 Pesterテスト・AD/M365変更ケース・Postmortem 実例・Backup/RTO/RPO/DR ドリル・SLO・チケット分類・物理層・M365 ポリシー JSON** を公開し、Infra Evidence と Production Readiness で **検証証跡と本番化差分** も追えるようにしました。
+成果の見え方としては、Infra Operation Lab で **VLAN 構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Cloud Lab で **VPC / Subnet / Security Group / Terraform 検証** を補い、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測（Metrics + Logs）」を一通り** 示しています。Support Toolkit では **17 手順書・9 PowerShell + 1 bash・25 Pesterテスト・AD/M365変更ケース・Postmortem 実例・Backup/RTO/RPO/DR ドリル・フェイルオーバー手順・ネットワーク切り分け証跡・SLO・チケット分類・物理層・M365 ポリシー JSON** を公開し、Infra Evidence と Production Readiness で **検証証跡と本番化差分**、Ansible playbook の **CIS Benchmark 対応マッピング** で **業界標準との整合性** も追えるようにしました。
 
 ### 想定 KPI / 業務改善見込み（架空数値）
 
@@ -140,7 +142,7 @@ Lab の各成果物が、現場でどの程度の効果を狙えるかの**架�
 | 履歴書 | `resume.html` | A4 1pager。**想定業務 × 自分の備えマトリクス** と **学習ロードマップ** を含む |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
 | Support Toolkit | `works.html#work-support-toolkit` | 手順書・PowerShell・チケット形式の対応例を、ITサポート実務に近い成果物としてまとめる |
-| サポート文書 | `support-docs/` | 標準業務4本 + AD/M365変更ケース + 障害対応3本 + Postmortem 実例 + Backup Runbook + **SLO / チケット分類 / 物理層 / 面接 FAQ** の計 15 本 + M365 ポリシー JSON 7 ファイル |
+| サポート文書 | `support-docs/` | 標準業務4本 + AD/M365変更ケース + 障害対応4本（**ネットワーク切り分け証跡**含む） + Postmortem 実例 + Backup Runbook + **フェイルオーバー Runbook** + SLO / チケット分類 / 物理層 / 面接 FAQ の計 17 本 + M365 ポリシー JSON 7 ファイル |
 | 実務スクリプト | `support-scripts/` | PowerShell 9本（うち1本★DB一次対応）+ bash 1本（Linux一次切り分け）+ **Triage-Lib 純関数ライブラリ + Pester テスト** |
 | Monitoring Stack | `monitoring-stack/` | Prometheus + Grafana + node_exporter + **Loki + Promtail** の docker-compose 一式 + 4 アラート + 2 ダッシュボード |
 | Ansible Playbook | `ansible/` | Ubuntu ベースライン冪等化 (SSH / UFW / fail2ban / auditd / unattended-upgrades) |
@@ -224,13 +226,15 @@ ns7jp.github.io/
 │   ├── troubleshooting-case-studies.md        ... 障害対応事例集（10ケース）
 │   ├── incident-response-playbook.md          ... 重大インシデント対応プレイブック
 │   ├── malware-suspected-response.md          ... マルウェア感染疑い対応フロー
+│   ├── network-triage-evidence.md             ... ★ L2-L7 ネットワーク切り分け証跡集
 │   ├── postmortem-example.md                  ... 共有フォルダI/O飽和のPostmortem実例（架空）
-│   ├── backup-restore-runbook.md              ... ★ RTO/RPO/DR ドリル追加版（Win VSS + Linux rsync）
-│   ├── slo-error-budget.md                    ... ★ SLO / Error Budget / バーンレート アラート
-│   ├── ticket-taxonomy.md                     ... ★ ITIL 4 区分の受付フローと記入テンプレ
-│   ├── office-it-physical-layer.md            ... ★ 物理層（ラック / LAN / UPS / AP / 複合機）
-│   ├── interview-faq.md                       ... ★ 面接 想定 FAQ（自答メモ）
-│   └── m365-policy-examples/                  ... ★ Intune / 条件付きアクセス / Defender ASR JSON
+│   ├── backup-restore-runbook.md              ... RTO/RPO/DR ドリル付き（Win VSS + Linux rsync）
+│   ├── failover-runbook.md                    ... ★ AD/ファイル/DB/VIP/DNS の副系切替手順
+│   ├── slo-error-budget.md                    ... SLO / Error Budget / バーンレート アラート
+│   ├── ticket-taxonomy.md                     ... ITIL 4 区分の受付フローと記入テンプレ
+│   ├── office-it-physical-layer.md            ... 物理層（ラック / LAN / UPS / AP / 複合機）
+│   ├── interview-faq.md                       ... 面接 想定 FAQ（自答メモ）
+│   └── m365-policy-examples/                  ... Intune / 条件付きアクセス / Defender ASR JSON
 │       ├── README.md
 │       ├── intune-windows-compliance-policy.json
 │       ├── intune-windows-configuration-profile.json
@@ -262,17 +266,19 @@ ns7jp.github.io/
 │   ├── promtail/promtail-config.yml     ★ Promtail 設定
 │   └── grafana/provisioning/            （Prom + Loki データソース、2 ダッシュボード）
 │
-├── ansible/                 ... ★ Linux ベースライン冪等化 playbook
+├── ansible/                 ... Linux ベースライン冪等化 playbook
 │   ├── playbook.yml
 │   ├── inventory.ini
+│   ├── cis-benchmark-mapping.md  ... ★ CIS Ubuntu 22.04 L1 への対応マッピング
 │   └── templates/sshd_config.j2
 │
 ├── cloud-lab/               ... ★ AWS VPC / Security Group / Terraform validate
 │   ├── README.md
 │   └── terraform/
 │
-├── infra-evidence/          ... ★ 実行証跡サンプルとCI検証観点
+├── infra-evidence/          ... 実行証跡サンプルとCI検証観点
 │   ├── README.md
+│   ├── network-triage.sample.txt   ... ★ L2-L7 切り分けコマンドの出力サンプル
 │   └── *.sample.txt
 │
 ├── .github/workflows/

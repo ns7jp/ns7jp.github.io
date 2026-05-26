@@ -56,7 +56,7 @@
           "name": "島田則幸の制作物",
           "itemListOrder": "ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定した15本の手順書、10本の確認スクリプト (PowerShell 9 + bash 1) + Pester 25テスト、SLO/Error Budget、チケット分類(ITIL)、物理層、M365ポリシーJSON" } },
+            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定した17本の手順書、10本の確認スクリプト (PowerShell 9 + bash 1) + Pester 25テスト、SLO/Error Budget、チケット分類(ITIL)、物理層、M365ポリシーJSON、Failover Runbook、ネットワーク切り分け証跡、CIS Benchmark マッピング" } },
             { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU/メモリ/ディスク/ネットワーク/プロセスをリアルタイム可視化する監視ダッシュボード" } },
             { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Fletフレームワークで作成した定型文テンプレート管理ツール" } },
             { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Tkinterで作成した付箋復元機能付きデスクトップアプリ" } },
@@ -221,21 +221,22 @@
                             <h4>Support Toolkit</h4>
                             <div class="work-summary">
                                 <div><span>目的</span><strong>問い合わせ一次対応と運用手順の標準化</strong></div>
-                                <div><span>成果</span><strong>15手順書・10スクリプト・M365ポリシーJSON</strong></div>
-                                <div><span>活用</span><strong>受付・分類・切り分け・証跡・引き継ぎ</strong></div>
+                                <div><span>成果</span><strong>17手順書・10スクリプト・M365ポリシーJSON・CIS マッピング</strong></div>
+                                <div><span>活用</span><strong>受付・分類・切り分け・証跡・副系切替・引き継ぎ</strong></div>
                             </div>
                             <div class="support-fit high">
                                 <span class="fit-label">ITサポート関連度: High</span>
-                                <p>コードだけでなく、現場で求められる手順化・記録・確認観点をまとめた成果物。ヘルプデスク、社内SE補助、運用監視への適性を直接示せます。チケット分類(ITIL)・SLO・物理層・M365 ポリシー JSON もカバー。</p>
+                                <p>コードだけでなく、現場で求められる手順化・記録・確認観点をまとめた成果物。ヘルプデスク、社内SE補助、運用監視への適性を直接示せます。チケット分類(ITIL)・SLO・物理層・M365 ポリシー JSON・Failover Runbook・Network 切り分け証跡・Ansible の CIS Benchmark 対応マッピングもカバー。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip"><strong>15</strong>手順書</span>
+                                <span class="num-chip"><strong>17</strong>手順書</span>
                                 <span class="num-chip"><strong>10</strong>スクリプト</span>
                                 <span class="num-chip"><strong>10</strong>障害ケース</span>
                                 <span class="num-chip"><strong>7</strong>M365 ポリシー JSON</span>
                                 <span class="num-chip"><strong>25</strong>Pesterテスト</span>
+                                <span class="num-chip">CIS L1 約<strong>65</strong>%</span>
                             </div>
-                            <p>Windows 11 / Microsoft 365 / Active Directory を想定し、PCキッティング、退職者アカウント停止、共有フォルダ権限管理、M365ライセンス管理、AD/M365変更作業、障害対応、重大インシデント、マルウェア感染疑い対応、SLO/Error Budget、チケット分類(ITIL 4区分)、物理層(ラック/LAN/UPS/AP)、M365ポリシー(Intune / 条件付きアクセス / Defender ASR の JSON 定義)までを一通り公開しています。確認スクリプトは削除・設定変更を含めず、端末状態やログ・DB ヘルスを読み取り中心で収集する構成です。</p>
+                            <p>Windows 11 / Microsoft 365 / Active Directory を想定し、PCキッティング、退職者アカウント停止、共有フォルダ権限管理、M365ライセンス管理、AD/M365変更作業、障害対応、重大インシデント、マルウェア感染疑い対応、ネットワーク一次切り分け証跡（L2-L7）、SLO/Error Budget、チケット分類(ITIL 4区分)、物理層(ラック/LAN/UPS/AP)、M365ポリシー(Intune / 条件付きアクセス / Defender ASR の JSON 定義)、Failover Runbook（AD/ファイル/DB/VIP/DNS の副系切替）、Ansible playbook の CIS Ubuntu 22.04 LTS L1 対応マッピングまでを一通り公開しています。確認スクリプトは削除・設定変更を含めず、端末状態やログ・DB ヘルスを読み取り中心で収集する構成です。</p>
                             <ul class="work-points">
                                 <li>問い合わせ受付後に「何を、どの順番で、どの証跡として残すか」を意識して構成しました。</li>
                                 <li>JSON / CSV / HTML の出力を用意し、チケット添付や引き継ぎ資料へ転用しやすくしました。</li>

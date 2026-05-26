@@ -52,7 +52,7 @@ route:
 
 ---
 
-## 4. バックアップ / リストア
+## 4. バックアップ / リストア / DR
 
 | 対象 | 本番で確認すること |
 |---|---|
@@ -60,8 +60,9 @@ route:
 | Linux サーバー | rsync / 世代管理 / systemd timer / オフサイト同期 / 完全復元手順 |
 | Grafana / Prometheus | 永続ボリューム、設定ファイル、ダッシュボードJSONのGit管理 |
 | Cloud | AWS Backup、世代管理、暗号化、別アカウント保管 |
+| **副系切替** | AD FSMO 移譲、DFS Namespace ターゲット切替、DB レプリカ昇格、VIP（Keepalived）、DNS TTL 短縮 → 切替 → 戻し |
 
-バックアップは取得成否だけでなく、**戻せること** を月次で証明します。
+バックアップは取得成否だけでなく、**戻せること** を月次で、**副系に切れること** を年次の DR ドリルで証明します。手順の具体例は [Failover Runbook](./support-docs/failover-runbook.md) を参照。
 
 ---
 
@@ -107,7 +108,8 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 |---|---|---|
 | P1 | Alertmanager + 通知先 + Runbook link | 障害検知から初動までをつなぐ |
 | P1 | Secrets / Vault / SSO | 公開サンプルから本番運用へ移る際の最低条件 |
-| P1 | リストアテスト記録 | バックアップの実効性を示す |
+| P1 | リストアテスト記録 + 年次 DR ドリル（[Failover Runbook](./support-docs/failover-runbook.md) 実行） | バックアップ・副系切替の実効性を示す |
+| P1 | CIS Benchmark 自動監査（OpenSCAP / Lynis） | [現状マッピング](./ansible/cis-benchmark-mapping.md)を継続検証する仕組み |
 | P2 | CloudTrail / Flow Logs / GuardDuty | クラウド監査と検知を補う |
 | P2 | ansible-lint / Terraform validate のCI強化 | IaC変更の安全性を上げる |
 | P3 | SLO / Error Budget | 運用品質を数値で説明できるようにする |
@@ -120,10 +122,12 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 - [Linux Lab](./linux-lab.html)
 - [Cloud Network Lab](./cloud-lab.html)
 - [Monitoring Stack](./monitoring-stack/) — Prometheus + Grafana + Loki + Promtail
-- [Ansible Playbook](./ansible/)
+- [Ansible Playbook](./ansible/) / [CIS Benchmark マッピング](./ansible/cis-benchmark-mapping.md) — 業界標準への対応表
 - [Infra Evidence](./infra-evidence/) — 検証コマンドサンプル + 失敗→修正対比
 - [SLO / Error Budget](./support-docs/slo-error-budget.md) — 運用品質の数値設計（具体例）
 - [チケット分類](./support-docs/ticket-taxonomy.md) — ITIL 4 区分の受付テンプレ
 - [物理層](./support-docs/office-it-physical-layer.md) — ラック / LAN / UPS / 複合機
 - [M365 ポリシー定義](./support-docs/m365-policy-examples/) — Intune / 条件付きアクセス / Defender JSON
 - [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md) — RTO / RPO / DR ドリル計画
+- [Failover Runbook](./support-docs/failover-runbook.md) — AD / ファイル / DB / VIP / DNS の副系切替手順
+- [ネットワーク切り分け証跡](./support-docs/network-triage-evidence.md) — L2-L7 を機械的に当てるコマンドと出力例

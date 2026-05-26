@@ -28,9 +28,12 @@ ansible/
 ├── playbook.yml                ... メイン playbook（21タスク + 4ハンドラ）
 ├── requirements.yml            ... 必要な collection 宣言（ansible.posix / community.general）
 ├── inventory.ini               ... 対象ホスト一覧（Lab用）
+├── cis-benchmark-mapping.md    ... ★ CIS Ubuntu 22.04 LTS L1 への対応マッピング
 └── templates/
     └── sshd_config.j2          ... Ansible 管理下の sshd_config テンプレート
 ```
+
+[`cis-benchmark-mapping.md`](./cis-benchmark-mapping.md) では、本 playbook の各タスクを **CIS Ubuntu Linux 22.04 LTS Benchmark v1.0.0 / Level 1** の管理項目番号に紐付けています（主要項目で約 65% カバー）。「ハードニングしました」ではなく「**CIS L1 の SSH §5.2 / Firewall §3.4 / Audit §4.1 を満たしています**」の形で監査側に伝えられる状態を意図しています。
 
 ---
 
@@ -87,4 +90,5 @@ collection 経由になるため、`requirements.yml` で明示宣言してい�
 ## 検証証跡 / 本番化差分
 
 - [Infra Evidence](../infra-evidence/) — Ansible syntax-check / ansible-lint の検証コマンドとサンプル出力
+- [CIS Benchmark マッピング](./cis-benchmark-mapping.md) — 本 playbook が **CIS L1 のどの管理項目に対応しているか** の表
 - [Production Readiness](../production-readiness.md) — Vault、秘密情報、ロールバック、監査ログなど、本番化で足す観点
