@@ -1,0 +1,177 @@
+# Network Triage Sample Evidence
+#
+# 一次切り分け中に取得する典型的なコマンド出力をまとめたサンプルです。
+# 公開ポートフォリオ用に RFC 5737 (192.0.2.0/24, 203.0.113.0/24) と
+# RFC 2606 (example.com) のドキュメント用予約レンジで匿名化しています。
+#
+# 切り分けの詳細は ../support-docs/network-triage-evidence.md を参照。
+
+
+===============================================================================
+01-link.txt   ip -br link / ethtool eth0
+===============================================================================
+
+$ ip -br link
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP>
+eth0             UP             52:54:00:aa:bb:cc <BROADCAST,MULTICAST,UP,LOWER_UP>
+eth1             DOWN           52:54:00:aa:bb:cd <BROADCAST,MULTICAST>
+
+$ sudo ethtool eth0 | grep -E 'Speed|Duplex|Link detected|Auto-negotiation'
+        Auto-negotiation: on
+        Speed: 1000Mb/s
+        Duplex: Full
+        Link detected: yes
+
+[判定]
+- eth0 は UP / 1Gbps / Full / リンクあり。物理層 OK。
+- eth1 は使用していないので DOWN のままで問題なし。
+
+
+===============================================================================
+02-route.txt  ip route / ip neigh show
+===============================================================================
+
+$ ip route
+default via 192.0.2.1 dev eth0 proto static
+192.0.2.0/24 dev eth0 proto kernel scope link src 192.0.2.50
+
+$ ip neigh show
+192.0.2.1 dev eth0 lladdr 52:54:00:11:22:33 REACHABLE
+192.0.2.10 dev eth0 lladdr 52:54:00:aa:bb:01 STALE
+192.0.2.20 dev eth0 lladdr 52:54:00:aa:bb:02 REACHABLE
+
+[判定]
+- デフォルトゲートウェイ 192.0.2.1 への ARP が REACHABLE。L3 経路 OK。
+
+
+===============================================================================
+03-listen.txt ss -tlnp
+===============================================================================
+
+$ sudo ss -tlnp
+State    Recv-Q  Send-Q  Local Address:Port  Peer Address:Port  Process
+LISTEN   0       128            0.0.0.0:22          0.0.0.0:*      users:(("sshd",pid=812,fd=3))
+LISTEN   0       4096           0.0.0.0:9100        0.0.0.0:*      users:(("node_exporter",pid=901,fd=3))
+LISTEN   0       511            0.0.0.0:80          0.0.0.0:*      users:(("nginx",pid=1011,fd=6))
+LISTEN   0       511            0.0.0.0:443         0.0.0.0:*      users:(("nginx",pid=1011,fd=7))
+
+[判定]
+- 22 / 80 / 443 / 9100 が想定どおりリッスン中。意図しないオープンポートなし。
+
+
+===============================================================================
+04-ping-gw.txt   ping -c 5 192.0.2.1
+===============================================================================
+
+$ ping -c 5 -W 2 192.0.2.1
+PING 192.0.2.1 (192.0.2.1) 56(84) bytes of data.
+64 bytes from 192.0.2.1: icmp_seq=1 ttl=64 time=0.532 ms
+64 bytes from 192.0.2.1: icmp_seq=2 ttl=64 time=0.491 ms
+64 bytes from 192.0.2.1: icmp_seq=3 ttl=64 time=0.488 ms
+64 bytes from 192.0.2.1: icmp_seq=4 ttl=64 time=0.477 ms
+64 bytes from 192.0.2.1: icmp_seq=5 ttl=64 time=0.501 ms
+
+--- 192.0.2.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4083ms
+rtt min/avg/max/mdev = 0.477/0.498/0.532/0.022 ms
+
+[判定]
+- 0% loss / mdev 0.022ms。揺らぎ無し。LAN セグメント正常。
+
+
+===============================================================================
+05-mtr-out.txt  sudo mtr -rwc 20 example.com
+===============================================================================
+
+Start: 2026-05-26T09:12:03+0900
+HOST: ops01                                Loss%   Snt   Last   Avg  Best  Wrst StDev
+  1.|-- 192.0.2.1                          0.0%    20    0.5    0.6   0.4   1.2   0.2
+  2.|-- 203.0.113.1                        0.0%    20    1.2    1.4   1.1   3.2   0.4
+  3.|-- 203.0.113.254                      5.0%    20    2.1    2.3   1.9   8.4   1.1
+  4.|-- ???                                100.0%  20    0.0    0.0   0.0   0.0   0.0
+  5.|-- 203.0.113.10                       0.0%    20   12.4   13.1  11.8  22.5   2.4
+  6.|-- 93.184.216.34                      0.0%    20   12.6   13.0  11.9  18.7   1.8
+
+[判定]
+- 4 hop 目は ICMP 応答を返さないだけで、5 hop 以降は 0% loss。実通信は通っている。
+- 3 hop 目の 5% は ICMP rate limit の可能性が高い（5 hop 以降の loss が 0% なので、
+  実トラフィックには影響していないと判断）。
+
+
+===============================================================================
+06-dig-trace.txt   dig +trace example.com / 内部vs外部 DNS の比較
+===============================================================================
+
+$ dig +trace example.com +nodnssec
+; <<>> DiG 9.18.18 <<>> +trace example.com
+;; global options: +cmd
+.                       86400  IN  NS  a.root-servers.net.
+[... root → TLD → 権威 ...]
+example.com.            86400  IN  A   93.184.216.34
+;; Received 1389 bytes from 199.43.135.53#53(a.iana-servers.net) in 28 ms
+
+
+$ dig @192.0.2.10 fileserver.corp.local +short
+192.0.2.20
+
+$ dig @8.8.8.8 fileserver.corp.local +short
+(空行 — パブリック側では引けない、想定どおり)
+
+[判定]
+- 外部名 example.com は委譲が正常に取れている。
+- 内部名 fileserver.corp.local は社内 DNS でのみ解決される（スプリット DNS 想定どおり）。
+
+
+===============================================================================
+07-curl-v.txt   curl -v https://example.com の時間内訳
+===============================================================================
+
+$ curl -s -o /dev/null -w '@/tmp/curl-format.txt' https://example.com
+namelookup:  0.012
+connect:     0.021
+appconnect:  0.082
+starttransfer: 0.151
+total:       0.182
+size_download: 1256
+http_code:   200
+
+[判定]
+- namelookup 12ms / connect 9ms / TLS 61ms / 初回バイト 69ms / 合計 182ms。
+- TLS ハンドシェイクが最も時間を取っているが、64ms は標準的な範囲。
+- どの区間も異常値ではない。「サイトが遅い」報告に対しては問題なしと回答可能。
+
+
+===============================================================================
+08-openssl-cert.txt   証明書チェーンと残日数
+===============================================================================
+
+$ echo | openssl s_client -connect example.com:443 -servername example.com -showcerts 2>/dev/null \
+    | openssl x509 -noout -subject -issuer -dates
+
+subject= CN = example.com
+issuer= C = US, O = DigiCert Inc, CN = DigiCert TLS RSA SHA256 2020 CA1
+notBefore=Jan 13 00:00:00 2026 GMT
+notAfter=Feb 13 23:59:59 2027 GMT
+
+$ days_left example.com
+628
+
+[判定]
+- 残 628 日。期限管理 OK（30 日切ったら P3 起票するルーチンを月次で実行）。
+
+
+===============================================================================
+失敗例) SYN は出るが ACK が返らない（戻り経路の片方向遮断）
+===============================================================================
+
+$ sudo tcpdump -ni any 'tcp[tcpflags] & tcp-syn != 0 and host 192.0.2.55 and port 443'
+09:30:12.001234 IP 192.0.2.50.51234 > 192.0.2.55.443: Flags [S], seq 0, win 64240, ...
+09:30:13.002567 IP 192.0.2.50.51234 > 192.0.2.55.443: Flags [S], seq 0, win 64240, ...    <-- 再送
+09:30:15.005432 IP 192.0.2.50.51234 > 192.0.2.55.443: Flags [S], seq 0, win 64240, ...    <-- 再送
+( 192.0.2.55 からの SYN-ACK が返ってこない )
+
+[判定]
+- 一方向だけしか通っていない（行きはあるが戻りが来ない）。
+- 経路上の FW / SG / NAT のステートフル設定、または対向サーバーのリッスン状態を疑う。
+- ssh で 192.0.2.55 にログインできるなら ss -tlnp で 443 のリッスンを直接確認。
+- ログインできないなら、対向側の運用担当へ「443/tcp の戻りが来ない」状態として引き渡し。

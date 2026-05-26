@@ -19,6 +19,7 @@
 | Ansible | `ansible-galaxy collection install` / `ansible-playbook --syntax-check` / `ansible-lint` | `infra-check.yml` |
 | Cloud Lab Terraform | `terraform fmt -check` / `terraform init -backend=false` / `terraform validate` | `infra-check.yml` |
 | M365 ポリシー JSON | `jq -e . *.json` (構文検証) / 必須キー検査 | `infra-check.yml` |
+| **ネットワーク切り分け** | `ip` / `mtr` / `dig` / `openssl s_client` / `tcpdump` / `curl -w` | 手動実行（[network-triage.sample.txt](./network-triage.sample.txt) に出力例） |
 
 ---
 
@@ -40,7 +41,8 @@
 | [ansible-check.sample.txt](./ansible-check.sample.txt) | Ansible collection install、syntax-check、ansible-lint の出力例 |
 | [terraform-check.sample.txt](./terraform-check.sample.txt) | Cloud Lab Terraform の fmt / init / validate 出力例 |
 | [m365-policy-check.sample.txt](./m365-policy-check.sample.txt) | M365 ポリシー JSON の構文検証 + Apply-IntunePolicy.ps1 dry-run 出力例 |
-| [validation-failure-and-fix.sample.txt](./validation-failure-and-fix.sample.txt) | ★ promtool / ansible-lint / terraform validate の**失敗 → 修正 → 成功**の対比証跡 |
+| [validation-failure-and-fix.sample.txt](./validation-failure-and-fix.sample.txt) | promtool / ansible-lint / terraform validate の**失敗 → 修正 → 成功**の対比証跡 |
+| [network-triage.sample.txt](./network-triage.sample.txt) | ★ L2 〜 L7 切り分けコマンドの出力サンプル（link / route / ping / mtr / dig / curl / openssl / tcpdump）|
 
 ---
 

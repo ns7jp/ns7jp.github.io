@@ -6,7 +6,7 @@ ITサポート・社内SE・運用監視業務で実際に使われる手順書�
 
 ---
 
-## 📂 収録ドキュメント（全 15 本 + M365 ポリシー定義 7 ファイル）
+## 📂 収録ドキュメント（全 17 本 + M365 ポリシー定義 7 ファイル）
 
 ### 🛠 標準業務 手順書（4 本）
 
@@ -36,7 +36,7 @@ ITサポート・社内SE・運用監視業務で実際に使われる手順書�
 
 ---
 
-### 🚨 障害対応 / インシデント対応（3 本）
+### 🚨 障害対応 / インシデント対応（4 本）
 
 #### 6. [障害対応事例集（10 ケース）](./troubleshooting-case-studies.md)
 
@@ -52,31 +52,39 @@ P1 / P2 重大度の事案で発動する、検知から事後分析までの定
 
 感染兆候の判断基準から、即時隔離（5 分以内）、影響範囲の特定、検体保全、復旧、事後対応まで。電源切断 vs シャットダウンの判断基準、横展開検知の PowerShell クエリ等を収録。
 
+#### 9. [ネットワーク一次切り分け 証跡集](./network-triage-evidence.md)
+
+OSI 参照モデルの下から上へ機械的に当てる**コマンド一覧と想定出力例**を集めた切り分け証跡集。L2 (ARP) / L3 (ping, mtr, MTU) / DNS (dig +trace) / TLS (openssl s_client) / L4 (tcpdump, ss) / L7 (curl の時間内訳) を網羅し、**証跡保存ワンライナー**も収録。Windows 端末向けの同等コマンド対応表つき。
+
 ---
 
-### 📓 事後分析 / 復旧運用（2 本）
+### 📓 事後分析 / 復旧運用（3 本）
 
-#### 9. [Postmortem 実例（共有フォルダ I/O 飽和、P2）](./postmortem-example.md)
+#### 10. [Postmortem 実例（共有フォルダ I/O 飽和、P2）](./postmortem-example.md)
 
 重大インシデント対応プレイブックの「型」を、実際の振り返りに当てはめた架空のサンプル。**MTTA / MTTR / MTTM、5 Whys、応急 / 恒久 / 中期対応** を含む。`incident-response-playbook.md` と組み合わせると「型 → 実例」が一通り読めます。
 
-#### 10. [バックアップ / リストア Runbook](./backup-restore-runbook.md)
+#### 11. [バックアップ / リストア Runbook](./backup-restore-runbook.md)
 
 Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsync + systemd timer）の 2 系統を載せ、**サービス別 RTO/RPO 表**、**月次リストアテスト計画**、**年次 DR ドリル計画（火災 / DC 障害 / ランサムウェア）** までを含めた運用Runbook。「取れている」だけでなく「**目標時間内に必ず戻せる**」の証明を意識した構成。
+
+#### 12. [フェイルオーバー / 切り戻し Runbook](./failover-runbook.md)
+
+副系への切替を**判断基準 → 事前確認 → 切替コマンド → 検証 → 切り戻し**の 5 段階で構成した実行手順書。AD DS（FSMO graceful 移譲 / seizure）、ファイルサーバー（DFS Namespace ターゲット切替）、DB（SQL Server AG / PostgreSQL streaming レプリカ昇格）、VIP（Keepalived VRRP）、DNS（TTL 短縮 → 切替 → 戻し）を網羅。**年次 DR ドリル計画と接続**。
 
 ---
 
 ### 🎯 運用設計 / SRE (3 本)
 
-#### 11. [SLO / Error Budget](./slo-error-budget.md)
+#### 13. [SLO / Error Budget](./slo-error-budget.md)
 
 Lab 内サービスを題材に、**SLI 定義 → SLO 値 → Error Budget 計算 → 月中の運用判断**までを 1 本で示した SLO 設計の具体例。マルチウィンドウ・バーンレート Prometheus ルールも記載。
 
-#### 12. [チケット分類 / 受付の型（ITIL 4 区分）](./ticket-taxonomy.md)
+#### 14. [チケット分類 / 受付の型（ITIL 4 区分）](./ticket-taxonomy.md)
 
 **インシデント / サービスリクエスト / 問題 / 変更**の 4 区分と、受付フローチャート（Mermaid）、それぞれの受付テンプレート（時系列タイムライン形式）。
 
-#### 13. [オフィス IT / 物理層](./office-it-physical-layer.md)
+#### 15. [オフィス IT / 物理層](./office-it-physical-layer.md)
 
 [VLAN 論理構成図](../infra-lab.html) の対となる**物理層**ドキュメント。ラック搭載 / LAN 配線 / UPS A/B 系統 / 無線AP / 複合機 / 物理セキュリティの棚卸テンプレと切り分け順。
 
@@ -84,7 +92,7 @@ Lab 内サービスを題材に、**SLI 定義 → SLO 値 → Error Budget 計�
 
 ### 🎤 面接 / 自答 (1 本)
 
-#### 14. [面接 想定 FAQ](./interview-faq.md)
+#### 16. [面接 想定 FAQ](./interview-faq.md)
 
 選考で問われやすい 10 問の自答メモ（製造業 18 年からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等）。
 
@@ -92,7 +100,7 @@ Lab 内サービスを題材に、**SLI 定義 → SLO 値 → Error Budget 計�
 
 ### 🔐 M365 ポリシー定義サンプル (7 ファイル)
 
-#### 15. [M365 / Intune / Entra ID / Defender ポリシー](./m365-policy-examples/)
+#### 17. [M365 / Intune / Entra ID / Defender ポリシー](./m365-policy-examples/)
 
 Intune Compliance Policy / Configuration Profile、Conditional Access、Defender ASR を **JSON 定義**で公開。Graph SDK 経由で適用する PowerShell サンプル、棚卸しレポートスクリプトも収録。
 
