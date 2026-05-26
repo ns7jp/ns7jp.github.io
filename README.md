@@ -6,6 +6,7 @@
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-success?logo=github)
 [![Static site check](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml)
 [![Infrastructure checks](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml)
+[![Verified incident drill](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/verified-lab.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/verified-lab.yml)
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
@@ -24,25 +25,27 @@
 
 | 見るもの | 何が分かるか |
 |---|---|
-| [Cloud Network Lab](https://ns7jp.github.io/cloud-lab.html) | AWS VPC / Subnet / Security Group / Terraform validate / コスト配慮 |
+| [Cloud Network Lab](https://ns7jp.github.io/cloud-lab.html) | AWS VPC / Subnet / Security Group / Terraform validate + security test / コスト配慮 |
 | [Linux Operation Lab](https://ns7jp.github.io/linux-lab.html) | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計と早見表 |
-| [Monitoring Stack](./monitoring-stack/) | Prometheus + Grafana + Loki + Promtail + node_exporter + 4 アラート |
-| [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 15 手順書、9 PowerShell + 1 bash（Pester 25 テスト + GitHub Actions） |
+| [Monitoring Stack](https://ns7jp.github.io/monitoring-stack/) | Prometheus + Grafana + Loki + blackbox_exporter + Alertmanager の実装 |
+| [Verified Infrastructure Lab](https://ns7jp.github.io/verified-lab/) | HTTP ターゲット停止 → アラート通知 → 復旧通知を CI で実証 |
+| [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | Support Docs 14 本、9 PowerShell + 1 bash（Pester 25 テスト + GitHub Actions） |
 
 ### ⏱ 30 分で見る（運用品質の数値化まで含めて確認）
 
 | 見るもの | 何が分かるか |
 |---|---|
-| [SLO / Error Budget](./support-docs/slo-error-budget.md) | SLI 定義 → SLO 値 → Error Budget → 月中の運用判断 |
-| [チケット分類 (ITIL 4 区分)](./support-docs/ticket-taxonomy.md) | インシデント / リクエスト / 問題 / 変更 の受付フローと記入テンプレ |
-| [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md) | サービス別 RTO / RPO 表、月次リストアテスト、年次 DR ドリル |
-| [物理層 設計](./support-docs/office-it-physical-layer.md) | ラック / LAN / UPS / 無線AP / 複合機の棚卸と切り分け |
+| [詳細インフラ設計](https://ns7jp.github.io/detailed-infrastructure-design.html) | 実装済み / 動作ドリル / 設計サンプル / 本番化差分の境界 |
+| [SLO / Error Budget](https://ns7jp.github.io/support-docs/slo-error-budget.html) | SLI 定義 → SLO 値 → Error Budget → 月中の運用判断 |
+| [チケット分類 (ITIL 4 区分)](https://ns7jp.github.io/support-docs/ticket-taxonomy.html) | インシデント / リクエスト / 問題 / 変更 の受付フローと記入テンプレ |
+| [Backup / Restore Runbook](https://ns7jp.github.io/support-docs/backup-restore-runbook.html) | サービス別 RTO / RPO 表、月次リストアテスト、年次 DR ドリル |
+| [物理層 設計](https://ns7jp.github.io/support-docs/office-it-physical-layer.html) | ラック / LAN / UPS / 無線AP / 複合機の棚卸と切り分け |
 | [M365 ポリシー定義](./support-docs/m365-policy-examples/) | Intune / 条件付きアクセス / Defender ASR の JSON 定義 |
-| [Infra Evidence](./infra-evidence/) / [Production Readiness](./production-readiness.md) | 検証コマンド、失敗 → 修正サンプル、本番化差分 |
+| [Infra Evidence](https://ns7jp.github.io/infra-evidence/) / [Production Readiness](https://ns7jp.github.io/production-readiness.html) | CI証跡、失敗 → 修正サンプル、本番化差分 |
 | [Ansible Playbook](./ansible/) | SSH強化 / UFW / fail2ban / auditd / 自動更新 の冪等ベースライン |
-| [面接 想定 FAQ](./support-docs/interview-faq.md) | 製造業 18 年からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等の自答 |
+| [面接 想定 FAQ](https://ns7jp.github.io/support-docs/interview-faq.html) | 製造業 18 年からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等の自答 |
 
-成果の見え方としては、Infra Operation Lab で **VLAN 構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Cloud Lab で **VPC / Subnet / Security Group / Terraform 検証** を補い、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測（Metrics + Logs）」を一通り** 示しています。Support Toolkit では **15 手順書・9 PowerShell + 1 bash・25 Pesterテスト・AD/M365変更ケース・Postmortem 実例・Backup/RTO/RPO/DR ドリル・SLO・チケット分類・物理層・M365 ポリシー JSON** を公開し、Infra Evidence と Production Readiness で **検証証跡と本番化差分** も追えるようにしました。
+成果の見え方としては、Infra Operation Lab で **VLAN 構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Cloud Lab で **VPC / Subnet / Security Group / Terraform 検証** を補い、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測（Metrics + Logs）」** を示しています。さらに Verified Infrastructure Lab では **HTTP 外形監視の正常確認 → 障害注入 → Alertmanager 通知 → 復旧 → 解消通知** を CI で実行し、生成 artifact を実測証跡にします。詳細インフラ設計では、実装済み・自動実証対象・設計サンプル・本番化差分を明確に区別しています。
 
 ### 想定 KPI / 業務改善見込み（架空数値）
 
@@ -55,7 +58,7 @@ Lab の各成果物が、現場でどの程度の効果を狙えるかの**架�
 | 障害対応事例集 + チケット分類フロー | 一次受付の判断時間 | **1 件あたり 10 分 → 3 分**（240 件/月で 28h 削減）|
 | Backup Runbook + RTO/RPO 表 | リストア対応時の調査時間 | **2h → 30m**（年 6 件想定で 9h 削減）|
 | Ansible playbook | サーバー初期構築 | **1 台 4h → 30 分**（年 10 台で 35h 削減）|
-| Monitoring Stack (Metrics + Logs) | 障害時のログ調査 | **30 分 → 5 分**（月 12 件で 5h 削減）|
+| Monitoring Stack (Metrics + Logs + Alert drill) | 障害時の検知・ログ調査 | **30 分 → 5 分**（月 12 件で 5h 削減）|
 
 公共職業訓練（2025年10月〜2026年1月）で学んだ HTML / CSS / JavaScript / Python / PHP の成果を、**ITサポート・社内SE補助・インフラ運用支援**の応募先にも伝わる形でまとめたポートフォリオサイトです。制作した Web アプリ、業務改善向けデスクトップアプリ、サーバー監視ツールに加え、ITサポート実務を想定した **Infra Operation Lab（運用設計メモ）** と **Support Toolkit（手順書・PowerShell・チケット形式の対応例）** へアクセスできる構成にしています。
 
@@ -135,17 +138,19 @@ Lab の各成果物が、現場でどの程度の効果を狙えるかの**架�
 | スキルページ | `skills.html` | 学習した技術とITサポート系スキルをカテゴリ別に見せる（Windows / Linux 系を別カードに分割） |
 | インフラ運用Lab | `infra-lab.html` | Windows / M365 / AD を想定し、**VLAN論理構成図**、監視・証跡・一次対応・引き継ぎ基準を見せる |
 | Linux 運用Lab | `linux-lab.html` | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計メモ |
-| Cloud Network Lab | `cloud-lab.html` | AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail を見せる |
+| Cloud Network Lab | `cloud-lab.html` | AWS VPC / Subnet / Security Group / Terraform validate + security test / Cost Guardrail を見せる |
 | 作品ページ | `works.html` | Support Toolkit、**Infra Operation Lab**、6作品の詳細を紹介。Infrastructure カテゴリで絞り込み可能 |
 | 履歴書 | `resume.html` | A4 1pager。**想定業務 × 自分の備えマトリクス** と **学習ロードマップ** を含む |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
 | Support Toolkit | `works.html#work-support-toolkit` | 手順書・PowerShell・チケット形式の対応例を、ITサポート実務に近い成果物としてまとめる |
-| サポート文書 | `support-docs/` | 標準業務4本 + AD/M365変更ケース + 障害対応3本 + Postmortem 実例 + Backup Runbook + **SLO / チケット分類 / 物理層 / 面接 FAQ** の計 15 本 + M365 ポリシー JSON 7 ファイル |
+| サポート文書 | `support-docs/` | 標準業務4本 + AD/M365変更ケース + 障害対応3本 + Postmortem 実例 + Backup Runbook + **SLO / チケット分類 / 物理層 / 面接 FAQ** の計 14 本 + M365 ポリシー JSON 7 ファイル |
 | 実務スクリプト | `support-scripts/` | PowerShell 9本（うち1本★DB一次対応）+ bash 1本（Linux一次切り分け）+ **Triage-Lib 純関数ライブラリ + Pester テスト** |
-| Monitoring Stack | `monitoring-stack/` | Prometheus + Grafana + node_exporter + **Loki + Promtail** の docker-compose 一式 + 4 アラート + 2 ダッシュボード |
+| Monitoring Stack | `monitoring-stack/` | Prometheus + Grafana + Loki + Promtail + blackbox_exporter + Alertmanager + **ホスト4アラート / 外形監視アラート** |
 | Ansible Playbook | `ansible/` | Ubuntu ベースライン冪等化 (SSH / UFW / fail2ban / auditd / unattended-upgrades) |
 | 実行証跡 | `infra-evidence/` | Static / Pester / Prometheus / Loki / Ansible / Terraform / M365 JSON の検証コマンドとサンプル出力 + **失敗→修正対比** |
 | 本番化差分 | `production-readiness.md` | Lab から本番運用へ足す監視、通知、認証、秘密情報、バックアップ、変更管理 |
+| 詳細インフラ設計 | `detailed-infrastructure-design.md` | 実装状況、構成台帳、検証マトリクス、本番化境界を集約 |
+| 実証 Lab | `verified-lab/` | 外形監視の障害注入、通知、復旧、CI artifact 証跡 |
 
 ### `index.html`
 
@@ -254,20 +259,24 @@ ns7jp.github.io/
 │   ├── lib/Triage-Lib.ps1           ... 純関数化された判定ロジック
 │   └── tests/Triage-Lib.Tests.ps1   ... Pester ユニットテスト（25ケース）
 │
-├── monitoring-stack/        ... ★ Prometheus + Grafana + node_exporter + Loki + Promtail
+├── monitoring-stack/        ... ★ Prometheus + Grafana + Loki + blackbox_exporter + Alertmanager
 │   ├── docker-compose.yml
 │   ├── prometheus/prometheus.yml
 │   ├── prometheus/alert.rules.yml
+│   ├── alertmanager/alertmanager.yml    ★ 通知配送設定
+│   ├── blackbox/blackbox.yml            ★ HTTP 外形監視設定
 │   ├── loki/loki-config.yml             ★ Loki 設定
 │   ├── promtail/promtail-config.yml     ★ Promtail 設定
 │   └── grafana/provisioning/            （Prom + Loki データソース、2 ダッシュボード）
+│
+├── verified-lab/            ... ★ 障害注入 → 通知 → 復旧をCIで実証するドリル
 │
 ├── ansible/                 ... ★ Linux ベースライン冪等化 playbook
 │   ├── playbook.yml
 │   ├── inventory.ini
 │   └── templates/sshd_config.j2
 │
-├── cloud-lab/               ... ★ AWS VPC / Security Group / Terraform validate
+├── cloud-lab/               ... ★ AWS VPC / Security Group / Terraform validate + security test
 │   ├── README.md
 │   └── terraform/
 │
@@ -278,7 +287,8 @@ ns7jp.github.io/
 ├── .github/workflows/
 │   ├── static-check.yml     ... HTML 構造 + リンク + 画像バジェット
 │   ├── pwsh-tests.yml       ... ★ Pester + PSScriptAnalyzer
-│   └── infra-check.yml      ... ★ Docker Compose / promtool / Ansible / Terraform / bash 構文検証
+│   ├── infra-check.yml      ... ★ Docker Compose / promtool / Ansible / Terraform / bash 検証
+│   └── verified-lab.yml     ... ★ 外形監視の障害注入・通知・復旧ドリル
 │
 └── image/                   ... ヒーロー画像・スクリーンショット
 ```
@@ -293,7 +303,7 @@ ns7jp.github.io/
 
 | # | 作品名 | 主な技術 | ITサポート関連度 | 内容 | リポジトリ |
 |---|--------|----------|------------------|------|------------|
-| ① | Support Toolkit | Markdown / PowerShell / bash | High | 手順書10本、確認スクリプト9本、Pester 25テスト、AD/M365変更ケース、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ① | Support Toolkit | Markdown / PowerShell / bash | High | Support Docs 14本、詳細設計・実証Runbook、確認スクリプト10本、Pester 25テスト、障害注入CIドリル、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
 | ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
 | ③ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ④ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |

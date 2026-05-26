@@ -20,7 +20,7 @@ $ docker run --rm \
   check rules /etc/prometheus/alert.rules.yml
 
 Checking /etc/prometheus/alert.rules.yml
-  SUCCESS: 4 rules found
+  SUCCESS: 6 rules found
 
 $ docker run --rm \
   -v "$PWD/monitoring-stack/loki:/etc/loki:ro" \

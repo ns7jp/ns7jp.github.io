@@ -1,5 +1,6 @@
 {
   "_comment": "Conditional Access Policy: MFA required for all users except break-glass. POST /identity/conditionalAccess/policies",
+  "_applicationMode": "design-only",
   "displayName": "CA01-MFA-Required-AllUsers",
   "state": "enabledForReportingButNotEnforced",
   "_stateNote": "本番展開時は 'enabled' に変更。まず report-only モードで影響範囲を確認する。",

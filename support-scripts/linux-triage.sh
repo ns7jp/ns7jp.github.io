@@ -61,6 +61,7 @@ echo "hostname : $(hostname)"
 echo "datetime : $(date -Is)"
 echo "uptime   : $(uptime -p 2>/dev/null || uptime)"
 if [[ -r /etc/os-release ]]; then
+  # shellcheck disable=SC1091
   . /etc/os-release
   echo "os       : ${PRETTY_NAME:-unknown}"
 fi

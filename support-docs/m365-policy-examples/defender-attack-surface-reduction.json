@@ -1,5 +1,6 @@
 {
   "_comment": "Defender for Endpoint Attack Surface Reduction (ASR) rules. Intune の Endpoint security > Attack surface reduction で配布。POST /deviceManagement/configurationPolicies",
+  "_applicationMode": "design-only",
   "name": "Defender-ASR-Baseline-2026Q2",
   "description": "Office マクロ / 認証情報盗難 / Web 経由実行など、よくある攻撃面を縮小する ASR ルール 8 本",
   "platforms": "windows10",

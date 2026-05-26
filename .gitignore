@@ -1,0 +1,6 @@
+verified-lab/output/
+__pycache__/
+cloud-lab/terraform/.terraform/
+cloud-lab/terraform/*.tfstate
+cloud-lab/terraform/*.tfstate.*
+cloud-lab/terraform/*.tfplan

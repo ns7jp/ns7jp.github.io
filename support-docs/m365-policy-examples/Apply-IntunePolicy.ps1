@@ -69,6 +69,10 @@ function Read-PolicyJson {
 
 function Get-PolicyKind {
     param([Parameter(ValueFromPipeline=$true)]$Policy)
+    if ($Policy.PSObject.Properties.Match('_applicationMode').Count -gt 0 -and
+        $Policy._applicationMode -eq 'design-only') {
+        return 'DesignOnly'
+    }
     if ($Policy.PSObject.Properties.Match('@odata.type').Count -gt 0 -and
         $Policy.'@odata.type' -like '*CompliancePolicy*') {
         return 'Compliance'
@@ -97,6 +101,10 @@ $displayName = if ($policy.PSObject.Properties.Match('displayName').Count -gt 0)
     $policy.name
 }
 Write-Host "Display name  : $displayName"
+
+if ($kind -in @('DesignOnly', 'Unknown')) {
+    throw "この JSON は設計サンプルであり、このスクリプトの適用対象ではありません。適用対象は Intune Compliance / Configuration のみです。"
+}
 
 # 2) Graph 接続 (実適用時のみ)
 if (-not $Apply) {

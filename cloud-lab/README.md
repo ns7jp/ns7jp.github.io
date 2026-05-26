@@ -2,7 +2,7 @@
 
 ITサポート・社内SE補助・インフラ運用支援からクラウド運用へ接続するための、小さな AWS ネットワーク Lab です。目的は「クラウドを触ったことがある」と大きく見せることではなく、**VPC / Subnet / Route / Security Group / Cost Guardrail を、オンプレの VLAN や ACL と対応づけて説明できること**を示すことです。
 
-この Lab は Terraform の構文検証までを公開対象にしています。`terraform apply` は AWS 認証情報、課金、削除手順、リージョン制限を確認してから実施します。
+この Lab は Terraform の構文検証と mock provider によるセキュリティ挙動テストまでを公開対象にしています。実 AWS に対する `terraform apply` は、認証情報、課金、削除手順、リージョン制限を確認してから実施します。
 
 ---
 
@@ -48,12 +48,13 @@ ITサポート・社内SE補助・インフラ運用支援からクラウド運�
 
 ```bash
 cd cloud-lab/terraform
-terraform fmt -check
-terraform init -backend=false
+terraform fmt -check -recursive
+terraform init -backend=false -lockfile=readonly
 terraform validate
+terraform test
 ```
 
-`fmt` / `init -backend=false` / `validate` は変数値を必要としません。
+`fmt` / `init -backend=false -lockfile=readonly` / `validate` は変数値を必要としません。lock file で provider 版とチェックサムを固定します。`terraform test` は mock provider 内で評価を完結させ、実 AWS に作成せずに `admin_cidr` の世界公開拒否と Private SG の参照制限を検証します。
 
 `plan` / `apply` を行う場合は、**`admin_cidr` を必ず自分の管理元 CIDR で明示指定** してください。`variables.tf` ではあえて default を設定しておらず、未指定で `apply` できない設計にしています（RFC 5737 のドキュメント用 CIDR が誤って残ったまま SG を作成されることを防ぐため）。`0.0.0.0/0` は validation でブロックされます。
 
@@ -71,7 +72,7 @@ terraform plan \
 |---|---|
 | セグメント分離 | Public / Private subnet を分け、Private 側へ Internet Gateway の直接経路を作らない |
 | 最小権限 | SSH は `admin_cidr`、Private 側は Bastion SG からのみ許可 |
-| 変更前検証 | `terraform fmt` / `init -backend=false` / `validate` を CI で実行 |
+| 変更前検証 | `terraform fmt` / `init -backend=false` / `validate` / SG 安全条件の `terraform test` を CI で実行 |
 | コスト管理 | NAT Gateway / EC2 / Elastic IP をデフォルトで作らない |
 | 本番化差分 | Flow Logs、CloudTrail、GuardDuty、AWS Backup、SSM Session Manager を追加候補として整理 |
 
@@ -86,7 +87,7 @@ terraform plan \
 - **バックアップ**: AWS Backup、世代管理、リストアテスト
 - **コスト**: Budget Alert、タグ必須化、リージョン制限
 
-詳細は [../production-readiness.md](../production-readiness.md) にまとめています。
+詳細は [Production Readiness](https://ns7jp.github.io/production-readiness.html) にまとめています。
 
 ---
 

@@ -1,8 +1,9 @@
 # Postmortem: 共有フォルダの書き込み遅延（架空事例）
 
 > このドキュメントは **公開ポートフォリオ用の架空事例** です。実在の障害ではありません。
-> 重大インシデント対応プレイブック（[incident-response-playbook.md](./incident-response-playbook.md)）と組み合わせて、
+> 重大インシデント対応プレイブック（[Incident Response Playbook](https://ns7jp.github.io/support-docs/incident-response-playbook.html)）と組み合わせて、
 > 「型 → 実例」が一通り読める形にしています。
+> 下記の `[x]` はこの架空事例内で完了した対応を表し、公開リポジトリへ Windows exporter を実装済みという意味ではありません。実装済みの動作ドリルは [Verified Infrastructure Lab](../verified-lab/) に分離しています。
 
 ---
 
@@ -126,11 +127,12 @@
 
 ## 関連リンク
 
-- [障害対応事例集（10 ケース）](./troubleshooting-case-studies.md) — このフォルダで起きた他のケース
-- [重大インシデント対応プレイブック](./incident-response-playbook.md) — 今回 P2 で運用した型
-- [マルウェア感染疑い対応フロー](./malware-suspected-response.md) — エスカレーション境界
-- [バックアップ/リストア Runbook](./backup-restore-runbook.md) — 今回 PST 退避先の運用
-- [Monitoring Stack](../monitoring-stack/) — 恒久対応で追加した Prometheus 構成
+- [障害対応事例集（10 ケース）](https://ns7jp.github.io/support-docs/troubleshooting-case-studies.html) — このフォルダで起きた他のケース
+- [重大インシデント対応プレイブック](https://ns7jp.github.io/support-docs/incident-response-playbook.html) — 今回 P2 で運用した型
+- [マルウェア感染疑い対応フロー](https://ns7jp.github.io/support-docs/malware-suspected-response.html) — エスカレーション境界
+- [バックアップ/リストア Runbook](https://ns7jp.github.io/support-docs/backup-restore-runbook.html) — 今回 PST 退避先の運用
+- [Monitoring Stack](../monitoring-stack/) — Linux / HTTP 外形監視を実装した Lab 構成（本事例の Windows exporter は設計対象）
+- [Verified Infrastructure Lab](../verified-lab/) — 実際に障害注入から通知・復旧まで検証する範囲
 
 ---
 

@@ -146,10 +146,10 @@
                         </div>
                         <div class="skill-description">
                             <ul>
-                                <li>PowerShell 8本（読み取り中心、JSON/CSV/HTML出力、Pesterテスト + CI付き）</li>
+                                <li>PowerShell 9本（読み取り中心、JSON/CSV/HTML出力、Pesterテスト + CI付き）</li>
                                 <li>Active Directory 棚卸し（休眠ユーザー抽出、所属グループ確認）</li>
                                 <li>Microsoft 365 ライセンス棚卸し（Microsoft Graph PowerShell SDK）</li>
-                                <li>PCキッティング / 退職オフボーディング / AD・M365変更ケース（Support Docs 10本）</li>
+                                <li>PCキッティング / 退職オフボーディング / AD・M365変更ケース（Support Docs 14本）</li>
                                 <li>ネットワーク基礎（TCP/IP・DNS・DHCP・Wi-Fi 接続トラブル）</li>
                                 <li>セキュリティベースライン確認（Defender / Firewall / BitLocker / Update）</li>
                                 <li>リモートサポート（Quick Assist・TeamViewer・AnyDesk）<span class="learning-tag">学習中</span></li>
@@ -181,10 +181,10 @@
                         <div class="skill-description">
                             <ul>
                                 <li>Linux 一次切り分け bash スクリプト（systemd / journalctl / load / disk / ss）</li>
-                                <li>Prometheus + Grafana + node_exporter 監視スタック（Docker Compose で起動）</li>
+                                <li>Prometheus + Grafana + Loki + blackbox_exporter + Alertmanager 監視スタック</li>
                                 <li>Ansible playbook（SSH 強化 / UFW / fail2ban / auditd / unattended-upgrades）</li>
-                                <li>AWS VPC / Security Group / Terraform validate の Cloud Network Lab</li>
-                                <li>GitHub Actions による Docker Compose / promtool / Ansible / Terraform 検証</li>
+                                <li>AWS VPC / Security Group / Terraform validate + security test の Cloud Network Lab</li>
+                                <li>GitHub Actions による HTTP 障害注入 → 通知 → 復旧の動作ドリル</li>
                                 <li>rsync + systemd timer によるバックアップ / 月次リストアテスト計画</li>
                                 <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
                                 <li>XAMPP / Apache 環境構築・レンタルサーバーへのデプロイ運用</li>
@@ -589,13 +589,16 @@
                 <div class="support-docs-link">
                     <p class="support-docs-text">
                         <i class="fa-solid fa-folder-open"></i>
-                        さらに詳しい <strong>PC キッティング手順書</strong>、<strong>障害対応事例集（10ケース）</strong>、<strong>PowerShell 実務スクリプト</strong> を公開しています。
+                        さらに詳しい <strong>Support Docs 14本</strong>、<strong>詳細インフラ設計 / 実証 Runbook</strong>、<strong>PowerShell / bash 実務スクリプト</strong>、<strong>Verified Incident Drill</strong> を公開しています。
                     </p>
                     <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-github"></i> 詳細ドキュメントを見る
                     </a>
                     <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-terminal"></i> スクリプトを見る
+                    </a>
+                    <a href="verified-lab/" class="btn btn-outline-dark">
+                        <i class="fa-solid fa-bell"></i> 動作ドリルを見る
                     </a>
                 </div>
             </section>

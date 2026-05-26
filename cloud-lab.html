@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸のCloud Network Lab。AWS VPC / Subnet / Route / Security Group / Terraform validate を、オンプレのVLANやACLと対応づけて整理しています。">
+    <meta name="description" content="島田則幸のCloud Network Lab。AWS VPC / Subnet / Route / Security Group / Terraform validate と security test を、オンプレのVLANやACLと対応づけて整理しています。">
     <title>Cloud Lab | 島田則幸のポートフォリオ</title>
 
     <meta property="og:title" content="Cloud Lab | 島田則幸のポートフォリオ">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/cloud-lab.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta property="og:description" content="AWS VPC / Subnet / Route / Security Group / Terraform validate を、オンプレのVLANやACLと対応づけて整理したCloud Network Lab。">
+    <meta property="og:description" content="AWS VPC / Subnet / Route / Security Group / Terraform validate と security test を、オンプレのVLANやACLと対応づけて整理したCloud Network Lab。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -134,7 +134,7 @@
                                 <td>Terraform</td>
                                 <td><code>cloud-lab/terraform/</code></td>
                                 <td>構成管理台帳 / 変更差分</td>
-                                <td><code>fmt</code>、<code>init -backend=false</code>、<code>validate</code> をCIで確認。</td>
+                                <td><code>fmt</code>、<code>validate</code>、SG 安全条件の <code>terraform test</code> をCIで確認。</td>
                             </tr>
                         </tbody>
                     </table>
@@ -153,6 +153,7 @@
                             <li><code>terraform fmt -check</code> で書式を揃える。</li>
                             <li><code>terraform init -backend=false</code> で provider 取得と初期化を検証。</li>
                             <li><code>terraform validate</code> で構文と参照関係を確認。</li>
+                            <li><code>terraform test</code> で SSH 世界公開拒否と Private SG 制限を確認。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
@@ -196,12 +197,14 @@
                     <h4><i class="fa-solid fa-shield"></i> 本番化で足すもの</h4>
                     <p>Lab と本番運用の差分を、監視、通知、認証、秘密情報、バックアップ、変更管理の観点で整理しています。SLO の数値化、チケット分類、M365 ポリシーの JSON 化など、運用品質の補強もセットで参照できます。</p>
                     <div class="next-scope-list">
-                        <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
-                        <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">SLO / Error Budget</a></span>
-                        <span><a href="support-docs/ticket-taxonomy.md" style="color:inherit;">チケット分類 (ITIL)</a></span>
+                        <span><a href="detailed-infrastructure-design.html" style="color:inherit;">詳細インフラ設計</a></span>
+                        <span><a href="verified-lab/" style="color:inherit;">Verified Incident Drill</a></span>
+                        <span><a href="production-readiness.html" style="color:inherit;">Production Readiness</a></span>
+                        <span><a href="support-docs/slo-error-budget.html" style="color:inherit;">SLO / Error Budget</a></span>
+                        <span><a href="support-docs/ticket-taxonomy.html" style="color:inherit;">チケット分類 (ITIL)</a></span>
                         <span><a href="support-docs/m365-policy-examples/" style="color:inherit;">M365 ポリシー JSON</a></span>
-                        <span><a href="support-docs/ad-m365-change-case.md" style="color:inherit;">AD / M365 変更ケース</a></span>
-                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / RTO / RPO / DR</a></span>
+                        <span><a href="support-docs/ad-m365-change-case.html" style="color:inherit;">AD / M365 変更ケース</a></span>
+                        <span><a href="support-docs/backup-restore-runbook.html" style="color:inherit;">Backup / RTO / RPO / DR</a></span>
                         <span><a href="monitoring-stack/" style="color:inherit;">Monitoring Stack (Metrics + Logs)</a></span>
                         <span><a href="ansible/" style="color:inherit;">Ansible Playbook</a></span>
                     </div>

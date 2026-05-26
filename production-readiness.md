@@ -10,11 +10,11 @@ Lab では「学習しやすさ」「公開しやすさ」「安全に読める�
 
 | Lab の状態 | 本番で足すもの | 理由 |
 |---|---|---|
-| Prometheus + Grafana + Loki + 4 アラート | Alertmanager / 通知先 / 抑止 / エスカレーション | アラートを見えるだけでなく、担当者へ届く状態にする |
-| 固定しきい値 | ベースライン収集 / SLO / エラーバジェット ([具体例](./support-docs/slo-error-budget.md)) | 環境ごとの正常値に合わせる |
-| node_exporter 単体 | blackbox_exporter / windows_exporter / アプリメトリクス | 外形監視とOS別監視を追加する |
+| Prometheus + Grafana + Loki + blackbox_exporter + Alertmanager（Lab webhook 配送） | 外部通知先 / 認証 / 抑止 / エスカレーション | 検証用配送から実担当者へ届く運用へ移す |
+| 固定しきい値 | ベースライン収集 / SLO / エラーバジェット ([具体例](https://ns7jp.github.io/support-docs/slo-error-budget.html)) | 環境ごとの正常値に合わせる |
+| node_exporter + HTTP blackbox probe | windows_exporter / SMB probe / アプリメトリクス | Windows ファイル共有と業務サービスの利用者視点を加える |
 | Loki + Promtail (Lab) | retention 90 日 / S3 オブジェクトストレージ / X-Scope-OrgID 認証 | ログの長期保管とテナント分離 |
-| Metrics + Logs のみ | Traces (OpenTelemetry / Tempo) | 観測性の三本柱を揃える |
+| Metrics + Logs + HTTP alert drill | Traces (OpenTelemetry / Tempo) | 観測性の三本柱を揃える |
 | 手動確認 | Runbook link / ダッシュボードURL / 初動手順 | アラートから初動へ直結させる |
 
 最小本番化例:
@@ -77,7 +77,7 @@ route:
 | 検証 | 期待結果、確認結果、利用者確認 |
 | クローズ | 添付証跡、残課題、再発防止、ナレッジ更新 |
 
-AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/ad-m365-change-case.md) にまとめています。
+AD / M365 の具体例は [AD / M365 変更作業ケース](https://ns7jp.github.io/support-docs/ad-m365-change-case.html) にまとめています。
 
 ---
 
@@ -105,12 +105,13 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 
 | 優先 | 追加するもの | 理由 |
 |---|---|---|
-| P1 | Alertmanager + 通知先 + Runbook link | 障害検知から初動までをつなぐ |
+| P1 | 外部通知先 + Alertmanager 認証 + エスカレーション | Lab webhook 配送を担当者への通知へ置き換える |
 | P1 | Secrets / Vault / SSO | 公開サンプルから本番運用へ移る際の最低条件 |
 | P1 | リストアテスト記録 | バックアップの実効性を示す |
 | P2 | CloudTrail / Flow Logs / GuardDuty | クラウド監査と検知を補う |
-| P2 | ansible-lint / Terraform validate のCI強化 | IaC変更の安全性を上げる |
-| P3 | SLO / Error Budget | 運用品質を数値で説明できるようにする |
+| P2 | Ansible 実機冪等性の検証 / Terraform plan 証跡保存 | 静的検証と security test の次に、変更結果の証跡を加える |
+| P2 | Windows exporter / SMB probe の実機証跡 | 架空ファイルサーバー設計を測定可能にする |
+| P3 | 月次 SLO 実績 / Error Budget レビュー | 設計値を実測データで評価する |
 
 ---
 
@@ -119,11 +120,12 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 - [Infra Operation Lab](./infra-lab.html)
 - [Linux Lab](./linux-lab.html)
 - [Cloud Network Lab](./cloud-lab.html)
-- [Monitoring Stack](./monitoring-stack/) — Prometheus + Grafana + Loki + Promtail
+- [Monitoring Stack](./monitoring-stack/) — Prometheus + Grafana + Loki + blackbox_exporter + Alertmanager
+- [Verified Infrastructure Lab](./verified-lab/) — 外形監視の障害注入、通知、復旧の自動実証
 - [Ansible Playbook](./ansible/)
 - [Infra Evidence](./infra-evidence/) — 検証コマンドサンプル + 失敗→修正対比
-- [SLO / Error Budget](./support-docs/slo-error-budget.md) — 運用品質の数値設計（具体例）
-- [チケット分類](./support-docs/ticket-taxonomy.md) — ITIL 4 区分の受付テンプレ
-- [物理層](./support-docs/office-it-physical-layer.md) — ラック / LAN / UPS / 複合機
+- [SLO / Error Budget](https://ns7jp.github.io/support-docs/slo-error-budget.html) — 運用品質の数値設計（具体例）
+- [チケット分類](https://ns7jp.github.io/support-docs/ticket-taxonomy.html) — ITIL 4 区分の受付テンプレ
+- [物理層](https://ns7jp.github.io/support-docs/office-it-physical-layer.html) — ラック / LAN / UPS / 複合機
 - [M365 ポリシー定義](./support-docs/m365-policy-examples/) — Intune / 条件付きアクセス / Defender JSON
-- [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md) — RTO / RPO / DR ドリル計画
+- [Backup / Restore Runbook](https://ns7jp.github.io/support-docs/backup-restore-runbook.html) — RTO / RPO / DR ドリル計画

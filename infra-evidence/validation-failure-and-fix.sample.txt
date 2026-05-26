@@ -41,7 +41,7 @@ exit code: 1
 $ docker run --rm --entrypoint promtool ... check rules /etc/prometheus/alert.rules.yml
 
 Checking /etc/prometheus/alert.rules.yml
-  SUCCESS: 4 rules found
+  SUCCESS: 6 rules found
 
 exit code: 0
 

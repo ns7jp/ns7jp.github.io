@@ -6,6 +6,7 @@ on:
       - 'ansible/**'
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
+      - 'verified-lab/**'
       - 'support-scripts/linux-triage.sh'
       - 'support-docs/m365-policy-examples/**'
       - '.github/workflows/infra-check.yml'
@@ -14,6 +15,7 @@ on:
       - 'ansible/**'
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
+      - 'verified-lab/**'
       - 'support-scripts/linux-triage.sh'
       - 'support-docs/m365-policy-examples/**'
       - '.github/workflows/infra-check.yml'
@@ -64,6 +66,22 @@ jobs:
             -config.file=/etc/promtail/promtail-config.yml \
             -check-syntax
 
+      - name: Verify Alertmanager config
+        run: |
+          docker run --rm \
+            --entrypoint amtool \
+            -v "$PWD/monitoring-stack/alertmanager:/etc/alertmanager:ro" \
+            prom/alertmanager:v0.27.0 \
+            check-config /etc/alertmanager/alertmanager.yml
+
+      - name: Verify blackbox exporter config
+        run: |
+          docker run --rm \
+            -v "$PWD/monitoring-stack/blackbox:/etc/blackbox:ro" \
+            prom/blackbox-exporter:v0.28.0 \
+            --config.file=/etc/blackbox/blackbox.yml \
+            --config.check
+
       - name: Validate Grafana dashboards JSON
         run: |
           for f in monitoring-stack/grafana/provisioning/dashboards/*.json; do
@@ -110,23 +128,31 @@ jobs:
           terraform_version: 1.9.8
 
       - name: Check Terraform formatting
-        run: terraform -chdir=cloud-lab/terraform fmt -check
+        run: terraform -chdir=cloud-lab/terraform fmt -check -recursive
 
       - name: Terraform init without backend
-        run: terraform -chdir=cloud-lab/terraform init -backend=false
+        run: terraform -chdir=cloud-lab/terraform init -backend=false -lockfile=readonly
 
       - name: Terraform validate
         run: terraform -chdir=cloud-lab/terraform validate
 
+      - name: Terraform security behavior tests
+        run: terraform -chdir=cloud-lab/terraform test
+
   shell:
-    name: Linux triage shell syntax
+    name: Shell syntax and lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Bash syntax check
-        run: bash -n support-scripts/linux-triage.sh
+        run: |
+          bash -n support-scripts/linux-triage.sh
+          bash -n verified-lab/scripts/verify-monitoring-lab.sh
+
+      - name: ShellCheck scripts
+        run: shellcheck support-scripts/linux-triage.sh verified-lab/scripts/verify-monitoring-lab.sh
 
   m365-policies:
     name: M365 / Intune policy JSON
@@ -143,12 +169,12 @@ jobs:
             echo "Policy directory not found: $dir"
             exit 1
           fi
-          json_files=$(find "$dir" -name "*.json")
-          if [ -z "$json_files" ]; then
+          mapfile -d '' json_files < <(find "$dir" -name "*.json" -print0)
+          if [ "${#json_files[@]}" -eq 0 ]; then
             echo "No JSON files found in $dir"
             exit 0
           fi
-          for f in $json_files; do
+          for f in "${json_files[@]}"; do
             echo "Checking $f"
             jq -e . "$f" > /dev/null
           done
@@ -157,11 +183,36 @@ jobs:
         run: |
           set -e
           dir=support-docs/m365-policy-examples
-          for f in $(find "$dir" -name "*.json"); do
+          while IFS= read -r -d '' f; do
             has_name=$(jq -e '.displayName // .name | strings | length > 0' "$f" || echo "false")
             if [ "$has_name" != "true" ]; then
               echo "FAIL: $f missing displayName or name"
               exit 1
             fi
-          done
+          done < <(find "$dir" -name "*.json" -print0)
           echo "All policy files have displayName or name."
+
+      - name: Dry-run supported Intune policy types
+        shell: pwsh
+        run: |
+          ./support-docs/m365-policy-examples/Apply-IntunePolicy.ps1 `
+            -PolicyFile ./support-docs/m365-policy-examples/intune-windows-compliance-policy.json `
+            -TargetGroupName 'Ring-Test'
+          ./support-docs/m365-policy-examples/Apply-IntunePolicy.ps1 `
+            -PolicyFile ./support-docs/m365-policy-examples/intune-windows-configuration-profile.json `
+            -TargetGroupName 'Ring-Test'
+
+      - name: Reject design-only policy examples
+        shell: pwsh
+        run: |
+          try {
+            ./support-docs/m365-policy-examples/Apply-IntunePolicy.ps1 `
+              -PolicyFile ./support-docs/m365-policy-examples/conditional-access-baseline.json `
+              -TargetGroupName 'Ring-Test'
+            throw 'Design-only policy input was accepted unexpectedly.'
+          } catch {
+            if ($_.Exception.Message -notmatch '設計サンプル') {
+              throw
+            }
+            Write-Host 'Design-only policy input was rejected as intended.'
+          }

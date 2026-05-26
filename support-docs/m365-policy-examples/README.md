@@ -2,7 +2,7 @@
 
 社内 SE / 情シス補助で「M365 を運用できます」を見せるとき、画面操作の説明に留まると弱いので、**Graph API / Intune / 条件付きアクセスのポリシーをコード（JSON / PowerShell）で書ける**ことを示すための定義サンプル集です。
 
-このフォルダの各ファイルは、Microsoft Graph PowerShell SDK / Microsoft Graph REST API の標準スキーマに沿った JSON / PowerShell で、ポリシー名・対象・条件を読み取り可能な形でまとめています。
+このフォルダの各ファイルは、Microsoft Graph PowerShell SDK / Microsoft Graph REST API を想定した JSON / PowerShell で、ポリシー名・対象・条件を読み取り可能な形でまとめています。**実行パスを用意した Intune 定義** と **設計のみの Conditional Access / Defender 定義** は、下表の状態欄で明確に分けます。
 
 > 公開ポートフォリオ用の架空テナント値（`example.onmicrosoft.com` / `<group-id-here>`）です。実テナントに適用する前に、テスト用 OU / リング展開 / 影響範囲確認を必ず行ってください。
 
@@ -10,15 +10,15 @@
 
 ## 1. 収録ファイル
 
-| ファイル | 種別 | 用途 |
-|---|---|---|
-| [`intune-windows-compliance-policy.json`](./intune-windows-compliance-policy.json) | Intune Compliance | Windows 11 端末の準拠（BitLocker / Defender / Firewall / Update） |
-| [`intune-windows-configuration-profile.json`](./intune-windows-configuration-profile.json) | Intune Configuration | 業務 PC の標準設定（電源 / Edge / SmartScreen） |
-| [`conditional-access-baseline.json`](./conditional-access-baseline.json) | Conditional Access | MFA 必須 / 準拠デバイス / レガシー認証ブロック |
-| [`conditional-access-break-glass.json`](./conditional-access-break-glass.json) | Conditional Access | Break-glass アカウント除外設定 |
-| [`defender-attack-surface-reduction.json`](./defender-attack-surface-reduction.json) | Defender ASR | Office マクロ / Web 経由実行ブロック等の ASR ルール |
-| [`Apply-IntunePolicy.ps1`](./Apply-IntunePolicy.ps1) | PowerShell | Graph SDK で JSON を読み込んでテナントへ適用するサンプル |
-| [`Get-PolicyAssignmentReport.ps1`](./Get-PolicyAssignmentReport.ps1) | PowerShell | 既存ポリシーの割当状況を CSV 出力（棚卸し用） |
+| ファイル | 種別 | 状態 | 用途 |
+|---|---|---|---|
+| [`intune-windows-compliance-policy.json`](./intune-windows-compliance-policy.json) | Intune Compliance | dry-run 自動検証対象 | Windows 11 端末の準拠（BitLocker / Defender / Firewall / Update） |
+| [`intune-windows-configuration-profile.json`](./intune-windows-configuration-profile.json) | Intune Configuration | dry-run 自動検証対象 | 業務 PC の標準設定（電源 / Edge / SmartScreen） |
+| [`conditional-access-baseline.json`](./conditional-access-baseline.json) | Conditional Access | 設計サンプルのみ | MFA 必須 / 準拠デバイス / レガシー認証ブロック |
+| [`conditional-access-break-glass.json`](./conditional-access-break-glass.json) | Conditional Access | 設計サンプルのみ | Break-glass アカウント除外設定 |
+| [`defender-attack-surface-reduction.json`](./defender-attack-surface-reduction.json) | Defender ASR | 設計サンプルのみ | Office マクロ / Web 経由実行ブロック等の ASR ルール |
+| [`Apply-IntunePolicy.ps1`](./Apply-IntunePolicy.ps1) | PowerShell | Intune 2 種のみ対応 | Graph SDK で Compliance / Configuration を読み込むサンプル |
+| [`Get-PolicyAssignmentReport.ps1`](./Get-PolicyAssignmentReport.ps1) | PowerShell | 読み取りサンプル | 既存 Intune ポリシーの割当状況を CSV 出力 |
 
 ---
 
@@ -39,7 +39,8 @@
 
 ### ④ Graph API 経由のコード化
 - 画面操作（GUI）だけだと変更履歴が残らない
-- JSON で定義 → Git で履歴 → CI で構文検証 → Graph SDK で適用、まで一気通貫にする
+- Intune 2 種は JSON 定義 → Git 履歴 → CI dry-run → Graph SDK 適用パスまで示す
+- Conditional Access / Defender は影響が大きいため、この公開 Lab では JSON 設計と展開判断までに留め、適用済みとは主張しない
 
 ---
 
@@ -82,6 +83,8 @@ Connect-MgGraph -Scopes @(
 .\Get-PolicyAssignmentReport.ps1 -OutputPath .\report-2026-05-25.csv
 ```
 
+`Apply-IntunePolicy.ps1` は Compliance / Configuration の 2 種だけを受け付けます。Conditional Access / Defender JSON を渡した場合は、設計のみの定義を誤って適用したように見せないため明示的に停止します。実テナントへの `-Apply` 実行結果は本ポートフォリオの検証範囲外です。
+
 ---
 
 ## 4. 本番展開で必ず確認すること
@@ -100,15 +103,15 @@ Connect-MgGraph -Scopes @(
 ## 5. ポートフォリオでの位置づけ
 
 - [Infra Operation Lab](../../infra-lab.html) の M365 / AD 想定運用の**コードレベルの根拠**
-- [AD / M365 変更作業ケース](../ad-m365-change-case.md) の変更フローと、ここのポリシー JSON が **「型 ↔ 具体物」**の関係
-- [Production Readiness](../../production-readiness.md) で挙げた「条件付きアクセス / Intune / Defender」を、文章でなく**実物の JSON** で示す
+- [AD / M365 変更作業ケース](https://ns7jp.github.io/support-docs/ad-m365-change-case.html) の変更フローと、ここのポリシー JSON が **「型 ↔ 具体物」**の関係
+- [Production Readiness](https://ns7jp.github.io/production-readiness.html) で挙げた「条件付きアクセス / Intune / Defender」を、文章でなく**実物の JSON** で示す
 
 ---
 
 ## 関連リンク
 
 - [Infra Operation Lab](../../infra-lab.html) — Windows / M365 / AD 想定の運用設計
-- [AD / M365 変更作業ケース](../ad-m365-change-case.md) — 部署異動を例にした変更フロー
-- [チケット分類](../ticket-taxonomy.md) — 変更 (Change) の受付テンプレ
-- [Production Readiness](../../production-readiness.md) — 本番化で足す観点
+- [AD / M365 変更作業ケース](https://ns7jp.github.io/support-docs/ad-m365-change-case.html) — 部署異動を例にした変更フロー
+- [チケット分類](https://ns7jp.github.io/support-docs/ticket-taxonomy.html) — 変更 (Change) の受付テンプレ
+- [Production Readiness](https://ns7jp.github.io/production-readiness.html) — 本番化で足す観点
 - Microsoft Learn: [Intune Configuration profiles](https://learn.microsoft.com/intune/configuration/) / [Conditional Access](https://learn.microsoft.com/entra/identity/conditional-access/)

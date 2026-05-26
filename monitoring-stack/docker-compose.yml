@@ -1,5 +1,6 @@
 # 最小構成の監視スタック（Metrics + Logs）
-# Prometheus + node_exporter + Grafana に加え、Loki + Promtail を追加した Lab 用 compose ファイル。
+# Prometheus + node_exporter + Grafana + Loki + Promtail に加え、
+# blackbox_exporter + Alertmanager で検知から通知まで検証する Lab 用 compose ファイル。
 # 想定: 自宅検証VM / 1台のLinuxサーバー / 評価環境。
 # 観測性の三本柱のうち「Metrics」「Logs」をここで網羅し、Traces は本番化差分で扱う。
 # 本番では node_exporter を監視対象側へ分けて配置し、Loki のストレージを S3 / GCS に切替、認証 + TLS を有効化する。
@@ -28,6 +29,9 @@ services:
       - "9090:9090"
     networks:
       - monitoring
+    depends_on:
+      - alertmanager
+      - blackbox-exporter
 
   node_exporter:
     # ホストのCPU / メモリ / ディスク / ネットワーク統計を Prometheus が読み取れる形式で公開
@@ -95,6 +99,57 @@ services:
       - /etc/machine-id:/etc/machine-id:ro
     depends_on:
       - loki
+    networks:
+      - monitoring
+
+  alertmanager:
+    # Lab では webhook receiver へ配送し、CI で通知到達まで確認する。
+    image: prom/alertmanager:v0.27.0
+    container_name: lab-alertmanager
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    ports:
+      - "9093:9093"
+    depends_on:
+      - webhook-receiver
+    networks:
+      - monitoring
+
+  blackbox-exporter:
+    # 利用者視点の HTTP 到達性を probe_success (0/1) として取得する。
+    image: prom/blackbox-exporter:v0.28.0
+    container_name: lab-blackbox-exporter
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/blackbox/blackbox.yml
+    volumes:
+      - ./blackbox/blackbox.yml:/etc/blackbox/blackbox.yml:ro
+    ports:
+      - "9115:9115"
+    networks:
+      - monitoring
+
+  probe-target:
+    # CI の障害注入で意図的に停止し、外形監視アラートの発火を確認する対象。
+    image: nginx:1.27-alpine
+    container_name: lab-probe-target
+    restart: unless-stopped
+    networks:
+      - monitoring
+
+  webhook-receiver:
+    # Alertmanager の配送結果を標準出力へ記録する検証用受信器。
+    image: python:3.12-alpine
+    container_name: lab-webhook-receiver
+    restart: unless-stopped
+    command: ["python", "/opt/verified-lab/webhook_receiver.py"]
+    volumes:
+      - ../verified-lab/webhook_receiver.py:/opt/verified-lab/webhook_receiver.py:ro
+    ports:
+      - "18080:8080"
     networks:
       - monitoring
 

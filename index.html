@@ -25,7 +25,7 @@
 
     <!-- ===== SEO関連 meta情報 ===== -->
     <!-- 検索結果に表示される説明文（SEOで最重要） -->
-    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。ITサポート・社内SE補助・インフラ運用を目指し、Windows / Linux / Cloud 運用Lab、Prometheus 監視スタック、Ansible Playbook、10本の手順書、9本のスクリプト（Pester CI付き）を公開中。">
+    <meta name="description" content="島田則幸（Noriyuki Shimada）のポートフォリオサイト。ITサポート・社内SE補助・インフラ運用を目指し、Windows / Linux / Cloud 運用Lab、Prometheus 監視スタック、障害注入CIドリル、14本のSupport Docs、10本のスクリプトを公開中。">
     <!-- 作者情報 -->
     <meta name="author" content="Noriyuki Shimada">
     <!-- 検索キーワード（補助的SEO） -->
@@ -44,13 +44,13 @@
     <meta property="og:url" content="https://ns7jp.github.io/">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="ITサポート・社内SE補助・インフラ運用を目指し、Windows / Linux / Cloud 運用Lab、Prometheus 監視スタック、Ansible Playbook、10本の手順書、9本のスクリプト（Pester CI付き）を公開中。">
+    <meta property="og:description" content="ITサポート・社内SE補助・インフラ運用を目指し、Windows / Linux / Cloud 運用Lab、Prometheus 監視スタック、障害注入CIドリル、14本のSupport Docs、10本のスクリプトを公開中。">
     <meta property="og:locale" content="ja_JP">
 
     <!-- ===== Twitter カード設定（X 上で大きな画像付きカード表示） ===== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="島田則幸のポートフォリオ">
-    <meta name="twitter:description" content="ITサポート・社内SE補助・インフラ運用を目指し、Win + Linux + Cloud運用Lab、Prometheus監視、Ansible、10手順書、9スクリプト（Pester CI付き）を公開中。">
+    <meta name="twitter:description" content="ITサポート・インフラ運用を目指し、Win + Linux + Cloud Lab、Prometheus監視、障害注入CIドリル、Support Docs 14本、10スクリプトを公開中。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
 
     <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
@@ -178,12 +178,12 @@
                 <a href="works.html#work-support-toolkit" class="hero-proof-item">
                     <i class="fa-solid fa-folder-tree"></i>
                     <span>手順書</span>
-                    <strong>10 docs</strong>
+                    <strong>14 docs</strong>
                 </a>
                 <a href="works.html#work-support-toolkit" class="hero-proof-item">
                     <i class="fa-solid fa-terminal"></i>
                     <span>自動化</span>
-                    <strong>9 scripts</strong>
+                    <strong>10 scripts</strong>
                 </a>
                 <a href="works.html#work-infra-lab" class="hero-proof-item">
                     <i class="fa-solid fa-chart-area"></i>
@@ -224,8 +224,8 @@
                 </div>
                 <div class="summary-card">
                     <span class="summary-label">Portfolio Proof</span>
-                    <h4>6作品 + Support Toolkit</h4>
-                    <p>監視ダッシュボード、業務改善ツール、10本の実務想定ドキュメント、9本の確認スクリプト、Cloud/Terraform Labで、運用支援に近い成果物を公開しています。</p>
+                    <h4>設計 + 動作ドリル + Toolkit</h4>
+                    <p>Support Docs 14本に加え、詳細インフラ設計と実証 Runbook、10本の確認スクリプト、Cloud/Terraform Lab、外形監視の障害注入と復旧を行う CI ドリルを公開しています。</p>
                 </div>
             </div>
             <div class="summary-actions">
@@ -233,6 +233,7 @@
                 <a href="infra-lab.html" class="btn btn-outline-dark"><i class="fa-solid fa-network-wired"></i> インフラ運用Labを見る</a>
                 <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 1ページ履歴書を見る</a>
                 <a href="cloud-lab.html" class="btn btn-outline-dark"><i class="fa-solid fa-cloud"></i> Cloud Labを見る</a>
+                <a href="verified-lab/" class="btn btn-outline-dark"><i class="fa-solid fa-bell"></i> 動作ドリルを見る</a>
                 <a href="works.html#work-support-toolkit" class="btn btn-outline-dark"><i class="fa-solid fa-folder-open"></i> Support Toolkitを見る</a>
                 <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> 実務スクリプトを見る</a>
             </div>
@@ -287,18 +288,18 @@
             <div class="toolkit-grid">
                 <a href="works.html#work-support-toolkit" class="toolkit-card">
                     <span class="toolkit-label">Docs</span>
-                    <strong>10本の手順書</strong>
-                    <p>PCキッティング、退職者対応、権限管理、M365ライセンス、AD/M365変更、障害・インシデント、Postmortem、Backup Runbook を整理。</p>
+                    <strong>Support Docs 14本 + 設計 / Runbook</strong>
+                    <p>標準業務、インシデント、Postmortem、Backup/RTO/RPO、SLO、物理層、詳細設計を整理。</p>
                 </a>
                 <a href="works.html#work-support-toolkit" class="toolkit-card">
                     <span class="toolkit-label">Scripts</span>
-                    <strong>9本のスクリプト + Pester</strong>
-                    <p>PowerShell 8本 + Linux bash 1本。Pester 25テスト + PSScriptAnalyzer を GitHub Actions で自動実行。</p>
+                    <strong>10本のスクリプト + Pester</strong>
+                    <p>PowerShell 9本 + Linux bash 1本。Pester 25テスト + PSScriptAnalyzer を GitHub Actions で自動実行。</p>
                 </a>
                 <a href="works.html#work-infra-lab" class="toolkit-card">
                     <span class="toolkit-label">Lab / IaC</span>
-                    <strong>Monitoring + Ansible + Cloud</strong>
-                    <p>Prometheus + Grafana、Ubuntu ベースライン冪等化、AWS VPC / Terraform validate、CI証跡を整理。</p>
+                    <strong>Monitoring + Incident Drill</strong>
+                    <p>Prometheus / Loki / Alertmanager の構成を起動し、HTTP 障害の検知・通知・復旧を CI で確認。</p>
                 </a>
             </div>
             <div class="section-link">

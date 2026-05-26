@@ -29,7 +29,7 @@
 | **monitoring-stack（Grafana / Prometheus）** | Latency | `/api/health` を 1 分ごとに叩き、**応答が 1.0 秒以内に返った割合** |
 | **backup ジョブ（fs01 + app01）** | Freshness | `backup_last_success_timestamp` が**過去 26 時間以内**である割合（日次 02:00 / 03:00 + 余裕 2h） |
 
-外形監視は Prometheus の `blackbox_exporter`、ジョブの鮮度監視は `node_exporter` の textfile collector 経由で `backup_last_success_timestamp` を出力する想定です。Lab では Prometheus + 4 アラートまでで、`blackbox_exporter` 導入は[本番化差分](../production-readiness.md)に含めます。
+外形監視は Prometheus の `blackbox_exporter`、ジョブの鮮度監視は `node_exporter` の textfile collector 経由で `backup_last_success_timestamp` を出力する想定です。現在の [Verified Infrastructure Lab](../verified-lab/) では HTTP ターゲットに対する `blackbox_exporter` と Alertmanager 配送を実装し、障害注入から解消通知まで自動検証します。`fs01` の SMB probe とバックアップ鮮度メトリクスは、Windows / ファイルサーバーを用意した後に実測する設計サンプルです。
 
 ---
 
@@ -100,14 +100,14 @@ Error Budget (時間) = (1 - SLO) × 期間
 groups:
   - name: file-server-slo
     rules:
-      # SLI: 5 分ごとの外形監視成功率（直近 5 分間）
-      - record: probe_success:rate5m
-        expr: sum(rate(probe_success{job="fs01-smb"}[5m]))
-              / sum(rate(probe_total{job="fs01-smb"}[5m]))
+      # probe_success は probe ごとに成功=1 / 失敗=0 を返す gauge。
+      # SLI: 直近 5 分に取得した probe の成功割合。
+      - record: sli:fs01_smb:availability_5m
+        expr: avg_over_time(probe_success{job="fs01-smb"}[5m])
 
       # SLO 違反率（= 1 - SLI）
       - record: slo:fs01:error_ratio_5m
-        expr: 1 - probe_success:rate5m
+        expr: 1 - sli:fs01_smb:availability_5m
 
       # 短期バーンレート（5m / 1h）
       - alert: FileServerFastBurn
@@ -174,9 +174,9 @@ Grafana の SLO ダッシュボードに置く 4 パネル:
 
 ## 8. ポートフォリオでの位置づけ
 
-- [Monitoring Stack](../monitoring-stack/) の 4 アラート（しきい値ベース）が **L1: 異常検知**
+- [Monitoring Stack](../monitoring-stack/) のホスト4アラートと HTTP 外形監視アラートが **L1: 異常検知と通知配線**
 - このドキュメントの SLO バーンレート設計が **L2: 影響の見える化**
-- [Postmortem 実例](./postmortem-example.md) と [Backup Runbook](./backup-restore-runbook.md) の RTO/RPO が **L3: 失敗からの回復設計**
+- [Postmortem 実例](https://ns7jp.github.io/support-docs/postmortem-example.html) と [Backup Runbook](https://ns7jp.github.io/support-docs/backup-restore-runbook.html) の RTO/RPO が **L3: 失敗からの回復設計**
 
 3 段が揃うと、「監視している」だけでなく「**運用品質を数値で説明できる**」が伝わります。
 
@@ -184,8 +184,9 @@ Grafana の SLO ダッシュボードに置く 4 パネル:
 
 ## 関連リンク
 
-- [Monitoring Stack](../monitoring-stack/) — Prometheus / Grafana / node_exporter の Lab 構成
-- [Production Readiness](../production-readiness.md) — 本番化で足す Alertmanager・通知・SSO
-- [重大インシデント対応プレイブック](./incident-response-playbook.md) — 障害発生時のフロー
-- [Postmortem 例](./postmortem-example.md) — Error Budget 消費の実例（架空）
-- [Backup / Restore Runbook](./backup-restore-runbook.md) — RTO / RPO / DR ドリル計画
+- [Monitoring Stack](../monitoring-stack/) — Prometheus / Grafana / Loki / blackbox_exporter / Alertmanager の Lab 構成
+- [Verified Infrastructure Lab](../verified-lab/) — HTTP 外形監視の発火、通知、復旧を自動実証
+- [Production Readiness](https://ns7jp.github.io/production-readiness.html) — 本番化で足す外部通知・認証・SSO
+- [重大インシデント対応プレイブック](https://ns7jp.github.io/support-docs/incident-response-playbook.html) — 障害発生時のフロー
+- [Postmortem 例](https://ns7jp.github.io/support-docs/postmortem-example.html) — Error Budget 消費の実例（架空）
+- [Backup / Restore Runbook](https://ns7jp.github.io/support-docs/backup-restore-runbook.html) — RTO / RPO / DR ドリル計画

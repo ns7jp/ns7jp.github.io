@@ -40,7 +40,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 6. `linux-lab.html`
    - Linux 一次運用Lab。systemd / journalctl / SSH / rsync 早見表。
 7. `cloud-lab.html`
-   - AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail の設計メモ。
+   - AWS VPC / Subnet / Security Group / Terraform validate + security test / Cost Guardrail の設計メモ。
 8. `works.html`
    - 作品紹介カード、フィルター機能、ITサポートに関連する作品の見せ方を確認します。
 9. `resume.html`
@@ -53,8 +53,8 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
     - トップページの背景画像を切り替える jQuery プラグインの役割を確認します。
 13. `image/` と `favicon.ico`
     - 背景画像、プロフィール画像、作品スクリーンショット、ブラウザタブ用アイコンの役割を確認します。
-14. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
-    - **HTML 以外** の成果物。手順書 / PowerShell + bash / Pester / Prometheus + Loki + Promtail / Ansible playbook / Terraform / M365 ポリシー JSON / 実行証跡。インフラ運用ポートフォリオの本体です。
+14. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `verified-lab/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
+    - **HTML 以外** の成果物。手順書 / PowerShell + bash / Pester / Prometheus + Loki + Alertmanager / 障害注入 CI ドリル / Ansible playbook / Terraform / M365 ポリシー JSON / 実行証跡。インフラ運用ポートフォリオの本体です。
 15. `support-docs/slo-error-budget.md` / `support-docs/ticket-taxonomy.md` / `support-docs/office-it-physical-layer.md` / `support-docs/m365-policy-examples/` / `support-docs/interview-faq.md`
     - **運用品質を数値で語る系**の成果物。SLO / Error Budget、ITIL 4 区分のチケット分類、物理層 (ラック / LAN / UPS)、Intune + 条件付きアクセス + Defender ASR の JSON 定義、面接想定 FAQ。
 
@@ -296,11 +296,11 @@ $(".hero-slider").bgswitcher({
 
 ### `support-docs/`
 
-ITサポート・社内SE・運用監視で実際に使われる手順書・事例集（全 10 本）。
+ITサポート・社内SE・運用監視で実際に使われる手順書・事例集（全 14 本）。
 
 - 標準業務 4本（キッティング / オフボーディング / 共有フォルダ権限 / M365 ライセンス）
 - 障害対応 3本（10ケース事例集 / 重大インシデント・プレイブック / マルウェア対応）
-- 事後分析・運用 2本（Postmortem 実例 / Backup・Restore Runbook）
+- 事後分析・運用設計（Postmortem / Backup・Restore / SLO / チケット分類 / 物理層 / 面接 FAQ）
 
 初学者が見るポイント:
 - すべて Markdown ファイル。GitHub 上でそのまま読める
@@ -313,7 +313,7 @@ ITサポート・社内SE・運用監視で実際に使われる手順書・事�
 
 PowerShell + bash + Pester を収めたスクリプト集。
 
-- ルート: PowerShell 8本 + `linux-triage.sh`
+- ルート: PowerShell 9本 + `linux-triage.sh`
 - `lib/Triage-Lib.ps1`: しきい値判定・状態集約・メッセージ切り詰めなどの **純関数ヘルパー**
 - `tests/Triage-Lib.Tests.ps1`: Pester 5 系のユニットテスト（25ケース）
 - `samples/`: JSON / CSV / HTML のサンプル出力
@@ -327,16 +327,17 @@ PowerShell + bash + Pester を収めたスクリプト集。
 
 ### `monitoring-stack/`
 
-Prometheus + Grafana + node_exporter の最小監視スタック (docker-compose)。
+Prometheus + Grafana + Loki + blackbox_exporter + Alertmanager を含む監視スタック (docker-compose)。
 
-- `docker-compose.yml`: 3 コンテナの構成
-- `prometheus/prometheus.yml` + `prometheus/alert.rules.yml`: スクレイプ設定とアラート
+- `docker-compose.yml`: メトリクス、ログ、外形監視、通知配送、試験ターゲットの構成
+- `prometheus/prometheus.yml` + `prometheus/alert.rules.yml`: スクレイプ設定と外形監視アラート
+- `alertmanager/alertmanager.yml` + `blackbox/blackbox.yml`: webhook 配送と HTTP probe 設定
 - `grafana/provisioning/`: 起動時に Prometheus データソースとダッシュボードを自動登録
 
 初学者が見るポイント:
 - `docker compose up -d` だけで起動する Lab 構成
 - 認証情報は Lab 用の弱いものなので、本番転用しないこと
-- アラートルールは CPU / メモリ / ディスク / exporter ダウン の 4 つだけにし、最小から始める設計
+- `verified-lab/` では試験 HTTP ターゲットを停止し、発報・webhook 配送・復旧通知を CI で実証する
 
 ---
 

@@ -319,11 +319,12 @@ GitHub Actions（[.github/workflows/pwsh-tests.yml](../.github/workflows/pwsh-te
 
 ## 関連ドキュメント
 
-- [PC キッティング手順書](../support-docs/pc-kitting-guide.md)
-- [障害対応事例集](../support-docs/troubleshooting-case-studies.md)
-- [Postmortem 実例（共有フォルダ I/O 飽和、P2）](../support-docs/postmortem-example.md)
-- [バックアップ/リストア Runbook](../support-docs/backup-restore-runbook.md)
+- [PC キッティング手順書](https://ns7jp.github.io/support-docs/pc-kitting-guide.html)
+- [障害対応事例集](https://ns7jp.github.io/support-docs/troubleshooting-case-studies.html)
+- [Postmortem 実例（共有フォルダ I/O 飽和、P2）](https://ns7jp.github.io/support-docs/postmortem-example.html)
+- [バックアップ/リストア Runbook](https://ns7jp.github.io/support-docs/backup-restore-runbook.html)
 - [Linux Lab](https://ns7jp.github.io/linux-lab.html) — `linux-triage.sh` の使いどころ
-- [Monitoring Stack](../monitoring-stack/) — Prometheus + Grafana + node_exporter (docker-compose)
+- [Monitoring Stack](../monitoring-stack/) — Prometheus + Grafana + Loki + blackbox_exporter + Alertmanager
+- [Verified Infrastructure Lab](../verified-lab/) — 障害注入、通知、復旧を確認する CI ドリル
 - [Ansible Playbook](../ansible/) — Linux ベースライン冪等化
 - [ポートフォリオサイト > Skills](https://ns7jp.github.io/skills.html#support-cases)

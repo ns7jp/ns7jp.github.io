@@ -55,6 +55,11 @@ for (const file of htmlFiles) {
     }
 
     if (!fs.existsSync(targetPath)) {
+      // GitHub Pages/Jekyll generates foo.html when the source file is foo.md.
+      const markdownSource = targetPath.endsWith(".html")
+        ? targetPath.replace(/\.html$/, ".md")
+        : "";
+      if (markdownSource && fs.existsSync(markdownSource)) continue;
       failures.push(`${file}: ${rawLink} is missing`);
       continue;
     }

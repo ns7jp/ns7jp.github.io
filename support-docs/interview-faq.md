@@ -32,7 +32,7 @@ ITサポート・社内SE補助・インフラ運用支援の選考で問われ�
 ### 弱み
 
 - **本番運用の経験は無い**: 自宅 / VM ベースの Lab で完結しています。**実機での再現性は本番では別物**であることを自覚しており、入社後はまず**シャドウイング / 副担当**として配属業務に合わせる前提でいます。
-- **クラウド本番経験が無い**: AWS は Terraform validate までで、`apply` した課金体験はありません。資格（AZ-104 等）と並行して、まずは社内で許可された範囲で触る前提です。
+- **クラウド本番経験が無い**: AWS は Terraform validate と mock provider による security test までで、`apply` した課金体験はありません。資格（AZ-104 等）と並行して、まずは社内で許可された範囲で触る前提です。
 - **大規模スケール / SRE 本格運用は未経験**: 100 台規模のサーバー / 数千ユーザーは未体験です。中小規模での運用支援から学んでいきたいと考えています。
 
 弱みは隠さず開示し、入社後 3 ヶ月でどこまで埋めるかの計画（学習ロードマップ）を [Resume](https://ns7jp.github.io/resume.html) に明記しています。
@@ -70,7 +70,7 @@ Support Toolkit に[障害対応事例集（10 ケース）](./troubleshooting-c
 
 - PowerShell: 業務シナリオを書ききれる（端末情報・AD/M365・セキュリティ）
 - Linux (bash): 一次切り分け（`linux-triage.sh`）と Ansible playbook のレベル。SSH / systemd / journalctl / cron / rsync の運用観点はメモ化済（[Linux Lab](https://ns7jp.github.io/linux-lab.html)）
-- AWS: VPC / Subnet / SG / Terraform validate まで。本番 apply の経験は無し（[Cloud Lab](https://ns7jp.github.io/cloud-lab.html)）
+- AWS: VPC / Subnet / SG / Terraform validate + security test まで。本番 apply の経験は無し（[Cloud Lab](https://ns7jp.github.io/cloud-lab.html)）
 
 「一番」と聞かれたら PowerShell ですが、「**現場でどれが必要か聞いて、まず触り始める**」のは抵抗ありません。
 

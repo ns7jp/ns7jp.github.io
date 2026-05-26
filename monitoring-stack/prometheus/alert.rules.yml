@@ -1,5 +1,6 @@
 # Prometheus アラートルール
-# Lab 用に最小限の4ルールを定義。実運用ではしきい値・for 時間・ラベルを環境に合わせる。
+# Lab 用のホスト4ルールと、検証可能な HTTP 外形監視ルールを定義。
+# 実運用ではしきい値・for 時間・通知経路を環境に合わせる。
 
 groups:
   - name: host-baseline
@@ -39,3 +40,19 @@ groups:
         annotations:
           summary: "node_exporter 到達不能 ({{ $labels.instance }})"
           description: "サーバー本体ダウンか、node_exporter 障害の可能性。SSHでホスト疎通を確認してください。"
+
+  - name: lab-service-sli
+    rules:
+      - record: sli:lab_http_target:availability_5m
+        expr: avg_over_time(probe_success{job="blackbox-http", service="lab-http-target"}[5m])
+
+      - alert: LabProbeTargetDown
+        expr: probe_success{job="blackbox-http", service="lab-http-target"} == 0
+        for: 30s
+        labels:
+          severity: critical
+          service: lab-http-target
+        annotations:
+          summary: "検証用 HTTP サービスへの外形監視が失敗"
+          description: "blackbox_exporter の probe_success が 0 を継続。Verified Lab の復旧手順で確認してください。"
+          runbook_url: "https://ns7jp.github.io/verified-lab/runbook.html"

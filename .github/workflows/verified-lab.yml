@@ -1,0 +1,33 @@
+name: Verified monitoring incident drill
+
+on:
+  push:
+    paths:
+      - 'monitoring-stack/**'
+      - 'verified-lab/**'
+      - '.github/workflows/verified-lab.yml'
+  pull_request:
+    paths:
+      - 'monitoring-stack/**'
+      - 'verified-lab/**'
+      - '.github/workflows/verified-lab.yml'
+  workflow_dispatch:
+
+jobs:
+  incident-drill:
+    name: Detect, notify, and recover
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Execute monitoring failure and recovery drill
+        run: bash verified-lab/scripts/verify-monitoring-lab.sh
+
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-monitoring-incident-evidence
+          path: verified-lab/output/

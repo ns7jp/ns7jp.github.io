@@ -56,7 +56,7 @@
           "name": "島田則幸の制作物",
           "itemListOrder": "ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定した15本の手順書、10本の確認スクリプト (PowerShell 9 + bash 1) + Pester 25テスト、SLO/Error Budget、チケット分類(ITIL)、物理層、M365ポリシーJSON" } },
+            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定したSupport Docs 14本、詳細設計・実証Runbook、10本の確認スクリプト (PowerShell 9 + bash 1) + Pester 25テスト、M365ポリシーJSON" } },
             { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU/メモリ/ディスク/ネットワーク/プロセスをリアルタイム可視化する監視ダッシュボード" } },
             { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Fletフレームワークで作成した定型文テンプレート管理ツール" } },
             { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Tkinterで作成した付箋復元機能付きデスクトップアプリ" } },
@@ -221,7 +221,7 @@
                             <h4>Support Toolkit</h4>
                             <div class="work-summary">
                                 <div><span>目的</span><strong>問い合わせ一次対応と運用手順の標準化</strong></div>
-                                <div><span>成果</span><strong>15手順書・10スクリプト・M365ポリシーJSON</strong></div>
+                                <div><span>成果</span><strong>Support Docs 14本・10スクリプト・M365ポリシーJSON</strong></div>
                                 <div><span>活用</span><strong>受付・分類・切り分け・証跡・引き継ぎ</strong></div>
                             </div>
                             <div class="support-fit high">
@@ -229,7 +229,7 @@
                                 <p>コードだけでなく、現場で求められる手順化・記録・確認観点をまとめた成果物。ヘルプデスク、社内SE補助、運用監視への適性を直接示せます。チケット分類(ITIL)・SLO・物理層・M365 ポリシー JSON もカバー。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip"><strong>15</strong>手順書</span>
+                                <span class="num-chip"><strong>14</strong>Support Docs</span>
                                 <span class="num-chip"><strong>10</strong>スクリプト</span>
                                 <span class="num-chip"><strong>10</strong>障害ケース</span>
                                 <span class="num-chip"><strong>7</strong>M365 ポリシー JSON</span>
@@ -321,7 +321,7 @@
                             <h4>Infra Operation Lab</h4>
                             <div class="work-summary">
                                 <div><span>目的</span><strong>「確認 → 適用 → 観測 → 数値化」を一通り見せる運用Lab</strong></div>
-                                <div><span>成果</span><strong>5Lab + Metrics/Logs + SLO + DR ドリル + 証跡</strong></div>
+                                <div><span>成果</span><strong>5Lab + Metrics/Logs + Alert drill + SLO + DR 設計 + 証跡</strong></div>
                                 <div><span>活用</span><strong>一次切り分け・初期構築・継続観測・運用品質数値化・DR</strong></div>
                             </div>
                             <div class="support-fit high">
@@ -331,15 +331,16 @@
                             <div class="work-numbers" aria-label="主要スペック">
                                 <span class="num-chip"><strong>5</strong>Lab</span>
                                 <span class="num-chip"><strong>5</strong>CI領域</span>
-                                <span class="num-chip"><strong>4</strong>監視アラート</span>
+                                <span class="num-chip"><strong>5</strong>監視アラート</span>
                                 <span class="num-chip"><strong>2</strong>Grafana ダッシュボード</span>
                                 <span class="num-chip"><strong>3</strong>DR シナリオ</span>
                             </div>
-                            <p>「監視 → 切り分け → 証跡 → エスカレーション → 数値化 → 復旧」を 1 つの導線にまとめた Infra Lab を起点に、Linux 一次運用、AWS VPC / Terraform の Cloud Lab、Docker で起動できる Prometheus + Grafana + <strong>Loki + Promtail</strong> 監視スタック (Metrics + Logs)、Ansible によるベースライン冪等化、SLO / Error Budget の数値設計、RTO/RPO/<strong>年次 DR ドリル計画</strong>、共有フォルダ I/O 飽和を題材にした Postmortem 実例、物理層 (ラック / LAN / UPS) と論理層 (VLAN) のペア、M365 ポリシー JSON、本番化で足す運用観点まで、インフラ運用支援に必要な観点を相互参照可能な形で公開しています。</p>
+                            <p>「監視 → 切り分け → 証跡 → エスカレーション → 数値化 → 復旧」を 1 つの導線にまとめた Infra Lab を起点に、Linux 一次運用、AWS VPC / Terraform の Cloud Lab、Prometheus + Grafana + <strong>Loki + blackbox_exporter + Alertmanager</strong> 監視スタック、HTTP ターゲットを実際に停止して通知と復旧を確認する Verified Incident Drill、Ansible によるベースライン冪等化、SLO / Error Budget の数値設計、RTO/RPO/<strong>年次 DR ドリル計画</strong>、物理層と論理層のペア、M365 ポリシー JSON、本番化で足す運用観点まで公開しています。</p>
                             <ul class="work-points">
                                 <li><strong>VLAN論理構成図 + 物理層構成図</strong>を Infra Lab と物理層ドキュメントで対にして掲載。</li>
-                                <li><strong>Cloud Network Lab</strong>では AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail を整理。</li>
+                                <li><strong>Cloud Network Lab</strong>では AWS VPC / Subnet / Security Group / Terraform validate / security test / Cost Guardrail を整理。</li>
                                 <li><strong>観測性 (Metrics + Logs)</strong> を Prometheus + Loki + Promtail で実装し、Grafana 単一 UI で串刺し検索。</li>
+                                <li><strong>Verified Incident Drill</strong> で HTTP ターゲット停止、Alertmanager 配送、復旧と解消通知を自動確認。</li>
                                 <li><strong>SLO / Error Budget</strong> でマルチウィンドウ・バーンレートを設計し、運用品質を数値で語る型を提示。</li>
                                 <li><strong>RTO / RPO / DR ドリル</strong> をサービス別に数値化し、年次 DR ドリル (3 シナリオ) の振り返りテンプレを公開。</li>
                                 <li><strong>判定ロジックを純関数化</strong>し Pester で単体テスト。GitHub Actions で自動実行（PSScriptAnalyzer 静的解析も併走）。</li>
@@ -352,7 +353,7 @@
                                     <li><strong>問い合わせ受付直後：</strong>Windowsは PowerShell、Linux は <code>linux-triage.sh</code> を流して同じ形式で証跡を残す。</li>
                                     <li><strong>クラウド設計確認：</strong>Cloud Lab の Terraform を <code>fmt</code> / <code>validate</code> し、Public / Private subnet と Security Group の意図を説明する。</li>
                                     <li><strong>新規サーバー構築：</strong>Ansible playbook で SSH / UFW / fail2ban / auditd / 自動更新を冪等に適用。</li>
-                                    <li><strong>継続観測：</strong>Prometheus + Grafana + node_exporter を docker compose で起動し、4アラート（CPU / メモリ / ディスク / exporter ダウン）を運用。</li>
+                                    <li><strong>継続観測：</strong>Prometheus + Grafana + Loki + blackbox_exporter + Alertmanager を起動し、ホスト監視に加えて HTTP 外形監視の障害発火・通知・復旧を CI で検証。</li>
                                     <li><strong>事後対応：</strong>Postmortem テンプレートに合わせ、MTTR / 根本原因 / 応急 / 恒久 / 中期対応を分けて記録。</li>
                                 </ul>
                             </div>
@@ -372,6 +373,7 @@
                                 <span>Grafana</span>
                                 <span>Loki / Promtail</span>
                                 <span>node_exporter</span>
+                                <span>blackbox_exporter / Alertmanager</span>
                                 <span>SLO / Error Budget</span>
                                 <span>RTO / RPO / DR</span>
                                 <span>Pester</span>
