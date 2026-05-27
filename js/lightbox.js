@@ -30,10 +30,6 @@
         closeButton.className = 'lightbox-close';
         closeButton.setAttribute('aria-label', 'Close enlarged view');
         closeButton.innerHTML = '&times;';
-        closeButton.style.background = 'transparent';
-        closeButton.style.border = '0';
-        closeButton.style.lineHeight = '1';
-        closeButton.style.padding = '0';
 
         overlay.appendChild(closeButton);
         document.body.appendChild(overlay);
@@ -60,29 +56,12 @@
             }
 
             var diagram = target.cloneNode(true);
-            var svg = diagram.querySelector('svg');
 
             diagram.classList.remove('lightbox-trigger');
-            diagram.classList.add('lightbox-content');
+            diagram.classList.add('lightbox-content', 'lightbox-diagram');
             diagram.removeAttribute('tabindex');
             diagram.removeAttribute('role');
             diagram.removeAttribute('aria-label');
-            diagram.style.alignItems = 'center';
-            diagram.style.backgroundColor = '#fff';
-            diagram.style.boxSizing = 'border-box';
-            diagram.style.cursor = 'default';
-            diagram.style.display = 'flex';
-            diagram.style.height = '90vh';
-            diagram.style.justifyContent = 'center';
-            diagram.style.overflow = 'hidden';
-            diagram.style.padding = '1.5rem';
-            diagram.style.width = '90vw';
-
-            if (svg) {
-                svg.style.height = '100%';
-                svg.style.maxWidth = 'none';
-                svg.style.width = '100%';
-            }
 
             return diagram;
         }
