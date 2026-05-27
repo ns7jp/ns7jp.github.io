@@ -68,6 +68,7 @@
       ]
     }
     </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -251,6 +252,54 @@
                                     <li><strong>引き継ぎ：</strong>対応内容・判断・再発防止をチケットに残し、次回対応を早くする。</li>
                                 </ul>
                             </div>
+                            <div class="work-architecture">
+                                <h5><i class="fa-solid fa-list-check"></i> インシデント対応ライフサイクル (ITIL 準拠)</h5>
+                                <div class="mermaid">
+                                flowchart LR
+                                    A[検知・記録] --> B[一次切り分け]
+                                    B --> C{解決可能?}
+                                    C -- Yes --> D[対応・復旧]
+                                    C -- No --> E[エスカレーション]
+                                    E --> D
+                                    D --> F[事後レビュー<br>Postmortem]
+                                    
+                                    style A fill:#e8e0d5,stroke:#2c3e50
+                                    style B fill:#e8e0d5,stroke:#2c3e50
+                                    style D fill:#9caf88,stroke:#2c3e50,color:#fff
+                                    style E fill:#cd853f,stroke:#2c3e50,color:#fff
+                                    style F fill:#e8e0d5,stroke:#2c3e50
+                                </div>
+                                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text-medium);">
+                                    本 Toolkit は主に「検知・記録」「一次切り分け」を迅速に行うためのスクリプト群と、「事後レビュー (Postmortem)」のフォーマットを提供します。
+                                </p>
+                            </div>
+                            <div class="work-architecture">
+                                <h5><i class="fa-solid fa-code"></i> スクリプトの工夫 (純関数化とエラーハンドリング)</h5>
+                                <p style="font-size: 0.9em; margin-bottom: 10px; color: var(--text-medium);">PowerShell スクリプトは再利用性と自動テストを考慮し、状態判定ロジックを分離しています。</p>
+                                <pre><code class="language-powershell">
+function Get-ResourceStatus {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory=$true)][int]$CpuPercent,
+        [Parameter(Mandatory=$true)][int]$MemoryPercent
+    )
+    
+    $status = "Healthy"
+    if ($CpuPercent -ge 90 -or $MemoryPercent -ge 90) {
+        $status = "Critical"
+    } elseif ($CpuPercent -ge 75 -or $MemoryPercent -ge 75) {
+        $status = "Warning"
+    }
+    
+    return [PSCustomObject]@{
+        Timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
+        Status    = $status
+        CPU       = $CpuPercent
+        Memory    = $MemoryPercent
+    }
+}
+                                </code></pre>
+                            </div>
                             <div class="work-troubleshoot">
                                 <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
                                 <p><span class="trouble-label">課題</span>実務に近づけようとすると、社内固有のサーバー名・ユーザーID・権限情報のような公開に不向きな情報が混ざりやすい。</p>
@@ -357,6 +406,29 @@
                                     <li><strong>事後対応：</strong>Postmortem テンプレートに合わせ、MTTR / 根本原因 / 応急 / 恒久 / 中期対応を分けて記録。</li>
                                 </ul>
                             </div>
+                            <div class="work-architecture">
+                                <h5><i class="fa-solid fa-code-branch"></i> 継続的検証 (CI/CD) パイプライン</h5>
+                                <div class="mermaid">
+                                flowchart LR
+                                    Commit[コード変更/Push] --> GHA[GitHub Actions]
+                                    
+                                    subgraph CI Pipeline
+                                        direction TB
+                                        Lint[PSScriptAnalyzer 静的解析]
+                                        Test[Pester 単体テスト]
+                                        TF[Terraform Validate]
+                                        Lint --> Test --> TF
+                                    end
+                                    
+                                    GHA --> CI Pipeline
+                                    CI Pipeline --> Result{Pass / Fail}
+                                    Result -- Pass --> Merge[Merge 許可]
+                                    Result -- Fail --> Fix[修正]
+                                </div>
+                                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text-medium);">
+                                    変更による影響を事前に検知するため、インフラ設定と運用スクリプトの双方を GitHub Actions で自動検証しています。
+                                </p>
+                            </div>
                             <div class="work-troubleshoot">
                                 <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
                                 <p><span class="trouble-label">課題</span>PowerShell スクリプトはWindows実行が前提で、GitHub Actions のubuntu-latest上でテストを動かせるか不明だった。</p>
@@ -435,6 +507,31 @@
                                     <li><strong>客先デモ・説明用：</strong>「サーバー監視とはこういうもの」を非エンジニアに説明するときの教材。視覚的なゲージ・色分けでイメージしやすい。</li>
                                     <li><strong>社内ツールのテンプレート：</strong>このコードをベースに、独自指標（DBコネクション数・特定プロセスのみ等）を追加して社内専用ダッシュボードに発展可能。</li>
                                 </ul>
+                            </div>
+                            <div class="work-architecture">
+                                <h5><i class="fa-solid fa-code"></i> コア処理 (Flask API と非同期データ取得)</h5>
+                                <p style="font-size: 0.9em; margin-bottom: 10px; color: var(--text-medium);">フロントエンドの描画をブロックしないよう、Flask で JSON API を提供しています。</p>
+                                <pre><code class="language-python">
+@app.route('/api/stats')
+def api_stats():
+    # CPU使用率 (interval=0で即時取得できるための工夫を内部で実施)
+    cpu_percent = psutil.cpu_percent(interval=0)
+    cpu_cores = psutil.cpu_percent(interval=0, percpu=True)
+    
+    # メモリ情報
+    mem = psutil.virtual_memory()
+    
+    # ディスク情報
+    disk = psutil.disk_usage('/')
+    
+    return jsonify({
+        'cpu': cpu_percent,
+        'cpu_cores': cpu_cores,
+        'memory': mem.percent,
+        'disk': disk.percent,
+        'timestamp': datetime.now().strftime('%H:%M:%S')
+    })
+                                </code></pre>
                             </div>
                             <div class="work-troubleshoot">
                                 <h5><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h5>
@@ -871,5 +968,11 @@
         });
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables: { primaryColor: '#fdfbf7', lineColor: '#2c3e50', textColor: '#2c3e50' }});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="js/lightbox.js"></script>
 </body>
 </html>

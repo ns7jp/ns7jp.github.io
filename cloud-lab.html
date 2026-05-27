@@ -90,6 +90,42 @@
                 </div>
             </section>
 
+            <section class="lab-architecture" style="margin-bottom: 60px;">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-cloud"></i></span>
+                    <span class="heading-text">AWS VPC Architecture</span>
+                </div>
+                <figure class="network-figure" style="text-align: center;">
+                    <div class="mermaid">
+                    graph TD
+                        Internet((Internet)) --> IGW[Internet Gateway]
+                        IGW --> PublicRoute[Public Route Table]
+                        
+                        subgraph VPC[VPC: 10.20.0.0/16]
+                            PublicRoute --> PublicSubnet
+                            
+                            subgraph PublicSubnet[Public Subnet: 10.20.10.0/24]
+                                Bastion[Bastion / NAT]
+                            end
+                            
+                            subgraph PrivateSubnet[Private Subnet: 10.20.20.0/24]
+                                AppServer[App Server]
+                                DB[Database]
+                            end
+                            
+                            Bastion -- SSH / Admin --> AppServer
+                            Bastion -- SSH / Admin --> DB
+                        end
+                        
+                        subgraph SecurityGroups[Security Groups]
+                            BastionSG[Bastion SG: Allow SSH from Admin CIDR]
+                            PrivateSG[Private SG: Allow from Bastion SG]
+                        end
+                    </div>
+                    <figcaption>AWS VPC 最小構成図（Mermaid.js による動的描画。クリックで拡大可能）</figcaption>
+                </figure>
+            </section>
+
             <section class="operation-matrix-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-network-wired"></i></span>
@@ -252,5 +288,8 @@
         }
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables: { primaryColor: '#fdfbf7', lineColor: '#2c3e50', textColor: '#2c3e50' }});</script>
+<script src="js/lightbox.js"></script>
 </body>
 </html>
