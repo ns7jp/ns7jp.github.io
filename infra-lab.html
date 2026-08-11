@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸のインフラ運用Lab。Windows 11 / Microsoft 365 / Active Directory を想定し、監視、一次切り分け、証跡保存、エスカレーションまでの運用設計メモをまとめています。">
+    <meta name="description" content="島田則幸のLinuxサーバー構築・運用Lab。Ubuntu、Ansible、Docker、監視、試験、通信障害の切り分けと復旧をまとめています。">
     <title>Infra Lab | 島田則幸のポートフォリオ</title>
 
     <meta property="og:title" content="Infra Lab | 島田則幸のポートフォリオ">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/infra-lab.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta property="og:description" content="Windows / M365 / AD を想定したインフラ運用Lab。監視項目、一次切り分け、証跡、エスカレーション基準をまとめています。">
+    <meta property="og:description" content="Ubuntuサーバーの設計・Ansible構築・試験・監視・障害復旧を一つの案件としてまとめています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -60,8 +60,8 @@
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
             <h2 class="page-title">
-                <span class="title-en">Infra Operation Lab</span>
-                <span class="title-jp">インフラ運用設計メモ</span>
+                <span class="title-en">Server Build &amp; Operations Lab</span>
+                <span class="title-jp">Linuxサーバー構築・運用Lab</span>
             </h2>
         </div>
     </section>
@@ -70,30 +70,38 @@
         <div class="container">
 
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="infra-lab.html" class="active"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
-                <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux</a>
+                <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="active" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server"></i> Build Package</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux Operations</a>
                 <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
                 <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack</a>
                 <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
+                <a href="#windows-support"><i class="fa-brands fa-windows"></i> Windows Support</a>
             </nav>
 
             <section class="lab-intro">
-                <span class="case-label">Windows / M365 / AD Scenario</span>
-                <h3>監視、一次切り分け、証跡保存までを1つの流れで見せるLab</h3>
-                <p>社内ITサポート・運用監視で求められる「どこを見るか」「何を残すか」「いつ上位担当へ渡すか」を、公開可能なサンプル環境として整理しました。実機情報や社内固有情報は含めず、Windows 11、Microsoft 365、Active Directory、共有フォルダを想定した運用メモとしてまとめています。</p>
+                <span class="case-label">Ubuntu / Ansible / Docker Scenario</span>
+                <h3>設計、構築、試験、監視、障害復旧までを1つの案件で見せるLab</h3>
+                <p>主作品の Server Monitor を Ubuntu 1台のサーバー構築案件と見立て、基本・詳細設計、パラメータ、Ansible構築、単体・結合試験、監視、二セグメント通信障害、引き渡しまでを工程順に整理しました。コードと実測結果は証跡台帳で明確に分けています。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
-                    <span><i class="fa-solid fa-desktop"></i> Endpoint</span>
-                    <span><i class="fa-solid fa-id-card"></i> Account</span>
-                    <span><i class="fa-solid fa-wifi"></i> Network</span>
-                    <span><i class="fa-solid fa-chart-line"></i> Monitoring</span>
+                    <span><i class="fa-solid fa-file-lines"></i> Design</span>
+                    <span><i class="fa-solid fa-gears"></i> Build</span>
+                    <span><i class="fa-solid fa-clipboard-check"></i> Test</span>
+                    <span><i class="fa-solid fa-heart-pulse"></i> Recovery</span>
+                </div>
+                <div class="summary-actions" style="margin-top: 1.5rem;">
+                    <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> 構築案件パック</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check"></i> 検証証跡台帳</a>
+                    <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired"></i> 通信障害ラボ</a>
                 </div>
             </section>
 
-            <section class="lab-architecture">
+            <section class="lab-architecture" id="windows-support">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-diagram-project"></i></span>
-                    <span class="heading-text">Network Architecture（想定中規模オフィス）</span>
+                    <span class="heading-icon"><i class="fa-brands fa-windows"></i></span>
+                    <span class="heading-text">補助成果：Windows / M365 / AD 想定運用</span>
                 </div>
+
+                <p style="margin-bottom: 1.5rem;">以下は入口業務として対応する IT サポート・社内 SE 補助向けの設計サンプルです。第一志望の Linux サーバー構築案件とは区別して掲載しています。</p>
 
                 <figure class="network-figure" style="text-align: center; margin-bottom: 2rem;">
                     <div class="mermaid">
@@ -249,7 +257,7 @@
                 </div>
                 <div class="lab-link-card">
                     <h4><i class="fa-solid fa-arrows-spin"></i> 関連 Lab / Runbook</h4>
-                    <p>Windows / M365 / AD のこのページから、Linux運用・Cloud Network・観測性スタック（Metrics + Logs）・IaC・SLO・チケット分類・物理層・M365ポリシーJSON・障害事後分析・バックアップ・フェイルオーバー・ネットワーク切り分け・CIS 対応マッピング・本番化差分へ横展開できる構成にしています。</p>
+                    <p>第一導線は Linux サーバー構築案件パックです。補助成果として、Windows / M365 / AD、Cloud Network、Support Toolkit、チケット分類、物理層、M365 ポリシー JSON も確認できます。</p>
                     <div class="next-scope-list">
                         <span><a href="linux-lab.html" style="color:inherit;">Linux Lab</a></span>
                         <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>
