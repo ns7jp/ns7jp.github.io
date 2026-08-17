@@ -20,6 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="島田則幸の作品ページ。ITサポート・社内SE補助・インフラ運用で活かせるSupport Toolkit、サーバー監視ダッシュボード、業務改善向けPythonアプリ、PHPのWebアプリなどの制作実績を掲載しています。">
     <title>作品 | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/works.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
     <meta property="og:title" content="作品 | 島田則幸のポートフォリオ">
@@ -31,8 +32,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
 
-    <!-- jQueryと共通スタイル類の読み込み -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
+    <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -83,20 +84,20 @@
     </div>
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
-    <p class="res-menu">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
-    </p>
+    </button>
 
     <!-- ===== ヘッダー（共通） ===== -->
     <header>
-        <h1 class="logo">
+        <p class="logo">
             <a href="index.html">
                 <span class="logo-main">島田則幸のポートフォリオ</span>
                 <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
             </a>
-        </h1>
-        <nav>
+        </p>
+        <nav id="site-nav">
             <ul>
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
@@ -113,10 +114,10 @@
     <section class="page-hero" style="background-image: url('image/works.jpg');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
-            <h2 class="page-title">
+            <h1 class="page-title">
                 <span class="title-en">Works</span>
                 <span class="title-jp">作品</span>
-            </h2>
+            </h1>
         </div>
     </section>
 
@@ -490,6 +491,7 @@ function Get-ResourceStatus {
                                 <span class="num-chip"><strong>3</strong>OS対応</span>
                             </div>
                             <p>Python（Flask）+ psutil + Chart.js で構築したリアルタイムサーバー監視ツールです。CPU使用率（円形ゲージ＋コア別バー）、メモリ・スワップ、ディスク（パーティション別）、ネットワークI/O（リアルタイム速度算出）、プロセスTOP15、CPU/メモリの60秒推移グラフを1画面に集約。しきい値に応じて緑→黄→橙→赤に自動配色されます。</p>
+                            <p><strong>同じ server-monitor リポジトリでは、このFlaskダッシュボードを Ansible 構築・Docker Compose 配備・Prometheus / Grafana / Alertmanager 監視・Loki ログ集約・Terraform AWS 化まで拡張しています。</strong>設計・試験・障害復旧を含む主作品としての全体像は <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" target="_blank" rel="noopener noreferrer">構築案件パック</a> または <a href="infra-lab.html">Infra Lab</a> でご確認いただけます。</p>
                             <ul class="work-points">
                                 <li>Flask の JSON API（/api/stats、/api/processes）と Fetch API による非同期ポーリングでリアルタイム性を実現しました。</li>
                                 <li>psutilを使ってWindows / Linux / macOS で同じコードが動くクロスプラットフォームな実装にしました。</li>
@@ -910,64 +912,9 @@ def api_stats():
     </footer>
 
 <!-- ============================================================
-     JavaScript（jQuery）処理：このページに動きを付ける
+     ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出は
+     js/main.js（vanilla JS）に集約している。
 ============================================================ -->
-<script>
-    // ===== ローダーの非表示処理 =====
-    $(window).on('load', function() {
-        $('.loader').fadeOut(800);
-    });
-
-    // ===== ハンバーガーメニュー開閉処理 =====
-    $(".res-menu").click(function () {
-        $("nav").toggleClass("show");
-        $(".res-menu").toggleClass("show2");
-    });
-
-    // ===== ヘッダー縮小（スクロール時） =====
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
-            $('header').addClass('scrolled');
-        } else {
-            $('header').removeClass('scrolled');
-        }
-    });
-
-    // ===== 作品フィルター機能 =====
-    // フィルターボタンがクリックされたら、選択した技術カテゴリに該当する作品だけを表示する。
-    $('.filter-btn').click(function() {
-        // 一旦すべてのボタンから「active」クラスを外し、押されたボタンにだけ付与
-        $('.filter-btn').removeClass('active');
-        $(this).addClass('active');
-
-        // 押されたボタンの data-filter 属性の値を取得（例：'all', 'php', 'python', 'html'）
-        var filter = $(this).data('filter');
-
-        if (filter === 'all') {
-            // 「All」の場合：全作品をフェードイン表示
-            $('.work-showcase-item').fadeIn(400);
-        } else {
-            // それ以外：いったん全部フェードアウトしてから、該当カテゴリだけフェードイン
-            $('.work-showcase-item').fadeOut(200);
-            // 属性セレクター [data-category~="..."] は半角スペース区切りの値も一致するため、
-            // 1つの作品を複数カテゴリ（例：support + infra）に所属させられる。
-            $('.work-showcase-item[data-category~="' + filter + '"]').fadeIn(400);
-        }
-    });
-
-    // ===== スクロール連動のフェードイン演出 =====
-    // 各作品が画面に入ったら「visible」クラスを付与してアニメーションさせる
-    $(window).scroll(function() {
-        $('.work-showcase-item').each(function() {
-            var elementTop = $(this).offset().top;                            // 要素の上端位置
-            var windowBottom = $(window).scrollTop() + $(window).height();    // 画面下端位置
-            // 画面下端が要素の上端を50px以上越えたら、表示状態にする
-            if (windowBottom > elementTop + 50) {
-                $(this).addClass('visible');
-            }
-        });
-    });
-</script>
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables: { primaryColor: '#fdfbf7', lineColor: '#2c3e50', textColor: '#2c3e50' }});</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

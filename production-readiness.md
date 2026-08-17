@@ -111,7 +111,7 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 | P1 | リストアテスト記録 + 年次 DR ドリル（[Failover Runbook](./support-docs/failover-runbook.md) 実行） | バックアップ・副系切替の実効性を示す |
 | P1 | CIS Benchmark 自動監査（OpenSCAP / Lynis） | [現状マッピング](./ansible/cis-benchmark-mapping.md)を継続検証する仕組み |
 | P2 | CloudTrail / Flow Logs / GuardDuty | クラウド監査と検知を補う |
-| P2 | ansible-lint / Terraform validate のCI強化 | IaC変更の安全性を上げる |
+| P2 | ansible-lint のプロファイル引き上げ（`--profile min` → `moderate`/`safety`）+ CI失敗をマージ必須（required）チェック化 | 現状は ansible-lint（`--profile min`）と Terraform `validate` を CI で実行済み（[infra-check.yml](./.github/workflows/infra-check.yml)）。IaC変更の安全性をさらに上げ、失敗時にマージをブロックできる状態にする |
 | P3 | SLO / Error Budget | 運用品質を数値で説明できるようにする |
 
 ---

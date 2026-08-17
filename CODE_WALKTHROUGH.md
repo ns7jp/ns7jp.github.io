@@ -15,7 +15,7 @@ GitHub Pages
   ↓ HTML を読む
 css/reset.css / css/style.css
   ↓ 見た目を整える
-JavaScript / jQuery
+JavaScript（Vanilla JS、js/main.js）
   ↓ ローダー、メニュー、背景スライダー、スクロール演出を動かす
 image/
   ↓ プロフィール画像・作品画像・背景画像を表示
@@ -49,8 +49,8 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
    - 連絡先と問い合わせ導線を確認します。
 11. `css/reset.css` → `css/style.css`
     - ブラウザ差のリセット、サイト全体のデザイン、レスポンシブ対応を確認します。
-12. `js/jquery.bgswitcher.js`
-    - トップページの背景画像を切り替える jQuery プラグインの役割を確認します。
+12. `js/main.js`
+    - ローダー解除、メニュー開閉、スクロール演出、トップページの背景画像切り替えを担う、外部ライブラリ非依存の共通スクリプトです。
 13. `image/` と `favicon.ico`
     - 背景画像、プロフィール画像、作品スクリーンショット、ブラウザタブ用アイコンの役割を確認します。
 14. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
@@ -78,7 +78,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 サイトの入口となるトップページです。閲覧者に最初の数秒で「ITサポート・インフラ運用支援を目指す人のポートフォリオ」だと伝える役割があります。
 
 主な構成:
-- `<head>`: SEO、OGP、CSS、jQuery、背景切替プラグイン、フォント、アイコンを読み込む
+- `<head>`: SEO、OGP、CSS、共通スクリプト（js/main.js）、フォント、アイコンを読み込む
 - `.loader`: ページ読み込み中の表示
 - `.res-menu`: スマホ用メニュー開閉ボタン
 - `<header>` / `<nav>`: サイト共通ナビゲーション
@@ -87,12 +87,12 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 - `.skills-preview`: スキルページへの導線
 - `.works-preview`: 代表作品への導線
 - `.contact-cta`: 連絡先ページへの導線
-- 末尾の `<script>`: ローダー、メニュー、背景画像切替、スクロール演出を実装
+- `js/main.js`（全ページ共通）: ローダー、メニュー、背景画像切替、スクロール演出を実装
 
 初学者が見るポイント:
 - `class` は CSS と JavaScript の両方で使われる名前
 - `meta description` や OGP は公開サイトとしての見え方を整える設定
-- `bgswitcher()` は `js/jquery.bgswitcher.js` で提供される背景画像切替機能
+- ヒーロー背景のクロスフェードは `js/main.js` が生成する2枚のレイヤーの `opacity` を切り替えるだけの実装
 
 ---
 
@@ -106,7 +106,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 - タイムライン: 学歴、職歴、職業訓練などの流れ
 - 資格カード: Python、PHP、食品衛生管理者などの資格
 - 趣味・人物面: 人柄や継続力を補足する情報
-- 末尾の `<script>`: ローダー、メニュー、ヘッダー縮小演出
+- `js/main.js`（全ページ共通）: ローダー、メニュー、ヘッダー縮小演出
 
 初学者が見るポイント:
 - 同じヘッダー・フッター構造を複数ページで繰り返している
@@ -124,7 +124,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 - Web / プログラミング: HTML/CSS、JavaScript、Python、PHP
 - インフラ・監視: Flask、psutil、サーバー監視、ログ確認の入口
 - ソフトスキル: 正確性、改善意識、継続学習など
-- 末尾の `<script>`: スキルカードのフェードイン演出
+- `js/main.js`（全ページ共通）: スキルカードのフェードイン演出
 
 初学者が見るポイント:
 - スキルカードは同じ HTML 構造を繰り返して作られている
@@ -142,12 +142,12 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 - `.work-showcase-item`: 1作品分の紹介カード
 - `data-category`: フィルター処理で使うカテゴリ情報（**スペース区切りで複数所属可**。例: `data-category="support infra"`）
 - 各作品のリンク: デモサイト、GitHub リポジトリ
-- 末尾の `<script>`: フィルター、フェードイン、ヘッダー縮小演出
+- `js/main.js`（全ページ共通）: フィルター、フェードイン、ヘッダー縮小演出
 
 初学者が見るポイント:
 - `data-filter` と `data-category` を対応させることで、JavaScript から絞り込みできる
-- `[data-category~="infra"]` は **空白区切りのトークン一致** を行う jQuery セレクター。1作品を複数カテゴリに所属させられる
-- `fadeIn()` / `fadeOut()` は jQuery の表示・非表示アニメーション
+- `data-category` は空白区切りで複数値を持てるため、`split(/\s+/)` で配列化してから一致判定している（1作品を複数カテゴリに所属させられる）
+- 表示・非表示は `element.style.display` の切り替えで実装（vanilla JS、外部ライブラリ非依存）
 - ITサポート寄りには、サーバー監視、定型文管理、付箋、掲示板など「業務改善・運用支援」と結びつけて読む
 
 ---
@@ -215,7 +215,7 @@ A4 1ページの履歴書（印刷で PDF 化可）。`<meta name="robots" conte
 - 連絡先カード: メール、GitHub など
 - メッセージ: ポートフォリオ確認者への案内
 - FAQ: よくある確認事項
-- 末尾の `<script>`: ローダー、メニュー、ヘッダー縮小、フォーム風入力欄のフォーカス演出
+- `js/main.js`（全ページ共通）: ローダー、メニュー、ヘッダー縮小、フォーム風入力欄のフォーカス演出
 
 初学者が見るポイント:
 - 連絡先はリンクとしてクリックできる形にしている
@@ -255,25 +255,26 @@ A4 1ページの履歴書（印刷で PDF 化可）。`<meta name="robots" conte
 
 ---
 
-### `js/jquery.bgswitcher.js`
+### `js/main.js`
 
-トップページの背景画像を自動で切り替えるための jQuery プラグインです。外部由来のライブラリなので、通常は中身を大きく改造せず、`index.html` から使い方だけ指定します。
+全ページ共通の動きを1ファイルにまとめた vanilla JS（外部ライブラリ非依存）です。以前は jQuery 本体（CDN）と `jquery.bgswitcher.js`（背景画像切替プラグイン）に依存していましたが、CDN の読み込みに失敗するとローダーが消えず画面が固まってしまう問題があったため、外部ライブラリなしで書き直しました。
 
-このサイトでの使われ方:
+トップページの背景画像切り替え部分の実装:
 
 ```javascript
-$(".hero-slider").bgswitcher({
-    images: ["image/works.jpg", "image/me.jpg", "image/contact.jpg", "image/skills.jpg"],
-    interval: 5000,
-    effect: "fade"
-});
+var heroSlider = document.querySelector('.hero-slider');
+if (heroSlider) {
+    var heroImages = ['image/works.jpg', 'image/me.jpg', 'image/contact.jpg', 'image/skills.jpg'];
+    // 2枚の div レイヤーを重ねて、opacity を切り替えるだけでクロスフェードさせる
+    // 5秒ごとに setInterval で次の画像へ
+}
 ```
 
 初学者が見るポイント:
-- `$.fn.bgswitcher` により、jQuery オブジェクトへ機能を追加している
-- `images` 配列に背景画像のパスを渡す
-- `interval` は切り替え間隔、`duration` は切り替え時間
-- このファイルは「仕組み」、`index.html` の設定は「使い方」
+- `document.querySelector` / `addEventListener` など、ブラウザ標準の DOM API だけで実装している
+- 画像配列はページ読み込み時にシャッフルしてから使う
+- `window.setTimeout(hideLoader, 4000)` は、`load` イベントが発火しない・遅れる環境でもローダーが固まったままにならないための保険
+- 1つのファイルに集約したことで、9ページ分に同じコードをコピペしなくて済む
 
 ---
 
@@ -296,11 +297,12 @@ $(".hero-slider").bgswitcher({
 
 ### `support-docs/`
 
-ITサポート・社内SE・運用監視で実際に使われる手順書・事例集（全 10 本）。
+ITサポート・社内SE・運用監視で実際に使われる手順書・事例集（全 17 本 + M365 ポリシー JSON 7 ファイル。詳細は [support-docs/README.md](./support-docs/README.md)）。
 
 - 標準業務 4本（キッティング / オフボーディング / 共有フォルダ権限 / M365 ライセンス）
-- 障害対応 3本（10ケース事例集 / 重大インシデント・プレイブック / マルウェア対応）
-- 事後分析・運用 2本（Postmortem 実例 / Backup・Restore Runbook）
+- 障害対応 4本（10ケース事例集 / 重大インシデント・プレイブック / マルウェア対応 / ネットワーク切り分け証跡）
+- 事後分析・運用 6本（Postmortem 実例 / Backup・Restore Runbook / フェイルオーバー Runbook / SLO・Error Budget / チケット分類 / 物理層設計）
+- その他 3本（AD/M365 変更ケース / 面接想定 FAQ / M365 ポリシー README）
 
 初学者が見るポイント:
 - すべて Markdown ファイル。GitHub 上でそのまま読める
@@ -313,7 +315,7 @@ ITサポート・社内SE・運用監視で実際に使われる手順書・事�
 
 PowerShell + bash + Pester を収めたスクリプト集。
 
-- ルート: PowerShell 8本 + `linux-triage.sh`
+- ルート: PowerShell 9本 + `linux-triage.sh`
 - `lib/Triage-Lib.ps1`: しきい値判定・状態集約・メッセージ切り詰めなどの **純関数ヘルパー**
 - `tests/Triage-Lib.Tests.ps1`: Pester 5 系のユニットテスト（25ケース）
 - `samples/`: JSON / CSV / HTML のサンプル出力
@@ -375,10 +377,10 @@ GitHub Actions の CI 設定。
 
 ```text
 HTML の .loader
-  ↓ ページ読み込み完了
-jQuery の $(window).on('load')
+  ↓ ページ読み込み完了（または4秒経過した場合の保険タイマー）
+js/main.js の window.addEventListener('load', hideLoader)
   ↓
-$('.loader').fadeOut(800)
+loader.style.opacity を 0 にしてフェードアウト
   ↓
 ローダーが消えてページ本体が見える
 ```
@@ -399,9 +401,9 @@ CSS がメニュー表示とアイコン切替を反映
 ```text
 index.html の .hero-slider
   ↓
-jquery.bgswitcher.js の bgswitcher()
+js/main.js が2枚の .hero-slider-layer を生成
   ↓
-images 配列の画像を interval ごとに切り替える
+images 配列の画像を5秒ごとに opacity の切り替えでクロスフェード
 ```
 
 ### 作品フィルター
@@ -431,7 +433,7 @@ CSS の見た目変更・フェードインが反映される
 
 - HTML はページ構造を作る
 - CSS は見た目とレスポンシブ対応を作る
-- JavaScript / jQuery はユーザー操作に反応する動きを作る
+- JavaScript（Vanilla JS）はユーザー操作に反応する動きを作る
 - `class` は CSS と JavaScript の橋渡しになる
 - `data-*` 属性は JavaScript に追加情報を渡すときに便利
 - GitHub Pages では、静的ファイルを push するだけで公開サイトに反映できる

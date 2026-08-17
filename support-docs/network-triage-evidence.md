@@ -102,7 +102,7 @@ HOST: ops01                                Loss%   Snt   Last   Avg  Best  Wrst 
   3.|-- 203.0.113.254                      5.0%    20    2.1    2.3   1.9   8.4   1.1   <-- 5%損失
   4.|-- ???                                100.0%  20    0.0    0.0   0.0   0.0   0.0   <-- 応答なし
   5.|-- 203.0.113.10                       0.0%    20   12.4   13.1  11.8  22.5   2.4
-  6.|-- 93.184.216.34                      0.0%    20   12.6   13.0  11.9  18.7   1.8
+  6.|-- 192.0.2.53                         0.0%    20   12.6   13.0  11.9  18.7   1.8
 ```
 
 **読み方**:
@@ -116,8 +116,8 @@ HOST: ops01                                Loss%   Snt   Last   Avg  Best  Wrst 
 ```bash
 # DF ビットを立てた ping で MTU を実測（VPN / トンネル経由でよくハマる）
 $ ping -M do -s 1472 -c 3 example.com
-PING example.com (93.184.216.34) 1472(1500) bytes of data.
-1480 bytes from 93.184.216.34: icmp_seq=1 ttl=56 time=12.6 ms
+PING example.com (192.0.2.53) 1472(1500) bytes of data.
+1480 bytes from 192.0.2.53: icmp_seq=1 ttl=56 time=12.6 ms
 
 # 1472 + ICMP/IP ヘッダ 28 = 1500（標準MTU）が通れば OK。
 # 通らない場合は -s を 1452, 1400, 1380... と下げて境界を探す
@@ -147,7 +147,7 @@ example.com.            172800 IN  NS  a.iana-servers.net.
 example.com.            172800 IN  NS  b.iana-servers.net.
 ;; Received 56 bytes from 199.43.135.53#53(a.gtld-servers.net) in 24 ms
 
-example.com.            86400  IN  A   93.184.216.34
+example.com.            86400  IN  A   192.0.2.53
 example.com.            86400  IN  RRSIG A 8 2 86400 ...
 ;; Received 1389 bytes from 199.43.135.53#53(a.iana-servers.net) in 28 ms
 ```
@@ -298,7 +298,7 @@ $ wireshark /tmp/cap.pcap
 ```bash
 # Linux から TCP 443 の疎通確認のみ（ペイロードは送らない）
 $ nc -zv example.com 443
-Connection to example.com (93.184.216.34) 443 port [tcp/https] succeeded!
+Connection to example.com (192.0.2.53) 443 port [tcp/https] succeeded!
 
 # Windows PowerShell の等価
 PS> Test-NetConnection example.com -Port 443 -InformationLevel Detailed
@@ -347,8 +347,8 @@ http_code:   200
 
 ```bash
 $ curl -v https://example.com 2>&1 | head -25
-*   Trying 93.184.216.34:443...
-* Connected to example.com (93.184.216.34) port 443
+*   Trying 192.0.2.53:443...
+* Connected to example.com (192.0.2.53) port 443
 * ALPN: offers h2,http/1.1
 * TLSv1.3 (OUT), TLS handshake, Client hello (1):
 * TLSv1.3 (IN),  TLS handshake, Server hello (1):

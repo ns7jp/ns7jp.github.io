@@ -2,7 +2,7 @@
 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-jQuery-F7DF1E?logo=javascript&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?logo=javascript&logoColor=black)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-success?logo=github)
 [![Static site check](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml)
 [![Infrastructure checks](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml)
@@ -96,7 +96,7 @@ Lab の各成果物が、現場でどの程度の効果を狙えるかの**架�
 |------|------------------|
 | HTML | 見出し、文章、画像、リンク、ナビゲーションなど、ページの骨組みを作る |
 | CSS | 色、余白、文字サイズ、2カラム配置、カード表示、スマホ対応、アニメーションを担当 |
-| JavaScript / jQuery | ローダー、ハンバーガーメニュー、背景画像切り替え、スクロール演出などの動きを担当 |
+| JavaScript（Vanilla） | ローダー、ハンバーガーメニュー、背景画像切り替え、スクロール演出などの動きを担当（`js/main.js` に集約、外部ライブラリ非依存） |
 | 画像ファイル | ヒーロー画像、プロフィール画像、作品スクリーンショットを表示 |
 | GitHub Pages | 作成した静的ファイルをインターネット上に公開 |
 
@@ -215,7 +215,7 @@ ns7jp.github.io/
 ├── README.md                ... この説明ファイル
 │
 ├── css/                     ... reset.css と style.css
-├── js/                      ... jQuery プラグイン
+├── js/                      ... サイト共通スクリプト（main.js、vanilla JS）と lightbox.js
 │
 ├── support-docs/
 │   ├── pc-kitting-guide.md                    ... PCキッティング手順書
@@ -299,7 +299,7 @@ ns7jp.github.io/
 
 | # | 作品名 | 主な技術 | ITサポート関連度 | 内容 | リポジトリ |
 |---|--------|----------|------------------|------|------------|
-| ① | Support Toolkit | Markdown / PowerShell / bash | High | 手順書10本、確認スクリプト9本、Pester 25テスト、AD/M365変更ケース、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ① | Support Toolkit | Markdown / PowerShell / bash | High | 手順書17本、確認スクリプト9本、Pester 25テスト、AD/M365変更ケース、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
 | ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
 | ③ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ④ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
@@ -331,11 +331,11 @@ ns7jp.github.io/
 - ホバー時の変化やフェードインなどのアニメーション
 - 作品カードやスキルカードの視認性
 
-### JavaScript / jQuery
+### JavaScript（Vanilla JS）
 
 サイトに動きを加えるために使用しています。たとえば、ページ読み込み時のローダー、スマホ用ハンバーガーメニュー、スクロール時の表示演出、背景画像スライダーなどです。
 
-`jquery.bgswitcher.js` は、トップページのヒーロー背景画像を自動で切り替えるためのプラグインです。これにより、トップページに動きが出て、ポートフォリオの第一印象を強めています。
+以前は jQuery と `jquery.bgswitcher.js`（外部プラグイン）に依存していましたが、CDN 読み込み失敗時にローダーが消えず画面が固まってしまう問題があったため、`js/main.js` に外部ライブラリ非依存の vanilla JS として書き直しました。トップページのヒーロー背景クロスフェードも、`main.js` 内で2枚のレイヤーの `opacity` を切り替えるだけの実装に置き換えています。
 
 ### Font Awesome
 

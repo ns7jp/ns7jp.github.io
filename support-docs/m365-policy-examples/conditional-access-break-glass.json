@@ -1,17 +1,19 @@
 {
-  "_comment": "Conditional Access: Block legacy authentication for all users. レガシー認証 (POP/IMAP/SMTP basic 等) は MFA を回避できるためブロック",
-  "displayName": "CA02-Block-LegacyAuth",
-  "state": "enabledForReportingButNotEnforced",
-  "_stateNote": "本番展開時は 'enabled'。report-only で 1〜2 週間影響確認後に切替。",
+  "_comment": "Conditional Access: Break-glass（緊急アクセス用）アカウントの登録・全ポリシー除外を管理するためのカタログ用エントリ。POST /identity/conditionalAccess/policies の形式に合わせているが、目的は enforcement ではなく『どのアカウントが break-glass か』『なぜ除外するか』を Git 管理下に残すこと。",
+  "displayName": "CA00-Exclude-BreakGlass-Accounts",
+  "state": "disabled",
+  "_stateNote": "このポリシー自体は常に 'disabled' のまま運用する。有効化してしまうと break-glass アカウントに条件付きアクセスがかかり、MFA 基盤や CA 設定に障害が起きた際の復旧経路が失われる。目的は enforcement ではなく、除外対象アカウントの ID を 1 箇所にまとめて管理し、他ポリシー（CA01 等）の excludeUsers と同期させること。",
   "conditions": {
     "users": {
       "includeUsers": [
-        "All"
-      ],
-      "excludeUsers": [
         "<break-glass-account-1-object-id>",
         "<break-glass-account-2-object-id>"
-      ]
+      ],
+      "excludeUsers": [],
+      "includeGroups": [],
+      "excludeGroups": [],
+      "includeRoles": [],
+      "excludeRoles": []
     },
     "applications": {
       "includeApplications": [
@@ -19,19 +21,33 @@
       ]
     },
     "clientAppTypes": [
-      "exchangeActiveSync",
-      "other"
-    ]
+      "all"
+    ],
+    "platforms": null,
+    "locations": null,
+    "signInRiskLevels": [],
+    "userRiskLevels": []
   },
-  "grantControls": {
-    "operator": "OR",
-    "builtInControls": [
-      "block"
-    ]
-  },
+  "grantControls": null,
+  "_grantControlsNote": "意図的に未設定。このポリシーはどの制御も enforce しない。実際の除外は、CA01-MFA-Required-AllUsers など enforcing 側の各ポリシーの excludeUsers に、ここに登録した break-glass アカウントの object ID を含めることで実現する。",
+  "_whyExcluded": [
+    "MFA基盤（Authenticator / 条件付きアクセス評価エンジン）自体に障害が起きた場合でも、テナントから完全に締め出されない復旧経路を必ず1つ残すため",
+    "CA ポリシーの誤設定（意図しない全ユーザーブロック等）が発生した際に、管理者が是正操作を行うための入口を確保するため"
+  ],
+  "_compensatingControls": [
+    "パスワードは 30 文字以上のランダム生成、印刷して耐火金庫に保管し、単独では持ち出せないよう管理者2名で分割管理",
+    "cloud-only アカウント（オンプレAD非同期・ライセンス/日常グループ割当から分離）とする",
+    "サインインが発生した場合は Microsoft Sentinel / Log Analytics アラートで即時通知（平常時は使用されないアカウントのため、サインイン自体を異常として扱う）",
+    "四半期ごとにパスワードローテーションと『実際にサインインできるか』の動作確認を実施",
+    "日常業務・自動化のいずれにも使用しない。使用した場合は使用理由を必ずインシデントとして事後レビュー"
+  ],
+  "_referencedBy": [
+    "conditional-access-baseline.json（CA01-MFA-Required-AllUsers）の conditions.users.excludeUsers"
+  ],
   "_checklist": [
-    "古いメーラー / スキャナー / 複合機の SMTP 認証が basic auth なら、OAuth 対応へ事前移行",
-    "影響範囲を Sign-in logs (Legacy authentication client) で事前棚卸し",
-    "Break-glass アカウントは exclusion 維持"
+    "break-glass アカウントがすべての enforcing CA ポリシーの excludeUsers に含まれているか棚卸し",
+    "サインイン監視アラートが実際に飛ぶか年1回テスト",
+    "パスワード（金庫）へのアクセス権を持つ人数が最小限か確認",
+    "このポリシー自体を誤って 'enabled' にしていないか定期確認"
   ]
 }

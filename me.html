@@ -22,6 +22,7 @@
     <meta name="description" content="島田則幸の自己紹介ページ。製造・物流現場での改善経験を活かし、Linuxサーバー構築・運用を第一志望に転職活動中です。">
     <!-- ブラウザのタブに表示されるタイトル -->
     <title>私について | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/me.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
     <meta property="og:title" content="私について | 島田則幸のポートフォリオ">
@@ -33,8 +34,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
 
-    <!-- jQuery本体（CDNから読み込み） -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- サイト共通スクリプト（vanilla JS、外部ライブラリ非依存） -->
+    <script src="js/main.js" defer></script>
     <!-- ブラウザ標準スタイルのリセット -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- このサイト独自のスタイル -->
@@ -57,7 +58,6 @@
           "name": "島田則幸",
           "alternateName": "Noriyuki Shimada",
           "url": "https://ns7jp.github.io/",
-          "image": "https://ns7jp.github.io/image/image.jpg",
           "jobTitle": "Linuxサーバー構築・運用エンジニア志望",
           "description": "製造・物流現場での改善経験を活かし、Linuxサーバーの設計・構築・試験・監視・障害復旧を学習・実装しています。",
           "email": "mailto:net7jp@gmail.com",
@@ -94,20 +94,20 @@
     </div>
 
     <!-- ===== モバイル用メニュートグル（ハンバーガーボタン） ===== -->
-    <p class="res-menu">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
-    </p>
+    </button>
 
     <!-- ===== ヘッダー（全ページ共通） ===== -->
     <header>
-        <h1 class="logo">
+        <p class="logo">
             <a href="index.html">
                 <span class="logo-main">島田則幸のポートフォリオ</span>
                 <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
             </a>
-        </h1>
-        <nav>
+        </p>
+        <nav id="site-nav">
             <ul>
                 <!-- 現在ページ「About Me」には class="active" を付けて、CSSで強調表示する -->
                 <li class="active"><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
@@ -126,10 +126,10 @@
         <!-- 背景画像の上に重ねる暗い半透明レイヤー（文字を読みやすくする） -->
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
-            <h2 class="page-title">
+            <h1 class="page-title">
                 <span class="title-en">About Me</span>
                 <span class="title-jp">私について</span>
-            </h2>
+            </h1>
         </div>
     </section>
 
@@ -146,10 +146,11 @@
                     <div class="profile-image">
                         <!-- 画像をフレームで囲むデコレーション付き -->
                         <div class="image-frame">
-                            <img src="image/image.jpg" alt="学習と運用支援への姿勢を表すイメージ写真" width="800" height="600" decoding="async">
+                            <img src="image/image.jpg" alt="飼い猫の写真（本人の顔写真ではありません）" width="800" height="600" decoding="async">
                         </div>
                         <!-- 画像の周りに飾り（角の装飾など）をCSSで追加するための空div -->
                         <div class="profile-decoration"></div>
+                        <p style="margin-top:12px;font-size:1.3rem;color:var(--text-muted);">※本人の顔写真ではなく、飼い猫の写真です。顔写真は別途ご用意します。</p>
                     </div>
                     <!-- 右：氏名・自己紹介文・基本情報 -->
                     <div class="profile-text">
@@ -162,7 +163,8 @@
                             <p>はじめまして、島田則幸です。</p>
                         <p>2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了。現在はLinuxサーバー構築・運用を第一志望に、Ubuntu、Ansible、Docker、Prometheus / Grafanaを使った構築案件パックと障害復旧ラボを制作・公開しています。</p>
                             <p>製造・物流現場で業務効率化に取り組む中で、現場の工夫だけでは改善しきれない部分を痛感し、システム側から仕組みを変えていきたいと考えるようになりました。Linuxサーバーの構築・運用を軸に、手順どおり正確に作業し、試験結果と改善点を残せるエンジニアを目指しています。</p>
-                            <p>製造・物流現場などで18年間培った業務改善・在庫管理・現場対応の視点と、新たに習得したITスキルを組み合わせ、問い合わせ対応、障害の切り分け、手順書整備、現場で役立つ小さな自動化に貢献したいと考えています。</p>
+                            <p>製造・物流現場などで15年以上培った業務改善・在庫管理・現場対応の視点と、新たに習得したITスキルを組み合わせ、問い合わせ対応、障害の切り分け、手順書整備、現場で役立つ小さな自動化に貢献したいと考えています。</p>
+                            <p>物流現場では、作業時間を15分単位で計測してボトルネックを特定し、棚配置・補充ルール・OJT用マップを改善して、<strong>1日あたり約1時間の作業時間短縮</strong>につなげました。この「計測して原因を絞り、手順化して定着させる」進め方を、サーバー運用でも実践しています（<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/business-improvement/picking-improvement.md" target="_blank" rel="noopener noreferrer">業務改善レポート</a>）。</p>
                         <div class="profile-info">
                             <div class="info-item">
                                 <i class="fa-solid fa-location-dot"></i>
@@ -303,10 +305,10 @@
                 </h4>
                 <div class="license-grid license-studying-grid">
                     <div class="license-card license-card-studying">
-                        <div class="license-year">2026-6予定</div>
+                        <div class="license-year">2026 Q3-Q4</div>
                         <div class="license-info">
-                            <h4>ITパスポート</h4>
-                            <p>IT全般の基礎知識を問う国家試験。受験準備中。</p>
+                            <h4>LPIC-1（101 / 102）</h4>
+                            <p>Linuxサーバー運用の体系的理解を問う資格試験。101を2026 Q3、102を2026 Q4に受験予定。</p>
                         </div>
                         <div class="license-icon">
                             <i class="fa-solid fa-book-open"></i>
@@ -327,24 +329,24 @@
                         <span class="roadmap-detail">職業訓練で習得した開発技術の証跡。Web アプリと業務改善ツールの自作に直結。</span>
                     </li>
                     <li class="roadmap-item current">
-                        <span class="roadmap-period">2026-06 予定</span>
-                        <strong class="roadmap-title">IT パスポート</strong>
-                        <span class="roadmap-detail">IT 全般の共通言語。マネジメント・セキュリティ・ストラテジまでを一通り押さえる。</span>
+                        <span class="roadmap-period">2026 Q3-Q4 学習中</span>
+                        <strong class="roadmap-title">LPIC-1（101 / 102）</strong>
+                        <span class="roadmap-detail">Linux Lab / Ansible playbook / rsync バックアップで触れている知識を体系化。サーバー運用候補先で評価されやすい。101を2026 Q3、102を2026 Q4に受験予定。</span>
                     </li>
                     <li class="roadmap-item">
-                        <span class="roadmap-period">2026-09 目標</span>
-                        <strong class="roadmap-title">LPIC-1（Level 1）</strong>
-                        <span class="roadmap-detail">Linux Lab / Ansible playbook / rsync バックアップで触れている知識を体系化。サーバー運用候補先で評価されやすい。</span>
+                        <span class="roadmap-period">2026-12 まで</span>
+                        <strong class="roadmap-title">基本情報技術者試験（FE）</strong>
+                        <span class="roadmap-detail">IT 全般の共通言語を国家資格で証明。現行試験制度が2026年度で終了するため、移行期前の受験完了を目標にする。</span>
                     </li>
                     <li class="roadmap-item">
-                        <span class="roadmap-period">2026-12 目標</span>
-                        <strong class="roadmap-title">CCNA  または  Microsoft AZ-104</strong>
-                        <span class="roadmap-detail">配属先のネットワーク比重が高いなら CCNA、クラウド / M365 寄りなら AZ-104。VLAN 構成図と Entra 連携で扱った領域の延長線。</span>
+                        <span class="roadmap-period">2027年前半 目標</span>
+                        <strong class="roadmap-title">CCNA</strong>
+                        <span class="roadmap-detail">ネットワーク基礎（OSI / TCP/IP / ルーティング / スイッチング）を体系化。VLAN 構成図やネットワーク切り分けで扱った領域の延長線。</span>
                     </li>
                     <li class="roadmap-item">
-                        <span class="roadmap-period">2027 以降</span>
-                        <strong class="roadmap-title">CompTIA Server+ / Security+ / LPIC-2</strong>
-                        <span class="roadmap-detail">運用支援から運用設計側へ広げるための候補。実務で触れた領域とのギャップに応じて選定。</span>
+                        <span class="roadmap-period">2027年後半 目標</span>
+                        <strong class="roadmap-title">AWS Certified Solutions Architect - Associate（SAA）</strong>
+                        <span class="roadmap-detail">クラウド設計の基礎（VPC / EC2 / RDS / S3 / IAM）。Cloud Lab の Terraform 検証を実機学習として並行させる。</span>
                     </li>
                 </ol>
             </section>
@@ -416,32 +418,8 @@
     </footer>
 
 <!-- ============================================================
-     JavaScript（jQuery）処理：このページに動きを付ける
+     ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出は
+     js/main.js（vanilla JS）に集約している。
 ============================================================ -->
-<script>
-    // ===== ローダーの非表示処理 =====
-    // ページ読み込み完了時に、ローディング画面を800ミリ秒かけてフェードアウト
-    $(window).on('load', function() {
-        $('.loader').fadeOut(800);
-    });
-
-    // ===== ハンバーガーメニュー開閉処理 =====
-    // ボタンをクリックするたびに、ナビとボタンに「show / show2」クラスを付け外し
-    $(".res-menu").click(function () {
-        $("nav").toggleClass("show");
-        $(".res-menu").toggleClass("show2");
-    });
-
-    // ===== スクロール時のヘッダー縮小演出 =====
-    // 100px以上スクロールしたら header に「scrolled」クラスを追加
-    // → CSS側で背景の透明度・高さなどを変化させる
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
-            $('header').addClass('scrolled');
-        } else {
-            $('header').removeClass('scrolled');
-        }
-    });
-</script>
 </body>
 </html>
