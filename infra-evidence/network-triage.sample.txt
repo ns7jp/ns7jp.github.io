@@ -90,7 +90,7 @@ HOST: ops01                                Loss%   Snt   Last   Avg  Best  Wrst 
   3.|-- 203.0.113.254                      5.0%    20    2.1    2.3   1.9   8.4   1.1
   4.|-- ???                                100.0%  20    0.0    0.0   0.0   0.0   0.0
   5.|-- 203.0.113.10                       0.0%    20   12.4   13.1  11.8  22.5   2.4
-  6.|-- 93.184.216.34                      0.0%    20   12.6   13.0  11.9  18.7   1.8
+  6.|-- 192.0.2.53                         0.0%    20   12.6   13.0  11.9  18.7   1.8
 
 [判定]
 - 4 hop 目は ICMP 応答を返さないだけで、5 hop 以降は 0% loss。実通信は通っている。
@@ -107,7 +107,7 @@ $ dig +trace example.com +nodnssec
 ;; global options: +cmd
 .                       86400  IN  NS  a.root-servers.net.
 [... root → TLD → 権威 ...]
-example.com.            86400  IN  A   93.184.216.34
+example.com.            86400  IN  A   192.0.2.53
 ;; Received 1389 bytes from 199.43.135.53#53(a.iana-servers.net) in 28 ms
 
 

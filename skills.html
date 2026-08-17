@@ -22,6 +22,7 @@
     <!-- 検索エンジン用の説明文 -->
     <meta name="description" content="島田則幸のスキルページ。Linux、Ansible、Docker、Nginx、Prometheus、Grafana、Loki、Terraformと、構築・試験・障害対応の成果物を掲載しています。">
     <title>スキル | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/skills.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
     <meta property="og:title" content="スキル | 島田則幸のポートフォリオ">
@@ -33,8 +34,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
 
-    <!-- jQueryと共通スタイル類の読み込み -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
+    <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -66,20 +67,20 @@
     </div>
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
-    <p class="res-menu">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
-    </p>
+    </button>
 
     <!-- ===== ヘッダー（全ページ共通） ===== -->
     <header>
-        <h1 class="logo">
+        <p class="logo">
             <a href="index.html">
                 <span class="logo-main">島田則幸のポートフォリオ</span>
                 <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
             </a>
-        </h1>
-        <nav>
+        </p>
+        <nav id="site-nav">
             <ul>
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <!-- 現在ページ「Skills」を active クラスで強調 -->
@@ -97,10 +98,10 @@
     <section class="page-hero" style="background-image: url('image/skills.jpg');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
-            <h2 class="page-title">
+            <h1 class="page-title">
                 <span class="title-en">Skills</span>
                 <span class="title-jp">スキル</span>
-            </h2>
+            </h1>
         </div>
     </section>
 
@@ -123,8 +124,44 @@
                 <!-- スキルカードを並べるグリッドコンテナ -->
                 <div class="skill-cards-grid">
 
+                    <!-- ----- Linux / 監視 / 自動化 スキルカード ----- -->
+                    <!-- 第一志望のLinuxサーバー構築・運用に直結するスキル（Lab中心） -->
+                    <div class="skill-detail-card">
+                        <div class="skill-header">
+                            <div class="skill-icon-large infra">
+                                <i class="fa-brands fa-linux"></i>
+                            </div>
+                            <div class="skill-title">
+                                <h4>Linux / 監視 / 自動化</h4>
+                                <div class="skill-level">
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                    <span class="star"><i class="fa-regular fa-star"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-progress-bar">
+                            <div class="progress" style="width: 65%"></div>
+                        </div>
+                        <div class="skill-description">
+                            <ul>
+                                <li>Linux 一次切り分け bash スクリプト（systemd / journalctl / load / disk / ss）</li>
+                                <li>Prometheus + Grafana + node_exporter 監視スタック（Docker Compose で起動）</li>
+                                <li>Ansible playbook（SSH 強化 / UFW / fail2ban / auditd / unattended-upgrades）</li>
+                                <li>AWS VPC / Security Group / Terraform validate の Cloud Network Lab</li>
+                                <li>GitHub Actions による Docker Compose / promtool / Ansible / Terraform 検証</li>
+                                <li>rsync + systemd timer によるバックアップ / 月次リストアテスト計画</li>
+                                <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
+                                <li>XAMPP / Apache 環境構築・レンタルサーバーへのデプロイ運用</li>
+                                <li>Kubernetes <span class="learning-tag">学習中</span></li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <!-- ----- Windows / M365 / AD 運用支援 スキルカード ----- -->
-                    <!-- ITサポート実務の主戦場：端末・AD・M365・ネットワーク一次対応 -->
+                    <!-- IT サポート職を入口とする場合の実務スキル：端末・AD・M365・ネットワーク一次対応 -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large infra">
@@ -146,49 +183,13 @@
                         </div>
                         <div class="skill-description">
                             <ul>
-                                <li>PowerShell 8本（読み取り中心、JSON/CSV/HTML出力、Pesterテスト + CI付き）</li>
+                                <li>PowerShell 9本（読み取り中心、JSON/CSV/HTML出力、Pesterテスト + CI付き）</li>
                                 <li>Active Directory 棚卸し（休眠ユーザー抽出、所属グループ確認）</li>
                                 <li>Microsoft 365 ライセンス棚卸し（Microsoft Graph PowerShell SDK）</li>
-                                <li>PCキッティング / 退職オフボーディング / AD・M365変更ケース（Support Docs 10本）</li>
+                                <li>PCキッティング / 退職オフボーディング / AD・M365変更ケース（Support Docs 17本）</li>
                                 <li>ネットワーク基礎（TCP/IP・DNS・DHCP・Wi-Fi 接続トラブル）</li>
                                 <li>セキュリティベースライン確認（Defender / Firewall / BitLocker / Update）</li>
                                 <li>リモートサポート（Quick Assist・TeamViewer・AnyDesk）<span class="learning-tag">学習中</span></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- ----- Linux / 監視 / 自動化 スキルカード ----- -->
-                    <!-- 自学で取り組むサーバー運用・監視・IaC分野のスキル（Lab中心） -->
-                    <div class="skill-detail-card">
-                        <div class="skill-header">
-                            <div class="skill-icon-large infra">
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <div class="skill-title">
-                                <h4>Linux / 監視 / 自動化</h4>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 35%"></div>
-                        </div>
-                        <div class="skill-description">
-                            <ul>
-                                <li>Linux 一次切り分け bash スクリプト（systemd / journalctl / load / disk / ss）</li>
-                                <li>Prometheus + Grafana + node_exporter 監視スタック（Docker Compose で起動）</li>
-                                <li>Ansible playbook（SSH 強化 / UFW / fail2ban / auditd / unattended-upgrades）</li>
-                                <li>AWS VPC / Security Group / Terraform validate の Cloud Network Lab</li>
-                                <li>GitHub Actions による Docker Compose / promtool / Ansible / Terraform 検証</li>
-                                <li>rsync + systemd timer によるバックアップ / 月次リストアテスト計画</li>
-                                <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
-                                <li>XAMPP / Apache 環境構築・レンタルサーバーへのデプロイ運用</li>
-                                <li>Kubernetes <span class="learning-tag">学習中</span></li>
                             </ul>
                         </div>
                     </div>
@@ -702,42 +703,8 @@
     </footer>
 
 <!-- ============================================================
-     JavaScript（jQuery）処理：このページに動きを付ける
+     ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出は
+     js/main.js（vanilla JS）に集約している。
 ============================================================ -->
-<script>
-    // ===== ローダーの非表示処理 =====
-    // ページ読み込み完了時に、ローディング画面をフェードアウト
-    $(window).on('load', function() {
-        $('.loader').fadeOut(800);
-    });
-
-    // ===== ハンバーガーメニュー開閉処理 =====
-    $(".res-menu").click(function () {
-        $("nav").toggleClass("show");
-        $(".res-menu").toggleClass("show2");
-    });
-
-    // ===== スクロール時の演出 =====
-    $(window).scroll(function() {
-        // ヘッダー縮小：100px以上スクロールでscrolledクラス付与
-        if ($(this).scrollTop() > 100) {
-            $('header').addClass('scrolled');
-        } else {
-            $('header').removeClass('scrolled');
-        }
-
-        // スキルカードを順番にフェードイン表示
-        // 各 .skill-detail-card が画面に入ったら「visible」クラスを付与
-        // → CSSで透明度や位置をアニメーションさせる
-        $('.skill-detail-card').each(function() {
-            var elementTop = $(this).offset().top;                            // 要素の上端位置
-            var windowBottom = $(window).scrollTop() + $(window).height();    // 画面下端位置
-            // 画面下端が要素の上端を50px以上越えたら、表示状態に切り替え
-            if (windowBottom > elementTop + 50) {
-                $(this).addClass('visible');
-            }
-        });
-    });
-</script>
 </body>
 </html>

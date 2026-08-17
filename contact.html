@@ -19,19 +19,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="島田則幸の連絡先ページ。ポートフォリオ、Support Toolkit、6作品（Webアプリ・サーバー監視ダッシュボード等）、学習内容に関する連絡先を掲載しています。">
     <title>お問い合わせ | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/contact.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
     <meta property="og:title" content="お問い合わせ | 島田則幸のポートフォリオ">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/contact.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta property="og:description" content="島田則幸への連絡先。メール / GitHub / 履歴書PDF（1pager）の確認はこちら。ITサポート・社内SE補助・インフラ運用支援の応募を歓迎しています。">
+    <meta property="og:description" content="島田則幸への連絡先。メール / GitHub / 履歴書PDF（1pager）の確認はこちら。Linuxサーバー構築・運用を第一志望に、インフラ監視・運用、ITサポートへの応募を歓迎しています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
 
-    <!-- jQueryと共通スタイル類の読み込み -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
+    <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -72,20 +73,20 @@
     </div>
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
-    <p class="res-menu">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
-    </p>
+    </button>
 
     <!-- ===== ヘッダー（共通） ===== -->
     <header>
-        <h1 class="logo">
+        <p class="logo">
             <a href="index.html">
                 <span class="logo-main">島田則幸のポートフォリオ</span>
                 <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
             </a>
-        </h1>
-        <nav>
+        </p>
+        <nav id="site-nav">
             <ul>
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
@@ -102,10 +103,10 @@
     <section class="page-hero" style="background-image: url('image/contact.jpg');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
-            <h2 class="page-title">
+            <h1 class="page-title">
                 <span class="title-en">Contact</span>
                 <span class="title-jp">お問い合わせ</span>
-            </h2>
+            </h1>
         </div>
     </section>
 
@@ -115,7 +116,7 @@
 
             <!-- ===== 連絡先イントロ ===== -->
             <section class="contact-intro">
-                <h1>連絡先</h1>
+                <h2>連絡先</h2>
                 <p>作品や学習内容についてのご確認、応募・面談に関するご連絡は、以下の連絡先からお願いいたします。</p>
             </section>
 
@@ -178,7 +179,7 @@
                                         <!-- ----- 右：採用担当者向けメッセージカード ----- -->
                     <div class="contact-form-card contact-message-card">
                         <h3>For Recruiters</h3>
-                        <p>ポートフォリオをご覧いただきありがとうございます。<strong>ヘルプデスク／社内SE／運用監視・インフラ運用</strong>のポジションへの応募を希望しています。</p>
+                        <p>ポートフォリオをご覧いただきありがとうございます。第一志望は<strong>Linuxサーバー構築・運用</strong>です。入口としてインフラ監視・運用、IT サポート・社内SE補助のポジションへの応募も希望しています。</p>
                         <p>製造・物流現場で培った業務改善・トラブル対応の視点と、職業訓練で習得したIT技術を組み合わせて、PCサポート・問い合わせ一次対応・手順書整備・サーバー監視などに貢献したいと考えています。</p>
                         <p>Infra Operation Lab、Support Toolkit、サーバー監視ダッシュボード、業務改善ツールなどの成果物をGitHubで公開しています（<a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer">github.com/ns7jp</a>）。監視・証跡・障害切り分け対応例はInfra Lab／Works／Skillsページから確認できます。</p>
                         <!-- アクションボタン：メール送信／履歴書PDF／作品ページ -->
@@ -223,6 +224,39 @@
                             <span>Support Toolkit、Webアプリ、サーバー監視ツールなどの成果物をGitHubで公開しています。デモサイトや実務想定ドキュメントはWorksページから確認できます。</span>
                         </div>
                     </div>
+                    <!-- FAQ項目3 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i class="fa-solid fa-q"></i>
+                            <span>実務未経験ですが、どのように評価すればよいですか？</span>
+                        </div>
+                        <div class="faq-answer">
+                            <i class="fa-solid fa-a"></i>
+                            <span>大規模インフラの実務経験はこれからです。その前提のもと、設計・構築・試験・監視・障害復旧を一つの案件として実装し、「実装済み」と「実測済み」を区別して<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">検証証跡台帳</a>で公開しています。製造・物流現場で15年以上培った「計測し、原因を絞り、手順化して定着させる」進め方を、そのままサーバー運用の学び方に転用しています。</span>
+                        </div>
+                    </div>
+                    <!-- FAQ項目4 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i class="fa-solid fa-q"></i>
+                            <span>稼働開始はいつ頃可能ですか？</span>
+                        </div>
+                        <div class="faq-answer">
+                            <i class="fa-solid fa-a"></i>
+                            <span>〈稼働開始可能時期を記入してください。例：即日〜1か月以内、内定後1か月以内 など〉</span>
+                        </div>
+                    </div>
+                    <!-- FAQ項目5 -->
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <i class="fa-solid fa-q"></i>
+                            <span>希望する雇用形態・勤務地・リモート可否は？</span>
+                        </div>
+                        <div class="faq-answer">
+                            <i class="fa-solid fa-a"></i>
+                            <span>〈希望条件を記入してください。例：雇用形態（正社員 希望）、勤務地（埼玉県、通勤可能圏内 希望）、リモート可否（出社中心、一部リモート可 など） 〉</span>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -254,40 +288,8 @@
     </footer>
 
 <!-- ============================================================
-     JavaScript（jQuery）処理：このページに動きを付ける
+     ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出は
+     js/main.js（vanilla JS）に集約している。
 ============================================================ -->
-<script>
-    // ===== ローダーの非表示処理 =====
-    // 読み込み完了時にローダーを800ミリ秒かけてフェードアウト
-    $(window).on('load', function() {
-        $('.loader').fadeOut(800);
-    });
-
-    // ===== ハンバーガーメニュー開閉処理 =====
-    $(".res-menu").click(function () {
-        $("nav").toggleClass("show");
-        $(".res-menu").toggleClass("show2");
-    });
-
-    // ===== スクロール連動：ヘッダーの縮小演出 =====
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
-            $('header').addClass('scrolled');
-        } else {
-            $('header').removeClass('scrolled');
-        }
-    });
-
-    // ===== フォーム入力欄のフォーカス演出（このページでは未使用だが保持） =====
-    // 入力欄にフォーカスが入った時：親要素に「focused」クラスを付ける
-    // フォーカスが外れた時：値が空ならクラスを外す（フローティングラベル方式）
-    $('.input-wrapper input, .textarea-wrapper textarea').focus(function() {
-        $(this).parent().addClass('focused');
-    }).blur(function() {
-        if ($(this).val() === '') {
-            $(this).parent().removeClass('focused');
-        }
-    });
-</script>
 </body>
 </html>

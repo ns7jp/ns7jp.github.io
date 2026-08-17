@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="島田則幸のLinux運用Lab。systemd / journalctl / cron / SSH鍵 / 権限 / logrotate / rsyncバックアップなど、Linuxサーバー一次運用に必要な確認項目とコマンド例を整理しています。">
     <title>Linux Lab | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/linux-lab.html">
 
     <meta property="og:title" content="Linux Lab | 島田則幸のポートフォリオ">
     <meta property="og:type" content="website">
@@ -15,12 +16,24 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- ===== 構造化データ（JSON-LD）===== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Top", "item": "https://ns7jp.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Linux Lab", "item": "https://ns7jp.github.io/linux-lab.html" }
+      ]
+    }
+    </script>
 </head>
 <body>
     <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
@@ -32,19 +45,19 @@
         </div>
     </div>
 
-    <p class="res-menu">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
-    </p>
+    </button>
 
     <header>
-        <h1 class="logo">
+        <p class="logo">
             <a href="index.html">
                 <span class="logo-main">島田則幸のポートフォリオ</span>
                 <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
             </a>
-        </h1>
-        <nav>
+        </p>
+        <nav id="site-nav">
             <ul>
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
@@ -59,10 +72,10 @@
     <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
-            <h2 class="page-title">
+            <h1 class="page-title">
                 <span class="title-en">Linux Operation Lab</span>
                 <span class="title-jp">Linux 一次運用メモ</span>
-            </h2>
+            </h1>
         </div>
     </section>
 
@@ -299,23 +312,9 @@ WantedBy=timers.target
         </div>
     </footer>
 
-<script>
-    $(window).on('load', function() {
-        $('.loader').fadeOut(800);
-    });
-
-    $(".res-menu").click(function () {
-        $("nav").toggleClass("show");
-        $(".res-menu").toggleClass("show2");
-    });
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 100) {
-            $('header').addClass('scrolled');
-        } else {
-            $('header').removeClass('scrolled');
-        }
-    });
-</script>
+<!-- ============================================================
+     ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出は
+     js/main.js（vanilla JS）に集約している。
+============================================================ -->
 </body>
 </html>

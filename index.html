@@ -6,7 +6,7 @@
   概要       : サイトの顔となるページ。ヒーロー画像のスライドショー、
                自己紹介・スキル・作品の各プレビュー、CTA（連絡先誘導）を表示する。
   初学者向けの読み方:
-    1. head でSEO、CSS、jQuery、背景切替プラグインの読み込みを確認する
+    1. head でSEO、CSS、共通スクリプト（js/main.js）の読み込みを確認する
     2. header/nav で全ページ共通メニュー、hero で最初に見せる訴求を読む
     3. support-scope / quick-intro / skills-preview / works-preview / contact-cta を順に追う
     4. 末尾のscriptで、ローダー、メニュー、背景スライダー、スクロール演出を見る
@@ -57,10 +57,9 @@
     <title>Top | 島田則幸のポートフォリオ - Linuxサーバー構築・運用</title>
 
     <!-- ===== 外部スクリプト・CSSの読み込み ===== -->
-    <!-- jQuery本体（CDN経由）。$（ドルマーク）の記法でDOM操作を簡潔に書ける。 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- 背景画像を自動切替するjQueryプラグイン（ローカルファイル）。 -->
-    <script src="js/jquery.bgswitcher.js"></script>
+    <!-- サイト共通スクリプト（vanilla JS、外部ライブラリ非依存）。ローダー解除・メニュー開閉・
+         ヒーロー背景クロスフェード（旧jQueryプラグインの置き換え）などをここで一括管理する。 -->
+    <script src="js/main.js" defer></script>
     <!-- ブラウザ標準スタイルをリセットするCSS。表示崩れを防ぐ目的で先に読み込む。 -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- このサイト独自のスタイルシート。色・レイアウト・アニメーションを定義。 -->
@@ -94,7 +93,6 @@
           "name": "島田則幸",
           "alternateName": "Noriyuki Shimada",
           "url": "https://ns7jp.github.io/",
-          "image": "https://ns7jp.github.io/image/image.jpg",
           "jobTitle": "Linuxサーバー構築・運用エンジニア志望",
           "description": "Linuxサーバーの設計、Ansible構築、試験、Prometheus監視、障害復旧を扱うポートフォリオを公開しています。",
           "email": "mailto:net7jp@gmail.com",
@@ -123,25 +121,26 @@
     </div>
 
     <!-- ===== モバイル用メニュー切替ボタン（ハンバーガーメニュー） ===== -->
-    <!-- スマホ画面のときだけ表示される。タップするとナビゲーションが開閉する。 -->
-    <p class="res-menu">
+    <!-- スマホ画面のときだけ表示される。タップするとナビゲーションが開閉する。
+         button要素 + aria-expanded/aria-controls でキーボード・スクリーンリーダーからも操作できる。 -->
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
         <!-- 三本線（メニューを開くアイコン） -->
         <i class="fa-solid fa-bars"></i>
         <!-- バツ印（メニューを閉じるアイコン）。CSSで切替表示する。 -->
         <i class="fa-solid fa-xmark"></i>
-    </p>
+    </button>
 
     <!-- ===== ヘッダー（サイト共通の上部エリア） ===== -->
     <header>
-        <!-- サイトロゴ（h1なのでSEO上、最重要見出し）。クリックでトップへ戻る。 -->
-        <h1 class="logo">
+        <!-- サイトロゴ（全ページ共通のためh1にはせず、各ページ固有の見出しをh1にしている）。クリックでトップへ戻る。 -->
+        <p class="logo">
             <a href="index.html">
                 <span class="logo-main">島田則幸のポートフォリオ</span>
                 <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
             </a>
-        </h1>
+        </p>
         <!-- グローバルナビゲーション（全ページ共通のメニュー） -->
-        <nav>
+        <nav id="site-nav">
             <ul>
                 <!-- li要素1つ＝メニュー項目1つ。aタグでリンク、iタグでアイコンを表示。 -->
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
@@ -156,7 +155,7 @@
 
     <!-- ===== ヒーローセクション（ページ最上部の大きなビジュアルエリア） ===== -->
     <section class="hero" id="main" tabindex="-1">
-        <!-- 背景画像が自動で切り替わるエリア（jQueryプラグインで制御） -->
+        <!-- 背景画像が自動で切り替わるエリア（js/main.jsのvanilla JSで制御） -->
         <div class="hero-slider"></div>
         <!-- 背景画像の上に重ねる半透明のオーバーレイ（文字を読みやすくする） -->
         <div class="hero-overlay"></div>
@@ -164,10 +163,10 @@
         <div class="hero-content">
             <!-- アニメーションクラス「animate-fade-in」でCSS側でフェードイン演出 -->
             <p class="hero-greeting animate-fade-in">Welcome to my portfolio</p>
-            <h2 class="hero-title animate-slide-up">
+            <h1 class="hero-title animate-slide-up">
                 <span class="line1">Linux Server</span>
                 <span class="line2">Build &amp; Operations</span>
-            </h2>
+            </h1>
             <p class="hero-description animate-fade-in-delay">Ubuntuの設計・構築・試験から、<br>監視、障害切り分け、復旧までを一つの案件として公開しています</p>
             <div class="hero-proof-grid animate-fade-in-delay2" aria-label="Linuxサーバー構築・運用の公開成果">
                 <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
@@ -287,13 +286,13 @@
             <div class="toolkit-grid">
                 <a href="works.html#work-support-toolkit" class="toolkit-card">
                     <span class="toolkit-label">Docs</span>
-                    <strong>10本の手順書</strong>
+                    <strong>17本の手順書</strong>
                     <p>PCキッティング、退職者対応、権限管理、M365ライセンス、AD/M365変更、障害・インシデント、Postmortem、Backup Runbook を整理。</p>
                 </a>
                 <a href="works.html#work-support-toolkit" class="toolkit-card">
                     <span class="toolkit-label">Scripts</span>
                     <strong>9本のスクリプト + Pester</strong>
-                    <p>PowerShell 8本 + Linux bash 1本。Pester 25テスト + PSScriptAnalyzer を GitHub Actions で自動実行。</p>
+                    <p>PowerShell 9本 + Linux bash 1本。Pester 25テスト + PSScriptAnalyzer を GitHub Actions で自動実行。</p>
                 </a>
                 <a href="works.html#work-infra-lab" class="toolkit-card">
                     <span class="toolkit-label">Lab / IaC</span>
@@ -346,27 +345,16 @@
             </h3>
             <!-- 4つのスキルカードをCSS Gridで並べるエリア -->
             <div class="skills-grid">
-                <!-- 各カードはアイコン・スキル名・進捗バーで構成 -->
+                <!-- 各カードはアイコン・スキル名・進捗バーで構成。第一志望のLinuxサーバー構築・運用を先頭に表示 -->
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-brands fa-windows"></i>
+                        <i class="fa-solid fa-server"></i>
                     </div>
-                    <h4>Windows / M365 / AD</h4>
-                    <p>PCキッティング、権限、ライセンス、共有フォルダを想定</p>
-                    <!-- スキルバーの外枠 -->
+                    <h4>Linux / Monitoring</h4>
+                    <p>Ansible構築、Prometheus / Grafana監視、ログ確認、プロセス確認</p>
                     <div class="skill-bar">
                         <!-- data-progress属性に進捗値（％）を入れておき、JSで幅を反映させる。 -->
-                        <div class="skill-progress" data-progress="70"></div>
-                    </div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-terminal"></i>
-                    </div>
-                    <h4>PowerShell</h4>
-                    <p>端末情報、ログ、容量、セキュリティ状態を読み取り中心で確認</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-progress="75"></div>
+                        <div class="skill-progress" data-progress="65"></div>
                     </div>
                 </div>
                 <div class="skill-card">
@@ -381,12 +369,22 @@
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-solid fa-server"></i>
+                        <i class="fa-solid fa-terminal"></i>
                     </div>
-                    <h4>Linux / Monitoring</h4>
-                    <p>ログ確認、プロセス確認、リソース監視の基礎</p>
+                    <h4>PowerShell</h4>
+                    <p>端末情報、ログ、容量、セキュリティ状態を読み取り中心で確認</p>
                     <div class="skill-bar">
-                        <div class="skill-progress" data-progress="55"></div>
+                        <div class="skill-progress" data-progress="75"></div>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fa-brands fa-windows"></i>
+                    </div>
+                    <h4>Windows / M365 / AD</h4>
+                    <p>PCキッティング、権限、ライセンス、共有フォルダを想定</p>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="70"></div>
                     </div>
                 </div>
             </div>
@@ -527,92 +525,9 @@
     </footer>
 
 <!-- ============================================================
-     ここから下はJavaScript（jQuery）コード。
-     ページに「動き」を付けるための処理をまとめている。
+     ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出・
+     ヒーロー背景クロスフェードは js/main.js（vanilla JS）に集約している。
 ============================================================ -->
-<script>
-    // ===== ローダーの非表示処理 =====
-    // window（ブラウザの画面全体）の load イベント＝ページが画像も含めて完全に読み込まれた瞬間。
-    // そのタイミングで .loader 要素を800ミリ秒かけてフェードアウトさせる。
-    $(window).on('load', function() {
-        $('.loader').fadeOut(800);
-    });
-
-    // ===== ハンバーガーメニューの開閉処理 =====
-    // .res-menu（三本線アイコン）がクリックされたら、
-    //  - <nav>に「show」クラスを付け外しする → ナビが表示/非表示される
-    //  - .res-menu自身に「show2」クラスを付け外し → アイコンが「×」と切替わる
-    $(".res-menu").click(function () {
-        $("nav").toggleClass("show");
-        $(".res-menu").toggleClass("show2");
-    });
-
-    // ===== ヒーロー背景の画像切替（bgswitcherプラグイン） =====
-    // .hero-slider要素に対して、4枚の画像を5秒ごとに自動でフェード切替する設定。
-    $(".hero-slider").bgswitcher({
-        // 切り替えたい画像ファイルのパスを配列で指定
-        images: [
-            "image/works.jpg",
-            "image/me.jpg",
-            "image/contact.jpg",
-            "image/skills.jpg",
-        ],
-        effect: "fade",      // 切替演出：フェード（じわっと変化）
-        shuffle: true,       // 画像順をランダムにシャッフル
-        easing: "swing",     // アニメーションの動きの緩急
-        duration: 1500,      // 1回の切替にかける時間（1.5秒）
-        interval: 5000       // 次の切替までの間隔（5秒）
-    });
-
-    // ===== スクロール時の各種演出 =====
-    // 画面をスクロールするたびに発火するイベント。
-    $(window).scroll(function() {
-        // ----- ヘッダーの縮小 -----
-        // 100px以上スクロールしたら header に「scrolled」クラスを付与
-        // → CSS側で背景色を濃くしたりサイズを小さくする
-        if ($(this).scrollTop() > 100) {
-            $('header').addClass('scrolled');
-        } else {
-            $('header').removeClass('scrolled');
-        }
-
-        // ----- スキルバーのアニメーション -----
-        // 各 .skill-progress について、画面内に入ったら data-progress の値を width として適用。
-        $('.skill-progress').each(function() {
-            var elementTop = $(this).offset().top;                            // 要素の上端位置
-            var windowBottom = $(window).scrollTop() + $(window).height();    // 画面下端位置
-            // 画面下端が要素の上端を超えたら＝要素が画面に入ってきた
-            if (windowBottom > elementTop) {
-                var progress = $(this).data('progress');                      // 例：60
-                $(this).css('width', progress + '%');                         // 「60%」と幅を設定
-            }
-        });
-
-        // ----- セクションのフェードイン -----
-        // 各セクションが画面下端から100px以上見えるようになったら「visible」クラスを付与。
-        // CSS側で .visible が付くとふわっと表示される設定にしている。
-        $('.hiring-summary, .support-scope, .quick-intro, .skills-preview, .works-preview, .contact-cta').each(function() {
-            var elementTop = $(this).offset().top;
-            var windowBottom = $(window).scrollTop() + $(window).height();
-            if (windowBottom > elementTop + 100) {
-                $(this).addClass('visible');
-            }
-        });
-    });
-
-    // ===== ページ内アンカーリンクのスムーススクロール =====
-    // href が「#」で始まるリンクをクリックした時、ジャンプではなく滑らかに移動させる。
-    $('a[href^="#"]').on('click', function(e) {
-        e.preventDefault();                              // デフォルトのジャンプ動作をキャンセル
-        var target = $(this.getAttribute('href'));       // 飛び先の要素を取得
-        if (target.length) {
-            // ヘッダー分（80px）上に余白を確保して、800ミリ秒かけて移動
-            $('html, body').animate({
-                scrollTop: target.offset().top - 80
-            }, 800);
-        }
-    });
-</script>
 <script src="js/lightbox.js"></script>
 </body>
 </html>

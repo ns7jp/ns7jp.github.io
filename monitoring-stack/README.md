@@ -131,7 +131,7 @@ Grafana > Explore で Loki を選び、以下のクエリで現場と同じ調�
 
 - **自作 Flask 監視ダッシュボード** ([ns7jp/server-monitor](https://github.com/ns7jp/server-monitor)) は **psutil の挙動とAPI設計の学習** が目的
 - **このスタック** は **既存運用に合流できる "業界標準" を扱える** ことを示すのが目的
-- Metrics (Prometheus) と Logs (Loki) を**同一 UI から横断検索**できる構成にすることで、観測性の三本柱のうち二本を Lab で実機運用していることを示す
+- Metrics (Prometheus) と Logs (Loki) を**同一 UI から横断検索**できる構成にすることで、観測性の三本柱のうち二本を Lab 向けに設計・実装していることを示す（現時点の検証証跡は `docker compose config` / `promtool check` / `loki -verify-config` / `promtail -check-syntax` による**構成・構文検証**まで — 実際に起動した Grafana / Loki の画面キャプチャやアラート発火ログなど、稼働中の実機観測はまだ未取得）
 - 両方を同じポートフォリオ上に並べることで、自作と既製の **棲み分けを理解している** ことを伝える
 
 ---
