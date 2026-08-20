@@ -42,22 +42,9 @@
 | [M365 ポリシー定義](./support-docs/m365-policy-examples/) | Intune / 条件付きアクセス / Defender ASR の JSON 定義 |
 | [Infra Evidence](./infra-evidence/) / [Production Readiness](./production-readiness.md) | 検証コマンド、失敗 → 修正サンプル、本番化差分 |
 | [Ansible Playbook](./ansible/) / [CIS Benchmark マッピング](./ansible/cis-benchmark-mapping.md) | SSH強化 / UFW / fail2ban / auditd / 自動更新 + **CIS L1 主要項目 約 65% カバー** |
-| [面接 想定 FAQ](./support-docs/interview-faq.md) | 製造業 18 年からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等の自答 |
+| [面接 想定 FAQ](./support-docs/interview-faq.md) | 製造業 15 年以上からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等の自答 |
 
 成果の見え方としては、Infra Operation Lab で **VLAN 構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Cloud Lab で **VPC / Subnet / Security Group / Terraform 検証** を補い、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測（Metrics + Logs）」を一通り** 示しています。Support Toolkit では **17 手順書・9 PowerShell + 1 bash・25 Pesterテスト・AD/M365変更ケース・Postmortem 実例・Backup/RTO/RPO/DR ドリル・フェイルオーバー手順・ネットワーク切り分け証跡・SLO・チケット分類・物理層・M365 ポリシー JSON** を公開し、Infra Evidence と Production Readiness で **検証証跡と本番化差分**、Ansible playbook の **CIS Benchmark 対応マッピング** で **業界標準との整合性** も追えるようにしました。
-
-### 想定 KPI / 業務改善見込み（架空数値）
-
-Lab の各成果物が、現場でどの程度の効果を狙えるかの**架空見積もり**です。実機 / 業務環境での検証はこれからです。
-
-| 成果物 | 主な対象作業 | 想定削減 |
-|---|---|---|
-| `New-EndpointDailyReport.ps1` | 朝の端末ヘルスチェック（240台） | **20h/月 → 1h/月**（19h 削減）|
-| Pester + PSScriptAnalyzer (GitHub Actions) | スクリプト変更レビュー工数 | **1 変更あたり 30 分 → 5 分** |
-| 障害対応事例集 + チケット分類フロー | 一次受付の判断時間 | **1 件あたり 10 分 → 3 分**（240 件/月で 28h 削減）|
-| Backup Runbook + RTO/RPO 表 | リストア対応時の調査時間 | **2h → 30m**（年 6 件想定で 9h 削減）|
-| Ansible playbook | サーバー初期構築 | **1 台 4h → 30 分**（年 10 台で 35h 削減）|
-| Monitoring Stack (Metrics + Logs) | 障害時のログ調査 | **30 分 → 5 分**（月 12 件で 5h 削減）|
 
 公共職業訓練（2025年10月〜2026年1月）で学んだ開発基礎を起点に、**Linuxサーバー構築・運用**を第一志望としてまとめたポートフォリオサイトです。主作品の Server Monitor では、設計、Ansible構築、試験、Prometheus監視、障害切り分け、復旧までを一つの案件として公開しています。
 
