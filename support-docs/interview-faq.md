@@ -47,7 +47,7 @@ ITサポート・社内SE補助・インフラ運用支援の選考で問われ�
 - Ansible / Terraform / Prometheus は CI で構文検証 + ルール検証を回している（[Infra Evidence](../infra-evidence/) 参照）
 - 障害対応の「型」だけでなく、Postmortem 実例・RTO/RPO / DR ドリル計画まで含めている
 
-その上で、LPIC-1 → 基本情報技術者試験（FE） → CCNA → AWS Certified Solutions Architect - Associate（SAA） の学習ロードマップ（[Resume](https://ns7jp.github.io/resume.html)）は、**Lab で触れているものと整合**するよう順序を組んでいます。資格は「知識の確認」、Lab は「動かす体感」、両方を回す方針です。
+その上で、基本情報技術者試験（FE、現在の最優先） → LPIC-1（並行して学習中） → CCNA → AWS Certified Solutions Architect - Associate（SAA） の学習ロードマップ（[Resume](https://ns7jp.github.io/resume.html)）は、**Lab で触れているものと整合**するよう順序を組んでいます。資格は「知識の確認」、Lab は「動かす体感」、両方を回す方針です。
 
 ---
 
