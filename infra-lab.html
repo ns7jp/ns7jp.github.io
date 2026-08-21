@@ -19,6 +19,9 @@
     <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -83,17 +86,16 @@
         <div class="container">
 
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="active" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server"></i> Build Package</a>
-                <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux Operations</a>
+                <a href="infra-lab.html" class="active"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux</a>
                 <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
                 <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack</a>
                 <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
-                <a href="#windows-support"><i class="fa-brands fa-windows"></i> Windows Support</a>
             </nav>
 
             <section class="lab-intro">
                 <span class="case-label">Ubuntu / Ansible / Docker Scenario</span>
-                <h3>設計、構築、試験、監視、障害復旧までを1つの案件で見せるLab</h3>
+                <h2>設計、構築、試験、監視、障害復旧までを1つの案件で見せるLab</h2>
                 <p>主作品の Server Monitor を Ubuntu 1台のサーバー構築案件と見立て、基本・詳細設計、パラメータ、Ansible構築、単体・結合試験、監視、二セグメント通信障害、引き渡しまでを工程順に整理しました。コードと実測結果は証跡台帳で明確に分けています。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-file-lines"></i> Design</span>
@@ -158,7 +160,7 @@
 
                 <div class="lab-architecture-grid" style="margin-top:34px;">
                     <div class="architecture-notes">
-                        <h4>想定運用シナリオ</h4>
+                        <h3>想定運用シナリオ</h3>
                         <ul>
                             <li>問い合わせ受付後、端末・ネットワーク・アカウント・ライセンスを順に確認する。</li>
                             <li>確認結果はチケットへ添付しやすい JSON / CSV / HTML に残す。</li>
@@ -167,7 +169,7 @@
                         </ul>
                     </div>
                     <div class="architecture-notes">
-                        <h4>セグメント設計の考え方</h4>
+                        <h3>セグメント設計の考え方</h3>
                         <ul>
                             <li><strong>DMZ VLAN 10</strong>: 外部公開サービスのみ。内部VLANへの戻りはACLで明示許可されたものだけ。</li>
                             <li><strong>Server VLAN 20</strong>: AD/DNS/DHCP/ファイル/監視。クライアントVLANから必要ポートのみ許可。</li>
@@ -232,27 +234,27 @@
                 <div class="incident-flow">
                     <div class="flow-step">
                         <span>01</span>
-                        <h4>受付</h4>
+                        <h3>受付</h3>
                         <p>現象、発生時刻、対象者、業務影響、再現条件を確認。</p>
                     </div>
                     <div class="flow-step">
                         <span>02</span>
-                        <h4>切り分け</h4>
+                        <h3>切り分け</h3>
                         <p>端末、ネットワーク、アカウント、サービス側を順に分離。</p>
                     </div>
                     <div class="flow-step">
                         <span>03</span>
-                        <h4>証跡保存</h4>
+                        <h3>証跡保存</h3>
                         <p>確認コマンド、ログ、スクリーンショット、出力ファイルを添付。</p>
                     </div>
                     <div class="flow-step">
                         <span>04</span>
-                        <h4>対応・連携</h4>
+                        <h3>対応・連携</h3>
                         <p>一次対応で収まらない場合は影響範囲と仮説を添えて引き継ぎ。</p>
                     </div>
                     <div class="flow-step">
                         <span>05</span>
-                        <h4>再発防止</h4>
+                        <h3>再発防止</h3>
                         <p>手順書更新、FAQ化、監視項目追加、棚卸し対象化を検討。</p>
                     </div>
                 </div>
@@ -260,7 +262,7 @@
 
             <section class="lab-links-section">
                 <div class="lab-link-card">
-                    <h4><i class="fa-solid fa-folder-open"></i> 公開済みの証跡サンプル</h4>
+                    <h3><i class="fa-solid fa-folder-open"></i> 公開済みの証跡サンプル</h3>
                     <p>実行後に何が残るかを確認しやすいよう、架空端末・架空ユーザーのサンプル出力を用意しています。</p>
                     <div class="contact-actions">
                         <a href="support-scripts/samples/pc-inventory.sample.json" class="btn btn-secondary">JSONを見る</a>
@@ -269,7 +271,7 @@
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h4><i class="fa-solid fa-arrows-spin"></i> 関連 Lab / Runbook</h4>
+                    <h3><i class="fa-solid fa-arrows-spin"></i> 関連 Lab / Runbook</h3>
                     <p>第一導線は Linux サーバー構築案件パックです。補助成果として、Windows / M365 / AD、Cloud Network、Support Toolkit、チケット分類、物理層、M365 ポリシー JSON も確認できます。</p>
                     <div class="next-scope-list">
                         <span><a href="linux-lab.html" style="color:inherit;">Linux Lab</a></span>

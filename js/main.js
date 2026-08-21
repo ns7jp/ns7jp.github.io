@@ -106,18 +106,6 @@
         });
     }
 
-    /* ===== contact.html：入力欄フォーカス時のラベル演出 ===== */
-    document.querySelectorAll('.input-wrapper input, .textarea-wrapper textarea').forEach(function (field) {
-        field.addEventListener('focus', function () {
-            field.parentElement.classList.add('focused');
-        });
-        field.addEventListener('blur', function () {
-            if (field.value === '') {
-                field.parentElement.classList.remove('focused');
-            }
-        });
-    });
-
     /* ===== index.html：ヒーロー背景のクロスフェード（旧 jquery.bgswitcher.js の置き換え） ===== */
     var heroSlider = document.querySelector('.hero-slider');
     if (heroSlider) {
