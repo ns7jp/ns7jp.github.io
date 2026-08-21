@@ -768,7 +768,7 @@ header nav ul li a::after {
     text-transform: uppercase;
 }
 
-.summary-card h4 {
+.summary-card h3 {
     font-size: 1.8rem;
     color: var(--text-dark);
     margin-bottom: 14px;
@@ -786,6 +786,47 @@ header nav ul li a::after {
     gap: 18px;
     flex-wrap: wrap;
     margin-top: 48px;
+}
+
+/* ========================================
+   9-1. Time Budget Section - 時間予算別ナビゲーション
+   ----------------------------------------
+   index.html の「5分/15分/30分で見る」導線。.summary-cardを再利用し、
+   カード内は段落の代わりにリンク付きリストで構成する。
+======================================== */
+.time-budget {
+    padding: 0 0 100px;
+    background: var(--bg-warm);
+}
+
+.time-budget-links {
+    list-style: none;
+}
+
+.time-budget-links li {
+    margin-bottom: 16px;
+}
+
+.time-budget-links li:last-child {
+    margin-bottom: 0;
+}
+
+.time-budget-links a {
+    display: block;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.time-budget-links a:hover {
+    color: var(--accent-gold);
+}
+
+.time-budget-links span {
+    display: block;
+    font-size: 1.3rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-top: 2px;
 }
 
 /* ========================================
@@ -857,7 +898,7 @@ header nav ul li a::after {
     margin-bottom: 22px;
 }
 
-.support-scope-card h4 {
+.support-scope-card h3 {
     font-size: 1.7rem;
     font-weight: 500;
     color: var(--text-dark);
@@ -1058,7 +1099,7 @@ header nav ul li a::after {
     color: var(--text-light);
 }
 
-.skill-card h4 {
+.skill-card h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
@@ -1159,7 +1200,7 @@ header nav ul li a::after {
     font-weight: 500;
 }
 
-.work-overlay h4 {
+.work-overlay h3 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     color: var(--text-light);
@@ -1186,7 +1227,7 @@ header nav ul li a::after {
     transform: translateY(0);
 }
 
-.cta-content h3 {
+.cta-content h2 {
     font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
     font-weight: 400;
@@ -1589,7 +1630,7 @@ footer {
     letter-spacing: 1px;
 }
 
-.timeline-content h4 {
+.timeline-content h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     font-weight: 400;
@@ -1639,7 +1680,7 @@ footer {
     color: var(--accent-gold);
 }
 
-.license-info h4 {
+.license-info h3 {
     font-size: 1.5rem;
     font-weight: 500;
     color: var(--text-dark);
@@ -1855,7 +1896,7 @@ footer {
     color: var(--accent-gold);
 }
 
-.hobby-card h4 {
+.hobby-card h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.4rem;
     color: var(--text-light);
@@ -1945,7 +1986,7 @@ footer {
     color: var(--primary-color);
 }
 
-.skill-title h4 {
+.skill-title h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.6rem;
     font-weight: 600;
@@ -2096,7 +2137,7 @@ footer {
     color: var(--nature-green);
 }
 
-.soft-skill-item h4 {
+.soft-skill-item h3 {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.4rem;
     font-weight: 600;
@@ -2143,7 +2184,7 @@ footer {
     text-transform: uppercase;
 }
 
-.support-case-card h4 {
+.support-case-card h3 {
     font-size: 1.6rem;
     color: var(--text-dark);
     margin-bottom: 16px;
@@ -2210,7 +2251,7 @@ footer {
     margin-bottom: 28px;
 }
 
-.ticket-heading h4 {
+.ticket-heading h3 {
     font-family: 'Playfair Display', serif;
     font-size: 2.1rem;
     color: var(--text-dark);
@@ -2316,7 +2357,7 @@ footer {
     object-fit: cover;
 }
 
-.works-intro .intro-text h3 {
+.works-intro .intro-text h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 400;
@@ -2580,7 +2621,7 @@ footer {
     color: var(--accent-gold);
 }
 
-.overlay-content h4 {
+.overlay-content h3 {
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
     font-weight: 400;
@@ -2626,7 +2667,7 @@ footer {
     color: var(--accent-gold);
 }
 
-.work-details h4 {
+.work-details h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.8rem;
     font-weight: 400;
@@ -2763,7 +2804,7 @@ footer {
     border-left: 3px solid var(--accent-bronze);
 }
 
-.work-troubleshoot h5 {
+.work-troubleshoot h4 {
     font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
     font-size: 1.3rem;
     font-weight: 600;
@@ -2772,7 +2813,7 @@ footer {
     letter-spacing: 0.5px;
 }
 
-.work-troubleshoot h5 i {
+.work-troubleshoot h4 i {
     color: var(--accent-bronze);
     margin-right: 8px;
 }
@@ -2819,7 +2860,7 @@ footer {
     border-radius: 2px;
 }
 
-.work-usage h5 {
+.work-usage h4 {
     font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
     font-size: 1.3rem;
     font-weight: 600;
@@ -2828,7 +2869,7 @@ footer {
     letter-spacing: 0.5px;
 }
 
-.work-usage h5 i {
+.work-usage h4 i {
     color: var(--nature-olive);
     margin-right: 8px;
 }
@@ -2893,7 +2934,7 @@ footer {
     text-align: center;
 }
 
-.lab-intro h3 {
+.lab-intro h2 {
     font-family: 'Playfair Display', 'Noto Serif JP', serif;
     font-size: 3rem;
     font-weight: 400;
@@ -3009,8 +3050,8 @@ footer {
     border: 1px solid var(--bg-sand);
 }
 
-.architecture-notes h4,
-.lab-link-card h4 {
+.architecture-notes h3,
+.lab-link-card h3 {
     font-size: 2rem;
     color: var(--text-dark);
     margin-bottom: 18px;
@@ -3096,7 +3137,7 @@ footer {
     letter-spacing: 1.2px;
 }
 
-.flow-step h4 {
+.flow-step h3 {
     font-size: 1.7rem;
     color: var(--text-dark);
     margin-bottom: 10px;
@@ -3370,7 +3411,7 @@ footer {
     margin-bottom: 25px;
 }
 
-.coming-soon-content h3 {
+.coming-soon-content h2 {
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
     font-weight: 400;
@@ -3543,128 +3584,6 @@ footer {
     flex-wrap: wrap;
     gap: 14px;
     margin-top: 35px;
-}
-
-.contact-form .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-    margin-bottom: 25px;
-}
-
-.contact-form .form-group {
-    margin-bottom: 20px;
-}
-
-.contact-form .form-group.full-width {
-    grid-column: span 2;
-}
-
-.contact-form label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.contact-form .label-text {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: var(--text-dark);
-}
-
-.contact-form .required {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
-    padding: 3px 8px;
-    background: var(--nature-green);
-    color: var(--text-light);
-    letter-spacing: 0.5px;
-}
-
-.contact-form .optional {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
-    padding: 3px 8px;
-    background: var(--text-muted);
-    color: var(--text-light);
-}
-
-.input-wrapper {
-    position: relative;
-}
-
-.input-wrapper i {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    font-size: 1.4rem;
-    transition: var(--transition-smooth);
-}
-
-.input-wrapper input {
-    width: 100%;
-    padding: 16px 16px 16px 50px;
-    font-size: 1.5rem;
-    font-family: inherit;
-    border: 1px solid var(--bg-sand);
-    background: var(--bg-cream);
-    transition: var(--transition-smooth);
-}
-
-.input-wrapper input:focus {
-    outline: none;
-    border-color: var(--accent-gold);
-    background: var(--bg-white);
-}
-
-.input-wrapper.focused i {
-    color: var(--accent-gold);
-}
-
-.textarea-wrapper textarea {
-    width: 100%;
-    height: 180px;
-    padding: 16px;
-    font-size: 1.5rem;
-    font-family: inherit;
-    border: 1px solid var(--bg-sand);
-    background: var(--bg-cream);
-    resize: vertical;
-    transition: var(--transition-smooth);
-}
-
-.textarea-wrapper textarea:focus {
-    outline: none;
-    border-color: var(--accent-gold);
-    background: var(--bg-white);
-}
-
-.form-submit {
-    text-align: center;
-    margin-top: 35px;
-}
-
-.btn-submit {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 18px 50px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 500;
-    letter-spacing: 2px;
-    color: var(--text-light);
-    background: var(--primary-color);
-    border: none;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-}
-
-.btn-submit:hover {
-    background: var(--accent-gold);
 }
 
 /* FAQ Section */
@@ -4214,11 +4133,11 @@ article p {
         padding: 30px;
     }
     
-    .cta-content h3 {
+    .cta-content h2 {
         font-size: 2.5rem;
     }
 
-    .lab-intro h3 {
+    .lab-intro h2 {
         font-size: 2.4rem;
     }
 

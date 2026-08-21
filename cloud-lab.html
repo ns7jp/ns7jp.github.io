@@ -19,6 +19,9 @@
     <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -92,7 +95,7 @@
 
             <section class="lab-intro">
                 <span class="case-label">AWS VPC / Terraform Scenario</span>
-                <h3>オンプレの VLAN / ACL とクラウドの VPC / SG を対応づけるLab</h3>
+                <h2>オンプレの VLAN / ACL とクラウドの VPC / SG を対応づけるLab</h2>
                 <p>クラウド運用の入口として、AWS VPC、Public / Private Subnet、Route Table、Security Group を最小構成で整理しました。Terraform は構文検証までを CI に乗せ、課金インパクトが出やすい EC2 / NAT Gateway / Elastic IP は初期構成から外しています。</p>
                 <div class="lab-badges" aria-label="Cloud Labで確認できる領域">
                     <span><i class="fa-brands fa-aws"></i> AWS</span>
@@ -197,7 +200,7 @@
                 </div>
                 <div class="lab-architecture-grid">
                     <div class="architecture-notes">
-                        <h4>変更前確認</h4>
+                        <h3>変更前確認</h3>
                         <ul>
                             <li><code>terraform fmt -check</code> で書式を揃える。</li>
                             <li><code>terraform init -backend=false</code> で provider 取得と初期化を検証。</li>
@@ -205,7 +208,7 @@
                         </ul>
                     </div>
                     <div class="architecture-notes">
-                        <h4>セキュリティ</h4>
+                        <h3>セキュリティ</h3>
                         <ul>
                             <li>SSH は <code>admin_cidr</code> のみに限定し、<code>0.0.0.0/0</code> を禁止。</li>
                             <li>Private 側は Bastion SG からの SSH / node_exporter のみ許可。</li>
@@ -213,7 +216,7 @@
                         </ul>
                     </div>
                     <div class="architecture-notes">
-                        <h4>コスト</h4>
+                        <h3>コスト</h3>
                         <ul>
                             <li>初期構成では EC2 / NAT Gateway / Elastic IP を作らない。</li>
                             <li>追加する場合は Budget Alert と削除手順を先に用意する。</li>
@@ -221,7 +224,7 @@
                         </ul>
                     </div>
                     <div class="architecture-notes">
-                        <h4>本番化差分</h4>
+                        <h3>本番化差分</h3>
                         <ul>
                             <li>CloudTrail、VPC Flow Logs、GuardDuty、Security Hub を追加。</li>
                             <li>CloudWatch Alarm と通知先を Runbook に紐づける。</li>
@@ -233,7 +236,7 @@
 
             <section class="lab-links-section">
                 <div class="lab-link-card">
-                    <h4><i class="fa-solid fa-code-branch"></i> Terraform と検証証跡</h4>
+                    <h3><i class="fa-solid fa-code-branch"></i> Terraform と検証証跡</h3>
                     <p>Cloud Lab の詳細設計、Terraform、CIで実行する検証コマンドを確認できます。</p>
                     <div class="contact-actions">
                         <a href="cloud-lab/" class="btn btn-secondary">Cloud Lab README</a>
@@ -242,7 +245,7 @@
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h4><i class="fa-solid fa-shield"></i> 本番化で足すもの</h4>
+                    <h3><i class="fa-solid fa-shield"></i> 本番化で足すもの</h3>
                     <p>Lab と本番運用の差分を、監視、通知、認証、秘密情報、バックアップ、変更管理の観点で整理しています。SLO の数値化、チケット分類、M365 ポリシーの JSON 化など、運用品質の補強もセットで参照できます。</p>
                     <div class="next-scope-list">
                         <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>

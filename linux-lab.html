@@ -19,6 +19,9 @@
     <script src="js/main.js" defer></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -92,7 +95,7 @@
 
             <section class="lab-intro">
                 <span class="case-label">Ubuntu / RHEL family Scenario</span>
-                <h3>「サーバーが重い」「ログインできない」を同じ順で確認するLab</h3>
+                <h2>「サーバーが重い」「ログインできない」を同じ順で確認するLab</h2>
                 <p>Linuxサーバー（Ubuntu / RHEL系）の一次運用で、まず見るべきところを <strong>負荷・ディスク・サービス・ログ・ネットワーク・認証・ファイアウォール</strong> の順に整理しました。すべて読み取り操作のみで構成し、設定変更や再起動は手順を分けています。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-microchip"></i> systemd</span>
@@ -179,7 +182,7 @@
                 </div>
                 <div class="lab-architecture-grid">
                     <div class="architecture-notes">
-                        <h4>SSH 鍵運用</h4>
+                        <h3>SSH 鍵運用</h3>
                         <ul>
                             <li>鍵は <code>ssh-keygen -t ed25519</code> で作成し、パスフレーズを必ず設定する。</li>
                             <li>サーバー側 <code>~/.ssh/authorized_keys</code> は <code>chmod 600</code>、ディレクトリは <code>700</code>。</li>
@@ -188,7 +191,7 @@
                         </ul>
                     </div>
                     <div class="architecture-notes">
-                        <h4>権限・ファイルシステム</h4>
+                        <h3>権限・ファイルシステム</h3>
                         <ul>
                             <li><code>chown</code> / <code>chmod</code> は最小権限。共有は POSIX ACL（<code>setfacl</code>）で個別付与。</li>
                             <li>機密ファイルは <code>chmod 640</code> + 専用グループ。<code>ls -la</code> で確認。</li>
@@ -196,7 +199,7 @@
                         </ul>
                     </div>
                     <div class="architecture-notes">
-                        <h4>cron / systemd timer</h4>
+                        <h3>cron / systemd timer</h3>
                         <ul>
                             <li>OS全体: <code>/etc/cron.d/</code> / <code>/etc/cron.daily/</code>、ユーザー: <code>crontab -l</code>。</li>
                             <li>新規はできるだけ systemd timer を選び、ログを <code>journalctl -u xxx.timer</code> で追えるようにする。</li>
@@ -204,7 +207,7 @@
                         </ul>
                     </div>
                     <div class="architecture-notes">
-                        <h4>logrotate</h4>
+                        <h3>logrotate</h3>
                         <ul>
                             <li><code>/etc/logrotate.d/</code> 配下にサービス単位で配置。サイズ / 日付ローテ、保持世代、圧縮を指定。</li>
                             <li>新規アプリ追加時は logrotate 設定とディスク使用率監視を同時に追加。</li>
@@ -220,7 +223,7 @@
                     <span class="heading-text">rsync によるバックアップ例</span>
                 </div>
                 <div class="lab-link-card">
-                    <h4><i class="fa-solid fa-terminal"></i> 日次差分バックアップのワンライナー</h4>
+                    <h3><i class="fa-solid fa-terminal"></i> 日次差分バックアップのワンライナー</h3>
                     <p>同一ホスト内の別ディスクへ /etc と /var/www を日次でバックアップし、削除も同期する例です。実運用ではバックアップ先を別筐体 / オフサイトにすること、定期的にリストアテストを行うことが前提です。</p>
 <pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
 # /usr/local/sbin/daily-backup.sh
@@ -261,7 +264,7 @@ WantedBy=timers.target
 
             <section class="lab-links-section">
                 <div class="lab-link-card">
-                    <h4><i class="fa-solid fa-terminal"></i> bash 一次切り分けスクリプト</h4>
+                    <h3><i class="fa-solid fa-terminal"></i> bash 一次切り分けスクリプト</h3>
                     <p>ここまでの確認項目を1本にまとめた読み取り専用 bash です。問い合わせ受付直後に流して、結果をテキストでチケットに添付します。</p>
                     <div class="contact-actions">
                         <a href="support-scripts/linux-triage.sh" class="btn btn-secondary">linux-triage.sh を見る</a>
@@ -269,7 +272,7 @@ WantedBy=timers.target
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h4><i class="fa-solid fa-gears"></i> 自動化 / 観測 / 運用品質への入口</h4>
+                    <h3><i class="fa-solid fa-gears"></i> 自動化 / 観測 / 運用品質への入口</h3>
                     <p>初期構築のIaC、Cloud Network、運用後の観測性（Metrics + Logs）、運用品質の数値化、検証証跡を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheus + Loki で継続観測し、SLO で品質を語る流れです。</p>
                     <div class="next-scope-list">
                         <span><a href="ansible/" style="color:inherit;">Ansible playbook</a></span>

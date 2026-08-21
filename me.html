@@ -41,6 +41,9 @@
     <!-- このサイト独自のスタイル -->
     <link rel="stylesheet" href="css/style.css">
     <!-- アイコンフォント Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Googleフォント（日本語＋英字フォント） -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -154,10 +157,10 @@
                     </div>
                     <!-- 右：氏名・自己紹介文・基本情報 -->
                     <div class="profile-text">
-                        <h3 class="profile-name">
+                        <h2 class="profile-name">
                             <span class="name-jp">島田 則幸</span>
                             <span class="name-en">Noriyuki Shimada</span>
-                        </h3>
+                        </h2>
                         <!-- 自己紹介文（複数の段落で構成） -->
                         <div class="profile-intro">
                             <p>はじめまして、島田則幸です。</p>
@@ -186,10 +189,10 @@
 
             <!-- ===== タイムラインセクション（経歴・取得資格を時系列で表示） ===== -->
             <section class="timeline-section">
-                <h3 class="section-heading">
+                <h2 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-timeline"></i></span>
                     <span class="heading-text">Career Timeline</span>
-                </h3>
+                </h2>
                 <!-- タイムライン本体。CSSで縦線と各項目を配置する。 -->
                 <div class="timeline">
                     <!-- 各タイムライン項目（新しい順に並べる） -->
@@ -198,7 +201,7 @@
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">2026-1</span>
-                            <h4>職業訓練 終了</h4>
+                            <h3>職業訓練 終了</h3>
                             <p>Pythonエンジニア（情報処理）コースを受講終了。HTML/CSS、Python、PHPを学習終了。</p>
                         </div>
                     </div>
@@ -206,7 +209,7 @@
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">2026-1</span>
-                            <h4>Python3エンジニア認定実践試験 合格</h4>
+                            <h3>Python3エンジニア認定実践試験 合格</h3>
                             <p>IT関連の資格を取得。</p>
                         </div>
                     </div>
@@ -214,7 +217,7 @@
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">2026-1</span>
-                            <h4>PHP8技術者認定初級試験 合格</h4>
+                            <h3>PHP8技術者認定初級試験 合格</h3>
                             <p>IT関連の資格を取得。</p>
                         </div>
                     </div>
@@ -222,7 +225,7 @@
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">2025-12</span>
-                            <h4>Python3エンジニア認定基礎試験 合格</h4>
+                            <h3>Python3エンジニア認定基礎試験 合格</h3>
                             <p>IT関連の資格を取得。</p>
                         </div>
                     </div>
@@ -230,15 +233,23 @@
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">2025-10</span>
-                            <h4>職業訓練 開始</h4>
+                            <h3>職業訓練 開始</h3>
                             <p>Pythonエンジニア（情報処理）コースを受講開始。HTML/CSS、Python、PHPを学習開始。</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
+                            <span class="timeline-date">〜2025</span>
+                            <h3>製造・物流現場に勤務</h3>
+                            <p>15年以上にわたり、業務改善・在庫管理・現場対応・トラブルシューティングに従事。作業計測による1日約1時間の作業短縮などを実現。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
                             <span class="timeline-date">2007-3</span>
-                            <h4>食品衛生管理者 取得</h4>
+                            <h3>食品衛生管理者 取得</h3>
                             <p>食品関連の資格を取得。</p>
                         </div>
                     </div>
@@ -247,17 +258,17 @@
 
             <!-- ===== 資格セクション（取得資格をカード形式で表示） ===== -->
             <section class="license-section">
-                <h3 class="section-heading">
+                <h2 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-certificate"></i></span>
                     <span class="heading-text">License & Certification</span>
-                </h3>
+                </h2>
                 <!-- 資格カードをCSS Gridで並べるエリア -->
                 <div class="license-grid">
                     <!-- 資格カード1：取得年・名称・説明・アイコンの構成 -->
                     <div class="license-card">
                         <div class="license-year">2007-3</div>
                         <div class="license-info">
-                            <h4>食品衛生管理者</h4>
+                            <h3>食品衛生管理者</h3>
                             <p>食品衛生に関する専門資格</p>
                         </div>
                         <div class="license-icon">
@@ -268,7 +279,7 @@
                     <div class="license-card">
                         <div class="license-year">2025-12</div>
                         <div class="license-info">
-                            <h4>Python3エンジニア認定基礎試験</h4>
+                            <h3>Python3エンジニア認定基礎試験</h3>
                             <p>Pythonの文法と基礎概念に関する知識を評価する資格試験</p>
                         </div>
                         <div class="license-icon">
@@ -278,7 +289,7 @@
                     <div class="license-card">
                         <div class="license-year">2026-1</div>
                         <div class="license-info">
-                            <h4>PHP8技術者認定初級試験</h4>
+                            <h3>PHP8技術者認定初級試験</h3>
                             <p>PHPプログラミングの基本的な知識を問う資格試験</p>
                         </div>
                         <div class="license-icon">
@@ -288,7 +299,7 @@
                                         <div class="license-card">
                         <div class="license-year">2026-1</div>
                         <div class="license-info">
-                            <h4>Python3エンジニア認定実践試験</h4>
+                            <h3>Python3エンジニア認定実践試験</h3>
                             <p>Pythonを実務で活用するための実践的なスキルを問う資格試験</p>
                         </div>
                         <div class="license-icon">
@@ -299,15 +310,15 @@
 
                 <!-- ===== 学習中の資格 ===== -->
                 <!-- ITサポート系応募で評価される資格を、取得計画として明示する -->
-                <h4 class="license-subheading">
+                <h3 class="license-subheading">
                     <i class="fa-solid fa-book-open"></i>
                     Currently Studying
-                </h4>
+                </h3>
                 <div class="license-grid license-studying-grid">
                     <div class="license-card license-card-studying">
                         <div class="license-year">2026 Q3-Q4</div>
                         <div class="license-info">
-                            <h4>LPIC-1（101 / 102）</h4>
+                            <h3>LPIC-1（101 / 102）</h3>
                             <p>Linuxサーバー運用の体系的理解を問う資格試験。101を2026 Q3、102を2026 Q4に受験予定。</p>
                         </div>
                         <div class="license-icon">
@@ -317,10 +328,10 @@
                 </div>
 
                 <!-- ===== 学習ロードマップ（インフラ運用支援に向けた段階目標） ===== -->
-                <h4 class="license-subheading">
+                <h3 class="license-subheading">
                     <i class="fa-solid fa-route"></i>
                     Learning Roadmap — Linuxサーバー構築・運用に向けた段階目標
-                </h4>
+                </h3>
                 <p class="roadmap-intro">職業訓練で習得した開発基礎を起点に、Linux、ネットワーク、構築工程、監視・復旧の順で実測証跡を増やします。資格は LPIC-1、CCNA、AWS の順で、実機学習を補強する位置付けです。</p>
                 <ol class="learning-roadmap" aria-label="資格取得ロードマップ">
                     <li class="roadmap-item done">
@@ -353,38 +364,38 @@
 
             <!-- ===== 趣味セクション（人柄を伝えるアイコン付きカード） ===== -->
             <section class="hobbies-section">
-                <h3 class="section-heading">
+                <h2 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-star"></i></span>
                     <span class="heading-text">Interests & Hobbies</span>
-                </h3>
+                </h2>
                 <!-- 趣味カードをCSS Gridで並べるエリア -->
                 <div class="hobbies-grid">
                     <div class="hobby-card">
                         <div class="hobby-icon">
                             <i class="fa-solid fa-code"></i>
                         </div>
-                        <h4>プログラミング・サーバー運用</h4>
+                        <h3>プログラミング・サーバー運用</h3>
                         <p>Webアプリ開発からサーバー監視ツール作成まで、新しい技術の学習・自作が好きです</p>
                     </div>
                     <div class="hobby-card">
                         <div class="hobby-icon">
                             <i class="fa-solid fa-mountain"></i>
                         </div>
-                        <h4>自然・アウトドア</h4>
+                        <h3>自然・アウトドア</h3>
                         <p>山や自然の風景を楽しみます</p>
                     </div>
                     <div class="hobby-card">
                         <div class="hobby-icon">
                             <i class="fa-solid fa-film"></i>
                         </div>
-                        <h4>動画鑑賞</h4>
+                        <h3>動画鑑賞</h3>
                         <p>映画や技術系動画から新たな知識・インスピレーションを得ます</p>
                     </div>
                     <div class="hobby-card">
                         <div class="hobby-icon">
                             <i class="fa-solid fa-book"></i>
                         </div>
-                        <h4>読書</h4>
+                        <h3>読書</h3>
                         <p>教養を深めて新たな気付きを得ます</p>
                     </div>
                 </div>

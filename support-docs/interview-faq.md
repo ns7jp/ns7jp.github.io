@@ -32,7 +32,7 @@ ITサポート・社内SE補助・インフラ運用支援の選考で問われ�
 ### 弱み
 
 - **本番運用の経験は無い**: 自宅 / VM ベースの Lab で完結しています。**実機での再現性は本番では別物**であることを自覚しており、入社後はまず**シャドウイング / 副担当**として配属業務に合わせる前提でいます。
-- **クラウド本番経験が無い**: AWS は Terraform validate までで、`apply` した課金体験はありません。資格（AZ-104 等）と並行して、まずは社内で許可された範囲で触る前提です。
+- **クラウド本番経験が無い**: AWS は Terraform validate までで、`apply` した課金体験はありません。資格（AWS Certified Solutions Architect - Associate 等）と並行して、まずは社内で許可された範囲で触る前提です。
 - **大規模スケール / SRE 本格運用は未経験**: 100 台規模のサーバー / 数千ユーザーは未体験です。中小規模での運用支援から学んでいきたいと考えています。
 
 弱みは隠さず開示し、入社後 3 ヶ月でどこまで埋めるかの計画（学習ロードマップ）を [Resume](https://ns7jp.github.io/resume.html) に明記しています。
@@ -47,7 +47,7 @@ ITサポート・社内SE補助・インフラ運用支援の選考で問われ�
 - Ansible / Terraform / Prometheus は CI で構文検証 + ルール検証を回している（[Infra Evidence](../infra-evidence/) 参照）
 - 障害対応の「型」だけでなく、Postmortem 実例・RTO/RPO / DR ドリル計画まで含めている
 
-その上で、IT パスポート → LPIC-1 → CCNA / AZ-104 の学習ロードマップ（[Resume](https://ns7jp.github.io/resume.html)）は、**Lab で触れているものと整合**するよう順序を組んでいます。資格は「知識の確認」、Lab は「動かす体感」、両方を回す方針です。
+その上で、LPIC-1 → 基本情報技術者試験（FE） → CCNA → AWS Certified Solutions Architect - Associate（SAA） の学習ロードマップ（[Resume](https://ns7jp.github.io/resume.html)）は、**Lab で触れているものと整合**するよう順序を組んでいます。資格は「知識の確認」、Lab は「動かす体感」、両方を回す方針です。
 
 ---
 
