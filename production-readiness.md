@@ -56,7 +56,7 @@ route:
 
 | 対象 | 本番で確認すること |
 |---|---|
-| Windows ファイルサーバー | VSS / Robocopy / ACL復元 / 共有単位復旧 / 月次リストアテスト |
+| Windows ファイルサーバー | VSS / Robocopy / ACL復元 / 共有単位復旧 / 月次リストアテスト計画 |
 | Linux サーバー | rsync / 世代管理 / systemd timer / オフサイト同期 / 完全復元手順 |
 | Grafana / Prometheus | 永続ボリューム、設定ファイル、ダッシュボードJSONのGit管理 |
 | Cloud | AWS Backup、世代管理、暗号化、別アカウント保管 |

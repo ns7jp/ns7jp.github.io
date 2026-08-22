@@ -22,6 +22,12 @@ jobs:
       - name: Check HTML structure
         run: node scripts/check-html-structure.js
 
+      - name: Check accessibility and SEO guardrails
+        run: node scripts/check-site-quality.js
+
+      - name: Check evidence replay video metadata
+        run: node scripts/check-video-metadata.cjs
+
   image-budget:
     runs-on: ubuntu-latest
     steps:

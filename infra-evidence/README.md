@@ -1,8 +1,8 @@
-# Infrastructure Evidence — 実行証跡と検証観点
+# Infrastructure Evidence — 架空出力例と検証観点（未採録）
 
-このフォルダは、Infra Operation Lab の成果物を「読める」だけでなく、採用担当者やレビュー担当者が **どのコマンドで検証できるか** を短時間で確認できるようにまとめた証跡置き場です。
+このフォルダは、Infra Operation Lab の検証方法を短時間で確認できるようにまとめた、**架空の出力例と検証観点の置き場**です。ここにある <code>*.sample.txt</code> は説明用サンプルであり、実行日時・commit・実行環境を伴う実測証跡ではありません。
 
-公開リポジトリのため、ここに置くログは実ホスト名、実IP、ユーザー名、認証情報を含まないように加工したサンプルです。実行可能性そのものは GitHub Actions の `static-check.yml` / `pwsh-tests.yml` / `infra-check.yml` で継続確認する方針にしています。
+公開リポジトリのため、例示するホスト名、IP、ユーザー名、コマンド出力は架空です。`static-check.yml` / `pwsh-tests.yml` / `infra-check.yml` は構文・静的検査をCIで再現するための定義であり、このフォルダ自体はCI完走を証明しません。
 
 ---
 
@@ -32,7 +32,7 @@
 
 ---
 
-## サンプル証跡
+## 架空の出力例（実行証跡ではありません）
 
 | ファイル | 内容 |
 |---|---|
@@ -41,7 +41,7 @@
 | [ansible-check.sample.txt](./ansible-check.sample.txt) | Ansible collection install、syntax-check、ansible-lint の出力例 |
 | [terraform-check.sample.txt](./terraform-check.sample.txt) | Cloud Lab Terraform の fmt / init / validate 出力例 |
 | [m365-policy-check.sample.txt](./m365-policy-check.sample.txt) | M365 ポリシー JSON の構文検証 + Apply-IntunePolicy.ps1 dry-run 出力例 |
-| [validation-failure-and-fix.sample.txt](./validation-failure-and-fix.sample.txt) | promtool / ansible-lint / terraform validate の**失敗 → 修正 → 成功**の対比証跡 |
+| [validation-failure-and-fix.sample.txt](./validation-failure-and-fix.sample.txt) | promtool / ansible-lint / terraform validate の**失敗 → 修正 → 成功**の対比例 |
 | [network-triage.sample.txt](./network-triage.sample.txt) | ★ L2 〜 L7 切り分けコマンドの出力サンプル（link / route / ping / mtr / dig / curl / openssl / tcpdump）|
 
 ---

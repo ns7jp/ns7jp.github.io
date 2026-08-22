@@ -45,7 +45,7 @@ ITサポート・社内SE補助・インフラ運用支援の選考で問われ�
 
 - 手順書だけでなく、`Pester` で 25 ケースのユニットテスト・PSScriptAnalyzer での静的解析を**動く形**で公開
 - Ansible / Terraform / Prometheus は CI で構文検証 + ルール検証を回している（[Infra Evidence](../infra-evidence/) 参照）
-- 障害対応の「型」だけでなく、Postmortem 実例・RTO/RPO / DR ドリル計画まで含めている
+- 障害対応の「型」だけでなく、架空Postmortemサンプル・RTO/RPO / 未実施DRドリル計画まで含めている
 
 その上で、基本情報技術者試験（FE、現在の最優先） → LPIC-1（並行して学習中） → CCNA → AWS Certified Solutions Architect - Associate（SAA） の学習ロードマップ（[Resume](https://ns7jp.github.io/resume.html)）は、**Lab で触れているものと整合**するよう順序を組んでいます。資格は「知識の確認」、Lab は「動かす体感」、両方を回す方針です。
 
@@ -113,7 +113,7 @@ Support Toolkit に[障害対応事例集（10 ケース）](./troubleshooting-c
 - 並行調査の結果、**夜間メンテのバックアップリストアでテーブルが古いものに戻っていた**ことが判明
 - 復旧後、**「夜間作業後に在庫数 1 件サンプル確認」**という工程をチェックリストに追加
 
-このときに学んだのは「**並行調査の役割分担**」「**バックアップは取れているだけでは安全ではない**」「**再発防止は手順書ではなくチェックリストに落ちないと続かない**」の 3 つです。今のポートフォリオの [Backup Runbook](./backup-restore-runbook.md) と [Postmortem 実例](./postmortem-example.md) は、この経験が下敷きになっています。
+このときに学んだのは「**並行調査の役割分担**」「**バックアップは取れているだけでは安全ではない**」「**再発防止は手順書ではなくチェックリストに落ちないと続かない**」の 3 つです。今のポートフォリオの [Backup Runbook](./backup-restore-runbook.md) と [架空Postmortemサンプル](./postmortem-example.md) は、この経験が下敷きになっています。
 
 ---
 

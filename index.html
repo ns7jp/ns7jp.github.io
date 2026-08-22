@@ -3,12 +3,12 @@
 ========================================================================
   ファイル名 : index.html
   役割       : ポートフォリオサイトのトップページ
-  概要       : サイトの顔となるページ。ヒーロー画像のスライドショー、
-               自己紹介・スキル・作品の各プレビュー、CTA（連絡先誘導）を表示する。
+  概要       : Linuxサーバー構築・運用の主案件、実測証跡、履歴書へ
+               採用担当者を最短で案内するトップページ。
   初学者向けの読み方:
     1. head でSEO、CSS、共通スクリプト（js/main.js）の読み込みを確認する
     2. header/nav で全ページ共通メニュー、hero で最初に見せる訴求を読む
-    3. support-scope / quick-intro / skills-preview / works-preview / contact-cta を順に追う
+    3. recruiter-path / quick-intro / skills-preview / works-preview / contact-cta を順に追う
     4. 末尾のscriptで、ローダー、メニュー、背景スライダー、スクロール演出を見る
 ========================================================================
 -->
@@ -146,18 +146,19 @@
         <nav id="site-nav">
             <ul>
                 <!-- li要素1つ＝メニュー項目1つ。aタグでリンク、iタグでアイコンを表示。 -->
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
 
+    <main id="main" tabindex="-1">
     <!-- ===== ヒーローセクション（ページ最上部の大きなビジュアルエリア） ===== -->
-    <section class="hero" id="main" tabindex="-1">
+    <section class="hero">
         <!-- 背景画像が自動で切り替わるエリア（js/main.jsのvanilla JSで制御） -->
         <div class="hero-slider"></div>
         <!-- 背景画像の上に重ねる半透明のオーバーレイ（文字を読みやすくする） -->
@@ -170,7 +171,7 @@
                 <span class="line1">Linux Server</span>
                 <span class="line2">Build &amp; Operations</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">Ubuntuサーバーの設計とAnsible構成コード、監視、障害復旧を、<br>実装済み・実測済みの範囲を分けて公開しています</p>
+            <p class="hero-description animate-fade-in-delay">Ubuntu 24.04の設計・Ansible構築・監視・復旧を、<br>実装・実測・未実測に分け、再現可能な成果物と証跡で公開しています</p>
             <div class="hero-proof-grid animate-fade-in-delay2" aria-label="Linuxサーバー構築・運用の公開成果">
                 <a href="demo.html" class="hero-proof-item" aria-label="実測スクリーンショットと復旧ログを再構成した2分15秒の証跡リプレイを見る">
                     <i class="fa-solid fa-video"></i>
@@ -182,16 +183,17 @@
                     <span>構成図</span>
                     <strong>監視・ログ基盤</strong>
                 </a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-clipboard-check"></i>
                     <span>実測証跡</span>
-                    <strong>PASS / NOT RUN</strong>
+                    <strong>Full-stack E2E 23 / 23</strong>
                 </a>
             </div>
-            <!-- CTA（Call To Action）ボタン群。作品ページ・連絡先ページへの導線。 -->
+            <!-- CTA（Call To Action）ボタン群。採用担当者向けの主導線を3本に絞る。 -->
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="https://github.com/ns7jp/server-monitor" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Server Monitor</a>
-                <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-file-lines"></i> Resume</a>
+                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
+                <a href="evidence-demo.html" class="btn btn-outline"><i class="fa-solid fa-clipboard-check"></i> 実測証跡</a>
+                <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
             </div>
         </div>
         <!-- 「下にスクロールしてね」と促すアニメーション付きのインジケーター -->
@@ -209,26 +211,68 @@
             </h2>
             <div class="summary-grid">
                 <div class="summary-card">
-                    <span class="summary-label">Server Build</span>
-                    <h3>設計から試験までを一つに</h3>
-                    <p>基本・詳細設計、パラメータ、Ansibleロール、単体・結合試験、引き渡し資料を一つの案件として整理しています。</p>
+                    <span class="summary-label">Build Package</span>
+                    <h3>設計から検証まで10成果物</h3>
+                    <p>要件、基本・詳細設計、パラメータ、ネットワーク、構築、試験、引き渡し、ロールバック、実機検証手順を工程順に整理しています。</p>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">Operations</span>
-                    <h3>監視スタックと復旧を実測</h3>
-                    <p>Prometheus、Grafana、LokiをLinux上で起動。D-1はローカル13秒、使い捨てUbuntu E2Eでは1秒で復旧しました。</p>
+                    <span class="summary-label">2026-08-22 / Full-stack E2E</span>
+                    <h3>Ubuntu 24.04で23 / 23 PASS</h3>
+                    <p>使い捨てGitHub Actions runnerで、Dockerはプリインストール済み環境を使用。site.ymlの2回目がchanged=0となり、10コンテナ（主構成9＋CI用ローカルwebhook sink）の起動まで確認しました。</p>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">Evidence</span>
-                    <h3>Ubuntu E2E 23項目PASS</h3>
-                    <p>site.yml一括構築、2回目changed=0、UFW・待受・SSH tunnel、3 volume復元をCIで実測。Slack・AWS・D-2は未測定と明記します。</p>
+                    <span class="summary-label">Recovery / Restore</span>
+                    <h3>D-1 RTO 1秒・3 volume復元</h3>
+                    <p>runner内ネットワーク、UFW・待受・SSH tunnel、3 volumeのbackup / restore、ローカルwebhookのFIRING / RESOLVEDを実測しました。ローカルwebhookはSlack実配信ではありません。</p>
                 </div>
             </div>
+            <div class="evidence-boundary-strip" aria-label="証跡の現在・履歴・未実測の区分">
+                <span><strong>現在のE2E</strong> disposable Ubuntu 24.04・23 / 23 PASS・site.yml changed=0・network / UFW・D-1 1秒・3 volume restore</span>
+                <span><strong>履歴（2026-08-19）</strong> WSL2で11 / 21 PASS・D-1 RTO 13秒。現在のE2E結果とは分けて掲載</span>
+                <span><strong>NOT RUN</strong> Slack実配信・独立した管理端末／引き渡し対象ホスト・AWS apply / destroy・D-2</span>
+            </div>
             <div class="summary-actions">
-                <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server"></i> 構築案件パックを見る</a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check"></i> 実測証跡を見る</a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> Full-stack E2E結果</a>
-                <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 1ページ履歴書を見る</a>
+                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要を見る</a>
+                <a href="demo.html" class="btn btn-secondary"><i class="fa-solid fa-video"></i> 2分15秒デモ</a>
+                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> Full-stack E2E原本</a>
+                <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 採用担当者向けの最短導線 ===== -->
+    <section class="time-budget">
+        <div class="container">
+            <h2 class="section-title center">
+                <span class="title-en">Recruiter Path</span>
+                <span class="title-jp">確認したい内容から選ぶ</span>
+            </h2>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <span class="summary-label">01 / Overview</span>
+                    <h3>案件全体を3分で確認</h3>
+                    <ul class="time-budget-links">
+                        <li><a href="project-brief.html">Project Brief</a><span>目的、担当範囲、工程、設計判断、実測結果、未完了範囲</span></li>
+                        <li><a href="resume.html">1ページ履歴書</a><span>経歴、Linux構築スキル、主な成果物、学習計画</span></li>
+                    </ul>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">02 / Evidence</span>
+                    <h3>実際に動かした範囲を確認</h3>
+                    <ul class="time-budget-links">
+                        <li><a href="demo.html">2分15秒の証跡リプレイ</a><span>実測スクリーンショットと復旧ログを短時間で確認</span></li>
+                        <li><a href="evidence-demo.html">Evidence Digest</a><span>実測値、対象commit、コマンド、失敗、NOT RUNを確認</span></li>
+                        <li><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E原本</a><span>Ubuntu 24.04で23 / 23 PASSした最新記録</span></li>
+                    </ul>
+                </div>
+                <div class="summary-card">
+                    <span class="summary-label">03 / Deliverables</span>
+                    <h3>構築成果物を工程順に確認</h3>
+                    <ul class="time-budget-links">
+                        <li><a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" target="_blank" rel="noopener noreferrer">構築案件パック</a><span>設計、パラメータ、構築、試験、引き渡し、ロールバック</span></li>
+                        <li><a href="infra-lab.html">Server Build Lab</a><span>Ansible、監視、復旧、補助Labへの案内</span></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -261,56 +305,46 @@
     </section>
 
     <!-- ===== スキルプレビューセクション ===== -->
-    <!-- 主要スキルを4枚のカードで簡潔に表示。データはdata-progress属性で渡す。 -->
+    <!-- 主要スキルを4枚のカードで表示し、自己評価率ではなく実測証跡で示す。 -->
     <section class="skills-preview">
         <div class="container">
             <h2 class="section-title center">
                 <span class="title-en">Skills</span>
                 <span class="title-jp">スキル</span>
             </h2>
-            <!-- 4つのスキルカードをCSS Gridで並べるエリア -->
+            <!-- 自己評価の割合ではなく、成果物と証跡で説明できる4領域を表示する。 -->
             <div class="skills-grid">
-                <!-- 各カードはアイコン・スキル名・進捗バーで構成。第一志望のLinuxサーバー構築・運用を先頭に表示 -->
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-server"></i>
                     </div>
-                    <h3>Linux Server</h3>
-                    <p>Ubuntu、systemd、journalctl、SSH、UFWを使った構築・一次切り分け</p>
-                    <div class="skill-bar">
-                        <!-- data-progress属性に進捗値（％）を入れておき、JSで幅を反映させる。 -->
-                        <div class="skill-progress" data-progress="65"></div>
-                    </div>
+                    <span class="status-pill measured">E2E 23 / 23 PASS</span>
+                    <h3>Linux Server Build</h3>
+                    <p>Ubuntu 24.04 runner上で、構築、network・UFW、待受、SSH tunnelまで一気通貫で検証</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-gears"></i>
                     </div>
-                    <h3>Ansible / Docker</h3>
-                    <p>ロール分割、Moleculeによる冪等性確認、Composeによる再現可能な構成</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-progress="65"></div>
-                    </div>
+                    <span class="status-pill measured">2回目 changed=0</span>
+                    <h3>Ansible / IaC</h3>
+                    <p>site.ymlと役割別roleで構成し、同一runner上の2回目実行で冪等性を確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <h3>Observability</h3>
-                    <p>Prometheus、Grafana、Lokiによるメトリクス・ログ監視</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-progress="65"></div>
-                    </div>
+                    <span class="status-pill measured">10 containers起動</span>
+                    <h3>Monitoring / Logs</h3>
+                    <p>主構成9コンテナとCI用ローカルwebhook sinkを起動し、FIRING / RESOLVEDを確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-solid fa-network-wired"></i>
+                        <i class="fa-solid fa-heart-pulse"></i>
                     </div>
-                    <h3>Troubleshooting</h3>
-                    <p>障害注入、IP・DNS・route・ログの確認、復旧と証跡化</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-progress="65"></div>
-                    </div>
+                    <span class="status-pill measured">D-1 RTO 1秒</span>
+                    <h3>Recovery / Restore</h3>
+                    <p>D-1自動復旧と、Prometheus・Grafana・Lokiの3 volume backup / restoreを検証</p>
                 </div>
             </div>
             <!-- スキル一覧ページへの誘導ボタン -->
@@ -325,16 +359,66 @@
     <section class="works-preview">
         <div class="container">
             <h2 class="section-title center light">
-                <span class="title-en">Main Project</span>
-                <span class="title-jp">最初に見てほしい作品</span>
+                <span class="title-en">Works</span>
+                <span class="title-jp">作品</span>
             </h2>
-            <div class="works-grid works-grid-featured">
+            <div class="works-grid">
+                <div class="work-card">
+                    <a href="project-brief.html">
+                    <div class="work-image" style="background-image: url('image/server-monitor.png')">
+                        <div class="work-overlay">
+                            <span class="work-category">Design → Handover</span>
+                            <h3>Linux Server Project Brief</h3>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="work-card">
+                    <a href="evidence-demo.html">
+                    <div class="work-image" style="background-image: url('image/grafana-dashboard.svg')">
+                        <div class="work-overlay">
+                            <span class="work-category">Measured / CI / NOT RUN</span>
+                            <h3>Evidence Digest</h3>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="work-card">
+                    <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-network-drill.md" target="_blank" rel="noopener noreferrer">
+                    <div class="work-image" style="background-image: url('image/network-vlan.svg')">
+                        <div class="work-overlay">
+                            <span class="work-category">Fault → Triage → Recovery</span>
+                            <h3>二セグメント通信障害ラボ</h3>
+                        </div>
+                    </div>
+                    </a>
+                </div>
                 <div class="work-card">
                     <a href="works.html#work-monitor">
                     <div class="work-image" style="background-image: url('image/server-monitor.png')">
                         <div class="work-overlay">
-                            <span class="work-category">Linux / Ansible / Prometheus / Grafana / Loki</span>
-                            <h3>Server Monitor — 設計・構築・監視・障害復旧</h3>
+                            <span class="work-category">Python / Flask / psutil</span>
+                            <h3>サーバー監視ダッシュボード</h3>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="work-card">
+                    <a href="works.html#work-support-toolkit">
+                    <div class="work-image" style="background-image: url('image/skills.jpg')">
+                        <div class="work-overlay">
+                            <span class="work-category">Supplementary</span>
+                            <h3>Support Toolkit</h3>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="work-card">
+                    <a href="works.html">
+                    <div class="work-image" style="background-image: url('image/works.jpg')">
+                        <div class="work-overlay">
+                            <span class="work-category">Python / PHP / Web</span>
+                            <h3>その他の学習作品</h3>
                         </div>
                     </div>
                     </a>
@@ -342,39 +426,7 @@
             </div>
             <!-- 作品ページへの誘導ボタン -->
             <div class="section-link">
-                <a href="works.html#work-monitor" class="btn btn-light">主作品の詳細を見る <i class="fa-solid fa-arrow-right"></i></a>
-                <a href="https://github.com/ns7jp/server-monitor" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHubで見る</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== 補助成果セクション ===== -->
-    <!-- 第一志望と主作品を確認した後に、周辺領域の学習成果へ進める二次導線。 -->
-    <section class="support-toolkit">
-        <div class="container">
-            <h2 class="section-title center">
-                <span class="title-en">Supporting Work</span>
-                <span class="title-jp">補助成果</span>
-            </h2>
-            <div class="toolkit-grid">
-                <a href="linux-lab.html" class="toolkit-card">
-                    <span class="toolkit-label">Linux Operations</span>
-                    <strong>Linux Operation Lab</strong>
-                    <p>systemd、journalctl、cron、SSH、logrotate、rsyncの運用確認を整理しています。</p>
-                </a>
-                <a href="works.html#work-support-toolkit" class="toolkit-card">
-                    <span class="toolkit-label">Windows Support</span>
-                    <strong>Windows / M365 / AD</strong>
-                    <p>PCキッティング、権限・ライセンス管理、PowerShell確認スクリプトなどの実務想定資料です。</p>
-                </a>
-                <a href="works.html" class="toolkit-card">
-                    <span class="toolkit-label">Other Learning</span>
-                    <strong>Cloud / 開発作品</strong>
-                    <p>AWS・Terraformの設計学習と、Python・PHP・HTML/CSSの制作物をまとめています。</p>
-                </a>
-            </div>
-            <div class="section-link">
-                <a href="works.html" class="btn btn-secondary"><i class="fa-solid fa-folder-open"></i> 補助成果を含む全作品を見る</a>
+                <a href="works.html" class="btn btn-light">主案件と補助作品を見る <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
@@ -391,6 +443,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- ===== フッター（サイト共通の最下部エリア） ===== -->
     <footer>
         <div class="footer-content">
@@ -403,7 +457,10 @@
             <div class="footer-nav">
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Infra Lab</a>
+                <a href="project-brief.html">Project Brief</a>
+                <a href="infra-lab.html">Server Build</a>
+                <a href="demo.html">Demo Replay</a>
+                <a href="evidence-demo.html">Evidence</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
