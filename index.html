@@ -3,12 +3,12 @@
 ========================================================================
   ファイル名 : index.html
   役割       : ポートフォリオサイトのトップページ
-  概要       : サイトの顔となるページ。ヒーロー画像のスライドショー、
-               自己紹介・スキル・作品の各プレビュー、CTA（連絡先誘導）を表示する。
+  概要       : Linuxサーバー構築・運用の主案件、実測証跡、履歴書へ
+               採用担当者を最短で案内するトップページ。
   初学者向けの読み方:
     1. head でSEO、CSS、共通スクリプト（js/main.js）の読み込みを確認する
     2. header/nav で全ページ共通メニュー、hero で最初に見せる訴求を読む
-    3. support-scope / quick-intro / skills-preview / works-preview / contact-cta を順に追う
+    3. recruiter-path / quick-intro / skills-preview / works-preview / contact-cta を順に追う
     4. 末尾のscriptで、ローダー、メニュー、背景スライダー、スクロール演出を見る
 ========================================================================
 -->
@@ -146,18 +146,19 @@
         <nav id="site-nav">
             <ul>
                 <!-- li要素1つ＝メニュー項目1つ。aタグでリンク、iタグでアイコンを表示。 -->
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
 
+    <main id="main" tabindex="-1">
     <!-- ===== ヒーローセクション（ページ最上部の大きなビジュアルエリア） ===== -->
-    <section class="hero" id="main" tabindex="-1">
+    <section class="hero">
         <!-- 背景画像が自動で切り替わるエリア（js/main.jsのvanilla JSで制御） -->
         <div class="hero-slider"></div>
         <!-- 背景画像の上に重ねる半透明のオーバーレイ（文字を読みやすくする） -->
@@ -170,22 +171,22 @@
                 <span class="line1">Linux Server</span>
                 <span class="line2">Build &amp; Operations</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">Ubuntuの設計・構築・試験から、<br>監視、障害切り分け、復旧までを一つの案件として公開しています</p>
+            <p class="hero-description animate-fade-in-delay">Ubuntuの構築コード・設計書・試験票と、<br>過去commitで実測した監視・障害復旧を分けて公開しています</p>
             <div class="hero-proof-grid animate-fade-in-delay2" aria-label="Linuxサーバー構築・運用の公開成果">
                 <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-server"></i>
-                    <span>構築案件</span>
+                    <span>文書一式</span>
                     <strong>Design → Test</strong>
                 </a>
                 <a href="https://github.com/ns7jp/server-monitor/tree/main/ansible" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-gears"></i>
-                    <span>自動構築</span>
-                    <strong>Ansible</strong>
+                    <span>構築コード</span>
+                    <strong>Ansible 4 roles</strong>
                 </a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
+                <a href="evidence-demo.html" class="hero-proof-item">
                     <i class="fa-solid fa-clipboard-check"></i>
-                    <span>試験・証跡</span>
-                    <strong>Measured Only</strong>
+                    <span>実測証跡</span>
+                    <strong>必須9 / 18 PASS</strong>
                 </a>
                 <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-network-wired"></i>
@@ -193,11 +194,11 @@
                     <strong>2 Segments</strong>
                 </a>
             </div>
-            <!-- CTA（Call To Action）ボタン群。作品ページ・連絡先ページへの導線。 -->
+            <!-- CTA（Call To Action）ボタン群。採用担当者向けの主導線を3本に絞る。 -->
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="https://github.com/ns7jp/server-monitor" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Server Monitor</a>
-                <a href="infra-lab.html" class="btn btn-outline"><i class="fa-solid fa-network-wired"></i> Build &amp; Ops Lab</a>
-                <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-file-lines"></i> Resume</a>
+                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
+                <a href="evidence-demo.html" class="btn btn-outline"><i class="fa-solid fa-clipboard-check"></i> 実測証跡</a>
+                <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
             </div>
         </div>
         <!-- 「下にスクロールしてね」と促すアニメーション付きのインジケーター -->
@@ -215,137 +216,66 @@
             </h2>
             <div class="summary-grid">
                 <div class="summary-card">
-                    <span class="summary-label">Server Build</span>
-                    <h3>Ubuntu を設計から引き渡しまで</h3>
-                    <p>基本・詳細設計、パラメータ、Ansible構築、単体・結合試験、引き渡しを一つの案件として整理しています。</p>
+                    <span class="summary-label">Build Package</span>
+                    <h3>設計から検証まで10成果物</h3>
+                    <p>要件、基本・詳細設計、パラメータ、ネットワーク、構築、試験、引き渡し、ロールバック、実機検証手順を工程順に整理しています。</p>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">Operations</span>
-                    <h3>監視・ログ・障害復旧</h3>
-                    <p>Prometheus、Grafana、Loki、Alertmanagerで異常を検知し、ランブックに沿って切り分けと復旧を行います。</p>
+                    <span class="summary-label">Measured on Linux</span>
+                    <h3>9サービス・Grafana・Loki</h3>
+                    <p>記録済みcommit（2026年8月18日）で、WSL2 Ubuntu上の9サービス起動、Grafana実データ、Lokiのnginxログ103行を確認しました。</p>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">Evidence</span>
-                    <h3>実装と実測を分けて表示</h3>
-                    <p>コードや計画だけを実績とせず、日時・commit SHA・コマンド・結果があるものだけを実測済みとして管理します。</p>
+                    <span class="summary-label">Recovery Drill</span>
+                    <h3>RTO 13秒・通信障害PASS</h3>
+                    <p>記録済みcommit（2026年8月19日）で、D-1プロセスダウンから13秒で復旧。二セグメント障害は6段階をPASSしました。</p>
                 </div>
             </div>
+            <div class="evidence-boundary-strip" aria-label="現在の証跡範囲">
+                <span><strong>文書・コード作成済み</strong> 設計・構築・試験・引き渡し・ロールバック</span>
+                <span><strong>過去commitで実測</strong> Ansible 4 roles・監視9 services・D-1・通信障害</span>
+                <span><strong>NOT RUN</strong> 実VM一括構築・実通知・D-2・AWS適用</span>
+            </div>
             <div class="summary-actions">
-                <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server"></i> 構築案件パックを見る</a>
-                <a href="infra-lab.html" class="btn btn-outline-dark"><i class="fa-solid fa-network-wired"></i> 構築・運用Labを見る</a>
-                <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 1ページ履歴書を見る</a>
-                <a href="cloud-lab.html" class="btn btn-outline-dark"><i class="fa-solid fa-cloud"></i> Cloud Labを見る</a>
-                <a href="works.html#work-support-toolkit" class="btn btn-outline-dark"><i class="fa-solid fa-folder-open"></i> Support Toolkitを見る</a>
-                <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> 実務スクリプトを見る</a>
+                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要を見る</a>
+                <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check"></i> 実測証跡を見る</a>
+                <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
             </div>
         </div>
     </section>
 
-    <!-- ===== 時間予算別ナビゲーション ===== -->
-    <!-- 採用担当者が5分/15分/30分のどの時間予算でも迷わず要点を追えるよう、READMEの導線表を公開サイト本体にも反映する。 -->
+    <!-- ===== 採用担当者向けの最短導線 ===== -->
     <section class="time-budget">
         <div class="container">
             <h2 class="section-title center">
-                <span class="title-en">Reading Guide</span>
-                <span class="title-jp">時間予算別の読み方ガイド</span>
+                <span class="title-en">Recruiter Path</span>
+                <span class="title-jp">確認したい内容から選ぶ</span>
             </h2>
             <div class="summary-grid">
                 <div class="summary-card">
-                    <span class="summary-label">5分で見る</span>
-                    <h3>一目で実力を把握</h3>
+                    <span class="summary-label">01 / Overview</span>
+                    <h3>案件全体を3分で確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="resume.html">1ページ履歴書</a><span>経歴・資格・想定業務×備えマトリクス・学習ロードマップ</span></li>
-                        <li><a href="infra-lab.html">Infra Operation Lab</a><span>VLAN論理構成図、監視・証跡・一次対応</span></li>
+                        <li><a href="project-brief.html">Project Brief</a><span>目的、担当範囲、工程、設計判断、実測結果、未完了範囲</span></li>
+                        <li><a href="resume.html">1ページ履歴書</a><span>経歴、Linux構築スキル、主な成果物、学習計画</span></li>
                     </ul>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">15分で見る</span>
-                    <h3>運用視点の幅を確認</h3>
+                    <span class="summary-label">02 / Evidence</span>
+                    <h3>実際に動かした範囲を確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="cloud-lab.html">Cloud Network Lab</a><span>AWS VPC / Subnet / Security Group / Terraform validate</span></li>
-                        <li><a href="linux-lab.html">Linux Operation Lab</a><span>systemd / journalctl / cron / SSH / logrotate / rsync</span></li>
-                        <li><a href="works.html#work-support-toolkit">Support Toolkit</a><span>17手順書 + 9 PowerShell + 1 bash</span></li>
+                        <li><a href="evidence-demo.html">Evidence Digest</a><span>実測値、対象commit、コマンド、失敗、NOT RUNを2分で確認</span></li>
+                        <li><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">証跡台帳</a><span>日時・環境・結果・制約を含む原本</span></li>
                     </ul>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">30分で見る</span>
-                    <h3>運用品質の数値化まで確認</h3>
+                    <span class="summary-label">03 / Deliverables</span>
+                    <h3>構築成果物を工程順に確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/slo-error-budget.md" target="_blank" rel="noopener noreferrer">SLO / Error Budget</a><span>SLI定義 → SLO値 → Error Budget → 月中の運用判断</span></li>
-                        <li><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/failover-runbook.md" target="_blank" rel="noopener noreferrer">フェイルオーバー Runbook</a><span>AD / ファイル / DB / VIP / DNS の副系切替 + 切り戻し</span></li>
-                        <li><a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/ansible" target="_blank" rel="noopener noreferrer">Ansible / CIS Benchmark マッピング</a><span>SSH強化 / UFW / fail2ban / auditd、CIS L1 約65%カバー</span></li>
+                        <li><a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" target="_blank" rel="noopener noreferrer">構築案件パック</a><span>設計、パラメータ、構築、試験、引き渡し、ロールバック</span></li>
+                        <li><a href="infra-lab.html">Server Build Lab</a><span>Ansible、監視、復旧、補助Labへの案内</span></li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== 対応領域セクション ===== -->
-    <!-- ITサポート職で任せられることを、作品紹介より先に短く伝える。 -->
-    <section class="support-scope">
-        <div class="container">
-            <h2 class="section-title center">
-                <span class="title-en">Support Scope</span>
-                <span class="title-jp">対応できること</span>
-            </h2>
-            <div class="support-scope-grid">
-                <div class="support-scope-card">
-                    <div class="support-scope-icon">
-                        <i class="fa-solid fa-headset"></i>
-                    </div>
-                    <h3>問い合わせの切り分け</h3>
-                    <p>状況確認、再現条件の整理、影響範囲の確認を行い、次に見るべき原因を絞り込みます。</p>
-                </div>
-                <div class="support-scope-card">
-                    <div class="support-scope-icon">
-                        <i class="fa-solid fa-desktop"></i>
-                    </div>
-                    <h3>PC・Office・周辺機器</h3>
-                    <p>Windows操作、Office利用、機器接続、初期設定など、利用者目線の基本サポートに対応します。</p>
-                </div>
-                <div class="support-scope-card">
-                    <div class="support-scope-icon">
-                        <i class="fa-solid fa-server"></i>
-                    </div>
-                    <h3>監視・ログ確認・手順化</h3>
-                    <p>リソース状況やエラー内容を確認し、対応履歴を残して再発時に追える形へ整理します。</p>
-                </div>
-            </div>
-            <div class="section-link">
-                <a href="skills.html#support-cases" class="btn btn-secondary">対応例を見る <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== Support Toolkitセクション ===== -->
-    <!-- 採用担当者がITサポート実務への準備状況を短時間で確認できるよう、手順書・スクリプト・対応例を1ブロックに集約する。 -->
-    <section class="support-toolkit">
-        <div class="container">
-            <h2 class="section-title center">
-                <span class="title-en">Support Toolkit</span>
-                <span class="title-jp">実務想定の成果物</span>
-            </h2>
-            <div class="toolkit-grid">
-                <a href="works.html#work-support-toolkit" class="toolkit-card">
-                    <span class="toolkit-label">Docs</span>
-                    <strong>17本の手順書</strong>
-                    <p>PCキッティング、退職者対応、権限管理、M365ライセンス、AD/M365変更、障害・インシデント、Postmortem、Backup Runbook を整理。</p>
-                </a>
-                <a href="works.html#work-support-toolkit" class="toolkit-card">
-                    <span class="toolkit-label">Scripts</span>
-                    <strong>9本のスクリプト + Pester</strong>
-                    <p>PowerShell 9本 + Linux bash 1本。Pester 25テスト + PSScriptAnalyzer を GitHub Actions で自動実行。</p>
-                </a>
-                <a href="works.html#work-infra-lab" class="toolkit-card">
-                    <span class="toolkit-label">Lab / IaC</span>
-                    <strong>Monitoring + Ansible + Cloud</strong>
-                    <p>Prometheus + Grafana、Ubuntu ベースライン冪等化、AWS VPC / Terraform validate、CI証跡を整理。</p>
-                </a>
-            </div>
-            <div class="section-link">
-                <a href="works.html#work-support-toolkit" class="btn btn-secondary"><i class="fa-solid fa-folder-open"></i> 実務想定成果を見る</a>
-                <a href="skills.html#ticket-examples" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-list"></i> チケット例を見る</a>
-                <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts/samples" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-export"></i> サンプル出力を見る</a>
             </div>
         </div>
     </section>
@@ -385,49 +315,39 @@
                 <span class="title-en">Skills</span>
                 <span class="title-jp">スキル</span>
             </h2>
-            <!-- 4つのスキルカードをCSS Gridで並べるエリア -->
+            <!-- 自己評価の割合ではなく、成果物と証跡で説明できる4領域を表示する。 -->
             <div class="skills-grid">
-                <!-- 各カードはアイコン・スキル名・進捗バーで構成。第一志望のLinuxサーバー構築・運用を先頭に表示 -->
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-server"></i>
                     </div>
-                    <h3>Linux / Monitoring</h3>
-                    <p>Ansible構築、Prometheus / Grafana監視、ログ確認、プロセス確認</p>
-                    <div class="skill-bar">
-                        <!-- data-progress属性に進捗値（％）を入れておき、JSで幅を反映させる。 -->
-                        <div class="skill-progress" data-progress="65"></div>
-                    </div>
+                    <span class="status-pill validated">設計・手順作成済み</span>
+                    <h3>Linux Server Build</h3>
+                    <p>基本・詳細設計、パラメータ、構築手順、試験、引き渡し、ロールバック</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-solid fa-network-wired"></i>
+                        <i class="fa-solid fa-gears"></i>
                     </div>
-                    <h3>Network Triage</h3>
-                    <p>IP、DNS、ゲートウェイ、到達性を順に切り分け</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-progress="65"></div>
-                    </div>
+                    <span class="status-pill measured">過去commitで4 roles</span>
+                    <h3>Ansible / IaC</h3>
+                    <p>common、docker、nginx、monitoringを役割分割し、Moleculeで冪等性を確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-solid fa-terminal"></i>
+                        <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <h3>PowerShell</h3>
-                    <p>端末情報、ログ、容量、セキュリティ状態を読み取り中心で確認</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-progress="75"></div>
-                    </div>
+                    <span class="status-pill measured">過去commitで実測</span>
+                    <h3>Monitoring / Logs</h3>
+                    <p>Prometheus、Grafana、Loki、Alertmanager、9サービス起動と実データ表示</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-brands fa-windows"></i>
+                        <i class="fa-solid fa-heart-pulse"></i>
                     </div>
-                    <h3>Windows / M365 / AD</h3>
-                    <p>PCキッティング、権限、ライセンス、共有フォルダを想定</p>
-                    <div class="skill-bar">
-                        <div class="skill-progress" data-progress="70"></div>
-                    </div>
+                    <span class="status-pill measured">過去commitで2 drills</span>
+                    <h3>Triage / Recovery</h3>
+                    <p>D-1自動復旧、二セグメント通信障害、network・route・HTTP疎通の切り分け</p>
                 </div>
             </div>
             <!-- スキル一覧ページへの誘導ボタン -->
@@ -446,7 +366,36 @@
                 <span class="title-jp">作品</span>
             </h2>
             <div class="works-grid">
-                <!-- 作品カード1：サーバー監視ダッシュボード（インフラ・運用系） -->
+                <div class="work-card">
+                    <a href="project-brief.html">
+                    <div class="work-image" style="background-image: url('image/server-monitor.png')">
+                        <div class="work-overlay">
+                            <span class="work-category">Design → Handover</span>
+                            <h3>Linux Server Project Brief</h3>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="work-card">
+                    <a href="evidence-demo.html">
+                    <div class="work-image" style="background-image: url('image/grafana-dashboard.svg')">
+                        <div class="work-overlay">
+                            <span class="work-category">Measured / CI / NOT RUN</span>
+                            <h3>Evidence Digest</h3>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="work-card">
+                    <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-network-drill.md" target="_blank" rel="noopener noreferrer">
+                    <div class="work-image" style="background-image: url('image/network-vlan.svg')">
+                        <div class="work-overlay">
+                            <span class="work-category">Fault → Triage → Recovery</span>
+                            <h3>二セグメント通信障害ラボ</h3>
+                        </div>
+                    </div>
+                    </a>
+                </div>
                 <div class="work-card">
                     <a href="works.html#work-monitor">
                     <div class="work-image" style="background-image: url('image/server-monitor.png')">
@@ -457,60 +406,22 @@
                     </div>
                     </a>
                 </div>
-                <!-- 作品カード2：定型文管理アプリ -->
                 <div class="work-card">
-                    <a href="works.html#work-teikei">
-                    <div class="work-image" style="background-image: url('image/teikei.png')">
+                    <a href="works.html#work-support-toolkit">
+                    <div class="work-image" style="background-image: url('image/skills.jpg')">
                         <div class="work-overlay">
-                            <span class="work-category">Python / Flet</span>
-                            <h3>定型文管理アプリ</h3>
+                            <span class="work-category">Supplementary</span>
+                            <h3>Support Toolkit</h3>
                         </div>
                     </div>
                     </a>
                 </div>
-                <!-- 作品カード3：付箋アプリ -->
                 <div class="work-card">
-                    <a href="works.html#work-notes">
-                    <div class="work-image" style="background-image: url('image/notes.png')">
+                    <a href="works.html">
+                    <div class="work-image" style="background-image: url('image/works.jpg')">
                         <div class="work-overlay">
-                            <span class="work-category">Python / tkinter</span>
-                            <h3>付箋アプリ</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <!-- 作品カード4：SNSアプリ「Pulse」 -->
-                <div class="work-card">
-                    <!-- href="works.html#work-pulse"のように#でページ内の特定位置（id="work-pulse"）へジャンプ -->
-                    <a href="works.html#work-pulse">
-                    <!-- インラインstyleで背景画像を指定。CSSのbackground-imageと同じ効果。 -->
-                    <div class="work-image" style="background-image: url('image/pulse.png')">
-                        <!-- マウスホバー時にふわっと表示されるオーバーレイ -->
-                        <div class="work-overlay">
-                            <span class="work-category">PHP / SQLite</span>
-                            <h3>SNSアプリ「Pulse」</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <!-- 作品カード5：掲示板アプリ -->
-                <div class="work-card">
-                    <a href="works.html#work-post">
-                    <div class="work-image" style="background-image: url('image/post.png')">
-                        <div class="work-overlay">
-                            <span class="work-category">PHP / MySQL</span>
-                            <h3>掲示板アプリ</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <!-- 作品カード6：サンプル企業サイト -->
-                <div class="work-card">
-                    <a href="works.html#work-magic">
-                    <div class="work-image" style="background-image: url('image/magic.png')">
-                        <div class="work-overlay">
-                            <span class="work-category">HTML / CSS / JS</span>
-                            <h3>サンプル企業サイト</h3>
+                            <span class="work-category">Python / PHP / Web</span>
+                            <h3>その他の学習作品</h3>
                         </div>
                     </div>
                     </a>
@@ -518,7 +429,7 @@
             </div>
             <!-- 作品ページへの誘導ボタン -->
             <div class="section-link">
-                <a href="works.html" class="btn btn-light">すべての作品を見る <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="works.html" class="btn btn-light">主案件と補助作品を見る <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
@@ -535,6 +446,8 @@
         </div>
     </section>
 
+    </main>
+
     <!-- ===== フッター（サイト共通の最下部エリア） ===== -->
     <footer>
         <div class="footer-content">
@@ -547,7 +460,9 @@
             <div class="footer-nav">
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Infra Lab</a>
+                <a href="project-brief.html">Project Brief</a>
+                <a href="infra-lab.html">Server Build</a>
+                <a href="evidence-demo.html">Evidence</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>

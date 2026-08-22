@@ -62,11 +62,11 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li class="active"><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
@@ -82,12 +82,13 @@
         </div>
     </section>
 
-    <article class="page-content infra-lab-content" id="main" tabindex="-1">
+    <main class="page-content infra-lab-content" id="main" tabindex="-1">
         <div class="container">
 
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="infra-lab.html"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
-                <a href="linux-lab.html" class="active"><i class="fa-brands fa-linux"></i> Linux</a>
+                <a href="infra-lab.html"><i class="fa-solid fa-server"></i> Build Overview</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check"></i> Evidence</a>
+                <a href="linux-lab.html" class="active" aria-current="page"><i class="fa-brands fa-linux"></i> Linux</a>
                 <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
                 <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack</a>
                 <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
@@ -103,6 +104,13 @@
                     <span><i class="fa-solid fa-clock"></i> cron</span>
                     <span><i class="fa-solid fa-key"></i> SSH</span>
                     <span><i class="fa-solid fa-floppy-disk"></i> rsync</span>
+                </div>
+                <div class="status-callout validated" role="note">
+                    <i class="fa-solid fa-terminal"></i>
+                    <div>
+                        <strong>このページは一次切り分けの手順・コマンド集です</strong>
+                        <p>掲載コマンドすべてを同一実ホストで通した証跡ではありません。公開済みの実測は、WSL2 Ubuntu上の監視スタック、D-1復旧、二セグメント通信障害に分けて記録し、<a href="evidence-demo.html">Evidence Digest</a>から確認できます。</p>
+                    </div>
                 </div>
             </section>
 
@@ -279,16 +287,16 @@ WantedBy=timers.target
                         <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>
                         <span><a href="monitoring-stack/" style="color:inherit;">Prom + Grafana + Loki + Promtail</a></span>
                         <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">SLO / Error Budget</a></span>
-                        <span><a href="infra-evidence/" style="color:inherit;">Infra Evidence</a></span>
+                        <span><a href="infra-evidence/" style="color:inherit;">Infra出力サンプル</a></span>
                         <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
-                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / RTO / RPO / DR</a></span>
-                        <span><a href="support-docs/postmortem-example.md" style="color:inherit;">Postmortem 実例</a></span>
+                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / DR計画</a></span>
+                        <span><a href="support-docs/postmortem-example.md" style="color:inherit;">架空Postmortemサンプル</a></span>
                         <span><a href="support-docs/office-it-physical-layer.md" style="color:inherit;">物理層</a></span>
                     </div>
                 </div>
             </section>
         </div>
-    </article>
+    </main>
 
     <footer>
         <div class="footer-content">
@@ -299,7 +307,7 @@ WantedBy=timers.target
             <div class="footer-nav">
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Infra Lab</a>
+                <a href="infra-lab.html">Server Build</a>
                 <a href="linux-lab.html">Linux Lab</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>

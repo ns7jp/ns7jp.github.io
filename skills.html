@@ -85,12 +85,12 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <!-- 現在ページ「Skills」を active クラスで強調 -->
-                <li class="active"><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <!-- 現在ページ「Skills」を active クラスで強調 -->
+                <li class="active"><a href="skills.html" aria-current="page"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
@@ -109,12 +109,18 @@
     </section>
 
     <!-- ===== メインコンテンツ ===== -->
-    <article class="page-content" id="main" tabindex="-1">
+    <main class="page-content" id="main" tabindex="-1">
         <div class="container">
 
             <!-- ===== スキル概要文 ===== -->
             <section class="skills-overview">
                 <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発基礎に加え、自学で取り組むLinuxサーバー構築、Ansible、Docker、監視・ログ、障害復旧をご紹介します。<br>各技術はServer Monitor構築案件パックとSupport Toolkitで使用しています。</p>
+                <div class="evidence-boundary-strip" aria-label="スキルの証跡区分">
+                    <span><strong>過去commitで実測</strong> Ansible 4 roles・監視9 services・D-1・通信障害</span>
+                    <span><strong>構成・CI検証</strong> Compose・Prometheus・Ansible・Terraform validate</span>
+                    <span><strong>NOT RUN</strong> 実VM site.yml・実通知・AWS apply・D-2</span>
+                </div>
+                <p class="overview-text skills-evidence-link"><a href="evidence-demo.html">日時・環境・commit付きのEvidence Digestを見る <i class="fa-solid fa-arrow-right"></i></a></p>
             </section>
 
             <!-- ===== 技術スキル（プログラミング系）セクション ===== -->
@@ -136,24 +142,18 @@
                             </div>
                             <div class="skill-title">
                                 <h3>Linux / 監視 / 自動化</h3>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
                             </div>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 65%"></div>
+                        <div class="evidence-legend skill-evidence-pills" aria-label="Linuxスキルの証跡状況">
+                            <span class="status-pill measured">記録済みcommitで実測</span>
+                            <span class="status-pill pending">未実測範囲あり</span>
                         </div>
                         <div class="skill-description">
                             <ul>
                                 <li>Linux 一次切り分け bash スクリプト（systemd / journalctl / load / disk / ss）</li>
-                                <li>Prometheus + Grafana + node_exporter 監視スタック（Docker Compose で起動）</li>
-                                <li>Ansible playbook（SSH 強化 / UFW / fail2ban / auditd / unattended-upgrades）</li>
-                                <li>AWS VPC / Security Group / Terraform validate の Cloud Network Lab</li>
+                                <li>Prometheus + Grafana + Loki等9サービス（記録済みcommitでWSL2 Ubuntu上の起動を確認）</li>
+                                <li>Ansible playbook（4 rolesはUbuntuコンテナで実測、実VMへの<code>site.yml</code>一括適用は未実施）</li>
+                                <li>AWS VPC / Security Group構成コード（<code>fmt</code> / <code>init -backend=false</code> / <code>validate</code>まで。apply未実施）</li>
                                 <li>GitHub Actions による Docker Compose / promtool / Ansible / Terraform 検証</li>
                                 <li>rsync + systemd timer によるバックアップ / 月次リストアテスト計画</li>
                                 <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
@@ -172,24 +172,19 @@
                             </div>
                             <div class="skill-title">
                                 <h3>Windows / M365 / AD 運用支援</h3>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
                             </div>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 55%"></div>
+                        <div class="evidence-legend skill-evidence-pills" aria-label="Windows運用支援スキルの証跡状況">
+                            <span class="status-pill validated">成果物・テストコードあり</span>
+                            <span class="status-pill pending">本番テナント未実施</span>
                         </div>
                         <div class="skill-description">
                             <ul>
                                 <li>PowerShell 9本（読み取り中心、JSON/CSV/HTML出力、Pesterテスト + CI付き）</li>
                                 <li>Active Directory 棚卸し（休眠ユーザー抽出、所属グループ確認）</li>
                                 <li>Microsoft 365 ライセンス棚卸し（Microsoft Graph PowerShell SDK）</li>
-                                <li>PCキッティング / 退職オフボーディング / AD・M365変更ケース（Support Docs 17本）</li>
+                                <li>PCキッティング / 退職オフボーディング / AD・M365変更ケース（16ガイド + README）</li>
+                                <li>Microsoft 365サンプルデータ（JSON 5本）と補助PowerShell（2本）。本番テナント実績ではありません</li>
                                 <li>ネットワーク基礎（TCP/IP・DNS・DHCP・Wi-Fi 接続トラブル）</li>
                                 <li>セキュリティベースライン確認（Defender / Firewall / BitLocker / Update）</li>
                                 <li>リモートサポート（Quick Assist・TeamViewer・AnyDesk）<span class="learning-tag">学習中</span></li>
@@ -204,17 +199,10 @@
                             </div>
                             <div class="skill-title">
                                 <h3>Python</h3>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
                             </div>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 80%"></div>
+                        <div class="evidence-legend skill-evidence-pills" aria-label="Pythonスキルの証跡状況">
+                            <span class="status-pill validated">個人制作コードあり</span>
                         </div>
                         <div class="skill-description">
                             <ul>
@@ -234,17 +222,10 @@
                             </div>
                             <div class="skill-title">
                                 <h3>Database</h3>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
                             </div>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 60%"></div>
+                        <div class="evidence-legend skill-evidence-pills" aria-label="Databaseスキルの証跡状況">
+                            <span class="status-pill validated">個人制作でCRUD実装</span>
                         </div>
                         <div class="skill-description">
                             <ul>
@@ -258,7 +239,7 @@
 
                     <!-- ----- Office スキルカード ----- -->
                     <div class="skill-detail-card">
-                        <!-- カード上部：アイコンと、スキル名・星評価 -->
+                        <!-- カード上部：アイコンとスキル名 -->
                         <div class="skill-header">
                             <!-- スキル種別ごとに色分けする識別クラス（office, html, jsなど） -->
                             <div class="skill-icon-large office">
@@ -266,19 +247,10 @@
                             </div>
                             <div class="skill-title">
                                 <h3>Microsoft Office</h3>
-                                <!-- 星5段階評価。filledクラスが付いた星はCSSで色付き表示 -->
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
                             </div>
                         </div>
-                        <!-- 進捗バー（width%でスキル習熟度を視覚化） -->
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 60%"></div>
+                        <div class="evidence-legend skill-evidence-pills" aria-label="Microsoft Officeスキルの証跡状況">
+                            <span class="status-pill pending">学習・資料作成</span>
                         </div>
                         <!-- 具体的な習得項目をリストで列挙 -->
                         <div class="skill-description">
@@ -299,17 +271,10 @@
                             </div>
                             <div class="skill-title">
                                 <h3>PHP</h3>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
                             </div>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 60%"></div>
+                        <div class="evidence-legend skill-evidence-pills" aria-label="PHPスキルの証跡状況">
+                            <span class="status-pill validated">個人制作コードあり</span>
                         </div>
                         <div class="skill-description">
                             <ul>
@@ -329,17 +294,10 @@
                             </div>
                             <div class="skill-title">
                                 <h3>HTML / CSS</h3>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
                             </div>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 60%"></div>
+                        <div class="evidence-legend skill-evidence-pills" aria-label="HTMLとCSSスキルの証跡状況">
+                            <span class="status-pill measured">本ポートフォリオで実装</span>
                         </div>
                         <div class="skill-description">
                             <ul>
@@ -359,17 +317,10 @@
                             </div>
                             <div class="skill-title">
                                 <h3>JavaScript</h3>
-                                <div class="skill-level">
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star filled"><i class="fa-solid fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                    <span class="star"><i class="fa-regular fa-star"></i></span>
-                                </div>
                             </div>
                         </div>
-                        <div class="skill-progress-bar">
-                            <div class="progress" style="width: 30%"></div>
+                        <div class="evidence-legend skill-evidence-pills" aria-label="JavaScriptスキルの証跡状況">
+                            <span class="status-pill measured">本ポートフォリオで実装</span>
                         </div>
                         <div class="skill-description">
                             <ul>
@@ -383,12 +334,12 @@
                 </div>
             </section>
 
-            <!-- ===== ITサポートスキルセクション ===== -->
+            <!-- ===== 補助的な運用支援スキルセクション ===== -->
             <!-- プログラミング以外の、現場で役立つ運用・対応スキルを紹介 -->
             <section class="soft-skills-section">
                 <h2 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-headset"></i></span>
-                    <span class="heading-text">IT Support Skills</span>
+                    <span class="heading-text">Supplementary Operations Skills</span>
                 </h2>
                 <div class="soft-skills-grid">
                     <div class="soft-skill-item">
@@ -423,11 +374,11 @@
             </section>
 
             <!-- ===== サポート対応例セクション ===== -->
-            <!-- 実務での一次対応を想定し、切り分けの流れを具体例として示す。 -->
+            <!-- 架空シナリオで一次対応を想定し、切り分けの流れを具体例として示す。 -->
             <section class="support-cases-section" id="support-cases">
                 <h2 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-list-check"></i></span>
-                    <span class="heading-text">Support Response Examples</span>
+                    <span class="heading-text">Simulated Support Response Examples</span>
                 </h2>
                 <div class="support-case-grid">
                     <div class="support-case-card">
@@ -678,7 +629,7 @@
                 </div>
             </section>
         </div>
-    </article>
+    </main>
 
     <!-- ===== フッター（全ページ共通） ===== -->
     <footer>
@@ -690,7 +641,7 @@
             <div class="footer-nav">
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Infra Lab</a>
+                <a href="infra-lab.html">Server Build</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>

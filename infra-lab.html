@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="島田則幸のLinuxサーバー構築・運用Lab。Ubuntu、Ansible、Docker、監視、試験、通信障害の切り分けと復旧をまとめています。">
-    <title>Infra Lab | 島田則幸のポートフォリオ</title>
+    <title>Server Build Lab | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/infra-lab.html">
 
-    <meta property="og:title" content="Infra Lab | 島田則幸のポートフォリオ">
+    <meta property="og:title" content="Server Build Lab | 島田則幸のポートフォリオ">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/infra-lab.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -62,11 +62,11 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li class="active"><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li class="active"><a href="infra-lab.html" aria-current="page"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
@@ -82,18 +82,19 @@
         </div>
     </section>
 
-    <article class="page-content infra-lab-content" id="main" tabindex="-1">
+    <main class="page-content infra-lab-content" id="main" tabindex="-1">
         <div class="container">
 
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="infra-lab.html" class="active"><i class="fa-brands fa-windows"></i> Windows / M365 / AD</a>
+                <a href="infra-lab.html" class="active" aria-current="page"><i class="fa-solid fa-server"></i> Build Overview</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check"></i> Evidence</a>
                 <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux</a>
                 <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
                 <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack</a>
                 <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
             </nav>
 
-            <section class="lab-intro">
+            <section class="lab-intro" id="build-overview">
                 <span class="case-label">Ubuntu / Ansible / Docker Scenario</span>
                 <h2>設計、構築、試験、監視、障害復旧までを1つの案件で見せるLab</h2>
                 <p>主作品の Server Monitor を Ubuntu 1台のサーバー構築案件と見立て、基本・詳細設計、パラメータ、Ansible構築、単体・結合試験、監視、二セグメント通信障害、引き渡しまでを工程順に整理しました。コードと実測結果は証跡台帳で明確に分けています。</p>
@@ -104,13 +105,126 @@
                     <span><i class="fa-solid fa-heart-pulse"></i> Recovery</span>
                 </div>
                 <div class="summary-actions" style="margin-top: 1.5rem;">
+                    <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
                     <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> 構築案件パック</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check"></i> 検証証跡台帳</a>
-                    <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired"></i> 通信障害ラボ</a>
+                    <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-check"></i> 実測証跡</a>
                 </div>
             </section>
 
-            <section class="lab-architecture" id="windows-support">
+            <section class="evidence-overview" aria-labelledby="build-status-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                    <h2 class="heading-text" id="build-status-title">Recorded Evidence Status</h2>
+                </div>
+                <div class="metric-grid">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-17-molecule.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">4 roles</span>
+                        <strong>Ansible実測</strong>
+                        <small>適用・冪等性・verify／2分42秒</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-18-local-observability.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">9 services</span>
+                        <strong>監視スタック起動</strong>
+                        <small>Grafana実データ／Lokiログ103行</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/drills/logs/2026-08-19-D-1.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">13 sec</span>
+                        <strong>D-1復旧</strong>
+                        <small>目標RTO 5分以内／PASS</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">9 / 18</span>
+                        <strong>必須試験PASS</strong>
+                        <small>target cc7e478／全体11 / 21 PASS</small>
+                    </a>
+                </div>
+                <div class="status-callout validated evidence-scope-note" role="note">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <div>
+                        <strong>数値は2026年8月17〜19日の記録済みcommit時点</strong>
+                        <p>Server Monitorの現行HEADに対する再実行結果ではありません。各カードから対象commitの記録へ移動できます。</p>
+                    </div>
+                </div>
+                <div class="status-callout pending" role="note">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>実VMの新規構築完了とは表示していません</strong>
+                        <p><code>site.yml</code>の一括適用・2回目の冪等性、実ホストのNIC / DNS / route / listen / UFW、実通知、D-2、AWS apply / destroyは未採録です。</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="brief-section" aria-labelledby="deliverables-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-folder-tree"></i></span>
+                    <h2 class="heading-text" id="deliverables-title">Build Package — 10番号付き成果物</h2>
+                </div>
+                <ol class="brief-flow build-package-flow">
+                    <li class="brief-step"><span>00</span><strong>Requirements</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/00-requirements.md" target="_blank" rel="noopener noreferrer">要件定義</a></small></li>
+                    <li class="brief-step"><span>01</span><strong>Basic Design</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/01-basic-design.md" target="_blank" rel="noopener noreferrer">基本設計</a></small></li>
+                    <li class="brief-step"><span>02</span><strong>Detailed</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/02-detailed-design.md" target="_blank" rel="noopener noreferrer">詳細設計</a></small></li>
+                    <li class="brief-step"><span>03</span><strong>Parameters</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/03-parameter-sheet.md" target="_blank" rel="noopener noreferrer">パラメータ</a></small></li>
+                    <li class="brief-step"><span>04</span><strong>Network</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/04-network-ip-plan.md" target="_blank" rel="noopener noreferrer">IP / Port</a></small></li>
+                    <li class="brief-step"><span>05</span><strong>Build</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">構築手順</a></small></li>
+                    <li class="brief-step"><span>06</span><strong>Test</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">試験仕様</a></small></li>
+                    <li class="brief-step"><span>07</span><strong>Handover</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/07-handover-checklist.md" target="_blank" rel="noopener noreferrer">引き渡し</a></small></li>
+                    <li class="brief-step"><span>08</span><strong>Rollback</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/08-change-rollback-plan.md" target="_blank" rel="noopener noreferrer">変更・切り戻し</a></small></li>
+                    <li class="brief-step"><span>09</span><strong>Host Test</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/09-network-validation-procedure.md" target="_blank" rel="noopener noreferrer">実機検証手順</a></small></li>
+                </ol>
+            </section>
+
+            <section class="brief-section" aria-labelledby="server-operation-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-server"></i></span>
+                    <h2 class="heading-text" id="server-operation-title">Server Build &amp; Operations Matrix</h2>
+                </div>
+                <div class="operation-table-wrap">
+                    <table class="operation-table">
+                        <thead>
+                            <tr>
+                                <th>工程</th>
+                                <th>実装・成果物</th>
+                                <th>検証結果</th>
+                                <th>次の完了条件</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>OSベースライン</td>
+                                <td>timezone、SSH、UFW、fail2ban、auditd、自動更新</td>
+                                <td><span class="status-pill measured">Molecule 4 roles PASS</span></td>
+                                <td>実VMへ<code>site.yml</code>初回・2回目適用</td>
+                            </tr>
+                            <tr>
+                                <td>配備</td>
+                                <td>Flask、nginx、Docker Compose、秘密値example</td>
+                                <td><span class="status-pill validated">CI・構成検証</span></td>
+                                <td>実ホストのlisten・認証・実行ユーザー確認</td>
+                            </tr>
+                            <tr>
+                                <td>監視・ログ</td>
+                                <td>Prometheus、Grafana、Loki、Alloy、Alertmanager</td>
+                                <td><span class="status-pill measured">9 services実測</span></td>
+                                <td>外部通知の到達時間を採録</td>
+                            </tr>
+                            <tr>
+                                <td>障害復旧</td>
+                                <td>D-1、二セグメント通信障害、runbook</td>
+                                <td><span class="status-pill measured">D-1 13秒／通信6段階PASS</span></td>
+                                <td>D-2ホスト障害とrestoreを実測</td>
+                            </tr>
+                            <tr>
+                                <td>引き渡し</td>
+                                <td>運用開始条件、既知制約、rollback、証跡台帳</td>
+                                <td><span class="status-pill validated">文書作成済み</span></td>
+                                <td>rollback実行後の疎通・監視確認</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="lab-architecture secondary-scope" id="windows-support">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-brands fa-windows"></i></span>
                     <span class="heading-text">補助成果：Windows / M365 / AD 想定運用</span>
@@ -278,23 +392,23 @@
                         <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>
                         <span><a href="monitoring-stack/" style="color:inherit;">Monitoring Stack (Metrics + Logs)</a></span>
                         <span><a href="ansible/" style="color:inherit;">Ansible Playbook</a></span>
-                        <span><a href="ansible/cis-benchmark-mapping.md" style="color:inherit;">CIS Benchmark マッピング</a></span>
-                        <span><a href="infra-evidence/" style="color:inherit;">Infra Evidence</a></span>
+                        <span><a href="ansible/cis-benchmark-mapping.md" style="color:inherit;">CIS自己マッピング</a></span>
+                        <span><a href="infra-evidence/" style="color:inherit;">Infra出力サンプル</a></span>
                         <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
                         <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">SLO / Error Budget</a></span>
                         <span><a href="support-docs/ticket-taxonomy.md" style="color:inherit;">チケット分類 (ITIL)</a></span>
                         <span><a href="support-docs/office-it-physical-layer.md" style="color:inherit;">物理層</a></span>
                         <span><a href="support-docs/m365-policy-examples/" style="color:inherit;">M365 ポリシー JSON</a></span>
                         <span><a href="support-docs/ad-m365-change-case.md" style="color:inherit;">AD/M365 変更ケース</a></span>
-                        <span><a href="support-docs/postmortem-example.md" style="color:inherit;">Postmortem 実例</a></span>
-                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / RTO / RPO / DR</a></span>
+                        <span><a href="support-docs/postmortem-example.md" style="color:inherit;">架空Postmortemサンプル</a></span>
+                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / DR計画</a></span>
                         <span><a href="support-docs/failover-runbook.md" style="color:inherit;">Failover Runbook</a></span>
-                        <span><a href="support-docs/network-triage-evidence.md" style="color:inherit;">Network 切り分け証跡</a></span>
+                        <span><a href="support-docs/network-triage-evidence.md" style="color:inherit;">Network切り分け想定例</a></span>
                     </div>
                 </div>
             </section>
         </div>
-    </article>
+    </main>
 
     <footer>
         <div class="footer-content">
@@ -305,7 +419,7 @@
             <div class="footer-nav">
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Infra Lab</a>
+                <a href="infra-lab.html">Server Build</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>

@@ -60,13 +60,13 @@ OSI 参照モデルの下から上へ機械的に当てる**コマンド一覧�
 
 ### 📓 事後分析 / 復旧運用（3 本）
 
-#### 10. [Postmortem 実例（共有フォルダ I/O 飽和、P2）](./postmortem-example.md)
+#### 10. [架空Postmortemサンプル（共有フォルダ I/O 飽和、P2）](./postmortem-example.md)
 
 重大インシデント対応プレイブックの「型」を、実際の振り返りに当てはめた架空のサンプル。**MTTA / MTTR / MTTM、5 Whys、応急 / 恒久 / 中期対応** を含む。`incident-response-playbook.md` と組み合わせると「型 → 実例」が一通り読めます。
 
 #### 11. [バックアップ / リストア Runbook](./backup-restore-runbook.md)
 
-Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsync + systemd timer）の 2 系統を載せ、**サービス別 RTO/RPO 表**、**月次リストアテスト計画**、**年次 DR ドリル計画（火災 / DC 障害 / ランサムウェア）** までを含めた運用Runbook。「取れている」だけでなく「**目標時間内に必ず戻せる**」の証明を意識した構成。
+Windows ファイルサーバー（VSS + Robocopy）と Linux サーバー（rsync + systemd timer）の 2 系統を載せ、**サービス別 RTO/RPO 表**、**月次リストアテスト計画**、**年次 DR ドリル計画（火災 / DC 障害 / ランサムウェア）** までを含めた運用Runbook。目標時間内に復旧できるかを今後計測するための手順・記録様式であり、復旧実績の証明ではありません。
 
 #### 12. [フェイルオーバー / 切り戻し Runbook](./failover-runbook.md)
 

@@ -8,7 +8,6 @@ const failures = [];
 function shouldSkip(link) {
   return (
     !link ||
-    link.startsWith("#") ||
     link.startsWith("http://") ||
     link.startsWith("https://") ||
     link.startsWith("mailto:") ||
@@ -41,13 +40,13 @@ for (const file of htmlFiles) {
     if (shouldSkip(rawLink)) continue;
 
     const [targetPart, anchor] = stripQuery(rawLink).split("#");
-    if (!targetPart) continue;
-
-    const normalized = decodeURIComponent(targetPart);
-    // 先頭が "/" の絶対パスはサイトルートからの相対と解釈する（404.htmlなどで使用）。
-    const targetPath = normalized.startsWith("/")
-      ? path.resolve(root, normalized.slice(1))
-      : path.resolve(path.dirname(filePath), normalized);
+    const normalized = decodeURIComponent(targetPart || "");
+    // 空のtargetPartは同じHTML、先頭が "/" の場合はサイトルートからの相対と解釈する。
+    const targetPath = !normalized
+      ? filePath
+      : normalized.startsWith("/")
+        ? path.resolve(root, normalized.slice(1))
+        : path.resolve(path.dirname(filePath), normalized);
 
     if (!targetPath.startsWith(root)) {
       failures.push(`${file}: ${rawLink} points outside the site root`);
@@ -61,6 +60,23 @@ for (const file of htmlFiles) {
 
     if (anchor && targetPath.endsWith(".html") && !fileHasAnchor(targetPath, anchor)) {
       failures.push(`${file}: ${rawLink} anchor is missing`);
+    }
+  }
+}
+
+const cssDirectory = path.join(root, "css");
+if (fs.existsSync(cssDirectory)) {
+  const cssFiles = fs.readdirSync(cssDirectory).filter((file) => file.endsWith(".css"));
+  for (const file of cssFiles) {
+    const filePath = path.join(cssDirectory, file);
+    const css = fs.readFileSync(filePath, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    for (const match of css.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)) {
+      const rawLink = match[1].trim();
+      if (shouldSkip(rawLink) || rawLink.startsWith("#")) continue;
+      const targetPath = path.resolve(path.dirname(filePath), decodeURIComponent(stripQuery(rawLink)));
+      if (!targetPath.startsWith(root) || !fs.existsSync(targetPath)) {
+        failures.push(`css/${file}: ${rawLink} is missing or outside the site root`);
+      }
     }
   }
 }

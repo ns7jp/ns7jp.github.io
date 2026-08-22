@@ -176,7 +176,7 @@ Grafana の SLO ダッシュボードに置く 4 パネル:
 
 - [Monitoring Stack](../monitoring-stack/) の 4 アラート（しきい値ベース）が **L1: 異常検知**
 - このドキュメントの SLO バーンレート設計が **L2: 影響の見える化**
-- [Postmortem 実例](./postmortem-example.md) と [Backup Runbook](./backup-restore-runbook.md) の RTO/RPO が **L3: 失敗からの回復設計**
+- [架空Postmortemサンプル](./postmortem-example.md) と [Backup Runbook](./backup-restore-runbook.md) の RTO/RPO が **L3: 失敗からの回復設計**
 
 3 段が揃うと、「監視している」だけでなく「**運用品質を数値で説明できる**」が伝わります。
 

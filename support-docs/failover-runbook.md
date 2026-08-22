@@ -403,6 +403,6 @@ Set-DnsServerResourceRecord `
 - [Backup / Restore Runbook](./backup-restore-runbook.md) — 取得・復元手順、RTO / RPO 表、DR ドリル計画
 - [障害対応事例集](./troubleshooting-case-studies.md) — 切り替え判断の補助情報
 - [チケット分類](./ticket-taxonomy.md) — 変更 / 重大インシデント の起票テンプレ
-- [Postmortem 実例](./postmortem-example.md) — ドリル後の振り返り書式
+- [架空Postmortemサンプル](./postmortem-example.md) — ドリル後の振り返り書式
 - [Production Readiness](../production-readiness.md) — DFS NS / Route 53 / Keepalived 等の本番導入差分
 - [Network Triage Evidence](./network-triage-evidence.md) — 切替後の疎通確認に使う一次切り分け
