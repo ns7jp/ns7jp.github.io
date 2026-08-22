@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Linuxサーバー構築・運用案件を想定した1ページ概要。目的、構成、設計判断、工程成果物、実測結果、未完了範囲を採用担当者向けに整理しています。">
+    <meta name="author" content="Noriyuki Shimada">
+    <meta name="theme-color" content="#2C3E50">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ns7jp.github.io/project-brief.html">
+
+    <meta property="og:title" content="Project Brief | Linuxサーバー構築・運用">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/project-brief.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:description" content="Ubuntuの設計、Ansible構築、試験、監視、障害復旧、引き渡しを一つの案件として1ページで説明します。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Project Brief | Linuxサーバー構築・運用">
+    <meta name="twitter:description" content="設計から引き渡しまでの成果物、実測結果、未完了範囲を1ページで確認。">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+
+    <title>Project Brief | 島田則幸のポートフォリオ</title>
+
+    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CreativeWork",
+      "name": "Linux Server Build & Operations Project Brief",
+      "description": "Ubuntuサーバーの設計・構築・試験・監視・障害復旧を想定したポートフォリオ案件概要",
+      "creator": { "@type": "Person", "name": "島田則幸", "url": "https://ns7jp.github.io/" },
+      "url": "https://ns7jp.github.io/project-brief.html",
+      "inLanguage": "ja"
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <header>
+        <p class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </p>
+        <nav id="site-nav">
+            <ul>
+                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1 class="page-title">
+                <span class="title-en">Project Brief</span>
+                <span class="title-jp">Linuxサーバー構築・運用 案件概要</span>
+            </h1>
+        </div>
+    </section>
+
+    <main class="page-content project-brief-content" id="main" tabindex="-1">
+        <div class="container">
+            <nav class="lab-subnav" aria-label="Linuxサーバー構築案件の案内">
+                <a href="project-brief.html" class="active" aria-current="page"><i class="fa-solid fa-file-lines"></i> Project Brief</a>
+                <a href="infra-lab.html"><i class="fa-solid fa-server"></i> Build Lab</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check"></i> Evidence</a>
+                <a href="resume.html"><i class="fa-solid fa-id-card"></i> Resume</a>
+            </nav>
+
+            <section class="lab-intro project-intro">
+                <span class="case-label">Ubuntu / Ansible / Docker / Monitoring</span>
+                <h2>設計書・構築コード・試験票と、過去commitの実測を一つの案件として整理</h2>
+                <p>主作品のServer MonitorをUbuntuサーバー案件と見立て、成果物を工程順に整理しました。大規模環境の実務経験はこれからですが、何を設計し、何を実行し、どこまで確認できていないかを説明できる状態にしています。</p>
+                <div class="status-callout validated evidence-scope-note" role="note">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <div>
+                        <strong>成果物は現行公開版、実測値は記録済みcommit時点</strong>
+                        <p>構築案件パックは公開中の現行文書へリンクし、試験・復旧の数値は2026年8月17〜19日に保存した履歴を示します。現行HEADの再試験結果とは分けています。</p>
+                    </div>
+                </div>
+                <div class="summary-actions">
+                    <a href="evidence-demo.html" class="btn btn-primary"><i class="fa-solid fa-play"></i> 実測証跡を2分で見る</a>
+                    <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> 構築案件パック</a>
+                    <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 1ページ履歴書</a>
+                </div>
+            </section>
+
+            <section class="brief-section" aria-labelledby="brief-summary-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-bullseye"></i></span>
+                    <h2 class="heading-text" id="brief-summary-title">案件サマリー</h2>
+                </div>
+                <div class="brief-summary-grid">
+                    <article class="brief-summary-card">
+                        <span>目的</span>
+                        <h3>小規模Web監視サーバーの構築と運用</h3>
+                        <p>Ubuntu上でアプリ、リバースプロキシ、監視、ログ、アラートを構成し、引き渡し可能な成果物へ整理します。</p>
+                    </article>
+                    <article class="brief-summary-card">
+                        <span>担当範囲</span>
+                        <h3>設計から証跡・復旧まで</h3>
+                        <p>基本・詳細設計、パラメータ、Ansible、試験仕様、監視、障害演習、ロールバック、引き渡しを個人で作成しています。</p>
+                    </article>
+                    <article class="brief-summary-card">
+                        <span>現在地</span>
+                        <h3>必須9/18・全体11/21 PASS</h3>
+                        <p>Linux上の監視起動、ログ検索、D-1復旧、通信障害は過去commitで実測済み。実VMの一括構築やAWS適用など、残りはNOT RUNです。</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="brief-section" aria-labelledby="flow-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                    <h2 class="heading-text" id="flow-title">Delivery Flow</h2>
+                </div>
+                <ol class="brief-flow">
+                    <li class="brief-step">
+                        <span>01</span>
+                        <strong>Design</strong>
+                        <small>基本・詳細設計<br>IP / Port / Parameter</small>
+                    </li>
+                    <li class="brief-step">
+                        <span>02</span>
+                        <strong>Build</strong>
+                        <small>Ansible roles<br>Docker Compose</small>
+                    </li>
+                    <li class="brief-step">
+                        <span>03</span>
+                        <strong>Test</strong>
+                        <small>単体・結合・Security<br>PASS / NOT RUN</small>
+                    </li>
+                    <li class="brief-step">
+                        <span>04</span>
+                        <strong>Observe</strong>
+                        <small>Prometheus / Grafana<br>Loki / Alertmanager</small>
+                    </li>
+                    <li class="brief-step">
+                        <span>05</span>
+                        <strong>Recover</strong>
+                        <small>D-1 / Network fault<br>Runbook / RTO</small>
+                    </li>
+                    <li class="brief-step">
+                        <span>06</span>
+                        <strong>Handover</strong>
+                        <small>Rollback<br>引き渡し・証跡</small>
+                    </li>
+                </ol>
+            </section>
+
+            <section class="brief-section" aria-labelledby="artifact-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-folder-tree"></i></span>
+                    <h2 class="heading-text" id="artifact-title">工程成果物</h2>
+                </div>
+                <div class="operation-table-wrap">
+                    <table class="operation-table">
+                        <thead>
+                            <tr>
+                                <th>工程</th>
+                                <th>成果物</th>
+                                <th>採用担当者が確認できること</th>
+                                <th>証跡区分</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>設計</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/01-basic-design.md" target="_blank" rel="noopener noreferrer">基本設計</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/02-detailed-design.md" target="_blank" rel="noopener noreferrer">詳細設計</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/03-parameter-sheet.md" target="_blank" rel="noopener noreferrer">パラメータシート</a></td>
+                                <td>目的、非機能、構成値、ポート、監視、バックアップの考え方</td>
+                                <td><span class="status-pill validated">文書化済み</span></td>
+                            </tr>
+                            <tr>
+                                <td>構築</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/tree/main/ansible" target="_blank" rel="noopener noreferrer">Ansible</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/compose.yaml" target="_blank" rel="noopener noreferrer">Compose</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">構築手順</a></td>
+                                <td>再現可能な設定、自動化単位、手動工程との境界</td>
+                                <td><span class="status-pill measured">4 roles実測</span></td>
+                            </tr>
+                            <tr>
+                                <td>試験</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">試験仕様</a>／<a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">結果票</a></td>
+                                <td>期待結果、実行結果、証跡リンク、未実施項目</td>
+                                <td><span class="status-pill pending">target cc7e478<br>必須9/18・全体11/21</span></td>
+                            </tr>
+                            <tr>
+                                <td>運用・復旧</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/tree/main/docs/runbooks" target="_blank" rel="noopener noreferrer">Runbooks</a>／<a href="https://github.com/ns7jp/server-monitor/tree/main/docs/drills" target="_blank" rel="noopener noreferrer">Drills</a></td>
+                                <td>検知後の一次対応、復旧判断、RTO、失敗からの改善</td>
+                                <td><span class="status-pill measured">D-1 / Network実測</span></td>
+                            </tr>
+                            <tr>
+                                <td>引き渡し</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/07-handover-checklist.md" target="_blank" rel="noopener noreferrer">引き渡しチェックリスト</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/08-change-rollback-plan.md" target="_blank" rel="noopener noreferrer">変更・ロールバック計画</a></td>
+                                <td>運用開始条件、既知の制約、切り戻し後の確認方法</td>
+                                <td><span class="status-pill validated">手順作成済み</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="brief-section" aria-labelledby="decision-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-scale-balanced"></i></span>
+                    <h2 class="heading-text" id="decision-title">設計判断とトレードオフ</h2>
+                </div>
+                <div class="decision-grid">
+                    <article class="decision-card">
+                        <span class="decision-number">ADR-01</span>
+                        <h3>まずUbuntu 1台に範囲を固定</h3>
+                        <p>設計から引き渡しまでを一周することを優先し、複数ホスト・HAは初期範囲から外しました。D-2や外部probeは次段階として明示します。</p>
+                    </article>
+                    <article class="decision-card">
+                        <span class="decision-number">ADR-02</span>
+                        <h3>Ansibleを役割単位に分離</h3>
+                        <p>common / docker / nginx / monitoringへ分け、変更箇所と検証範囲を限定しました。Moleculeで4ロールの冪等性を確認しています。</p>
+                    </article>
+                    <article class="decision-card">
+                        <span class="decision-number">ADR-03</span>
+                        <h3>管理画面はloopback公開を原則化</h3>
+                        <p>Grafana等を外部へ直接公開しない方針です。ただし実ホストのlisten確認は未実施で、静的設定と実測を分けて扱います。</p>
+                    </article>
+                    <article class="decision-card">
+                        <span class="decision-number">ADR-04</span>
+                        <h3>メトリクスとログを同じ画面へ</h3>
+                        <p>PrometheusとLokiをGrafanaへ集約し、数値の変化と同時刻のログを行き来できる構成にしました。WSL2上で実データ表示を確認しています。</p>
+                    </article>
+                    <article class="decision-card">
+                        <span class="decision-number">ADR-05</span>
+                        <h3>未実測を空欄にしない</h3>
+                        <p>未実施項目は<code>NOT RUN</code>と理由を残します。CIの成功を実VMの構築成功へ読み替えず、次に必要な検証が分かる台帳にしています。</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="brief-section" aria-labelledby="result-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-chart-line"></i></span>
+                    <h2 class="heading-text" id="result-title">結果・学び・次の一手</h2>
+                </div>
+                <div class="brief-result-grid">
+                    <article class="architecture-notes">
+                        <h3>実測できたこと</h3>
+                        <ul>
+                            <li>Ansible 4ロールの適用・冪等性・verifyを2分42秒で完走。</li>
+                            <li>Linux上で監視スタック9サービスを起動し、GrafanaとLokiの実データを確認。</li>
+                            <li>D-1プロセスダウンから13秒で復旧。</li>
+                            <li>二セグメント障害の6段階をPASS（スクリプト全体は10秒台。ネットワークRTOではありません）。</li>
+                        </ul>
+                    </article>
+                    <article class="architecture-notes">
+                        <h3>まだ実測していないこと</h3>
+                        <ul>
+                            <li>実VMへの<code>site.yml</code>一括適用と2回目<code>changed=0</code>。</li>
+                            <li>実ホストのNIC / DNS / route / listen / UFW / SSH。</li>
+                            <li>AlertmanagerからSlack等への実通知。</li>
+                            <li>D-2ホスト障害、AWS apply / destroy、実費。</li>
+                        </ul>
+                    </article>
+                </div>
+                <div class="status-callout measured" role="note">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div>
+                        <strong>面接で説明できる改善事例</strong>
+                        <p>D-1演習では2回失敗し、障害注入方法と古いローカルブランチを原因として切り分けました。成功結果だけでなく、誤った前提、確認コマンド、修正、再試験まで記録しています。</p>
+                    </div>
+                </div>
+                <div class="summary-actions">
+                    <a href="evidence-demo.html" class="btn btn-primary"><i class="fa-solid fa-clipboard-check"></i> 実測証跡を見る</a>
+                    <a href="infra-lab.html" class="btn btn-secondary"><i class="fa-solid fa-server"></i> 詳細Labを見る</a>
+                    <a href="contact.html" class="btn btn-outline-dark"><i class="fa-solid fa-envelope"></i> 連絡先</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="project-brief.html">Project Brief</a>
+                <a href="infra-lab.html">Server Build</a>
+                <a href="evidence-demo.html">Evidence</a>
+                <a href="works.html">Works</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+</body>
+</html>

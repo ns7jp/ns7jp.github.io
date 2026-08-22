@@ -321,7 +321,7 @@ GitHub Actions（[.github/workflows/pwsh-tests.yml](../.github/workflows/pwsh-te
 
 - [PC キッティング手順書](../support-docs/pc-kitting-guide.md)
 - [障害対応事例集](../support-docs/troubleshooting-case-studies.md)
-- [Postmortem 実例（共有フォルダ I/O 飽和、P2）](../support-docs/postmortem-example.md)
+- [架空Postmortemサンプル（共有フォルダ I/O 飽和、P2）](../support-docs/postmortem-example.md)
 - [バックアップ/リストア Runbook](../support-docs/backup-restore-runbook.md)
 - [Linux Lab](https://ns7jp.github.io/linux-lab.html) — `linux-triage.sh` の使いどころ
 - [Monitoring Stack](../monitoring-stack/) — Prometheus + Grafana + node_exporter (docker-compose)

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Linuxサーバー構築・運用ポートフォリオの実測証跡ダイジェスト。Ansible、Docker Compose、Grafana、Loki、障害復旧、ネットワーク切り分けの実行結果と未実測範囲を分けて掲載しています。">
+    <meta name="author" content="Noriyuki Shimada">
+    <meta name="theme-color" content="#2C3E50">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ns7jp.github.io/evidence-demo.html">
+
+    <meta property="og:title" content="Evidence Digest | Linuxサーバー構築・運用">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/evidence-demo.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:description" content="実測済み・CI検証済み・未実測を分け、Linux上の起動、監視、ログ検索、復旧時間、通信障害の証跡を2分で確認できます。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Evidence Digest | Linuxサーバー構築・運用">
+    <meta name="twitter:description" content="実測結果と未実測範囲を、日時・commit・コマンド・結果へのリンク付きで公開。">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+
+    <title>Evidence Digest | 島田則幸のポートフォリオ</title>
+
+    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Linuxサーバー構築・運用 Evidence Digest",
+      "description": "Linuxサーバー構築・運用ポートフォリオの実測証跡と未実測範囲をまとめたダイジェスト",
+      "author": { "@type": "Person", "name": "島田則幸", "url": "https://ns7jp.github.io/" },
+      "url": "https://ns7jp.github.io/evidence-demo.html",
+      "inLanguage": "ja"
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <header>
+        <p class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </p>
+        <nav id="site-nav">
+            <ul>
+                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');">
+        <div class="page-hero-overlay"></div>
+        <div class="page-hero-content">
+            <h1 class="page-title">
+                <span class="title-en">Evidence Digest</span>
+                <span class="title-jp">Linux構築・監視・復旧の実測証跡</span>
+            </h1>
+        </div>
+    </section>
+
+    <main class="page-content evidence-page-content" id="main" tabindex="-1">
+        <div class="container">
+            <nav class="lab-subnav" aria-label="Linuxサーバー構築案件の案内">
+                <a href="project-brief.html"><i class="fa-solid fa-file-lines"></i> Project Brief</a>
+                <a href="infra-lab.html"><i class="fa-solid fa-server"></i> Build Lab</a>
+                <a href="evidence-demo.html" class="active" aria-current="page"><i class="fa-solid fa-clipboard-check"></i> Evidence</a>
+                <a href="resume.html"><i class="fa-solid fa-id-card"></i> Resume</a>
+            </nav>
+
+            <section class="lab-intro evidence-intro">
+                <span class="case-label">Measured results only</span>
+                <h2>採用担当者が2分で確認できる証跡ダイジェスト</h2>
+                <p>設計書やコードがあるだけの項目と、実際にコマンドを実行して結果を残した項目を分けています。以下の数値は、リンク先に実行日・対象commit・環境・コマンド・結果が残っているものだけです。</p>
+                <div class="status-callout validated evidence-scope-note" role="note">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <div>
+                        <strong>過去の記録済みcommitに対する実測です</strong>
+                        <p>2026年8月17〜19日に記録した結果を掲載しています。サイトまたはServer Monitorの現行HEADを、この更新時点で再実行した結果ではありません。リンク先は証跡文書の固定snapshot <code>0d82d68</code>、各カードのcommitは実測対象を示します。</p>
+                    </div>
+                </div>
+                <div class="evidence-legend" aria-label="証跡ステータスの凡例">
+                    <span class="status-pill measured"><i class="fa-solid fa-circle-check"></i> 実測済み</span>
+                    <span class="status-pill validated"><i class="fa-solid fa-code"></i> CI・構成検証</span>
+                    <span class="status-pill pending"><i class="fa-solid fa-circle-minus"></i> NOT RUN</span>
+                </div>
+            </section>
+
+            <section class="evidence-overview" aria-labelledby="snapshot-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                    <h2 class="heading-text" id="snapshot-title">Evidence Snapshot</h2>
+                </div>
+                <div class="metric-grid">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-17-molecule.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">4 roles</span>
+                        <strong>Ansible完走</strong>
+                        <small>Ubuntu 22.04コンテナ／2分42秒</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-18-local-observability.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">9 services</span>
+                        <strong>Linux上で起動</strong>
+                        <small>Grafana実データ／Loki 103行取得</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/drills/logs/2026-08-19-D-1.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">13 sec</span>
+                        <strong>D-1自動復旧</strong>
+                        <small>目標RTO 5分以内／PASS</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">9 / 18</span>
+                        <strong>必須試験PASS</strong>
+                        <small>target cc7e478／全体11 / 21 PASS</small>
+                    </a>
+                </div>
+            </section>
+
+            <section class="evidence-timeline-section" aria-labelledby="digest-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-list-check"></i></span>
+                    <h2 class="heading-text" id="digest-title">2 Minute Evidence Walkthrough</h2>
+                </div>
+                <div class="evidence-timeline">
+                    <article class="evidence-step">
+                        <span class="step-index">01</span>
+                        <div>
+                            <span class="status-pill measured">実測済み</span>
+                            <h3>Ansibleロールを適用し、冪等性まで確認</h3>
+                            <p><code>common</code>、<code>docker</code>、<code>nginx</code>、<code>monitoring</code>の4ロールについて、create → converge → idempotence → verifyを完走しました。実VMではなくGitHub Actions上のUbuntu 22.04コンテナでの結果です。</p>
+                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-17</dd></div><div><dt>環境</dt><dd>GitHub Actions / Ubuntu 22.04 container</dd></div><div><dt>commit</dt><dd><code>3203748</code></dd></div></dl>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-17-molecule.md" target="_blank" rel="noopener noreferrer">実行記録を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </article>
+                    <article class="evidence-step">
+                        <span class="step-index">02</span>
+                        <div>
+                            <span class="status-pill measured">実測済み</span>
+                            <h3>WSL2 Ubuntuで監視スタック9サービスを起動</h3>
+                            <p>Docker Composeで9サービスすべてが<code>Up</code>になったこと、GrafanaのInfrastructure / SLO画面に実データが表示されたこと、Lokiでnginxログを103行取得できたことを記録しています。</p>
+                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-18</dd></div><div><dt>環境</dt><dd>WSL2 Ubuntu / Docker Compose</dd></div><div><dt>commit</dt><dd><code>aab2fcc</code></dd></div></dl>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-18-local-observability.md" target="_blank" rel="noopener noreferrer">監視・ログの証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </article>
+                    <article class="evidence-step">
+                        <span class="step-index">03</span>
+                        <div>
+                            <span class="status-pill measured">実測済み</span>
+                            <h3>プロセスダウンから13秒で自動復旧</h3>
+                            <p>最初の2回は障害注入方法と古いローカルブランチが原因で失敗しました。失敗理由を切り分け、ホスト側PIDへ<code>kill -9</code>する方式に修正した3回目で、目標RTO 5分以内に対して13秒で復旧しました。</p>
+                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-19</dd></div><div><dt>環境</dt><dd>WSL2 Ubuntu / Docker Compose</dd></div><div><dt>commit</dt><dd><code>5dfc67d</code></dd></div></dl>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/drills/logs/2026-08-19-D-1.md" target="_blank" rel="noopener noreferrer">失敗から復旧までの記録を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </article>
+                    <article class="evidence-step">
+                        <span class="step-index">04</span>
+                        <div>
+                            <span class="status-pill measured">実測済み</span>
+                            <h3>二セグメント通信障害を注入・切り分け・復旧</h3>
+                            <p><code>proxy</code>をbackendネットワークから切断して502を再現し、<code>docker network inspect</code>と<code>ip route</code>で原因を絞り、再接続後の正常応答まで確認しました。6段階をPASSしました。10秒台という値はスクリプト全体の実行時間であり、ネットワーク復旧RTOではありません。</p>
+                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-19</dd></div><div><dt>環境</dt><dd>WSL2 Ubuntu / Docker network</dd></div><div><dt>commit</dt><dd><code>bcf1135</code></dd></div></dl>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-network-drill.md" target="_blank" rel="noopener noreferrer">通信障害ラボの証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="test-status-section" aria-labelledby="test-status-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-vial-circle-check"></i></span>
+                    <h2 class="heading-text" id="test-status-title">Test Status — 必須9 / 18・全体11 / 21 PASS</h2>
+                </div>
+                <p class="evidence-note">結果票は対象commit <code>cc7e478</code>、証跡文書は固定snapshot <code>0d82d68</code>で参照しています。未実施項目はPASS数に含めていません。</p>
+                <div class="operation-table-wrap">
+                    <table class="operation-table evidence-status-table">
+                        <thead>
+                            <tr>
+                                <th>区分</th>
+                                <th>確認済み</th>
+                                <th>次に実測する項目</th>
+                                <th>状態</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>必須：単体・構成</td>
+                                <td>Python、Compose、Prometheus、Ansible構文</td>
+                                <td>—</td>
+                                <td><span class="status-pill measured">4 / 4 PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>必須：構築・結合</td>
+                                <td>Grafana、Loki、D-1</td>
+                                <td><code>site.yml</code>初回・2回目、targets、認証、通知、restore</td>
+                                <td><span class="status-pill pending">3 / 9 PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>必須：セキュリティ</td>
+                                <td>秘密値追跡なし、Trivy high severityなし</td>
+                                <td>実ホストlisten、実行ユーザー、UFW</td>
+                                <td><span class="status-pill pending">2 / 5 PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>追加試験</td>
+                                <td>Terraform validate、二セグメント通信障害</td>
+                                <td>残り1項目</td>
+                                <td><span class="status-pill validated">2 / 3 PASS</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="status-callout pending" role="note">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>「構築完了」とはまだ判定していません</strong>
+                        <p>実VMへの<code>site.yml</code>一括適用と冪等性、実ホストのNIC / DNS / route / listen / UFW、Alertmanagerからの実通知、D-2ホスト障害、AWS apply / destroyは未採録です。テンプレートやコードの存在だけでは実績に数えません。</p>
+                    </div>
+                </div>
+                <div class="summary-actions">
+                    <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list"></i> 21項目の結果票</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> 証跡台帳</a>
+                </div>
+            </section>
+
+            <section class="change-story-section" aria-labelledby="change-story-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-code-pull-request"></i></span>
+                    <h2 class="heading-text" id="change-story-title">Failure → Hypothesis → Evidence</h2>
+                </div>
+                <div class="decision-grid">
+                    <article class="decision-card">
+                        <span class="decision-number">01</span>
+                        <h3>現象</h3>
+                        <p>最初の障害注入では<code>docker compose kill</code>後に自動復旧せず、300秒でタイムアウトしました。</p>
+                    </article>
+                    <article class="decision-card">
+                        <span class="decision-number">02</span>
+                        <h3>仮説と再試行</h3>
+                        <p>Dockerの手動停止状態が再起動ポリシーに影響すると仮説を立て、ホスト側PIDへ<code>kill -9</code>する方式へ変更しました。2回目は古いローカルブランチにより失敗しました。</p>
+                    </article>
+                    <article class="decision-card">
+                        <span class="decision-number">03</span>
+                        <h3>根拠を揃えてPASS</h3>
+                        <p>対象commitを取り直して3回目を実行し、プロセスダウンから13秒で復旧しました。目標RTO 5分以内を満たすことをログで確認しました。</p>
+                    </article>
+                </div>
+                <p class="evidence-note">成功結果だけでなく、2回の失敗、仮説、手順変更、3回目の成功を同じ記録に残しています。13秒は通知到達時間ではなく、アプリプロセスの復旧時間です。</p>
+            </section>
+
+            <section class="video-status-section" aria-labelledby="video-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-video"></i></span>
+                    <h2 class="heading-text" id="video-title">2〜3分デモ動画</h2>
+                </div>
+                <div class="status-callout validated" role="note">
+                    <i class="fa-solid fa-clapperboard"></i>
+                    <div>
+                        <strong>収録手順は作成済み／動画本体は未公開</strong>
+                        <p>デプロイ → 障害注入 → アラート → 復旧 → RTO確認の台本、秘密値を映さないチェックリスト、証跡更新先を準備しています。実通知の証跡がないため、Slack通知を含む動画が完成したとは表示していません。</p>
+                    </div>
+                </div>
+                <div class="summary-actions">
+                    <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/demo-capture-guide.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-ol"></i> 収録ガイドを見る</a>
+                    <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 案件概要へ</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <section class="contact-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>設計から復旧まで、根拠と未完了範囲を説明します</h2>
+                <p>面談では、実測した内容だけでなく、失敗した検証と次に埋める項目もお話しできます。</p>
+                <a href="contact.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-envelope"></i> 連絡先を見る</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="project-brief.html">Project Brief</a>
+                <a href="infra-lab.html">Server Build</a>
+                <a href="evidence-demo.html">Evidence</a>
+                <a href="works.html">Works</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+        </div>
+    </footer>
+</body>
+</html>

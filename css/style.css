@@ -63,7 +63,10 @@
     --primary-dark: #1a252f;      /* primary-colorより少し暗い色 */
 
     /* アクセントカラー - 上品なゴールド/ブロンズ */
-    --accent-gold: #B8860B;       /* 強調したい時に使う金色 */
+    --accent-gold: #765400;       /* 明るい背景上でも読みやすい濃い金色 */
+    --accent-gold-light: #F0CF72; /* 暗い背景上のアイコン・装飾用 */
+    --accent-gold-action: #765400;/* CTA背景用。暗いコンテナ内でも明色へ上書きしない */
+    --accent-gold-action-hover: #5A4000;
     --accent-bronze: #CD853F;     /* 装飾用ブロンズ */
     --accent-copper: #B87333;     /* 装飾用カッパー */
 
@@ -127,7 +130,7 @@ a {
 }
 
 a:hover {
-    color: var(--accent-gold);
+    color: var(--primary-color);
 }
 
 img {
@@ -150,8 +153,7 @@ h1, h2, h3, h4 {
 /* ========================================
    4. Loader - ページ読み込み中の演出
    ----------------------------------------
-   .loader はページが完全に読み込まれるまで表示する画面。
-   position: fixed で画面全体を覆い、JSでフェードアウトする。
+   JavaScriptが無効でも本文を塞がないよう、ローダーは既定で非表示。
    .loader-spinner はくるくる回るアニメーション本体。
 ======================================== */
 .loader {
@@ -161,7 +163,7 @@ h1, h2, h3, h4 {
     width: 100%;
     height: 100%;
     background: var(--bg-cream);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 9999;
@@ -289,6 +291,17 @@ header nav ul li a:hover {
 }
 
 header nav ul li a:hover::after {
+    transform: scaleX(1);
+}
+
+header nav ul li.active a,
+header nav ul li a[aria-current="page"] {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+header nav ul li.active a::after,
+header nav ul li a[aria-current="page"]::after {
     transform: scaleX(1);
 }
 
@@ -607,14 +620,26 @@ header nav ul li a::after {
 }
 
 .btn-primary {
+    background: var(--accent-gold-action);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background: var(--accent-gold-action-hover);
+    color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+.hero .btn-primary,
+.page-hero .btn-primary {
     background: var(--text-light);
     color: var(--text-dark);
 }
 
-.btn-primary:hover {
-    background: var(--accent-gold);
-    color: var(--text-light);
-    transform: translateY(-2px);
+.hero .btn-primary:hover,
+.page-hero .btn-primary:hover {
+    background: var(--accent-gold-light);
+    color: var(--text-dark);
 }
 
 .btn-outline {
@@ -786,6 +811,28 @@ header nav ul li a::after {
     gap: 18px;
     flex-wrap: wrap;
     margin-top: 48px;
+}
+
+.evidence-boundary-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.evidence-boundary-strip span {
+    padding: 15px 17px;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-medium);
+    background: var(--bg-white);
+    border-left: 3px solid var(--accent-gold);
+}
+
+.evidence-boundary-strip strong {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--text-dark);
 }
 
 /* ========================================
@@ -1227,6 +1274,15 @@ header nav ul li a::after {
     transform: translateY(0);
 }
 
+.contact-cta .btn-primary {
+    background: var(--accent-gold-action);
+    color: var(--text-light);
+}
+
+.contact-cta .btn-primary:hover {
+    background: var(--accent-gold-action-hover);
+}
+
 .cta-content h2 {
     font-family: 'Playfair Display', serif;
     font-size: 3.5rem;
@@ -1385,8 +1441,8 @@ footer {
 ======================================== */
 .page-hero {
     position: relative;
-    height: 60vh;
-    min-height: 450px;
+    height: clamp(260px, 35vh, 360px);
+    min-height: 260px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -2465,24 +2521,29 @@ footer {
     gap: 40px;
 }
 
-#work-support-toolkit {
+#work-infra-lab {
     order: 1;
+    grid-column: 1 / -1;
 }
 
 #work-monitor {
+    order: 3;
+}
+
+#work-support-toolkit {
     order: 2;
 }
 
 #work-teikei {
-    order: 3;
-}
-
-#work-notes {
     order: 4;
 }
 
-#work-post {
+#work-notes {
     order: 5;
+}
+
+#work-post {
+    order: 7;
 }
 
 #work-pulse {
@@ -2490,7 +2551,7 @@ footer {
 }
 
 #work-magic {
-    order: 7;
+    order: 8;
 }
 
 .work-showcase-item {
@@ -3209,6 +3270,360 @@ footer {
     color: var(--accent-gold);
 }
 
+.skill-card .status-pill {
+    margin: 2px auto 15px;
+}
+
+/* ========================================
+   Project Brief / Evidence Digest
+   実測・CI検証・未実測を視覚的に区別し、採用担当者向けの案件導線を作る。
+======================================== */
+.project-brief-content,
+.evidence-page-content {
+    padding-top: 90px;
+}
+
+.project-intro,
+.evidence-intro {
+    margin-bottom: 70px;
+}
+
+.brief-section,
+.evidence-overview,
+.evidence-timeline-section,
+.test-status-section,
+.change-story-section,
+.video-status-section {
+    margin-bottom: 90px;
+}
+
+.evidence-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    padding: 6px 11px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+}
+
+.status-pill.measured,
+.status-callout.measured {
+    color: #185c3b;
+    background: #e7f5ed;
+    border-color: #9ecdb2;
+}
+
+.status-pill.validated,
+.status-callout.validated {
+    color: #28557f;
+    background: #e9f2fa;
+    border-color: #a9c8e2;
+}
+
+.status-pill.pending,
+.status-callout.pending {
+    color: #785415;
+    background: #fff5db;
+    border-color: #e2c674;
+}
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.metric-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 190px;
+    padding: 28px 24px;
+    color: var(--text-dark);
+    background: var(--bg-white);
+    border: 1px solid var(--bg-sand);
+    transition: var(--transition-smooth);
+}
+
+.metric-card:hover {
+    color: var(--text-dark);
+    border-color: var(--accent-gold);
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-4px);
+}
+
+.metric-value {
+    margin-bottom: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.7rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: -0.5px;
+}
+
+.metric-card strong {
+    margin-bottom: 10px;
+    font-size: 1.55rem;
+    font-weight: 600;
+}
+
+.metric-card small {
+    margin-top: auto;
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--text-medium);
+}
+
+.evidence-timeline {
+    display: grid;
+    gap: 20px;
+}
+
+.evidence-step {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 26px;
+    padding: 30px;
+    background: var(--bg-white);
+    border: 1px solid var(--bg-sand);
+    border-left: 4px solid var(--accent-gold);
+}
+
+.step-index,
+.decision-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: 1.2px;
+}
+
+.evidence-step .step-index {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    color: var(--text-light);
+    background: var(--primary-color);
+    border-radius: 50%;
+}
+
+.evidence-step h3 {
+    margin: 12px 0 10px;
+    font-size: 1.9rem;
+    color: var(--text-dark);
+}
+
+.evidence-step p {
+    margin-bottom: 12px;
+    font-size: 1.4rem;
+    line-height: 1.9;
+    color: var(--text-medium);
+}
+
+.evidence-step a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.evidence-status-table .status-pill {
+    margin-top: 2px;
+}
+
+.status-callout {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-top: 24px;
+    padding: 24px 26px;
+    border: 1px solid;
+}
+
+.status-callout > i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.62);
+    font-size: 1.8rem;
+}
+
+.status-callout strong {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 1.55rem;
+}
+
+.status-callout p {
+    margin: 0;
+    font-size: 1.35rem;
+    line-height: 1.85;
+    color: currentColor;
+}
+
+.decision-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.decision-card {
+    min-height: 225px;
+    padding: 28px;
+    background: var(--bg-white);
+    border: 1px solid var(--bg-sand);
+}
+
+.decision-card h3 {
+    margin: 13px 0 12px;
+    font-size: 1.65rem;
+    color: var(--text-dark);
+}
+
+.decision-card p {
+    font-size: 1.35rem;
+    line-height: 1.85;
+    color: var(--text-medium);
+}
+
+.evidence-note {
+    margin-top: 20px;
+    padding: 18px 20px;
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+    background: var(--bg-warm);
+    border-left: 3px solid var(--accent-gold);
+}
+
+.brief-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.brief-summary-card {
+    min-height: 230px;
+    padding: 30px;
+    background: var(--primary-color);
+    color: var(--text-light);
+    border-top: 4px solid var(--accent-gold);
+}
+
+.brief-summary-card > span {
+    font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.brief-summary-card h3 {
+    margin: 15px 0 12px;
+    font-size: 1.8rem;
+    color: var(--text-light);
+}
+
+.brief-summary-card p {
+    font-size: 1.35rem;
+    line-height: 1.85;
+    color: rgba(253, 251, 247, 0.76);
+}
+
+.brief-flow {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.brief-step {
+    position: relative;
+    min-height: 180px;
+    padding: 24px 18px;
+    text-align: center;
+    background: var(--bg-warm);
+    border: 1px solid var(--bg-sand);
+}
+
+.brief-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -13px;
+    width: 13px;
+    height: 2px;
+    background: var(--accent-gold);
+    z-index: 1;
+}
+
+.brief-step > span,
+.brief-step > strong,
+.brief-step > small {
+    display: block;
+}
+
+.brief-step > span {
+    margin-bottom: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent-gold);
+}
+
+.brief-step > strong {
+    margin-bottom: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.45rem;
+    color: var(--text-dark);
+}
+
+.brief-step > small {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--text-medium);
+}
+
+.brief-result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+}
+
+.brief-result-grid .architecture-notes {
+    min-height: 310px;
+}
+
+.brief-result-grid + .status-callout {
+    margin-top: 26px;
+}
+
 /* ---- VLAN 構成図（SVG）+ 折りたたみのテキスト版 ---- */
 .network-figure {
     margin: 0 0 18px;
@@ -3675,7 +4090,8 @@ article h2 {
     margin-bottom: 60px;
 }
 
-article p {
+article p,
+.page-content p {
     font-size: 1.5rem;
     line-height: 2.2;
     color: var(--text-medium);
@@ -3745,9 +4161,21 @@ article p {
     .incident-flow {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .brief-flow {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .brief-step:nth-child(3)::after {
+        display: none;
+    }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     header {
         padding: 0 25px;
     }
@@ -3767,10 +4195,14 @@ article p {
         justify-content: center;
         align-items: center;
         transition: var(--transition-slow);
+        visibility: hidden;
+        pointer-events: none;
     }
     
     header nav.show {
         top: 0;
+        visibility: visible;
+        pointer-events: auto;
     }
     
     header nav ul {
@@ -3964,6 +4396,38 @@ article p {
         grid-template-columns: 1fr;
     }
 
+    .evidence-boundary-strip {
+        grid-template-columns: 1fr;
+    }
+
+    .decision-grid,
+    .brief-summary-grid,
+    .brief-result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .evidence-step {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .evidence-step .step-index {
+        width: 48px;
+        height: 48px;
+    }
+
+    .brief-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .brief-step:nth-child(3)::after {
+        display: block;
+    }
+
+    .brief-step:nth-child(even)::after {
+        display: none;
+    }
+
     .arch-line {
         width: 1px;
         height: 28px;
@@ -4089,8 +4553,8 @@ article p {
     }
     
     .page-hero {
-        height: 50vh;
-        min-height: 350px;
+        height: clamp(220px, 30vh, 300px);
+        min-height: 220px;
     }
     
     .page-title .title-en {
@@ -4116,6 +4580,28 @@ article p {
     .ticket-card,
     .priority-card {
         padding: 28px 22px;
+    }
+
+    .metric-grid,
+    .brief-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .brief-step::after,
+    .brief-step:nth-child(3)::after {
+        display: none;
+    }
+
+    .status-callout {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 22px;
+    }
+
+    .metric-card,
+    .decision-card,
+    .brief-summary-card {
+        min-height: auto;
     }
 
     .work-summary div {
@@ -4380,5 +4866,124 @@ article p {
 
     .lightbox-diagram {
         padding: 0.75rem;
+    }
+}
+
+/* Evidence metadata and portfolio integrity helpers */
+.evidence-scope-note {
+    margin-top: 24px;
+}
+
+.evidence-meta {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin: 18px 0;
+}
+
+.evidence-meta div {
+    padding: 10px 12px;
+    background: var(--bg-warm);
+    border-left: 2px solid var(--accent-gold);
+}
+
+.evidence-meta dt {
+    margin-bottom: 2px;
+    color: var(--text-muted);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.evidence-meta dd {
+    color: var(--text-dark);
+    font-size: 1.15rem;
+    overflow-wrap: anywhere;
+}
+
+.build-package-flow {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.build-package-flow .brief-step:nth-child(5n)::after {
+    display: none;
+}
+
+.secondary-scope {
+    margin-top: 110px;
+    padding-top: 70px;
+    border-top: 4px solid var(--bg-sand);
+}
+
+.works-evidence-boundary {
+    margin: 0 0 44px;
+}
+
+.skill-level,
+.skill-progress-bar {
+    display: none;
+}
+
+.skill-evidence-pills {
+    margin: 0 0 18px;
+}
+
+.skills-evidence-link {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.contact-info-card .info-icon i,
+.network-diagram .net-host i,
+.lightbox-close:hover {
+    color: var(--accent-gold-light);
+}
+
+.hero,
+.page-hero,
+.works-preview,
+.work-overlay-full,
+.contact-info-card,
+.contact-cta,
+.support-toolkit,
+.hobbies-section,
+.brief-summary-card,
+.diagram-alt[open] > summary,
+.network-diagram,
+.architecture-map,
+.support-toolkit-visual,
+footer {
+    --accent-gold: var(--accent-gold-light);
+}
+
+@media (max-width: 1024px) {
+    .build-package-flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .build-package-flow .brief-step:nth-child(5n)::after {
+        display: block;
+    }
+
+    .build-package-flow .brief-step:nth-child(even)::after {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .evidence-meta {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .build-package-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .build-package-flow .brief-step::after {
+        display: none;
     }
 }

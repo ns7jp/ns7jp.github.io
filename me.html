@@ -112,12 +112,12 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <!-- 現在ページ「About Me」には class="active" を付けて、CSSで強調表示する -->
-                <li class="active"><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="infra-lab.html"><i class="fa-solid fa-network-wired"></i><span>Infra Lab</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
                 <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <!-- 現在ページ「About Me」には class="active" を付けて、CSSで強調表示する -->
+                <li class="active"><a href="me.html" aria-current="page"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
                 <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
             </ul>
         </nav>
@@ -137,8 +137,8 @@
     </section>
 
     <!-- ===== メインコンテンツ ===== -->
-    <!-- <article>はページの主要な独立コンテンツを表すセマンティックタグ -->
-    <article class="page-content" id="main" tabindex="-1">
+    <!-- main要素でページの主要コンテンツ範囲を明示する -->
+    <main class="page-content" id="main" tabindex="-1">
         <div class="container">
 
             <!-- ===== プロフィールセクション ===== -->
@@ -164,7 +164,7 @@
                         <!-- 自己紹介文（複数の段落で構成） -->
                         <div class="profile-intro">
                             <p>はじめまして、島田則幸です。</p>
-                        <p>2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了。現在はアデコ株式会社より株式会社Changeupへ派遣社員としてトライアル就業中です（2026年7月〜、Windows/Linuxサーバー構築およびAWS/Azure構築の研修）。Linuxサーバー構築・運用を第一志望に、Ubuntu、Ansible、Docker、Prometheus / Grafanaを使った構築案件パックと障害復旧ラボを制作・公開しています。</p>
+                        <p>2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了。現在はアデコ株式会社より株式会社Changeupへ派遣社員としてトライアル就業中です（2026年7月〜、Windows/Linuxサーバー構築およびAWS/Azure構築の研修）。Linuxサーバー構築・運用を第一志望に、Ubuntu、Ansible、Docker、Prometheus / Grafanaを使った<a href="project-brief.html">構築案件パックの概要</a>と<a href="evidence-demo.html">実測証跡</a>を公開しています。</p>
                             <p>製造・物流現場で業務効率化に取り組む中で、現場の工夫だけでは改善しきれない部分を痛感し、システム側から仕組みを変えていきたいと考えるようになりました。Linuxサーバーの構築・運用を軸に、手順どおり正確に作業し、試験結果と改善点を残せるエンジニアを目指しています。</p>
                             <p>製造・物流現場などで15年以上培った業務改善・在庫管理・現場対応の視点と、新たに習得したITスキルを組み合わせ、問い合わせ対応、障害の切り分け、手順書整備、現場で役立つ小さな自動化に貢献したいと考えています。</p>
                             <p>物流現場では、作業時間を15分単位で計測してボトルネックを特定し、棚配置・補充ルール・OJT用マップを改善して、<strong>1日あたり約1時間の作業時間短縮</strong>につなげました。この「計測して原因を絞り、手順化して定着させる」進め方を、サーバー運用でも実践しています（<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/business-improvement/picking-improvement.md" target="_blank" rel="noopener noreferrer">業務改善レポート</a>）。</p>
@@ -411,7 +411,7 @@
                 </div>
             </section>
         </div>
-    </article>
+    </main>
 
     <!-- ===== フッター（全ページ共通） ===== -->
     <footer>
@@ -423,7 +423,7 @@
             <div class="footer-nav">
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Infra Lab</a>
+                <a href="infra-lab.html">Server Build</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>

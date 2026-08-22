@@ -246,7 +246,7 @@ A5: 障害から手順への反映フローが整備されていない
 
 ## 9. ポートフォリオでの位置づけ
 
-- 受付の型（このドキュメント）→ [障害事例集](./troubleshooting-case-studies.md) の現象別対応 → [インシデント対応プレイブック](./incident-response-playbook.md) の P1/P2 → [Postmortem 実例](./postmortem-example.md) の事後分析、と1本でつなぐ構成です。
+- 受付の型（このドキュメント）→ [障害事例集](./troubleshooting-case-studies.md) の現象別対応 → [インシデント対応プレイブック](./incident-response-playbook.md) の P1/P2 → [架空Postmortemサンプル](./postmortem-example.md) の事後分析、と1本でつなぐ構成です。
 - [変更作業ケース](./ad-m365-change-case.md) は本ドキュメントの「変更」テンプレの具体例（AD/M365 部署異動）として読めます。
 - [SLO / Error Budget](./slo-error-budget.md) と組み合わせると、「**何件まで失敗を許容するか**」のチケット側のしきい値が決まります。
 
@@ -256,7 +256,7 @@ A5: 障害から手順への反映フローが整備されていない
 
 - [障害対応事例集](./troubleshooting-case-studies.md) — 現象別の切り分けケース
 - [重大インシデント対応プレイブック](./incident-response-playbook.md) — P1/P2 発動時のフロー
-- [Postmortem 実例](./postmortem-example.md) — 事後分析の実例
+- [架空Postmortemサンプル](./postmortem-example.md) — 事後分析の型
 - [AD / M365 変更作業ケース](./ad-m365-change-case.md) — 変更テンプレの具体例
 - [SLO / Error Budget](./slo-error-budget.md) — 失敗許容量の数値設計
 - [Backup / Restore Runbook](./backup-restore-runbook.md) — RTO / RPO / DR ドリル
