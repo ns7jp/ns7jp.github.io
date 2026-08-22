@@ -116,9 +116,9 @@
             <section class="skills-overview">
                 <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発基礎に加え、自学で取り組むLinuxサーバー構築、Ansible、Docker、監視・ログ、障害復旧をご紹介します。<br>各技術はServer Monitor構築案件パックとSupport Toolkitで使用しています。</p>
                 <div class="evidence-boundary-strip" aria-label="スキルの証跡区分">
-                    <span><strong>過去commitで実測</strong> Ansible 4 roles・監視9 services・D-1・通信障害</span>
-                    <span><strong>構成・CI検証</strong> Compose・Prometheus・Ansible・Terraform validate</span>
-                    <span><strong>NOT RUN</strong> 実VM site.yml・実通知・AWS apply・D-2</span>
+                    <span><strong>2026-08-22 E2E</strong> disposable Ubuntu 24.04・23/23 PASS・<code>changed=0</code>・runner内network/UFW・D-1・3-volume restore</span>
+                    <span><strong>過去の実測履歴</strong> Ansible 4 roles・監視core 9 services・D-1 RTO 13秒・通信障害</span>
+                    <span><strong>NOT RUN</strong> Slack実配信・AWS apply / destroy・D-2・独立した管理端末と引き渡し対象ホスト</span>
                 </div>
                 <p class="overview-text skills-evidence-link"><a href="evidence-demo.html">日時・環境・commit付きのEvidence Digestを見る <i class="fa-solid fa-arrow-right"></i></a></p>
             </section>
@@ -152,10 +152,10 @@
                             <ul>
                                 <li>Linux 一次切り分け bash スクリプト（systemd / journalctl / load / disk / ss）</li>
                                 <li>Prometheus + Grafana + Loki等9サービス（記録済みcommitでWSL2 Ubuntu上の起動を確認）</li>
-                                <li>Ansible playbook（4 rolesはUbuntuコンテナで実測、実VMへの<code>site.yml</code>一括適用は未実施）</li>
+                                <li>Ansible playbook（4 rolesのMoleculeに加え、使い捨てUbuntu 24.04 runnerで<code>site.yml</code>一括適用と2回目<code>changed=0</code>を実測。Dockerはrunnerへ事前導入済み）</li>
                                 <li>AWS VPC / Security Group構成コード（<code>fmt</code> / <code>init -backend=false</code> / <code>validate</code>まで。apply未実施）</li>
                                 <li>GitHub Actions による Docker Compose / promtool / Ansible / Terraform 検証</li>
-                                <li>rsync + systemd timer によるバックアップ / 月次リストアテスト計画</li>
+                                <li>systemdによる3-volumeバックアップ、SHA-256検証、別名volumeへのrestoreをE2Eで実測。別ホスト復元のD-2は未実施</li>
                                 <li>サーバー監視ダッシュボード自作（Flask + psutil + Chart.js）</li>
                                 <li>XAMPP / Apache 環境構築・レンタルサーバーへのデプロイ運用</li>
                                 <li>Kubernetes <span class="learning-tag">学習中</span></li>

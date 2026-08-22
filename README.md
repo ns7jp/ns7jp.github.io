@@ -9,6 +9,8 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
+**Linuxサーバー構築・運用を第一志望**とし、Ubuntuサーバーの設計とAnsible構成コード、Prometheus・Grafana・Loki監視、障害注入から復旧までを、実装済み・実測済みの範囲を分けて公開しています。
+
 ## 開発体制について
 
 このポートフォリオおよび主作品 [Server Monitor](https://github.com/ns7jp/server-monitor) は、設計方針・構成・検証観点は自分で立てた上で、実装・デバッグの多くを Claude Code / Codex などの AI コーディングエージェントと協働して進めています。実機・CIで確認できた項目は日時・環境・対象commitとともに記録し、未確認の項目は `NOT RUN` として公開します。コミット履歴・PRもGitHub上で確認できます。
@@ -19,22 +21,27 @@
 |---|---|---|
 | 1 | [Project Brief](https://ns7jp.github.io/project-brief.html) | Linuxサーバー構築案件の目的、担当範囲、工程、設計判断、完了条件 |
 | 2 | [Evidence Digest](https://ns7jp.github.io/evidence-demo.html) | 日時・環境・commit付きの実測結果、失敗、未実施範囲 |
-| 3 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、構築・運用スキル、主成果物 |
-| 4 | [Server Build Lab](https://ns7jp.github.io/infra-lab.html) | 要件から引き渡しまでの10番号付き成果物、監視、復旧、補助Lab |
+| 3 | [2分15秒 証跡リプレイ](https://ns7jp.github.io/demo.html) | 2026年8月18日・19日の実測画面とD-1ログを時系列に再構成した閲覧用デモ |
+| 4 | [Full-stack E2E 23/23](https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md) | 使い捨てUbuntu 24.04 runnerでの構築・冪等性・稼働・復旧・3 volumes復元 |
+| 5 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、構築・運用スキル、主成果物 |
+| 6 | [Server Build Lab](https://ns7jp.github.io/infra-lab.html) | 要件から引き渡しまでの10番号付き成果物、監視、復旧、補助Lab |
 
 ### 証跡の境界
 
 - **作成・実装済み:** 要件、設計、パラメータ、構築コード、試験仕様、引き渡し、変更・ロールバック、実機検証手順
-- **記録済みcommitで実測:** Ansible 4 roles、監視9 services、Grafana実データ、Lokiログ、D-1復旧、二セグメント通信障害
-- **NOT RUN:** 実VMへの`site.yml`一括適用と2回目冪等性、実ホストNIC/DNS/route/listen/UFW、外部通知、D-2、restore、AWS apply/destroy
+- **2026年8月17〜19日の履歴として実測:** Ansible 4 roles、監視9 services、Grafana実データ、Lokiログ、D-1復旧（RTO 13秒）、二セグメント通信障害
+- **2026年8月22日のE2Eで実測:** 使い捨てUbuntu 24.04 runnerで23/23 PASS。`site.yml`初回一括適用、2回目`changed=0`、core 9 services + CI専用webhook sinkの計10 containers、認証、runner内network/UFW、synthetic alertのlocal webhook FIRING/RESOLVED、D-1自動復旧（RTO 1秒）、別名3 volumesへのchecksum付きrestore
+- **NOT RUN:** Slack実配信、AWS `apply / destroy`・実費・Security Group/NACL、D-2、独立した管理端末・引き渡し対象host・組織DNSを含むnetwork検証、長期稼働・host再起動後・production traffic
 
-実測値は2026年8月17〜19日の記録済みcommitに対する履歴です。Server Monitorの現行HEADを、このサイト更新時点で再実行した結果ではありません。Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画、架空Postmortem、CIS自己マッピング、`infra-evidence/*.sample.txt`は、実運用実績・実測結果とは区別しています。
+E2E runnerにはDockerが事前導入済みだったため、最小OSからDockerを導入した実績とは表現しません。local webhookのsynthetic alert試験とD-1障害注入は別の検証であり、いずれもSlack実配信を示しません。
 
-公共職業訓練（2025年10月〜2026年1月）で学んだ開発基礎を起点に、**Linuxサーバー構築・運用**を第一志望としてまとめたポートフォリオサイトです。主作品の Server Monitor では、設計、Ansible構築、試験、Prometheus監視、障害切り分け、復旧までを一つの案件として公開しています。
+公開中の2分15秒映像は、2026年8月18日・19日の画面とRTO 13秒のD-1ログを再構成した証跡リプレイで、実操作の連続録画ではありません。2026年8月22日の実terminal `demo.cast`は期限付きActions artifactに保存され、公開サイト上の常設動画ではありません。実操作を収録する手順は[収録ガイド](https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md)に分けています。
 
-この README は、Web 初学者の方にも「このサイトが何を目的に作られているのか」「どのファイルが何を担当しているのか」「HTML / CSS / JavaScript がどう分担して動いているのか」が分かるように、できるだけ順を追って説明しています。
+Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画、架空Postmortem、CIS自己マッピング、`infra-evidence/*.sample.txt`は、実運用実績・実測結果とは区別しています。
 
-各ファイルの詳しい役割、読む順番、処理の追い方は [CODE_WALKTHROUGH.md](./CODE_WALKTHROUGH.md) にまとめています。
+公共職業訓練（2025年10月〜2026年1月）で学んだ開発基礎を起点に、主作品の Server Monitor では設計、Ansible構築、試験、Prometheus監視、障害切り分け、復旧までを一つの案件として公開しています。
+
+この README は、Web 初学者の方にも「このサイトが何を目的に作られているのか」「どのファイルが何を担当しているのか」「HTML / CSS / JavaScript がどう分担して動いているのか」が分かるように、できるだけ順を追って説明しています。各ファイルの詳しい役割、読む順番、処理の追い方は [CODE_WALKTHROUGH.md](./CODE_WALKTHROUGH.md) にまとめています。
 
 ---
 
@@ -47,6 +54,7 @@
 | 見てほしいこと | 内容 |
 |----------------|------|
 | 人物像 | 製造・物流現場で培った正確性、改善意識、職業訓練で学んだ内容 |
+| 第一志望 | Linuxサーバーの構築・運用 |
 | スキル | Linuxサーバー設計・構築、Ansible、Docker、監視・ログ、障害切り分け、復旧、補助的な開発・運用支援 |
 | 制作物 | Linux Server Build & Operations Lab、Evidence Digest、Server Monitor、補助成果・学習作品 |
 | 学習姿勢 | トラブルに対して原因を切り分け、調査し、修正し、手順化した過程 |
@@ -68,7 +76,7 @@
 | HTML | 見出し、文章、画像、リンク、ナビゲーションなど、ページの骨組みを作る |
 | CSS | 色、余白、文字サイズ、2カラム配置、カード表示、スマホ対応、アニメーションを担当 |
 | JavaScript（Vanilla） | ハンバーガーメニュー、背景画像切り替え、スクロール演出などの動きを担当（`js/main.js` に集約、外部ライブラリ非依存） |
-| 画像ファイル | ヒーロー画像、プロフィール画像、作品スクリーンショットを表示 |
+| 画像・動画ファイル | ヒーロー画像、プロフィール画像、作品スクリーンショット、証跡リプレイを表示 |
 | GitHub Pages | 作成した静的ファイルをインターネット上に公開 |
 
 ブラウザで `https://ns7jp.github.io/` を開くと、GitHub Pages がこのリポジトリの `index.html` を配信し、そこから CSS・JavaScript・画像ファイルが読み込まれます。
@@ -80,7 +88,7 @@
 初めて見る人が迷わず内容を追えるよう、サイト全体は次の流れで構成しています。
 
 1. **Top**
-   最初に表示されるページです。ヒーロー画像、採用担当者向け1分サマリー、短い自己紹介、主要スキル、代表作品への導線を置いています。
+   Linuxサーバー構築・運用という第一志望、Server Monitorの要約、2分15秒の証跡リプレイ、構成図、実測証跡への導線を最初に表示します。
 
 2. **About Me**
    これまでの経歴、職業訓練で学んだこと、取得資格を確認できます。
@@ -105,7 +113,8 @@
 |--------|----------|------|
 | トップページ | `index.html` | サイトの入口。自己紹介・スキル・作品ページへの導線をまとめる |
 | 案件概要 | `project-brief.html` | Linuxサーバー構築案件の目的、担当範囲、工程、設計判断、完了条件を説明する |
-| 証跡ダイジェスト | `evidence-demo.html` | 記録済みcommitの実測値、失敗、制約、NOT RUNを日時・環境付きで示す |
+| 証跡ダイジェスト | `evidence-demo.html` | 最新E2Eと日付付き履歴、失敗、制約、NOT RUNを環境・commit付きで示す |
+| 証跡リプレイ | `demo.html` | 2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の閲覧用デモ |
 | 自己紹介ページ | `me.html` | プロフィール、経歴、職業訓練、資格、**学習ロードマップ** を説明する |
 | スキルページ | `skills.html` | Linux構築・監視・自動化を先頭に、補助スキルを証跡区分付きで見せる |
 | Server Build Lab | `infra-lab.html` | 要件・設計・構築・試験・監視・復旧・引き渡しを工程順に見せる |
@@ -172,10 +181,13 @@ PowerShellで端末情報、ネットワーク疎通、イベントログ、デ�
 ns7jp.github.io/
 ├── CODE_WALKTHROUGH.md      ... 初学者向けの詳細なコード読解ガイド
 ├── index.html               ... トップページ
+├── project-brief.html       ... Linuxサーバー構築案件の概要
+├── evidence-demo.html       ... 実測・CI・NOT RUNを分けた証跡ダイジェスト
+├── demo.html                ... 2分15秒の証跡リプレイ（連続操作動画ではない）
 ├── me.html                  ... 自己紹介ページ（学習ロードマップ含む）
 ├── skills.html              ... スキル一覧ページ（Win / Linux 系を別カードに分割）
 ├── works.html               ... 作品一覧ページ（Infra カテゴリに Lab + Support Toolkit）
-├── infra-lab.html           ... Windows / M365 / AD Lab（VLAN論理構成図）
+├── infra-lab.html           ... Linux Server Build & Operations Lab
 ├── linux-lab.html           ... Linux 一次運用Lab（systemd / journalctl / SSH / rsync）
 ├── cloud-lab.html           ... Cloud Network Lab（AWS VPC / Terraform）
 ├── production-readiness.md  ... Lab を本番化する際に足す運用観点
@@ -272,7 +284,7 @@ ns7jp.github.io/
 
 | # | 作品名 | 主な技術 | 位置づけ | 内容 | リポジトリ |
 |---|--------|----------|----------|------|------------|
-| ① | Linux Server Build & Operations | Ubuntu / Ansible / Docker / Prometheus / Loki | 主成果 | 要件から引き渡しまでの10番号付き成果物と、記録済みcommitの実測証跡 | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
+| ① | Linux Server Build & Operations | Ubuntu / Ansible / Docker / Prometheus / Loki / Alloy | 主成果 | 要件から引き渡しまでの10番号付き成果物と、2026年8月22日のFull-stack E2E 23/23 | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
 | ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | 主成果 | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
 | ③ | Support Toolkit | Markdown / PowerShell / bash | 補助成果 | 16ガイド+README、10確認スクリプト、M365サンプル、架空ケース | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
 | ④ | 定型文管理アプリ | Python / Flet | 補助スキル | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |

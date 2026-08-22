@@ -99,17 +99,17 @@
 
             <section class="lab-intro project-intro">
                 <span class="case-label">Ubuntu / Ansible / Docker / Monitoring</span>
-                <h2>設計書・構築コード・試験票と、過去commitの実測を一つの案件として整理</h2>
+                <h2>設計書・構築コード・試験票と、最新E2Eの実測を一つの案件として整理</h2>
                 <p>主作品のServer MonitorをUbuntuサーバー案件と見立て、成果物を工程順に整理しました。大規模環境の実務経験はこれからですが、何を設計し、何を実行し、どこまで確認できていないかを説明できる状態にしています。</p>
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                     <div>
-                        <strong>成果物は現行公開版、実測値は記録済みcommit時点</strong>
-                        <p>構築案件パックは公開中の現行文書へリンクし、試験・復旧の数値は2026年8月17〜19日に保存した履歴を示します。現行HEADの再試験結果とは分けています。</p>
+                        <strong>最新実測は2026年8月22日の使い捨てrunner E2E</strong>
+                        <p>Docker導入済みのdisposable Ubuntu 24.04 runnerで23 / 23 IDがPASSしました。2026年8月19日の全体11 / 21 PASSとD-1 13秒は当時の対象commitに対する履歴として残し、最新結果と区別しています。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
-                    <a href="evidence-demo.html" class="btn btn-primary"><i class="fa-solid fa-play"></i> 実測証跡を2分で見る</a>
+                    <a href="evidence-demo.html" class="btn btn-primary"><i class="fa-solid fa-clipboard-check"></i> 最新の実測証跡を見る</a>
                     <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> 構築案件パック</a>
                     <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 1ページ履歴書</a>
                 </div>
@@ -133,8 +133,8 @@
                     </article>
                     <article class="brief-summary-card">
                         <span>現在地</span>
-                        <h3>必須9/18・全体11/21 PASS</h3>
-                        <p>Linux上の監視起動、ログ検索、D-1復旧、通信障害は過去commitで実測済み。実VMの一括構築やAWS適用など、残りはNOT RUNです。</p>
+                        <h3>Full-stack E2E 23 / 23 PASS</h3>
+                        <p>使い捨てUbuntu 24.04 runnerで、構築・冪等性・起動・local webhook通知経路・network / UFW・障害復旧・3-volume restoreまで確認しました。独立した引き渡し対象ホスト等はNOT RUNです。</p>
                     </article>
                 </div>
             </section>
@@ -204,19 +204,19 @@
                                 <td>構築</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/tree/main/ansible" target="_blank" rel="noopener noreferrer">Ansible</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/compose.yaml" target="_blank" rel="noopener noreferrer">Compose</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">構築手順</a></td>
                                 <td>再現可能な設定、自動化単位、手動工程との境界</td>
-                                <td><span class="status-pill measured">4 roles実測</span></td>
+                                <td><span class="status-pill measured"><code>site.yml</code> 2回目<br><code>changed=0</code></span></td>
                             </tr>
                             <tr>
                                 <td>試験</td>
-                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">試験仕様</a>／<a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">結果票</a></td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">試験仕様</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026-08-22 E2E証跡</a>／<a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">2026-08-19 履歴</a></td>
                                 <td>期待結果、実行結果、証跡リンク、未実施項目</td>
-                                <td><span class="status-pill pending">target cc7e478<br>必須9/18・全体11/21</span></td>
+                                <td><span class="status-pill measured">disposable runner<br>23 / 23 PASS</span></td>
                             </tr>
                             <tr>
                                 <td>運用・復旧</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/tree/main/docs/runbooks" target="_blank" rel="noopener noreferrer">Runbooks</a>／<a href="https://github.com/ns7jp/server-monitor/tree/main/docs/drills" target="_blank" rel="noopener noreferrer">Drills</a></td>
                                 <td>検知後の一次対応、復旧判断、RTO、失敗からの改善</td>
-                                <td><span class="status-pill measured">D-1 / Network実測</span></td>
+                                <td><span class="status-pill measured">D-1 1秒 / Network・UFW<br>3-volume restore</span></td>
                             </tr>
                             <tr>
                                 <td>引き渡し</td>
@@ -248,7 +248,7 @@
                     <article class="decision-card">
                         <span class="decision-number">ADR-03</span>
                         <h3>管理画面はloopback公開を原則化</h3>
-                        <p>Grafana等を外部へ直接公開しない方針です。ただし実ホストのlisten確認は未実施で、静的設定と実測を分けて扱います。</p>
+                        <p>Grafana等を外部へ直接公開しない方針です。2026年8月22日に使い捨てrunner内のlistenとUFWを確認しましたが、独立した管理端末・引き渡し対象ホスト・組織DNSからの到達性は未実測です。</p>
                     </article>
                     <article class="decision-card">
                         <span class="decision-number">ADR-04</span>
@@ -258,7 +258,7 @@
                     <article class="decision-card">
                         <span class="decision-number">ADR-05</span>
                         <h3>未実測を空欄にしない</h3>
-                        <p>未実施項目は<code>NOT RUN</code>と理由を残します。CIの成功を実VMの構築成功へ読み替えず、次に必要な検証が分かる台帳にしています。</p>
+                        <p>未実施項目は<code>NOT RUN</code>と理由を残します。使い捨てrunnerの成功を独立した引き渡し対象ホストの構築成功へ読み替えず、次に必要な検証が分かる台帳にしています。</p>
                     </article>
                 </div>
             </section>
@@ -272,19 +272,20 @@
                     <article class="architecture-notes">
                         <h3>実測できたこと</h3>
                         <ul>
-                            <li>Ansible 4ロールの適用・冪等性・verifyを2分42秒で完走。</li>
-                            <li>Linux上で監視スタック9サービスを起動し、GrafanaとLokiの実データを確認。</li>
-                            <li>D-1プロセスダウンから13秒で復旧。</li>
-                            <li>二セグメント障害の6段階をPASS（スクリプト全体は10秒台。ネットワークRTOではありません）。</li>
+                            <li>Docker導入済みのdisposable Ubuntu 24.04 runnerへ<code>site.yml</code>を2回適用し、2回目<code>changed=0</code>を確認。</li>
+                            <li>core 9 servicesとCI webhook sinkを起動し、local webhookの<code>FIRING</code> / <code>RESOLVED</code>を確認（Slack実配信ではありません）。</li>
+                            <li>runner内のnetwork / UFWを検証し、D-1を1秒で復旧。</li>
+                            <li>Prometheus・Grafana・Lokiの3 volumeをbackup / restoreし、Full-stack E2E 23 / 23 IDをPASS。</li>
+                            <li>履歴：2026年8月19日は全体11 / 21 PASS、D-1 RTO 13秒。最新値とは分けて保存。</li>
                         </ul>
                     </article>
                     <article class="architecture-notes">
                         <h3>まだ実測していないこと</h3>
                         <ul>
-                            <li>実VMへの<code>site.yml</code>一括適用と2回目<code>changed=0</code>。</li>
-                            <li>実ホストのNIC / DNS / route / listen / UFW / SSH。</li>
-                            <li>AlertmanagerからSlack等への実通知。</li>
-                            <li>D-2ホスト障害、AWS apply / destroy、実費。</li>
+                            <li>AlertmanagerからSlackへの実配信。</li>
+                            <li>AWS apply / destroyとD-2ホスト障害。</li>
+                            <li>独立した管理端末と引き渡し対象ホストでの構築・疎通・運用。</li>
+                            <li>組織DNSを使った名前解決と長期稼働。</li>
                         </ul>
                     </article>
                 </div>

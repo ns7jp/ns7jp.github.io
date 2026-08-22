@@ -171,27 +171,22 @@
                 <span class="line1">Linux Server</span>
                 <span class="line2">Build &amp; Operations</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">Ubuntuの構築コード・設計書・試験票と、<br>過去commitで実測した監視・障害復旧を分けて公開しています</p>
+            <p class="hero-description animate-fade-in-delay">Ubuntu 24.04の設計・Ansible構築・監視・復旧を、<br>実装・実測・未実測に分け、再現可能な成果物と証跡で公開しています</p>
             <div class="hero-proof-grid animate-fade-in-delay2" aria-label="Linuxサーバー構築・運用の公開成果">
-                <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-server"></i>
-                    <span>文書一式</span>
-                    <strong>Design → Test</strong>
+                <a href="demo.html" class="hero-proof-item" aria-label="実測スクリーンショットと復旧ログを再構成した2分15秒の証跡リプレイを見る">
+                    <i class="fa-solid fa-video"></i>
+                    <span>2分15秒デモ</span>
+                    <strong>実測証跡リプレイ</strong>
                 </a>
-                <a href="https://github.com/ns7jp/server-monitor/tree/main/ansible" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-gears"></i>
-                    <span>構築コード</span>
-                    <strong>Ansible 4 roles</strong>
+                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/architecture.md#構成図" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <span>構成図</span>
+                    <strong>監視・ログ基盤</strong>
                 </a>
-                <a href="evidence-demo.html" class="hero-proof-item">
+                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-clipboard-check"></i>
                     <span>実測証跡</span>
-                    <strong>必須9 / 18 PASS</strong>
-                </a>
-                <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-network-wired"></i>
-                    <span>障害・復旧</span>
-                    <strong>2 Segments</strong>
+                    <strong>Full-stack E2E 23 / 23</strong>
                 </a>
             </div>
             <!-- CTA（Call To Action）ボタン群。採用担当者向けの主導線を3本に絞る。 -->
@@ -212,7 +207,7 @@
         <div class="container">
             <h2 class="section-title center">
                 <span class="title-en">1 Minute Summary</span>
-                <span class="title-jp">採用担当者向けサマリー</span>
+                <span class="title-jp">主作品：Server Monitor</span>
             </h2>
             <div class="summary-grid">
                 <div class="summary-card">
@@ -221,24 +216,25 @@
                     <p>要件、基本・詳細設計、パラメータ、ネットワーク、構築、試験、引き渡し、ロールバック、実機検証手順を工程順に整理しています。</p>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">Measured on Linux</span>
-                    <h3>9サービス・Grafana・Loki</h3>
-                    <p>記録済みcommit（2026年8月18日）で、WSL2 Ubuntu上の9サービス起動、Grafana実データ、Lokiのnginxログ103行を確認しました。</p>
+                    <span class="summary-label">2026-08-22 / Full-stack E2E</span>
+                    <h3>Ubuntu 24.04で23 / 23 PASS</h3>
+                    <p>使い捨てGitHub Actions runnerで、Dockerはプリインストール済み環境を使用。site.ymlの2回目がchanged=0となり、10コンテナ（主構成9＋CI用ローカルwebhook sink）の起動まで確認しました。</p>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">Recovery Drill</span>
-                    <h3>RTO 13秒・通信障害PASS</h3>
-                    <p>記録済みcommit（2026年8月19日）で、D-1プロセスダウンから13秒で復旧。二セグメント障害は6段階をPASSしました。</p>
+                    <span class="summary-label">Recovery / Restore</span>
+                    <h3>D-1 RTO 1秒・3 volume復元</h3>
+                    <p>runner内ネットワーク、UFW・待受・SSH tunnel、3 volumeのbackup / restore、ローカルwebhookのFIRING / RESOLVEDを実測しました。ローカルwebhookはSlack実配信ではありません。</p>
                 </div>
             </div>
-            <div class="evidence-boundary-strip" aria-label="現在の証跡範囲">
-                <span><strong>文書・コード作成済み</strong> 設計・構築・試験・引き渡し・ロールバック</span>
-                <span><strong>過去commitで実測</strong> Ansible 4 roles・監視9 services・D-1・通信障害</span>
-                <span><strong>NOT RUN</strong> 実VM一括構築・実通知・D-2・AWS適用</span>
+            <div class="evidence-boundary-strip" aria-label="証跡の現在・履歴・未実測の区分">
+                <span><strong>現在のE2E</strong> disposable Ubuntu 24.04・23 / 23 PASS・site.yml changed=0・network / UFW・D-1 1秒・3 volume restore</span>
+                <span><strong>履歴（2026-08-19）</strong> WSL2で11 / 21 PASS・D-1 RTO 13秒。現在のE2E結果とは分けて掲載</span>
+                <span><strong>NOT RUN</strong> Slack実配信・独立した管理端末／引き渡し対象ホスト・AWS apply / destroy・D-2</span>
             </div>
             <div class="summary-actions">
                 <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要を見る</a>
-                <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check"></i> 実測証跡を見る</a>
+                <a href="demo.html" class="btn btn-secondary"><i class="fa-solid fa-video"></i> 2分15秒デモ</a>
+                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> Full-stack E2E原本</a>
                 <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
             </div>
         </div>
@@ -264,8 +260,9 @@
                     <span class="summary-label">02 / Evidence</span>
                     <h3>実際に動かした範囲を確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="evidence-demo.html">Evidence Digest</a><span>実測値、対象commit、コマンド、失敗、NOT RUNを2分で確認</span></li>
-                        <li><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">証跡台帳</a><span>日時・環境・結果・制約を含む原本</span></li>
+                        <li><a href="demo.html">2分15秒の証跡リプレイ</a><span>実測スクリーンショットと復旧ログを短時間で確認</span></li>
+                        <li><a href="evidence-demo.html">Evidence Digest</a><span>実測値、対象commit、コマンド、失敗、NOT RUNを確認</span></li>
+                        <li><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E原本</a><span>Ubuntu 24.04で23 / 23 PASSした最新記録</span></li>
                     </ul>
                 </div>
                 <div class="summary-card">
@@ -308,7 +305,7 @@
     </section>
 
     <!-- ===== スキルプレビューセクション ===== -->
-    <!-- 主要スキルを4枚のカードで簡潔に表示。データはdata-progress属性で渡す。 -->
+    <!-- 主要スキルを4枚のカードで表示し、自己評価率ではなく実測証跡で示す。 -->
     <section class="skills-preview">
         <div class="container">
             <h2 class="section-title center">
@@ -321,33 +318,33 @@
                     <div class="skill-icon">
                         <i class="fa-solid fa-server"></i>
                     </div>
-                    <span class="status-pill validated">設計・手順作成済み</span>
+                    <span class="status-pill measured">E2E 23 / 23 PASS</span>
                     <h3>Linux Server Build</h3>
-                    <p>基本・詳細設計、パラメータ、構築手順、試験、引き渡し、ロールバック</p>
+                    <p>Ubuntu 24.04 runner上で、構築、network・UFW、待受、SSH tunnelまで一気通貫で検証</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-gears"></i>
                     </div>
-                    <span class="status-pill measured">過去commitで4 roles</span>
+                    <span class="status-pill measured">2回目 changed=0</span>
                     <h3>Ansible / IaC</h3>
-                    <p>common、docker、nginx、monitoringを役割分割し、Moleculeで冪等性を確認</p>
+                    <p>site.ymlと役割別roleで構成し、同一runner上の2回目実行で冪等性を確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <span class="status-pill measured">過去commitで実測</span>
+                    <span class="status-pill measured">10 containers起動</span>
                     <h3>Monitoring / Logs</h3>
-                    <p>Prometheus、Grafana、Loki、Alertmanager、9サービス起動と実データ表示</p>
+                    <p>主構成9コンテナとCI用ローカルwebhook sinkを起動し、FIRING / RESOLVEDを確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-heart-pulse"></i>
                     </div>
-                    <span class="status-pill measured">過去commitで2 drills</span>
-                    <h3>Triage / Recovery</h3>
-                    <p>D-1自動復旧、二セグメント通信障害、network・route・HTTP疎通の切り分け</p>
+                    <span class="status-pill measured">D-1 RTO 1秒</span>
+                    <h3>Recovery / Restore</h3>
+                    <p>D-1自動復旧と、Prometheus・Grafana・Lokiの3 volume backup / restoreを検証</p>
                 </div>
             </div>
             <!-- スキル一覧ページへの誘導ボタン -->
@@ -462,6 +459,7 @@
                 <a href="skills.html">Skills</a>
                 <a href="project-brief.html">Project Brief</a>
                 <a href="infra-lab.html">Server Build</a>
+                <a href="demo.html">Demo Replay</a>
                 <a href="evidence-demo.html">Evidence</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>

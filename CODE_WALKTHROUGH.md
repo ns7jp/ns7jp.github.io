@@ -31,29 +31,35 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
    - サイトの目的、Linuxサーバー構築・運用向けに何を伝えるサイトか、ファイル構成を確認します。
 2. `index.html`
    - トップページの構成を読みます。最初に見せたい情報と、各ページへの導線を確認します。
-3. `me.html`
+3. `project-brief.html`
+   - 主案件の目的、担当範囲、工程、成果物、設計判断、未実測の境界を確認します。
+4. `evidence-demo.html`
+   - 日付・環境・commit付きの最新実測結果と、PASS / NOT RUNの境界を確認します。
+5. `demo.html`
+   - 2026年8月18日・19日の保存済み証跡を再構成した2分15秒の補助リプレイと、元証跡への導線を確認します。
+6. `me.html`
    - 経歴、資格、人物像、**学習ロードマップ** を伝えるページ構成を確認します。
-4. `skills.html`
+7. `skills.html`
    - Linux構築・監視・自動化を先頭に、補助的なITサポート、Web制作、Python/PHPの分類を確認します。
-5. `infra-lab.html`
-   - Windows / M365 / AD を想定した運用Lab。**VLAN論理構成図** と監視・証跡・一次対応マトリクス。
-6. `linux-lab.html`
+8. `infra-lab.html`
+   - Linuxサーバー案件の10番号付き成果物、構築・監視・復旧マトリクス、実測と未実測の境界を確認します。
+9. `linux-lab.html`
    - Linux 一次運用Lab。systemd / journalctl / SSH / rsync 早見表。
-7. `cloud-lab.html`
+10. `cloud-lab.html`
    - AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail の設計メモ。
-8. `works.html`
+11. `works.html`
    - 主案件、証跡、補助成果、学習作品の順序とフィルター機能を確認します。
-9. `resume.html`
+12. `resume.html`
    - A4 1pager。**想定業務 × 自分の備えマトリクス**、学習ロードマップ。
-10. `contact.html`
+13. `contact.html`
    - 連絡先と問い合わせ導線を確認します。
-11. `css/reset.css` → `css/style.css`
-    - ブラウザ差のリセット、サイト全体のデザイン、レスポンシブ対応を確認します。
-12. `js/main.js`
-    - ローダー解除、メニュー開閉、スクロール演出、トップページの背景画像切り替えを担う、外部ライブラリ非依存の共通スクリプトです。
-13. `image/` と `favicon.ico`
-    - 背景画像、プロフィール画像、作品スクリーンショット、ブラウザタブ用アイコンの役割を確認します。
-14. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
+14. `css/reset.css` → `css/style.css`
+   - ブラウザ差のリセット、サイト全体のデザイン、レスポンシブ対応を確認します。
+15. `js/main.js`
+   - ローダー解除、メニュー開閉、スクロール演出、トップページの背景画像切り替えを担う、外部ライブラリ非依存の共通スクリプトです。
+16. `image/` / `media/` と `favicon.ico`
+    - 背景画像、プロフィール画像、作品画像、証跡リプレイ動画・字幕、ブラウザタブ用アイコンの役割を確認します。
+17. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
     - **HTML 以外** の成果物。手順書 / PowerShell + bash / Pester / Prometheus + Loki + Promtail / Ansible playbook / Terraform / M365 ポリシー JSON / 実行証跡。インフラ運用ポートフォリオの本体です。
 15. `support-docs/slo-error-budget.md` / `support-docs/ticket-taxonomy.md` / `support-docs/office-it-physical-layer.md` / `support-docs/m365-policy-examples/` / `support-docs/interview-faq.md`
     - **運用品質を数値で語る系**の成果物。SLO / Error Budget、ITIL 4 区分のチケット分類、物理層 (ラック / LAN / UPS)、Intune + 条件付きアクセス + Defender ASR の JSON 定義、面接想定 FAQ。
