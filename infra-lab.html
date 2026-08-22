@@ -72,6 +72,7 @@
         </nav>
     </header>
 
+    <main id="main" tabindex="-1">
     <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
@@ -82,7 +83,7 @@
         </div>
     </section>
 
-    <main class="page-content infra-lab-content" id="main" tabindex="-1">
+    <div class="page-content infra-lab-content">
         <div class="container">
 
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
@@ -109,7 +110,7 @@
                     <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
                     <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> 構築案件パック</a>
                     <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-check"></i> Evidence Digest</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> E2E 23/23</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> E2E 23/23</a>
                     <a href="demo.html" class="btn btn-outline-dark" aria-label="2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video"></i> 2分15秒 証跡リプレイ</a>
                     <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired"></i> 通信障害ラボ</a>
                 </div>
@@ -121,7 +122,7 @@
                     <h2 class="heading-text" id="build-status-title">Recorded Evidence Status</h2>
                 </div>
                 <div class="metric-grid">
-                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">23 / 23</span>
                         <strong>Full-stack E2E</strong>
                         <small>使い捨てUbuntu 24.04／2026-08-22</small>
@@ -150,7 +151,7 @@
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-circle-check"></i>
                     <div>
-                        <strong>現行E2Eと履歴証跡を分けて掲載</strong>
+                        <strong>完了済みE2Eと履歴証跡を分けて掲載</strong>
                         <p>23/23は2026年8月22日の使い捨てrunner実測です。4 roles、9 services、D-1 13秒、必須9/18・全体11/21は2026年8月17〜19日の対象commitに残る履歴です。公開中の2分15秒デモも8月18日・19日の画面と13秒のD-1ログを再構成したリプレイで、連続操作の録画ではありません。</p>
                     </div>
                 </div>
@@ -207,13 +208,13 @@
                             <tr>
                                 <td>配備</td>
                                 <td>Flask、nginx、Docker Compose、秘密値example</td>
-                                <td><span class="status-pill measured">core 9 + CI sink = 10 containers</span></td>
-                                <td>引き渡し対象hostのlisten・認証・実行ユーザー確認</td>
+                                <td><span class="status-pill measured">2026-08-22: core 9 + CI sink = 10</span></td>
+                                <td>独立した引き渡し対象hostでE2E再実行</td>
                             </tr>
                             <tr>
                                 <td>監視・ログ</td>
                                 <td>Prometheus、Grafana、Loki、Alloy、Alertmanager</td>
-                                <td><span class="status-pill measured">9 services + local webhook実測</span></td>
+                                <td><span class="status-pill measured">2026-08-22: 9 services + local webhook</span></td>
                                 <td>Slack実配信の到達時間を採録</td>
                             </tr>
                             <tr>
@@ -417,6 +418,7 @@
                 </div>
             </section>
         </div>
+    </div>
     </main>
 
     <footer>

@@ -98,6 +98,7 @@
 
     <!-- ===== ページヒーロー（ページ上部の見出しエリア） ===== -->
     <!-- このページ専用の背景画像を style 属性で直接指定 -->
+    <main id="main" tabindex="-1">
     <section class="page-hero" style="background-image: url('image/skills.jpg');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
@@ -109,14 +110,14 @@
     </section>
 
     <!-- ===== メインコンテンツ ===== -->
-    <main class="page-content" id="main" tabindex="-1">
+    <div class="page-content">
         <div class="container">
 
             <!-- ===== スキル概要文 ===== -->
             <section class="skills-overview">
                 <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発基礎に加え、自学で取り組むLinuxサーバー構築、Ansible、Docker、監視・ログ、障害復旧をご紹介します。<br>各技術はServer Monitor構築案件パックとSupport Toolkitで使用しています。</p>
                 <div class="evidence-boundary-strip" aria-label="スキルの証跡区分">
-                    <span><strong>2026-08-22 E2E</strong> disposable Ubuntu 24.04・23/23 PASS・<code>changed=0</code>・runner内network/UFW・D-1・3-volume restore</span>
+                    <span><strong>完了済みE2E（2026-08-22）</strong> disposable Ubuntu 24.04・23/23 PASS・<code>changed=0</code>・runner内network/UFW・D-1・3-volume restore</span>
                     <span><strong>過去の実測履歴</strong> Ansible 4 roles・監視core 9 services・D-1 RTO 13秒・通信障害</span>
                     <span><strong>NOT RUN</strong> Slack実配信・AWS apply / destroy・D-2・独立した管理端末と引き渡し対象ホスト</span>
                 </div>
@@ -629,6 +630,7 @@
                 </div>
             </section>
         </div>
+    </div>
     </main>
 
     <!-- ===== フッター（全ページ共通） ===== -->

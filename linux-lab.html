@@ -72,6 +72,7 @@
         </nav>
     </header>
 
+    <main id="main" tabindex="-1">
     <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
@@ -82,7 +83,7 @@
         </div>
     </section>
 
-    <main class="page-content infra-lab-content" id="main" tabindex="-1">
+    <div class="page-content infra-lab-content">
         <div class="container">
 
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
@@ -109,7 +110,7 @@
                     <i class="fa-solid fa-terminal"></i>
                     <div>
                         <strong>このページは一次切り分けの手順・コマンド集です</strong>
-                        <p>掲載コマンドすべてを同一実ホストで通した証跡ではありません。公開済みの実測は、WSL2 Ubuntu上の監視スタック、D-1復旧、二セグメント通信障害に分けて記録し、<a href="evidence-demo.html">Evidence Digest</a>から確認できます。</p>
+                        <p>掲載コマンドすべてを同一実ホストで通した証跡ではありません。最新の完了済み<a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026-08-22 Full-stack E2E</a>では、実行対象<code>f4ea319</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、<code>site.yml</code>、2回目<code>changed=0</code>、runner内network / UFW、D-1 RTO 1秒、3-volume restoreを含む23 / 23 IDをPASSしました。WSL2上の監視、D-1 RTO 13秒、二セグメント通信障害は2026-08-17〜19の履歴として、<a href="evidence-demo.html">Evidence Digest</a>で区別しています。</p>
                     </div>
                 </div>
             </section>
@@ -281,7 +282,7 @@ WantedBy=timers.target
                 </div>
                 <div class="lab-link-card">
                     <h3><i class="fa-solid fa-gears"></i> 自動化 / 観測 / 運用品質への入口</h3>
-                    <p>初期構築のIaC、Cloud Network、運用後の観測性（Metrics + Logs）、運用品質の数値化、検証証跡を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheus + Loki で継続観測し、SLO で品質を語る流れです。</p>
+                    <p>初期構築のIaC、Cloud Network、運用後の観測性（Metrics + Logs）、運用品質の数値化、検証証跡を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheus + Loki の観測基盤を構成し、採録した範囲のSLOを説明する流れです。長期稼働の実測ではありません。</p>
                     <div class="next-scope-list">
                         <span><a href="ansible/" style="color:inherit;">Ansible playbook</a></span>
                         <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>
@@ -296,6 +297,7 @@ WantedBy=timers.target
                 </div>
             </section>
         </div>
+    </div>
     </main>
 
     <footer>
