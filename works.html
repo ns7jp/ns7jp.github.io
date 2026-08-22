@@ -27,15 +27,20 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/works.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
     <meta property="og:description" content="Linuxサーバーの設計・Ansible構築・試験・監視・障害復旧と、Full-stack E2E 23/23の実測証跡を主成果として掲載。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=20260822-3" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260822-3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -89,7 +94,7 @@
     </div>
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </button>
@@ -142,7 +147,7 @@
                         <h2>Linuxサーバー構築・運用に直結する成果物から紹介します</h2>
                         <p>構築案件パック、実測証跡、障害復旧、サーバー監視を主成果として先に掲載し、Support Toolkitと開発学習作品は補助成果として区別しています。</p>
                         <p>主案件では「設計書やコードがあること」と「実際に動かして確認したこと」を分け、日時・対象commit・環境・コマンド・結果があるものだけを実測済みとしています。</p>
-                        <p>2026年8月22日には、Docker導入済みの使い捨てUbuntu 24.04 runnerで、Ansible一括適用・2回目冪等性・稼働・network/UFW・障害復旧・3 volumes復元を含むFull-stack E2E 23/23を記録しました。</p>
+                        <p>2026年8月22日には、runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、Ansible一括適用・2回目冪等性・11 containers・Docker API proxy・network/UFW・障害復旧・3 volumes復元を含むFull-stack E2E 23/23を記録しました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。</p>
                         <p>学習作品では、使用技術、制作中の問題、解決過程を説明しています。想定シナリオやサンプル出力は、実務実績と誤解されないよう明記しています。</p>
                     </div>
                 </div>
@@ -157,7 +162,7 @@
                         <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check"></i> Evidence Digest</a>
                         <a href="#work-infra-lab"><i class="fa-solid fa-server"></i> 構築・運用Lab</a>
                         <a href="#work-monitor"><i class="fa-solid fa-chart-line"></i> サーバー監視</a>
-                        <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> E2E 23/23</a>
+                        <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> E2E 23/23</a>
                         <a href="demo.html" aria-label="2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video"></i> 2分15秒 証跡リプレイ</a>
                     </div>
                 </div>
@@ -165,9 +170,9 @@
 
             <section class="works-evidence-boundary" aria-label="主案件の証跡範囲">
                 <div class="evidence-boundary-strip">
-                    <span><strong>完了済みE2E（2026-08-22）</strong>使い捨てUbuntu 24.04で23/23 PASS。site.yml初回・2回目changed=0、network/UFW、D-1 RTO 1秒、3 volumes復元</span>
+                    <span><strong>main統合済みE2E（2026-08-22）</strong>runtime <code>7622a9d</code>で23/23 PASS。2回目changed=0、11 containers、proxy GET / POST拒否 / Loki、network/UFW、D-1 1秒、3 volumes復元</span>
                     <span><strong>過去commitで実測</strong>Ansible 4 roles、core 9 services、Grafana / Loki、D-1 RTO 13秒、通信障害</span>
-                    <span><strong>NOT RUN</strong>Slack実配信、AWS apply / destroy、D-2、独立管理端末・引き渡し対象host、長期稼働・再起動後</span>
+                    <span><strong>NOT RUN</strong>構成commit／設定rollback rehearsal、Slack実配信、AWS apply / destroy、D-2、独立管理端末・引き渡し対象host、長期稼働・再起動後</span>
                 </div>
             </section>
 
@@ -176,12 +181,12 @@
             <section class="filter-section">
                 <div class="filter-tabs">
                     <!-- data-filter属性の値はJSで参照され、対応するdata-categoryの作品だけ表示される -->
-                    <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-                    <button class="filter-btn" data-filter="support" aria-pressed="false">Support Toolkit</button>
-                    <button class="filter-btn" data-filter="infra" aria-pressed="false">Infrastructure</button>
-                    <button class="filter-btn" data-filter="python" aria-pressed="false">Python</button>
-                    <button class="filter-btn" data-filter="php" aria-pressed="false">PHP</button>
-                    <button class="filter-btn" data-filter="html" aria-pressed="false">HTML/CSS</button>
+                    <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                    <button type="button" class="filter-btn" data-filter="support" aria-pressed="false">Support Toolkit</button>
+                    <button type="button" class="filter-btn" data-filter="infra" aria-pressed="false">Infrastructure</button>
+                    <button type="button" class="filter-btn" data-filter="python" aria-pressed="false">Python</button>
+                    <button type="button" class="filter-btn" data-filter="php" aria-pressed="false">PHP</button>
+                    <button type="button" class="filter-btn" data-filter="html" aria-pressed="false">HTML/CSS</button>
                 </div>
             </section>
 
@@ -259,7 +264,7 @@
                                 <span class="num-chip"><strong>2</strong>Grafana ダッシュボード</span>
                                 <span class="num-chip"><strong>3</strong>DR シナリオ</span>
                             </div>
-                            <p>「設計 → 構築 → 試験 → 監視 → 切り分け → 復旧 → 引き渡し」を一つの導線にまとめています。2026年8月17〜19日の履歴証跡に加え、8月22日はDocker導入済みの使い捨てUbuntu 24.04 runnerでFull-stack E2E 23/23を記録しました。AWS VPC/Terraform、年次DRドリル、架空Postmortem、Windows/M365は補助的な設計・サンプルであり、実運用実績ではありません。</p>
+                            <p>「設計 → 構築 → 試験 → 監視 → 切り分け → 復旧 → 引き渡し」を一つの導線にまとめています。2026年8月17〜19日の履歴証跡に加え、8月22日はDocker導入済みの使い捨てUbuntu 24.04 runnerでruntime <code>7622a9d</code>のFull-stack E2E 23/23を記録し、main <code>4a292026</code>へ統合しました。AWS VPC/Terraform、年次DRドリル、架空Postmortem、Windows/M365は補助的な設計・サンプルであり、実運用実績ではありません。</p>
                             <ul class="work-points">
                                 <li><strong>VLAN論理構成図 + 物理層構成図</strong>を Infra Lab と物理層ドキュメントで対にして掲載。</li>
                                 <li><strong>Cloud Network Lab</strong>では AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail を整理。</li>
@@ -276,7 +281,7 @@
                                     <li><strong>問い合わせ受付直後：</strong>Windowsは PowerShell、Linux は <code>linux-triage.sh</code> を流して同じ形式で証跡を残す。</li>
                                     <li><strong>クラウド設計確認：</strong>Cloud Lab の Terraform を <code>fmt</code> / <code>validate</code> し、Public / Private subnet と Security Group の意図を説明する。</li>
                                     <li><strong>新規サーバー構築：</strong>Ansible playbookにSSH / UFW / fail2ban / auditd / 自動更新を定義。使い捨てrunnerで<code>site.yml</code>初回一括適用と2回目<code>changed=0</code>を確認済みです。Docker未導入の最小OSと引き渡し対象hostでは未実測です。</li>
-                                    <li><strong>稼働確認：</strong>2026-08-22 E2Eではcore 9 servicesとCI専用webhook sinkの計10 containersを起動し、synthetic alertのlocal webhook FIRING / RESOLVEDを確認しました。Slack実配信とは別です。</li>
+                                    <li><strong>稼働確認：</strong>2026-08-22 E2Eではcore 10 servicesとCI専用webhook sinkの計11 containersを起動し、synthetic alertのlocal webhook FIRING / RESOLVED、Docker API proxyのGET成功・POST拒否・Loki到達を確認しました。Slack実配信とは別です。</li>
                                     <li><strong>障害復旧：</strong>履歴のD-1 RTO 13秒に加え、E2EでD-1 RTO 1秒と3 volumesのchecksum付き別名復元を確認。D-2は未実測です。</li>
                                     <li><strong>事後対応：</strong>Postmortem テンプレートに合わせ、MTTR / 根本原因 / 応急 / 恒久 / 中期対応を分けて記録。</li>
                                 </ul>
@@ -936,7 +941,7 @@ def api_stats():
      ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出は
      js/main.js（vanilla JS）に集約している。
 ============================================================ -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.8/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables: { primaryColor: '#fdfbf7', lineColor: '#2c3e50', textColor: '#2c3e50' }});</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>

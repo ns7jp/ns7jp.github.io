@@ -9,6 +9,10 @@
 (function () {
     'use strict';
 
+    var reduceMotionQuery = window.matchMedia
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : { matches: false };
+
     /* ===== ローダーの非表示処理 ===== */
     function hideLoader() {
         var loader = document.querySelector('.loader');
@@ -34,18 +38,23 @@
             menuButton.classList.remove('show2');
             menuButton.setAttribute('aria-expanded', 'false');
             menuButton.setAttribute('aria-label', 'メニューを開く');
+            document.body.classList.remove('menu-open');
             if (restoreFocus) menuButton.focus();
         }
 
         menuButton.addEventListener('click', function () {
-            var isOpen = siteNav.classList.toggle('show');
-            menuButton.classList.toggle('show2', isOpen);
-            menuButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            menuButton.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
-            if (isOpen) {
-                var firstLink = siteNav.querySelector('a');
-                if (firstLink) firstLink.focus();
+            if (siteNav.classList.contains('show')) {
+                closeMenu(false);
+                return;
             }
+
+            siteNav.classList.add('show');
+            menuButton.classList.add('show2');
+            menuButton.setAttribute('aria-expanded', 'true');
+            menuButton.setAttribute('aria-label', 'メニューを閉じる');
+            document.body.classList.add('menu-open');
+            var firstLink = siteNav.querySelector('a');
+            if (firstLink) firstLink.focus();
         });
 
         siteNav.querySelectorAll('a').forEach(function (link) {
@@ -53,24 +62,22 @@
         });
 
         document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape' && siteNav.classList.contains('show')) {
+            if (!siteNav.classList.contains('show')) return;
+            if (event.key === 'Escape') {
                 closeMenu(true);
+                return;
             }
-        });
-
-        siteNav.addEventListener('keydown', function (event) {
-            if (event.key !== 'Tab' || !siteNav.classList.contains('show')) return;
+            if (event.key !== 'Tab') return;
             var links = siteNav.querySelectorAll('a');
             if (!links.length) return;
-            var first = links[0];
-            var last = links[links.length - 1];
-            if (event.shiftKey && document.activeElement === first) {
-                event.preventDefault();
-                last.focus();
-            } else if (!event.shiftKey && document.activeElement === last) {
-                event.preventDefault();
-                first.focus();
-            }
+            var focusableItems = [menuButton].concat(Array.from(links));
+            var currentIndex = focusableItems.indexOf(document.activeElement);
+            var nextIndex = event.shiftKey ? currentIndex - 1 : currentIndex + 1;
+            if (currentIndex === -1) nextIndex = event.shiftKey ? focusableItems.length - 1 : 0;
+            if (nextIndex < 0) nextIndex = focusableItems.length - 1;
+            if (nextIndex >= focusableItems.length) nextIndex = 0;
+            event.preventDefault();
+            focusableItems[nextIndex].focus();
         });
 
         window.addEventListener('resize', function () {
@@ -115,6 +122,10 @@
     document.querySelectorAll('a[href^="#"]').forEach(function (link) {
         var href = link.getAttribute('href');
         if (!href || href.length < 2) return;
+        // スキップリンクはブラウザ標準のアンカー移動に任せる。
+        // <main tabindex="-1">へフォーカスも移るため、キーボード利用者が
+        // そのまま本文を読み進められる。
+        if (link.classList.contains('skip-link')) return;
         link.addEventListener('click', function (e) {
             var target;
             try {
@@ -126,7 +137,11 @@
             e.preventDefault();
             var top = target.getBoundingClientRect().top +
                 (window.pageYOffset || document.documentElement.scrollTop) - 80;
-            window.scrollTo({ top: top, behavior: 'smooth' });
+
+            window.scrollTo({
+                top: top,
+                behavior: reduceMotionQuery.matches ? 'auto' : 'smooth'
+            });
         });
     });
 
@@ -178,14 +193,16 @@
         var current = layerA;
         var next = layerB;
         var index = 0;
-        window.setInterval(function () {
-            index = (index + 1) % heroImages.length;
-            next.style.backgroundImage = 'url(' + heroImages[index] + ')';
-            next.classList.add('is-visible');
-            current.classList.remove('is-visible');
-            var swap = current;
-            current = next;
-            next = swap;
-        }, 5000);
+        if (!reduceMotionQuery.matches) {
+            window.setInterval(function () {
+                index = (index + 1) % heroImages.length;
+                next.style.backgroundImage = 'url(' + heroImages[index] + ')';
+                next.classList.add('is-visible');
+                current.classList.remove('is-visible');
+                var swap = current;
+                current = next;
+                next = swap;
+            }, 5000);
+        }
     }
 })();

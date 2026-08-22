@@ -13,18 +13,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/project-brief.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
     <meta property="og:description" content="Ubuntuの設計、Ansible構築、試験、監視、障害復旧、引き渡しを一つの案件として1ページで説明します。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Project Brief | Linuxサーバー構築・運用">
     <meta name="twitter:description" content="設計から引き渡しまでの成果物、実測結果、未完了範囲を1ページで確認。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <title>Project Brief | 島田則幸のポートフォリオ</title>
 
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=20260822-3" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260822-3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -54,7 +59,7 @@
         </div>
     </div>
 
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </button>
@@ -105,8 +110,8 @@
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                     <div>
-                        <strong>最新の完了済み証跡は2026年8月22日の使い捨てrunner E2E</strong>
-                        <p>実行対象<code>f4ea319</code>をDocker導入済みのdisposable Ubuntu 24.04 runnerで検証し、23 / 23 IDがPASSしました。2026年8月19日の全体11 / 21 PASSとD-1 13秒は当時の対象commitに対する履歴として区別しています。</p>
+                        <strong>最新のruntime実測は2026年8月22日の使い捨てrunner E2E</strong>
+                        <p>runtime最終commit <code>7622a9d</code>をDocker導入済みのdisposable Ubuntu 24.04 runnerで検証し、23 / 23 IDがPASSしました。証跡文書commit <code>cf9419b</code>を含むPR #75はmain merge <code>4a292026</code>へ統合済みです。2026年8月19日の全体11 / 21 PASSとD-1 13秒は、当時の対象commitに対する履歴として区別しています。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
@@ -135,7 +140,7 @@
                     <article class="brief-summary-card">
                     <span>完了済み証跡</span>
                     <h3>2026-08-22 E2E 23 / 23 PASS</h3>
-                    <p>使い捨てUbuntu 24.04 runnerで、構築・冪等性・起動・local webhook通知経路・network / UFW・障害復旧・3-volume restoreまで確認しました。独立した引き渡し対象ホスト等はNOT RUNです。</p>
+                    <p>使い捨てUbuntu 24.04 runnerで、構築・冪等性・11 containersの起動・local webhook通知経路・Docker API proxyのGET成功／POST拒否／Loki到達・network / UFW・障害復旧・3-volume restoreまで確認しました。構成commit／設定rollback rehearsalと独立した引き渡し対象ホスト等はNOT RUNです。</p>
                     </article>
                 </div>
             </section>
@@ -209,7 +214,7 @@
                             </tr>
                             <tr>
                                 <td>試験</td>
-                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">試験仕様</a>／<a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026-08-22 E2E証跡</a>（実行対象 <code>f4ea319</code>）／<a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">2026-08-19 履歴</a></td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">試験仕様</a>／<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026-08-22 E2E証跡</a>（runtime <code>7622a9d</code>、main <code>4a292026</code>）／<a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">2026-08-19 履歴</a></td>
                                 <td>期待結果、実行結果、証跡リンク、未実施項目</td>
                                 <td><span class="status-pill measured">disposable runner<br>23 / 23 PASS</span></td>
                             </tr>
@@ -274,7 +279,8 @@
                         <h3>実測できたこと</h3>
                         <ul>
                             <li>Docker導入済みのdisposable Ubuntu 24.04 runnerへ<code>site.yml</code>を2回適用し、2回目<code>changed=0</code>を確認。</li>
-                            <li>2026-08-22 E2Eでcore 9 servicesとCI webhook sinkを起動し、local webhookの<code>FIRING</code> / <code>RESOLVED</code>を確認（Slack実配信ではありません）。</li>
+                            <li>2026-08-22 E2Eでcore 10 servicesとCI webhook sinkの計11 containersを起動し、local webhookの<code>FIRING</code> / <code>RESOLVED</code>を確認（Slack実配信ではありません）。</li>
+                            <li>Docker API proxyのGET成功・POST拒否と、proxyが取得した固有Nginx logのAlloy経由Loki到達を確認。GETの読取権限は残るため、完全なleast privilegeではありません。</li>
                             <li>runner内のnetwork / UFWを検証し、D-1を1秒で復旧。</li>
                             <li>Prometheus・Grafana・Lokiの3 volumeをbackup / restoreし、Full-stack E2E 23 / 23 IDをPASS。</li>
                             <li>履歴：2026年8月19日は全体11 / 21 PASS、D-1 RTO 13秒。最新値とは分けて保存。</li>
@@ -283,6 +289,7 @@
                     <article class="architecture-notes">
                         <h3>まだ実測していないこと</h3>
                         <ul>
+                            <li>構成commit／設定を前版へ戻すrollback rehearsal。</li>
                             <li>AlertmanagerからSlackへの実配信。</li>
                             <li>AWS apply / destroyとD-2ホスト障害。</li>
                             <li>独立した管理端末と引き渡し対象ホストでの構築・疎通・運用。</li>

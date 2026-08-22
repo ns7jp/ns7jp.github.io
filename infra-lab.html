@@ -11,14 +11,19 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/infra-lab.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
     <meta property="og:description" content="Ubuntuサーバーの設計・Ansible構築・試験・監視・障害復旧を一つの案件としてまとめています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=20260822-3" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260822-3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -48,7 +53,7 @@
         </div>
     </div>
 
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </button>
@@ -99,7 +104,7 @@
                 <span class="case-label">Ubuntu / Ansible / Docker Scenario</span>
                 <h2>設計、構築、試験、監視、障害復旧までを1つの案件で見せるLab</h2>
                 <p>主作品の Server Monitor を Ubuntu 1台のサーバー構築案件と見立て、基本・詳細設計、パラメータ、Ansible構築、単体・結合試験、監視、二セグメント通信障害、引き渡しまでを工程順に整理しました。コードと実測結果は証跡台帳で明確に分けています。</p>
-                <p><strong>2026年8月22日:</strong> Docker導入済みの使い捨てUbuntu 24.04 runnerで、<code>site.yml</code>初回一括適用、2回目<code>changed=0</code>、core 9 services + CI専用webhook sinkの計10 containers、認証、runner内network/UFW、D-1 RTO 1秒、3 volumes復元を含むFull-stack E2E 23/23を採録しました。synthetic alertのlocal webhook試験はSlack実配信とは別です。</p>
+                <p><strong>2026年8月22日:</strong> runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、<code>site.yml</code>初回一括適用、2回目<code>changed=0</code>、core 10 services + CI専用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・Loki到達、認証、runner内network/UFW、D-1 RTO 1秒、3 volumes復元を含むFull-stack E2E 23/23を採録しました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。synthetic alertのlocal webhook試験はSlack実配信とは別です。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-file-lines"></i> Design</span>
                     <span><i class="fa-solid fa-gears"></i> Build</span>
@@ -110,7 +115,7 @@
                     <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
                     <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> 構築案件パック</a>
                     <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-check"></i> Evidence Digest</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> E2E 23/23</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> E2E 23/23</a>
                     <a href="demo.html" class="btn btn-outline-dark" aria-label="2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video"></i> 2分15秒 証跡リプレイ</a>
                     <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired"></i> 通信障害ラボ</a>
                 </div>
@@ -122,10 +127,20 @@
                     <h2 class="heading-text" id="build-status-title">Recorded Evidence Status</h2>
                 </div>
                 <div class="metric-grid">
-                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">23 / 23</span>
                         <strong>Full-stack E2E</strong>
                         <small>使い捨てUbuntu 24.04／2026-08-22</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">10 + 1</span>
+                        <strong>containers起動</strong>
+                        <small>core 10 services＋CI webhook sink</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">3 checks</span>
+                        <strong>Docker API proxy</strong>
+                        <small>GET成功／POST拒否／Loki到達</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-17-molecule.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">4 roles</span>
@@ -152,14 +167,14 @@
                     <i class="fa-solid fa-circle-check"></i>
                     <div>
                         <strong>完了済みE2Eと履歴証跡を分けて掲載</strong>
-                        <p>23/23は2026年8月22日の使い捨てrunner実測です。4 roles、9 services、D-1 13秒、必須9/18・全体11/21は2026年8月17〜19日の対象commitに残る履歴です。公開中の2分15秒デモも8月18日・19日の画面と13秒のD-1ログを再構成したリプレイで、連続操作の録画ではありません。</p>
+                        <p>23/23、11 containers、Docker API proxyはruntime <code>7622a9d</code>に対する2026年8月22日の使い捨てrunner実測です。4 roles、9 services、D-1 13秒、必須9/18・全体11/21は2026年8月17〜19日の対象commitに残る履歴です。公開中の2分15秒デモも8月18日・19日の画面と13秒のD-1ログを再構成したリプレイで、連続操作の録画ではありません。</p>
                     </div>
                 </div>
                 <div class="status-callout pending" role="note">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     <div>
                         <strong>E2Eの環境制約と未実測範囲</strong>
-                        <p>runnerにはDockerが事前導入済みです。最小OSからのDocker導入、独立した管理端末・引き渡し対象host・組織DNSでのnetwork検証、Slack実配信、AWS apply / destroy・実費・Security Group/NACL、D-2、長期稼働・host再起動後・production trafficは未実測です。local webhookとD-1は別の試験であり、どちらもSlack配信を示しません。</p>
+                        <p>runnerにはDockerが事前導入済みです。構成commit／設定rollback rehearsal、最小OSからのDocker導入、独立した管理端末・引き渡し対象host・組織DNSでのnetwork検証、Slack実配信、AWS apply / destroy・実費・Security Group/NACL、D-2、長期稼働・host再起動後・production trafficは未実測です。local webhookとD-1は別の試験であり、どちらもSlack配信を示しません。</p>
                     </div>
                 </div>
             </section>
@@ -208,13 +223,13 @@
                             <tr>
                                 <td>配備</td>
                                 <td>Flask、nginx、Docker Compose、秘密値example</td>
-                                <td><span class="status-pill measured">2026-08-22: core 9 + CI sink = 10</span></td>
+                                <td><span class="status-pill measured">2026-08-22: core 10 + CI sink = 11</span></td>
                                 <td>独立した引き渡し対象hostでE2E再実行</td>
                             </tr>
                             <tr>
                                 <td>監視・ログ</td>
                                 <td>Prometheus、Grafana、Loki、Alloy、Alertmanager</td>
-                                <td><span class="status-pill measured">2026-08-22: 9 services + local webhook</span></td>
+                                <td><span class="status-pill measured">2026-08-22: 10 services + proxy + local webhook</span></td>
                                 <td>Slack実配信の到達時間を採録</td>
                             </tr>
                             <tr>
@@ -449,7 +464,7 @@
      ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出は
      js/main.js（vanilla JS）に集約している。
 ============================================================ -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.8/dist/mermaid.min.js"></script>
 <script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables: { primaryColor: '#fdfbf7', lineColor: '#2c3e50', textColor: '#2c3e50' }});</script>
 <script src="js/lightbox.js"></script>
 </body>

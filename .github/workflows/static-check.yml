@@ -25,6 +25,9 @@ jobs:
       - name: Check accessibility and SEO guardrails
         run: node scripts/check-site-quality.js
 
+      - name: Test external link checker guardrails
+        run: node scripts/test-external-link-check.js
+
       - name: Check evidence replay video metadata
         run: node scripts/check-video-metadata.cjs
 

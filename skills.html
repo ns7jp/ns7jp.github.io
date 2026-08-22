@@ -29,15 +29,20 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/skills.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
     <meta property="og:description" content="Linux、Ansible、Docker、Nginx、Prometheus、Grafana、Loki、Terraformと、構築・試験・障害対応の成果物を掲載。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=20260822-3" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260822-3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -70,7 +75,7 @@
     </div>
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </button>
@@ -117,9 +122,9 @@
             <section class="skills-overview">
                 <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発基礎に加え、自学で取り組むLinuxサーバー構築、Ansible、Docker、監視・ログ、障害復旧をご紹介します。<br>各技術はServer Monitor構築案件パックとSupport Toolkitで使用しています。</p>
                 <div class="evidence-boundary-strip" aria-label="スキルの証跡区分">
-                    <span><strong>完了済みE2E（2026-08-22）</strong> disposable Ubuntu 24.04・23/23 PASS・<code>changed=0</code>・runner内network/UFW・D-1・3-volume restore</span>
+                    <span><strong>main統合済みE2E（2026-08-22）</strong> runtime <code>7622a9d</code>・23/23 PASS・2回目<code>changed=0</code>・11 containers・proxy GET / POST拒否 / Loki・D-1・3-volume restore</span>
                     <span><strong>過去の実測履歴</strong> Ansible 4 roles・監視core 9 services・D-1 RTO 13秒・通信障害</span>
-                    <span><strong>NOT RUN</strong> Slack実配信・AWS apply / destroy・D-2・独立した管理端末と引き渡し対象ホスト</span>
+                    <span><strong>NOT RUN</strong> 構成commit／設定rollback rehearsal・Slack実配信・AWS apply / destroy・D-2・独立した管理端末と引き渡し対象ホスト</span>
                 </div>
                 <p class="overview-text skills-evidence-link"><a href="evidence-demo.html">日時・環境・commit付きのEvidence Digestを見る <i class="fa-solid fa-arrow-right"></i></a></p>
             </section>
