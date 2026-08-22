@@ -8,9 +8,9 @@ const POSTER = path.join(ROOT, 'image', 'server-monitor-evidence-replay-poster.p
 const NOTICE = 'この映像は実操作の連続録画ではありません。2026年8月18日・19日に保存した実測スクリーンショットとD-1復旧ログを、閲覧用に時系列で再構成したリプレイです。';
 
 const imageFiles = {
-  compose: path.join(ROOT, 'image', 'demo', 'compose-ps_aab2fcc_20260818.png'),
-  grafana: path.join(ROOT, 'image', 'demo', 'grafana-server-monitor_aab2fcc_20260818.png'),
-  slo: path.join(ROOT, 'image', 'demo', 'grafana-slo_aab2fcc_20260818.png'),
+  compose: path.join(ROOT, 'media', 'demo-sources', 'compose-ps_aab2fcc_20260818.png'),
+  grafana: path.join(ROOT, 'media', 'demo-sources', 'grafana-server-monitor_aab2fcc_20260818.png'),
+  slo: path.join(ROOT, 'media', 'demo-sources', 'grafana-slo_aab2fcc_20260818.png'),
 };
 
 for (const required of Object.values(imageFiles)) {
