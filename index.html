@@ -216,17 +216,18 @@
                 <div class="summary-card">
                     <span class="summary-label">Operations</span>
                     <h3>監視スタックと復旧を実測</h3>
-                    <p>Prometheus、Grafana、LokiをLinux上で起動し、プロセス停止から13秒で復旧したD-1演習を記録しています。</p>
+                    <p>Prometheus、Grafana、LokiをLinux上で起動。D-1はローカル13秒、使い捨てUbuntu E2Eでは1秒で復旧しました。</p>
                 </div>
                 <div class="summary-card">
                     <span class="summary-label">Evidence</span>
-                    <h3>未実測も明記</h3>
-                    <p>新規VMへのsite.yml適用、実VMのUFW・ネットワーク確認、バックアップ復元など、未採録の項目はNOT RUNと表示します。</p>
+                    <h3>Ubuntu E2E 23項目PASS</h3>
+                    <p>site.yml一括構築、2回目changed=0、UFW・待受・SSH tunnel、3 volume復元をCIで実測。Slack・AWS・D-2は未測定と明記します。</p>
                 </div>
             </div>
             <div class="summary-actions">
                 <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server"></i> 構築案件パックを見る</a>
                 <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check"></i> 実測証跡を見る</a>
+                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> Full-stack E2E結果</a>
                 <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 1ページ履歴書を見る</a>
             </div>
         </div>

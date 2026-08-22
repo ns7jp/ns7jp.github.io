@@ -26,8 +26,8 @@
 > **映像の位置付け:** この映像は実操作の連続録画ではありません。2026年8月18日・19日に保存した実測スクリーンショットとD-1復旧ログを、閲覧用に時系列で再構成したリプレイです。実操作を収録する手順は[収録ガイド](https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md)に分けています。
 
 - **設計・構成**: 基本・詳細設計、パラメータ、Ansibleロール、Docker Compose、試験・引き渡し資料
-- **実測済み**: Ansible 4ロールのMolecule試験、Linux上の監視スタック起動、D-1復旧演習（RTO 13秒）、二セグメント障害ラボ
-- **未採録**: 新規VMへの`site.yml`適用、実VMのUFW・ネットワーク確認、バックアップ復元、AWS適用
+- **実測済み**: 4ロールのMolecule、Linux監視stack、D-1（ローカルRTO 13秒 / E2E 1秒）、二セグメント障害ラボ、[使い捨てUbuntu Full-stack E2E 23項目PASS](https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md)
+- **未採録**: Slack実配信、独立した引き渡し対象host/管理端末のnetwork検証、D-2、AWS `apply / destroy`
 
 [構築案件パック](https://github.com/ns7jp/server-monitor/tree/main/docs/build-package) / [主作品の詳細](https://ns7jp.github.io/works.html#work-monitor) / [1ページ履歴書](https://ns7jp.github.io/resume.html)
 
