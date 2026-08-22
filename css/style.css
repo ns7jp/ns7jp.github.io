@@ -133,6 +133,17 @@ a:hover {
     color: var(--primary-color);
 }
 
+/* reset.cssで標準outlineを外しているため、キーボード操作時だけ共通の
+   フォーカスリングを戻す。マウス操作時の見た目は変えない。 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--accent-gold);
+    outline-offset: 3px;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -418,6 +429,8 @@ header nav ul li a::after {
     height: 100%;
     background-size: cover;
     background-position: center;
+    /* JavaScriptを無効化した環境でもヒーロー画像を表示するfallback。 */
+    background-image: url('../image/works.jpg');
 }
 
 /* .hero-slider-layer は js/main.js が生成する2枚のレイヤーで、
@@ -4385,6 +4398,10 @@ article p,
 }
 
 @media (max-width: 900px) {
+    body.menu-open {
+        overflow: hidden;
+    }
+
     header {
         padding: 0 25px;
     }
@@ -4399,10 +4416,15 @@ article p,
         left: 0;
         width: 100%;
         height: 100vh;
+        height: 100dvh;
         background: var(--bg-cream);
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-start;
         align-items: center;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 90px 20px 30px;
         transition: var(--transition-slow);
         visibility: hidden;
         pointer-events: none;
@@ -4418,6 +4440,8 @@ article p,
         flex-direction: column;
         gap: 20px;
         text-align: center;
+        width: min(100%, 320px);
+        margin: auto 0;
     }
     
     header nav ul li a {

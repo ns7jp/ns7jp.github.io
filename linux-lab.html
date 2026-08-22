@@ -11,14 +11,19 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/linux-lab.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
     <meta property="og:description" content="Linuxサーバー一次運用の確認項目とコマンド例。journalctl / systemd / cron / SSH / logrotate / rsync をまとめています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=20260822-3" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260822-3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -48,7 +53,7 @@
         </div>
     </div>
 
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </button>
@@ -110,7 +115,7 @@
                     <i class="fa-solid fa-terminal"></i>
                     <div>
                         <strong>このページは一次切り分けの手順・コマンド集です</strong>
-                        <p>掲載コマンドすべてを同一実ホストで通した証跡ではありません。最新の完了済み<a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026-08-22 Full-stack E2E</a>では、実行対象<code>f4ea319</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、<code>site.yml</code>、2回目<code>changed=0</code>、runner内network / UFW、D-1 RTO 1秒、3-volume restoreを含む23 / 23 IDをPASSしました。WSL2上の監視、D-1 RTO 13秒、二セグメント通信障害は2026-08-17〜19の履歴として、<a href="evidence-demo.html">Evidence Digest</a>で区別しています。</p>
+                        <p>掲載コマンドすべてを同一実ホストで通した証跡ではありません。最新のruntime実測<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026-08-22 Full-stack E2E</a>では、runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、<code>site.yml</code>、2回目<code>changed=0</code>、11 containers、Docker API proxy、runner内network / UFW、D-1 RTO 1秒、3-volume restoreを含む23 / 23 IDをPASSしました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。WSL2上の監視、D-1 RTO 13秒、二セグメント通信障害は2026-08-17〜19の履歴として、<a href="evidence-demo.html">Evidence Digest</a>で区別しています。</p>
                     </div>
                 </div>
             </section>

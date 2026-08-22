@@ -34,6 +34,20 @@ for (const file of htmlFiles) {
     ? "https://ns7jp.github.io/"
     : `https://ns7jp.github.io/${file}`;
 
+  const htmlTag = html.match(/<html\b[^>]*>/i)?.[0] || "";
+  if (!hasAttribute(htmlTag, "lang", /^ja(?:-|$)/i)) {
+    failures.push(`${file}: <html> requires a Japanese lang attribute`);
+  }
+  if (!/<meta\b[^>]*charset=["']?utf-8["']?/i.test(html)) {
+    failures.push(`${file}: UTF-8 charset declaration is required`);
+  }
+  if (!/<meta\b[^>]*name=["']viewport["'][^>]*content=["'][^"']*width=device-width/i.test(html)) {
+    failures.push(`${file}: responsive viewport meta tag is required`);
+  }
+  if (!/<title>[^<]+<\/title>/i.test(html)) {
+    failures.push(`${file}: a non-empty <title> is required`);
+  }
+
   const mainCount = countMatches(html, /<main\b/gi);
   if (mainCount !== 1) failures.push(`${file}: expected exactly one <main>, found ${mainCount}`);
   if (mainCount === 1) {
@@ -58,6 +72,33 @@ for (const file of htmlFiles) {
   const ids = Array.from(html.matchAll(/\bid=["']([^"']+)["']/gi), (match) => match[1]);
   const duplicates = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
   if (duplicates.length) failures.push(`${file}: duplicate ids: ${duplicates.join(", ")}`);
+
+  const buttonTags = Array.from(html.matchAll(/<button\b[^>]*>/gi), (match) => match[0]);
+  for (const tag of buttonTags) {
+    if (!hasAttribute(tag, "type", /^(?:button|submit|reset)$/i)) {
+      failures.push(`${file}: every <button> requires an explicit valid type`);
+    }
+  }
+
+  if (ids.includes("site-nav")) {
+    const menuButtons = buttonTags.filter((tag) =>
+      hasAttribute(tag, "class", /(?:^|\s)res-menu(?:\s|$)/i)
+    );
+    if (menuButtons.length !== 1) {
+      failures.push(`${file}: site navigation requires exactly one .res-menu button`);
+    } else {
+      const menuButton = menuButtons[0];
+      if (!hasAttribute(menuButton, "aria-controls", /^site-nav$/)) {
+        failures.push(`${file}: .res-menu must control #site-nav`);
+      }
+      if (!hasAttribute(menuButton, "aria-expanded", /^false$/i)) {
+        failures.push(`${file}: .res-menu must start with aria-expanded="false"`);
+      }
+      if (!hasAttribute(menuButton, "aria-label", /^メニューを開く$/)) {
+        failures.push(`${file}: .res-menu requires the initial label メニューを開く`);
+      }
+    }
+  }
 
   for (const match of html.matchAll(/href=["']#([^"']+)["']/gi)) {
     if (!ids.includes(match[1])) failures.push(`${file}: same-page anchor #${match[1]} is missing`);
@@ -93,6 +134,19 @@ for (const file of htmlFiles) {
     }
   }
 
+  for (const match of html.matchAll(/<video\b[^>]*>[\s\S]*?<\/video>/gi)) {
+    const block = match[0];
+    const openTag = block.match(/<video\b[^>]*>/i)?.[0] || "";
+    if (!/\bcontrols(?:\s|>|=)/i.test(openTag)) failures.push(`${file}: video requires controls`);
+    if (!hasAttribute(openTag, "poster")) failures.push(`${file}: video requires a poster image`);
+    if (!hasAttribute(openTag, "width") || !hasAttribute(openTag, "height")) {
+      failures.push(`${file}: video requires explicit width/height`);
+    }
+    if (!/<track\b[^>]*kind=["']captions["'][^>]*srclang=["'][^"']+["']/i.test(block)) {
+      failures.push(`${file}: video requires a captions track with srclang`);
+    }
+  }
+
   for (const match of html.matchAll(/<a\b[^>]*target=["']_blank["'][^>]*>/gi)) {
     const tag = match[0];
     if (!hasAttribute(tag, "rel", /(?:^|\s)noopener(?:\s|$)/i) ||
@@ -119,9 +173,15 @@ for (const file of htmlFiles) {
     ["canonical", new RegExp(`<link\\b[^>]*rel=["']canonical["'][^>]*href=["']${expectedUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']`, "i")],
     ["og:title", /<meta\b[^>]*property=["']og:title["'][^>]*content=["'][^"']+["']/i],
     ["og:description", /<meta\b[^>]*property=["']og:description["'][^>]*content=["'][^"']+["']/i],
+    ["og:url", new RegExp(`<meta\\b[^>]*property=["']og:url["'][^>]*content=["']${expectedUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["']`, "i")],
     ["og:image", /<meta\b[^>]*property=["']og:image["'][^>]*content=["'][^"']+["']/i],
+    ["og:image:width", /<meta\b[^>]*property=["']og:image:width["'][^>]*content=["']\d+["']/i],
+    ["og:image:height", /<meta\b[^>]*property=["']og:image:height["'][^>]*content=["']\d+["']/i],
+    ["og:image:alt", /<meta\b[^>]*property=["']og:image:alt["'][^>]*content=["'][^"']+["']/i],
+    ["og:site_name", /<meta\b[^>]*property=["']og:site_name["'][^>]*content=["'][^"']+["']/i],
     ["twitter:card", /<meta\b[^>]*name=["']twitter:card["'][^>]*content=["'][^"']+["']/i],
     ["twitter:image", /<meta\b[^>]*name=["']twitter:image["'][^>]*content=["'][^"']+["']/i],
+    ["twitter:image:alt", /<meta\b[^>]*name=["']twitter:image:alt["'][^>]*content=["'][^"']+["']/i],
   ];
 
   for (const [label, pattern] of requiredPatterns) {

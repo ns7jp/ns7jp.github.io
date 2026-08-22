@@ -22,7 +22,7 @@
 | 1 | [Project Brief](https://ns7jp.github.io/project-brief.html) | Linuxサーバー構築案件の目的、担当範囲、工程、設計判断、完了条件 |
 | 2 | [Evidence Digest](https://ns7jp.github.io/evidence-demo.html) | 日時・環境・commit付きの実測結果、失敗、未実施範囲 |
 | 3 | [2分15秒 証跡リプレイ](https://ns7jp.github.io/demo.html) | 2026年8月18日・19日の実測画面とD-1ログを時系列に再構成した閲覧用デモ |
-| 4 | [Full-stack E2E 23/23](https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md) | 実行対象 `f4ea319`、使い捨てUbuntu 24.04 runnerでの構築・冪等性・稼働・復旧・3 volumes復元 |
+| 4 | [Full-stack E2E 23/23](https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md) | runtime `7622a9d`、使い捨てUbuntu 24.04 runnerでの構築・冪等性・11 containers・Docker API proxy・復旧・3 volumes復元。main `4a292026`へ統合済み |
 | 5 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、構築・運用スキル、主成果物 |
 | 6 | [Server Build Lab](https://ns7jp.github.io/infra-lab.html) | 要件から引き渡しまでの10番号付き成果物、監視、復旧、補助Lab |
 
@@ -30,10 +30,10 @@
 
 - **作成・実装済み:** 要件、設計、パラメータ、構築コード、試験仕様、引き渡し、変更・ロールバック、実機検証手順
 - **2026年8月17〜19日の履歴として実測:** Ansible 4 roles、監視9 services、Grafana実データ、Lokiログ、D-1復旧（RTO 13秒）、二セグメント通信障害
-- **2026年8月22日のE2Eで実測（実行対象 `f4ea319`）:** 使い捨てUbuntu 24.04 runnerで23/23 PASS。`site.yml`初回一括適用、2回目`changed=0`、core 9 services + CI専用webhook sinkの計10 containers、認証、runner内network/UFW、synthetic alertのlocal webhook FIRING/RESOLVED、D-1自動復旧（RTO 1秒）、別名3 volumesへのchecksum付きrestore
-- **NOT RUN:** Slack実配信、AWS `apply / destroy`・実費・Security Group/NACL、D-2、独立した管理端末・引き渡し対象host・組織DNSを含むnetwork検証、長期稼働・host再起動後・production traffic
+- **2026年8月22日のE2Eで実測（runtime `7622a9d`）:** 使い捨てUbuntu 24.04 runnerで23/23 PASS。`site.yml`初回一括適用、2回目`changed=0`、core 10 services + CI専用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・固有Nginx logのAlloy経由Loki到達、認証、runner内network/UFW、synthetic alertのlocal webhook FIRING/RESOLVED、D-1自動復旧（RTO 1秒）、別名3 volumesへのchecksum付きrestore。証跡docs `cf9419b`を含むPR #75はmain merge `4a292026`へ統合済み
+- **NOT RUN:** 構成commit / 設定rollback rehearsal、Slack実配信、AWS `apply / destroy`・実費・Security Group/NACL、D-2、独立した管理端末・引き渡し対象host・組織DNSを含むnetwork検証、長期稼働・host再起動後・production traffic
 
-E2E runnerにはDockerが事前導入済みだったため、最小OSからDockerを導入した実績とは表現しません。local webhookのsynthetic alert試験とD-1障害注入は別の検証であり、いずれもSlack実配信を示しません。
+E2E runnerにはDockerが事前導入済みだったため、最小OSからDockerを導入した実績とは表現しません。local webhookのsynthetic alert試験とD-1障害注入は別の検証であり、いずれもSlack実配信を示しません。runtime実測commit、結果を転記したdocs commit、main merge commitを分け、後続の文書変更をruntime検証へ読み替えません。
 
 公開中の2分15秒映像は、2026年8月18日・19日の画面とRTO 13秒のD-1ログを再構成した証跡リプレイで、実操作の連続録画ではありません。2026年8月22日の実terminal `demo.cast`は期限付きActions artifactに保存され、公開サイト上の常設動画ではありません。実操作を収録する手順は[収録ガイド](https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md)に分けています。
 
@@ -394,6 +394,21 @@ python -m http.server 8000
 
 ```text
 http://localhost:8000/
+```
+
+ローカルHTML構造・リンク・アクセシビリティ／SEOガードレールは次のコマンドで確認できます。
+
+```bash
+node scripts/check-html-structure.js
+node scripts/check-static-links.js
+node scripts/check-site-quality.js
+node scripts/test-external-link-check.js
+```
+
+公開先やGitHubなど外部URLの応答確認は、ネットワークに接続できる環境で任意実行します。外部要因で不安定になり得るためCIの必須gateにはしていません。
+
+```bash
+node scripts/check-external-links.js
 ```
 
 ---

@@ -13,18 +13,23 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/evidence-demo.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
     <meta property="og:description" content="実測済み・CI検証済み・未実測を分け、Linux上の起動、監視、ログ検索、復旧時間、通信障害の証跡を2分で確認できます。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Evidence Digest | Linuxサーバー構築・運用">
     <meta name="twitter:description" content="実測結果と未実測範囲を、日時・commit・コマンド・結果へのリンク付きで公開。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <title>Evidence Digest | 島田則幸のポートフォリオ</title>
 
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=20260822-3" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260822-3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -54,7 +59,7 @@
         </div>
     </div>
 
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
         <i class="fa-solid fa-bars"></i>
         <i class="fa-solid fa-xmark"></i>
     </button>
@@ -105,8 +110,8 @@
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                     <div>
-                        <strong>最新の完了済み証跡は2026年8月22日の使い捨てrunner E2Eです</strong>
-                        <p><a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E証跡</a>では、実行対象<code>f4ea319</code>をDocker導入済みのdisposable Ubuntu 24.04 runner上で検証し、23 / 23 IDがPASSしました。2026年8月17〜19日のMolecule・WSL2・D-1記録は、当時の対象commitに対する履歴として区別して掲載します。</p>
+                        <strong>最新のruntime実測は2026年8月22日の使い捨てrunner E2Eです</strong>
+                        <p><a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E証跡</a>では、runtime最終commit <code>7622a9d</code>をDocker導入済みのdisposable Ubuntu 24.04 runner上で検証し、23 / 23 IDがPASSしました。証跡文書commit <code>cf9419b</code>を含むPR #75はmain merge <code>4a292026</code>へ統合済みです。2026年8月17〜19日のMolecule・WSL2・D-1記録は、当時の対象commitに対する履歴として区別して掲載します。</p>
                     </div>
                 </div>
                 <div class="evidence-legend" aria-label="証跡ステータスの凡例">
@@ -122,35 +127,35 @@
                     <h2 class="heading-text" id="snapshot-title">Evidence Snapshot</h2>
                 </div>
                 <div class="metric-grid">
-                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">23 / 23</span>
                         <strong>Full-stack E2E</strong>
                         <small>disposable Ubuntu 24.04／PASS</small>
                     </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">changed=0</span>
                         <strong>site.yml 2回目</strong>
                         <small>Ansible冪等性／PASS</small>
                     </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">10 + 1</span>
+                        <strong>containers起動</strong>
+                        <small>core 10 services＋CI webhook sink</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">3 checks</span>
+                        <strong>Docker API proxy</strong>
+                        <small>GET成功／POST拒否／Loki到達</small>
+                    </a>
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">1 sec</span>
                         <strong>D-1自動復旧</strong>
                         <small>目標RTO 5分以内／PASS</small>
                     </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">3 volumes</span>
                         <strong>backup / restore</strong>
                         <small>Prometheus・Grafana・Loki／PASS</small>
-                    </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">core 9 + 1</span>
-                        <strong>サービス起動</strong>
-                        <small>core 9 services＋CI webhook sink</small>
-                    </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">2 states</span>
-                        <strong>local webhook</strong>
-                        <small>FIRING / RESOLVED（Slackではない）</small>
                     </a>
                 </div>
             </section>
@@ -168,37 +173,47 @@
                             <h3>使い捨てUbuntuへsite.ymlを2回適用</h3>
                             <p>Docker導入済みのdisposable Ubuntu 24.04 runnerへ<code>site.yml</code>を初回適用し、同じplaybookの2回目が<code>changed=0</code>になることを確認しました。Docker自体の新規導入検証ではありません。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>GitHub Actions / disposable Ubuntu 24.04</dd></div><div><dt>前提</dt><dd>Docker preinstalled</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </article>
                     <article class="evidence-step">
                         <span class="step-index">02</span>
                         <div>
                             <span class="status-pill measured">実測済み</span>
-                            <h3>core 9 servicesとCI webhook sinkを起動</h3>
-                            <p>監視スタックのcore 9 servicesにCI用webhook sinkを加えて起動し、ローカルwebhookで<code>FIRING</code>と<code>RESOLVED</code>を確認しました。これは通知経路のローカル検証であり、Slack実配信の証跡ではありません。</p>
-                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>Docker Compose / CI webhook sink</dd></div><div><dt>結果</dt><dd>FIRING / RESOLVED</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">起動・通知の証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <h3>core 10 servicesとCI webhook sinkを起動</h3>
+                            <p>監視スタックのcore 10 servicesにCI用webhook sinkを加えた計11 containersを起動し、ローカルwebhookで<code>FIRING</code>と<code>RESOLVED</code>を確認しました。これは通知経路のローカル検証であり、Slack実配信の証跡ではありません。</p>
+                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>Docker Compose / 11 containers</dd></div><div><dt>結果</dt><dd>FIRING / RESOLVED</dd></div></dl>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">起動・通知の証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </article>
                     <article class="evidence-step">
                         <span class="step-index">03</span>
                         <div>
                             <span class="status-pill measured">実測済み</span>
-                            <h3>runner内のnetwork / UFWを確認</h3>
-                            <p>使い捨てrunner内でNIC、route、listen、UFWとコンテナ間通信を検証しました。このPASSは同一runner内の確認範囲であり、独立した管理端末や引き渡し対象ホスト、組織DNSからの疎通を示しません。</p>
-                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>disposable Ubuntu 24.04 runner</dd></div><div><dt>範囲</dt><dd>runner network / UFW</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">network / UFW証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <h3>Docker API proxyをread-onlyで検証</h3>
+                            <p>proxy経由のread APIが成功し、書き込みを伴うPOSTは拒否されました。さらにproxyが取得した固有Nginx logがAlloyを経由してLokiへ届くことを確認しています。POST拒否は変更操作を低減しますが、containers / networksのGETにはログ等を読み取れる権限が残るため、完全なleast privilegeとは扱いません。残存リスクは<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/security.md" target="_blank" rel="noopener noreferrer">Security方針</a>に記録しています。</p>
+                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>runtime</dt><dd><code>7622a9d</code></dd></div><div><dt>結果</dt><dd>GET PASS / POST denied / Loki PASS</dd></div></dl>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">proxy検証の証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </article>
                     <article class="evidence-step">
                         <span class="step-index">04</span>
                         <div>
                             <span class="status-pill measured">実測済み</span>
+                            <h3>runner内のnetwork / UFWを確認</h3>
+                            <p>使い捨てrunner内でNIC、route、listen、UFWとコンテナ間通信を検証しました。このPASSは同一runner内の確認範囲であり、独立した管理端末や引き渡し対象ホスト、組織DNSからの疎通を示しません。</p>
+                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>disposable Ubuntu 24.04 runner</dd></div><div><dt>範囲</dt><dd>runner network / UFW</dd></div></dl>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">network / UFW証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </article>
+                    <article class="evidence-step">
+                        <span class="step-index">05</span>
+                        <div>
+                            <span class="status-pill measured">実測済み</span>
                             <h3>D-1を1秒で復旧し、3 volumeをrestore</h3>
                             <p>D-1プロセス障害から1秒で復旧し、目標RTO 5分以内を満たしました。さらにPrometheus・Grafana・Lokiの3 volumeをバックアップから復元し、データの復旧を確認しました。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>D-1 RTO</dt><dd>1秒</dd></div><div><dt>restore</dt><dd>3 volumes</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">復旧・restore証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">復旧・restore証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                         </div>
                     </article>
                 </div>
@@ -207,9 +222,9 @@
             <section class="test-status-section" aria-labelledby="test-status-title">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-vial-circle-check"></i></span>
-                    <h2 class="heading-text" id="test-status-title">Test Status — 2026-08-22 / f4ea319 / 23 / 23 PASS</h2>
+                    <h2 class="heading-text" id="test-status-title">Test Status — 2026-08-22 / runtime 7622a9d / 23 / 23 PASS</h2>
                 </div>
-                <p class="evidence-note"><a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026年8月22日のFull-stack E2E</a>は実行対象<code>f4ea319</code>で23 / 23 IDがPASSしました。2026年8月19日の必須9 / 18・全体11 / 21 PASSは、当時の検証範囲を示す履歴です。</p>
+                <p class="evidence-note"><a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026年8月22日のFull-stack E2E</a>はruntime最終commit <code>7622a9d</code>で23 / 23 IDがPASSしました。結果を転記したdocs commitは<code>cf9419b</code>、main mergeは<code>4a292026</code>です。後続の証跡文書だけの変更をruntime検証へ読み替えていません。2026年8月19日の必須9 / 18・全体11 / 21 PASSは、当時の検証範囲を示す履歴です。</p>
                 <div class="operation-table-wrap">
                     <table class="operation-table evidence-status-table">
                         <thead>
@@ -229,8 +244,14 @@
                             </tr>
                             <tr>
                                 <td>起動・通知</td>
-                                <td>core 9 services＋CI webhook sink、FIRING / RESOLVED</td>
+                                <td>core 10 services＋CI webhook sink（計11 containers）、FIRING / RESOLVED</td>
                                 <td>local webhookのみ。Slack実配信ではない</td>
+                                <td><span class="status-pill measured">PASS</span></td>
+                            </tr>
+                            <tr>
+                                <td>Docker API proxy</td>
+                                <td>read API成功、POST拒否、固有Nginx logのAlloy経由Loki到達</td>
+                                <td>runtime commit <code>7622a9d</code>のPR E2E内</td>
                                 <td><span class="status-pill measured">PASS</span></td>
                             </tr>
                             <tr>
@@ -251,14 +272,39 @@
                 <div class="status-callout pending" role="note">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     <div>
-                        <strong>23 / 23 PASSは2026-08-22の使い捨てrunnerに対する完了判定です</strong>
-                        <p>Slack実配信、AWS apply / destroy、D-2ホスト障害、独立した管理端末と引き渡し対象ホスト、組織DNS、長期稼働は未実測です。Dockerもrunnerへ導入済みだったため、新規ホストへのDocker導入完了を示す結果ではありません。</p>
+                        <strong>23 / 23 PASSはruntime <code>7622a9d</code>を使い捨てrunnerで確認した判定です</strong>
+                        <p>このruntimeと証跡文書はmain <code>4a292026</code>へ統合済みです。ただし、構成commit／設定rollback rehearsal、Slack実配信、AWS apply / destroy、D-2ホスト障害、独立した管理端末と引き渡し対象ホスト、組織DNS、長期稼働は未実測です。Dockerもrunnerへ導入済みだったため、新規ホストへのDocker導入完了を示す結果ではありません。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list"></i> 23 / 23 E2E証跡</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list"></i> 23 / 23 E2E証跡</a>
                     <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clock-rotate-left"></i> 2026-08-19 結果票</a>
                     <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> 最新の証跡台帳</a>
+                </div>
+            </section>
+
+            <section class="change-story-section" aria-labelledby="pr75-change-story-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-code-pull-request"></i></span>
+                    <h2 class="heading-text" id="pr75-change-story-title">PR #75 CI：Failure → Root Cause → Fix</h2>
+                </div>
+                <p class="evidence-note">成功結果だけでなく、PR上で実環境相当のE2Eが検出した不具合と修正も残しています。最終runtime <code>7622a9d</code>と証跡docs <code>cf9419b</code>はmain <code>4a292026</code>へ統合済みです。</p>
+                <div class="decision-grid">
+                    <article class="decision-card">
+                        <span class="decision-number">01</span>
+                        <h3>assert変数の配置不備</h3>
+                        <p><a href="https://github.com/ns7jp/server-monitor/actions/runs/32571650745" target="_blank" rel="noopener noreferrer">先行run 32571650745</a>で、<code>ansible.builtin.assert</code>に対するtask-level <code>vars</code>のindent不整合を検出。変数をtask直下へ移して修正しました。</p>
+                    </article>
+                    <article class="decision-card">
+                        <span class="decision-number">02</span>
+                        <h3>2回目changed=1</h3>
+                        <p><a href="https://github.com/ns7jp/server-monitor/actions/runs/32571890175" target="_blank" rel="noopener noreferrer">先行run 32571890175</a>で、<code>become_user</code>が作る<code>.ansible/tmp</code>とsource同期の干渉を特定。OpenSSL実行を<code>runuser</code>へ変更しました。</p>
+                    </article>
+                    <article class="decision-card">
+                        <span class="decision-number">03</span>
+                        <h3>修正後に23 / 23 PASS</h3>
+                        <p><a href="https://github.com/ns7jp/server-monitor/actions/runs/32572409469" target="_blank" rel="noopener noreferrer">最終run 32572409469</a>で2回目<code>changed=0</code>、11 containers、proxy、network / UFW、D-1、restoreを再検証しました。</p>
+                    </article>
                 </div>
             </section>
 

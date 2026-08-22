@@ -362,12 +362,12 @@
                     <div class="work-item">
                         <span class="work-name">① Linux Server Build &amp; Operations Lab</span>
                         <span class="work-tag">Design / Ansible / Test / Monitoring / Recovery</span>
-                        <div class="work-desc">要件・設計・パラメータ・構築・試験・引き渡し・rollback・実機検証の10番号付き成果物。2026-08-22は使い捨てUbuntu 24.04 runnerでFull-stack E2E 23/23 PASS。独立した引き渡し対象ホストでの受け入れは未実測。</div>
+                        <div class="work-desc">要件・設計・パラメータ・構築・試験・引き渡し・rollback・実機検証の10番号付き成果物。2026-08-22はruntime 7622a9dを使い捨てUbuntu 24.04 runnerでFull-stack E2E 23/23 PASSし、main 4a292026へ統合。独立した引き渡し対象ホストでの受け入れは未実測。</div>
                     </div>
                     <div class="work-item">
                         <span class="work-name">② Evidence Digest</span>
                         <span class="work-tag">E2E 23/23 / changed=0 / D-1 1 sec / Restore PASS</span>
-                        <div class="work-desc">2026-08-22のE2EでAnsible一括適用、runner内network/UFW、local webhook、D-1、3-volume restoreを実測。2026-08-19の11/21 PASSとD-1 RTO 13秒も履歴として保持。</div>
+                        <div class="work-desc">2026-08-22のE2EでAnsible一括適用、11 containers、Docker API proxy、runner内network/UFW、local webhook、D-1、3-volume restoreを実測。2026-08-19の11/21 PASSとD-1 RTO 13秒も履歴として保持。</div>
                     </div>
                     <div class="work-item">
                         <span class="work-name">③ サーバー監視ダッシュボード</span>
@@ -402,11 +402,11 @@
                         </tr>
                         <tr>
                             <td class="task">単体・結合・Security試験</td>
-                            <td class="evidence"><a href="evidence-demo.html">Evidence Digest</a> / <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md">2026-08-22 Full-stack E2E 23/23 PASS</a>（実行対象 <code>f4ea319</code>）。2026-08-19の11/21 PASSは履歴として保持</td>
+                            <td class="evidence"><a href="evidence-demo.html">Evidence Digest</a> / <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md">2026-08-22 Full-stack E2E 23/23 PASS</a>（runtime <code>7622a9d</code>、main <code>4a292026</code>）。2026-08-19の11/21 PASSは履歴として保持</td>
                         </tr>
                         <tr>
                             <td class="task">監視 / ログ / 一次切り分け</td>
-                            <td class="evidence">Prometheus / Grafana / Loki / Alloy / Alertmanager。2026-08-22にcore 9 servicesと実データ、local webhook FIRING / RESOLVEDを確認（Slack実配信は未実測）</td>
+                            <td class="evidence">Prometheus / Grafana / Loki / Alloy / Alertmanager。2026-08-22にcore 10 services＋CI sinkの計11 containers、Docker API proxyのGET成功・POST拒否とLoki到達、local webhook FIRING / RESOLVEDを確認（GETの読取権限とSlack実配信は残存課題）</td>
                         </tr>
                         <tr>
                             <td class="task">障害注入 / 復旧 / 再発防止</td>

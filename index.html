@@ -43,6 +43,9 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
     <meta property="og:description" content="Ubuntuの設計、Ansible構築、Docker、Prometheus / Grafana監視、試験、通信障害の切り分け・復旧までを一つの構築案件として公開中。">
     <meta property="og:locale" content="ja_JP">
@@ -52,6 +55,7 @@
     <meta name="twitter:title" content="島田則幸のポートフォリオ">
     <meta name="twitter:description" content="Linuxサーバーの設計・Ansible構築・試験・監視・障害復旧を一つの案件として公開しています。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
     <title>Top | 島田則幸のポートフォリオ - Linuxサーバー構築・運用</title>
@@ -59,11 +63,11 @@
     <!-- ===== 外部スクリプト・CSSの読み込み ===== -->
     <!-- サイト共通スクリプト（vanilla JS、外部ライブラリ非依存）。ローダー解除・メニュー開閉・
          ヒーロー背景クロスフェード（旧jQueryプラグインの置き換え）などをここで一括管理する。 -->
-    <script src="js/main.js" defer></script>
+    <script src="js/main.js?v=20260822-3" defer></script>
     <!-- ブラウザ標準スタイルをリセットするCSS。表示崩れを防ぐ目的で先に読み込む。 -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- このサイト独自のスタイルシート。色・レイアウト・アニメーションを定義。 -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260822-3">
     <!-- アイコンフォントFont Awesome（CDN経由）。<i class="fa-..."></i>でアイコンを表示できる。 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -126,7 +130,7 @@
     <!-- ===== モバイル用メニュー切替ボタン（ハンバーガーメニュー） ===== -->
     <!-- スマホ画面のときだけ表示される。タップするとナビゲーションが開閉する。
          button要素 + aria-expanded/aria-controls でキーボード・スクリーンリーダーからも操作できる。 -->
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開閉">
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
         <!-- 三本線（メニューを開くアイコン） -->
         <i class="fa-solid fa-bars"></i>
         <!-- バツ印（メニューを閉じるアイコン）。CSSで切替表示する。 -->
@@ -183,7 +187,7 @@
                     <span>構成図</span>
                     <strong>監視・ログ基盤</strong>
                 </a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
                     <i class="fa-solid fa-clipboard-check"></i>
                     <span>実測証跡</span>
                     <strong>2026-08-22 E2E 23 / 23</strong>
@@ -216,9 +220,9 @@
                     <p>要件、基本・詳細設計、パラメータ、ネットワーク、構築、試験、引き渡し、ロールバック、実機検証手順を工程順に整理しています。</p>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">完了済みE2E / 2026-08-22</span>
+                    <span class="summary-label">main統合済みE2E / 2026-08-22</span>
                     <h3>Ubuntu 24.04で23 / 23 PASS</h3>
-                    <p>使い捨てGitHub Actions runnerで、Dockerはプリインストール済み環境を使用。site.ymlの2回目がchanged=0となり、10コンテナ（主構成9＋CI用ローカルwebhook sink）の起動まで確認しました。</p>
+                    <p>runtime最終commit <code>7622a9d</code>を、Docker導入済みの使い捨てrunnerで検証。<code>site.yml</code>の2回目<code>changed=0</code>、core 10 services＋CI用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・Loki到達を確認しました。証跡文書<code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。</p>
                 </div>
                 <div class="summary-card">
                     <span class="summary-label">Recovery / Restore</span>
@@ -227,14 +231,14 @@
                 </div>
             </div>
             <div class="evidence-boundary-strip" aria-label="証跡の現在・履歴・未実測の区分">
-                <span><strong>完了済みE2E</strong> disposable Ubuntu 24.04・23 / 23 PASS・site.yml changed=0・network / UFW・D-1 1秒・3 volume restore</span>
+                <span><strong>main統合済みE2E</strong> runtime <code>7622a9d</code>・23 / 23 PASS・2回目changed=0・11 containers・proxy GET / POST拒否 / Loki・D-1 1秒・3 volume restore</span>
                 <span><strong>履歴（2026-08-19）</strong> WSL2で11 / 21 PASS・D-1 RTO 13秒。現在のE2E結果とは分けて掲載</span>
-                <span><strong>NOT RUN</strong> Slack実配信・独立した管理端末／引き渡し対象ホスト・AWS apply / destroy・D-2</span>
+                <span><strong>NOT RUN</strong> 構成commit／設定rollback rehearsal・Slack実配信・独立した管理端末／引き渡し対象ホスト・AWS apply / destroy・D-2</span>
             </div>
             <div class="summary-actions">
                 <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要を見る</a>
                 <a href="demo.html" class="btn btn-secondary"><i class="fa-solid fa-video"></i> 2分15秒デモ</a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> Full-stack E2E原本</a>
+                <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> Full-stack E2E原本</a>
                 <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
             </div>
         </div>
@@ -262,7 +266,7 @@
                     <ul class="time-budget-links">
                         <li><a href="demo.html">2分15秒の証跡リプレイ</a><span>実測スクリーンショットと復旧ログを短時間で確認</span></li>
                         <li><a href="evidence-demo.html">Evidence Digest</a><span>実測値、対象commit、コマンド、失敗、NOT RUNを確認</span></li>
-                        <li><a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E原本</a><span>実行対象f4ea319で23 / 23 PASSした固定記録</span></li>
+                        <li><a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E原本</a><span>runtime <code>7622a9d</code>で23 / 23 PASS、main <code>4a292026</code>へ統合済み</span></li>
                     </ul>
                 </div>
                 <div class="summary-card">
@@ -334,9 +338,9 @@
                     <div class="skill-icon">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
-                    <span class="status-pill measured">10 containers起動</span>
+                    <span class="status-pill measured">11 containers起動</span>
                     <h3>Monitoring / Logs</h3>
-                    <p>2026-08-22に主構成9コンテナとCI用ローカルwebhook sinkを起動し、FIRING / RESOLVEDを確認</p>
+                    <p>core 10 servicesとCI用webhook sinkを起動し、local通知に加えてDocker API proxyのread-only制御とLoki到達を確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
