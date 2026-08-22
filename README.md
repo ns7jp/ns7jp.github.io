@@ -9,52 +9,37 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
+**Linuxサーバー構築・運用を第一志望**とし、Ubuntuサーバーの設計とAnsible構成コード、Prometheus・Grafana・Loki監視、障害注入から復旧までを、実装済み・実測済みの範囲を分けて公開しています。
+
+## まず見る3点
+
+| 見るもの | 状態・確認できること |
+|---|---|
+| [2分15秒デモ](https://ns7jp.github.io/demo.html) | 2026年8月18日・19日の実測スクリーンショットとD-1復旧ログを再構成した証跡リプレイ |
+| [構成図](https://github.com/ns7jp/server-monitor/blob/main/docs/architecture.md#構成図) | Nginx、Flask、Prometheus、Grafana、Alertmanager、Lokiの役割と接続関係 |
+| [実測証跡](https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md) | 実測済み、未実測（NOT RUN）、確認できる範囲の境界 |
+
+## 主作品: Server Monitor
+
+[Server Monitor](https://github.com/ns7jp/server-monitor) は、設計、構成管理、監視、試験、障害対応、引き渡しを一つの案件としてまとめたLinuxインフラ構築ラボです。
+
+> **映像の位置付け:** この映像は実操作の連続録画ではありません。2026年8月18日・19日に保存した実測スクリーンショットとD-1復旧ログを、閲覧用に時系列で再構成したリプレイです。実操作を収録する手順は[収録ガイド](https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md)に分けています。
+
+- **設計・構成**: 基本・詳細設計、パラメータ、Ansibleロール、Docker Compose、試験・引き渡し資料
+- **実測済み**: Ansible 4ロールのMolecule試験、Linux上の監視スタック起動、D-1復旧演習（RTO 13秒）、二セグメント障害ラボ
+- **未採録**: 新規VMへの`site.yml`適用、実VMのUFW・ネットワーク確認、バックアップ復元、AWS適用
+
+[構築案件パック](https://github.com/ns7jp/server-monitor/tree/main/docs/build-package) / [主作品の詳細](https://ns7jp.github.io/works.html#work-monitor) / [1ページ履歴書](https://ns7jp.github.io/resume.html)
+
+## 補助成果
+
+主作品を確認した後の二次導線として、[Linux Operation Lab](https://ns7jp.github.io/linux-lab.html)、[Windows / M365 / AD・PowerShellのSupport Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit)、[Cloud Lab](https://ns7jp.github.io/cloud-lab.html)、Python・PHP・Web制作物を掲載しています。
+
 ## 開発体制について
 
-このポートフォリオおよび主作品 [Server Monitor](https://github.com/ns7jp/server-monitor) は、設計方針・構成・検証観点は自分で立てた上で、実装・デバッグの多くを Claude Code / Codex などの AI コーディングエージェントと協働して進めています。AI が書いたコードや文章も、実機・CI での動作確認を経てから採用し、内容は自分で理解・説明できる状態にしてから公開する方針です。コミット履歴・PR は GitHub 上でそのまま公開しているため、進め方も含めて確認いただけます。
+設計方針・構成・検証観点は自分で立て、Claude Code / CodexなどのAIコーディングエージェントと協働して実装・デバッグしています。採用する成果物は実機またはCIで確認し、内容を説明できる状態にして公開します。コミット履歴とPRもGitHub上で確認できます。
 
-## 採用担当者向け: 時間予算別の動線
-
-3 段階の時間予算で、どこを見れば全体が把握できるかを整理しました。
-
-### ⏱ 5 分で見る（一目で実力把握）
-
-| 見るもの | 何が分かるか |
-|---|---|
-| [1 ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、**想定業務 × 自分の備えマトリクス**、学習ロードマップ |
-| [Infra Operation Lab](https://ns7jp.github.io/infra-lab.html) | Windows / M365 / AD 想定の **VLAN 論理構成図**、監視 / 証跡 / 一次対応 |
-
-### ⏱ 15 分で見る（運用視点の幅を確認）
-
-| 見るもの | 何が分かるか |
-|---|---|
-| [Cloud Network Lab](https://ns7jp.github.io/cloud-lab.html) | AWS VPC / Subnet / Security Group / Terraform validate / コスト配慮 |
-| [Linux Operation Lab](https://ns7jp.github.io/linux-lab.html) | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計と早見表 |
-| [Monitoring Stack](./monitoring-stack/) | Prometheus + Grafana + Loki + Promtail + node_exporter + 4 アラート |
-| [Support Toolkit](https://ns7jp.github.io/works.html#work-support-toolkit) | 17 手順書（**Failover Runbook / Network 切り分け証跡** 含む）、9 PowerShell + 1 bash（Pester 25 テスト + GitHub Actions） |
-
-### ⏱ 30 分で見る（運用品質の数値化まで含めて確認）
-
-| 見るもの | 何が分かるか |
-|---|---|
-| [SLO / Error Budget](./support-docs/slo-error-budget.md) | SLI 定義 → SLO 値 → Error Budget → 月中の運用判断 |
-| [チケット分類 (ITIL 4 区分)](./support-docs/ticket-taxonomy.md) | インシデント / リクエスト / 問題 / 変更 の受付フローと記入テンプレ |
-| [Backup / Restore Runbook](./support-docs/backup-restore-runbook.md) | サービス別 RTO / RPO 表、月次リストアテスト、年次 DR ドリル |
-| [フェイルオーバー Runbook](./support-docs/failover-runbook.md) | AD / ファイル / DB / VIP / DNS の **副系切替コマンド + 切り戻し** |
-| [ネットワーク切り分け証跡](./support-docs/network-triage-evidence.md) | L2 〜 L7 を機械的に当てる切り分けコマンドと想定出力例 |
-| [物理層 設計](./support-docs/office-it-physical-layer.md) | ラック / LAN / UPS / 無線AP / 複合機の棚卸と切り分け |
-| [M365 ポリシー定義](./support-docs/m365-policy-examples/) | Intune / 条件付きアクセス / Defender ASR の JSON 定義 |
-| [Infra Evidence](./infra-evidence/) / [Production Readiness](./production-readiness.md) | 検証コマンド、失敗 → 修正サンプル、本番化差分 |
-| [Ansible Playbook](./ansible/) / [CIS Benchmark マッピング](./ansible/cis-benchmark-mapping.md) | SSH強化 / UFW / fail2ban / auditd / 自動更新 + **CIS L1 主要項目 約 65% カバー** |
-| [面接 想定 FAQ](./support-docs/interview-faq.md) | 製造業 15 年以上からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等の自答 |
-
-成果の見え方としては、Infra Operation Lab で **VLAN 構成図・監視項目・証跡保存・一次対応・引き継ぎ基準** を見せ、Cloud Lab で **VPC / Subnet / Security Group / Terraform 検証** を補い、Linux Lab と Monitoring Stack と Ansible で **「確認 → 適用 → 観測（Metrics + Logs）」を一通り** 示しています。Support Toolkit では **17 手順書・9 PowerShell + 1 bash・25 Pesterテスト・AD/M365変更ケース・Postmortem 実例・Backup/RTO/RPO/DR ドリル・フェイルオーバー手順・ネットワーク切り分け証跡・SLO・チケット分類・物理層・M365 ポリシー JSON** を公開し、Infra Evidence と Production Readiness で **検証証跡と本番化差分**、Ansible playbook の **CIS Benchmark 対応マッピング** で **業界標準との整合性** も追えるようにしました。
-
-公共職業訓練（2025年10月〜2026年1月）で学んだ開発基礎を起点に、**Linuxサーバー構築・運用**を第一志望としてまとめたポートフォリオサイトです。主作品の Server Monitor では、設計、Ansible構築、試験、Prometheus監視、障害切り分け、復旧までを一つの案件として公開しています。
-
-この README は、Web 初学者の方にも「このサイトが何を目的に作られているのか」「どのファイルが何を担当しているのか」「HTML / CSS / JavaScript がどう分担して動いているのか」が分かるように、できるだけ順を追って説明しています。
-
-各ファイルの詳しい役割、読む順番、処理の追い方は [CODE_WALKTHROUGH.md](./CODE_WALKTHROUGH.md) にまとめています。
+サイト実装の詳しい読み方は [CODE_WALKTHROUGH.md](./CODE_WALKTHROUGH.md) に分離しています。
 
 ---
 
@@ -67,13 +52,13 @@
 | 見てほしいこと | 内容 |
 |----------------|------|
 | 人物像 | 製造・物流現場で培った正確性、改善意識、職業訓練で学んだ内容 |
-| スキル | Windows / Microsoft 365 / Active Directory 想定、PowerShell、ネットワーク一次切り分け、Linux・サーバー監視の基礎 |
-| 制作物 | Infra Operation Lab、Support Toolkit と6作品の概要、使い方、使用技術、ITサポート業務への活かし方 |
-| 学習姿勢 | トラブルに対して原因を切り分け、調査し、修正し、手順化した過程 |
-| 実務準備 | PCキッティング手順書、障害対応事例集、PowerShell確認スクリプト、チケット形式の対応例 |
+| 第一志望 | Linuxサーバーの構築・運用 |
+| 主作品 | Server Monitorの設計、Ansible構成、監視、試験、障害復旧 |
+| 学習姿勢 | 実装と実測を分け、トラブルを切り分け、修正し、証跡化した過程 |
+| 補助成果 | Windows / M365 / AD、PowerShell、Cloud、開発作品 |
 | 連絡先 | GitHub やメールなど、連絡・確認に使える情報 |
 
-初学者向けに言い換えると、このポートフォリオは「自分の学習成果を Web 上で見せる履歴書」のようなものです。履歴書が職歴や資格を伝えるのに対し、このサイトでは実際に作ったページやアプリを通して、問い合わせ対応・運用確認・業務改善ツール作成に必要な基礎力を示しています。
+初学者向けに言い換えると、このポートフォリオは「Linuxサーバー構築・運用の学習成果をWeb上で見せる履歴書」です。設計書だけでなく、構成コード、試験結果、障害対応ログを結び付けて示しています。
 
 ---
 
@@ -100,19 +85,19 @@
 初めて見る人が迷わず内容を追えるよう、サイト全体は次の流れで構成しています。
 
 1. **Top**
-   最初に表示されるページです。ヒーロー画像、採用担当者向け1分サマリー、短い自己紹介、主要スキル、代表作品への導線を置いています。
+   Linuxサーバー構築・運用という第一志望、Server Monitorの要約、3分デモの公開状況、構成図、実測証跡への導線を最初に表示します。
 
 2. **About Me**
    これまでの経歴、職業訓練で学んだこと、取得資格を確認できます。
 
 3. **Skills**
-   Windows / M365 / AD、PowerShell、ネットワーク一次切り分け、Linux・監視基礎、開発技術などをカテゴリ別に整理しています。ITサポート対応例と詳細ドキュメントへのリンクも置いています。
+   Linux、Ansible、Docker、監視、ネットワーク切り分けを先に示し、Windows / M365 / ADやPowerShellは補助領域として整理しています。
 
 4. **Infra Lab**
-   Windows 11 / Microsoft 365 / Active Directory を想定した運用設計メモです。VLAN論理構成図、監視項目、証跡保存、一次対応、エスカレーション基準を1ページで確認できます。サブナビから **Linux Lab / Cloud Lab / Monitoring Stack / Ansible** へ横展開できます。
+   Linux Lab、監視スタック、Ansibleの補足資料へ進めます。Windows / M365 / AD想定の運用設計やCloud Labも二次導線から確認できます。
 
 5. **Works**
-   Support Toolkit と制作した6作品を詳しく紹介しています。作品画像、成果サマリー、概要、使用技術、デモまたはスクリーンショット、GitHubリンク、制作時のトラブルと解決過程を掲載しています。
+   Server Monitorを先頭に表示し、その後にSupport Toolkitと開発作品を補助成果として紹介しています。
 
 6. **Contact**
    メールや GitHub など、連絡先情報をまとめています。
@@ -123,13 +108,13 @@
 
 | ページ | ファイル | 役割 |
 |--------|----------|------|
-| トップページ | `index.html` | サイトの入口。自己紹介・スキル・作品ページへの導線をまとめる |
+| トップページ | `index.html` | 第一志望、Server Monitor、構成図、実測証跡を最優先で示す |
 | 自己紹介ページ | `me.html` | プロフィール、経歴、職業訓練、資格、**学習ロードマップ** を説明する |
 | スキルページ | `skills.html` | 学習した技術とITサポート系スキルをカテゴリ別に見せる（Windows / Linux 系を別カードに分割） |
 | インフラ運用Lab | `infra-lab.html` | Windows / M365 / AD を想定し、**VLAN論理構成図**、監視・証跡・一次対応・引き継ぎ基準を見せる |
 | Linux 運用Lab | `linux-lab.html` | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計メモ |
 | Cloud Network Lab | `cloud-lab.html` | AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail を見せる |
-| 作品ページ | `works.html` | Support Toolkit、**Infra Operation Lab**、6作品の詳細を紹介。Infrastructure カテゴリで絞り込み可能 |
+| 作品ページ | `works.html` | **Server Monitor**を先頭に、Infra Lab、Support Toolkit、開発作品を紹介 |
 | 履歴書 | `resume.html` | A4 1pager。**想定業務 × 自分の備えマトリクス** と **学習ロードマップ** を含む |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
 | Support Toolkit | `works.html#work-support-toolkit` | 手順書・PowerShell・チケット形式の対応例を、ITサポート実務に近い成果物としてまとめる |
@@ -288,15 +273,15 @@ ns7jp.github.io/
 
 ## 掲載成果物
 
-| # | 作品名 | 主な技術 | ITサポート関連度 | 内容 | リポジトリ |
-|---|--------|----------|------------------|------|------------|
-| ① | Support Toolkit | Markdown / PowerShell / bash | High | 手順書17本、確認スクリプト9本、Pester 25テスト、AD/M365変更ケース、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
-| ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | High | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
-| ③ | 定型文管理アプリ | Python / Flet | High | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
-| ④ | 付箋アプリ | Python / Tkinter | Medium | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
-| ⑤ | 掲示板アプリ | PHP / MySQL | Medium | ユーザー登録、投稿、返信ができる掲示板 | [ns7jp/post](https://github.com/ns7jp/post) |
-| ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | Learning | 感情ムードを選んで投稿するSNS | [ns7jp/pulse](https://github.com/ns7jp/pulse) |
-| ⑦ | サンプル企業サイト | HTML / CSS / JavaScript | Learning | 架空企業のレスポンシブ対応コーポレートサイト | [ns7jp/magic](https://github.com/ns7jp/magic) |
+| # | 作品名 | 主な技術 | 位置付け | 内容 | リポジトリ |
+|---|--------|----------|----------|------|------------|
+| ① | Server Monitor | Linux / Ansible / Docker / Prometheus / Grafana / Loki | **主作品** | 設計、構成管理、監視、試験、障害注入、復旧、実測証跡を一つの案件として公開 | [ns7jp/server-monitor](https://github.com/ns7jp/server-monitor) |
+| ② | Support Toolkit | Markdown / PowerShell / bash | 補助成果 | 手順書17本、確認スクリプト9本、Pester 25テスト、AD/M365変更ケース、サンプル出力3種 | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ③ | 定型文管理アプリ | Python / Flet | 補助成果 | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
+| ④ | 付箋アプリ | Python / Tkinter | 補助成果 | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
+| ⑤ | 掲示板アプリ | PHP / MySQL | 補助成果 | ユーザー登録、投稿、返信ができる掲示板 | [ns7jp/post](https://github.com/ns7jp/post) |
+| ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | 補助成果 | 感情ムードを選んで投稿するSNS | [ns7jp/pulse](https://github.com/ns7jp/pulse) |
+| ⑦ | サンプル企業サイト | HTML / CSS / JavaScript | 補助成果 | 架空企業のレスポンシブ対応コーポレートサイト | [ns7jp/magic](https://github.com/ns7jp/magic) |
 
 作品ページでは、単に「何を作ったか」だけでなく、「どんな場面で使えるか」「作る中で何に困ったか」「どう解決したか」も記載しています。これは、完成物だけでなく、問題解決の過程も伝えるためです。
 

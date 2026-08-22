@@ -18,7 +18,7 @@
     <!-- 文字コード（UTF-8）と画面サイズ調整の設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸の作品ページ。ITサポート・社内SE補助・インフラ運用で活かせるSupport Toolkit、サーバー監視ダッシュボード、業務改善向けPythonアプリ、PHPのWebアプリなどの制作実績を掲載しています。">
+    <meta name="description" content="島田則幸の作品ページ。Linuxサーバーの設計、Ansible構成、Prometheus・Grafana・Loki監視、障害復旧をまとめたServer Monitorを主作品として掲載しています。">
     <title>作品 | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/works.html">
 
@@ -27,7 +27,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/works.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta property="og:description" content="島田則幸のSupport Toolkitと作品6点。手順書・PowerShellスクリプト、サーバー監視ダッシュボード、業務改善向けPythonアプリなど、ITサポート・社内SE補助・インフラ運用で活かせる制作実績。">
+    <meta property="og:description" content="Linuxサーバーの設計・Ansible構成・監視・障害復旧をまとめたServer Monitorを主作品として、補助成果と分けて紹介しています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -60,8 +60,8 @@
           "name": "島田則幸の制作物",
           "itemListOrder": "ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定した17本の手順書、10本の確認スクリプト (PowerShell 9 + bash 1) + Pester 25テスト、SLO/Error Budget、チケット分類(ITIL)、物理層、M365ポリシーJSON、Failover Runbook、ネットワーク切り分け証跡、CIS Benchmark マッピング" } },
-            { "@type": "ListItem", "position": 2, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU/メモリ/ディスク/ネットワーク/プロセスをリアルタイム可視化する監視ダッシュボード" } },
+            { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "Server Monitor", "applicationCategory": "DeveloperApplication", "operatingSystem": "Linux", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Linuxサーバーの設計、Ansible構成、Prometheus・Grafana・Loki監視、障害復旧を一つの案件としてまとめた主作品" } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "CreativeWork", "name": "Support Toolkit", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "ITサポート実務を想定した17本の手順書、10本の確認スクリプト (PowerShell 9 + bash 1) + Pester 25テスト、SLO/Error Budget、チケット分類(ITIL)、物理層、M365ポリシーJSON、Failover Runbook、ネットワーク切り分け証跡、CIS Benchmark マッピング" } },
             { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Fletフレームワークで作成した定型文テンプレート管理ツール" } },
             { "@type": "ListItem", "position": 4, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python", "description": "Tkinterで作成した付箋復元機能付きデスクトップアプリ" } },
             { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareApplication", "name": "掲示板アプリ", "applicationCategory": "WebApplication", "url": "https://github.com/ns7jp/post", "programmingLanguage": "PHP", "description": "PHP + MySQL によるユーザー登録・投稿・返信機能付き掲示板" } },
@@ -136,10 +136,10 @@
                         <img src="image/server-monitor.png" alt="サーバー監視ダッシュボードの画面" width="1600" height="859" loading="lazy" decoding="async">
                     </div>
                     <div class="intro-text">
-                        <h2>ITサポート・業務改善に近い順で紹介しています</h2>
-                        <p>まずSupport Toolkit、サーバー監視ダッシュボード、定型文管理、付箋アプリを見せ、PC・サーバー運用、問い合わせ対応、業務改善に活かせる力が先に伝わる構成にしています。</p>
-                        <p>各作品には使用技術・学習ポイント・具体的な使用例・制作時のトラブルと解決過程を記載し、問題の切り分けや手順化の姿勢が伝わるようにしています。</p>
-                        <p>各作品に「成果サマリー」と「ITサポート関連度」を付け、運用・ヘルプデスク・業務改善にどのようにつながる成果物かを短時間で確認できるようにしました。</p>
+                        <h2>主作品はLinuxサーバー構築・運用ラボです</h2>
+                        <p>Server Monitorで、設計資料、Ansible構成コード、Prometheus・Grafana・Loki監視、試験、障害注入、復旧を一つの案件として公開しています。</p>
+                        <p>実装した項目と実機で確認した項目を分け、未採録の試験はNOT RUNと明記しています。</p>
+                        <p>Windows / M365 / AD、PowerShell、Cloud、開発作品は、主作品の後に確認できる補助成果として掲載しています。</p>
                     </div>
                 </div>
             </section>
@@ -147,12 +147,12 @@
             <!-- ===== 優先して見てほしい作品 ===== -->
             <section class="priority-works">
                 <div class="priority-card">
-                    <span class="priority-label">まず見てほしい成果物</span>
+                    <span class="priority-label">主作品：Server Monitor</span>
                     <div class="priority-links">
-                        <a href="#work-support-toolkit"><i class="fa-solid fa-folder-tree"></i> Support Toolkit</a>
-                        <a href="#work-monitor"><i class="fa-solid fa-server"></i> サーバー監視</a>
-                        <a href="#work-teikei"><i class="fa-solid fa-message"></i> 定型文管理</a>
-                        <a href="#work-notes"><i class="fa-solid fa-note-sticky"></i> 付箋アプリ</a>
+                        <a href="#work-monitor"><i class="fa-solid fa-server"></i> 作品詳細</a>
+                        <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/architecture.md#構成図" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-diagram-project"></i> 構成図</a>
+                        <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check"></i> 実測証跡</a>
+                        <a href="demo.html" aria-label="実測スクリーンショットと復旧ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video"></i> 2分15秒 実測証跡リプレイ</a>
                     </div>
                 </div>
             </section>
@@ -163,8 +163,8 @@
                 <div class="filter-tabs">
                     <!-- data-filter属性の値はJSで参照され、対応するdata-categoryの作品だけ表示される -->
                     <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="support">Support Toolkit</button>
                     <button class="filter-btn" data-filter="infra">Infrastructure</button>
+                    <button class="filter-btn" data-filter="support">Support Toolkit</button>
                     <button class="filter-btn" data-filter="python">Python</button>
                     <button class="filter-btn" data-filter="php">PHP</button>
                     <button class="filter-btn" data-filter="html">HTML/CSS</button>
