@@ -34,7 +34,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 3. `project-brief.html`
    - 主案件の目的、担当範囲、工程、成果物、設計判断、未実測の境界を確認します。
 4. `evidence-demo.html`
-   - 日付・環境・commit付きの最新実測結果と、PASS / NOT RUNの境界を確認します。
+   - 日付・環境・commit付きの完了済み実測結果と、PASS / NOT RUNの境界を確認します。
 5. `demo.html`
    - 2026年8月18日・19日の保存済み証跡を再構成した2分15秒の補助リプレイと、元証跡への導線を確認します。
 6. `me.html`

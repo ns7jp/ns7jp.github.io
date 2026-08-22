@@ -276,6 +276,8 @@
 </head>
 <body>
 
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
     <div class="resume-toolbar">
         <span class="toolbar-info">
             <i class="fa-solid fa-circle-info"></i>
@@ -290,7 +292,7 @@
         </span>
     </div>
 
-    <main class="resume" id="main" lang="ja">
+    <main class="resume" id="main" lang="ja" tabindex="-1">
         <header class="resume-header">
             <div>
                 <h1 class="resume-name">島田 則幸<span class="en">Noriyuki Shimada</span></h1>
@@ -400,11 +402,11 @@
                         </tr>
                         <tr>
                             <td class="task">単体・結合・Security試験</td>
-                            <td class="evidence"><a href="evidence-demo.html">Evidence Digest</a> / <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md">2026-08-22 Full-stack E2E 23/23 PASS</a>。2026-08-19の11/21 PASSは履歴として保持</td>
+                            <td class="evidence"><a href="evidence-demo.html">Evidence Digest</a> / <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md">2026-08-22 Full-stack E2E 23/23 PASS</a>（実行対象 <code>f4ea319</code>）。2026-08-19の11/21 PASSは履歴として保持</td>
                         </tr>
                         <tr>
                             <td class="task">監視 / ログ / 一次切り分け</td>
-                            <td class="evidence">Prometheus / Grafana / Loki / Alloy / Alertmanager。Linux上のcore 9 servicesと実データ、E2Eのlocal webhook FIRING / RESOLVEDを確認（Slack実配信は未実測）</td>
+                            <td class="evidence">Prometheus / Grafana / Loki / Alloy / Alertmanager。2026-08-22にcore 9 servicesと実データ、local webhook FIRING / RESOLVEDを確認（Slack実配信は未実測）</td>
                         </tr>
                         <tr>
                             <td class="task">障害注入 / 復旧 / 再発防止</td>

@@ -125,6 +125,7 @@
 
     <!-- ===== ページヒーロー（各ページ上部の見出しエリア） ===== -->
     <!-- インラインstyleで背景画像を直接指定（このページ専用の画像） -->
+    <main id="main" tabindex="-1">
     <section class="page-hero" style="background-image: url('image/me.jpg');">
         <!-- 背景画像の上に重ねる暗い半透明レイヤー（文字を読みやすくする） -->
         <div class="page-hero-overlay"></div>
@@ -138,7 +139,7 @@
 
     <!-- ===== メインコンテンツ ===== -->
     <!-- main要素でページの主要コンテンツ範囲を明示する -->
-    <main class="page-content" id="main" tabindex="-1">
+    <div class="page-content">
         <div class="container">
 
             <!-- ===== プロフィールセクション ===== -->
@@ -411,6 +412,7 @@
                 </div>
             </section>
         </div>
+    </div>
     </main>
 
     <!-- ===== フッター（全ページ共通） ===== -->

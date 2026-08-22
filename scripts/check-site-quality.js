@@ -10,9 +10,14 @@ function countMatches(text, pattern) {
   return Array.from(text.matchAll(pattern)).length;
 }
 
-function hasAttribute(tag, name, valuePattern) {
+function getAttribute(tag, name) {
   const match = tag.match(new RegExp(`\\b${name}=["']([^"']*)["']`, "i"));
-  return Boolean(match && (!valuePattern || valuePattern.test(match[1])));
+  return match ? match[1] : null;
+}
+
+function hasAttribute(tag, name, valuePattern) {
+  const value = getAttribute(tag, name);
+  return value !== null && (!valuePattern || valuePattern.test(value));
 }
 
 function stripIgnoredBlocks(html) {
@@ -31,9 +36,24 @@ for (const file of htmlFiles) {
 
   const mainCount = countMatches(html, /<main\b/gi);
   if (mainCount !== 1) failures.push(`${file}: expected exactly one <main>, found ${mainCount}`);
+  if (mainCount === 1) {
+    const mainTag = html.match(/<main\b[^>]*>/i)?.[0] || "";
+    if (!hasAttribute(mainTag, "tabindex", /^-1$/)) {
+      failures.push(`${file}: <main> requires tabindex="-1" for skip-link focus`);
+    }
+  }
 
   const h1Count = countMatches(html, /<h1\b/gi);
   if (h1Count !== 1) failures.push(`${file}: expected exactly one <h1>, found ${h1Count}`);
+
+  if (mainCount === 1 && h1Count === 1) {
+    const mainOpen = html.search(/<main\b/i);
+    const mainClose = html.search(/<\/main>/i);
+    const h1 = html.search(/<h1\b/i);
+    if (h1 < mainOpen || h1 > mainClose) {
+      failures.push(`${file}: <h1> must be inside the <main> landmark`);
+    }
+  }
 
   const ids = Array.from(html.matchAll(/\bid=["']([^"']+)["']/gi), (match) => match[1]);
   const duplicates = [...new Set(ids.filter((id, index) => ids.indexOf(id) !== index))];
@@ -41,6 +61,28 @@ for (const file of htmlFiles) {
 
   for (const match of html.matchAll(/href=["']#([^"']+)["']/gi)) {
     if (!ids.includes(match[1])) failures.push(`${file}: same-page anchor #${match[1]} is missing`);
+  }
+
+  const anchorTags = Array.from(html.matchAll(/<a\b[^>]*>/gi), (match) => match[0]);
+  const skipLink = anchorTags.find((tag) => hasAttribute(tag, "class", /(?:^|\s)skip-link(?:\s|$)/i));
+  if (!skipLink) {
+    failures.push(`${file}: page requires a skip link`);
+  } else {
+    const skipHref = getAttribute(skipLink, "href");
+    if (!skipHref || !skipHref.startsWith("#")) {
+      failures.push(`${file}: skip link requires a same-page target`);
+    } else if (!ids.includes(skipHref.slice(1))) {
+      failures.push(`${file}: skip link target ${skipHref} is missing`);
+    }
+  }
+
+  for (const tag of anchorTags.filter((anchor) => hasAttribute(anchor, "aria-current", /^page$/i))) {
+    const href = getAttribute(tag, "href") || "";
+    const currentPath = href.split(/[?#]/)[0].replace(/^\//, "");
+    const expectedPath = file === "index.html" && currentPath === "" ? "index.html" : currentPath;
+    if (expectedPath !== file) {
+      failures.push(`${file}: aria-current="page" points to ${href || "an empty href"}`);
+    }
   }
 
   for (const match of html.matchAll(/<img\b[^>]*>/gi)) {

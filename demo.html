@@ -65,7 +65,7 @@
         <nav id="site-nav">
             <ul>
                 <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
-                <li class="active"><a href="works.html" aria-current="page"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li class="active"><a href="works.html" aria-current="location"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
                 <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
                 <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
                 <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
@@ -74,6 +74,7 @@
         </nav>
     </header>
 
+    <main id="main" tabindex="-1">
     <section class="page-hero demo-hero" style="background-image: url('image/server-monitor-evidence-replay-poster.png');">
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
@@ -84,13 +85,13 @@
         </div>
     </section>
 
-    <main class="page-content demo-content" id="main" tabindex="-1">
+    <div class="page-content demo-content">
         <div class="container">
             <section class="demo-intro">
                 <span class="case-label">2:15 / Captions / No autoplay</span>
                 <h2>構築済みサービス、監視画面、障害注入と13秒での復旧を短時間で確認</h2>
                 <p class="evidence-notice" role="note"><strong>この映像は実操作の連続録画ではありません。</strong>2026年8月18日・19日に保存した実測スクリーンショットとD-1復旧ログを、閲覧用に時系列で再構成したリプレイです。</p>
-                <p>最新の実測状況は<a href="evidence-demo.html">Evidence Digest</a>、案件全体は<a href="project-brief.html">Project Brief</a>で確認できます。2026年8月22日のFull-stack E2Eは別のterminal実測で、この映像の内容には含めていません。</p>
+                <p>完了済み実測と未実測範囲は<a href="evidence-demo.html">Evidence Digest</a>、案件全体は<a href="project-brief.html">Project Brief</a>で確認できます。2026年8月22日のFull-stack E2Eは別のterminal実測で、この映像の内容には含めていません。</p>
             </section>
 
             <section class="demo-player-section" aria-labelledby="demo-player-title">
@@ -160,12 +161,13 @@
                     <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-check"></i> 最新のEvidence Digest</a>
                     <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-18-local-observability.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-line"></i> 可観測性の実測記録</a>
                     <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-19-D-1.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-rotate"></i> D-1復旧ログ</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-terminal"></i> 2026-08-22 実terminal E2E</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/53e885742593c4f5d96b8a8038e234f9a69947e0/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-terminal"></i> 2026-08-22 実terminal E2E</a>
                     <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check"></i> 検証証跡台帳</a>
                     <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-video"></i> 実操作の収録ガイド</a>
                 </div>
             </section>
         </div>
+    </div>
     </main>
 
     <footer>
