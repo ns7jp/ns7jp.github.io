@@ -1,4 +1,23 @@
-# Monitoring Stack — Prometheus + Grafana + Loki + Promtail (Lab)
+# Monitoring Stack — Prometheus + Grafana + Loki + Promtail (Lab / アーカイブ)
+
+> ## ⚠ この構成はアーカイブです（2026-08-23）
+>
+> **Promtail は 2026-03-02 に EOL** となりました。主作品の
+> [server-monitor](https://github.com/ns7jp/server-monitor) は収集エージェントを
+> **Grafana Alloy** へ移行済みで、Docker socket も直接マウントせず、
+> GET / HEAD 限定の専用 proxy 経由に変更しています。
+>
+> このディレクトリは、そこへ至る前の**初期の学習作品**として履歴を残しているものです。
+> 現在の設計として提示しているものではありません。
+> 現行の構成はこちらを参照してください。
+>
+> | 現行 | 場所 |
+> | --- | --- |
+> | 監視スタック本体（Alloy 版） | [server-monitor `compose.yaml`](https://github.com/ns7jp/server-monitor/blob/main/compose.yaml) |
+> | 収集エージェントの移行理由 | [server-monitor README「ログ集約」](https://github.com/ns7jp/server-monitor#ログ集約) |
+> | 実測証跡 | [検証証跡台帳](https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md) |
+>
+> 以下は当時のままの記述です。
 
 自宅検証VMや評価Linux 1台にすぐ立てられる、**観測性 (Observability) の Metrics + Logs を網羅した最小構成スタック**です。`docker compose up -d` だけで Prometheus / Grafana / node_exporter / Loki / Promtail が起動し、Grafana を開けば
 
