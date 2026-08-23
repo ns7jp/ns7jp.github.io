@@ -123,8 +123,9 @@
                 <p class="overview-text">公共職業訓練「情報処理（Pythonエンジニア）コース」（2025年10月〜2026年1月）で習得した開発基礎に加え、自学で取り組むLinuxサーバー構築、Ansible、Docker、監視・ログ、障害復旧をご紹介します。<br>各技術はServer Monitor構築案件パックとSupport Toolkitで使用しています。</p>
                 <div class="evidence-boundary-strip" aria-label="スキルの証跡区分">
                     <span><strong>main統合済みE2E（2026-08-22）</strong> runtime <code>7622a9d</code>・23/23 PASS・2回目<code>changed=0</code>・11 containers・proxy GET / POST拒否 / Loki・D-1・3-volume restore</span>
+                    <span><strong>PR #77 CI（2026-08-23）</strong> disposable Ubuntuでcandidate <code>84e1492</code> → rollback <code>59aa88e</code>を<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">run 32611251044</a>でPASS</span>
                     <span><strong>過去の実測履歴</strong> Ansible 4 roles・監視core 9 services・D-1 RTO 13秒・通信障害</span>
-                    <span><strong>NOT RUN</strong> 構成commit／設定rollback rehearsal・Slack実配信・AWS apply / destroy・D-2・独立した管理端末と引き渡し対象ホスト</span>
+                    <span><strong>NOT RUN</strong> persistent hostでのrollback・72時間連続稼働・host再起動後・Slack実配信・AWS apply / destroy・D-2・独立した管理端末と引き渡し対象ホスト</span>
                 </div>
                 <p class="overview-text skills-evidence-link"><a href="evidence-demo.html">日時・環境・commit付きのEvidence Digestを見る <i class="fa-solid fa-arrow-right"></i></a></p>
             </section>
@@ -159,6 +160,7 @@
                                 <li>Linux 一次切り分け bash スクリプト（systemd / journalctl / load / disk / ss）</li>
                                 <li>Prometheus + Grafana + Loki等9サービス（記録済みcommitでWSL2 Ubuntu上の起動を確認）</li>
                                 <li>Ansible playbook（4 rolesのMoleculeに加え、使い捨てUbuntu 24.04 runnerで<code>site.yml</code>一括適用と2回目<code>changed=0</code>を実測。Dockerはrunnerへ事前導入済み）</li>
+                                <li>immutable git SHAによる配備・切り戻し（PR #77 CIの使い捨てrunnerでcandidate <code>84e1492</code>から前版<code>59aa88e</code>へrollbackし、revision・runtime manifest・loopback bind・Loki取り込みを再検証）</li>
                                 <li>AWS VPC / Security Group構成コード（<code>fmt</code> / <code>init -backend=false</code> / <code>validate</code>まで。apply未実施）</li>
                                 <li>GitHub Actions による Docker Compose / promtool / Ansible / Terraform 検証</li>
                                 <li>systemdによる3-volumeバックアップ、SHA-256検証、別名volumeへのrestoreをE2Eで実測。別ホスト復元のD-2は未実施</li>

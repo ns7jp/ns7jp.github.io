@@ -362,7 +362,7 @@
                     <div class="work-item">
                         <span class="work-name">① Linux Server Build &amp; Operations Lab</span>
                         <span class="work-tag">Design / Ansible / Test / Monitoring / Recovery</span>
-                        <div class="work-desc">要件・設計・パラメータ・構築・試験・引き渡し・rollback・実機検証の10番号付き成果物。2026-08-22はruntime 7622a9dを使い捨てUbuntu 24.04 runnerでFull-stack E2E 23/23 PASSし、main 4a292026へ統合。独立した引き渡し対象ホストでの受け入れは未実測。</div>
+                        <div class="work-desc">要件・設計・パラメータ・構築・試験・引き渡し・rollback・実機検証の10番号付き成果物。2026-08-22はruntime 7622a9dを使い捨てUbuntu 24.04 runnerでFull-stack E2E 23/23 PASSし、main 4a292026へ統合。2026-08-23はPR #77 CIでgit rollbackをPASS。独立した引き渡し対象ホストでの受け入れは未実測。</div>
                     </div>
                     <div class="work-item">
                         <span class="work-name">② Evidence Digest</span>
@@ -414,7 +414,7 @@
                         </tr>
                         <tr>
                             <td class="task">引き渡し / rollback</td>
-                            <td class="evidence">運用開始条件・既知制約・引き渡し・切り戻し手順を作成（rollback実行はNOT RUN）</td>
+                            <td class="evidence"><a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044">PR #77 / run 32611251044</a>のdisposable Ubuntuでcandidate <code>84e1492</code> → 前版<code>59aa88e</code>をPASS。persistent hostでのrollback・72時間稼働／再起動後、Slack、AWS、D-2はNOT RUN</td>
                         </tr>
                     </tbody>
                 </table>

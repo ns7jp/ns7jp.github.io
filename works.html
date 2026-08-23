@@ -148,6 +148,7 @@
                         <p>構築案件パック、実測証跡、障害復旧、サーバー監視を主成果として先に掲載し、Support Toolkitと開発学習作品は補助成果として区別しています。</p>
                         <p>主案件では「設計書やコードがあること」と「実際に動かして確認したこと」を分け、日時・対象commit・環境・コマンド・結果があるものだけを実測済みとしています。</p>
                         <p>2026年8月22日には、runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、Ansible一括適用・2回目冪等性・11 containers・Docker API proxy・network/UFW・障害復旧・3 volumes復元を含むFull-stack E2E 23/23を記録しました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。</p>
+                        <p>2026年8月23日は、PR #77の<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044</a>で、disposable Ubuntuの<code>/opt/server-monitor</code>へcandidate <code>84e1492</code>をimmutable git SHAで配備後、前版<code>59aa88e</code>へ切り戻してPASSしました。これはPR branch上のCI実測で、persistent hostまたはmain統合の実績ではありません。</p>
                         <p>学習作品では、使用技術、制作中の問題、解決過程を説明しています。想定シナリオやサンプル出力は、実務実績と誤解されないよう明記しています。</p>
                     </div>
                 </div>
@@ -171,8 +172,9 @@
             <section class="works-evidence-boundary" aria-label="主案件の証跡範囲">
                 <div class="evidence-boundary-strip">
                     <span><strong>main統合済みE2E（2026-08-22）</strong>runtime <code>7622a9d</code>で23/23 PASS。2回目changed=0、11 containers、proxy GET / POST拒否 / Loki、network/UFW、D-1 1秒、3 volumes復元</span>
+                    <span><strong>PR #77 CI（2026-08-23）</strong>run <code>32611251044</code>でcandidate <code>84e1492</code> → exact rollback <code>59aa88e</code> PASS（disposable Ubuntu）</span>
                     <span><strong>過去commitで実測</strong>Ansible 4 roles、core 9 services、Grafana / Loki、D-1 RTO 13秒、通信障害</span>
-                    <span><strong>NOT RUN</strong>構成commit／設定rollback rehearsal、Slack実配信、AWS apply / destroy、D-2、独立管理端末・引き渡し対象host、長期稼働・再起動後</span>
+                    <span><strong>NOT RUN</strong>persistent hostでのrollback・72時間連続稼働・host再起動後、Slack実配信、AWS apply / destroy、D-2、独立管理端末・引き渡し対象host</span>
                 </div>
             </section>
 
@@ -250,7 +252,7 @@
                             <h3>Linux Server Build &amp; Operations Lab</h3>
                             <div class="work-summary">
                                 <div><span>目的</span><strong>「確認 → 適用 → 観測 → 数値化」を一通り見せる運用Lab</strong></div>
-                                <div><span>成果</span><strong>構築案件10番号付き成果物 + Full-stack E2E 23/23 + 履歴証跡</strong></div>
+                                <div><span>成果</span><strong>構築案件10番号付き成果物 + Full-stack E2E 23/23 + Git rollback CI PASS + 履歴証跡</strong></div>
                                 <div><span>活用</span><strong>設計・自動化・試験・稼働確認・障害復旧・引き渡し</strong></div>
                             </div>
                             <div class="support-fit high">
@@ -264,7 +266,7 @@
                                 <span class="num-chip"><strong>2</strong>Grafana ダッシュボード</span>
                                 <span class="num-chip"><strong>3</strong>DR シナリオ</span>
                             </div>
-                            <p>「設計 → 構築 → 試験 → 監視 → 切り分け → 復旧 → 引き渡し」を一つの導線にまとめています。2026年8月17〜19日の履歴証跡に加え、8月22日はDocker導入済みの使い捨てUbuntu 24.04 runnerでruntime <code>7622a9d</code>のFull-stack E2E 23/23を記録し、main <code>4a292026</code>へ統合しました。AWS VPC/Terraform、年次DRドリル、架空Postmortem、Windows/M365は補助的な設計・サンプルであり、実運用実績ではありません。</p>
+                            <p>「設計 → 構築 → 試験 → 監視 → 切り分け → 復旧 → 引き渡し」を一つの導線にまとめています。2026年8月17〜19日の履歴証跡に加え、8月22日はDocker導入済みの使い捨てUbuntu 24.04 runnerでruntime <code>7622a9d</code>のFull-stack E2E 23/23を記録し、main <code>4a292026</code>へ統合しました。8月23日はPR #77のrun <code>32611251044</code>でcandidate <code>84e1492</code>から前版<code>59aa88e</code>へのgit-mode rollbackを使い捨てrunner上でPASSしました。AWS VPC/Terraform、年次DRドリル、架空Postmortem、Windows/M365は補助的な設計・サンプルであり、実運用実績ではありません。</p>
                             <ul class="work-points">
                                 <li><strong>VLAN論理構成図 + 物理層構成図</strong>を Infra Lab と物理層ドキュメントで対にして掲載。</li>
                                 <li><strong>Cloud Network Lab</strong>では AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail を整理。</li>

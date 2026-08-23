@@ -110,8 +110,8 @@
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                     <div>
-                        <strong>最新のruntime実測は2026年8月22日の使い捨てrunner E2E</strong>
-                        <p>runtime最終commit <code>7622a9d</code>をDocker導入済みのdisposable Ubuntu 24.04 runnerで検証し、23 / 23 IDがPASSしました。証跡文書commit <code>cf9419b</code>を含むPR #75はmain merge <code>4a292026</code>へ統合済みです。2026年8月19日の全体11 / 21 PASSとD-1 13秒は、当時の対象commitに対する履歴として区別しています。</p>
+                        <strong>2026年8月23日にgit-mode rollback rehearsalを追加実測</strong>
+                        <p><a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">PR #77 / Actions run 32611251044</a>のdisposable Ubuntuでcandidate <code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code>を配備・検証後、前版<code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code>へ切り戻してPASSしました。PR branch上の結果で、main統合済みまたはpersistent hostでの実績ではありません。8月22日の23 / 23 E2Eと8月19日の履歴は、そのまま別の対象commitに紐づけて保持しています。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
@@ -139,8 +139,8 @@
                     </article>
                     <article class="brief-summary-card">
                     <span>完了済み証跡</span>
-                    <h3>2026-08-22 E2E 23 / 23 PASS</h3>
-                    <p>使い捨てUbuntu 24.04 runnerで、構築・冪等性・11 containersの起動・local webhook通知経路・Docker API proxyのGET成功／POST拒否／Loki到達・network / UFW・障害復旧・3-volume restoreまで確認しました。構成commit／設定rollback rehearsalと独立した引き渡し対象ホスト等はNOT RUNです。</p>
+                    <h3>E2E 23 / 23 + Git rollback PASS</h3>
+                    <p>8月22日の使い捨てUbuntu E2Eで構築・冪等性・11 containers・network / UFW・障害復旧・3-volume restoreを確認。8月23日のPR #77 CIではcandidate <code>84e1492</code>から前版<code>59aa88e</code>へのgit rollbackを確認しました。persistent host、Slack、AWS、D-2、72時間稼働・再起動後はNOT RUNです。</p>
                     </article>
                 </div>
             </section>
@@ -228,7 +228,7 @@
                                 <td>引き渡し</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/07-handover-checklist.md" target="_blank" rel="noopener noreferrer">引き渡しチェックリスト</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/08-change-rollback-plan.md" target="_blank" rel="noopener noreferrer">変更・ロールバック計画</a></td>
                                 <td>運用開始条件、既知の制約、切り戻し後の確認方法</td>
-                                <td><span class="status-pill validated">手順作成済み</span></td>
+                                <td><span class="status-pill measured">PR #77 CI<br>git rollback PASS</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -283,13 +283,14 @@
                             <li>Docker API proxyのGET成功・POST拒否と、proxyが取得した固有Nginx logのAlloy経由Loki到達を確認。GETの読取権限は残るため、完全なleast privilegeではありません。</li>
                             <li>runner内のnetwork / UFWを検証し、D-1を1秒で復旧。</li>
                             <li>Prometheus・Grafana・Lokiの3 volumeをbackup / restoreし、Full-stack E2E 23 / 23 IDをPASS。</li>
+                            <li>PR #77のrun <code>32611251044</code>でcandidate <code>84e1492</code>を配備・検証後、前版<code>59aa88e</code>へrollbackし、revisionとruntimeを再検証。</li>
                             <li>履歴：2026年8月19日は全体11 / 21 PASS、D-1 RTO 13秒。最新値とは分けて保存。</li>
                         </ul>
                     </article>
                     <article class="architecture-notes">
                         <h3>まだ実測していないこと</h3>
                         <ul>
-                            <li>構成commit／設定を前版へ戻すrollback rehearsal。</li>
+                            <li>persistent hostでのrollback、72時間連続稼働、host再起動後の確認。</li>
                             <li>AlertmanagerからSlackへの実配信。</li>
                             <li>AWS apply / destroyとD-2ホスト障害。</li>
                             <li>独立した管理端末と引き渡し対象ホストでの構築・疎通・運用。</li>

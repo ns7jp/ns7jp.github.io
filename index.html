@@ -225,6 +225,11 @@
                     <p>runtime最終commit <code>7622a9d</code>を、Docker導入済みの使い捨てrunnerで検証。<code>site.yml</code>の2回目<code>changed=0</code>、core 10 services＋CI用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・Loki到達を確認しました。証跡文書<code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。</p>
                 </div>
                 <div class="summary-card">
+                    <span class="summary-label">PR #77 CI / 2026-08-23</span>
+                    <h3>Git SHA rollback rehearsal PASS</h3>
+                    <p>使い捨てUbuntu runnerへcandidate <code>84e1492</code>をimmutable git SHAで配備・検証し、前版<code>59aa88e</code>へ切り戻してrevisionとruntimeを再検証しました。<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044</a>の結果で、main統合済みとは扱いません。</p>
+                </div>
+                <div class="summary-card">
                     <span class="summary-label">Recovery / Restore</span>
                     <h3>D-1 RTO 1秒・3 volume復元</h3>
                     <p>runner内ネットワーク、UFW・待受・SSH tunnel、3 volumeのbackup / restore、ローカルwebhookのFIRING / RESOLVEDを実測しました。ローカルwebhookはSlack実配信ではありません。</p>
@@ -232,13 +237,15 @@
             </div>
             <div class="evidence-boundary-strip" aria-label="証跡の現在・履歴・未実測の区分">
                 <span><strong>main統合済みE2E</strong> runtime <code>7622a9d</code>・23 / 23 PASS・2回目changed=0・11 containers・proxy GET / POST拒否 / Loki・D-1 1秒・3 volume restore</span>
+                <span><strong>PR #77 CI</strong> run <code>32611251044</code>・disposable Ubuntu・candidate <code>84e1492</code> → rollback <code>59aa88e</code> PASS</span>
                 <span><strong>履歴（2026-08-19）</strong> WSL2で11 / 21 PASS・D-1 RTO 13秒。現在のE2E結果とは分けて掲載</span>
-                <span><strong>NOT RUN</strong> 構成commit／設定rollback rehearsal・Slack実配信・独立した管理端末／引き渡し対象ホスト・AWS apply / destroy・D-2</span>
+                <span><strong>NOT RUN</strong> persistent hostでのrollback・72時間連続稼働／host再起動後・Slack実配信・独立した管理端末／引き渡し対象ホスト・AWS apply / destroy・D-2</span>
             </div>
             <div class="summary-actions">
                 <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要を見る</a>
                 <a href="demo.html" class="btn btn-secondary"><i class="fa-solid fa-video"></i> 2分15秒デモ</a>
                 <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> Full-stack E2E原本</a>
+                <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-rotate-left"></i> Git rollback CI</a>
                 <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
             </div>
         </div>
