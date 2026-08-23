@@ -23,15 +23,17 @@
 | 2 | [Evidence Digest](https://ns7jp.github.io/evidence-demo.html) | 日時・環境・commit付きの実測結果、失敗、未実施範囲 |
 | 3 | [2分15秒 証跡リプレイ](https://ns7jp.github.io/demo.html) | 2026年8月18日・19日の実測画面とD-1ログを時系列に再構成した閲覧用デモ |
 | 4 | [Full-stack E2E 23/23](https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md) | runtime `7622a9d`、使い捨てUbuntu 24.04 runnerでの構築・冪等性・11 containers・Docker API proxy・復旧・3 volumes復元。main `4a292026`へ統合済み |
-| 5 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、構築・運用スキル、主成果物 |
-| 6 | [Server Build Lab](https://ns7jp.github.io/infra-lab.html) | 要件から引き渡しまでの10番号付き成果物、監視、復旧、補助Lab |
+| 5 | [Git rollback rehearsal](https://github.com/ns7jp/server-monitor/actions/runs/32611251044) | PR #77の使い捨てUbuntu runnerで、candidate `84e1492`から前版`59aa88e`へのimmutable git SHA切り戻しをPASS。main統合済みとは扱いません |
+| 6 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、構築・運用スキル、主成果物 |
+| 7 | [Server Build Lab](https://ns7jp.github.io/infra-lab.html) | 要件から引き渡しまでの10番号付き成果物、監視、復旧、補助Lab |
 
 ### 証跡の境界
 
 - **作成・実装済み:** 要件、設計、パラメータ、構築コード、試験仕様、引き渡し、変更・ロールバック、実機検証手順
 - **2026年8月17〜19日の履歴として実測:** Ansible 4 roles、監視9 services、Grafana実データ、Lokiログ、D-1復旧（RTO 13秒）、二セグメント通信障害
 - **2026年8月22日のE2Eで実測（runtime `7622a9d`）:** 使い捨てUbuntu 24.04 runnerで23/23 PASS。`site.yml`初回一括適用、2回目`changed=0`、core 10 services + CI専用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・固有Nginx logのAlloy経由Loki到達、認証、runner内network/UFW、synthetic alertのlocal webhook FIRING/RESOLVED、D-1自動復旧（RTO 1秒）、別名3 volumesへのchecksum付きrestore。証跡docs `cf9419b`を含むPR #75はmain merge `4a292026`へ統合済み
-- **NOT RUN:** 構成commit / 設定rollback rehearsal、Slack実配信、AWS `apply / destroy`・実費・Security Group/NACL、D-2、独立した管理端末・引き渡し対象host・組織DNSを含むnetwork検証、長期稼働・host再起動後・production traffic
+- **2026年8月23日のCIで実測（PR #77 / [Actions run 32611251044](https://github.com/ns7jp/server-monitor/actions/runs/32611251044)）:** disposable Ubuntu runnerの`/opt/server-monitor`へimmutable git SHAでcandidate `84e149254d463a8a27a4cabcd09efa4504d1b47e`を配備・検証後、前版`59aa88ed1c8ccb7ba188909f0e079b834e9126c7`へ切り戻してPASS。revision marker、running-container manifest、app container強制置換、stale file除去、loopback bind、Loki取り込みまで一致を確認。PR branch上の結果であり、main統合済みとは表現しません
+- **NOT RUN:** persistent hostでのrollback・72時間連続稼働・host再起動後、Slack実配信、AWS `apply / destroy`・実費・Security Group/NACL、D-2、独立した管理端末・引き渡し対象host・組織DNSを含むnetwork検証、production traffic
 
 E2E runnerにはDockerが事前導入済みだったため、最小OSからDockerを導入した実績とは表現しません。local webhookのsynthetic alert試験とD-1障害注入は別の検証であり、いずれもSlack実配信を示しません。runtime実測commit、結果を転記したdocs commit、main merge commitを分け、後続の文書変更をruntime検証へ読み替えません。
 

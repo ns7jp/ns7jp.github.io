@@ -110,8 +110,8 @@
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left"></i>
                     <div>
-                        <strong>最新のruntime実測は2026年8月22日の使い捨てrunner E2Eです</strong>
-                        <p><a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E証跡</a>では、runtime最終commit <code>7622a9d</code>をDocker導入済みのdisposable Ubuntu 24.04 runner上で検証し、23 / 23 IDがPASSしました。証跡文書commit <code>cf9419b</code>を含むPR #75はmain merge <code>4a292026</code>へ統合済みです。2026年8月17〜19日のMolecule・WSL2・D-1記録は、当時の対象commitに対する履歴として区別して掲載します。</p>
+                        <strong>最新の追加実測は2026年8月23日のgit-mode rollback rehearsalです</strong>
+                        <p><a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">PR #77 / Actions run 32611251044</a>で、disposable Ubuntu runnerの<code>/opt/server-monitor</code>へcandidate <code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code>をimmutable git SHAで配備・検証し、前版<code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code>へ切り戻してPASSしました。これはPR branch上のCI実測であり、main統合済みまたはpersistent hostの実績ではありません。2026年8月22日の23 / 23 E2Eと8月17〜19日の履歴も、それぞれの対象commitに紐づけて保持しています。</p>
                     </div>
                 </div>
                 <div class="evidence-legend" aria-label="証跡ステータスの凡例">
@@ -127,6 +127,11 @@
                     <h2 class="heading-text" id="snapshot-title">Evidence Snapshot</h2>
                 </div>
                 <div class="metric-grid">
+                    <a class="metric-card" href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">
+                        <span class="metric-value">SHA → SHA</span>
+                        <strong>Git rollback PASS</strong>
+                        <small><code>84e1492</code> → <code>59aa88e</code>／run 32611251044</small>
+                    </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">23 / 23</span>
                         <strong>Full-stack E2E</strong>
@@ -169,6 +174,16 @@
                     <article class="evidence-step">
                         <span class="step-index">01</span>
                         <div>
+                            <span class="status-pill measured">CI実測済み</span>
+                            <h3>candidateから前版のexact SHAへrollback</h3>
+                            <p>candidateを配備・検証後、前版SHAへ切り戻し、revision markerとrunning-container manifestの一致、app containerの強制置換、stale file除去、loopback bind、Loki取り込みを再確認しました。対象はdisposable Ubuntu runnerで、persistent hostではありません。</p>
+                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-23</dd></div><div><dt>candidate</dt><dd><code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code></dd></div><div><dt>rollback</dt><dd><code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code></dd></div></dl>
+                            <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </article>
+                    <article class="evidence-step">
+                        <span class="step-index">02</span>
+                        <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>使い捨てUbuntuへsite.ymlを2回適用</h3>
                             <p>Docker導入済みのdisposable Ubuntu 24.04 runnerへ<code>site.yml</code>を初回適用し、同じplaybookの2回目が<code>changed=0</code>になることを確認しました。Docker自体の新規導入検証ではありません。</p>
@@ -177,7 +192,7 @@
                         </div>
                     </article>
                     <article class="evidence-step">
-                        <span class="step-index">02</span>
+                        <span class="step-index">03</span>
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>core 10 servicesとCI webhook sinkを起動</h3>
@@ -187,7 +202,7 @@
                         </div>
                     </article>
                     <article class="evidence-step">
-                        <span class="step-index">03</span>
+                        <span class="step-index">04</span>
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>Docker API proxyをread-onlyで検証</h3>
@@ -197,7 +212,7 @@
                         </div>
                     </article>
                     <article class="evidence-step">
-                        <span class="step-index">04</span>
+                        <span class="step-index">05</span>
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>runner内のnetwork / UFWを確認</h3>
@@ -207,7 +222,7 @@
                         </div>
                     </article>
                     <article class="evidence-step">
-                        <span class="step-index">05</span>
+                        <span class="step-index">06</span>
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>D-1を1秒で復旧し、3 volumeをrestore</h3>
@@ -273,7 +288,7 @@
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     <div>
                         <strong>23 / 23 PASSはruntime <code>7622a9d</code>を使い捨てrunnerで確認した判定です</strong>
-                        <p>このruntimeと証跡文書はmain <code>4a292026</code>へ統合済みです。ただし、構成commit／設定rollback rehearsal、Slack実配信、AWS apply / destroy、D-2ホスト障害、独立した管理端末と引き渡し対象ホスト、組織DNS、長期稼働は未実測です。Dockerもrunnerへ導入済みだったため、新規ホストへのDocker導入完了を示す結果ではありません。</p>
+                        <p>このruntimeと証跡文書はmain <code>4a292026</code>へ統合済みです。別途、PR #77のdisposable runnerではcandidate <code>84e1492</code>から前版<code>59aa88e</code>へのgit-mode rollbackをPASSしました。ただし、persistent hostでのrollback・72時間連続稼働・host再起動後、Slack実配信、AWS apply / destroy、D-2ホスト障害、独立した管理端末と引き渡し対象ホスト、組織DNSは未実測です。Dockerもrunnerへ導入済みだったため、新規ホストへのDocker導入完了を示す結果ではありません。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
