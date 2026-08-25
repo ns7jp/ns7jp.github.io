@@ -1,8 +1,12 @@
 # 面接 想定 FAQ — 自答メモ
 
+**2026-08-25 時点の注意**: このファイルは IT サポート・社内 SE 補助・インフラ運用支援トラックを想定して書いた自答メモで、**第一志望である Linux サーバー設計・構築の内容とは前提が異なります**（PowerShell を「一番」と答えている、物流現場を「〜2025」と書いている等）。応募先が第一志望トラックの場合は、[職務経歴書](https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md)・[採用ご担当者さま向け 1 ページ版](https://ns7jp.github.io/resume.html) を優先してください。**サイトの導線からは外していますが、URL を知っていれば引き続き読めます。**
+
 ITサポート・社内SE補助・インフラ運用支援の選考で問われやすい質問と、現時点での私（島田）の自答メモです。**自分用の整理**として書いていますが、応募先で読んでいただくことも想定し、誠実に書いています。
 
 > 経験は製造・物流 15 年以上 + 公共職業訓練 4 ヶ月（HTML/CSS, JavaScript, Python, PHP）と、本ポートフォリオに集約しています。現場のインフラ運用実務は未経験ですが、Lab で何をどこまで触れるかを公開しています。
+>
+> **現況（2026-08-25 追記）**: 2026-07 より人材派遣を通じて IT 企業でトライアル就業中です（Windows / Linux サーバー構築・AWS / Azure 構築の研修）。第一志望は Linux サーバー設計・構築で、本ファイルが前提とする IT サポート・運用支援は補助トラックです。
 
 ---
 
@@ -25,7 +29,7 @@ ITサポート・社内SE補助・インフラ運用支援の選考で問われ�
 ### 強み
 
 - **手順化と再現性に強い執着**: 製造・物流で「同じ作業を 240 回繰り返す」現場にいたので、再現性のない作業を放置できません。Support Toolkit の手順書 17 本・Pester テスト 25 本は、その表れです。
-- **物理層の感覚**: 機械の動作音、温度、振動の変化を「異常」として察知してきた経験があり、サーバールーム・配線・UPS のような物理側の運用は抵抗感が無く、むしろ得意領域に近いと考えています。
+- **物理層への抵抗の無さ**: 機械の動作音、温度、振動の変化を「異常」として察知してきた経験があり、サーバールーム・配線・UPS のような物理側の作業に抵抗はありません。**ただし物理層（スイッチ・ケーブル・ポート VLAN）の実務経験そのものはまだ無く**、「得意領域」ではなく「抵抗が無く、早く習熟できると考えている領域」です。
 - **トラブル時の落ち着き**: 製造現場の停止対応では「**まず影響範囲を切り出し、原因仮説を最大 3 つに絞る**」型を反復してきました。インシデント対応の型と相性が良いです。
 - **ドキュメントを書ききる体力**: 公開している手順書 17 本・運用 Runbook・Postmortem の文章量がそのまま証拠です。
 
@@ -66,13 +70,13 @@ Support Toolkit に[障害対応事例集（10 ケース）](./troubleshooting-c
 
 ## Q5. PowerShell / Linux / クラウドのうち、どれが一番触れるか
 
-**PowerShell** が一番手数があります。Support Toolkit の 8 本のスクリプトすべてを自分で書き、Pester のテストもセットで作りました。
+**書いたコード量では PowerShell が一番手数があります**（Support Toolkit の 8 本を自分で書き、Pester のテストもセット）。ただし**第一志望は Linux サーバー構築**で、そちらへの投入時間は増やしている最中です。
 
 - PowerShell: 業務シナリオを書ききれる（端末情報・AD/M365・セキュリティ）
-- Linux (bash): 一次切り分け（`linux-triage.sh`）と Ansible playbook のレベル。SSH / systemd / journalctl / cron / rsync の運用観点はメモ化済（[Linux Lab](https://ns7jp.github.io/linux-lab.html)）
+- Linux (bash): 一次切り分け（`linux-triage.sh`）、Ansible playbook の構築・冪等性確認、LVM・3 層構成・L2/L3 切り分けの演習を実行済み（[server-monitor](https://github.com/ns7jp/server-monitor)、[Linux Lab](https://ns7jp.github.io/linux-lab.html)）
 - AWS: VPC / Subnet / SG / Terraform validate まで。本番 apply の経験は無し（[Cloud Lab](https://ns7jp.github.io/cloud-lab.html)）
 
-「一番」と聞かれたら PowerShell ですが、「**現場でどれが必要か聞いて、まず触り始める**」のは抵抗ありません。
+書いた分量は PowerShell が多いですが、**志望順位で言えば Linux が一番**です。「現場でどれが必要か聞いて、まず触り始める」のは抵抗ありません。
 
 ---
 
@@ -84,7 +88,7 @@ Support Toolkit に[障害対応事例集（10 ケース）](./troubleshooting-c
 - 同じ確認漏れが繰り返される箇所をチェックリスト化し、現場全員に展開した
 - トラブル発生時に「**起きたこと / 影響 / やったこと / 残課題**」をホワイトボードで共有する型を導入した
 
-職業訓練で習得した PowerShell / Python / Flask / Markdown のおかげで、これらが「**コード + ドキュメント**」に置き換わりました。
+PowerShell / Python / Flask / Markdown のおかげで、これらが「**コード + ドキュメント**」に置き換わりました（PowerShell は現職での実務、Python / Flask / Markdown は公共職業訓練での習得です）。
 
 例: [`New-EndpointDailyReport.ps1`](../support-scripts/New-EndpointDailyReport.ps1) は、ヘルプデスクが朝に PC 状態を確認する手間を「**端末数 × 5 分**」から「**1 コマンド + 1 画面**」に圧縮するためのもの。同じ発想です。
 

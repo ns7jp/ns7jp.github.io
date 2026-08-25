@@ -128,7 +128,7 @@ Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画
 | Support Toolkit | `works.html#work-support-toolkit` | 16ガイド+README、確認スクリプト、想定ケースを補助成果としてまとめる |
 | サポート文書 | `support-docs/` | 16ガイド+README。架空ケース・計画・テンプレートを含み、実運用実績ではない |
 | 確認スクリプト | `support-scripts/` | PowerShell 9本 + bash 1本、純関数ライブラリとPesterテスト |
-| Monitoring Stack | `monitoring-stack/` | Prometheus + Grafana + node_exporter + **Loki + Promtail** の docker-compose 一式 + 4 アラート + 2 ダッシュボード |
+| Monitoring Stack（アーカイブ） | `monitoring-stack/` | Prometheus + Grafana + node_exporter + Loki + Promtail の docker-compose 一式。**2026-03 に Promtail が EOL となり、主作品側は Grafana Alloy へ移行済み**（[monitoring-stack/README.md](./monitoring-stack/README.md)）。現行構成は [server-monitor](https://github.com/ns7jp/server-monitor) |
 | Ansible Playbook | `ansible/` | Ubuntu ベースライン冪等化 (SSH / UFW / fail2ban / auditd / unattended-upgrades) |
 | 出力サンプル | `infra-evidence/` | 架空・未採録の`.sample.txt`。実測証跡としては扱わない |
 | 本番化差分 | `production-readiness.md` | Lab から本番運用へ足す監視、通知、認証、秘密情報、バックアップ、変更管理 |
@@ -245,7 +245,7 @@ ns7jp.github.io/
 │   ├── lib/Triage-Lib.ps1           ... 純関数化された判定ロジック
 │   └── tests/Triage-Lib.Tests.ps1   ... Pester ユニットテスト（25ケース）
 │
-├── monitoring-stack/        ... ★ Prometheus + Grafana + node_exporter + Loki + Promtail
+├── monitoring-stack/        ... ★ アーカイブ（学習用の初期構成。現行は server-monitor）
 │   ├── docker-compose.yml
 │   ├── prometheus/prometheus.yml
 │   ├── prometheus/alert.rules.yml

@@ -119,7 +119,7 @@ CIS Benchmark 本体は[CIS の Web サイト](https://www.cisecurity.org/benchm
 | CIS # | 項目 | 対応 | Ansible タスク / 備考 |
 |---|---|---|---|
 | 4.2.1.x | journald を **persistent** に | ◯ | playbook §6 で **`Storage=persistent`** を `journald.conf` に書き込み + `restart journald` |
-| 4.2.2.x | rsyslog のリモート送信 | ✗ | **未対応**（中央集約は [Loki + Promtail](../monitoring-stack/) で代替。SIEM 連携は本番化候補） |
+| 4.2.2.x | rsyslog のリモート送信 | ✗ | **未対応**（中央集約は [server-monitor の Loki + Alloy](https://github.com/ns7jp/server-monitor) で代替。`monitoring-stack/` の Loki + Promtail はアーカイブ済み。SIEM 連携は本番化候補） |
 | 4.2.3 | logrotate のパーミッション | ◯ | `pre_tasks` で `logrotate` をインストール（OS デフォルト設定を使用） |
 
 ---
