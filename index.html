@@ -3,7 +3,7 @@
 ========================================================================
   ファイル名 : index.html
   役割       : ポートフォリオサイトのトップページ
-  概要       : Linuxサーバー構築・運用の主案件、実測証跡、履歴書へ
+  概要       : Linuxサーバー構築・運用の主な作品、動作確認の記録、履歴書へ
                採用担当者を最短で案内するトップページ。
   初学者向けの読み方:
     1. head でSEO、CSS、共通スクリプト（js/main.js）の読み込みを確認する
@@ -25,7 +25,7 @@
 
     <!-- ===== SEO関連 meta情報 ===== -->
     <!-- 検索結果に表示される説明文（SEOで最重要） -->
-    <meta name="description" content="島田則幸（Noriyuki Shimada）のLinuxサーバー構築・運用ポートフォリオ。基本・詳細設計、パラメータ、Ansible構築、Prometheus監視、試験、障害復旧までを公開しています。">
+    <meta name="description" content="未経験からLinuxサーバー構築・運用を目指す島田則幸のポートフォリオ。学習用環境で作成した設定、手順、動作確認、監視、復旧の記録を公開しています。">
     <!-- 作者情報 -->
     <meta name="author" content="Noriyuki Shimada">
     <!-- 検索キーワード（補助的SEO） -->
@@ -45,17 +45,17 @@
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="Ubuntuの設計、Ansible構築、Docker、Prometheus / Grafana監視、試験、通信障害の切り分け・復旧までを一つの構築案件として公開中。">
+    <meta property="og:description" content="学習用のUbuntu環境で、サーバー設定、動作確認、監視、復旧を練習しました。実施済みと未実施を分けて公開しています。">
     <meta property="og:locale" content="ja_JP">
 
     <!-- ===== Twitter カード設定（X 上で大きな画像付きカード表示） ===== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="島田則幸のポートフォリオ">
-    <meta name="twitter:description" content="Linuxサーバーの設計・Ansible構築・試験・監視・障害復旧を一つの案件として公開しています。">
+    <meta name="twitter:description" content="Linuxサーバーの設定、動作確認、監視、復旧を学んだ記録です。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
 
     <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
     <title>Top | 島田則幸のポートフォリオ - Linuxサーバー構築・運用</title>
@@ -67,7 +67,7 @@
     <!-- ブラウザ標準スタイルをリセットするCSS。表示崩れを防ぐ目的で先に読み込む。 -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- このサイト独自のスタイルシート。色・レイアウト・アニメーションを定義。 -->
-    <link rel="stylesheet" href="css/style.css?v=20260826-1">
+    <link rel="stylesheet" href="css/style.css?v=20260826-2">
     <link rel="stylesheet" href="css/work-readiness.css?v=20260826-1">
     <!-- アイコンフォントFont Awesome（CDN経由）。<i class="fa-..."></i>でアイコンを表示できる。 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -151,12 +151,12 @@
         <nav id="site-nav">
             <ul>
                 <!-- li要素1つ＝メニュー項目1つ。aタグでリンク、iタグでアイコンを表示。 -->
-                <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
             </ul>
         </nav>
     </header>
@@ -176,10 +176,10 @@
                 <span class="line1">Linux Server</span>
                 <span class="line2">Build &amp; Operations</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">Ubuntuの設計、Ansible構築、試験、監視、復旧、引き渡しを、<br>「説明できる成果物」と「再現できる証跡」にまとめています</p>
+            <p class="hero-description animate-fade-in-delay">Linuxサーバーの設定、動作確認、監視、トラブル時の復旧を学んでいます。<br>実際に試したことと、まだ試していないことを分けて公開しています</p>
             <!-- CTA（Call To Action）ボタン群。採用担当者向けの主導線を3本に絞る。 -->
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 3分で案件概要</a>
+                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 3分で制作概要</a>
                 <a href="work-readiness.html" class="btn btn-outline"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
                 <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-id-card" aria-hidden="true"></i> 1ページ履歴書</a>
             </div>
@@ -197,9 +197,9 @@
                 <span>ROLE TARGET</span>
                 <strong>Linuxサーバー構築・運用</strong>
             </div>
-            <div class="role-strip-item"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><span>手順に沿った<br>構築・変更補助</span></div>
-            <div class="role-strip-item"><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i><span>試験・証跡<br>引き渡し資料</span></div>
-            <div class="role-strip-item"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>監視・ログ<br>一次切り分け</span></div>
+            <div class="role-strip-item"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><span>手順に沿った<br>サーバー設定の補助</span></div>
+            <div class="role-strip-item"><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i><span>動作確認・記録<br>引き継ぎ資料</span></div>
+            <div class="role-strip-item"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>状態とログの確認<br>最初の原因調査</span></div>
         </div>
     </section>
 
@@ -212,32 +212,32 @@
             <div class="value-grid">
                 <article class="value-card">
                     <i class="fa-solid fa-folder-tree" aria-hidden="true"></i>
-                    <h3>工程を一周した成果物</h3>
-                    <p>要件、基本・詳細設計、パラメータ、Ansible、試験、監視、復旧、引き渡し、ロールバックを工程順に確認できます。</p>
-                    <a href="project-brief.html">案件全体を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <h3>仕事の流れを一通り練習</h3>
+                    <p>何を作るか決めるところから、設定、動作確認、監視、復旧、引き継ぎまでを順番にまとめました。</p>
+                    <a href="project-brief.html">制作全体を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
                 <article class="value-card">
                     <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
-                    <h3>成功だけでなく境界を記録</h3>
-                    <p>実行日・環境・commit・コマンドを残し、FAIL、再試験、NOT RUNを分離。CI E2Eに加え、障害切り分け・DB復元・L2/L3演習も公開しています。</p>
-                    <a href="evidence-demo.html">実測証跡を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <h3>できたこと・まだのことを区別</h3>
+                    <p>実行日、使った環境、結果を記録しています。成功だけでなく、失敗から直した内容や未実施の項目も公開しています。</p>
+                    <a href="evidence-demo.html">確認記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
                 <article class="value-card">
                     <i class="fa-solid fa-people-group" aria-hidden="true"></i>
-                    <h3>現場での動き方を明示</h3>
-                    <p>手順とレビューのある範囲から担当し、操作前の採録、承認、事後確認、報告までを一つの作業として進めます。</p>
+                    <h3>安全な仕事の進め方を意識</h3>
+                    <p>最初は手順と確認者がいる作業を担当し、作業前の記録、承認、作業後の確認、報告を大切にします。</p>
                     <a href="work-readiness.html">仕事の進め方を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
             </div>
-            <div class="evidence-boundary-strip" aria-label="証跡の現在・履歴・未実測の区分">
-                <span><strong>主構成E2E / 2026-08-22</strong> Ubuntu runnerで23 / 23 PASS、2回目changed=0、監視・ログ、D-1、3-volume restore</span>
-                <span><strong>追加演習 / 2026-08-24〜25</strong> B-1〜B-4の構築・障害演習、EL9 Moleculeを採録。環境制約とSKIPも記録</span>
-                <span><strong>現在の境界</strong> 独立VM／実機、72時間稼働、Slack実配信、AWS apply / destroy、D-2、本番変更はNOT RUN</span>
+            <div class="evidence-boundary-strip" aria-label="確認済み・未実施の区分">
+                <span><strong>自動確認 / 2026-08-22</strong> 23項目すべて成功。設定の再実行、監視、ログ、復旧、バックアップからの復元を確認</span>
+                <span><strong>追加練習 / 2026-08-24〜25</strong> ディスク、通信、データベース復元などを練習。環境の都合で省いた項目も記録</span>
+                <span><strong>未実施</strong> 独立した仮想マシンや実機、72時間の連続稼働、実際のSlack通知、AWSへの配置、本番環境の変更</span>
             </div>
             <div class="summary-actions">
-                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 案件概要を見る</a>
-                <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence Digest</a>
-                <a href="work-readiness.html" class="btn btn-outline-dark"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Work Readiness</a>
+                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 制作概要を見る</a>
+                <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 確認結果を見る</a>
+                <a href="work-readiness.html" class="btn btn-outline-dark"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
             </div>
         </div>
     </section>
@@ -252,9 +252,9 @@
             <div class="summary-grid">
                 <div class="summary-card">
                     <span class="summary-label">01 / Overview</span>
-                    <h3>案件全体を3分で確認</h3>
+                    <h3>学習内容全体を3分で確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="project-brief.html">Project Brief</a><span>目的、担当範囲、工程、設計判断、実測結果、未完了範囲</span></li>
+                        <li><a href="project-brief.html">制作概要</a><span>目的、作ったもの、確認できたこと、まだできていないこと</span></li>
                         <li><a href="resume.html">1ページ履歴書</a><span>経歴、Linux構築スキル、主な成果物、学習計画</span></li>
                     </ul>
                 </div>
@@ -262,17 +262,17 @@
                     <span class="summary-label">02 / Evidence</span>
                     <h3>実際に動かした範囲を確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="demo.html">2分15秒の証跡リプレイ</a><span>実測スクリーンショットと復旧ログを短時間で確認</span></li>
-                        <li><a href="evidence-demo.html">Evidence Digest</a><span>実測値、対象commit、コマンド、失敗、NOT RUNを確認</span></li>
-                        <li><a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E原本</a><span>runtime <code>7622a9d</code>で23 / 23 PASS、main <code>4a292026</code>へ統合済み</span></li>
+                        <li><a href="demo.html">2分15秒の確認動画</a><span>実際の画面と復旧記録を短時間で確認</span></li>
+                        <li><a href="evidence-demo.html">確認結果のまとめ</a><span>実際に試した内容、失敗、未実施を確認</span></li>
+                        <li><a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">自動確認の原本</a><span>対象バージョンで23項目すべて成功した記録</span></li>
                     </ul>
                 </div>
                 <div class="summary-card">
                     <span class="summary-label">03 / Work Style</span>
                     <h3>入社後の動き方を確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="work-readiness.html">Work Readiness</a><span>実務想定ケース、変更管理、協働、AI利用の境界</span></li>
-                        <li><a href="work-readiness.html#gap-title">次の実機検証</a><span>独立VM／実機で埋める未実測項目と完了条件</span></li>
+                        <li><a href="work-readiness.html">仕事の進め方</a><span>最初に担当したい仕事、報告方法、AIの使い方</span></li>
+                        <li><a href="work-readiness.html#gap-title">次に行う実機確認</a><span>独立した仮想マシンや実機で、これから確かめること</span></li>
                     </ul>
                 </div>
             </div>
@@ -320,33 +320,33 @@
                     <div class="skill-icon">
                         <i class="fa-solid fa-server" aria-hidden="true"></i>
                     </div>
-                    <span class="status-pill measured">E2E 23 / 23 PASS</span>
-                    <h3>Linux Server Build</h3>
-                    <p>Ubuntu 24.04 runner上で、構築、network・UFW、待受、SSH tunnelまで一気通貫で検証</p>
+                    <span class="status-pill measured">自動確認 23 / 23 成功</span>
+                    <h3>Linuxサーバーの設定</h3>
+                    <p>一時的なUbuntu環境で、設定からネットワーク接続の確認までをまとめて実行</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-gears" aria-hidden="true"></i>
                     </div>
-                    <span class="status-pill measured">2回目 changed=0</span>
-                    <h3>Ansible / IaC</h3>
-                    <p>site.ymlと役割別roleで構成し、同一runner上の2回目実行で冪等性を確認</p>
+                    <span class="status-pill measured">2回目は変更なし</span>
+                    <h3>設定の自動化（Ansible）</h3>
+                    <p>同じ設定をもう一度実行しても、不要な変更が発生しないことを確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
                     </div>
-                    <span class="status-pill measured">11 containers起動</span>
-                    <h3>Monitoring / Logs</h3>
-                    <p>core 10 servicesとCI用webhook sinkを起動し、local通知に加えてDocker API proxyのread-only制御とLoki到達を確認</p>
+                    <span class="status-pill measured">11個のサービスを起動</span>
+                    <h3>サーバーの状態とログの監視</h3>
+                    <p>監視用サービスを起動し、異常と復旧の通知、ログが届くことを確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
                         <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
                     </div>
-                    <span class="status-pill measured">D-1 RTO 1秒</span>
-                    <h3>Recovery / Restore</h3>
-                    <p>D-1自動復旧と、Prometheus・Grafana・Lokiの3 volume backup / restoreを検証</p>
+                    <span class="status-pill measured">1秒で自動復旧</span>
+                    <h3>障害からの復旧</h3>
+                    <p>停止させたサービスの自動復旧と、監視データをバックアップから戻せることを確認</p>
                 </div>
             </div>
             <!-- スキル一覧ページへの誘導ボタン -->
@@ -369,8 +369,8 @@
                     <a href="project-brief.html">
                     <div class="work-image" style="background-image: url('image/server-monitor.png')">
                         <div class="work-overlay">
-                            <span class="work-category">Design → Handover</span>
-                            <h3>Linux Server Project Brief</h3>
+                            <span class="work-category">計画 → 設定 → 引き継ぎ</span>
+                            <h3>Linuxサーバー制作概要</h3>
                         </div>
                     </div>
                     </a>
@@ -379,8 +379,8 @@
                     <a href="evidence-demo.html">
                     <div class="work-image" style="background-image: url('image/grafana-dashboard.svg')">
                         <div class="work-overlay">
-                            <span class="work-category">Measured / CI / NOT RUN</span>
-                            <h3>Evidence Digest</h3>
+                            <span class="work-category">確認済み / 自動確認 / 未実施</span>
+                            <h3>確認結果のまとめ</h3>
                         </div>
                     </div>
                     </a>
@@ -389,8 +389,8 @@
                     <a href="work-readiness.html">
                     <div class="work-image" style="background-image: url('image/network-vlan.svg')">
                         <div class="work-overlay">
-                            <span class="work-category">Confirm → Change → Report</span>
-                            <h3>Work Readiness</h3>
+                            <span class="work-category">確認 → 作業 → 報告</span>
+                            <h3>仕事の進め方</h3>
                         </div>
                     </div>
                     </a>
@@ -398,7 +398,7 @@
             </div>
             <!-- 作品ページへの誘導ボタン -->
             <div class="section-link">
-                <a href="works.html" class="btn btn-light">主案件と補助作品を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                <a href="works.html" class="btn btn-light">主な作品と追加学習を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -427,16 +427,16 @@
             </div>
             <!-- フッター中央：各ページへのテキストリンク -->
             <div class="footer-nav">
-                <a href="me.html">About</a>
-                <a href="skills.html">Skills</a>
-                <a href="project-brief.html">Project Brief</a>
-                <a href="infra-lab.html">Server Build</a>
+                <a href="me.html">自己紹介</a>
+                <a href="skills.html">スキル</a>
+                <a href="project-brief.html">制作概要</a>
+                <a href="infra-lab.html">サーバー構築</a>
                 <a href="demo.html">Demo Replay</a>
-                <a href="evidence-demo.html">Evidence</a>
-                <a href="work-readiness.html">Work Style</a>
-                <a href="works.html">Works</a>
-                <a href="resume.html">Resume</a>
-                <a href="contact.html">Contact</a>
+                <a href="evidence-demo.html">動作確認の記録</a>
+                <a href="work-readiness.html">仕事の進め方</a>
+                <a href="works.html">作品</a>
+                <a href="resume.html">履歴書</a>
+                <a href="contact.html">連絡先</a>
             </div>
             <!-- フッター右：SNS・メールアイコン -->
             <div class="footer-social">
@@ -449,7 +449,7 @@
         <!-- 著作権表示。&copy;は©（コピーライト記号）の実体参照。 -->
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連リポジトリは、文書の整形だけでなく実装コードの生成にも AI（Claude）を使っています。範囲は <a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィール README</a> に開示しています。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行い、個人制作のため人によるレビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 

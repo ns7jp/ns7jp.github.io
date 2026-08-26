@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸のLinuxサーバー構築・運用Lab。Ubuntu、Ansible、Docker、監視、試験、通信障害の切り分けと復旧をまとめています。">
-    <title>Server Build Lab | 島田則幸のポートフォリオ</title>
+    <meta name="description" content="島田則幸が学習用Ubuntu環境で取り組んだLinuxサーバー構築・運用。設定、動作確認、監視、問題の原因調査、復旧の記録をまとめています。">
+    <title>Linuxサーバー構築・運用の学習 | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/infra-lab.html">
 
-    <meta property="og:title" content="Server Build Lab | 島田則幸のポートフォリオ">
+    <meta property="og:title" content="Linuxサーバー構築・運用の学習 | 島田則幸のポートフォリオ">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/infra-lab.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="Ubuntuサーバーの設計・Ansible構築・試験・監視・障害復旧を一つの案件としてまとめています。">
+    <meta property="og:description" content="学習用Ubuntu環境で行ったサーバー設定、動作確認、監視、復旧をまとめています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
 
     <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260826-1">
+    <link rel="stylesheet" href="css/style.css?v=20260826-2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -67,12 +67,12 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li class="active"><a href="infra-lab.html" aria-current="page"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
+                <li class="active"><a href="infra-lab.html" aria-current="page"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
             </ul>
         </nav>
     </header>
@@ -83,7 +83,7 @@
         <div class="page-hero-content">
             <h1 class="page-title">
                 <span class="title-en">Server Build &amp; Operations Lab</span>
-                <span class="title-jp">Linuxサーバー構築・運用Lab</span>
+                <span class="title-jp">Linuxサーバー構築・運用の学習</span>
             </h1>
         </div>
     </section>
@@ -91,34 +91,34 @@
     <div class="page-content infra-lab-content">
         <div class="container">
 
-            <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="infra-lab.html" class="active" aria-current="page"><i class="fa-solid fa-server" aria-hidden="true"></i> Build Overview</a>
-                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence</a>
-                <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux</a>
-                <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> Cloud</a>
-                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Monitoring Stack（アーカイブ）</a>
-                <a href="ansible/"><i class="fa-solid fa-gears" aria-hidden="true"></i> Ansible</a>
+            <nav class="lab-subnav" aria-label="サーバー学習内の案内">
+                <a href="infra-lab.html" class="active" aria-current="page"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux基本確認</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> AWS設計</a>
+                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> 監視の初期作品</a>
+                <a href="ansible/"><i class="fa-solid fa-gears" aria-hidden="true"></i> 自動構築の設定</a>
             </nav>
 
             <section class="lab-intro" id="build-overview">
-                <span class="case-label">Ubuntu / Ansible / Docker Scenario</span>
-                <h2>設計、構築、試験、監視、障害復旧までを1つの案件で見せるLab</h2>
-                <p>主作品の Server Monitor を Ubuntu 1台のサーバー構築案件と見立て、基本・詳細設計、パラメータ、Ansible構築、単体・結合試験、監視、二セグメント通信障害、引き渡しまでを工程順に整理しました。コードと実測結果は証跡台帳で明確に分けています。</p>
-                <p><strong>2026年8月22日:</strong> runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、<code>site.yml</code>初回一括適用、2回目<code>changed=0</code>、core 10 services + CI専用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・Loki到達、認証、runner内network/UFW、D-1 RTO 1秒、3 volumes復元を含むFull-stack E2E 23/23を採録しました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。synthetic alertのlocal webhook試験はSlack実配信とは別です。</p>
-                <p><strong>2026年8月23日:</strong> PR #77途中commitの<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044</a>で、disposable Ubuntuの<code>/opt/server-monitor</code>へcandidate <code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code>をimmutable git SHAで配備・検証後、前版<code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code>へrollbackしてPASSしました。PR #77自体は後にmainへmerge済みですが、このrunをmerge後mainで再実行した結果やpersistent hostでの実績ではありません。</p>
+                <span class="case-label">Ubuntuを使った個人学習</span>
+                <h2>設計、設定、動作確認、監視、復旧までを順番に練習</h2>
+                <p>主作品「Server Monitor」をUbuntuサーバー1台の学習課題として作りました。設定内容、構築手順、動作確認、監視、通信障害の調査、引き継ぎ資料を作業順にまとめ、作成しただけのものと実際に動かしたものを分けています。</p>
+                <p><strong>2026年8月22日:</strong> 自動テスト用の一時的なUbuntu環境で、構築、再実行、11個のサービス起動、通信制限、監視、復旧、バックアップからの復元を確認しました。23項目すべて合格しています。なお、Dockerはあらかじめ導入済みの環境です。</p>
+                <p><strong>2026年8月23日:</strong> 新しい版を確認したあと、前の版へ戻す「切り戻し」の自動テストにも合格しました。GitHub上に詳しい結果を公開していますが、継続利用する実機や仮想マシンではまだ実施していません。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
-                    <span><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Design</span>
-                    <span><i class="fa-solid fa-gears" aria-hidden="true"></i> Build</span>
-                    <span><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Test</span>
-                    <span><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Recovery</span>
+                    <span><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 設計</span>
+                    <span><i class="fa-solid fa-gears" aria-hidden="true"></i> 設定</span>
+                    <span><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認</span>
+                    <span><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> 復旧</span>
                 </div>
                 <div class="summary-actions" style="margin-top: 1.5rem;">
-                    <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 案件概要</a>
-                    <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> 構築案件パック</a>
-                    <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence Digest</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> E2E 23/23</a>
-                    <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Git rollback CI</a>
-                    <a href="demo.html" class="btn btn-outline-dark" aria-label="2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video" aria-hidden="true"></i> 2分15秒 証跡リプレイ</a>
+                    <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 制作概要</a>
+                    <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> 構築手順・確認資料</a>
+                    <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 23項目の自動確認</a>
+                    <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> 前の版へ戻すテスト</a>
+                    <a href="demo.html" class="btn btn-outline-dark" aria-label="2026年8月18日・19日の動作画面と復旧ログを再構成した2分15秒の記録動画を見る"><i class="fa-solid fa-video" aria-hidden="true"></i> 2分15秒の記録動画</a>
                     <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> 通信障害ラボ</a>
                 </div>
             </section>
@@ -126,62 +126,62 @@
             <section class="evidence-overview" aria-labelledby="build-status-title">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="build-status-title">Recorded Evidence Status</h2>
+                    <h2 class="heading-text" id="build-status-title">主な確認結果</h2>
                 </div>
                 <div class="metric-grid">
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">SHA → SHA</span>
-                        <strong>Git rollback PASS</strong>
-                        <small><code>84e1492</code> → <code>59aa88e</code>／2026-08-23</small>
+                        <span class="metric-value">前の版へ</span>
+                        <strong>切り戻しに合格</strong>
+                        <small>新しい版から指定した前の版へ／2026-08-23</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">23 / 23</span>
-                        <strong>Full-stack E2E</strong>
-                        <small>使い捨てUbuntu 24.04／2026-08-22</small>
+                        <strong>一連の自動テスト</strong>
+                        <small>一時的なUbuntu 24.04環境／2026-08-22</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">10 + 1</span>
-                        <strong>containers起動</strong>
-                        <small>core 10 services＋CI webhook sink</small>
+                        <strong>サービスを起動</strong>
+                        <small>監視用10個＋通知確認用1個</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">3 checks</span>
-                        <strong>Docker API proxy</strong>
-                        <small>GET成功／POST拒否／Loki到達</small>
+                        <span class="metric-value">3項目</span>
+                        <strong>情報は読取のみ許可</strong>
+                        <small>読取成功／書込拒否／ログ到達</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-17-molecule.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">4 roles</span>
-                        <strong>Ansible実測</strong>
-                        <small>適用・冪等性・verify／2分42秒</small>
+                        <span class="metric-value">4種類</span>
+                        <strong>自動設定を確認</strong>
+                        <small>設定・再実行・確認／2分42秒</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-18-local-observability.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">9 services</span>
-                        <strong>監視スタック起動</strong>
-                        <small>Grafana実データ／Lokiログ103行</small>
+                        <span class="metric-value">9個</span>
+                        <strong>監視サービスを起動</strong>
+                        <small>監視画面へ実データ／ログ103行</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/drills/logs/2026-08-19-D-1.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">13 sec</span>
-                        <strong>D-1復旧</strong>
-                        <small>目標RTO 5分以内／PASS</small>
+                        <span class="metric-value">13秒</span>
+                        <strong>同じ環境で復旧</strong>
+                        <small>目標5分以内／合格</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">9 / 18</span>
-                        <strong>必須試験PASS</strong>
-                        <small>target cc7e478／全体11 / 21 PASS</small>
+                        <strong>当時の必須確認に合格</strong>
+                        <small>全体は11 / 21項目に合格</small>
                     </a>
                 </div>
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
                     <div>
-                        <strong>完了済みE2Eと履歴証跡を分けて掲載</strong>
-                        <p>PR #77のgit rollback PASSはcandidate <code>84e1492</code>と前版<code>59aa88e</code>に対する2026年8月23日のdisposable runner実測です。23/23、11 containers、Docker API proxyはruntime <code>7622a9d</code>に対する2026年8月22日の使い捨てrunner実測です。4 roles、9 services、D-1 13秒、必須9/18・全体11/21は2026年8月17〜19日の対象commitに残る履歴です。公開中の2分15秒デモも8月18日・19日の画面と13秒のD-1ログを再構成したリプレイで、連続操作の録画ではありません。</p>
+                        <strong>新しい結果と過去の結果を分けて掲載</strong>
+                        <p>23項目の自動テストと前の版へ戻すテストは、2026年8月22日・23日の一時環境での結果です。監視サービス9個の起動と13秒での復旧は8月17〜19日の結果です。2分15秒の動画も当時の画面とログを編集したもので、連続した操作録画ではありません。詳しいコードの版と実行番号はリンク先に残しています。</p>
                     </div>
                 </div>
                 <div class="status-callout pending" role="note">
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
-                        <strong>E2Eの環境制約と未実測範囲</strong>
-                        <p>runnerにはDockerが事前導入済みです。persistent hostでのrollback、最小OSからのDocker導入、独立した管理端末・引き渡し対象host・組織DNSでのnetwork検証、Slack実配信、AWS apply / destroy・実費・Security Group/NACL、D-2、72時間連続稼働・host再起動後・production trafficは未実測です。local webhookとD-1は別の試験であり、どちらもSlack配信を示しません。</p>
+                        <strong>まだ実施していない範囲</strong>
+                        <p>テスト環境にはDockerが最初から入っていました。何も入っていないOSからの構築、継続利用する実機や仮想マシン、別の管理端末からの接続、実際のSlack通知、AWS上での作成と削除、別サーバーへの復旧、72時間の連続動作、本番環境での利用は未実施です。</p>
                     </div>
                 </div>
             </section>
@@ -189,68 +189,68 @@
             <section class="brief-section" aria-labelledby="deliverables-title">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="deliverables-title">Build Package — 10番号付き成果物</h2>
+                    <h2 class="heading-text" id="deliverables-title">作成した10種類の資料</h2>
                 </div>
                 <ol class="brief-flow build-package-flow">
-                    <li class="brief-step"><span>00</span><strong>Requirements</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/00-requirements.md" target="_blank" rel="noopener noreferrer">要件定義</a></small></li>
-                    <li class="brief-step"><span>01</span><strong>Basic Design</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/01-basic-design.md" target="_blank" rel="noopener noreferrer">基本設計</a></small></li>
-                    <li class="brief-step"><span>02</span><strong>Detailed</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/02-detailed-design.md" target="_blank" rel="noopener noreferrer">詳細設計</a></small></li>
-                    <li class="brief-step"><span>03</span><strong>Parameters</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/03-parameter-sheet.md" target="_blank" rel="noopener noreferrer">パラメータ</a></small></li>
-                    <li class="brief-step"><span>04</span><strong>Network</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/04-network-ip-plan.md" target="_blank" rel="noopener noreferrer">IP / Port</a></small></li>
-                    <li class="brief-step"><span>05</span><strong>Build</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">構築手順</a></small></li>
-                    <li class="brief-step"><span>06</span><strong>Test</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">試験仕様</a></small></li>
-                    <li class="brief-step"><span>07</span><strong>Handover</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/07-handover-checklist.md" target="_blank" rel="noopener noreferrer">引き渡し</a></small></li>
-                    <li class="brief-step"><span>08</span><strong>Rollback</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/08-change-rollback-plan.md" target="_blank" rel="noopener noreferrer">変更・切り戻し</a></small></li>
-                    <li class="brief-step"><span>09</span><strong>Host Test</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/09-network-validation-procedure.md" target="_blank" rel="noopener noreferrer">実機検証手順</a></small></li>
+                    <li class="brief-step"><span>00</span><strong>目的と条件</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/00-requirements.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>01</span><strong>全体の設計</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/01-basic-design.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>02</span><strong>詳しい設計</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/02-detailed-design.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>03</span><strong>設定値の一覧</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/03-parameter-sheet.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>04</span><strong>通信の設計</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/04-network-ip-plan.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>05</span><strong>構築手順</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>06</span><strong>動作確認の手順</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>07</span><strong>引き継ぎ確認</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/07-handover-checklist.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>08</span><strong>変更を戻す手順</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/08-change-rollback-plan.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
+                    <li class="brief-step"><span>09</span><strong>実機での確認手順</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/09-network-validation-procedure.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
                 </ol>
             </section>
 
             <section class="brief-section" aria-labelledby="server-operation-title">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="server-operation-title">Server Build &amp; Operations Matrix</h2>
+                    <h2 class="heading-text" id="server-operation-title">構築・運用の確認一覧</h2>
                 </div>
-                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるServer Build工程表" tabindex="0">
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるサーバー構築工程表" tabindex="0">
                     <table class="operation-table">
-                        <caption class="sr-only">Server Build &amp; Operationsの工程、検証結果、次の完了条件</caption>
+                        <caption class="sr-only">サーバー構築・運用の工程、動作確認の結果、次に確認すること</caption>
                         <thead>
                             <tr>
                                 <th scope="col">工程</th>
-                                <th scope="col">実装・成果物</th>
-                                <th scope="col">検証結果</th>
-                                <th scope="col">次の完了条件</th>
+                                <th scope="col">設定・資料</th>
+                                <th scope="col">動作確認したこと</th>
+                                <th scope="col">次に確認すること</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>OSベースライン</td>
-                                <td>timezone、SSH、UFW、fail2ban、auditd、自動更新。Ubuntu 22.04 / 24.04に加えAlmaLinux / Rocky 9対応（dnf、firewalld、SELinux、dnf-automatic）</td>
-                                <td><span class="status-pill measured">4 roles + site.yml 2回目changed=0</span> <span class="status-pill measured">el9シナリオ実行成功（コンテナ上）</span></td>
-                                <td>Docker未導入の最小OS・引き渡し対象hostで適用。実機AlmaLinuxホストへの適用</td>
+                                <td>Linuxの基本設定</td>
+                                <td>時刻、SSH接続、ファイアウォール、不正ログイン対策、操作記録、自動更新</td>
+                                <td><span class="status-pill measured">同じ設定を2回実行し、2回目は不要な変更なし</span> <span class="status-pill measured">Ubuntu以外はコンテナ内で合格</span></td>
+                                <td>Docker未導入の新しいOSと、実機AlmaLinuxへの適用</td>
                             </tr>
                             <tr>
-                                <td>配備</td>
-                                <td>Flask、nginx、Docker Compose、秘密値example</td>
-                                <td><span class="status-pill measured">2026-08-22: core 10 + CI sink = 11</span></td>
-                                <td>独立した引き渡し対象hostでE2E再実行</td>
+                                <td>アプリの設置</td>
+                                <td>Webアプリ、Webサーバー、Dockerの設定例</td>
+                                <td><span class="status-pill measured">一時Ubuntu環境で11サービスを起動</span></td>
+                                <td>独立した仮想マシンや実機で、一連の確認を再実行</td>
                             </tr>
                             <tr>
                                 <td>監視・ログ</td>
                                 <td>Prometheus、Grafana、Loki、Alloy、Alertmanager</td>
-                                <td><span class="status-pill measured">2026-08-22: 10 services + proxy + local webhook</span></td>
-                                <td>Slack実配信の到達時間を採録</td>
+                                <td><span class="status-pill measured">監視10サービス、通信制限、テスト用通知を確認</span></td>
+                                <td>Slackへ実際に通知し、届くまでの時間を記録</td>
                             </tr>
                             <tr>
                                 <td>障害復旧</td>
-                                <td>D-1、二セグメント通信障害、runbook</td>
-                                <td><span class="status-pill measured">D-1 履歴13秒／E2E 1秒 + 3 volumes復元</span></td>
-                                <td>D-2ホスト障害を実測</td>
+                                <td>アプリ停止、ネットワーク障害、復旧手順書</td>
+                                <td><span class="status-pill measured">アプリを1秒で復旧し、監視データ3種類を復元</span></td>
+                                <td>サーバー本体が停止した場合の復旧</td>
                             </tr>
                             <tr>
                                 <td>引き渡し</td>
-                                <td>運用開始条件、既知制約、rollback、証跡台帳</td>
-                                <td><span class="status-pill measured">PR #77 CI<br>git rollback PASS</span></td>
-                                <td>persistent host・独立した管理端末でrollback後を確認</td>
+                                <td>運用開始の条件、分かっている制約、元に戻す方法、確認記録</td>
+                                <td><span class="status-pill measured">自動テストで前の版への切り戻しに合格</span></td>
+                                <td>継続利用するサーバーと、別の管理PCで切り戻し後を確認</td>
                             </tr>
                         </tbody>
                     </table>
@@ -263,7 +263,7 @@
                     <span class="heading-text">補助成果：Windows / M365 / AD 想定運用</span>
                 </div>
 
-                <p style="margin-bottom: 1.5rem;">以下は入口業務として対応する IT サポート・社内 SE 補助向けの設計サンプルです。第一志望の Linux サーバー構築案件とは区別して掲載しています。</p>
+                <p style="margin-bottom: 1.5rem;"><strong>補助学習：</strong>以下はWindows、Microsoft 365、Active Directoryの問い合わせ対応を学ぶために作成した設計例です。実際の組織環境を構築・運用した実績ではなく、第一志望のLinuxサーバー学習とは分けて掲載しています。</p>
 
                 <figure class="network-figure" style="text-align: center; margin-bottom: 2rem;">
                     <div class="mermaid">
@@ -331,17 +331,17 @@
             <section class="operation-matrix-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span>
-                    <span class="heading-text">Monitoring & Evidence Matrix</span>
+                    <span class="heading-text">確認項目と記録</span>
                 </div>
-                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる監視・証跡マトリクス" tabindex="0">
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる確認項目と記録の表" tabindex="0">
                     <table class="operation-table">
-                        <caption class="sr-only">補助成果の監視・証跡・一次対応マトリクス</caption>
+                        <caption class="sr-only">補助学習の監視、記録、最初の対応一覧</caption>
                         <thead>
                             <tr>
                                 <th scope="col">対象</th>
                                 <th scope="col">確認観点</th>
-                                <th scope="col">使用スクリプト・証跡</th>
-                                <th scope="col">一次対応 / 引き継ぎ基準</th>
+                                <th scope="col">使用スクリプト・確認記録</th>
+                                <th scope="col">最初の対応 / 引き継ぎ基準</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -377,7 +377,7 @@
             <section class="incident-flow-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></span>
-                    <span class="heading-text">Ticket Flow</span>
+                    <span class="heading-text">問い合わせ対応の流れ</span>
                 </div>
                 <div class="incident-flow">
                     <div class="flow-step">
@@ -387,18 +387,18 @@
                     </div>
                     <div class="flow-step">
                         <span>02</span>
-                        <h3>切り分け</h3>
+                        <h3>原因の場所を絞る</h3>
                         <p>端末、ネットワーク、アカウント、サービス側を順に分離。</p>
                     </div>
                     <div class="flow-step">
                         <span>03</span>
-                        <h3>証跡保存</h3>
+                        <h3>結果を保存</h3>
                         <p>確認コマンド、ログ、スクリーンショット、出力ファイルを添付。</p>
                     </div>
                     <div class="flow-step">
                         <span>04</span>
                         <h3>対応・連携</h3>
-                        <p>一次対応で収まらない場合は影響範囲と仮説を添えて引き継ぎ。</p>
+                        <p>自分の担当範囲で解決しない場合は、影響した範囲と考えられる原因を添えて引き継ぎ。</p>
                     </div>
                     <div class="flow-step">
                         <span>05</span>
@@ -410,7 +410,7 @@
 
             <section class="lab-links-section">
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-folder-open" aria-hidden="true"></i> 公開済みの証跡サンプル</h3>
+                    <h3><i class="fa-solid fa-folder-open" aria-hidden="true"></i> 公開済みの出力サンプル</h3>
                     <p>実行後に何が残るかを確認しやすいよう、架空端末・架空ユーザーのサンプル出力を用意しています。</p>
                     <div class="contact-actions">
                         <a href="support-scripts/samples/pc-inventory.sample.json" class="btn btn-secondary">JSONを見る</a>
@@ -419,8 +419,8 @@
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-arrows-spin" aria-hidden="true"></i> 関連 Lab / Runbook</h3>
-                    <p>第一導線は Linux サーバー構築案件パックです。補助成果として、Windows / M365 / AD、Cloud Network、Support Toolkit、チケット分類、物理層、M365 ポリシー JSON も確認できます。</p>
+                    <h3><i class="fa-solid fa-arrows-spin" aria-hidden="true"></i> 関連する学習内容</h3>
+                    <p>最初に見ていただきたいのはLinuxサーバーの構築手順と確認資料です。Windows、Microsoft 365、Active Directory、クラウド、問い合わせ対応の資料は補助学習として掲載しています。</p>
                     <div class="next-scope-list">
                         <span><a href="linux-lab.html" style="color:inherit;">Linux Lab</a></span>
                         <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>
@@ -452,12 +452,12 @@
                 <span class="logo-sub">Portfolio</span>
             </div>
             <div class="footer-nav">
-                <a href="me.html">About</a>
-                <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Server Build</a>
-                <a href="works.html">Works</a>
-                <a href="resume.html">Resume</a>
-                <a href="contact.html">Contact</a>
+                <a href="me.html">自己紹介</a>
+                <a href="skills.html">スキル</a>
+                <a href="infra-lab.html">サーバー構築</a>
+                <a href="works.html">作品</a>
+                <a href="resume.html">履歴書</a>
+                <a href="contact.html">連絡先</a>
             </div>
             <div class="footer-social">
                 <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
@@ -466,7 +466,7 @@
         </div>
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連リポジトリは、文書の整形だけでなく実装コードの生成にも AI（Claude）を使っています。範囲は <a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィール README</a> に開示しています。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行い、個人制作のため人によるレビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 

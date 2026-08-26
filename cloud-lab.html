@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸のCloud Network Lab。AWS VPC / Subnet / Route / Security Group / Terraform validate を、オンプレのVLANやACLと対応づけて整理しています。">
-    <title>Cloud Lab | 島田則幸のポートフォリオ</title>
+    <meta name="description" content="社内ネットワークとAWSの考え方を比べながら、ネットワークの分け方と通信制限を学ぶために作成した設計例です。AWS実環境への適用は未実施です。">
+    <title>AWSネットワークの学習用設計 | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/cloud-lab.html">
 
-    <meta property="og:title" content="Cloud Lab | 島田則幸のポートフォリオ">
+    <meta property="og:title" content="AWSネットワークの学習用設計 | 島田則幸のポートフォリオ">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/cloud-lab.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="AWS VPC / Subnet / Route / Security Group / Terraform validate を、オンプレのVLANやACLと対応づけて整理したCloud Network Lab。">
+    <meta property="og:description" content="社内ネットワークとAWSの考え方を比べて整理した学習用設計。AWS実環境への適用は未実施です。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
 
     <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260826-1">
+    <link rel="stylesheet" href="css/style.css?v=20260826-2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -67,12 +67,12 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
+                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
             </ul>
         </nav>
     </header>
@@ -82,8 +82,8 @@
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
             <h1 class="page-title">
-                <span class="title-en">Cloud Network Lab</span>
-                <span class="title-jp">AWS VPC / Terraform 設計メモ</span>
+                <span class="title-en">AWS Network Study</span>
+                <span class="title-jp">AWSネットワークの学習用設計</span>
             </h1>
         </div>
     </section>
@@ -91,39 +91,39 @@
     <div class="page-content infra-lab-content">
         <div class="container">
 
-            <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> Build Overview</a>
-                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence</a>
-                <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux</a>
-                <a href="cloud-lab.html" class="active" aria-current="page"><i class="fa-solid fa-cloud" aria-hidden="true"></i> Cloud</a>
-                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Monitoring Stack（アーカイブ）</a>
-                <a href="ansible/"><i class="fa-solid fa-gears" aria-hidden="true"></i> Ansible</a>
+            <nav class="lab-subnav" aria-label="サーバー学習内の案内">
+                <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux基本確認</a>
+                <a href="cloud-lab.html" class="active" aria-current="page"><i class="fa-solid fa-cloud" aria-hidden="true"></i> AWS設計</a>
+                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> 監視の初期作品</a>
+                <a href="ansible/"><i class="fa-solid fa-gears" aria-hidden="true"></i> 自動構築の設定</a>
             </nav>
 
             <section class="lab-intro">
-                <span class="case-label">AWS VPC / Terraform Scenario</span>
-                <h2>オンプレの VLAN / ACL とクラウドの VPC / SG を対応づけるLab</h2>
-                <p>クラウド運用の入口として、AWS VPC、Public / Private Subnet、Route Table、Security Group を最小構成で整理しました。Terraform は<code>fmt</code>、<code>init -backend=false</code>、<code>validate</code>までを CI に乗せています。</p>
+                <span class="case-label">学習用設計 / AWS・Terraform</span>
+                <h2>社内ネットワークとAWSの考え方を比べる学習用設計</h2>
+                <p>AWS上でネットワークを分け、接続できる範囲を制限する方法を学ぶための設計例です。Terraformで設定をコードとして記録し、書式と構文が正しいことを自動テストで確認しています。</p>
                 <div class="status-callout pending" role="note">
                     <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
                     <div>
-                        <strong>設計・静的検証まで／AWS実環境への適用は未実施</strong>
-                        <p><code>terraform plan / apply / destroy</code>、疎通、AWS Cost Explorerの実費は未採録です。EC2 / NAT Gateway / Elastic IPは課金を避けるため初期構成から外しており、Cloud Labを構築済みAWS環境とは表示していません。</p>
+                        <strong>確認済みは設計とコードの構文まで／AWS上での作成は未実施</strong>
+                        <p>AWS環境の作成・削除、実際の通信確認、利用料金の確認はまだ行っていません。料金が発生するEC2、NAT Gateway、Elastic IPは作成対象から外しています。このページは構築済みAWS環境の実績ではありません。</p>
                     </div>
                 </div>
                 <div class="lab-badges" aria-label="Cloud Labで確認できる領域">
                     <span><i class="fa-brands fa-aws" aria-hidden="true"></i> AWS</span>
                     <span><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> VPC</span>
-                    <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Security Group</span>
+                    <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> 通信制限</span>
                     <span><i class="fa-solid fa-code" aria-hidden="true"></i> Terraform</span>
-                    <span><i class="fa-solid fa-coins" aria-hidden="true"></i> Cost Guardrail</span>
+                    <span><i class="fa-solid fa-coins" aria-hidden="true"></i> 料金対策</span>
                 </div>
             </section>
 
             <section class="lab-architecture" style="margin-bottom: 60px;">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-cloud" aria-hidden="true"></i></span>
-                    <span class="heading-text">AWS VPC Architecture</span>
+                    <span class="heading-text">学習用のAWSネットワーク構成</span>
                 </div>
                 <figure class="network-figure" style="text-align: center;">
                     <div class="mermaid">
@@ -152,56 +152,56 @@
                             PrivateSG[Private SG: Allow from Bastion SG]
                         end
                     </div>
-                    <figcaption>AWS VPC 最小構成図（Mermaid.js による動的描画。クリックで拡大可能）</figcaption>
+                    <figcaption>AWSネットワークの学習用構成図。AWS上へ実際に作成した構成ではありません（クリックで拡大できます）。</figcaption>
                 </figure>
             </section>
 
             <section class="operation-matrix-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span>
-                    <span class="heading-text">Cloud Network Design</span>
+                    <span class="heading-text">AWSネットワークの設計例</span>
                 </div>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるCloud Network Lab設計表" tabindex="0">
                     <table class="operation-table">
-                        <caption class="sr-only">Cloud Network Labの設計値と運用確認ポイント</caption>
+                        <caption class="sr-only">AWSネットワークの学習用設計値と確認ポイント</caption>
                         <thead>
                             <tr>
                                 <th scope="col">要素</th>
                                 <th scope="col">設計値</th>
-                                <th scope="col">オンプレ対応</th>
-                                <th scope="col">運用で見るポイント</th>
+                                <th scope="col">社内ネットワークで近いもの</th>
+                                <th scope="col">確認すること</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>VPC</td>
+                                <td>VPC<br><small>AWS上のネットワーク全体</small></td>
                                 <td><code>10.20.0.0/16</code></td>
-                                <td>拠点 / データセンターのL3ネットワーク</td>
-                                <td>将来の拡張、他拠点・VPNとのCIDR重複を避ける。</td>
+                                <td>拠点やデータセンター全体のネットワーク</td>
+                                <td>将来の拡張を考え、ほかの拠点やVPNとIPアドレスの範囲が重ならないようにします。</td>
                             </tr>
                             <tr>
-                                <td>Public Subnet</td>
+                                <td>Public Subnet<br><small>外部接続用の領域</small></td>
                                 <td><code>10.20.10.0/24</code></td>
-                                <td>DMZ / 踏み台セグメント</td>
-                                <td>Internet Gateway への経路を持つ。SSH は管理CIDRのみに限定。</td>
+                                <td>外部公開用または管理用のネットワーク</td>
+                                <td>インターネットへの経路を持たせます。SSH接続は管理者が使うIPアドレスの範囲だけに制限します。</td>
                             </tr>
                             <tr>
-                                <td>Private Subnet</td>
+                                <td>Private Subnet<br><small>外部へ直接公開しない領域</small></td>
                                 <td><code>10.20.20.0/24</code></td>
-                                <td>Server VLAN</td>
-                                <td>直接インターネット公開しない。Bastion SG 経由の必要ポートのみ許可。</td>
+                                <td>社内サーバー用のネットワーク</td>
+                                <td>インターネットへ直接公開せず、管理用の入口を経由した必要な通信だけを許可します。</td>
                             </tr>
                             <tr>
-                                <td>Security Group</td>
-                                <td>Bastion / Private App を分離</td>
-                                <td>ACL / FW ルール</td>
-                                <td>送信元CIDRではなくSG参照を使い、意図しない横展開を防ぐ。</td>
+                                <td>Security Group<br><small>サーバーごとの通信許可ルール</small></td>
+                                <td>管理用とアプリ用のルールを分ける</td>
+                                <td>ファイアウォールの許可ルール</td>
+                                <td>管理用サーバーからの通信だけを許可し、ほかのサーバーへ意図せず接続できる状態を防ぎます。</td>
                             </tr>
                             <tr>
-                                <td>Terraform</td>
+                                <td>Terraform<br><small>構成をコードで記録する仕組み</small></td>
                                 <td><code>cloud-lab/terraform/</code></td>
-                                <td>構成管理台帳 / 変更差分</td>
-                                <td><code>fmt</code>、<code>init -backend=false</code>、<code>validate</code> をCIで確認。</td>
+                                <td>構成管理の記録 / 変更点の一覧</td>
+                                <td><code>fmt</code>、<code>init -backend=false</code>、<code>validate</code>を自動テストで確認しています。AWS上での作成確認ではありません。</td>
                             </tr>
                         </tbody>
                     </table>
@@ -211,39 +211,39 @@
             <section class="operation-matrix-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span>
-                    <span class="heading-text">Change / Verify / Cost Guardrail</span>
+                    <span class="heading-text">コード確認・安全・料金への配慮</span>
                 </div>
                 <div class="lab-architecture-grid">
                     <div class="architecture-notes">
                         <h3>変更前確認</h3>
                         <ul>
-                            <li><code>terraform fmt -check</code> で書式を揃える。</li>
-                            <li><code>terraform init -backend=false</code> で provider 取得と初期化を検証。</li>
-                            <li><code>terraform validate</code> で構文と参照関係を確認。</li>
+                            <li><code>terraform fmt -check</code>でコードの書式を確認します。</li>
+                            <li><code>terraform init -backend=false</code>で必要な部品を取得し、初期化できることを確認します。</li>
+                            <li><code>terraform validate</code>で構文と設定同士の参照関係を確認します。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>セキュリティ</h3>
                         <ul>
-                            <li>SSH は <code>admin_cidr</code> のみに限定し、<code>0.0.0.0/0</code> を禁止。</li>
-                            <li>Private 側は Bastion SG からの SSH / node_exporter のみ許可。</li>
-                            <li>本番では SSM Session Manager / VPN / Zero Trust Access を優先。</li>
+                            <li>SSH接続は管理者が使うIPアドレスの範囲だけに限定し、誰でも接続できる設定（<code>0.0.0.0/0</code>）を禁止します。</li>
+                            <li>外部へ直接公開しない領域は、管理用の入口から必要な通信だけを許可します。</li>
+                            <li>実務では、会社で指定された安全な接続方法（SSM Session Manager、VPNなど）を優先します。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>コスト</h3>
                         <ul>
-                            <li>初期構成では EC2 / NAT Gateway / Elastic IP を作らない。</li>
-                            <li>追加する場合は Budget Alert と削除手順を先に用意する。</li>
-                            <li>検証目的のリソースには <code>Project</code> / <code>Environment</code> タグを必須化。</li>
+                            <li>この学習用設計では、料金が発生するEC2、NAT Gateway、Elastic IPを作りません。</li>
+                            <li>将来作成する場合は、予算の通知と削除手順を先に用意します。</li>
+                            <li>検証用の項目には、目的と環境が分かるタグを付ける想定です。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
-                        <h3>本番化差分</h3>
+                        <h3>実務環境で追加するもの（未実施）</h3>
                         <ul>
-                            <li>CloudTrail、VPC Flow Logs、GuardDuty、Security Hub を追加。</li>
-                            <li>CloudWatch Alarm と通知先を Runbook に紐づける。</li>
-                            <li>AWS Backup とリストアテストを月次運用に入れる。</li>
+                            <li>操作記録、通信ログ、異常検知を追加します（CloudTrail、VPC Flow Logsなど）。</li>
+                            <li>異常通知と、通知を受けたあとの対応手順を結び付けます。</li>
+                            <li>バックアップを設定し、定期的に復元できるかを確認します。</li>
                         </ul>
                     </div>
                 </div>
@@ -251,26 +251,26 @@
 
             <section class="lab-links-section">
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Terraform と検証証跡</h3>
-                    <p>Cloud Lab の詳細設計、Terraform、CIで実行する検証コマンドを確認できます。</p>
+                    <h3><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Terraformコードと確認記録</h3>
+                    <p>学習用の詳細設計、Terraformコード、自動テストで確認したコマンドを掲載しています。AWS実環境での動作記録ではありません。</p>
                     <div class="contact-actions">
                         <a href="cloud-lab/" class="btn btn-secondary">Cloud Lab README</a>
                         <a href="cloud-lab/terraform/main.tf" class="btn btn-outline-dark">Terraformを見る</a>
-                        <a href="infra-evidence/" class="btn btn-outline-dark">証跡を見る</a>
+                        <a href="infra-evidence/" class="btn btn-outline-dark">実行記録を見る</a>
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-shield" aria-hidden="true"></i> 本番化で足すもの</h3>
-                    <p>Lab と本番運用の差分を、監視、通知、認証、秘密情報、バックアップ、変更管理の観点で整理しています。SLO の数値化、チケット分類、M365 ポリシーの JSON 化など、運用品質の補強もセットで参照できます。</p>
+                    <h3><i class="fa-solid fa-shield" aria-hidden="true"></i> 実務環境へ進む前の学習項目</h3>
+                    <p>監視、通知、ログイン方法、秘密情報、バックアップ、変更手順など、まだ確認が必要な内容を別資料にまとめています。以下は学習資料であり、実際の本番運用を行った実績ではありません。</p>
                     <div class="next-scope-list">
-                        <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
-                        <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">SLO / Error Budget</a></span>
-                        <span><a href="support-docs/ticket-taxonomy.md" style="color:inherit;">チケット分類 (ITIL)</a></span>
-                        <span><a href="support-docs/m365-policy-examples/" style="color:inherit;">M365 ポリシー JSON</a></span>
-                        <span><a href="support-docs/ad-m365-change-case.md" style="color:inherit;">AD / M365 変更ケース</a></span>
-                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / RTO / RPO / DR</a></span>
-                        <span><a href="monitoring-stack/" style="color:inherit;">Monitoring Stack（初期作品・アーカイブ）</a></span>
-                        <span><a href="ansible/" style="color:inherit;">Ansible Playbook</a></span>
+                        <span><a href="production-readiness.md" style="color:inherit;">実務環境へ進む前の確認事項</a></span>
+                        <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">サービス目標の学習メモ</a></span>
+                        <span><a href="support-docs/ticket-taxonomy.md" style="color:inherit;">問い合わせの分類例</a></span>
+                        <span><a href="support-docs/m365-policy-examples/" style="color:inherit;">Microsoft 365設定例</a></span>
+                        <span><a href="support-docs/ad-m365-change-case.md" style="color:inherit;">AD・Microsoft 365の変更例</a></span>
+                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">バックアップ・復元計画</a></span>
+                        <span><a href="monitoring-stack/" style="color:inherit;">監視構成（初期作品・アーカイブ）</a></span>
+                        <span><a href="ansible/" style="color:inherit;">構築自動化のコード</a></span>
                     </div>
                 </div>
             </section>
@@ -285,12 +285,12 @@
                 <span class="logo-sub">Portfolio</span>
             </div>
             <div class="footer-nav">
-                <a href="me.html">About</a>
-                <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Server Build</a>
-                <a href="works.html">Works</a>
-                <a href="resume.html">Resume</a>
-                <a href="contact.html">Contact</a>
+                <a href="me.html">自己紹介</a>
+                <a href="skills.html">スキル</a>
+                <a href="infra-lab.html">サーバー構築</a>
+                <a href="works.html">作品</a>
+                <a href="resume.html">履歴書</a>
+                <a href="contact.html">連絡先</a>
             </div>
             <div class="footer-social">
                 <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
@@ -299,7 +299,7 @@
         </div>
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連リポジトリは、文書の整形だけでなく実装コードの生成にも AI（Claude）を使っています。範囲は <a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィール README</a> に開示しています。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行い、個人制作のため人によるレビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 
