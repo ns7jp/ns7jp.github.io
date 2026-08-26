@@ -298,6 +298,58 @@
                 </div>
             </section>
 
+            <section class="change-story-section" aria-labelledby="b-series-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-flask-vial"></i></span>
+                    <h2 class="heading-text" id="b-series-title">B-1〜B-4 — 2026-08-24 に実行・採録</h2>
+                </div>
+                <p class="evidence-note">ディスク設計、3層構成の障害切り分け、DB復元、L2 / L3切り分けの4演習です。判定はスクリプトが期待値と実測値を比較した結果で、証跡ファイルは実行結果から自動生成されます。B-1はqemuゲスト（loop device）、B-2 / B-3はDockerコンテナ、B-4はnetwork namespace上での実行で、いずれもAI支援セッションの作業環境上のものです。面接の場での再実演は、手元のWSL2 + Dockerで再現できるB-2 / B-3に限りお約束できます。</p>
+                <div class="operation-table-wrap">
+                    <table class="operation-table evidence-status-table">
+                        <thead>
+                            <tr>
+                                <th>演習</th>
+                                <th>内容</th>
+                                <th>結果</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>B-1 ディスク設計・LVM拡張</td>
+                                <td>VG / LVを作り、容量を使い切り、PVを足してonline拡張する</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-1.md" target="_blank" rel="noopener noreferrer">5 PASS / 0 FAIL</a>（220M→457M）</td>
+                            </tr>
+                            <tr>
+                                <td>B-2 3層構成の障害切り分け</td>
+                                <td>Web / AP / DBのどの層で止まっているかを層別healthで絞り込む</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-2.md" target="_blank" rel="noopener noreferrer">9 PASS / 0 FAIL</a></td>
+                            </tr>
+                            <tr>
+                                <td>B-3 DBバックアップ・復元</td>
+                                <td><code>pg_dump</code> / <code>pg_restore</code>で復元し、RTO / RPOと内容ハッシュを突き合わせる</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-3.md" target="_blank" rel="noopener noreferrer">7 PASS / 0 FAIL</a>（RTO 0.149秒）</td>
+                            </tr>
+                            <tr>
+                                <td>B-4 L2 / L3切り分け</td>
+                                <td>静的ルート、<code>ip_forward</code>、802.1Q VLAN ID不一致を切り分ける</td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-4.md" target="_blank" rel="noopener noreferrer">6 PASS / 0 FAIL / 3 SKIP-ENV</a>（VLAN部はkernel都合で未検証）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="status-callout pending" role="note">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>実行して初めて見つかった実バグは通算29件</strong>
+                        <p>静的検査（shellcheck / ansible-lint / molecule / 構文検査）で捕まえられたものは0件、うち6件は「壊れているのに PASS」する偽PASSでした。1件ずつの症状・発見方法・修正PRは<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" target="_blank" rel="noopener noreferrer">欠陥台帳</a>にまとめています。Ansible roleはUbuntu 22.04 / 24.04に加えてAlmaLinux / Rocky 9に対応しており、Moleculeのel9シナリオは<a href="https://github.com/ns7jp/server-monitor/actions/runs/32811100007" target="_blank" rel="noopener noreferrer">2026-08-25に実行証跡を採録</a>しました（コンテナ上での検証。実機のAlmaLinuxホストへ適用した証跡はまだありません）。</p>
+                    </div>
+                </div>
+                <div class="summary-actions">
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bug"></i> 欠陥台帳（29件）</a>
+                    <a href="https://github.com/ns7jp/server-monitor/tree/main/ansible/roles/common/molecule/el9" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server"></i> el9シナリオ</a>
+                </div>
+            </section>
+
             <section class="change-story-section" aria-labelledby="pr75-change-story-title">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-code-pull-request"></i></span>
