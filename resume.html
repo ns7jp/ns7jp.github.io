@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸（Noriyuki Shimada）の1ページ履歴書（A4印刷対応）。Linuxサーバー構築・運用エンジニア志望。経歴・資格・構築案件パック・主な作品を掲載しています。">
+    <meta name="description" content="島田則幸（Noriyuki Shimada）の1ページ履歴書（A4印刷対応）。Linuxサーバー構築・運用エンジニア志望。経歴、資格、学習内容、主な作品を掲載しています。">
     <meta name="robots" content="noindex">
-    <title>履歴書 1pager | 島田則幸のポートフォリオ</title>
+    <title>1ページ履歴書 | 島田則幸のポートフォリオ</title>
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -253,35 +253,36 @@
         }
 
         @media print {
-            body { background: #fff; padding: 0; font-size: 11px; line-height: 1.35; }
-            .resume-toolbar { display: none; }
+            body { background: #fff; padding: 0; font-size: 11.5px; line-height: 1.4; }
+            .resume-toolbar,
+            .skip-link { display: none !important; }
             .resume {
                 box-shadow: none;
                 width: auto;
                 min-height: auto;
                 margin: 0;
-                padding: 5mm 7mm;
+                padding: 7mm 9mm;
             }
-            .resume-name { font-size: 20px; }
+            .resume-name { font-size: 22px; }
             .resume-name .en { font-size: 11px; }
-            .resume-role { font-size: 11.5px; margin-top: 0; }
-            .resume-contact { font-size: 10.5px; line-height: 1.4; }
-            .resume-summary { padding: 4px 7px; margin-bottom: 5px; font-size: 11px; line-height: 1.4; }
+            .resume-role { font-size: 12px; margin-top: 0; }
+            .resume-contact { font-size: 11px; line-height: 1.45; }
+            .resume-summary { padding: 5px 8px; margin-bottom: 6px; font-size: 11.5px; line-height: 1.45; }
             .resume-header { padding-bottom: 3px; margin-bottom: 4px; }
-            .resume-section h2 { font-size: 11px; padding-bottom: 2px; margin-bottom: 4px; }
-            .resume-section table td { padding: 1px 0; font-size: 10.5px; }
+            .resume-section h2 { font-size: 11.5px; padding-bottom: 2px; margin-bottom: 4px; }
+            .resume-section table td { padding: 1px 0; font-size: 11px; }
             .resume-section td.year { width: 56px; }
-            .resume-skills div { font-size: 10.5px; margin-bottom: 1px; }
+            .resume-skills div { font-size: 11px; margin-bottom: 1px; }
             .resume-skills strong { min-width: 80px; }
-            .resume-works .work-item { font-size: 10.5px; margin-bottom: 2px; }
-            .resume-works .work-name { font-size: 10.5px; }
+            .resume-works .work-item { font-size: 11px; margin-bottom: 2px; }
+            .resume-works .work-name { font-size: 11px; }
             .resume-works .work-desc { line-height: 1.35; }
             .resume-readiness { margin-top: 0; }
             .resume-readiness th,
-            .resume-readiness td { padding: 2px 4px; font-size: 10.5px; line-height: 1.3; }
-            .resume-readiness td.task { font-size: 10.5px; }
-            .resume-readiness th { font-size: 10.5px; }
-            .resume-production-note { padding: 3px 6px; font-size: 10.5px; line-height: 1.3; }
+            .resume-readiness td { padding: 2px 4px; font-size: 10.75px; line-height: 1.35; }
+            .resume-readiness td.task { font-size: 10.75px; }
+            .resume-readiness th { font-size: 10.75px; }
+            .resume-production-note { padding: 4px 7px; font-size: 10.75px; line-height: 1.35; }
             .resume-roadmap { margin-top: 0; }
             .roadmap-track { gap: 3px; }
             .roadmap-step { padding: 1px 3px; font-size: 10px; }
@@ -337,7 +338,7 @@
         </header>
 
         <section class="resume-summary">
-            <strong>Linuxサーバー構築・運用を第一志望</strong>とし、手順とレビューのある範囲から、構築補助・試験・監視・一次切り分け・証跡整理を正確に担当します。製造・物流で15年以上培った「計測 → 原因特定 → 手順化 → 定着」を、構築と運用の進め方に活かします。
+            <strong>Linuxサーバー構築・運用を第一志望</strong>としています。実務経験はまだありませんが、入社後は手順を確認しながら、サーバー設定の補助、動作確認、監視、ログ確認、作業記録などの基礎業務から取り組みます。製造・物流で15年以上続けてきた、作業を測り、問題点を見つけ、手順を改善する経験を活かします。
         </section>
 
         <div class="resume-body">
@@ -377,11 +378,11 @@
             <section class="resume-section">
                 <h2><i class="fa-solid fa-laptop-code" aria-hidden="true"></i>SKILLS / スキル</h2>
                 <div class="resume-skills">
-                    <div><strong>Linux構築</strong>Ubuntu / SSH / UFW / fail2ban / auditd / systemd / Nginx</div>
-                    <div><strong>自動化・配備</strong>Ansible / Molecule / Docker Compose / GitHub Actions</div>
-                    <div><strong>監視・ログ</strong>Prometheus / Grafana / Loki / Alloy / Alertmanager</div>
-                    <div><strong>切り分け</strong>journalctl / ss / DNS / route / tcpdump / Runbook / RTO</div>
-                    <div><strong>補助技術</strong>Python / Flask / PowerShell / Terraform validate / Git / GitHub</div>
+                    <div><strong>Linuxの基本設定</strong>学習用UbuntuでSSH、ファイアウォール、サービス、ログを確認</div>
+                    <div><strong>設定の自動化</strong>Ansible、Docker Compose、GitHub上の自動テストを学習</div>
+                    <div><strong>監視</strong>サーバーの状態、ログ、異常・復旧通知を学習用環境で確認</div>
+                    <div><strong>原因調査</strong>ログ、通信状態、名前解決、通信経路を順番に確認</div>
+                    <div><strong>その他</strong>Python / PowerShell / Git / GitHub / Terraform（設定チェックのみ）</div>
                 </div>
             </section>
 
@@ -389,58 +390,58 @@
                 <h2><i class="fa-solid fa-briefcase" aria-hidden="true"></i>SELECTED WORKS / 主な成果物</h2>
                 <div class="resume-works">
                     <div class="work-item">
-                        <span class="work-name">Linux Server Build &amp; Operations Lab</span>
-                        <span class="work-tag">Design → Handover</span>
-                        <div class="work-desc">Ubuntu 1台を想定し、要件・設計・パラメータ・Ansible・試験・監視・復旧・rollback・引き渡しを10成果物に整理。</div>
+                        <span class="work-name">Linuxサーバー構築・運用の学習環境</span>
+                        <span class="work-tag">準備 → 設定 → 確認 → 引き継ぎ</span>
+                        <div class="work-desc">Ubuntu 1台を想定し、設定内容、構築手順、動作確認、監視、復旧、引き継ぎ資料を作成。</div>
                     </div>
                     <div class="work-item">
-                        <span class="work-name">実測証跡（2026-08-25時点）</span>
-                        <span class="work-tag">E2E / Drills / CI</span>
-                        <div class="work-desc">Ubuntu runnerのE2E 23/23、2回目changed=0、git rollback、B-1〜B-4、EL9 Moleculeを環境境界付きで公開。独立VM／実機、本番変更、第三者レビューは未実施。</div>
+                        <span class="work-name">動作確認の記録（2026-08-25時点）</span>
+                        <span class="work-tag">実施済み / 未実施を区別</span>
+                        <div class="work-desc">学習用Ubuntu環境で23項目を確認。独立した仮想マシンや実機、本番環境の変更、第三者レビューは未実施。</div>
                     </div>
                 </div>
             </section>
 
             <section class="resume-section resume-readiness">
-                <h2><i class="fa-solid fa-table-list" aria-hidden="true"></i>READINESS / 想定業務 × 自分の備え</h2>
+                <h2><i class="fa-solid fa-table-list" aria-hidden="true"></i>READINESS / 想定業務 × 学習で取り組んだこと</h2>
                 <table>
-                    <caption class="sr-only">想定業務に対する実施内容と環境境界</caption>
+                    <caption class="sr-only">想定業務に対する学習内容と、どこまで試したか</caption>
                     <thead>
                         <tr>
                             <th scope="col">想定業務</th>
-                            <th scope="col">実施内容と環境境界</th>
+                            <th scope="col">学習内容と未実施の範囲</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="task">設計 / パラメータ / 手順</td>
-                            <td class="evidence"><a href="project-brief.html">案件概要</a>と<a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package">構築案件パック</a>を作成。想定案件の個人成果物。</td>
+                            <td class="task">設定内容 / 作業手順</td>
+                            <td class="evidence"><a href="project-brief.html">制作概要</a>と<a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package">構築手順・確認資料</a>を個人学習で作成。</td>
                         </tr>
                         <tr>
-                            <td class="task">構築 / 冪等化 / 試験</td>
-                            <td class="evidence">Docker導入済みUbuntu runnerで<code>site.yml</code>を2回適用し、2回目<code>changed=0</code>とFull-stack E2E 23/23を確認。</td>
+                            <td class="task">構築 / 再実行 / 動作確認</td>
+                            <td class="evidence">一時的なUbuntu環境で設定を2回実行し、2回目に不要な変更が出ないことと、23項目の動作を確認。</td>
                         </tr>
                         <tr>
-                            <td class="task">監視 / ログ / 切り分け</td>
-                            <td class="evidence">Prometheus / Grafana / Loki / Alloy / Alertmanager、D-1復旧、DB復元、3層・L2/L3切り分けをLab環境で実測。</td>
+                            <td class="task">監視 / ログ確認 / 原因調査</td>
+                            <td class="evidence">学習用環境でサーバーの状態とログを確認し、サービス停止、データベース復元、通信障害の調査を練習。</td>
                         </tr>
                         <tr>
-                            <td class="task">変更 / rollback / 引き渡し</td>
-                            <td class="evidence">使い捨てrunnerでexact SHA rollbackを確認。persistent host、72時間稼働、実機、Slack実配信、AWS apply / destroyはNOT RUN。</td>
+                            <td class="task">変更を戻す / 引き継ぎ</td>
+                            <td class="evidence">一時的な環境で、Gitを使って変更前の状態へ戻せることを確認。常設サーバー、実機、本番環境での作業は未実施。</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
 
             <aside class="resume-production-note">
-                <strong>仕事の進め方・制作体制：</strong>手順、承認、操作前後の確認、FAIL / NOT RUNを含む証跡、報告を重視。設計方針・構成・検証観点と実行結果の採否は本人が担当し、Claude Code / Codexを実装・デバッグ・文書整形に使用しています。個人制作のため、人による第三者レビュー実績はありません。詳細は<a href="work-readiness.html">Work Readiness</a>。
+                <strong>仕事の進め方・制作体制：</strong>手順の確認、必要な相談と承認、作業前後の確認、結果の記録と報告を大切にします。何を作り、何を確認するかは本人が決め、Claude Code / Codexはプログラム作成、問題調査、文章整理の補助に使いました。個人制作のため、第三者によるレビューは受けていません。詳細は<a href="work-readiness.html">仕事の進め方</a>。
             </aside>
 
         </div>
 
         <footer class="resume-footer">
-            最新の Infra / Linux / Cloud Lab・Monitoring・Ansible・Evidence・Runbook は <a href="https://ns7jp.github.io/">ns7jp.github.io</a> に公開 / 最終更新 2026-08
-            <br>このページと関連リポジトリは、文書の整形だけでなく実装コードの生成にも AI（Claude）を使っています。範囲は <a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィール README</a> に開示しています。
+            学習用の構築資料、Linux確認手順、動作確認の記録は <a href="https://ns7jp.github.io/">ns7jp.github.io</a> に公開 / 最終更新 2026-08
+            <br>プログラム作成や文章整理にAI（Claude）を補助として使用しています。内容と確認結果は本人が確認しています。
         </footer>
     </main>
 
