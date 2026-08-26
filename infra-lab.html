@@ -21,9 +21,9 @@
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
-    <script src="js/main.js?v=20260822-3" defer></script>
+    <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260822-3">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -54,8 +54,8 @@
     </div>
 
     <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars"></i>
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <header>
@@ -67,12 +67,12 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li class="active"><a href="infra-lab.html" aria-current="page"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+                <li class="active"><a href="infra-lab.html" aria-current="page"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -92,12 +92,12 @@
         <div class="container">
 
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="infra-lab.html" class="active" aria-current="page"><i class="fa-solid fa-server"></i> Build Overview</a>
-                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check"></i> Evidence</a>
-                <a href="linux-lab.html"><i class="fa-brands fa-linux"></i> Linux</a>
-                <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
-                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack（アーカイブ）</a>
-                <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
+                <a href="infra-lab.html" class="active" aria-current="page"><i class="fa-solid fa-server" aria-hidden="true"></i> Build Overview</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> Cloud</a>
+                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Monitoring Stack（アーカイブ）</a>
+                <a href="ansible/"><i class="fa-solid fa-gears" aria-hidden="true"></i> Ansible</a>
             </nav>
 
             <section class="lab-intro" id="build-overview">
@@ -105,27 +105,27 @@
                 <h2>設計、構築、試験、監視、障害復旧までを1つの案件で見せるLab</h2>
                 <p>主作品の Server Monitor を Ubuntu 1台のサーバー構築案件と見立て、基本・詳細設計、パラメータ、Ansible構築、単体・結合試験、監視、二セグメント通信障害、引き渡しまでを工程順に整理しました。コードと実測結果は証跡台帳で明確に分けています。</p>
                 <p><strong>2026年8月22日:</strong> runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、<code>site.yml</code>初回一括適用、2回目<code>changed=0</code>、core 10 services + CI専用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・Loki到達、認証、runner内network/UFW、D-1 RTO 1秒、3 volumes復元を含むFull-stack E2E 23/23を採録しました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。synthetic alertのlocal webhook試験はSlack実配信とは別です。</p>
-                <p><strong>2026年8月23日:</strong> PR #77の<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044</a>で、disposable Ubuntuの<code>/opt/server-monitor</code>へcandidate <code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code>をimmutable git SHAで配備・検証後、前版<code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code>へrollbackしてPASSしました。PR branch上の結果で、main統合済みまたはpersistent hostでの実績ではありません。</p>
+                <p><strong>2026年8月23日:</strong> PR #77途中commitの<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044</a>で、disposable Ubuntuの<code>/opt/server-monitor</code>へcandidate <code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code>をimmutable git SHAで配備・検証後、前版<code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code>へrollbackしてPASSしました。PR #77自体は後にmainへmerge済みですが、このrunをmerge後mainで再実行した結果やpersistent hostでの実績ではありません。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
-                    <span><i class="fa-solid fa-file-lines"></i> Design</span>
-                    <span><i class="fa-solid fa-gears"></i> Build</span>
-                    <span><i class="fa-solid fa-clipboard-check"></i> Test</span>
-                    <span><i class="fa-solid fa-heart-pulse"></i> Recovery</span>
+                    <span><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Design</span>
+                    <span><i class="fa-solid fa-gears" aria-hidden="true"></i> Build</span>
+                    <span><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Test</span>
+                    <span><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i> Recovery</span>
                 </div>
                 <div class="summary-actions" style="margin-top: 1.5rem;">
-                    <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
-                    <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> 構築案件パック</a>
-                    <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-check"></i> Evidence Digest</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> E2E 23/23</a>
-                    <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-rotate-left"></i> Git rollback CI</a>
-                    <a href="demo.html" class="btn btn-outline-dark" aria-label="2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video"></i> 2分15秒 証跡リプレイ</a>
-                    <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired"></i> 通信障害ラボ</a>
+                    <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 案件概要</a>
+                    <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> 構築案件パック</a>
+                    <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence Digest</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> E2E 23/23</a>
+                    <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Git rollback CI</a>
+                    <a href="demo.html" class="btn btn-outline-dark" aria-label="2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video" aria-hidden="true"></i> 2分15秒 証跡リプレイ</a>
+                    <a href="https://github.com/ns7jp/server-monitor/tree/main/labs/network-troubleshooting" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> 通信障害ラボ</a>
                 </div>
             </section>
 
             <section class="evidence-overview" aria-labelledby="build-status-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="build-status-title">Recorded Evidence Status</h2>
                 </div>
                 <div class="metric-grid">
@@ -171,14 +171,14 @@
                     </a>
                 </div>
                 <div class="status-callout validated evidence-scope-note" role="note">
-                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
                     <div>
                         <strong>完了済みE2Eと履歴証跡を分けて掲載</strong>
                         <p>PR #77のgit rollback PASSはcandidate <code>84e1492</code>と前版<code>59aa88e</code>に対する2026年8月23日のdisposable runner実測です。23/23、11 containers、Docker API proxyはruntime <code>7622a9d</code>に対する2026年8月22日の使い捨てrunner実測です。4 roles、9 services、D-1 13秒、必須9/18・全体11/21は2026年8月17〜19日の対象commitに残る履歴です。公開中の2分15秒デモも8月18日・19日の画面と13秒のD-1ログを再構成したリプレイで、連続操作の録画ではありません。</p>
                     </div>
                 </div>
                 <div class="status-callout pending" role="note">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
                         <strong>E2Eの環境制約と未実測範囲</strong>
                         <p>runnerにはDockerが事前導入済みです。persistent hostでのrollback、最小OSからのDocker導入、独立した管理端末・引き渡し対象host・組織DNSでのnetwork検証、Slack実配信、AWS apply / destroy・実費・Security Group/NACL、D-2、72時間連続稼働・host再起動後・production trafficは未実測です。local webhookとD-1は別の試験であり、どちらもSlack配信を示しません。</p>
@@ -188,7 +188,7 @@
 
             <section class="brief-section" aria-labelledby="deliverables-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-folder-tree"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="deliverables-title">Build Package — 10番号付き成果物</h2>
                 </div>
                 <ol class="brief-flow build-package-flow">
@@ -207,17 +207,18 @@
 
             <section class="brief-section" aria-labelledby="server-operation-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-server"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="server-operation-title">Server Build &amp; Operations Matrix</h2>
                 </div>
-                <div class="operation-table-wrap">
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるServer Build工程表" tabindex="0">
                     <table class="operation-table">
+                        <caption class="sr-only">Server Build &amp; Operationsの工程、検証結果、次の完了条件</caption>
                         <thead>
                             <tr>
-                                <th>工程</th>
-                                <th>実装・成果物</th>
-                                <th>検証結果</th>
-                                <th>次の完了条件</th>
+                                <th scope="col">工程</th>
+                                <th scope="col">実装・成果物</th>
+                                <th scope="col">検証結果</th>
+                                <th scope="col">次の完了条件</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -258,7 +259,7 @@
 
             <section class="lab-architecture secondary-scope" id="windows-support">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-brands fa-windows"></i></span>
+                    <span class="heading-icon"><i class="fa-brands fa-windows" aria-hidden="true"></i></span>
                     <span class="heading-text">補助成果：Windows / M365 / AD 想定運用</span>
                 </div>
 
@@ -329,17 +330,18 @@
 
             <section class="operation-matrix-section">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-table-list"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span>
                     <span class="heading-text">Monitoring & Evidence Matrix</span>
                 </div>
-                <div class="operation-table-wrap">
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる監視・証跡マトリクス" tabindex="0">
                     <table class="operation-table">
+                        <caption class="sr-only">補助成果の監視・証跡・一次対応マトリクス</caption>
                         <thead>
                             <tr>
-                                <th>対象</th>
-                                <th>確認観点</th>
-                                <th>使用スクリプト・証跡</th>
-                                <th>一次対応 / 引き継ぎ基準</th>
+                                <th scope="col">対象</th>
+                                <th scope="col">確認観点</th>
+                                <th scope="col">使用スクリプト・証跡</th>
+                                <th scope="col">一次対応 / 引き継ぎ基準</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -374,7 +376,7 @@
 
             <section class="incident-flow-section">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-route"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></span>
                     <span class="heading-text">Ticket Flow</span>
                 </div>
                 <div class="incident-flow">
@@ -408,7 +410,7 @@
 
             <section class="lab-links-section">
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-folder-open"></i> 公開済みの証跡サンプル</h3>
+                    <h3><i class="fa-solid fa-folder-open" aria-hidden="true"></i> 公開済みの証跡サンプル</h3>
                     <p>実行後に何が残るかを確認しやすいよう、架空端末・架空ユーザーのサンプル出力を用意しています。</p>
                     <div class="contact-actions">
                         <a href="support-scripts/samples/pc-inventory.sample.json" class="btn btn-secondary">JSONを見る</a>
@@ -417,7 +419,7 @@
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-arrows-spin"></i> 関連 Lab / Runbook</h3>
+                    <h3><i class="fa-solid fa-arrows-spin" aria-hidden="true"></i> 関連 Lab / Runbook</h3>
                     <p>第一導線は Linux サーバー構築案件パックです。補助成果として、Windows / M365 / AD、Cloud Network、Support Toolkit、チケット分類、物理層、M365 ポリシー JSON も確認できます。</p>
                     <div class="next-scope-list">
                         <span><a href="linux-lab.html" style="color:inherit;">Linux Lab</a></span>
@@ -458,8 +460,8 @@
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="footer-bottom">

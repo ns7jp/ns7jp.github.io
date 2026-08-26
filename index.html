@@ -9,7 +9,7 @@
     1. head でSEO、CSS、共通スクリプト（js/main.js）の読み込みを確認する
     2. header/nav で全ページ共通メニュー、hero で最初に見せる訴求を読む
     3. recruiter-path / quick-intro / skills-preview / works-preview / contact-cta を順に追う
-    4. 末尾のscriptで、ローダー、メニュー、背景スライダー、スクロール演出を見る
+    4. 末尾のscriptで、ローダー、メニュー、スクロール演出を見る
 ========================================================================
 -->
 <!-- 「<!DOCTYPE html>」はHTML5で書かれていることをブラウザに伝える宣言。必ず1行目に書く。 -->
@@ -62,12 +62,13 @@
 
     <!-- ===== 外部スクリプト・CSSの読み込み ===== -->
     <!-- サイト共通スクリプト（vanilla JS、外部ライブラリ非依存）。ローダー解除・メニュー開閉・
-         ヒーロー背景クロスフェード（旧jQueryプラグインの置き換え）などをここで一括管理する。 -->
-    <script src="js/main.js?v=20260822-3" defer></script>
+         スクロール処理などをここで一括管理する。 -->
+    <script src="js/main.js?v=20260826-1" defer></script>
     <!-- ブラウザ標準スタイルをリセットするCSS。表示崩れを防ぐ目的で先に読み込む。 -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- このサイト独自のスタイルシート。色・レイアウト・アニメーションを定義。 -->
-    <link rel="stylesheet" href="css/style.css?v=20260822-3">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
+    <link rel="stylesheet" href="css/work-readiness.css?v=20260826-1">
     <!-- アイコンフォントFont Awesome（CDN経由）。<i class="fa-..."></i>でアイコンを表示できる。 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,9 +133,9 @@
          button要素 + aria-expanded/aria-controls でキーボード・スクリーンリーダーからも操作できる。 -->
     <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
         <!-- 三本線（メニューを開くアイコン） -->
-        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
         <!-- バツ印（メニューを閉じるアイコン）。CSSで切替表示する。 -->
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <!-- ===== ヘッダー（サイト共通の上部エリア） ===== -->
@@ -150,12 +151,12 @@
         <nav id="site-nav">
             <ul>
                 <!-- li要素1つ＝メニュー項目1つ。aタグでリンク、iタグでアイコンを表示。 -->
-                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -163,90 +164,80 @@
     <main id="main" tabindex="-1">
     <!-- ===== ヒーローセクション（ページ最上部の大きなビジュアルエリア） ===== -->
     <section class="hero">
-        <!-- 背景画像が自動で切り替わるエリア（js/main.jsのvanilla JSで制御） -->
+        <!-- 主作品を示す固定背景。複数画像の自動取得を避け、初期表示を軽くする。 -->
         <div class="hero-slider"></div>
         <!-- 背景画像の上に重ねる半透明のオーバーレイ（文字を読みやすくする） -->
         <div class="hero-overlay"></div>
         <!-- ヒーローエリアの中央に表示するテキストとボタン -->
         <div class="hero-content">
             <!-- アニメーションクラス「animate-fade-in」でCSS側でフェードイン演出 -->
-            <p class="hero-greeting animate-fade-in">Welcome to my portfolio</p>
+            <p class="hero-greeting animate-fade-in">Linuxサーバー構築・運用エンジニア志望</p>
             <h1 class="hero-title animate-slide-up">
                 <span class="line1">Linux Server</span>
                 <span class="line2">Build &amp; Operations</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">Ubuntu 24.04の設計・Ansible構築・監視・復旧を、<br>実装・実測・未実測に分け、再現可能な成果物と証跡で公開しています</p>
-            <div class="hero-proof-grid animate-fade-in-delay2" aria-label="Linuxサーバー構築・運用の公開成果">
-                <a href="demo.html" class="hero-proof-item" aria-label="実測スクリーンショットと復旧ログを再構成した2分15秒の証跡リプレイを見る">
-                    <i class="fa-solid fa-video"></i>
-                    <span>2分15秒デモ</span>
-                    <strong>実測証跡リプレイ</strong>
-                </a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/architecture.md#構成図" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-diagram-project"></i>
-                    <span>構成図</span>
-                    <strong>監視・ログ基盤</strong>
-                </a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="hero-proof-item" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-clipboard-check"></i>
-                    <span>実測証跡</span>
-                    <strong>2026-08-22 E2E 23 / 23</strong>
-                </a>
-            </div>
+            <p class="hero-description animate-fade-in-delay">Ubuntuの設計、Ansible構築、試験、監視、復旧、引き渡しを、<br>「説明できる成果物」と「再現できる証跡」にまとめています</p>
             <!-- CTA（Call To Action）ボタン群。採用担当者向けの主導線を3本に絞る。 -->
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
-                <a href="evidence-demo.html" class="btn btn-outline"><i class="fa-solid fa-clipboard-check"></i> 実測証跡</a>
-                <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
+                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 3分で案件概要</a>
+                <a href="work-readiness.html" class="btn btn-outline"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
+                <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-id-card" aria-hidden="true"></i> 1ページ履歴書</a>
             </div>
         </div>
         <!-- 「下にスクロールしてね」と促すアニメーション付きのインジケーター -->
         <div class="scroll-indicator">
             <span>Scroll</span>
-            <i class="fa-solid fa-chevron-down"></i>
+            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
         </div>
     </section>
 
-    <section class="hiring-summary">
+    <section class="role-strip" aria-label="志望職種と入口業務">
+        <div class="container role-strip-inner">
+            <div class="role-strip-lead">
+                <span>ROLE TARGET</span>
+                <strong>Linuxサーバー構築・運用</strong>
+            </div>
+            <div class="role-strip-item"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><span>手順に沿った<br>構築・変更補助</span></div>
+            <div class="role-strip-item"><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i><span>試験・証跡<br>引き渡し資料</span></div>
+            <div class="role-strip-item"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>監視・ログ<br>一次切り分け</span></div>
+        </div>
+    </section>
+
+    <section class="recruiter-value">
         <div class="container">
             <h2 class="section-title center">
-                <span class="title-en">1 Minute Summary</span>
-                <span class="title-jp">主作品：Server Monitor</span>
+                <span class="title-en">Why This Portfolio</span>
+                <span class="title-jp">採用担当者に確認いただきたい3点</span>
             </h2>
-            <div class="summary-grid">
-                <div class="summary-card">
-                    <span class="summary-label">Build Package</span>
-                    <h3>設計から検証まで10成果物</h3>
-                    <p>要件、基本・詳細設計、パラメータ、ネットワーク、構築、試験、引き渡し、ロールバック、実機検証手順を工程順に整理しています。</p>
-                </div>
-                <div class="summary-card">
-                    <span class="summary-label">main統合済みE2E / 2026-08-22</span>
-                    <h3>Ubuntu 24.04で23 / 23 PASS</h3>
-                    <p>runtime最終commit <code>7622a9d</code>を、Docker導入済みの使い捨てrunnerで検証。<code>site.yml</code>の2回目<code>changed=0</code>、core 10 services＋CI用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・Loki到達を確認しました。証跡文書<code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。</p>
-                </div>
-                <div class="summary-card">
-                    <span class="summary-label">PR #77 CI / 2026-08-23</span>
-                    <h3>Git SHA rollback rehearsal PASS</h3>
-                    <p>使い捨てUbuntu runnerへcandidate <code>84e1492</code>をimmutable git SHAで配備・検証し、前版<code>59aa88e</code>へ切り戻してrevisionとruntimeを再検証しました。<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044</a>の結果で、main統合済みとは扱いません。</p>
-                </div>
-                <div class="summary-card">
-                    <span class="summary-label">Recovery / Restore</span>
-                    <h3>D-1 RTO 1秒・3 volume復元</h3>
-                    <p>runner内ネットワーク、UFW・待受・SSH tunnel、3 volumeのbackup / restore、ローカルwebhookのFIRING / RESOLVEDを実測しました。ローカルwebhookはSlack実配信ではありません。</p>
-                </div>
+            <div class="value-grid">
+                <article class="value-card">
+                    <i class="fa-solid fa-folder-tree" aria-hidden="true"></i>
+                    <h3>工程を一周した成果物</h3>
+                    <p>要件、基本・詳細設計、パラメータ、Ansible、試験、監視、復旧、引き渡し、ロールバックを工程順に確認できます。</p>
+                    <a href="project-brief.html">案件全体を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+                <article class="value-card">
+                    <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
+                    <h3>成功だけでなく境界を記録</h3>
+                    <p>実行日・環境・commit・コマンドを残し、FAIL、再試験、NOT RUNを分離。CI E2Eに加え、障害切り分け・DB復元・L2/L3演習も公開しています。</p>
+                    <a href="evidence-demo.html">実測証跡を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+                <article class="value-card">
+                    <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+                    <h3>現場での動き方を明示</h3>
+                    <p>手順とレビューのある範囲から担当し、操作前の採録、承認、事後確認、報告までを一つの作業として進めます。</p>
+                    <a href="work-readiness.html">仕事の進め方を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
             </div>
             <div class="evidence-boundary-strip" aria-label="証跡の現在・履歴・未実測の区分">
-                <span><strong>main統合済みE2E</strong> runtime <code>7622a9d</code>・23 / 23 PASS・2回目changed=0・11 containers・proxy GET / POST拒否 / Loki・D-1 1秒・3 volume restore</span>
-                <span><strong>PR #77 CI</strong> run <code>32611251044</code>・disposable Ubuntu・candidate <code>84e1492</code> → rollback <code>59aa88e</code> PASS</span>
-                <span><strong>履歴（2026-08-19）</strong> WSL2で11 / 21 PASS・D-1 RTO 13秒。現在のE2E結果とは分けて掲載</span>
-                <span><strong>NOT RUN</strong> persistent hostでのrollback・72時間連続稼働／host再起動後・Slack実配信・独立した管理端末／引き渡し対象ホスト・AWS apply / destroy・D-2</span>
+                <span><strong>主構成E2E / 2026-08-22</strong> Ubuntu runnerで23 / 23 PASS、2回目changed=0、監視・ログ、D-1、3-volume restore</span>
+                <span><strong>追加演習 / 2026-08-24〜25</strong> B-1〜B-4の構築・障害演習、EL9 Moleculeを採録。環境制約とSKIPも記録</span>
+                <span><strong>現在の境界</strong> 独立VM／実機、72時間稼働、Slack実配信、AWS apply / destroy、D-2、本番変更はNOT RUN</span>
             </div>
             <div class="summary-actions">
-                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines"></i> 案件概要を見る</a>
-                <a href="demo.html" class="btn btn-secondary"><i class="fa-solid fa-video"></i> 2分15秒デモ</a>
-                <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> Full-stack E2E原本</a>
-                <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-rotate-left"></i> Git rollback CI</a>
-                <a href="resume.html" class="btn btn-outline-dark"><i class="fa-solid fa-id-card"></i> 1ページ履歴書</a>
+                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 案件概要を見る</a>
+                <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence Digest</a>
+                <a href="work-readiness.html" class="btn btn-outline-dark"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Work Readiness</a>
             </div>
         </div>
     </section>
@@ -277,11 +268,11 @@
                     </ul>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">03 / Deliverables</span>
-                    <h3>構築成果物を工程順に確認</h3>
+                    <span class="summary-label">03 / Work Style</span>
+                    <h3>入社後の動き方を確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" target="_blank" rel="noopener noreferrer">構築案件パック</a><span>設計、パラメータ、構築、試験、引き渡し、ロールバック</span></li>
-                        <li><a href="infra-lab.html">Server Build Lab</a><span>Ansible、監視、復旧、補助Labへの案内</span></li>
+                        <li><a href="work-readiness.html">Work Readiness</a><span>実務想定ケース、変更管理、協働、AI利用の境界</span></li>
+                        <li><a href="work-readiness.html#gap-title">次の実機検証</a><span>独立VM／実機で埋める未実測項目と完了条件</span></li>
                     </ul>
                 </div>
             </div>
@@ -300,9 +291,9 @@
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h2>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在は人材派遣会社（アデコ株式会社）を通じ、IT企業にて派遣社員としてトライアル就業中です（2026年7月〜。就業先の社名は面談時に開示します）。Linuxサーバー構築・運用を第一志望に、キャリア移行を目指しています。製造・物流現場で培った改善視点を、構築手順、試験、監視、障害復旧の成果物へつなげています。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在は人材派遣会社（アデコ株式会社）を通じ、IT企業にて派遣社員としてトライアル就業中です（2026年7月〜。就業先の社名は面談時に開示します）。Linuxサーバー構築・運用を第一志望に、キャリア移行を目指しています。製造・物流現場では作業を計測し、棚配置・補充ルール・手順を見直して1日約1時間を短縮しました。この「計測 → 原因特定 → 手順化 → 定着」を構築、試験、監視、障害復旧にもつなげています。</p>
                     <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
-                    <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
                 <!-- プロフィール画像。クリックで自己紹介ページへ移動できる。 -->
                 <a href="me.html">
@@ -327,7 +318,7 @@
             <div class="skills-grid">
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-solid fa-server"></i>
+                        <i class="fa-solid fa-server" aria-hidden="true"></i>
                     </div>
                     <span class="status-pill measured">E2E 23 / 23 PASS</span>
                     <h3>Linux Server Build</h3>
@@ -335,7 +326,7 @@
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-solid fa-gears"></i>
+                        <i class="fa-solid fa-gears" aria-hidden="true"></i>
                     </div>
                     <span class="status-pill measured">2回目 changed=0</span>
                     <h3>Ansible / IaC</h3>
@@ -343,7 +334,7 @@
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-solid fa-chart-line"></i>
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
                     </div>
                     <span class="status-pill measured">11 containers起動</span>
                     <h3>Monitoring / Logs</h3>
@@ -351,7 +342,7 @@
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
-                        <i class="fa-solid fa-heart-pulse"></i>
+                        <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
                     </div>
                     <span class="status-pill measured">D-1 RTO 1秒</span>
                     <h3>Recovery / Restore</h3>
@@ -360,7 +351,7 @@
             </div>
             <!-- スキル一覧ページへの誘導ボタン -->
             <div class="section-link">
-                <a href="skills.html" class="btn btn-secondary">すべてのスキルを見る <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="skills.html" class="btn btn-secondary">すべてのスキルを見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -395,41 +386,11 @@
                     </a>
                 </div>
                 <div class="work-card">
-                    <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-network-drill.md" target="_blank" rel="noopener noreferrer">
+                    <a href="work-readiness.html">
                     <div class="work-image" style="background-image: url('image/network-vlan.svg')">
                         <div class="work-overlay">
-                            <span class="work-category">Fault → Triage → Recovery</span>
-                            <h3>二セグメント通信障害ラボ</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="work-card">
-                    <a href="works.html#work-monitor">
-                    <div class="work-image" style="background-image: url('image/server-monitor.png')">
-                        <div class="work-overlay">
-                            <span class="work-category">Python / Flask / psutil</span>
-                            <h3>サーバー監視ダッシュボード</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="work-card">
-                    <a href="works.html#work-support-toolkit">
-                    <div class="work-image" style="background-image: url('image/skills.jpg')">
-                        <div class="work-overlay">
-                            <span class="work-category">Supplementary</span>
-                            <h3>Support Toolkit</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="work-card">
-                    <a href="works.html">
-                    <div class="work-image" style="background-image: url('image/works.jpg')">
-                        <div class="work-overlay">
-                            <span class="work-category">Python / PHP / Web</span>
-                            <h3>その他の学習作品</h3>
+                            <span class="work-category">Confirm → Change → Report</span>
+                            <h3>Work Readiness</h3>
                         </div>
                     </div>
                     </a>
@@ -437,7 +398,7 @@
             </div>
             <!-- 作品ページへの誘導ボタン -->
             <div class="section-link">
-                <a href="works.html" class="btn btn-light">主案件と補助作品を見る <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="works.html" class="btn btn-light">主案件と補助作品を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -449,7 +410,7 @@
             <div class="cta-content">
                 <h2>作品や学習内容についてご確認いただけます</h2>
                 <p>応募・面談に関するご連絡は、連絡先ページからお願いいたします。</p>
-                <a href="contact.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-envelope"></i> 連絡先を見る</a>
+                <a href="contact.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 連絡先を見る</a>
             </div>
         </div>
     </section>
@@ -472,6 +433,7 @@
                 <a href="infra-lab.html">Server Build</a>
                 <a href="demo.html">Demo Replay</a>
                 <a href="evidence-demo.html">Evidence</a>
+                <a href="work-readiness.html">Work Style</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
@@ -479,9 +441,9 @@
             <!-- フッター右：SNS・メールアイコン -->
             <div class="footer-social">
                 <!-- target="_blank"で別タブで開く。rel="noopener noreferrer"はセキュリティ対策（タブナビング防止）。 -->
-                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
                 <!-- mailto:でメーラーを起動 -->
-                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
         <!-- 著作権表示。&copy;は©（コピーライト記号）の実体参照。 -->
@@ -493,7 +455,7 @@
 
 <!-- ============================================================
      ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出・
-     ヒーロー背景クロスフェードは js/main.js（vanilla JS）に集約している。
+     作品フィルター等の共通処理は js/main.js（vanilla JS）に集約している。
 ============================================================ -->
 <script src="js/lightbox.js"></script>
 </body>

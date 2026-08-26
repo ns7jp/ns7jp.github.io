@@ -37,9 +37,10 @@
     <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
-    <script src="js/main.js?v=20260822-3" defer></script>
+    <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260822-3">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
+    <link rel="stylesheet" href="css/work-readiness.css?v=20260826-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -92,8 +93,8 @@
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
     <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars"></i>
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <!-- ===== ヘッダー（共通） ===== -->
@@ -106,13 +107,13 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
                 <!-- 現在ページ「Contact」を active クラスで強調 -->
-                <li class="active"><a href="contact.html" aria-current="page"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+                <li class="active"><a href="contact.html" aria-current="page"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -154,7 +155,7 @@
                             <!-- メール -->
                             <div class="info-item">
                                 <div class="info-icon">
-                                    <i class="fa-solid fa-envelope"></i>
+                                    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                                 </div>
                                 <div class="info-content">
                                     <span class="info-label">Email</span>
@@ -165,7 +166,7 @@
                             <!-- GitHub -->
                             <div class="info-item">
                                 <div class="info-icon">
-                                    <i class="fa-brands fa-github"></i>
+                                    <i class="fa-brands fa-github" aria-hidden="true"></i>
                                 </div>
                                 <div class="info-content">
                                     <span class="info-label">GitHub</span>
@@ -175,7 +176,7 @@
                             <!-- 所在地（リンクなし） -->
                             <div class="info-item">
                                 <div class="info-icon">
-                                    <i class="fa-solid fa-location-dot"></i>
+                                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                                 </div>
                                 <div class="info-content">
                                     <span class="info-label">Location</span>
@@ -189,8 +190,8 @@
                             <h4>Links</h4>
                             <div class="social-icons">
                                 <!-- aria-labelはスクリーンリーダー用の代替テキスト（アクセシビリティ対応） -->
-                                <a href="https://github.com/ns7jp" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                                <a href="mailto:net7jp@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                                <a href="https://github.com/ns7jp" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                                <a href="mailto:net7jp@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -199,16 +200,14 @@
                     <div class="contact-form-card contact-message-card">
                         <h3>For Recruiters</h3>
                         <p>ポートフォリオをご覧いただきありがとうございます。第一志望は<strong>Linuxサーバー構築・運用</strong>です。入口としてインフラ監視・運用、IT サポート・社内SE補助のポジションへの応募も希望しています。</p>
-                        <p>製造・物流現場で培った業務改善・トラブル対応の視点と、職業訓練・自学で習得したIT技術を組み合わせ、構築手順、試験、監視、障害切り分け、引き渡し資料を正確に残す仕事に貢献したいと考えています。</p>
-                        <p>Linux Server Build &amp; Operations Lab、Evidence Digest、サーバー監視ダッシュボードを主成果として公開し、Support Toolkitと開発学習作品は補助成果として区別しています（<a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer">github.com/ns7jp</a>）。</p>
+                        <p>最初は、手順とレビューのある範囲での構築・変更補助、試験、監視、一次切り分け、証跡整理を正確に担当します。停止影響、権限、セキュリティ、費用が絡む判断は抱え込まず、事実と仮説を分けて共有します。</p>
+                        <p>個人Lab、AI支援、人による第三者レビュー未実施という境界も含めて、<a href="work-readiness.html">入社後の動き方と確認方法</a>を公開しています。</p>
                         <!-- アクションボタン：メール送信／履歴書PDF／作品ページ -->
                         <div class="contact-actions">
-                            <a href="mailto:net7jp@gmail.com" class="btn btn-primary"><i class="fa-solid fa-envelope"></i> メールを送る</a>
-                            <a href="resume.html" class="btn btn-secondary"><i class="fa-solid fa-file-pdf"></i> 履歴書 1pager（PDF保存可）</a>
-                            <a href="project-brief.html" class="btn btn-secondary"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
-                            <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check"></i> 実測証跡</a>
-                            <a href="infra-lab.html" class="btn btn-secondary"><i class="fa-solid fa-server"></i> Server Build</a>
-                            <a href="works.html" class="btn btn-secondary"><i class="fa-solid fa-briefcase"></i> 作品を見る</a>
+                            <a href="mailto:net7jp@gmail.com" class="btn btn-primary"><i class="fa-solid fa-envelope" aria-hidden="true"></i> メールを送る</a>
+                            <a href="resume.html" class="btn btn-secondary"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> 履歴書 1pager（PDF保存可）</a>
+                            <a href="work-readiness.html" class="btn btn-secondary"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
+                            <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 実測証跡</a>
                         </div>
                     </div>
                 </div>
@@ -218,62 +217,62 @@
             <!-- よくある質問をQ&A形式で表示。アイコンで質問・回答を視覚的に区別。 -->
             <section class="faq-section">
                 <h3 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-circle-question"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></span>
                     <span class="heading-text">よくある質問</span>
                 </h3>
                 <div class="faq-grid">
                     <!-- FAQ項目1 -->
                     <div class="faq-item">
                         <div class="faq-question">
-                            <i class="fa-solid fa-q"></i>
+                            <i class="fa-solid fa-q" aria-hidden="true"></i>
                             <span>連絡方法は何ですか？</span>
                         </div>
                         <div class="faq-answer">
-                            <i class="fa-solid fa-a"></i>
+                            <i class="fa-solid fa-a" aria-hidden="true"></i>
                             <span>メールでのご連絡をお願いいたします。</span>
                         </div>
                     </div>
                     <!-- FAQ項目2 -->
                     <div class="faq-item">
                         <div class="faq-question">
-                            <i class="fa-solid fa-q"></i>
+                            <i class="fa-solid fa-q" aria-hidden="true"></i>
                             <span>作品のコードは確認できますか？</span>
                         </div>
                         <div class="faq-answer">
-                            <i class="fa-solid fa-a"></i>
+                            <i class="fa-solid fa-a" aria-hidden="true"></i>
                             <span>Linuxサーバー構築案件、日時・環境・commit付きの実測証跡、監視ツールをGitHubで公開しています。想定資料や学習作品は主成果と区別してWorksページに掲載しています。</span>
                         </div>
                     </div>
                     <!-- FAQ項目3 -->
                     <div class="faq-item">
                         <div class="faq-question">
-                            <i class="fa-solid fa-q"></i>
+                            <i class="fa-solid fa-q" aria-hidden="true"></i>
                             <span>実務未経験ですが、どのように評価すればよいですか？</span>
                         </div>
                         <div class="faq-answer">
-                            <i class="fa-solid fa-a"></i>
-                            <span>大規模インフラの実務経験はこれからです。その前提のもと、設計・構築・試験・監視・障害復旧を一つの案件として実装し、「実装済み」と「実測済み」を区別して<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">検証証跡台帳</a>で公開しています。製造・物流現場で15年以上培った「計測し、原因を絞り、手順化して定着させる」進め方を、そのままサーバー運用の学び方に転用しています。</span>
+                            <i class="fa-solid fa-a" aria-hidden="true"></i>
+                            <span>大規模インフラの実務経験はこれからです。その前提のもと、設計・構築・試験・監視・障害復旧を一つの案件として実装し、「実装済み」「実測済み」「NOT RUN」を<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">検証証跡台帳</a>で分けています。技術だけでなく、確認、承認、記録、報告、AI利用の境界は<a href="work-readiness.html">Work Readiness</a>でご確認いただけます。</span>
                         </div>
                     </div>
                     <!-- FAQ項目4 -->
                     <div class="faq-item">
                         <div class="faq-question">
-                            <i class="fa-solid fa-q"></i>
+                            <i class="fa-solid fa-q" aria-hidden="true"></i>
                             <span>稼働開始はいつ頃可能ですか？</span>
                         </div>
                         <div class="faq-answer">
-                            <i class="fa-solid fa-a"></i>
+                            <i class="fa-solid fa-a" aria-hidden="true"></i>
                             <span>トライアル期間満了の 2026 年 9 月以降を予定しています。相談のうえ 1 か月以内の調整も可能です。</span>
                         </div>
                     </div>
                     <!-- FAQ項目5 -->
                     <div class="faq-item">
                         <div class="faq-question">
-                            <i class="fa-solid fa-q"></i>
+                            <i class="fa-solid fa-q" aria-hidden="true"></i>
                             <span>希望する雇用形態・勤務地・リモート可否は？</span>
                         </div>
                         <div class="faq-answer">
-                            <i class="fa-solid fa-a"></i>
+                            <i class="fa-solid fa-a" aria-hidden="true"></i>
                             <span>雇用形態は正社員に限らず契約社員も含めて幅広く検討しています。勤務地は応相談です。</span>
                         </div>
                     </div>
@@ -294,13 +293,14 @@
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
                 <a href="infra-lab.html">Server Build</a>
+                <a href="work-readiness.html">Work Style</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="footer-bottom">

@@ -13,6 +13,48 @@
         ? window.matchMedia('(prefers-reduced-motion: reduce)')
         : { matches: false };
 
+    /* Font Awesome icons are decorative. Links and buttons already provide
+       their accessible names through visible text or aria-label. */
+    document.querySelectorAll('i.fa-solid, i.fa-regular, i.fa-brands').forEach(function (icon) {
+        icon.setAttribute('aria-hidden', 'true');
+    });
+
+    /* Give data tables a programmatic name from their section heading and
+       expose column/row headers without duplicating captions in the layout. */
+    document.querySelectorAll('table').forEach(function (table, tableIndex) {
+        if (!table.querySelector('caption') &&
+            !table.hasAttribute('aria-label') &&
+            !table.hasAttribute('aria-labelledby')) {
+            var section = table.closest('section, article');
+            var heading = section ? section.querySelector('h2, h3') : null;
+            if (heading) {
+                if (!heading.id) heading.id = 'table-heading-' + (tableIndex + 1);
+                table.setAttribute('aria-labelledby', heading.id);
+            }
+        }
+        table.querySelectorAll('thead th').forEach(function (headerCell) {
+            if (!headerCell.hasAttribute('scope')) headerCell.setAttribute('scope', 'col');
+        });
+        table.querySelectorAll('tbody th').forEach(function (headerCell) {
+            if (!headerCell.hasAttribute('scope')) headerCell.setAttribute('scope', 'row');
+        });
+    });
+
+    document.querySelectorAll('.operation-table-wrap').forEach(function (tableRegion, regionIndex) {
+        if (!tableRegion.hasAttribute('tabindex')) tableRegion.setAttribute('tabindex', '0');
+        if (!tableRegion.hasAttribute('role')) tableRegion.setAttribute('role', 'region');
+        if (!tableRegion.hasAttribute('aria-label') && !tableRegion.hasAttribute('aria-labelledby')) {
+            var regionSection = tableRegion.closest('section, article');
+            var regionHeading = regionSection ? regionSection.querySelector('h2, h3') : null;
+            if (regionHeading) {
+                if (!regionHeading.id) regionHeading.id = 'table-region-heading-' + (regionIndex + 1);
+                tableRegion.setAttribute('aria-labelledby', regionHeading.id);
+            } else {
+                tableRegion.setAttribute('aria-label', '横方向にスクロールできる表');
+            }
+        }
+    });
+
     /* ===== ローダーの非表示処理 ===== */
     function hideLoader() {
         var loader = document.querySelector('.loader');
@@ -81,7 +123,7 @@
         });
 
         window.addEventListener('resize', function () {
-            if (window.innerWidth > 900 && siteNav.classList.contains('show')) closeMenu(false);
+            if (window.innerWidth > 960 && siteNav.classList.contains('show')) closeMenu(false);
         }, { passive: true });
     }
 
@@ -115,7 +157,15 @@
             }
         });
     }
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    var scrollFrame = null;
+    function requestScrollUpdate() {
+        if (scrollFrame !== null) return;
+        scrollFrame = window.requestAnimationFrame(function () {
+            scrollFrame = null;
+            handleScroll();
+        });
+    }
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
     handleScroll();
 
     /* ===== ページ内アンカーリンクのスムーススクロール ===== */
@@ -149,6 +199,16 @@
     var filterButtons = document.querySelectorAll('.filter-btn');
     if (filterButtons.length) {
         var showcaseItems = document.querySelectorAll('.work-showcase-item');
+        var filterStatus = document.querySelector('#filter-status');
+        var preferredFilterButton = document.querySelector('.filter-btn[data-filter="infra"]');
+        if (preferredFilterButton) {
+            filterButtons.forEach(function (button) {
+                button.classList.remove('active');
+                button.setAttribute('aria-pressed', 'false');
+            });
+            preferredFilterButton.classList.add('active');
+            preferredFilterButton.setAttribute('aria-pressed', 'true');
+        }
         filterButtons.forEach(function (button) {
             button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
         });
@@ -166,43 +226,41 @@
                     var show = filter === 'all' || categories.indexOf(filter) !== -1;
                     item.style.display = show ? '' : 'none';
                 });
+                if (filterStatus) {
+                    var visibleCount = Array.from(showcaseItems).filter(function (item) {
+                        return item.style.display !== 'none';
+                    }).length;
+                    filterStatus.textContent = visibleCount + '件の作品を表示しています。';
+                }
+            });
+        });
+
+        var initialFilterButton = document.querySelector('.filter-btn.active');
+        if (initialFilterButton) {
+            var initialFilter = initialFilterButton.getAttribute('data-filter');
+            showcaseItems.forEach(function (item) {
+                var initialCategories = (item.getAttribute('data-category') || '').split(/\s+/);
+                item.style.display = initialFilter === 'all' || initialCategories.indexOf(initialFilter) !== -1 ? '' : 'none';
+            });
+            if (filterStatus) {
+                var initialVisibleCount = Array.from(showcaseItems).filter(function (item) {
+                    return item.style.display !== 'none';
+                }).length;
+                filterStatus.textContent = initialVisibleCount + '件の作品を表示しています。';
+            }
+        }
+
+        document.querySelectorAll('.work-showcase-item').forEach(function (item) {
+            var workHeading = item.querySelector('h2, h3');
+            var workName = workHeading ? workHeading.textContent.trim() : '作品';
+            item.querySelectorAll('a').forEach(function (link) {
+                if (link.hasAttribute('aria-label')) return;
+                var linkText = link.textContent.replace(/\s+/g, ' ').trim();
+                if (/^(?:Code|Screenshot|GitHub|Demo|Live Demo)$/i.test(linkText)) {
+                    link.setAttribute('aria-label', workName + 'の' + linkText);
+                }
             });
         });
     }
 
-    /* ===== index.html：ヒーロー背景のクロスフェード（旧 jquery.bgswitcher.js の置き換え） ===== */
-    var heroSlider = document.querySelector('.hero-slider');
-    if (heroSlider) {
-        var heroImages = ['image/works.jpg', 'image/me.jpg', 'image/contact.jpg', 'image/skills.jpg'];
-        for (var i = heroImages.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            var tmp = heroImages[i];
-            heroImages[i] = heroImages[j];
-            heroImages[j] = tmp;
-        }
-
-        var layerA = document.createElement('div');
-        var layerB = document.createElement('div');
-        [layerA, layerB].forEach(function (layer) {
-            layer.className = 'hero-slider-layer';
-            heroSlider.appendChild(layer);
-        });
-        layerA.style.backgroundImage = 'url(' + heroImages[0] + ')';
-        layerA.classList.add('is-visible');
-
-        var current = layerA;
-        var next = layerB;
-        var index = 0;
-        if (!reduceMotionQuery.matches) {
-            window.setInterval(function () {
-                index = (index + 1) % heroImages.length;
-                next.style.backgroundImage = 'url(' + heroImages[index] + ')';
-                next.classList.add('is-visible');
-                current.classList.remove('is-visible');
-                var swap = current;
-                current = next;
-                next = swap;
-            }, 5000);
-        }
-    }
 })();

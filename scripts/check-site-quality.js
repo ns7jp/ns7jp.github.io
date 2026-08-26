@@ -134,6 +134,30 @@ for (const file of htmlFiles) {
     }
   }
 
+  for (const match of html.matchAll(/<i\b[^>]*class=["'][^"']*\bfa-(?:solid|regular|brands)\b[^"']*["'][^>]*>/gi)) {
+    const tag = match[0];
+    if (!hasAttribute(tag, "aria-hidden", /^true$/i)) {
+      failures.push(`${file}: decorative Font Awesome icon requires aria-hidden="true": ${tag.slice(0, 100)}`);
+    }
+  }
+
+  for (const match of html.matchAll(/<table\b[^>]*>[\s\S]*?<\/table>/gi)) {
+    const tableBlock = match[0];
+    if (!/<thead\b/i.test(tableBlock)) continue;
+    const tableTag = tableBlock.match(/<table\b[^>]*>/i)?.[0] || "";
+    const hasAccessibleName = /<caption\b[^>]*>[\s\S]*?\S[\s\S]*?<\/caption>/i.test(tableBlock) ||
+      hasAttribute(tableTag, "aria-label") || hasAttribute(tableTag, "aria-labelledby");
+    if (!hasAccessibleName) failures.push(`${file}: data table requires a caption or accessible name`);
+
+    const theadBlock = tableBlock.match(/<thead\b[\s\S]*?<\/thead>/i)?.[0] || "";
+    for (const headerMatch of theadBlock.matchAll(/<th\b[^>]*>/gi)) {
+      const headerTag = headerMatch[0];
+      if (!hasAttribute(headerTag, "scope", /^col$/i)) {
+        failures.push(`${file}: column header requires scope="col"`);
+      }
+    }
+  }
+
   for (const match of html.matchAll(/<video\b[^>]*>[\s\S]*?<\/video>/gi)) {
     const block = match[0];
     const openTag = block.match(/<video\b[^>]*>/i)?.[0] || "";

@@ -27,9 +27,9 @@
 
     <title>Evidence Digest | 島田則幸のポートフォリオ</title>
 
-    <script src="js/main.js?v=20260822-3" defer></script>
+    <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260822-3">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -43,6 +43,7 @@
       "@type": "TechArticle",
       "headline": "Linuxサーバー構築・運用 Evidence Digest",
       "description": "Linuxサーバー構築・運用ポートフォリオの実測証跡と未実測範囲をまとめたダイジェスト",
+      "dateModified": "2026-08-26",
       "author": { "@type": "Person", "name": "島田則幸", "url": "https://ns7jp.github.io/" },
       "url": "https://ns7jp.github.io/evidence-demo.html",
       "inLanguage": "ja"
@@ -60,8 +61,8 @@
     </div>
 
     <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars"></i>
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <header>
@@ -73,12 +74,12 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -97,10 +98,11 @@
     <div class="page-content evidence-page-content">
         <div class="container">
             <nav class="lab-subnav" aria-label="Linuxサーバー構築案件の案内">
-                <a href="project-brief.html"><i class="fa-solid fa-file-lines"></i> Project Brief</a>
-                <a href="infra-lab.html"><i class="fa-solid fa-server"></i> Build Lab</a>
-                <a href="evidence-demo.html" class="active" aria-current="page"><i class="fa-solid fa-clipboard-check"></i> Evidence</a>
-                <a href="resume.html"><i class="fa-solid fa-id-card"></i> Resume</a>
+                <a href="project-brief.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Project Brief</a>
+                <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> Build Lab</a>
+                <a href="evidence-demo.html" class="active" aria-current="page"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence</a>
+                <a href="work-readiness.html"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Work Style</a>
+                <a href="resume.html"><i class="fa-solid fa-id-card" aria-hidden="true"></i> Resume</a>
             </nav>
 
             <section class="lab-intro evidence-intro">
@@ -108,22 +110,22 @@
                 <h2>採用担当者が2分で確認できる証跡ダイジェスト</h2>
                 <p>設計書やコードがあるだけの項目と、実際にコマンドを実行して結果を残した項目を分けています。以下の数値は、リンク先に実行日・対象commit・環境・コマンド・結果が残っているものだけです。</p>
                 <div class="status-callout validated evidence-scope-note" role="note">
-                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
                     <div>
-                        <strong>最新の追加実測は2026年8月23日のgit-mode rollback rehearsalです</strong>
-                        <p><a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">PR #77 / Actions run 32611251044</a>で、disposable Ubuntu runnerの<code>/opt/server-monitor</code>へcandidate <code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code>をimmutable git SHAで配備・検証し、前版<code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code>へ切り戻してPASSしました。これはPR branch上のCI実測であり、main統合済みまたはpersistent hostの実績ではありません。2026年8月22日の23 / 23 E2Eと8月17〜19日の履歴も、それぞれの対象commitに紐づけて保持しています。</p>
+                        <strong>証跡スナップショット（2026年8月25日時点）</strong>
+                        <p>8月22日のFull-stack E2E 23 / 23、8月23日のgit rollback CIに続き、8月24日に<a href="#b-series-title">B-1〜B-4</a>、8月25日に<a href="https://github.com/ns7jp/server-monitor/actions/runs/32811100007" target="_blank" rel="noopener noreferrer">EL9向けMolecule</a>を採録しました。通算29件の実行時欠陥と6件の偽PASSも台帳化しています。qemu、Docker、network namespace、コンテナ上の結果であり、独立VM／実機AlmaLinuxでの構築実績とは区別します。</p>
                     </div>
                 </div>
                 <div class="evidence-legend" aria-label="証跡ステータスの凡例">
-                    <span class="status-pill measured"><i class="fa-solid fa-circle-check"></i> 実測済み</span>
-                    <span class="status-pill validated"><i class="fa-solid fa-code"></i> CI・構成検証</span>
-                    <span class="status-pill pending"><i class="fa-solid fa-circle-minus"></i> NOT RUN</span>
+                    <span class="status-pill measured"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 実測済み</span>
+                    <span class="status-pill validated"><i class="fa-solid fa-code" aria-hidden="true"></i> CI・構成検証</span>
+                    <span class="status-pill pending"><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> NOT RUN</span>
                 </div>
             </section>
 
             <section class="evidence-overview" aria-labelledby="snapshot-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="snapshot-title">Evidence Snapshot</h2>
                 </div>
                 <div class="metric-grid">
@@ -167,7 +169,7 @@
 
             <section class="evidence-timeline-section" aria-labelledby="digest-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-list-check"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="digest-title">2 Minute Evidence Walkthrough</h2>
                 </div>
                 <div class="evidence-timeline">
@@ -178,7 +180,7 @@
                             <h3>candidateから前版のexact SHAへrollback</h3>
                             <p>candidateを配備・検証後、前版SHAへ切り戻し、revision markerとrunning-container manifestの一致、app containerの強制置換、stale file除去、loopback bind、Loki取り込みを再確認しました。対象はdisposable Ubuntu runnerで、persistent hostではありません。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-23</dd></div><div><dt>candidate</dt><dd><code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code></dd></div><div><dt>rollback</dt><dd><code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code></dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
                     </article>
                     <article class="evidence-step">
@@ -188,7 +190,7 @@
                             <h3>使い捨てUbuntuへsite.ymlを2回適用</h3>
                             <p>Docker導入済みのdisposable Ubuntu 24.04 runnerへ<code>site.yml</code>を初回適用し、同じplaybookの2回目が<code>changed=0</code>になることを確認しました。Docker自体の新規導入検証ではありません。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>GitHub Actions / disposable Ubuntu 24.04</dd></div><div><dt>前提</dt><dd>Docker preinstalled</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">Full-stack E2E証跡を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
                     </article>
                     <article class="evidence-step">
@@ -198,7 +200,7 @@
                             <h3>core 10 servicesとCI webhook sinkを起動</h3>
                             <p>監視スタックのcore 10 servicesにCI用webhook sinkを加えた計11 containersを起動し、ローカルwebhookで<code>FIRING</code>と<code>RESOLVED</code>を確認しました。これは通知経路のローカル検証であり、Slack実配信の証跡ではありません。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>Docker Compose / 11 containers</dd></div><div><dt>結果</dt><dd>FIRING / RESOLVED</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">起動・通知の証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">起動・通知の証跡を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
                     </article>
                     <article class="evidence-step">
@@ -208,7 +210,7 @@
                             <h3>Docker API proxyをread-onlyで検証</h3>
                             <p>proxy経由のread APIが成功し、書き込みを伴うPOSTは拒否されました。さらにproxyが取得した固有Nginx logがAlloyを経由してLokiへ届くことを確認しています。POST拒否は変更操作を低減しますが、containers / networksのGETにはログ等を読み取れる権限が残るため、完全なleast privilegeとは扱いません。残存リスクは<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/security.md" target="_blank" rel="noopener noreferrer">Security方針</a>に記録しています。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>runtime</dt><dd><code>7622a9d</code></dd></div><div><dt>結果</dt><dd>GET PASS / POST denied / Loki PASS</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">proxy検証の証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">proxy検証の証跡を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
                     </article>
                     <article class="evidence-step">
@@ -218,7 +220,7 @@
                             <h3>runner内のnetwork / UFWを確認</h3>
                             <p>使い捨てrunner内でNIC、route、listen、UFWとコンテナ間通信を検証しました。このPASSは同一runner内の確認範囲であり、独立した管理端末や引き渡し対象ホスト、組織DNSからの疎通を示しません。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>disposable Ubuntu 24.04 runner</dd></div><div><dt>範囲</dt><dd>runner network / UFW</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">network / UFW証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">network / UFW証跡を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
                     </article>
                     <article class="evidence-step">
@@ -228,7 +230,7 @@
                             <h3>D-1を1秒で復旧し、3 volumeをrestore</h3>
                             <p>D-1プロセス障害から1秒で復旧し、目標RTO 5分以内を満たしました。さらにPrometheus・Grafana・Lokiの3 volumeをバックアップから復元し、データの復旧を確認しました。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>D-1 RTO</dt><dd>1秒</dd></div><div><dt>restore</dt><dd>3 volumes</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">復旧・restore証跡を見る <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">復旧・restore証跡を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
                     </article>
                 </div>
@@ -236,18 +238,19 @@
 
             <section class="test-status-section" aria-labelledby="test-status-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-vial-circle-check"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="test-status-title">Test Status — 2026-08-22 / runtime 7622a9d / 23 / 23 PASS</h2>
                 </div>
                 <p class="evidence-note"><a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026年8月22日のFull-stack E2E</a>はruntime最終commit <code>7622a9d</code>で23 / 23 IDがPASSしました。結果を転記したdocs commitは<code>cf9419b</code>、main mergeは<code>4a292026</code>です。後続の証跡文書だけの変更をruntime検証へ読み替えていません。2026年8月19日の必須9 / 18・全体11 / 21 PASSは、当時の検証範囲を示す履歴です。</p>
-                <div class="operation-table-wrap">
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるFull-stack E2E試験結果表" tabindex="0">
                     <table class="operation-table evidence-status-table">
+                        <caption class="sr-only">2026年8月22日のFull-stack E2E試験結果と環境境界</caption>
                         <thead>
                             <tr>
-                                <th>区分</th>
-                                <th>確認済み</th>
-                                <th>確認範囲・境界</th>
-                                <th>状態</th>
+                                <th scope="col">区分</th>
+                                <th scope="col">確認済み</th>
+                                <th scope="col">確認範囲・境界</th>
+                                <th scope="col">状態</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -285,32 +288,33 @@
                     </table>
                 </div>
                 <div class="status-callout pending" role="note">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
                         <strong>23 / 23 PASSはruntime <code>7622a9d</code>を使い捨てrunnerで確認した判定です</strong>
-                        <p>このruntimeと証跡文書はmain <code>4a292026</code>へ統合済みです。別途、PR #77のdisposable runnerではcandidate <code>84e1492</code>から前版<code>59aa88e</code>へのgit-mode rollbackをPASSしました。ただし、persistent hostでのrollback・72時間連続稼働・host再起動後、Slack実配信、AWS apply / destroy、D-2ホスト障害、独立した管理端末と引き渡し対象ホスト、組織DNSは未実測です。Dockerもrunnerへ導入済みだったため、新規ホストへのDocker導入完了を示す結果ではありません。</p>
+                        <p>このruntimeと証跡文書はmain <code>4a292026</code>へ統合済みです。別途、PR #77途中commitのdisposable runnerではcandidate <code>84e1492</code>から前版<code>59aa88e</code>へのgit-mode rollbackをPASSしました。PR #77自体は後にmainへmerge済みですが、このrollback runはmerge後mainで同一試験を再実行した結果ではありません。persistent hostでのrollback・72時間連続稼働・host再起動後、Slack実配信、AWS apply / destroy、D-2ホスト障害、独立した管理端末と引き渡し対象ホスト、組織DNSは未実測です。Dockerもrunnerへ導入済みだったため、新規ホストへのDocker導入完了を示す結果ではありません。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list"></i> 23 / 23 E2E証跡</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clock-rotate-left"></i> 2026-08-19 結果票</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book"></i> 最新の証跡台帳</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list" aria-hidden="true"></i> 23 / 23 E2E証跡</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> 2026-08-19 結果票</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> 最新の証跡台帳</a>
                 </div>
             </section>
 
             <section class="change-story-section" aria-labelledby="b-series-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-flask-vial"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-flask-vial" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="b-series-title">B-1〜B-4 — 2026-08-24 に実行・採録</h2>
                 </div>
                 <p class="evidence-note">ディスク設計、3層構成の障害切り分け、DB復元、L2 / L3切り分けの4演習です。判定はスクリプトが期待値と実測値を比較した結果で、証跡ファイルは実行結果から自動生成されます。B-1はqemuゲスト（loop device）、B-2 / B-3はDockerコンテナ、B-4はnetwork namespace上での実行で、いずれもAI支援セッションの作業環境上のものです。面接の場での再実演は、手元のWSL2 + Dockerで再現できるB-2 / B-3に限りお約束できます。</p>
-                <div class="operation-table-wrap">
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるB-1からB-4の演習結果表" tabindex="0">
                     <table class="operation-table evidence-status-table">
+                        <caption class="sr-only">2026年8月24日に実行したB-1からB-4の演習結果</caption>
                         <thead>
                             <tr>
-                                <th>演習</th>
-                                <th>内容</th>
-                                <th>結果</th>
+                                <th scope="col">演習</th>
+                                <th scope="col">内容</th>
+                                <th scope="col">結果</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -338,21 +342,21 @@
                     </table>
                 </div>
                 <div class="status-callout pending" role="note">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
                         <strong>実行して初めて見つかった実バグは通算29件</strong>
                         <p>静的検査（shellcheck / ansible-lint / molecule / 構文検査）で捕まえられたものは0件、うち6件は「壊れているのに PASS」する偽PASSでした。1件ずつの症状・発見方法・修正PRは<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" target="_blank" rel="noopener noreferrer">欠陥台帳</a>にまとめています。Ansible roleはUbuntu 22.04 / 24.04に加えてAlmaLinux / Rocky 9に対応しており、Moleculeのel9シナリオは<a href="https://github.com/ns7jp/server-monitor/actions/runs/32811100007" target="_blank" rel="noopener noreferrer">2026-08-25に実行証跡を採録</a>しました（コンテナ上での検証。実機のAlmaLinuxホストへ適用した証跡はまだありません）。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bug"></i> 欠陥台帳（29件）</a>
-                    <a href="https://github.com/ns7jp/server-monitor/tree/main/ansible/roles/common/molecule/el9" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server"></i> el9シナリオ</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bug" aria-hidden="true"></i> 欠陥台帳（29件）</a>
+                    <a href="https://github.com/ns7jp/server-monitor/tree/main/ansible/roles/common/molecule/el9" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server" aria-hidden="true"></i> el9シナリオ</a>
                 </div>
             </section>
 
             <section class="change-story-section" aria-labelledby="pr75-change-story-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-code-pull-request"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="pr75-change-story-title">PR #75 CI：Failure → Root Cause → Fix</h2>
                 </div>
                 <p class="evidence-note">成功結果だけでなく、PR上で実環境相当のE2Eが検出した不具合と修正も残しています。最終runtime <code>7622a9d</code>と証跡docs <code>cf9419b</code>はmain <code>4a292026</code>へ統合済みです。</p>
@@ -377,7 +381,7 @@
 
             <section class="change-story-section" aria-labelledby="change-story-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-code-pull-request"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="change-story-title">2026-08-19 履歴：Failure → Hypothesis → Evidence</h2>
                 </div>
                 <div class="decision-grid">
@@ -402,20 +406,20 @@
 
             <section class="video-status-section" aria-labelledby="video-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-video"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-video" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="video-title">2分15秒 実測証跡リプレイ</h2>
                 </div>
                 <div class="status-callout validated" role="note">
-                    <i class="fa-solid fa-clapperboard"></i>
+                    <i class="fa-solid fa-clapperboard" aria-hidden="true"></i>
                     <div>
                         <strong>2026年8月18・19日の保存済み証跡を編集したリプレイを公開中</strong>
                         <p><code>demo.html</code>は当時のスクリーンショットとD-1 13秒のログを2分15秒に再構成した映像です。実操作の連続録画でも、2026年8月22日Full-stack E2Eの録画でもありません。Slack実配信を示す映像も含みません。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
-                    <a href="demo.html" class="btn btn-primary"><i class="fa-solid fa-play"></i> 編集リプレイを見る</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-ol"></i> 実操作の収録ガイド</a>
-                    <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines"></i> 案件概要へ</a>
+                    <a href="demo.html" class="btn btn-primary"><i class="fa-solid fa-play" aria-hidden="true"></i> 編集リプレイを見る</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-ol" aria-hidden="true"></i> 実操作の収録ガイド</a>
+                    <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 案件概要へ</a>
                 </div>
             </section>
         </div>
@@ -427,7 +431,7 @@
             <div class="cta-content">
                 <h2>設計から復旧まで、根拠と未完了範囲を説明します</h2>
                 <p>面談では、実測した内容だけでなく、失敗した検証と次に埋める項目もお話しできます。</p>
-                <a href="contact.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-envelope"></i> 連絡先を見る</a>
+                <a href="contact.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 連絡先を見る</a>
             </div>
         </div>
     </section>
@@ -442,13 +446,14 @@
                 <a href="project-brief.html">Project Brief</a>
                 <a href="infra-lab.html">Server Build</a>
                 <a href="evidence-demo.html">Evidence</a>
+                <a href="work-readiness.html">Work Style</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="footer-bottom">
