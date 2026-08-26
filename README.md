@@ -13,7 +13,7 @@
 
 ## 開発体制について
 
-このポートフォリオおよび主作品 [Server Monitor](https://github.com/ns7jp/server-monitor) は、設計方針・構成・検証観点は自分で立てた上で、実装・デバッグの多くを Claude Code / Codex などの AI コーディングエージェントと協働して進めています。実機・CIで確認できた項目は日時・環境・対象commitとともに記録し、未確認の項目は `NOT RUN` として公開します。コミット履歴・PRもGitHub上で確認できます。
+このポートフォリオおよび主作品 [Server Monitor](https://github.com/ns7jp/server-monitor) は、README・設計書・Runbookの下書き／推敲に加え、Ansible role、Terraform module、CI workflow、test・Lab雛形の生成やデバッグにも Claude Code / Codex を使用しています。採用する構成の最終判断、機密情報のマスク、実測／未実測の判定、面談での説明は本人が担当します。証跡は本人手元WSL2、自動CI、AI支援セッションを区別し、未確認項目は `NOT RUN` として公開します。個人制作のため、人による第三者レビュー実績とは表現しません。
 
 ## 採用担当者向け: 最短レビュー順
 
@@ -21,18 +21,20 @@
 |---|---|---|
 | 1 | [Project Brief](https://ns7jp.github.io/project-brief.html) | Linuxサーバー構築案件の目的、担当範囲、工程、設計判断、完了条件 |
 | 2 | [Evidence Digest](https://ns7jp.github.io/evidence-demo.html) | 日時・環境・commit付きの実測結果、失敗、未実施範囲 |
-| 3 | [2分15秒 証跡リプレイ](https://ns7jp.github.io/demo.html) | 2026年8月18日・19日の実測画面とD-1ログを時系列に再構成した閲覧用デモ |
-| 4 | [Full-stack E2E 23/23](https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md) | runtime `7622a9d`、使い捨てUbuntu 24.04 runnerでの構築・冪等性・11 containers・Docker API proxy・復旧・3 volumes復元。main `4a292026`へ統合済み |
-| 5 | [Git rollback rehearsal](https://github.com/ns7jp/server-monitor/actions/runs/32611251044) | PR #77の使い捨てUbuntu runnerで、candidate `84e1492`から前版`59aa88e`へのimmutable git SHA切り戻しをPASS。main統合済みとは扱いません |
-| 6 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、構築・運用スキル、主成果物 |
-| 7 | [Server Build Lab](https://ns7jp.github.io/infra-lab.html) | 要件から引き渡しまでの10番号付き成果物、監視、復旧、補助Lab |
+| 3 | [Work Readiness](https://ns7jp.github.io/work-readiness.html) | 実務想定ケース、変更・報告の型、AI利用の境界、面談で再現できる内容、次の独立VM検証 |
+| 4 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、構築・運用スキル、主成果物、制作体制 |
+| 5 | [2分15秒 証跡リプレイ](https://ns7jp.github.io/demo.html) | 2026年8月18日・19日の実測画面とD-1ログを時系列に再構成した閲覧用デモ |
+| 6 | [Full-stack E2E 23/23](https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md) | runtime `7622a9d`、使い捨てUbuntu 24.04 runnerでの構築・冪等性・11 containers・Docker API proxy・復旧・3 volumes復元。main `4a292026`へ統合済み |
+| 7 | [Git rollback rehearsal](https://github.com/ns7jp/server-monitor/actions/runs/32611251044) | PR #77途中commitの使い捨てUbuntu runnerで、candidate `84e1492`から前版`59aa88e`へのimmutable git SHA切り戻しをPASS。PR自体は後にmerge済みですが、merge後mainでの同一試験結果とは扱いません |
 
 ### 証跡の境界
 
 - **作成・実装済み:** 要件、設計、パラメータ、構築コード、試験仕様、引き渡し、変更・ロールバック、実機検証手順
 - **2026年8月17〜19日の履歴として実測:** Ansible 4 roles、監視9 services、Grafana実データ、Lokiログ、D-1復旧（RTO 13秒）、二セグメント通信障害
 - **2026年8月22日のE2Eで実測（runtime `7622a9d`）:** 使い捨てUbuntu 24.04 runnerで23/23 PASS。`site.yml`初回一括適用、2回目`changed=0`、core 10 services + CI専用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・固有Nginx logのAlloy経由Loki到達、認証、runner内network/UFW、synthetic alertのlocal webhook FIRING/RESOLVED、D-1自動復旧（RTO 1秒）、別名3 volumesへのchecksum付きrestore。証跡docs `cf9419b`を含むPR #75はmain merge `4a292026`へ統合済み
-- **2026年8月23日のCIで実測（PR #77 / [Actions run 32611251044](https://github.com/ns7jp/server-monitor/actions/runs/32611251044)）:** disposable Ubuntu runnerの`/opt/server-monitor`へimmutable git SHAでcandidate `84e149254d463a8a27a4cabcd09efa4504d1b47e`を配備・検証後、前版`59aa88ed1c8ccb7ba188909f0e079b834e9126c7`へ切り戻してPASS。revision marker、running-container manifest、app container強制置換、stale file除去、loopback bind、Loki取り込みまで一致を確認。PR branch上の結果であり、main統合済みとは表現しません
+- **2026年8月23日のCIで実測（PR #77途中commit / [Actions run 32611251044](https://github.com/ns7jp/server-monitor/actions/runs/32611251044)）:** disposable Ubuntu runnerの`/opt/server-monitor`へimmutable git SHAでcandidate `84e149254d463a8a27a4cabcd09efa4504d1b47e`を配備・検証後、前版`59aa88ed1c8ccb7ba188909f0e079b834e9126c7`へ切り戻してPASS。revision marker、running-container manifest、app container強制置換、stale file除去、loopback bind、Loki取り込みまで一致を確認。PR #77自体は後にmerge済みですが、このrunをmerge後mainで再実行した結果とは表現しません
+- **2026年8月24日のAI支援セッション環境で実測:** B-1（qemu guest上のloop deviceによるLVM）、B-2 / B-3（Docker）、B-4（network namespace）を採録。B-4は環境制約により3項目を`SKIP-ENV`とし、本人手元で面談再実演を約束するのはWSL2 + Dockerで再現できるB-2 / B-3のみ
+- **2026年8月25日のCIで実測:** AlmaLinux / Rocky 9向けMoleculeのEL9シナリオをコンテナ上で確認。実機AlmaLinuxホストへの適用証跡とは扱いません
 - **NOT RUN:** persistent hostでのrollback・72時間連続稼働・host再起動後、Slack実配信、AWS `apply / destroy`・実費・Security Group/NACL、D-2、独立した管理端末・引き渡し対象host・組織DNSを含むnetwork検証、production traffic
 
 E2E runnerにはDockerが事前導入済みだったため、最小OSからDockerを導入した実績とは表現しません。local webhookのsynthetic alert試験とD-1障害注入は別の検証であり、いずれもSlack実配信を示しません。runtime実測commit、結果を転記したdocs commit、main merge commitを分け、後続の文書変更をruntime検証へ読み替えません。
@@ -77,7 +79,7 @@ Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画
 |------|------------------|
 | HTML | 見出し、文章、画像、リンク、ナビゲーションなど、ページの骨組みを作る |
 | CSS | 色、余白、文字サイズ、2カラム配置、カード表示、スマホ対応、アニメーションを担当 |
-| JavaScript（Vanilla） | ハンバーガーメニュー、背景画像切り替え、スクロール演出などの動きを担当（`js/main.js` に集約、外部ライブラリ非依存） |
+| JavaScript（Vanilla） | ハンバーガーメニュー、作品フィルター、スクロール処理などの動きを担当（`js/main.js` に集約、外部ライブラリ非依存） |
 | 画像・動画ファイル | ヒーロー画像、プロフィール画像、作品スクリーンショット、証跡リプレイを表示 |
 | GitHub Pages | 作成した静的ファイルをインターネット上に公開 |
 
@@ -116,6 +118,7 @@ Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画
 | トップページ | `index.html` | サイトの入口。自己紹介・スキル・作品ページへの導線をまとめる |
 | 案件概要 | `project-brief.html` | Linuxサーバー構築案件の目的、担当範囲、工程、設計判断、完了条件を説明する |
 | 証跡ダイジェスト | `evidence-demo.html` | 最新E2Eと日付付き履歴、失敗、制約、NOT RUNを環境・commit付きで示す |
+| 仕事の進め方 | `work-readiness.html` | 入口業務、実務想定ケース、変更管理、協働・AI利用の境界、面談デモ、独立VM検証計画 |
 | 証跡リプレイ | `demo.html` | 2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の閲覧用デモ |
 | 自己紹介ページ | `me.html` | プロフィール、経歴、職業訓練、資格、**学習ロードマップ** を説明する |
 | スキルページ | `skills.html` | Linux構築・監視・自動化を先頭に、補助スキルを証跡区分付きで見せる |
@@ -135,7 +138,7 @@ Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画
 
 ### `index.html`
 
-サイトの顔となるトップページです。ファーストビューでは背景画像スライダーとキャッチコピーを表示し、閲覧者に「どんな人のポートフォリオか」を最初に伝えます。その下に採用担当者向けの1分サマリー、自己紹介・スキル・作品のプレビューを配置し、詳細ページへ移動しやすい導線を作っています。
+サイトの顔となるトップページです。ファーストビューでは主作品の固定背景とキャッチコピーを表示し、閲覧者に「どんな人のポートフォリオか」を最初に伝えます。その下に採用担当者向けの要約、仕事の進め方、自己紹介・スキル・主成果のプレビューを配置しています。
 
 初学者向けに見るポイントは、`header`、`nav`、`section` などの HTML タグでページを区切り、CSS のクラス名で見た目を調整している点です。
 
@@ -185,6 +188,7 @@ ns7jp.github.io/
 ├── index.html               ... トップページ
 ├── project-brief.html       ... Linuxサーバー構築案件の概要
 ├── evidence-demo.html       ... 実測・CI・NOT RUNを分けた証跡ダイジェスト
+├── work-readiness.html      ... 実務想定ケース、制作体制、面談デモ、次の独立VM検証計画
 ├── demo.html                ... 2分15秒の証跡リプレイ（連続操作動画ではない）
 ├── me.html                  ... 自己紹介ページ（学習ロードマップ含む）
 ├── skills.html              ... スキル一覧ページ（Win / Linux 系を別カードに分割）
@@ -321,9 +325,9 @@ ns7jp.github.io/
 
 ### JavaScript（Vanilla JS）
 
-サイトに動きを加えるために使用しています。たとえば、ページ読み込み時のローダー、スマホ用ハンバーガーメニュー、スクロール時の表示演出、背景画像スライダーなどです。
+サイトに動きを加えるために使用しています。たとえば、スマホ用ハンバーガーメニュー、作品フィルター、スクロール時のヘッダー調整などです。
 
-以前は jQuery と `jquery.bgswitcher.js`（外部プラグイン）に依存していましたが、CDN 読み込み失敗時にローダーが消えず画面が固まってしまう問題があったため、`js/main.js` に外部ライブラリ非依存の vanilla JS として書き直しました。トップページのヒーロー背景クロスフェードも、`main.js` 内で2枚のレイヤーの `opacity` を切り替えるだけの実装に置き換えています。
+以前は jQuery と背景切替プラグインに依存していましたが、CDN読み込み失敗時の不具合を避けるため、`js/main.js` を外部ライブラリ非依存のvanilla JSへ書き直しました。現在のトップ背景は主作品の1枚に固定し、複数画像の自動取得と定期切替をなくしています。
 
 ### Font Awesome
 

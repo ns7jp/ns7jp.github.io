@@ -21,9 +21,9 @@
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
-    <script src="js/main.js?v=20260822-3" defer></script>
+    <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260822-3">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -54,8 +54,8 @@
     </div>
 
     <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars"></i>
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <header>
@@ -67,12 +67,12 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -92,12 +92,12 @@
         <div class="container">
 
             <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="infra-lab.html"><i class="fa-solid fa-server"></i> Build Overview</a>
-                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check"></i> Evidence</a>
-                <a href="linux-lab.html" class="active" aria-current="page"><i class="fa-brands fa-linux"></i> Linux</a>
-                <a href="cloud-lab.html"><i class="fa-solid fa-cloud"></i> Cloud</a>
-                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area"></i> Monitoring Stack（アーカイブ）</a>
-                <a href="ansible/"><i class="fa-solid fa-gears"></i> Ansible</a>
+                <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> Build Overview</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence</a>
+                <a href="linux-lab.html" class="active" aria-current="page"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> Cloud</a>
+                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Monitoring Stack（アーカイブ）</a>
+                <a href="ansible/"><i class="fa-solid fa-gears" aria-hidden="true"></i> Ansible</a>
             </nav>
 
             <section class="lab-intro">
@@ -105,14 +105,14 @@
                 <h2>「サーバーが重い」「ログインできない」を同じ順で確認するLab</h2>
                 <p>Linuxサーバー（Ubuntu / RHEL系）の一次運用で、まず見るべきところを <strong>負荷・ディスク・サービス・ログ・ネットワーク・認証・ファイアウォール</strong> の順に整理しました。すべて読み取り操作のみで構成し、設定変更や再起動は手順を分けています。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
-                    <span><i class="fa-solid fa-microchip"></i> systemd</span>
-                    <span><i class="fa-solid fa-book"></i> journalctl</span>
-                    <span><i class="fa-solid fa-clock"></i> cron</span>
-                    <span><i class="fa-solid fa-key"></i> SSH</span>
-                    <span><i class="fa-solid fa-floppy-disk"></i> rsync</span>
+                    <span><i class="fa-solid fa-microchip" aria-hidden="true"></i> systemd</span>
+                    <span><i class="fa-solid fa-book" aria-hidden="true"></i> journalctl</span>
+                    <span><i class="fa-solid fa-clock" aria-hidden="true"></i> cron</span>
+                    <span><i class="fa-solid fa-key" aria-hidden="true"></i> SSH</span>
+                    <span><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> rsync</span>
                 </div>
                 <div class="status-callout validated" role="note">
-                    <i class="fa-solid fa-terminal"></i>
+                    <i class="fa-solid fa-terminal" aria-hidden="true"></i>
                     <div>
                         <strong>このページは一次切り分けの手順・コマンド集です</strong>
                         <p>掲載コマンドすべてを同一実ホストで通した証跡ではありません。最新のruntime実測<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026-08-22 Full-stack E2E</a>では、runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、<code>site.yml</code>、2回目<code>changed=0</code>、11 containers、Docker API proxy、runner内network / UFW、D-1 RTO 1秒、3-volume restoreを含む23 / 23 IDをPASSしました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。WSL2上の監視、D-1 RTO 13秒、二セグメント通信障害は2026-08-17〜19の履歴として、<a href="evidence-demo.html">Evidence Digest</a>で区別しています。</p>
@@ -122,17 +122,18 @@
 
             <section class="operation-matrix-section">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-table-list"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span>
                     <span class="heading-text">Linux 一次切り分けコマンド早見表</span>
                 </div>
-                <div class="operation-table-wrap">
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるLinux一次運用表" tabindex="0">
                     <table class="operation-table">
+                        <caption class="sr-only">Linux一次運用Labの確認観点、コマンド、判断基準</caption>
                         <thead>
                             <tr>
-                                <th>対象</th>
-                                <th>確認観点</th>
-                                <th>主なコマンド</th>
-                                <th>判断基準 / 引き継ぎ目安</th>
+                                <th scope="col">対象</th>
+                                <th scope="col">確認観点</th>
+                                <th scope="col">主なコマンド</th>
+                                <th scope="col">判断基準 / 引き継ぎ目安</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -191,7 +192,7 @@
 
             <section class="operation-matrix-section">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
                     <span class="heading-text">SSH / 権限 / cron 設計メモ</span>
                 </div>
                 <div class="lab-architecture-grid">
@@ -233,11 +234,11 @@
 
             <section class="operation-matrix-section">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-floppy-disk"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i></span>
                     <span class="heading-text">rsync によるバックアップ例</span>
                 </div>
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-terminal"></i> 日次差分バックアップのワンライナー</h3>
+                    <h3><i class="fa-solid fa-terminal" aria-hidden="true"></i> 日次差分バックアップのワンライナー</h3>
                     <p>同一ホスト内の別ディスクへ /etc と /var/www を日次でバックアップし、削除も同期する例です。実運用ではバックアップ先を別筐体 / オフサイトにすること、定期的にリストアテストを行うことが前提です。</p>
 <pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
 # /usr/local/sbin/daily-backup.sh
@@ -278,7 +279,7 @@ WantedBy=timers.target
 
             <section class="lab-links-section">
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-terminal"></i> bash 一次切り分けスクリプト</h3>
+                    <h3><i class="fa-solid fa-terminal" aria-hidden="true"></i> bash 一次切り分けスクリプト</h3>
                     <p>ここまでの確認項目を1本にまとめた読み取り専用 bash です。問い合わせ受付直後に流して、結果をテキストでチケットに添付します。</p>
                     <div class="contact-actions">
                         <a href="support-scripts/linux-triage.sh" class="btn btn-secondary">linux-triage.sh を見る</a>
@@ -286,7 +287,7 @@ WantedBy=timers.target
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-gears"></i> 自動化 / 観測 / 運用品質への入口</h3>
+                    <h3><i class="fa-solid fa-gears" aria-hidden="true"></i> 自動化 / 観測 / 運用品質への入口</h3>
                     <p>初期構築のIaC、Cloud Network、運用後の観測性（Metrics + Logs）、運用品質の数値化、検証証跡を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheus + Loki の観測基盤を構成し、採録した範囲のSLOを説明する流れです。長期稼働の実測ではありません。</p>
                     <div class="next-scope-list">
                         <span><a href="ansible/" style="color:inherit;">Ansible playbook</a></span>
@@ -324,8 +325,8 @@ WantedBy=timers.target
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="footer-bottom">

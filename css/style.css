@@ -108,11 +108,13 @@
 ======================================== */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
     font-size: 62.5%;
 }
 
 body {
     font-family: 'Noto Sans JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    font-size: 1.6rem;
     color: var(--text-dark);
     line-height: 1.9;
     overflow-x: hidden;
@@ -123,6 +125,18 @@ body {
     box-sizing: border-box;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 a {
     color: var(--nature-green);
     text-decoration: none;
@@ -131,6 +145,15 @@ a {
 
 a:hover {
     color: var(--primary-color);
+}
+
+/* Body-copy links stay identifiable without relying on color alone. */
+main p a:not(.btn),
+main td a:not(.btn),
+main li a:not(.btn) {
+    text-decoration: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.18em;
 }
 
 /* reset.cssで標準outlineを外しているため、キーボード操作時だけ共通の
@@ -407,14 +430,16 @@ header nav ul li a::after {
 /* ========================================
    7. Hero Section - トップページのヒーロー（最上部の大きなビジュアル）
    ----------------------------------------
-   .hero-slider に .hero-slider-layer が2枚重なり、js/main.jsのvanilla JSで自動切替する。
+   .hero-slider は主作品の固定背景を表示する。
    .hero-overlay は半透明の暗いレイヤー。背景画像の上に重ねて
    白文字を読みやすくする役目がある。
    .hero-content にタイトル・説明・ボタンが入る。
 ======================================== */
 .hero {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: max(620px, 100svh);
+    padding: 110px 0 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -429,26 +454,7 @@ header nav ul li a::after {
     height: 100%;
     background-size: cover;
     background-position: center;
-    /* JavaScriptを無効化した環境でもヒーロー画像を表示するfallback。 */
-    background-image: url('../image/works.jpg');
-}
-
-/* .hero-slider-layer は js/main.js が生成する2枚のレイヤーで、
-   opacityの遷移だけでクロスフェードさせる（旧jQueryプラグインの置き換え）。 */
-.hero-slider-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    opacity: 0;
-    transition: opacity 1.5s ease;
-}
-
-.hero-slider-layer.is-visible {
-    opacity: 1;
+    background-image: url('../image/server-monitor.png');
 }
 
 .hero-overlay {
@@ -799,7 +805,7 @@ header nav ul li a::after {
     display: inline-block;
     margin-bottom: 16px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--accent-gold);
     letter-spacing: 1.5px;
@@ -828,14 +834,14 @@ header nav ul li a::after {
 
 .evidence-boundary-strip {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 12px;
     margin-top: 30px;
 }
 
 .evidence-boundary-strip span {
     padding: 15px 17px;
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     line-height: 1.7;
     color: var(--text-medium);
     background: var(--bg-white);
@@ -1461,7 +1467,7 @@ header nav ul li a::after {
 
 .work-category {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--accent-gold);
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -1559,7 +1565,7 @@ footer {
 
 .footer-nav a {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: var(--text-muted);
     font-weight: 400;
     letter-spacing: 1px;
@@ -1604,9 +1610,43 @@ footer {
 
 .footer-bottom small {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.35rem;
     color: var(--text-muted);
     letter-spacing: 1px;
+}
+
+/* Footer text sits on --primary-dark, so use a dedicated light neutral instead
+   of the body-muted color. Wrap earlier than the mobile navigation breakpoint
+   to keep every link and social control inside medium-width viewports. */
+footer .footer-logo .logo-sub,
+footer .footer-nav a,
+footer .footer-social a,
+footer .footer-bottom small {
+    color: #cbd3d9;
+}
+
+@media (max-width: 1300px) {
+    .footer-content {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 28px;
+    }
+
+    .footer-logo {
+        flex: 0 0 100%;
+        text-align: center;
+    }
+
+    .footer-nav {
+        flex: 1 1 680px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px 28px;
+    }
+
+    .footer-social {
+        flex: 0 0 auto;
+    }
 }
 
 /* ========================================
@@ -2454,7 +2494,7 @@ footer {
 .case-label {
     display: inline-block;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--accent-gold);
     letter-spacing: 1px;
@@ -3356,6 +3396,12 @@ footer {
     overflow-x: auto;
     border: 1px solid var(--bg-sand);
     background: var(--bg-white);
+    scrollbar-gutter: stable;
+}
+
+.operation-table-wrap:focus-visible {
+    outline: 3px solid var(--accent-gold);
+    outline-offset: 3px;
 }
 
 .operation-table {
@@ -3462,7 +3508,7 @@ footer {
     gap: 8px;
     padding: 8px 16px;
     font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     font-weight: 600;
     color: var(--text-medium);
     border: 1px solid transparent;
@@ -3536,7 +3582,7 @@ footer {
     border: 1px solid transparent;
     border-radius: 999px;
     font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     font-weight: 700;
     line-height: 1.3;
     letter-spacing: 0.4px;
@@ -3605,7 +3651,7 @@ footer {
 
 .metric-card small {
     margin-top: auto;
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     line-height: 1.65;
     color: var(--text-medium);
 }
@@ -4397,7 +4443,7 @@ article p,
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
     body.menu-open {
         overflow: hidden;
     }
@@ -5124,7 +5170,7 @@ article p,
     margin-bottom: 2px;
     color: var(--text-muted);
     font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -5132,7 +5178,7 @@ article p,
 
 .evidence-meta dd {
     color: var(--text-dark);
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     overflow-wrap: anywhere;
 }
 

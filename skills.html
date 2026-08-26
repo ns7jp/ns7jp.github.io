@@ -21,11 +21,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 検索エンジン用の説明文 -->
     <meta name="description" content="島田則幸のスキルページ。Linux、Ansible、Docker、Nginx、Prometheus、Grafana、Loki、Terraformと、構築・試験・障害対応の成果物を掲載しています。">
-    <title>スキル | 島田則幸のポートフォリオ</title>
+    <title>Linuxサーバー構築・運用スキル | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/skills.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
-    <meta property="og:title" content="スキル | 島田則幸のポートフォリオ">
+    <meta property="og:title" content="Linuxサーバー構築・運用スキル | 島田則幸">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/skills.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -36,13 +36,15 @@
     <meta property="og:description" content="Linux、Ansible、Docker、Nginx、Prometheus、Grafana、Loki、Terraformと、構築・試験・障害対応の成果物を掲載。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Linuxサーバー構築・運用スキル | 島田則幸">
+    <meta name="twitter:description" content="Linux、Ansible、Docker、監視・ログ、試験、障害復旧を成果物と環境境界付きで掲載。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
-    <script src="js/main.js?v=20260822-3" defer></script>
+    <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260822-3">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -76,8 +78,8 @@
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
     <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars"></i>
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <!-- ===== ヘッダー（全ページ共通） ===== -->
@@ -90,13 +92,13 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
                 <!-- 現在ページ「Skills」を active クラスで強調 -->
-                <li class="active"><a href="skills.html" aria-current="page"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+                <li class="active"><a href="skills.html" aria-current="page"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -124,16 +126,16 @@
                 <div class="evidence-boundary-strip" aria-label="スキルの証跡区分">
                     <span><strong>main統合済みE2E（2026-08-22）</strong> runtime <code>7622a9d</code>・23/23 PASS・2回目<code>changed=0</code>・11 containers・proxy GET / POST拒否 / Loki・D-1・3-volume restore</span>
                     <span><strong>PR #77 CI（2026-08-23）</strong> disposable Ubuntuでcandidate <code>84e1492</code> → rollback <code>59aa88e</code>を<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">run 32611251044</a>でPASS</span>
-                    <span><strong>過去の実測履歴</strong> Ansible 4 roles・監視core 9 services・D-1 RTO 13秒・通信障害</span>
+                    <span><strong>追加演習（2026-08-24〜25）</strong> B-1〜B-4、欠陥29件（偽PASS 6件）、EL9 Molecule。qemu / Docker / namespace / コンテナ上の結果</span>
                     <span><strong>NOT RUN</strong> persistent hostでのrollback・72時間連続稼働・host再起動後・Slack実配信・AWS apply / destroy・D-2・独立した管理端末と引き渡し対象ホスト</span>
                 </div>
-                <p class="overview-text skills-evidence-link"><a href="evidence-demo.html">日時・環境・commit付きのEvidence Digestを見る <i class="fa-solid fa-arrow-right"></i></a></p>
+                <p class="overview-text skills-evidence-link"><a href="evidence-demo.html">日時・環境・commit付きのEvidence Digestを見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
             </section>
 
             <!-- ===== 技術スキル（プログラミング系）セクション ===== -->
             <section class="technical-skills">
                 <h2 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-code"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
                     <span class="heading-text">Technical Skills</span>
                 </h2>
 
@@ -145,7 +147,7 @@
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large infra">
-                                <i class="fa-brands fa-linux"></i>
+                                <i class="fa-brands fa-linux" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
                                 <h3>Linux / 監視 / 自動化</h3>
@@ -176,7 +178,7 @@
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large infra">
-                                <i class="fa-brands fa-windows"></i>
+                                <i class="fa-brands fa-windows" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
                                 <h3>Windows / M365 / AD 運用支援</h3>
@@ -203,7 +205,7 @@
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large python">
-                                <i class="fa-brands fa-python"></i>
+                                <i class="fa-brands fa-python" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
                                 <h3>Python</h3>
@@ -226,7 +228,7 @@
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large db">
-                                <i class="fa-solid fa-database"></i>
+                                <i class="fa-solid fa-database" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
                                 <h3>Database</h3>
@@ -251,7 +253,7 @@
                         <div class="skill-header">
                             <!-- スキル種別ごとに色分けする識別クラス（office, html, jsなど） -->
                             <div class="skill-icon-large office">
-                                <i class="fa-solid fa-file-word"></i>
+                                <i class="fa-solid fa-file-word" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
                                 <h3>Microsoft Office</h3>
@@ -275,7 +277,7 @@
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large php">
-                                <i class="fa-brands fa-php"></i>
+                                <i class="fa-brands fa-php" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
                                 <h3>PHP</h3>
@@ -298,7 +300,7 @@
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large html">
-                                <i class="fa-brands fa-html5"></i>
+                                <i class="fa-brands fa-html5" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
                                 <h3>HTML / CSS</h3>
@@ -321,7 +323,7 @@
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large js">
-                                <i class="fa-brands fa-js"></i>
+                                <i class="fa-brands fa-js" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
                                 <h3>JavaScript</h3>
@@ -346,34 +348,34 @@
             <!-- プログラミング以外の、現場で役立つ運用・対応スキルを紹介 -->
             <section class="soft-skills-section">
                 <h2 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-headset"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span>
                     <span class="heading-text">Supplementary Operations Skills</span>
                 </h2>
                 <div class="soft-skills-grid">
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
-                            <i class="fa-solid fa-desktop"></i>
+                            <i class="fa-solid fa-desktop" aria-hidden="true"></i>
                         </div>
                         <h3>PC・IT基礎</h3>
                         <p>Windows操作、Microsoft Office、周辺機器の接続・初期設定。東芝機器派遣時代に自動販売機の動作試験を担当し、仕様書通りの動作確認・不具合報告の経験あり。</p>
                     </div>
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
-                            <i class="fa-solid fa-shield-halved"></i>
+                            <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
                         </div>
                         <h3>セキュリティ・トラブル対応</h3>
                         <p>SQLi／XSS／CSRF対策、認証情報の安全な管理、エラーログからの原因特定、サーバー監視ダッシュボードでのリソース異常検知。製造現場で培った「なぜなぜ分析」をIT現場の不具合解析にも応用。</p>
                     </div>
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
-                            <i class="fa-solid fa-book"></i>
+                            <i class="fa-solid fa-book" aria-hidden="true"></i>
                         </div>
                         <h3>ドキュメント・ナレッジ管理</h3>
                         <p>README整備、手順書作成、FAQ的な情報構造化。製造現場では作業手順書を整理し、他メンバーへの引き継ぎ・展開を実施した経験あり。</p>
                     </div>
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
-                            <i class="fa-solid fa-circle-question"></i>
+                            <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
                         </div>
                         <h3>問い合わせ対応・ナレッジ共有</h3>
                         <p>要件確認、不明点の言語化と質問、改善提案の展開。少人数チームでの協調作業、立場の違う相手への説明経験を保有。</p>
@@ -385,7 +387,7 @@
             <!-- 架空シナリオで一次対応を想定し、切り分けの流れを具体例として示す。 -->
             <section class="support-cases-section" id="support-cases">
                 <h2 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-list-check"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
                     <span class="heading-text">Simulated Support Response Examples</span>
                 </h2>
                 <div class="support-case-grid">
@@ -551,14 +553,14 @@
                 <!-- support-docs/ フォルダの詳細手順書・事例集へ案内するコールアウト -->
                 <div class="support-docs-link">
                     <p class="support-docs-text">
-                        <i class="fa-solid fa-folder-open"></i>
+                        <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
                         さらに詳しい <strong>PC キッティング手順書</strong>、<strong>障害対応事例集（10ケース）</strong>、<strong>PowerShell 実務スクリプト</strong> を公開しています。
                     </p>
                     <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-github"></i> 詳細ドキュメントを見る
+                        <i class="fa-brands fa-github" aria-hidden="true"></i> 詳細ドキュメントを見る
                     </a>
                     <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-solid fa-terminal"></i> スクリプトを見る
+                        <i class="fa-solid fa-terminal" aria-hidden="true"></i> スクリプトを見る
                     </a>
                 </div>
             </section>
@@ -567,32 +569,32 @@
             <!-- 開発で日常的に使っているツールをアイコン付きで一覧表示 -->
             <section class="tools-section">
                 <h2 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-tools"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-tools" aria-hidden="true"></i></span>
                     <span class="heading-text">Tools & Software</span>
                 </h2>
                 <div class="tools-grid">
                     <div class="tool-item">
-                        <i class="fa-brands fa-github"></i>
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
                         <span>GitHub</span>
                     </div>
                     <div class="tool-item">
-                        <i class="fa-solid fa-terminal"></i>
+                        <i class="fa-solid fa-terminal" aria-hidden="true"></i>
                         <span>VS Code</span>
                     </div>
                     <div class="tool-item">
-                        <i class="fa-solid fa-server"></i>
+                        <i class="fa-solid fa-server" aria-hidden="true"></i>
                         <span>XAMPP / Apache</span>
                     </div>
                     <div class="tool-item">
-                        <i class="fa-brands fa-chrome"></i>
+                        <i class="fa-brands fa-chrome" aria-hidden="true"></i>
                         <span>DevTools</span>
                     </div>
                     <div class="tool-item">
-                        <i class="fa-solid fa-flask"></i>
+                        <i class="fa-solid fa-flask" aria-hidden="true"></i>
                         <span>Flask</span>
                     </div>
                     <div class="tool-item">
-                        <i class="fa-solid fa-chart-line"></i>
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
                         <span>Chart.js</span>
                     </div>
                 </div>
@@ -602,34 +604,34 @@
             <!-- 技術以外の、人柄や働き方に関するスキル -->
             <section class="soft-skills-section">
                 <h2 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-users"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span>
                     <span class="heading-text">Soft Skills</span>
                 </h2>
                 <div class="soft-skills-grid">
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
-                            <i class="fa-solid fa-book-open"></i>
+                            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
                         </div>
                         <h3>学習意欲</h3>
                         <p>新技術への興味と継続的な学習姿勢</p>
                     </div>
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
-                            <i class="fa-solid fa-lightbulb"></i>
+                            <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
                         </div>
                         <h3>問題解決力</h3>
                         <p>論理的思考による課題の分析と解決</p>
                     </div>
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
-                            <i class="fa-solid fa-clock"></i>
+                            <i class="fa-solid fa-clock" aria-hidden="true"></i>
                         </div>
                         <h3>時間管理</h3>
                         <p>締め切りを守る計画的な作業進行</p>
                     </div>
                     <div class="soft-skill-item">
                         <div class="soft-skill-icon">
-                            <i class="fa-solid fa-comments"></i>
+                            <i class="fa-solid fa-comments" aria-hidden="true"></i>
                         </div>
                         <h3>コミュニケーション</h3>
                         <p>少人数チームでの協力作業、要件の確認・共有</p>
@@ -656,8 +658,8 @@
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="footer-bottom">

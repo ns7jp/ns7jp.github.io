@@ -16,7 +16,7 @@ GitHub Pages
 css/reset.css / css/style.css
   ↓ 見た目を整える
 JavaScript（Vanilla JS、js/main.js）
-  ↓ ローダー、メニュー、背景スライダー、スクロール演出を動かす
+  ↓ ローダー、メニュー、作品フィルター、スクロール処理を動かす
 image/
   ↓ プロフィール画像・作品画像・背景画像を表示
 ```
@@ -56,7 +56,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 14. `css/reset.css` → `css/style.css`
    - ブラウザ差のリセット、サイト全体のデザイン、レスポンシブ対応を確認します。
 15. `js/main.js`
-   - ローダー解除、メニュー開閉、スクロール演出、トップページの背景画像切り替えを担う、外部ライブラリ非依存の共通スクリプトです。
+   - ローダー解除、メニュー開閉、作品フィルター、スクロール処理を担う、外部ライブラリ非依存の共通スクリプトです。
 16. `image/` / `media/` と `favicon.ico`
     - 背景画像、プロフィール画像、作品画像、証跡リプレイ動画・字幕、ブラウザタブ用アイコンの役割を確認します。
 17. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
@@ -98,7 +98,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 初学者が見るポイント:
 - `class` は CSS と JavaScript の両方で使われる名前
 - `meta description` や OGP は公開サイトとしての見え方を整える設定
-- ヒーロー背景のクロスフェードは `js/main.js` が生成する2枚のレイヤーの `opacity` を切り替えるだけの実装
+- ヒーロー背景は主作品の1枚に固定し、複数画像の自動取得を行わない
 
 ---
 
@@ -263,22 +263,10 @@ A4 1ページの履歴書（印刷で PDF 化可）。`<meta name="robots" conte
 
 ### `js/main.js`
 
-全ページ共通の動きを1ファイルにまとめた vanilla JS（外部ライブラリ非依存）です。以前は jQuery 本体（CDN）と `jquery.bgswitcher.js`（背景画像切替プラグイン）に依存していましたが、CDN の読み込みに失敗するとローダーが消えず画面が固まってしまう問題があったため、外部ライブラリなしで書き直しました。
-
-トップページの背景画像切り替え部分の実装:
-
-```javascript
-var heroSlider = document.querySelector('.hero-slider');
-if (heroSlider) {
-    var heroImages = ['image/works.jpg', 'image/me.jpg', 'image/contact.jpg', 'image/skills.jpg'];
-    // 2枚の div レイヤーを重ねて、opacity を切り替えるだけでクロスフェードさせる
-    // 5秒ごとに setInterval で次の画像へ
-}
-```
+全ページ共通の動きを1ファイルにまとめた vanilla JS（外部ライブラリ非依存）です。以前は jQuery 本体（CDN）と背景画像切替プラグインに依存していましたが、CDNの読み込み失敗時の不具合を避けるため、外部ライブラリなしで書き直しました。現在はヒーロー背景をCSSの1枚に固定し、JavaScriptでの画像切替は行いません。
 
 初学者が見るポイント:
 - `document.querySelector` / `addEventListener` など、ブラウザ標準の DOM API だけで実装している
-- 画像配列はページ読み込み時にシャッフルしてから使う
 - `window.setTimeout(hideLoader, 4000)` は、`load` イベントが発火しない・遅れる環境でもローダーが固まったままにならないための保険
 - 1つのファイルに集約したことで、9ページ分に同じコードをコピペしなくて済む
 
@@ -402,14 +390,14 @@ nav に .show を付け外し
 CSS がメニュー表示とアイコン切替を反映
 ```
 
-### 背景画像スライダー
+### ヒーロー背景
 
 ```text
 index.html の .hero-slider
   ↓
-js/main.js が2枚の .hero-slider-layer を生成
+css/style.css が主作品の固定背景画像を表示
   ↓
-images 配列の画像を5秒ごとに opacity の切り替えでクロスフェード
+複数画像の自動取得・タイマー切替を行わず初期表示を安定させる
 ```
 
 ### 作品フィルター

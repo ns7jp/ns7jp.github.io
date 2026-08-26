@@ -40,11 +40,12 @@
     <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <!-- サイト共通スクリプト（vanilla JS、外部ライブラリ非依存） -->
-    <script src="js/main.js?v=20260822-3" defer></script>
+    <script src="js/main.js?v=20260826-1" defer></script>
     <!-- ブラウザ標準スタイルのリセット -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- このサイト独自のスタイル -->
-    <link rel="stylesheet" href="css/style.css?v=20260822-3">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
+    <link rel="stylesheet" href="css/work-readiness.css?v=20260826-1">
     <!-- アイコンフォント Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -103,8 +104,8 @@
 
     <!-- ===== モバイル用メニュートグル（ハンバーガーボタン） ===== -->
     <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars"></i>
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <!-- ===== ヘッダー（全ページ共通） ===== -->
@@ -117,13 +118,13 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
                 <!-- 現在ページ「About Me」には class="active" を付けて、CSSで強調表示する -->
-                <li class="active"><a href="me.html" aria-current="page"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+                <li class="active"><a href="me.html" aria-current="page"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -173,18 +174,19 @@
                         <p>2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了。現在は人材派遣会社（アデコ株式会社）を通じ、IT企業にて派遣社員としてトライアル就業中です（2026年7月〜、Windows/Linuxサーバー構築およびAWS/Azure構築の研修。就業先の社名は面談時に開示します）。Linuxサーバー構築・運用を第一志望に、Ubuntu、Ansible、Docker、Prometheus / Grafanaを使った<a href="project-brief.html">構築案件パックの概要</a>と<a href="evidence-demo.html">実測証跡</a>を公開しています。</p>
                             <p>製造・物流現場で業務効率化に取り組む中で、現場の工夫だけでは改善しきれない部分を痛感し、システム側から仕組みを変えていきたいと考えるようになりました。Linuxサーバーの構築・運用を軸に、手順どおり正確に作業し、試験結果と改善点を残せるエンジニアを目指しています。</p>
                             <p>製造・物流現場などで15年以上培った業務改善・在庫管理・現場対応の視点と、新たに習得したITスキルを組み合わせ、問い合わせ対応、障害の切り分け、手順書整備、現場で役立つ小さな自動化に貢献したいと考えています。</p>
-                            <p>物流現場では、作業時間を15分単位で計測してボトルネックを特定し、棚配置・補充ルール・OJT用マップを改善して、<strong>1日あたり約1時間の作業時間短縮</strong>につなげました。この「計測して原因を絞り、手順化して定着させる」進め方を、サーバー運用でも実践しています（<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/business-improvement/picking-improvement.md" target="_blank" rel="noopener noreferrer">業務改善レポート</a>）。</p>
+                             <p>物流現場では、作業時間を15分単位で計測してボトルネックを特定し、棚配置・補充ルール・OJT用マップを改善して、<strong>1日あたり約1時間の作業時間短縮</strong>につなげました。この「計測して原因を絞り、手順化して定着させる」進め方を、サーバー運用でも実践しています（<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/business-improvement/picking-improvement.md" target="_blank" rel="noopener noreferrer">業務改善レポート</a>）。</p>
+                            <p><a href="work-readiness.html"><strong>入社後の動き方、実務想定ケース、AI利用の境界、面談で再現できる内容</strong></a>も、技術一覧とは別に整理しています。</p>
                         <div class="profile-info">
                             <div class="info-item">
-                                <i class="fa-solid fa-location-dot"></i>
+                                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
                                 <span>埼玉県</span>
                             </div>
                             <div class="info-item">
-                                <i class="fa-solid fa-graduation-cap"></i>
+                                <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
                                 <span>職業訓練 受講終了</span>
                             </div>
                             <div class="info-item">
-                                <i class="fa-solid fa-heart"></i>
+                                <i class="fa-solid fa-heart" aria-hidden="true"></i>
                                 <span>Linuxサーバー構築・運用、監視、ITサポート、業務改善</span>
                             </div>
                         </div>
@@ -196,7 +198,7 @@
             <!-- ===== タイムラインセクション（経歴・取得資格を時系列で表示） ===== -->
             <section class="timeline-section">
                 <h2 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-timeline"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-timeline" aria-hidden="true"></i></span>
                     <span class="heading-text">Career Timeline</span>
                 </h2>
                 <!-- タイムライン本体。CSSで縦線と各項目を配置する。 -->
@@ -281,7 +283,7 @@
             <!-- ===== 資格セクション（取得資格をカード形式で表示） ===== -->
             <section class="license-section">
                 <h2 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-certificate"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-certificate" aria-hidden="true"></i></span>
                     <span class="heading-text">License & Certification</span>
                 </h2>
                 <!-- 資格カードをCSS Gridで並べるエリア -->
@@ -294,7 +296,7 @@
                             <p>食品衛生に関する専門資格</p>
                         </div>
                         <div class="license-icon">
-                            <i class="fa-solid fa-award"></i>
+                            <i class="fa-solid fa-award" aria-hidden="true"></i>
                         </div>
                     </div>
                     <!-- 追加の資格がある場合はこの形式で並べる -->
@@ -305,7 +307,7 @@
                             <p>Pythonの文法と基礎概念に関する知識を評価する資格試験</p>
                         </div>
                         <div class="license-icon">
-                            <i class="fa-solid fa-award"></i>
+                            <i class="fa-solid fa-award" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="license-card">
@@ -315,7 +317,7 @@
                             <p>PHPプログラミングの基本的な知識を問う資格試験</p>
                         </div>
                         <div class="license-icon">
-                            <i class="fa-solid fa-award"></i>
+                            <i class="fa-solid fa-award" aria-hidden="true"></i>
                         </div>
                     </div>
                                         <div class="license-card">
@@ -325,7 +327,7 @@
                             <p>Pythonを実務で活用するための実践的なスキルを問う資格試験</p>
                         </div>
                         <div class="license-icon">
-                            <i class="fa-solid fa-award"></i>
+                            <i class="fa-solid fa-award" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="license-card">
@@ -335,7 +337,7 @@
                             <p>ITに関する基礎知識を評価する国家資格</p>
                         </div>
                         <div class="license-icon">
-                            <i class="fa-solid fa-award"></i>
+                            <i class="fa-solid fa-award" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -343,7 +345,7 @@
                 <!-- ===== 学習中の資格 ===== -->
                 <!-- ITサポート系応募で評価される資格を、取得計画として明示する -->
                 <h3 class="license-subheading">
-                    <i class="fa-solid fa-book-open"></i>
+                    <i class="fa-solid fa-book-open" aria-hidden="true"></i>
                     Currently Studying
                 </h3>
                 <div class="license-grid license-studying-grid">
@@ -354,7 +356,7 @@
                             <p>現在の最優先。現行試験制度が2026年度で終了するため、移行期前の受験完了を目標にする。</p>
                         </div>
                         <div class="license-icon">
-                            <i class="fa-solid fa-book-open"></i>
+                            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
                         </div>
                     </div>
                     <div class="license-card license-card-studying">
@@ -364,14 +366,14 @@
                             <p>Linuxサーバー運用の体系的理解を問う資格試験。FEと並行して学習中だが、受験日はFEの進捗を見てから確定する。</p>
                         </div>
                         <div class="license-icon">
-                            <i class="fa-solid fa-book-open"></i>
+                            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
 
                 <!-- ===== 学習ロードマップ（インフラ運用支援に向けた段階目標） ===== -->
                 <h3 class="license-subheading">
-                    <i class="fa-solid fa-route"></i>
+                    <i class="fa-solid fa-route" aria-hidden="true"></i>
                     Learning Roadmap — Linuxサーバー構築・運用に向けた段階目標
                 </h3>
                 <p class="roadmap-intro">職業訓練で習得した開発基礎を起点に、Linux、ネットワーク、構築工程、監視・復旧の順で実測証跡を増やします。資格は基本情報技術者試験（FE）を最優先に、LPIC-1を並行して学習し、その後CCNA、AWSの順で実機学習を補強する位置付けです。</p>
@@ -407,35 +409,35 @@
             <!-- ===== 趣味セクション（人柄を伝えるアイコン付きカード） ===== -->
             <section class="hobbies-section">
                 <h2 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-star"></i></span>
+                    <span class="heading-icon"><i class="fa-solid fa-star" aria-hidden="true"></i></span>
                     <span class="heading-text">Interests & Hobbies</span>
                 </h2>
                 <!-- 趣味カードをCSS Gridで並べるエリア -->
                 <div class="hobbies-grid">
                     <div class="hobby-card">
                         <div class="hobby-icon">
-                            <i class="fa-solid fa-code"></i>
+                            <i class="fa-solid fa-code" aria-hidden="true"></i>
                         </div>
                         <h3>プログラミング・サーバー運用</h3>
                         <p>Webアプリ開発からサーバー監視ツール作成まで、新しい技術の学習・自作が好きです</p>
                     </div>
                     <div class="hobby-card">
                         <div class="hobby-icon">
-                            <i class="fa-solid fa-mountain"></i>
+                            <i class="fa-solid fa-mountain" aria-hidden="true"></i>
                         </div>
                         <h3>自然・アウトドア</h3>
                         <p>山や自然の風景を楽しみます</p>
                     </div>
                     <div class="hobby-card">
                         <div class="hobby-icon">
-                            <i class="fa-solid fa-film"></i>
+                            <i class="fa-solid fa-film" aria-hidden="true"></i>
                         </div>
                         <h3>動画鑑賞</h3>
                         <p>映画や技術系動画から新たな知識・インスピレーションを得ます</p>
                     </div>
                     <div class="hobby-card">
                         <div class="hobby-icon">
-                            <i class="fa-solid fa-book"></i>
+                            <i class="fa-solid fa-book" aria-hidden="true"></i>
                         </div>
                         <h3>読書</h3>
                         <p>教養を深めて新たな気付きを得ます</p>
@@ -457,13 +459,14 @@
                 <a href="me.html">About</a>
                 <a href="skills.html">Skills</a>
                 <a href="infra-lab.html">Server Build</a>
+                <a href="work-readiness.html">Work Style</a>
                 <a href="works.html">Works</a>
                 <a href="resume.html">Resume</a>
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="footer-bottom">

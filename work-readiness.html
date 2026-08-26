@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="未経験からLinuxサーバー構築・運用を目指す島田則幸の仕事の進め方。実務想定ケース、変更・報告の型、AI利用の境界、面談で再現できる内容、未実測のVM検証計画を整理しています。">
+    <meta name="author" content="Noriyuki Shimada">
+    <meta name="theme-color" content="#2C3E50">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://ns7jp.github.io/work-readiness.html">
+
+    <meta property="og:title" content="Work Readiness | 入社後の動き方・検証計画">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/work-readiness.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
+    <meta property="og:description" content="技術一覧ではなく、確認・変更・試験・報告をどう進めるか、AI支援をどう検証するか、次に埋める実機証跡までを公開します。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Work Readiness | 入社後の動き方・検証計画">
+    <meta name="twitter:description" content="実務想定ケース、変更管理、協働・AI利用の境界、面談デモ、未実測のVM検証計画。">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+
+    <title>Work Readiness | 島田則幸のポートフォリオ</title>
+
+    <script src="js/main.js?v=20260826-1" defer></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
+    <link rel="stylesheet" href="css/work-readiness.css?v=20260826-1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "name": "Work Readiness | 入社後の動き方・検証計画",
+      "description": "Linuxサーバー構築・運用を目指す島田則幸の実務想定ケース、検証方針、AI利用の境界、今後の実機検証計画",
+      "dateModified": "2026-08-26",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "島田則幸",
+        "url": "https://ns7jp.github.io/",
+        "jobTitle": "Linuxサーバー構築・運用エンジニア志望"
+      },
+      "url": "https://ns7jp.github.io/work-readiness.html",
+      "inLanguage": "ja"
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <span>Welcome</span>
+        </div>
+    </div>
+
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <header>
+        <p class="logo">
+            <a href="index.html">
+                <span class="logo-main">島田則幸のポートフォリオ</span>
+                <span class="logo-sub">Noriyuki Shimada's Portfolio</span>
+            </a>
+        </p>
+        <nav id="site-nav">
+            <ul>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+        <section class="page-hero readiness-hero" style="background-image: url('image/server-monitor.png');">
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content">
+                <h1 class="page-title">
+                    <span class="title-en">Work Readiness</span>
+                    <span class="title-jp">入社後の動き方・検証計画</span>
+                </h1>
+            </div>
+        </section>
+
+        <div class="page-content readiness-content">
+            <div class="container">
+                <nav class="lab-subnav" aria-label="Linuxサーバー構築案件の案内">
+                    <a href="project-brief.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Project Brief</a>
+                    <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> Build Lab</a>
+                    <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence</a>
+                    <a href="work-readiness.html" class="active" aria-current="page"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Work Style</a>
+                </nav>
+
+                <section class="readiness-intro">
+                    <span class="case-label">ENTRY ROLE / SUPERVISED CHANGE / EVIDENCE FIRST</span>
+                    <p class="readiness-kicker">技術名より先に、現場でどう確認し、どう報告するかを示します。</p>
+                    <h2>未経験であることを隠さず、安全に任せられる範囲を広げる</h2>
+                    <p>大規模環境での実務経験はこれからです。最初は手順・承認・レビューのある範囲で、構築補助、試験、監視、一次切り分け、証跡整理を正確に担当し、判断が必要な変更は抱え込まずに共有します。以下のケースと手順は<strong>実務を想定した準備内容</strong>であり、実務実績とは区別しています。</p>
+                    <div class="readiness-boundary" role="note">
+                        <span><i class="fa-solid fa-laptop" aria-hidden="true"></i><strong>本人手元WSL2</strong> 監視・ログ、D-1復旧、二セグメント通信障害</span>
+                        <span><i class="fa-solid fa-gears" aria-hidden="true"></i><strong>自動CI</strong> Full-stack E2E、Ansible冪等性、git rollback</span>
+                        <span><i class="fa-solid fa-flask" aria-hidden="true"></i><strong>AI支援環境</strong> B-1〜B-4。面談再現を約束するのはB-2 / B-3</span>
+                        <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i><strong>NOT RUN</strong> 独立VM／実機、長期稼働、本番変更、第三者レビュー</span>
+                    </div>
+                </section>
+
+                <section class="brief-section" aria-labelledby="entry-work-title">
+                    <div class="section-heading">
+                        <span class="heading-icon"><i class="fa-solid fa-door-open" aria-hidden="true"></i></span>
+                        <h2 class="heading-text" id="entry-work-title">入口として担当したい業務</h2>
+                    </div>
+                    <div class="readiness-card-grid">
+                        <article class="readiness-card">
+                            <span class="readiness-card-number">01</span>
+                            <h3>構築・変更作業の補助</h3>
+                            <p>設計書とパラメータを照合し、手順に沿って設定・確認を実施。差分、実行結果、未完了項目を残します。</p>
+                        </article>
+                        <article class="readiness-card">
+                            <span class="readiness-card-number">02</span>
+                            <h3>監視・一次切り分け</h3>
+                            <p>発生時刻、影響範囲、変更履歴、メトリクス、ログを時系列で集め、事実と仮説を分けて共有します。</p>
+                        </article>
+                        <article class="readiness-card">
+                            <span class="readiness-card-number">03</span>
+                            <h3>試験・証跡・引き渡し</h3>
+                            <p>期待値と実測値を照合し、PASSだけでなくFAIL、NOT RUN、制約、再試験結果まで同じ形式で整理します。</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="brief-section" aria-labelledby="case-title">
+                    <div class="section-heading">
+                        <span class="heading-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span>
+                        <h2 class="heading-text" id="case-title">実務想定ケース：Web監視アラートを受けたら</h2>
+                    </div>
+                    <div class="simulation-banner" role="note">
+                        <strong>SIMULATED CASE</strong>
+                        <span>以下は個人Labの障害演習とRunbookを基にした作業イメージで、顧客環境での対応実績ではありません。</span>
+                    </div>
+                    <ol class="response-flow">
+                        <li>
+                            <span class="response-step">01</span>
+                            <div><strong>受付・影響確認</strong><p>アラート時刻、対象サービス、利用者影響、直前変更、同時発生アラートを確認します。</p></div>
+                        </li>
+                        <li>
+                            <span class="response-step">02</span>
+                            <div><strong>事実を採録</strong><p>監視値、プロセス、待受ポート、ログ、依存サービスを確認し、操作前の状態を保存します。</p></div>
+                        </li>
+                        <li>
+                            <span class="response-step">03</span>
+                            <div><strong>仮説と切り分け</strong><p>アプリ、リバースプロキシ、ホスト、ネットワークのどこで止まっているかを分離します。</p></div>
+                        </li>
+                        <li>
+                            <span class="response-step">04</span>
+                            <div><strong>承認された一次対応</strong><p>Runbookと権限範囲を確認し、判断が必要な再起動・設定変更は承認を得てから行います。</p></div>
+                        </li>
+                        <li>
+                            <span class="response-step">05</span>
+                            <div><strong>復旧確認</strong><p>プロセス起動だけで終えず、HTTP応答、監視回復、ログ、関連機能への影響まで再確認します。</p></div>
+                        </li>
+                        <li>
+                            <span class="response-step">06</span>
+                            <div><strong>報告・再発防止</strong><p>現象、影響、原因、対応、復旧時刻、残存リスクを報告し、手順・監視・試験の更新候補を残します。</p></div>
+                        </li>
+                    </ol>
+                    <div class="summary-actions">
+                        <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/runbooks" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> Runbookを見る</a>
+                        <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-flask" aria-hidden="true"></i> 障害演習の実測を見る</a>
+                    </div>
+                </section>
+
+                <section class="brief-section" aria-labelledby="change-title">
+                    <div class="section-heading">
+                        <span class="heading-icon"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i></span>
+                        <h2 class="heading-text" id="change-title">変更を安全に進める型</h2>
+                    </div>
+                    <div class="change-grid">
+                        <article class="change-card">
+                            <span class="status-pill measured">実測済み</span>
+                            <h3>Failure → Root Cause → Fix</h3>
+                            <p>PR #75のE2Eでは、変数配置不備と2回目<code>changed=1</code>を検出。原因を絞り、修正後に23 / 23と<code>changed=0</code>を再確認しました。</p>
+                            <a href="https://github.com/ns7jp/server-monitor/pull/75" target="_blank" rel="noopener noreferrer">PR #75を確認 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        </article>
+                        <article class="change-card">
+                            <span class="status-pill measured">CIで実測済み</span>
+                            <h3>Exact SHAで切り戻す</h3>
+                            <p>PR #77ではcandidateを検証後、前版のimmutable git SHAへ戻し、revision、runtime、loopback bind、Loki取り込みを再確認しました。</p>
+                            <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">rollback runを確認 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        </article>
+                        <article class="change-card">
+                            <span class="status-pill pending">実務では要レビュー</span>
+                            <h3>本番変更は単独判断しない</h3>
+                            <p>目的、影響範囲、事前確認、実施手順、切り戻し条件、事後確認をレビュー可能な形にし、承認と担当範囲を確認してから進めます。</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="brief-section" aria-labelledby="collaboration-title">
+                    <div class="section-heading">
+                        <span class="heading-icon"><i class="fa-solid fa-people-arrows" aria-hidden="true"></i></span>
+                        <h2 class="heading-text" id="collaboration-title">チームで働くための準備</h2>
+                    </div>
+                    <p class="section-lead">公開成果物は個人制作であり、第三者によるコードレビュー実績とは扱いません。そのうえで、現場では次の情報を揃えてレビューと引き継ぎを受けられる形にします。</p>
+                    <div class="collaboration-grid">
+                        <article><i class="fa-solid fa-ticket" aria-hidden="true"></i><h3>依頼を小さくする</h3><p>目的、対象、完了条件、対象外をIssueや作業票に整理します。</p></article>
+                        <article><i class="fa-solid fa-code-branch" aria-hidden="true"></i><h3>差分を限定する</h3><p>1変更1目的を基本にし、確認者が影響を追える単位に分けます。</p></article>
+                        <article><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i><h3>結果を添える</h3><p>期待値、コマンド、実測値、FAIL、再試験、NOT RUNを残します。</p></article>
+                        <article><i class="fa-solid fa-person-circle-check" aria-hidden="true"></i><h3>判断を仰ぐ</h3><p>権限、停止影響、セキュリティ、費用が絡む変更は独断で進めません。</p></article>
+                    </div>
+                </section>
+
+                <section class="brief-section" aria-labelledby="ai-title">
+                    <div class="section-heading">
+                        <span class="heading-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
+                        <h2 class="heading-text" id="ai-title">AI利用の境界と本人確認</h2>
+                    </div>
+                    <p class="section-lead">このサイトと関連リポジトリでは、文書整理だけでなく実装コードにもAI支援を利用しています。AIの出力そのものを能力の証明にはせず、本人が説明・実行・検証できる範囲と、保存した証跡を評価材料としています。</p>
+                    <div class="ai-boundary-grid">
+                        <article>
+                            <span>本人が持つ責任</span>
+                            <ul>
+                                <li>目的、対象範囲、完了条件を決める</li>
+                                <li>設計判断と残存リスクを説明する</li>
+                                <li>実行環境と対象commitを特定する</li>
+                                <li>結果を確認し、未実施を明記する</li>
+                            </ul>
+                        </article>
+                        <article>
+                            <span>AIに依頼する範囲</span>
+                            <ul>
+                                <li>コード・テスト・文書の案出し</li>
+                                <li>エラー原因の仮説列挙</li>
+                                <li>確認観点の漏れチェック</li>
+                                <li>反復作業と体裁の整理</li>
+                            </ul>
+                        </article>
+                        <article>
+                            <span>採用前の確認方法</span>
+                            <ul>
+                                <li>主要構成を図と言葉で説明する</li>
+                                <li>保存済み証跡から判断根拠を示す</li>
+                                <li>面談時に再現可能な演習を実行する</li>
+                                <li>分からない点を分からないと回答する</li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="summary-actions">
+                        <a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> AI利用の詳細</a>
+                        <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-bug" aria-hidden="true"></i> 実行時に見つけた欠陥と修正</a>
+                    </div>
+                </section>
+
+                <section class="brief-section" aria-labelledby="demo-title">
+                    <div class="section-heading">
+                        <span class="heading-icon"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
+                        <h2 class="heading-text" id="demo-title">面談で確認いただけること</h2>
+                    </div>
+                    <div class="interview-demo-grid">
+                        <article>
+                            <span class="status-pill measured">再現可能</span>
+                            <h3>3層構成の障害切り分け</h3>
+                            <p>WSL2 + DockerでWeb / AP / DBのhealthを確認し、どの層で止まっているかを切り分けます。</p>
+                        </article>
+                        <article>
+                            <span class="status-pill measured">再現可能</span>
+                            <h3>DBバックアップ・復元</h3>
+                            <p><code>pg_dump</code> / <code>pg_restore</code>で復元し、RTO / RPOと内容ハッシュを照合します。</p>
+                        </article>
+                        <article>
+                            <span class="status-pill validated">説明可能</span>
+                            <h3>設計判断と失敗事例</h3>
+                            <p>loopback公開、Ansible role分割、rollback条件、D-1演習の2回の失敗と修正理由を説明します。</p>
+                        </article>
+                    </div>
+                    <p class="evidence-footnote">再実演の対象は手元のWSL2 + Dockerで再現できる範囲です。CI runner、実機AlmaLinux、persistent hostでの再実演は約束していません。</p>
+                </section>
+
+                <section class="brief-section gap-plan" aria-labelledby="gap-title">
+                    <div class="section-heading">
+                        <span class="heading-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></span>
+                        <h2 class="heading-text" id="gap-title">次に埋める証跡：独立VM／実機</h2>
+                    </div>
+                    <div class="gap-plan-header">
+                        <span class="status-pill pending">NOT RUN</span>
+                        <p>現在のE2EはDocker導入済みの使い捨てrunnerが中心です。以下を完了するまで「空のOSから独立ホストを構築した実績」とは表現しません。</p>
+                    </div>
+                    <ol class="acceptance-list">
+                        <li><span>01</span><div><strong>独立した最小OSを用意</strong><p>VMまたは実機へUbuntuを導入し、CPU、メモリ、ディスク、NIC、時刻、名前解決の初期状態を採録する。</p></div></li>
+                        <li><span>02</span><div><strong>別の管理端末から構築</strong><p>SSH、固定IP、UFW、ユーザー、sudo、Docker、Ansibleを含め、runner内完結ではない疎通を確認する。</p></div></li>
+                        <li><span>03</span><div><strong>再起動・切り戻し・復元</strong><p>host再起動後の起動、exact SHA rollback、バックアップからの復元、監視・ログ再開を確認する。</p></div></li>
+                        <li><span>04</span><div><strong>長期稼働と引き渡し判定</strong><p>72時間連続稼働、既知制約、復旧条件、引き渡しチェックリストを実測結果で更新する。</p></div></li>
+                    </ol>
+                    <div class="summary-actions">
+                        <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/10-host-bringup-and-acceptance.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-check" aria-hidden="true"></i> 実機検証手順</a>
+                        <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> 案件概要へ戻る</a>
+                    </div>
+                </section>
+
+                <section class="readiness-cta">
+                    <span>Linux Server Build / Monitoring / Operations</span>
+                    <h2>手順とレビューのある範囲から、正確に担当します</h2>
+                    <p>実測したこと、準備したこと、まだ経験していないことを分けてお話しします。</p>
+                    <div class="summary-actions">
+                        <a href="resume.html" class="btn btn-primary"><i class="fa-solid fa-id-card" aria-hidden="true"></i> 1ページ履歴書</a>
+                        <a href="contact.html" class="btn btn-secondary"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 連絡先</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="project-brief.html">Project Brief</a>
+                <a href="infra-lab.html">Server Build</a>
+                <a href="evidence-demo.html">Evidence</a>
+                <a href="work-readiness.html" aria-current="page">Work Style</a>
+                <a href="resume.html">Resume</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+            <small class="footer-ai-disclosure">このサイトと関連リポジトリは、文書の整形だけでなく実装コードの生成にもAIを使っています。本人が説明・実行・検証できる範囲は、このページで明示しています。</small>
+        </div>
+    </footer>
+</body>
+</html>

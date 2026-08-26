@@ -19,11 +19,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="島田則幸の作品ページ。Linuxサーバー構築案件、Full-stack E2E 23/23、障害復旧、監視ダッシュボードを主成果として、補助成果と学習作品を区別して掲載しています。">
-    <title>作品 | 島田則幸のポートフォリオ</title>
+    <title>Linuxサーバー構築・運用の成果物 | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/works.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
-    <meta property="og:title" content="作品 | 島田則幸のポートフォリオ">
+    <meta property="og:title" content="Linuxサーバー構築・運用の成果物 | 島田則幸">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/works.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -34,13 +34,15 @@
     <meta property="og:description" content="Linuxサーバーの設計・Ansible構築・試験・監視・障害復旧と、Full-stack E2E 23/23の実測証跡を主成果として掲載。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Linuxサーバー構築・運用の成果物 | 島田則幸">
+    <meta name="twitter:description" content="設計から引き渡しまでの構築案件、実測証跡、監視・復旧Labを主成果として掲載。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
 
     <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
-    <script src="js/main.js?v=20260822-3" defer></script>
+    <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260822-3">
+    <link rel="stylesheet" href="css/style.css?v=20260826-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -95,8 +97,8 @@
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
     <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars"></i>
-        <i class="fa-solid fa-xmark"></i>
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
 
     <!-- ===== ヘッダー（共通） ===== -->
@@ -109,13 +111,13 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li><a href="infra-lab.html"><i class="fa-solid fa-server"></i><span>Server Build</span></a></li>
+                <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
                 <!-- 現在ページ「Works」を active クラスで強調 -->
-                <li class="active"><a href="works.html" aria-current="page"><i class="fa-solid fa-briefcase"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature"></i><span>Contact</span></a></li>
+                <li class="active"><a href="works.html" aria-current="page"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
             </ul>
         </nav>
     </header>
@@ -148,7 +150,8 @@
                         <p>構築案件パック、実測証跡、障害復旧、サーバー監視を主成果として先に掲載し、Support Toolkitと開発学習作品は補助成果として区別しています。</p>
                         <p>主案件では「設計書やコードがあること」と「実際に動かして確認したこと」を分け、日時・対象commit・環境・コマンド・結果があるものだけを実測済みとしています。</p>
                         <p>2026年8月22日には、runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、Ansible一括適用・2回目冪等性・11 containers・Docker API proxy・network/UFW・障害復旧・3 volumes復元を含むFull-stack E2E 23/23を記録しました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。</p>
-                        <p>2026年8月23日は、PR #77の<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044</a>で、disposable Ubuntuの<code>/opt/server-monitor</code>へcandidate <code>84e1492</code>をimmutable git SHAで配備後、前版<code>59aa88e</code>へ切り戻してPASSしました。これはPR branch上のCI実測で、persistent hostまたはmain統合の実績ではありません。</p>
+                        <p>2026年8月23日は、PR #77途中commitの<a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">Actions run 32611251044</a>で、disposable Ubuntuの<code>/opt/server-monitor</code>へcandidate <code>84e1492</code>をimmutable git SHAで配備後、前版<code>59aa88e</code>へ切り戻してPASSしました。PR #77自体は後にmainへmerge済みですが、このrunをmerge後mainで再実行した結果やpersistent hostでの実績ではありません。</p>
+                        <p>2026年8月24〜25日は、B-1〜B-4とEL9向けMoleculeを採録しました。B-seriesはAI支援セッション環境上のqemu / Docker / network namespace、EL9はコンテナ上の結果で、独立VM／実機での構築実績とは区別しています。</p>
                         <p>学習作品では、使用技術、制作中の問題、解決過程を説明しています。想定シナリオやサンプル出力は、実務実績と誤解されないよう明記しています。</p>
                     </div>
                 </div>
@@ -159,12 +162,13 @@
                 <div class="priority-card">
                     <span class="priority-label">まず見てほしい成果物</span>
                     <div class="priority-links">
-                        <a href="project-brief.html"><i class="fa-solid fa-file-lines"></i> 案件概要</a>
-                        <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check"></i> Evidence Digest</a>
-                        <a href="#work-infra-lab"><i class="fa-solid fa-server"></i> 構築・運用Lab</a>
-                        <a href="#work-monitor"><i class="fa-solid fa-chart-line"></i> サーバー監視</a>
-                        <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check"></i> E2E 23/23</a>
-                        <a href="demo.html" aria-label="2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video"></i> 2分15秒 証跡リプレイ</a>
+                        <a href="project-brief.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 案件概要</a>
+                        <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence Digest</a>
+                        <a href="work-readiness.html"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
+                        <a href="#work-infra-lab"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築・運用Lab</a>
+                        <a href="#work-monitor"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> サーバー監視</a>
+                        <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> E2E 23/23</a>
+                        <a href="demo.html" aria-label="2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の証跡リプレイを見る"><i class="fa-solid fa-video" aria-hidden="true"></i> 2分15秒 証跡リプレイ</a>
                     </div>
                 </div>
             </section>
@@ -173,7 +177,7 @@
                 <div class="evidence-boundary-strip">
                     <span><strong>main統合済みE2E（2026-08-22）</strong>runtime <code>7622a9d</code>で23/23 PASS。2回目changed=0、11 containers、proxy GET / POST拒否 / Loki、network/UFW、D-1 1秒、3 volumes復元</span>
                     <span><strong>PR #77 CI（2026-08-23）</strong>run <code>32611251044</code>でcandidate <code>84e1492</code> → exact rollback <code>59aa88e</code> PASS（disposable Ubuntu）</span>
-                    <span><strong>過去commitで実測</strong>Ansible 4 roles、core 9 services、Grafana / Loki、D-1 RTO 13秒、通信障害</span>
+                    <span><strong>追加演習（2026-08-24〜25）</strong>B-1〜B-4、欠陥29件（偽PASS 6件）、EL9 Molecule。qemu / Docker / namespace / コンテナ上</span>
                     <span><strong>NOT RUN</strong>persistent hostでのrollback・72時間連続稼働・host再起動後、Slack実配信、AWS apply / destroy、D-2、独立管理端末・引き渡し対象host</span>
                 </div>
             </section>
@@ -183,17 +187,18 @@
             <section class="filter-section">
                 <div class="filter-tabs">
                     <!-- data-filter属性の値はJSで参照され、対応するdata-categoryの作品だけ表示される -->
-                    <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-                    <button type="button" class="filter-btn" data-filter="support" aria-pressed="false">Support Toolkit</button>
-                    <button type="button" class="filter-btn" data-filter="infra" aria-pressed="false">Infrastructure</button>
-                    <button type="button" class="filter-btn" data-filter="python" aria-pressed="false">Python</button>
-                    <button type="button" class="filter-btn" data-filter="php" aria-pressed="false">PHP</button>
-                    <button type="button" class="filter-btn" data-filter="html" aria-pressed="false">HTML/CSS</button>
+                    <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true" aria-controls="works-list">All</button>
+                    <button type="button" class="filter-btn" data-filter="support" aria-pressed="false" aria-controls="works-list">Support Toolkit</button>
+                    <button type="button" class="filter-btn" data-filter="infra" aria-pressed="false" aria-controls="works-list">Infrastructure</button>
+                    <button type="button" class="filter-btn" data-filter="python" aria-pressed="false" aria-controls="works-list">Python</button>
+                    <button type="button" class="filter-btn" data-filter="php" aria-pressed="false" aria-controls="works-list">PHP</button>
+                    <button type="button" class="filter-btn" data-filter="html" aria-pressed="false" aria-controls="works-list">HTML/CSS</button>
                 </div>
+                <p id="filter-status" class="sr-only" aria-live="polite"></p>
             </section>
 
             <section class="works-section">
-                <div class="works-showcase">
+                <div class="works-showcase" id="works-list">
 
                     <!-- Infra Lab + Linux Lab + Monitoring Stack + Ansible を1つの「インフラ運用Lab」作品として掲示 -->
                     <div class="work-showcase-item support-toolkit-item" id="work-infra-lab" data-category="infra support">
@@ -206,22 +211,22 @@
                                 </div>
                                 <div class="toolkit-visual-grid">
                                     <div>
-                                        <i class="fa-brands fa-windows"></i>
+                                        <i class="fa-brands fa-windows" aria-hidden="true"></i>
                                         <strong>Windows / M365 / AD</strong>
                                         <span>監視・証跡</span>
                                     </div>
                                     <div>
-                                        <i class="fa-brands fa-linux"></i>
+                                        <i class="fa-brands fa-linux" aria-hidden="true"></i>
                                         <strong>Linux</strong>
                                         <span>systemd / journalctl</span>
                                     </div>
                                     <div>
-                                        <i class="fa-solid fa-chart-area"></i>
+                                        <i class="fa-solid fa-chart-area" aria-hidden="true"></i>
                                         <strong>Prometheus + Grafana</strong>
                                         <span>監視スタック</span>
                                     </div>
                                     <div>
-                                        <i class="fa-solid fa-cloud"></i>
+                                        <i class="fa-solid fa-cloud" aria-hidden="true"></i>
                                         <strong>Cloud + Ansible</strong>
                                         <span>Terraform / IaC</span>
                                     </div>
@@ -233,21 +238,21 @@
                                     <h3>Linux Server Build &amp; Operations Lab</h3>
                                     <p>要件・設計からAnsible構築、試験、監視、障害復旧、引き渡しまでを1つの導線にまとめたLab</p>
                                     <div class="overlay-buttons">
-                                        <a href="project-brief.html" class="btn btn-sm btn-light"><i class="fa-solid fa-file-lines"></i> Project Brief</a>
-                                        <a href="evidence-demo.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-clipboard-check"></i> Evidence</a>
-                                        <a href="infra-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-server"></i> Server Build</a>
-                                        <a href="linux-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-linux"></i> Linux Lab</a>
-                                        <a href="cloud-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-cloud"></i> Cloud</a>
-                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/monitoring-stack" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-area"></i> Monitoring（初期作品）</a>
-                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/ansible" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gears"></i> Ansible</a>
+                                        <a href="project-brief.html" class="btn btn-sm btn-light"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Project Brief</a>
+                                        <a href="evidence-demo.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence</a>
+                                        <a href="infra-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-server" aria-hidden="true"></i> Server Build</a>
+                                        <a href="linux-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux Lab</a>
+                                        <a href="cloud-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-cloud" aria-hidden="true"></i> Cloud</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/monitoring-stack" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Monitoring（初期作品）</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/ansible" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gears" aria-hidden="true"></i> Ansible</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="work-details">
                             <div class="work-meta">
-                                <span class="category"><i class="fa-solid fa-network-wired"></i> Infrastructure / Observability / IaC</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                                <span class="category"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> Infrastructure / Observability / IaC</span>
+                                <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>Linux Server Build &amp; Operations Lab</h3>
                             <div class="work-summary">
@@ -278,7 +283,7 @@
                                 <li><strong>架空Postmortemサンプル</strong>に MTTA / MTTR / 5 Whys / 応急対応 / 恒久対応を含め、振り返りの型を提示。</li>
                             </ul>
                             <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h4>
+                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>具体的な使用例・活用シーン</h4>
                                 <ul class="usage-list">
                                     <li><strong>問い合わせ受付直後：</strong>Windowsは PowerShell、Linux は <code>linux-triage.sh</code> を流して同じ形式で証跡を残す。</li>
                                     <li><strong>クラウド設計確認：</strong>Cloud Lab の Terraform を <code>fmt</code> / <code>validate</code> し、Public / Private subnet と Security Group の意図を説明する。</li>
@@ -289,7 +294,7 @@
                                 </ul>
                             </div>
                             <div class="work-architecture">
-                                <h4><i class="fa-solid fa-code-branch"></i> 継続的検証 (CI/CD) パイプライン</h4>
+                                <h4><i class="fa-solid fa-code-branch" aria-hidden="true"></i> 継続的検証 (CI/CD) パイプライン</h4>
                                 <div class="mermaid">
                                 flowchart LR
                                     Commit[コード変更/Push] --> GHA[GitHub Actions]
@@ -312,7 +317,7 @@
                                 </p>
                             </div>
                             <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h4>
+                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中のトラブルと解決過程</h4>
                                 <p><span class="trouble-label">課題</span>PowerShell スクリプトはWindows実行が前提で、GitHub Actions のubuntu-latest上でテストを動かせるか不明だった。</p>
                                 <p><span class="trouble-label solution">解決</span>判定ロジック（しきい値判定、状態集約、メッセージ切り詰め等）を純関数化し <code>support-scripts/lib/Triage-Lib.ps1</code> に分離。pwsh はクロスプラットフォームで動くため、ubuntu-latest 上の Pester で実行可能になった。</p>
                             </div>
@@ -346,22 +351,22 @@
                                 </div>
                                 <div class="toolkit-visual-grid">
                                     <div>
-                                        <i class="fa-solid fa-laptop"></i>
+                                        <i class="fa-solid fa-laptop" aria-hidden="true"></i>
                                         <strong>PC Kitting</strong>
                                         <span>手順書</span>
                                     </div>
                                     <div>
-                                        <i class="fa-solid fa-user-shield"></i>
+                                        <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
                                         <strong>AD / M365</strong>
                                         <span>棚卸し</span>
                                     </div>
                                     <div>
-                                        <i class="fa-solid fa-wifi"></i>
+                                        <i class="fa-solid fa-wifi" aria-hidden="true"></i>
                                         <strong>Network</strong>
                                         <span>一次確認</span>
                                     </div>
                                     <div>
-                                        <i class="fa-solid fa-file-lines"></i>
+                                        <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
                                         <strong>Ticket</strong>
                                         <span>記録の型</span>
                                     </div>
@@ -373,17 +378,17 @@
                                     <h3>Support Toolkit</h3>
                                     <p>手順書・確認スクリプト・対応ログの型をまとめた実務想定成果物</p>
                                     <div class="overlay-buttons">
-                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open"></i> Docs</a>
-                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-terminal"></i> Scripts</a>
-                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts/samples" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-export"></i> Samples</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Docs</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-terminal" aria-hidden="true"></i> Scripts</a>
+                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts/samples" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-export" aria-hidden="true"></i> Samples</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="work-details">
                             <div class="work-meta">
-                                <span class="category"><i class="fa-solid fa-headset"></i> IT Support / PowerShell / Docs</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                                <span class="category"><i class="fa-solid fa-headset" aria-hidden="true"></i> IT Support / PowerShell / Docs</span>
+                                <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>Support Toolkit</h3>
                             <div class="work-summary">
@@ -410,7 +415,7 @@
                                 <li>公開ポートフォリオとして、社内固有情報や認証情報を含めない安全なサンプルにしています。</li>
                             </ul>
                             <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h4>
+                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>具体的な使用例・活用シーン</h4>
                                 <ul class="usage-list">
                                     <li><strong>新人受け入れ：</strong>PCキッティング手順書で、検品からAD参加、M365導入、引き渡しまでの抜け漏れを防ぐ。</li>
                                     <li><strong>退職・異動対応：</strong>アカウント停止、権限剥奪、データ引き継ぎ、ライセンス回収を時系列で確認する。</li>
@@ -419,7 +424,7 @@
                                 </ul>
                             </div>
                             <div class="work-architecture">
-                                <h4><i class="fa-solid fa-list-check"></i> インシデント対応ライフサイクル (ITIL 準拠)</h4>
+                                <h4><i class="fa-solid fa-list-check" aria-hidden="true"></i> インシデント対応ライフサイクル (ITIL 準拠)</h4>
                                 <div class="mermaid">
                                 flowchart LR
                                     A[検知・記録] --> B[一次切り分け]
@@ -440,7 +445,7 @@
                                 </p>
                             </div>
                             <div class="work-architecture">
-                                <h4><i class="fa-solid fa-code"></i> スクリプトの工夫 (純関数化とエラーハンドリング)</h4>
+                                <h4><i class="fa-solid fa-code" aria-hidden="true"></i> スクリプトの工夫 (純関数化とエラーハンドリング)</h4>
                                 <p style="font-size: 0.9em; margin-bottom: 10px; color: var(--text-medium);">PowerShell スクリプトは再利用性と自動テストを考慮し、状態判定ロジックを分離しています。</p>
                                 <pre><code class="language-powershell">
 function Get-ResourceStatus {
@@ -467,7 +472,7 @@ function Get-ResourceStatus {
                                 </code></pre>
                             </div>
                             <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h4>
+                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中のトラブルと解決過程</h4>
                                 <p><span class="trouble-label">課題</span>実務に近づけようとすると、社内固有のサーバー名・ユーザーID・権限情報のような公開に不向きな情報が混ざりやすい。</p>
                                 <p><span class="trouble-label solution">解決</span>環境を Windows 11 / M365 / AD の汎用想定に固定し、スクリプトは読み取り中心・プレースホルダ中心で構成。注意事項もREADMEに明記しました。</p>
                             </div>
@@ -491,15 +496,15 @@ function Get-ResourceStatus {
                                     <h3>サーバー監視ダッシュボード</h3>
                                     <p>Webブラウザから動作中マシンのリソースをリアルタイム可視化</p>
                                     <div class="overlay-buttons">
-                                        <a href="https://github.com/ns7jp/server-monitor" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                        <a href="https://github.com/ns7jp/server-monitor" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="サーバー監視ダッシュボードのCode"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="work-details">
                             <div class="work-meta">
-                                <span class="category"><i class="fa-solid fa-server"></i> Python / Flask / psutil</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                                <span class="category"><i class="fa-solid fa-server" aria-hidden="true"></i> Python / Flask / psutil</span>
+                                <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>サーバー監視ダッシュボード</h3>
                             <div class="work-summary">
@@ -526,7 +531,7 @@ function Get-ResourceStatus {
                             </ul>
                             <!-- 使用例・活用シーン -->
                             <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h4>
+                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>具体的な使用例・活用シーン</h4>
                                 <ul class="usage-list">
                                     <li><strong>個人PC・自宅サーバーの常時モニタ：</strong>サブモニターやブラウザの別タブに開きっぱなしにして、重い処理（動画エンコード・ビルド・学習タスク）の進行と負荷を一目で確認。</li>
                                     <li><strong>小規模Webサーバーの簡易監視：</strong>Zabbix・Prometheusなど本格的監視ツール導入前の暫定モニタリング。LAN内に1台立てておけばブラウザだけで状態確認できる。</li>
@@ -538,7 +543,7 @@ function Get-ResourceStatus {
                                 </ul>
                             </div>
                             <div class="work-architecture">
-                                <h4><i class="fa-solid fa-code"></i> コア処理 (Flask API と非同期データ取得)</h4>
+                                <h4><i class="fa-solid fa-code" aria-hidden="true"></i> コア処理 (Flask API と非同期データ取得)</h4>
                                 <p style="font-size: 0.9em; margin-bottom: 10px; color: var(--text-medium);">フロントエンドの描画をブロックしないよう、Flask で JSON API を提供しています。</p>
                                 <pre><code class="language-python">
 @app.route('/api/stats')
@@ -563,7 +568,7 @@ def api_stats():
                                 </code></pre>
                             </div>
                             <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h4>
+                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中のトラブルと解決過程</h4>
                                 <p><span class="trouble-label">課題</span><code>psutil.cpu_percent()</code> を <code>interval=0</code> で呼ぶと前回呼び出しからの差分を返す仕様のため、初回が必ず0%になり、グラフが歪んで表示される。</p>
                                 <p><span class="trouble-label solution">解決</span>全体使用率の取得時のみ <code>interval=0.5</code> でサンプリングして基準点を作り、その直後にコア別を <code>interval=0</code> で取得することで、正確かつレスポンスを大きく落とさない構成に変更。</p>
                             </div>
@@ -588,15 +593,15 @@ def api_stats():
                                     <h3>定型文管理アプリ</h3>
                                     <p>Fletフレームワークを用いたテンプレート管理ツール</p>
                                     <div class="overlay-buttons">
-                                        <a href="https://github.com/ns7jp/works/blob/main/teikei_kanri.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                        <a href="https://github.com/ns7jp/works/blob/main/teikei_kanri.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="定型文管理アプリのCode"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="work-details">
                             <div class="work-meta">
-                                <span class="category"><i class="fa-brands fa-python"></i> Python / Flet</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                                <span class="category"><i class="fa-brands fa-python" aria-hidden="true"></i> Python / Flet</span>
+                                <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>定型文管理アプリ</h3>
                             <div class="work-summary">
@@ -615,7 +620,7 @@ def api_stats():
                             </ul>
                             <!-- 使用例・活用シーン -->
                             <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h4>
+                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>具体的な使用例・活用シーン</h4>
                                 <ul class="usage-list">
                                     <li><strong>カスタマーサポート：</strong>「お問い合わせありがとうございます」「ご返金処理について」など、よくある問い合わせへの返答テンプレートを登録。1クリックでコピーして、メール・チャットへ即貼り付けできる。</li>
                                     <li><strong>営業メール：</strong>初回挨拶・見積書送付・フォローアップ・受注御礼の各テンプレを登録。商談フェーズに応じて選んで使い回せるため、メール作成時間を大幅短縮。</li>
@@ -626,7 +631,7 @@ def api_stats():
                                 </ul>
                             </div>
                             <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h4>
+                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中のトラブルと解決過程</h4>
                                 <p><span class="trouble-label">課題</span>JSON保存時に日本語が <code>\uXXXX</code> 形式でエスケープされ、ファイルを直接開いても内容を確認できない。</p>
                                 <p><span class="trouble-label solution">解決</span><code>json.dump(..., ensure_ascii=False, indent=2)</code> を指定し、日本語のまま整形保存。トラブル時のデータ確認が容易になった。</p>
                             </div>
@@ -648,15 +653,15 @@ def api_stats():
                                     <h3>付箋アプリ</h3>
                                     <p>デスクトップ上で自由に使える付箋アプリ</p>
                                     <div class="overlay-buttons">
-                                        <a href="https://github.com/ns7jp/works/blob/main/sticky_notes.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                        <a href="https://github.com/ns7jp/works/blob/main/sticky_notes.py" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="付箋アプリのCode"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="work-details">
                             <div class="work-meta">
-                                <span class="category"><i class="fa-brands fa-python"></i> Python / tkinter</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                                <span class="category"><i class="fa-brands fa-python" aria-hidden="true"></i> Python / tkinter</span>
+                                <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>付箋アプリ</h3>
                             <div class="work-summary">
@@ -675,7 +680,7 @@ def api_stats():
                             </ul>
                             <!-- 使用例・活用シーン -->
                             <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h4>
+                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>具体的な使用例・活用シーン</h4>
                                 <ul class="usage-list">
                                     <li><strong>今日のTODOリスト：</strong>朝起きてその日にやることを付箋に書き、画面端に貼っておく。完了したら削除して達成感を得る、シンプルなタスク管理。</li>
                                     <li><strong>瞬発アイデアメモ：</strong>会議中・作業中にひらめいたアイデアや気づきを即座にキャプチャ。Excel・メーラーを開く手間なく、ワンキーで付箋追加できる。</li>
@@ -687,7 +692,7 @@ def api_stats():
                                 </ul>
                             </div>
                             <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h4>
+                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中のトラブルと解決過程</h4>
                                 <p><span class="trouble-label">課題</span>付箋を移動して配置を変えても、再起動すると毎回初期位置に戻ってしまう。</p>
                                 <p><span class="trouble-label solution">解決</span>ウィンドウ終了時のイベントで <code>geometry()</code> を取得しJSONに保存、起動時に読み込んで位置を復元する処理に変更。</p>
                             </div>
@@ -708,8 +713,8 @@ def api_stats():
                                     <h3>SNSアプリ「Pulse」</h3>
                                     <p>感情ムードで繋がる独自コンセプトのSNS</p>
                                     <div class="overlay-buttons">
-                                        <a href="image/pulse.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-image"></i> Screenshot</a>
-                                        <a href="https://github.com/ns7jp/pulse" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                        <a href="image/pulse.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="SNSアプリPulseのScreenshot"><i class="fa-solid fa-image" aria-hidden="true"></i> Screenshot</a>
+                                        <a href="https://github.com/ns7jp/pulse" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer" aria-label="SNSアプリPulseのCode"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
                                     </div>
                                     <p class="demo-note">ログイン画面へのHTTP誘導は避け、画面確認はスクリーンショットで行えるようにしています。</p>
                                 </div>
@@ -717,8 +722,8 @@ def api_stats():
                         </div>
                         <div class="work-details">
                             <div class="work-meta">
-                                <span class="category"><i class="fa-brands fa-php"></i> PHP / SQLite</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                                <span class="category"><i class="fa-brands fa-php" aria-hidden="true"></i> PHP / SQLite</span>
+                                <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>SNSアプリ「Pulse」</h3>
                             <div class="work-summary">
@@ -743,7 +748,7 @@ def api_stats():
                             </ul>
                             <!-- 使用例・活用シーン -->
                             <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h4>
+                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>具体的な使用例・活用シーン</h4>
                                 <ul class="usage-list">
                                     <li><strong>日々の感情記録：</strong>朝・昼・夜とムードを選んで投稿し、感情オーラ（7日間グラフ）で自分の心の波を振り返る。日記アプリの代わりとして気軽に使える。</li>
                                     <li><strong>本音の吐き出し：</strong>ささやきモード（匿名投稿）で、職場や学校で言いづらい本音や悩みを誰にも特定されずに吐露。ストレス発散の場として機能する。</li>
@@ -753,7 +758,7 @@ def api_stats():
                                 </ul>
                             </div>
                             <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h4>
+                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中のトラブルと解決過程</h4>
                                 <p><span class="trouble-label">課題</span>開発環境と本番サーバーでSQLiteファイルの初期化挙動が異なり、デプロイ直後に「DBが存在しない」エラーが発生。</p>
                                 <p><span class="trouble-label solution">解決</span>起動時にDBファイルの有無を確認し、無ければスキーマを自動生成する処理を追加。環境ごとの手動セットアップが不要となった。</p>
                             </div>
@@ -777,8 +782,8 @@ def api_stats():
                                     <h3>掲示板アプリ</h3>
                                     <p>ユーザー認証・投稿・返信機能を備えた掲示板</p>
                                     <div class="overlay-buttons">
-                                        <a href="image/post.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-image"></i> Screenshot</a>
-                                        <a href="https://github.com/ns7jp/post" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                        <a href="image/post.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="掲示板アプリのScreenshot"><i class="fa-solid fa-image" aria-hidden="true"></i> Screenshot</a>
+                                        <a href="https://github.com/ns7jp/post" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer" aria-label="掲示板アプリのCode"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
                                     </div>
                                     <p class="demo-note">ログイン画面へのHTTP誘導は避け、画面確認はスクリーンショットで行えるようにしています。</p>
                                 </div>
@@ -786,8 +791,8 @@ def api_stats():
                         </div>
                         <div class="work-details">
                             <div class="work-meta">
-                                <span class="category"><i class="fa-brands fa-php"></i> PHP / MySQL</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                                <span class="category"><i class="fa-brands fa-php" aria-hidden="true"></i> PHP / MySQL</span>
+                                <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>掲示板アプリ</h3>
                             <div class="work-summary">
@@ -812,7 +817,7 @@ def api_stats():
                             </ul>
                             <!-- 使用例・活用シーン -->
                             <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h4>
+                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>具体的な使用例・活用シーン</h4>
                                 <ul class="usage-list">
                                     <li><strong>部活・サークルの情報共有：</strong>会員登録制でクローズドな掲示板として運用。練習日程の連絡・出欠確認・反省会のスレッドなど、SNSに乗せにくい内輪向け情報の共有に使える。</li>
                                     <li><strong>社内ナレッジ掲示板：</strong>業務手順・FAQ・トラブル対応事例をスレッドごとに整理。検索性が高く、新人教育や引き継ぎ資料としても活用できる。</li>
@@ -823,7 +828,7 @@ def api_stats():
                                 </ul>
                             </div>
                             <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h4>
+                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中のトラブルと解決過程</h4>
                                 <p><span class="trouble-label">課題</span>DB認証情報を db.php に直接記述しており、GitHub公開時に漏洩リスクがあることが判明。</p>
                                 <p><span class="trouble-label solution">解決</span>db.php を .gitignore で除外し、プレースホルダ版 db.example.php を別途用意。READMEに環境構築手順を記載し、第三者が安全にローカル展開できる構成へ変更。</p>
                             </div>
@@ -846,16 +851,16 @@ def api_stats():
                                     <h3>サンプル企業サイト</h3>
                                     <p>デザインカンプからコーディングしたレスポンシブサイト</p>
                                     <div class="overlay-buttons">
-                                        <a href="https://ns7jp.github.io/magic/" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i> Demo</a>
-                                        <a href="https://github.com/ns7jp/magic" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Code</a>
+                                        <a href="https://ns7jp.github.io/magic/" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="サンプル企業サイトのDemo"><i class="fa-solid fa-eye" aria-hidden="true"></i> Demo</a>
+                                        <a href="https://github.com/ns7jp/magic" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer" aria-label="サンプル企業サイトのCode"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="work-details">
                             <div class="work-meta">
-                                <span class="category"><i class="fa-brands fa-html5"></i> HTML / CSS / JS</span>
-                                <span class="date"><i class="fa-regular fa-calendar"></i> 2026</span>
+                                <span class="category"><i class="fa-brands fa-html5" aria-hidden="true"></i> HTML / CSS / JS</span>
+                                <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>サンプル企業サイト</h3>
                             <div class="work-summary">
@@ -874,7 +879,7 @@ def api_stats():
                             </ul>
                             <!-- 使用例・活用シーン -->
                             <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb"></i>具体的な使用例・活用シーン</h4>
+                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>具体的な使用例・活用シーン</h4>
                                 <ul class="usage-list">
                                     <li><strong>中小企業のコーポレートサイト：</strong>会社概要・事業内容・実績紹介・お問い合わせの基本構成が一通り含まれており、テンプレートとして即座にカスタマイズできる。HTML/CSS/JSのみで動くため、PHPサーバー不要で安価に運用可能。</li>
                                     <li><strong>制作会社・デザイン事務所の実績ページ：</strong>事例ページのLightbox2ギャラリーは、施工事例・制作実績・撮影ポートフォリオなどの画像を美しく見せる用途に応用可。クリックで拡大表示できるため、訴求力が高い。</li>
@@ -885,7 +890,7 @@ def api_stats():
                                 </ul>
                             </div>
                             <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench"></i>制作中のトラブルと解決過程</h4>
+                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中のトラブルと解決過程</h4>
                                 <p><span class="trouble-label">課題</span>モバイルでハンバーガーメニューを開いたまま画面幅を変えると、メニューが閉じずレイアウトが崩れる。</p>
                                 <p><span class="trouble-label solution">解決</span><code>resize</code> イベントを監視し、PC幅に戻った時点でメニュー状態をリセットする処理を追加。複数ブレイクポイントで動作確認を実施。</p>
                             </div>
@@ -905,7 +910,7 @@ def api_stats():
             <!-- 「今後も作品を追加予定」というメッセージで継続的な学習意欲を表現 -->
             <section class="coming-soon">
                 <div class="coming-soon-content">
-                    <i class="fa-solid fa-rocket"></i>
+                    <i class="fa-solid fa-rocket" aria-hidden="true"></i>
                     <h2>More Works Coming Soon</h2>
                     <p>現在も新しい作品を制作中です。学習を重ね、さらに多くの作品を追加していく予定です。</p>
                 </div>
@@ -930,8 +935,8 @@ def api_stats():
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-social">
-                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
             </div>
         </div>
         <div class="footer-bottom">
