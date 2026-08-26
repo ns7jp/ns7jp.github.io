@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸のLinux運用Lab。systemd / journalctl / cron / SSH鍵 / 権限 / logrotate / rsyncバックアップなど、Linuxサーバー一次運用に必要な確認項目とコマンド例を整理しています。">
-    <title>Linux Lab | 島田則幸のポートフォリオ</title>
+    <meta name="description" content="Linuxサーバーで問題が起きたときの基本的な確認順序と、情報を安全に集めるためのコマンド例をまとめた学習ページです。">
+    <title>Linuxサーバーの基本確認 | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/linux-lab.html">
 
-    <meta property="og:title" content="Linux Lab | 島田則幸のポートフォリオ">
+    <meta property="og:title" content="Linuxサーバーの基本確認 | 島田則幸のポートフォリオ">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/linux-lab.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="Linuxサーバー一次運用の確認項目とコマンド例。journalctl / systemd / cron / SSH / logrotate / rsync をまとめています。">
+    <meta property="og:description" content="Linuxサーバーで問題が起きたときの基本的な確認順序と、情報を安全に集めるためのコマンド例を紹介します。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta name="twitter:image:alt" content="Linux Server Build &amp; Operations — 島田則幸のポートフォリオ">
+    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
 
     <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260826-1">
+    <link rel="stylesheet" href="css/style.css?v=20260826-2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -67,12 +67,12 @@
         </p>
         <nav id="site-nav">
             <ul>
-                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>Server Build</span></a></li>
-                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Works</span></a></li>
-                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>Skills</span></a></li>
-                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>Resume</span></a></li>
-                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>About Me</span></a></li>
-                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>Contact</span></a></li>
+                <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li>
+                <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li>
+                <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li>
+                <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li>
+                <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li>
+                <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
             </ul>
         </nav>
     </header>
@@ -82,8 +82,8 @@
         <div class="page-hero-overlay"></div>
         <div class="page-hero-content">
             <h1 class="page-title">
-                <span class="title-en">Linux Operation Lab</span>
-                <span class="title-jp">Linux 一次運用メモ</span>
+                <span class="title-en">Linux Basic Checks</span>
+                <span class="title-jp">Linuxサーバーの基本確認</span>
             </h1>
         </div>
     </section>
@@ -91,19 +91,19 @@
     <div class="page-content infra-lab-content">
         <div class="container">
 
-            <nav class="lab-subnav" aria-label="Infra Lab 内ナビ">
-                <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> Build Overview</a>
-                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> Evidence</a>
-                <a href="linux-lab.html" class="active" aria-current="page"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux</a>
-                <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> Cloud</a>
-                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Monitoring Stack（アーカイブ）</a>
-                <a href="ansible/"><i class="fa-solid fa-gears" aria-hidden="true"></i> Ansible</a>
+            <nav class="lab-subnav" aria-label="サーバー学習内の案内">
+                <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
+                <a href="linux-lab.html" class="active" aria-current="page"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux基本確認</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> AWS設計</a>
+                <a href="monitoring-stack/"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> 監視の初期作品</a>
+                <a href="ansible/"><i class="fa-solid fa-gears" aria-hidden="true"></i> 自動構築の設定</a>
             </nav>
 
             <section class="lab-intro">
-                <span class="case-label">Ubuntu / RHEL family Scenario</span>
-                <h2>「サーバーが重い」「ログインできない」を同じ順で確認するLab</h2>
-                <p>Linuxサーバー（Ubuntu / RHEL系）の一次運用で、まず見るべきところを <strong>負荷・ディスク・サービス・ログ・ネットワーク・認証・ファイアウォール</strong> の順に整理しました。すべて読み取り操作のみで構成し、設定変更や再起動は手順を分けています。</p>
+                <span class="case-label">学習用 / Ubuntu・RHEL系Linux</span>
+                <h2>「サーバーが重い」「ログインできない」ときの確認順序</h2>
+                <p>UbuntuやRHEL系Linuxで問い合わせを受けたときに、<strong>負荷・空き容量・サービス・ログ・通信・ログイン・ファイアウォール</strong>の順で状態を確認する練習です。ここに掲載した確認コマンドは情報を見るためのもので、設定変更や再起動は別の手順として扱います。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-microchip" aria-hidden="true"></i> systemd</span>
                     <span><i class="fa-solid fa-book" aria-hidden="true"></i> journalctl</span>
@@ -114,8 +114,8 @@
                 <div class="status-callout validated" role="note">
                     <i class="fa-solid fa-terminal" aria-hidden="true"></i>
                     <div>
-                        <strong>このページは一次切り分けの手順・コマンド集です</strong>
-                        <p>掲載コマンドすべてを同一実ホストで通した証跡ではありません。最新のruntime実測<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026-08-22 Full-stack E2E</a>では、runtime <code>7622a9d</code>をDocker導入済みの使い捨てUbuntu 24.04 runnerで検証し、<code>site.yml</code>、2回目<code>changed=0</code>、11 containers、Docker API proxy、runner内network / UFW、D-1 RTO 1秒、3-volume restoreを含む23 / 23 IDをPASSしました。証跡docs <code>cf9419b</code>を含むPR #75はmain <code>4a292026</code>へ統合済みです。WSL2上の監視、D-1 RTO 13秒、二セグメント通信障害は2026-08-17〜19の履歴として、<a href="evidence-demo.html">Evidence Digest</a>で区別しています。</p>
+                        <strong>確認できた範囲と、まだ確認していない範囲</strong>
+                        <p>このページの全コマンドを1台の実機で試したわけではありません。<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026年8月22日の実行記録</a>では、Dockerが事前に入った使い捨てのUbuntu 24.04環境で、構築手順の実行、11個のコンテナ起動、通信制限、アプリ復旧、監視データの復元など23項目を確認し、すべて合格しました。WSL2上で行った監視と復旧の練習は2026年8月17日〜19日の別記録です。詳しい環境と未実施項目は<a href="evidence-demo.html">実行記録ページ</a>で分けて掲載しています。</p>
                     </div>
                 </div>
             </section>
@@ -123,67 +123,68 @@
             <section class="operation-matrix-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span>
-                    <span class="heading-text">Linux 一次切り分けコマンド早見表</span>
+                    <span class="heading-text">Linuxの基本確認コマンド早見表</span>
                 </div>
+                <p class="evidence-note">下記の数値は一律の正解ではなく、異常の可能性に気づくための目安です。普段の状態や設計値と比べ、判断できない場合は結果を保存して上位担当者へ相談します。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるLinux一次運用表" tabindex="0">
                     <table class="operation-table">
-                        <caption class="sr-only">Linux一次運用Labの確認観点、コマンド、判断基準</caption>
+                        <caption class="sr-only">Linuxサーバーの基本確認項目、コマンド、相談の目安</caption>
                         <thead>
                             <tr>
                                 <th scope="col">対象</th>
                                 <th scope="col">確認観点</th>
                                 <th scope="col">主なコマンド</th>
-                                <th scope="col">判断基準 / 引き継ぎ目安</th>
+                                <th scope="col">異常の可能性と相談の目安</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>負荷</td>
-                                <td>load average / CPU / プロセス上位</td>
+                                <td>処理の混み具合 / CPU使用率 / 負荷の高いプロセス</td>
                                 <td><code>uptime</code><br><code>top -bn1 | head -n 20</code><br><code>ps -eo pid,user,pcpu,pmem,etime,comm --sort=-pcpu | head</code></td>
-                                <td>load5 が CPU 数を超えていれば負荷高。常駐プロセスが特定のものに偏る場合はそのサービスを担当へ。</td>
+                                <td>5分間の平均負荷（load5）がCPU数を超える状態が続く場合は、普段の値と比べます。特定のプロセスに負荷が集中していれば、結果を添えて担当者へ相談します。</td>
                             </tr>
                             <tr>
                                 <td>メモリ</td>
-                                <td>使用量 / available / swap</td>
+                                <td>使用量 / 利用可能量 / ディスクへの一時退避（swap）</td>
                                 <td><code>free -h</code><br><code>vmstat 1 5</code></td>
-                                <td>available が物理の 10% を切る、swap が継続的に増える場合は OOM 注意。</td>
+                                <td>利用可能なメモリが全体の10%を下回る、またはswapの使用が増え続ける場合は、メモリ不足の可能性として相談します。</td>
                             </tr>
                             <tr>
                                 <td>ディスク</td>
-                                <td>使用率 / inode / I/O</td>
+                                <td>容量 / 作成できるファイル数（inode） / 読み書きの遅れ</td>
                                 <td><code>df -hPT -x tmpfs</code><br><code>df -hPi -x tmpfs</code><br><code>iostat -x 1 3</code></td>
-                                <td>使用率 90% 以上、inode 80% 以上、await が継続的に高い場合は要対応。</td>
+                                <td>容量90%以上、inode 80%以上、読み書きの待ち時間が普段より長い状態が続く場合は、結果を保存して相談します。</td>
                             </tr>
                             <tr>
                                 <td>サービス</td>
-                                <td>失敗ユニット / 起動順序 / 自動起動</td>
+                                <td>停止・失敗したサービス / 自動起動の設定</td>
                                 <td><code>systemctl --failed</code><br><code>systemctl status sshd</code><br><code>systemctl list-unit-files --state=enabled</code></td>
-                                <td>failed があれば即チケット。enabled だが inactive のサービスは設計と照合する。</td>
+                                <td>失敗したサービスがあれば記録します。自動起動の設定があるのに停止している場合は、設計上正しい状態かを確認して担当者へ相談します。</td>
                             </tr>
                             <tr>
                                 <td>ログ</td>
                                 <td>直近のエラー / 該当サービス / 起動失敗</td>
                                 <td><code>journalctl -p err --since "30 min ago"</code><br><code>journalctl -u nginx -n 50</code><br><code>dmesg -T --level=err | tail</code></td>
-                                <td>同一エラーの反復、kernel oops、OOM killer 発火は重大として上位担当へ。</td>
+                                <td>同じエラーの繰り返し、OS内部の重大エラー、メモリ不足による強制終了があれば、ログと発生時刻を添えて上位担当者へ相談します。</td>
                             </tr>
                             <tr>
                                 <td>ネットワーク</td>
-                                <td>経路 / DNS / リスニングポート</td>
+                                <td>通信経路 / 名前解決（DNS） / 接続を待ち受けているポート</td>
                                 <td><code>ip route</code><br><code>resolvectl status</code><br><code>ss -tulnp</code></td>
-                                <td>同一セグメントから到達できない場合は L2/L3 の問題として切り出す。</td>
+                                <td>同じネットワーク内でも接続できないのか、別ネットワークへの経路で止まるのかを分けて確認します。</td>
                             </tr>
                             <tr>
                                 <td>認証</td>
-                                <td>SSH 失敗 / ログイン履歴 / ロックアウト</td>
+                                <td>SSH接続の失敗 / ログイン履歴 / アカウントのロック</td>
                                 <td><code>journalctl -u ssh -p warning</code><br><code>last -n 20</code><br><code>lastb -n 20</code></td>
-                                <td>同一IPからのbrute force兆候があれば fail2ban / firewall 担当へエスカレーション。</td>
+                                <td>同じIPアドレスからログイン失敗が繰り返されていれば、記録を保存してセキュリティまたはネットワーク担当者へ相談します。</td>
                             </tr>
                             <tr>
                                 <td>ファイアウォール</td>
-                                <td>許可ポリシー / 適用状態</td>
+                                <td>許可されている通信 / ルールの適用状態</td>
                                 <td><code>ufw status verbose</code><br><code>firewall-cmd --list-all</code><br><code>iptables -L -n -v</code></td>
-                                <td>申請にない解放、想定外の許可、ルールの空状態は即確認対象。</td>
+                                <td>申請にない通信許可、想定外の許可、ルールが設定されていない状態を見つけた場合は、変更せず担当者へ確認します。</td>
                             </tr>
                         </tbody>
                     </table>
@@ -193,40 +194,41 @@
             <section class="operation-matrix-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
-                    <span class="heading-text">SSH / 権限 / cron 設計メモ</span>
+                    <span class="heading-text">SSH・権限・定期処理の学習メモ</span>
                 </div>
+                <p class="evidence-note">以下は設定内容を理解するための学習例です。実務では、会社の手順、影響範囲、承認の有無を確認してから変更します。</p>
                 <div class="lab-architecture-grid">
                     <div class="architecture-notes">
                         <h3>SSH 鍵運用</h3>
                         <ul>
-                            <li>鍵は <code>ssh-keygen -t ed25519</code> で作成し、パスフレーズを必ず設定する。</li>
-                            <li>サーバー側 <code>~/.ssh/authorized_keys</code> は <code>chmod 600</code>、ディレクトリは <code>700</code>。</li>
-                            <li><code>/etc/ssh/sshd_config</code> で <code>PasswordAuthentication no</code>、<code>PermitRootLogin no</code>、<code>Port</code> は必要に応じて変更。</li>
-                            <li>退職・異動時は <code>authorized_keys</code> の該当行を削除し、運用台帳と突合する。</li>
+                            <li><code>ssh-keygen -t ed25519</code>で接続用の鍵を作り、鍵を守るパスフレーズを設定します。</li>
+                            <li>サーバー側の鍵ファイルは、ほかの利用者から読まれない権限にします（ファイルは<code>600</code>、ディレクトリは<code>700</code>）。</li>
+                            <li>パスワード接続や管理者の直接ログインを無効にする場合は、先に別の接続手段を確認してから設定します。</li>
+                            <li>退職・異動時は不要になった鍵を削除し、運用台帳と照合します。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>権限・ファイルシステム</h3>
                         <ul>
-                            <li><code>chown</code> / <code>chmod</code> は最小権限。共有は POSIX ACL（<code>setfacl</code>）で個別付与。</li>
-                            <li>機密ファイルは <code>chmod 640</code> + 専用グループ。<code>ls -la</code> で確認。</li>
-                            <li>ディレクトリの SUID/SGID は棚卸し対象（<code>find / -perm /6000 -type f 2>/dev/null</code>）。</li>
+                            <li><code>chown</code>や<code>chmod</code>では、必要な利用者だけが操作できる権限にします。個別に権限を追加するときはACL（<code>setfacl</code>）を使います。</li>
+                            <li>機密ファイルは専用グループだけが読める権限にし、<code>ls -la</code>で設定結果を確認します。</li>
+                            <li>通常より強い権限（SUID / SGID）が付いたファイルは、必要なものか定期的に確認します。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>cron / systemd timer</h3>
                         <ul>
-                            <li>OS全体: <code>/etc/cron.d/</code> / <code>/etc/cron.daily/</code>、ユーザー: <code>crontab -l</code>。</li>
-                            <li>新規はできるだけ systemd timer を選び、ログを <code>journalctl -u xxx.timer</code> で追えるようにする。</li>
-                            <li>ジョブ追加時は実行ユーザー、出力先、リトライ、タイムアウトを設計書に明記。</li>
+                            <li>定期実行の設定場所は、OS全体の設定と利用者ごとの設定に分かれます。</li>
+                            <li>新しい定期処理は、実行結果をログで追いやすい<code>systemd timer</code>の利用を検討します。</li>
+                            <li>追加時は、誰が実行するか、結果の保存先、失敗時の再試行、制限時間を記録します。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>logrotate</h3>
                         <ul>
-                            <li><code>/etc/logrotate.d/</code> 配下にサービス単位で配置。サイズ / 日付ローテ、保持世代、圧縮を指定。</li>
-                            <li>新規アプリ追加時は logrotate 設定とディスク使用率監視を同時に追加。</li>
-                            <li>動作確認は <code>logrotate -d /etc/logrotate.d/xxx</code> (dry-run)。</li>
+                            <li><code>logrotate</code>は、古いログを一定期間ごとに整理し、ディスク不足を防ぐ仕組みです。</li>
+                            <li>新しいアプリを追加するときは、ログの保存期間とディスク使用率の監視も決めます。</li>
+                            <li>変更前に<code>logrotate -d</code>を使い、実際には処理せず設定内容だけを確認します。</li>
                         </ul>
                     </div>
                 </div>
@@ -235,11 +237,12 @@
             <section class="operation-matrix-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i></span>
-                    <span class="heading-text">rsync によるバックアップ例</span>
+                    <span class="heading-text">rsyncを使ったバックアップの学習例</span>
                 </div>
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-terminal" aria-hidden="true"></i> 日次差分バックアップのワンライナー</h3>
-                    <p>同一ホスト内の別ディスクへ /etc と /var/www を日次でバックアップし、削除も同期する例です。実運用ではバックアップ先を別筐体 / オフサイトにすること、定期的にリストアテストを行うことが前提です。</p>
+                    <h3><i class="fa-solid fa-terminal" aria-hidden="true"></i> 毎日の差分バックアップ例</h3>
+                    <p>同じサーバー内の別ディスクへ、設定ファイルとWebコンテンツを毎日コピーする学習例です。本番環境で実行した実績ではありません。同じサーバー内だけでは機器故障に備えられないため、実務では別の機器や離れた場所にも保存し、定期的に復元できるかを確認します。</p>
+                    <p class="evidence-note"><strong>実行前の注意:</strong> <code>--delete</code>はバックアップ先の余分なファイルを削除し、末尾の<code>find ... rm -rf</code>は30日を超えた保存先を削除します。最初はテスト用ディレクトリへ変更し、<code>rsync --dry-run</code>で対象と差分を確認してください。</p>
 <pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
 # /usr/local/sbin/daily-backup.sh
 SRC1=/etc
@@ -255,7 +258,7 @@ rsync -aHAX --delete --numeric-ids \
 ln -snf "$DST" /mnt/backup/$(hostname)/latest
 find /mnt/backup/$(hostname) -maxdepth 1 -type d -mtime +30 -exec rm -rf {} +
 </pre>
-                    <p style="margin-top:14px;">systemd timer 例（毎日 03:00 実行）:</p>
+                    <p style="margin-top:14px;">毎日3時に自動実行する設定例（systemd timer）:</p>
 <pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
 # /etc/systemd/system/daily-backup.service
 [Unit]
@@ -273,34 +276,34 @@ Persistent=true
 [Install]
 WantedBy=timers.target
 </pre>
-                    <p style="margin-top:14px;">詳しいリストア手順とテスト計画は <a href="support-docs/backup-restore-runbook.md">バックアップ/リストアRunbook</a> に分けて記載しています。</p>
+                    <p style="margin-top:14px;">復元手順と確認計画は、別の<a href="support-docs/backup-restore-runbook.md">バックアップ・復元手順</a>にまとめています。</p>
                 </div>
             </section>
 
             <section class="lab-links-section">
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-terminal" aria-hidden="true"></i> bash 一次切り分けスクリプト</h3>
-                    <p>ここまでの確認項目を1本にまとめた読み取り専用 bash です。問い合わせ受付直後に流して、結果をテキストでチケットに添付します。</p>
+                    <h3><i class="fa-solid fa-terminal" aria-hidden="true"></i> 基本情報を集めるbashスクリプト</h3>
+                    <p>ここまでの確認項目を1本にまとめた、設定を変更しない読み取り専用のスクリプトです。問い合わせを受けた直後に実行し、結果をテキストとして記録できます。</p>
                     <div class="contact-actions">
                         <a href="support-scripts/linux-triage.sh" class="btn btn-secondary">linux-triage.sh を見る</a>
                         <a href="support-scripts/" class="btn btn-outline-dark">support-scripts/ へ</a>
                     </div>
                 </div>
                 <div class="lab-link-card">
-                    <h3><i class="fa-solid fa-gears" aria-hidden="true"></i> 自動化 / 観測 / 運用品質への入口</h3>
-                    <p>初期構築のIaC、Cloud Network、運用後の観測性（Metrics + Logs）、運用品質の数値化、検証証跡を別フォルダにまとめています。bashスクリプトで状態を確認し、Ansibleで設定を揃え、Prometheus + Loki の観測基盤を構成し、採録した範囲のSLOを説明する流れです。長期稼働の実測ではありません。</p>
+                    <h3><i class="fa-solid fa-gears" aria-hidden="true"></i> 関連する学習資料</h3>
+                    <p>構築の自動化、クラウドのネットワーク設計、監視、ログ確認、テスト結果を別資料にまとめています。いずれも学習環境で確認できた範囲であり、長期間の実運用実績ではありません。</p>
                     <div class="next-scope-list">
                         <span><a href="ansible/" style="color:inherit;">Ansible playbook</a></span>
                         <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>
                         <span><a href="monitoring-stack/" style="color:inherit;">Monitoring Stack（初期作品・アーカイブ）</a></span>
-                        <span><a href="https://github.com/ns7jp/server-monitor/tree/main/labs/three-tier" target="_blank" rel="noopener noreferrer" style="color:inherit;">Web / AP / DB 3層ラボ</a></span>
-                        <span><a href="https://github.com/ns7jp/server-monitor/tree/main/labs/routing" target="_blank" rel="noopener noreferrer" style="color:inherit;">L2 / L3 切り分けラボ</a></span>
-                        <span><a href="https://github.com/ns7jp/server-monitor/tree/main/ansible/roles/storage" target="_blank" rel="noopener noreferrer" style="color:inherit;">LVM storage role</a></span>
-                        <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">SLO / Error Budget</a></span>
-                        <span><a href="infra-evidence/" style="color:inherit;">Infra出力サンプル</a></span>
-                        <span><a href="production-readiness.md" style="color:inherit;">Production Readiness</a></span>
-                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">Backup / DR計画</a></span>
-                        <span><a href="support-docs/postmortem-example.md" style="color:inherit;">架空Postmortemサンプル</a></span>
+                        <span><a href="https://github.com/ns7jp/server-monitor/tree/main/labs/three-tier" target="_blank" rel="noopener noreferrer" style="color:inherit;">Web・アプリ・DBの障害切り分け</a></span>
+                        <span><a href="https://github.com/ns7jp/server-monitor/tree/main/labs/routing" target="_blank" rel="noopener noreferrer" style="color:inherit;">同じ／別ネットワーク間の通信確認</a></span>
+                        <span><a href="https://github.com/ns7jp/server-monitor/tree/main/ansible/roles/storage" target="_blank" rel="noopener noreferrer" style="color:inherit;">ディスク容量拡張の自動化</a></span>
+                        <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">サービス目標の学習メモ</a></span>
+                        <span><a href="infra-evidence/" style="color:inherit;">実行結果のサンプル</a></span>
+                        <span><a href="production-readiness.md" style="color:inherit;">実務環境へ進む前の確認事項</a></span>
+                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">バックアップ・復旧計画</a></span>
+                        <span><a href="support-docs/postmortem-example.md" style="color:inherit;">架空の障害振り返り</a></span>
                         <span><a href="support-docs/office-it-physical-layer.md" style="color:inherit;">物理層</a></span>
                     </div>
                 </div>
@@ -316,13 +319,13 @@ WantedBy=timers.target
                 <span class="logo-sub">Portfolio</span>
             </div>
             <div class="footer-nav">
-                <a href="me.html">About</a>
-                <a href="skills.html">Skills</a>
-                <a href="infra-lab.html">Server Build</a>
+                <a href="me.html">自己紹介</a>
+                <a href="skills.html">スキル</a>
+                <a href="infra-lab.html">サーバー構築</a>
                 <a href="linux-lab.html">Linux Lab</a>
-                <a href="works.html">Works</a>
-                <a href="resume.html">Resume</a>
-                <a href="contact.html">Contact</a>
+                <a href="works.html">作品</a>
+                <a href="resume.html">履歴書</a>
+                <a href="contact.html">連絡先</a>
             </div>
             <div class="footer-social">
                 <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
@@ -331,7 +334,7 @@ WantedBy=timers.target
         </div>
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連リポジトリは、文書の整形だけでなく実装コードの生成にも AI（Claude）を使っています。範囲は <a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィール README</a> に開示しています。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行い、個人制作のため人によるレビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 

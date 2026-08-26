@@ -732,20 +732,23 @@ header nav ul li a::after {
 
 .section-title .title-en {
     display: block;
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    font-weight: 400;
-    color: var(--text-dark);
-    letter-spacing: 2px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
 }
 
 .section-title .title-jp {
     display: block;
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.3rem;
-    color: var(--text-muted);
-    margin-top: 12px;
-    letter-spacing: 3px;
+    font-size: clamp(2.6rem, 4vw, 4rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-top: 8px;
+    letter-spacing: 0.08em;
+    line-height: 1.35;
 }
 
 .section-title.center {
@@ -753,11 +756,11 @@ header nav ul li a::after {
 }
 
 .section-title.light .title-en {
-    color: var(--text-light);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .section-title.light .title-jp {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-light);
 }
 
 .section-link {
@@ -1734,20 +1737,23 @@ footer .footer-bottom small {
 
 .page-title .title-en {
     display: block;
-    font-family: 'Playfair Display', serif;
-    font-size: 5rem;
-    font-weight: 400;
-    color: var(--text-light);
-    letter-spacing: 4px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.72);
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .page-title .title-jp {
     display: block;
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 20px;
-    letter-spacing: 6px;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 700;
+    color: var(--text-light);
+    margin-top: 12px;
+    letter-spacing: 0.1em;
+    line-height: 1.35;
 }
 
 .page-content {
@@ -4559,7 +4565,7 @@ article p,
         grid-template-columns: 1fr;
     }
     
-    .section-title .title-en {
+    .section-title .title-jp {
         font-size: 3rem;
     }
     
@@ -4575,7 +4581,7 @@ article p,
         gap: 25px;
     }
     
-    .page-title .title-en {
+    .page-title .title-jp {
         font-size: 3.5rem;
     }
     
@@ -4823,7 +4829,7 @@ article p,
         letter-spacing: 1px;
     }
     
-    .section-title .title-en {
+    .section-title .title-jp {
         font-size: 2.5rem;
     }
     
@@ -4836,7 +4842,7 @@ article p,
         min-height: 220px;
     }
     
-    .page-title .title-en {
+    .page-title .title-jp {
         font-size: 2.8rem;
     }
     

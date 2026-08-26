@@ -9,49 +9,50 @@
 
 🔗 **公開サイト**: https://ns7jp.github.io/
 
-**Linuxサーバー構築・運用を第一志望**とし、Ubuntuサーバーの設計とAnsible構成コード、Prometheus・Grafana・Loki監視、障害注入から復旧までを、実装済み・実測済みの範囲を分けて公開しています。
+**Linuxサーバー構築・運用を第一志望**としています。このサイトでは、Ubuntuサーバーの設定、動作確認、監視、ログ確認、障害からの復旧を学んだ過程を公開しています。「作ったもの」「実際に動かして確認したもの」「まだ試していないもの」を分けて記載します。
 
 ## 開発体制について
 
-このポートフォリオおよび主作品 [Server Monitor](https://github.com/ns7jp/server-monitor) は、README・設計書・Runbookの下書き／推敲に加え、Ansible role、Terraform module、CI workflow、test・Lab雛形の生成やデバッグにも Claude Code / Codex を使用しています。採用する構成の最終判断、機密情報のマスク、実測／未実測の判定、面談での説明は本人が担当します。証跡は本人手元WSL2、自動CI、AI支援セッションを区別し、未確認項目は `NOT RUN` として公開します。個人制作のため、人による第三者レビュー実績とは表現しません。
+このポートフォリオと主作品 [Server Monitor](https://github.com/ns7jp/server-monitor) では、文章、プログラム、テストの作成補助にClaude Code / Codexを使用しました。採用する方法を決め、結果を確認し、未実施の項目を明記し、面談で説明する責任は本人が持ちます。個人制作であり、人による第三者レビューは受けていません。
 
-## 採用担当者向け: 最短レビュー順
+## はじめに見てほしいページ
 
 | 順番 | 見るもの | 何が分かるか |
 |---|---|---|
-| 1 | [Project Brief](https://ns7jp.github.io/project-brief.html) | Linuxサーバー構築案件の目的、担当範囲、工程、設計判断、完了条件 |
-| 2 | [Evidence Digest](https://ns7jp.github.io/evidence-demo.html) | 日時・環境・commit付きの実測結果、失敗、未実施範囲 |
-| 3 | [Work Readiness](https://ns7jp.github.io/work-readiness.html) | 実務想定ケース、変更・報告の型、AI利用の境界、面談で再現できる内容、次の独立VM検証 |
+| 1 | [制作概要](https://ns7jp.github.io/project-brief.html) | 何を作り、どこまで自分で取り組んだか |
+| 2 | [動作確認の記録](https://ns7jp.github.io/evidence-demo.html) | いつ、どの環境で、何を確認したか。失敗と未実施の範囲も掲載 |
+| 3 | [仕事の進め方](https://ns7jp.github.io/work-readiness.html) | 入社後に取り組みたい仕事、相談・報告の仕方、AIを使った範囲 |
 | 4 | [1ページ履歴書](https://ns7jp.github.io/resume.html) | 経歴、資格、構築・運用スキル、主成果物、制作体制 |
-| 5 | [2分15秒 証跡リプレイ](https://ns7jp.github.io/demo.html) | 2026年8月18日・19日の実測画面とD-1ログを時系列に再構成した閲覧用デモ |
-| 6 | [Full-stack E2E 23/23](https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md) | runtime `7622a9d`、使い捨てUbuntu 24.04 runnerでの構築・冪等性・11 containers・Docker API proxy・復旧・3 volumes復元。main `4a292026`へ統合済み |
-| 7 | [Git rollback rehearsal](https://github.com/ns7jp/server-monitor/actions/runs/32611251044) | PR #77途中commitの使い捨てUbuntu runnerで、candidate `84e1492`から前版`59aa88e`へのimmutable git SHA切り戻しをPASS。PR自体は後にmerge済みですが、merge後mainでの同一試験結果とは扱いません |
 
-### 証跡の境界
+## 実施状況
 
-- **作成・実装済み:** 要件、設計、パラメータ、構築コード、試験仕様、引き渡し、変更・ロールバック、実機検証手順
-- **2026年8月17〜19日の履歴として実測:** Ansible 4 roles、監視9 services、Grafana実データ、Lokiログ、D-1復旧（RTO 13秒）、二セグメント通信障害
-- **2026年8月22日のE2Eで実測（runtime `7622a9d`）:** 使い捨てUbuntu 24.04 runnerで23/23 PASS。`site.yml`初回一括適用、2回目`changed=0`、core 10 services + CI専用webhook sinkの計11 containers、Docker API proxyのGET成功・POST拒否・固有Nginx logのAlloy経由Loki到達、認証、runner内network/UFW、synthetic alertのlocal webhook FIRING/RESOLVED、D-1自動復旧（RTO 1秒）、別名3 volumesへのchecksum付きrestore。証跡docs `cf9419b`を含むPR #75はmain merge `4a292026`へ統合済み
-- **2026年8月23日のCIで実測（PR #77途中commit / [Actions run 32611251044](https://github.com/ns7jp/server-monitor/actions/runs/32611251044)）:** disposable Ubuntu runnerの`/opt/server-monitor`へimmutable git SHAでcandidate `84e149254d463a8a27a4cabcd09efa4504d1b47e`を配備・検証後、前版`59aa88ed1c8ccb7ba188909f0e079b834e9126c7`へ切り戻してPASS。revision marker、running-container manifest、app container強制置換、stale file除去、loopback bind、Loki取り込みまで一致を確認。PR #77自体は後にmerge済みですが、このrunをmerge後mainで再実行した結果とは表現しません
-- **2026年8月24日のAI支援セッション環境で実測:** B-1（qemu guest上のloop deviceによるLVM）、B-2 / B-3（Docker）、B-4（network namespace）を採録。B-4は環境制約により3項目を`SKIP-ENV`とし、本人手元で面談再実演を約束するのはWSL2 + Dockerで再現できるB-2 / B-3のみ
-- **2026年8月25日のCIで実測:** AlmaLinux / Rocky 9向けMoleculeのEL9シナリオをコンテナ上で確認。実機AlmaLinuxホストへの適用証跡とは扱いません
-- **NOT RUN:** persistent hostでのrollback・72時間連続稼働・host再起動後、Slack実配信、AWS `apply / destroy`・実費・Security Group/NACL、D-2、独立した管理端末・引き渡し対象host・組織DNSを含むnetwork検証、production traffic
+- **本人のPCで確認:** Windows上のLinux環境（WSL2）で、監視、ログ確認、サービスの復旧、ネットワーク障害の原因調査を練習しました。
+- **GitHub上の自動テストで確認:** テストのたびに作り直す一時的なUbuntu環境で、構築から復旧までの23項目すべてに合格しました。前の版へ戻すテストも行いました。
+- **AI支援の練習環境で確認:** 仮想環境やコンテナを使った追加演習です。独立した実機での構築実績ではありません。
+- **未実施:** 独立サーバーでの72時間稼働、再起動後の確認、Slackへの実通知、AWS環境の作成・削除、別サーバーへの復元、本番通信などです。
 
-E2E runnerにはDockerが事前導入済みだったため、最小OSからDockerを導入した実績とは表現しません。local webhookのsynthetic alert試験とD-1障害注入は別の検証であり、いずれもSlack実配信を示しません。runtime実測commit、結果を転記したdocs commit、main merge commitを分け、後続の文書変更をruntime検証へ読み替えません。
+自動テストに使ったUbuntuにはDockerがあらかじめ入っていました。そのため、何も入っていないOSへDockerを導入した実績とは表現しません。詳しい実行条件と、検証したコードの版（コミットID）は以下に残しています。
 
-公開中の2分15秒映像は、2026年8月18日・19日の画面とRTO 13秒のD-1ログを再構成した証跡リプレイで、実操作の連続録画ではありません。2026年8月22日の実terminal `demo.cast`は期限付きActions artifactに保存され、公開サイト上の常設動画ではありません。実操作を収録する手順は[収録ガイド](https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md)に分けています。
+<details>
+<summary>コミットIDを含む詳しい技術記録</summary>
 
-Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画、架空Postmortem、CIS自己マッピング、`infra-evidence/*.sample.txt`は、実運用実績・実測結果とは区別しています。
+- [構築から復旧までの一連テスト（E2E）23項目](https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md): 一時Ubuntu環境で実施。実行したコードは `7622a9d`、記録を含む変更はmainブランチの `4a292026` へ取り込み済みです。
+- [前の版へ戻すテスト](https://github.com/ns7jp/server-monitor/actions/runs/32611251044): PR #77途中のコード `84e1492` から前の版 `59aa88e` へ戻せることを確認しました。PR #77自体は後にmainへ取り込みましたが、取り込み後のmainで同じテストを再実行した結果ではありません。
+- 2026年8月24日の追加演習はAI支援の仮想・コンテナ環境で行いました。面談で再現できると約束するのは、本人のWSL2 + Dockerで実行できるB-2 / B-3のみです。
+- 2026年8月25日はAlmaLinux / Rocky Linux 9系向けのAnsible設定をコンテナ上で確認しました。実機AlmaLinuxサーバーでの結果ではありません。
+- 公開中の2分15秒映像は、2026年8月18日・19日の画面と復旧ログを再構成したものです。実操作を最初から最後まで連続録画した映像ではありません。収録方法は[収録ガイド](https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md)に分けています。
 
-公共職業訓練（2025年10月〜2026年1月）で学んだ開発基礎を起点に、主作品の Server Monitor では設計、Ansible構築、試験、Prometheus監視、障害切り分け、復旧までを一つの案件として公開しています。
+</details>
 
-この README は、Web 初学者の方にも「このサイトが何を目的に作られているのか」「どのファイルが何を担当しているのか」「HTML / CSS / JavaScript がどう分担して動いているのか」が分かるように、できるだけ順を追って説明しています。各ファイルの詳しい役割、読む順番、処理の追い方は [CODE_WALKTHROUGH.md](./CODE_WALKTHROUGH.md) にまとめています。
+公共職業訓練（2025年10月〜2026年1月）で学んだ開発の基礎を出発点に、主作品のServer Monitorでは、計画、設定、動作確認、監視、問題の原因調査、復旧を一つの流れとして学んでいます。
+
+このREADMEは、Web初学者にも「このサイトの目的」「各ファイルの役割」「HTML / CSS / JavaScriptの分担」が分かるように説明しています。詳しい読み方は[CODE_WALKTHROUGH.md](./CODE_WALKTHROUGH.md)にまとめています。
 
 ---
 
 ## このサイトの目的
 
-このサイトは、単に作品リンクを並べるだけではなく、**未経験からLinuxサーバー構築・運用を目指す過程で、設計値、構成コード、試験項目、実測証跡をどう分けて管理しているかを伝えるためのサイト**です。
+このサイトは、単に作品リンクを並べるだけではなく、**未経験からLinuxサーバー構築・運用を目指す過程で、設定、プログラム、動作確認の記録をどう整理しているかを伝えるためのサイト**です。
 
 閲覧者には、次のような情報が伝わることを目指しています。
 
@@ -59,13 +60,13 @@ Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画
 |----------------|------|
 | 人物像 | 製造・物流現場で培った正確性、改善意識、職業訓練で学んだ内容 |
 | 第一志望 | Linuxサーバーの構築・運用 |
-| スキル | Linuxサーバー設計・構築、Ansible、Docker、監視・ログ、障害切り分け、復旧、補助的な開発・運用支援 |
-| 制作物 | Linux Server Build & Operations Lab、Evidence Digest、Server Monitor、補助成果・学習作品 |
+| スキル | Linuxサーバーの設定、構築の自動化、監視、ログ確認、問題の原因調査、復旧、開発・運用の補助 |
+| 制作物 | Linuxサーバー構築・運用演習、動作確認の記録、Server Monitor、その他の学習作品 |
 | 学習姿勢 | トラブルに対して原因を切り分け、調査し、修正し、手順化した過程 |
-| 実務準備 | 要件・設計・パラメータ・構築・試験・引き渡し・変更/rollback・実機検証手順 |
+| 実務準備 | 目的確認、設計、設定、動作確認、引き渡し、前の版へ戻す手順、実機での確認手順 |
 | 連絡先 | GitHub やメールなど、連絡・確認に使える情報 |
 
-初学者向けに言い換えると、このポートフォリオは「サーバー構築案件をWeb上で説明する引き渡しファイル」のようなものです。成果物がある項目、実際に動かした項目、まだ動かしていない項目を分けて示します。
+初学者向けに言い換えると、このポートフォリオは「サーバー構築の学習内容をWeb上で説明するファイル」のようなものです。作成した項目、実際に動かした項目、まだ試していない項目を分けて示します。
 
 ---
 
@@ -91,22 +92,22 @@ Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画
 
 初めて見る人が迷わず内容を追えるよう、サイト全体は次の流れで構成しています。
 
-1. **Top**
-   Linuxサーバー構築・運用という第一志望、Server Monitorの要約、2分15秒の証跡リプレイ、構成図、実測証跡への導線を最初に表示します。
+1. **トップ**
+   Linuxサーバー構築・運用という第一志望、主な学習成果、構成図、動作確認の記録への案内を最初に表示します。
 
-2. **About Me**
+2. **自己紹介**
    これまでの経歴、職業訓練で学んだこと、取得資格を確認できます。
 
-3. **Project Brief / Evidence Digest**
-   Linuxサーバー構築案件の全体像と、記録済みcommitの実測結果・未実施範囲を最短で確認できます。
+3. **制作概要 / 動作確認の記録**
+   Linuxサーバー構築演習の全体像と、実際に確認した結果、まだ試していない範囲を確認できます。
 
-4. **Server Build / Skills**
+4. **サーバー構築 / スキル**
    要件から引き渡しまでの10番号付き成果物と、Linux・Ansible・Docker・監視・復旧のスキルを確認できます。Windows/M365と開発技術は補助成果として区別しています。
 
-5. **Works**
+5. **作品**
    Linux Server Build & Operations LabとServer Monitorを先頭に、Support Toolkit、業務改善・開発学習作品を詳しく紹介しています。
 
-6. **Contact**
+6. **連絡先**
    メールや GitHub など、連絡先情報をまとめています。
 
 ---
@@ -116,23 +117,23 @@ Support Toolkitの16ガイド+README、M365 JSON 5本+PowerShell 2本、DR計画
 | ページ | ファイル | 役割 |
 |--------|----------|------|
 | トップページ | `index.html` | サイトの入口。自己紹介・スキル・作品ページへの導線をまとめる |
-| 案件概要 | `project-brief.html` | Linuxサーバー構築案件の目的、担当範囲、工程、設計判断、完了条件を説明する |
-| 証跡ダイジェスト | `evidence-demo.html` | 最新E2Eと日付付き履歴、失敗、制約、NOT RUNを環境・commit付きで示す |
-| 仕事の進め方 | `work-readiness.html` | 入口業務、実務想定ケース、変更管理、協働・AI利用の境界、面談デモ、独立VM検証計画 |
-| 証跡リプレイ | `demo.html` | 2026年8月18日・19日の実測画面とD-1ログを再構成した2分15秒の閲覧用デモ |
+| 制作概要 | `project-brief.html` | Linuxサーバー構築学習の目的、取り組んだ範囲、流れ、作成資料、未実施の項目を説明する |
+| 動作確認の記録 | `evidence-demo.html` | 一連の動作テスト、失敗と修正、未実施の範囲を、日時・環境・コードの版とともに示す |
+| 仕事の進め方 | `work-readiness.html` | 入社後に取り組みたい仕事、作業前の確認、相談、動作確認、記録、報告、今後の学習計画 |
+| 動作確認動画 | `demo.html` | 2026年8月18日・19日の画面と復旧ログを編集した2分15秒の動画 |
 | 自己紹介ページ | `me.html` | プロフィール、経歴、職業訓練、資格、**学習ロードマップ** を説明する |
 | スキルページ | `skills.html` | Linux構築・監視・自動化を先頭に、補助スキルを証跡区分付きで見せる |
-| Server Build Lab | `infra-lab.html` | 要件・設計・構築・試験・監視・復旧・引き渡しを工程順に見せる |
-| Linux 運用Lab | `linux-lab.html` | systemd / journalctl / cron / SSH / logrotate / rsync の運用設計メモ |
-| Cloud Network Lab | `cloud-lab.html` | AWS VPC / Subnet / Security Group / Terraform validate / Cost Guardrail を見せる |
+| サーバー構築の学習 | `infra-lab.html` | 目的確認、設計、設定、動作確認、監視、復旧、引き継ぎを順に見せる |
+| Linuxの基本確認 | `linux-lab.html` | 負荷、空き容量、サービス、ログ、通信、ログイン、ファイアウォールの確認例 |
+| AWSネットワークの学習用設計 | `cloud-lab.html` | AWS上でネットワークを分け、接続できる範囲を制限する設計例。AWSへの作成は未実施 |
 | 作品ページ | `works.html` | Linux Server Build & Operations Labを先頭に、補助成果・学習作品を紹介 |
-| 履歴書 | `resume.html` | A4 1pager。**想定業務 × 自分の備えマトリクス** と **学習ロードマップ** を含む |
+| 履歴書 | `resume.html` | A4 1ページ。経歴、資格、想定業務への備え、主な学習成果、AIを使った範囲を掲載 |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
 | Support Toolkit | `works.html#work-support-toolkit` | 16ガイド+README、確認スクリプト、想定ケースを補助成果としてまとめる |
 | サポート文書 | `support-docs/` | 16ガイド+README。架空ケース・計画・テンプレートを含み、実運用実績ではない |
 | 確認スクリプト | `support-scripts/` | PowerShell 9本 + bash 1本、純関数ライブラリとPesterテスト |
 | Monitoring Stack（アーカイブ） | `monitoring-stack/` | Prometheus + Grafana + node_exporter + Loki + Promtail の docker-compose 一式。**2026-03 に Promtail が EOL となり、主作品側は Grafana Alloy へ移行済み**（[monitoring-stack/README.md](./monitoring-stack/README.md)）。現行構成は [server-monitor](https://github.com/ns7jp/server-monitor) |
-| Ansible Playbook | `ansible/` | Ubuntu ベースライン冪等化 (SSH / UFW / fail2ban / auditd / unattended-upgrades) |
+| 自動構築の設定 | `ansible/` | Ubuntuの基本設定を自動化。同じ手順を繰り返しても不要な変更が出ないように作成 |
 | 出力サンプル | `infra-evidence/` | 架空・未採録の`.sample.txt`。実測証跡としては扱わない |
 | 本番化差分 | `production-readiness.md` | Lab から本番運用へ足す監視、通知、認証、秘密情報、バックアップ、変更管理 |
 
@@ -186,9 +187,9 @@ PowerShellで端末情報、ネットワーク疎通、イベントログ、デ�
 ns7jp.github.io/
 ├── CODE_WALKTHROUGH.md      ... 初学者向けの詳細なコード読解ガイド
 ├── index.html               ... トップページ
-├── project-brief.html       ... Linuxサーバー構築案件の概要
-├── evidence-demo.html       ... 実測・CI・NOT RUNを分けた証跡ダイジェスト
-├── work-readiness.html      ... 実務想定ケース、制作体制、面談デモ、次の独立VM検証計画
+├── project-brief.html       ... Linuxサーバー構築学習の概要
+├── evidence-demo.html       ... 本人PC・自動テスト・未実施を分けた動作確認の記録
+├── work-readiness.html      ... 仕事の進め方、制作体制、面談で説明できる内容、今後の学習計画
 ├── demo.html                ... 2分15秒の証跡リプレイ（連続操作動画ではない）
 ├── me.html                  ... 自己紹介ページ（学習ロードマップ含む）
 ├── skills.html              ... スキル一覧ページ（Win / Linux 系を別カードに分割）
@@ -198,7 +199,7 @@ ns7jp.github.io/
 ├── cloud-lab.html           ... Cloud Network Lab（AWS VPC / Terraform）
 ├── production-readiness.md  ... Lab を本番化する際に足す運用観点
 ├── contact.html             ... 連絡先ページ
-├── resume.html              ... A4 1ページ履歴書 + 想定業務マトリクス + 学習ロードマップ
+├── resume.html              ... A4 1ページ履歴書 + 想定業務への備え + AI利用の説明
 ├── 404.html                 ... 存在しないURLにアクセスされた時のカスタム表示
 ├── sitemap.xml              ... 検索エンジン向けサイトマップ
 ├── robots.txt               ... クローラー制御
@@ -237,7 +238,7 @@ ns7jp.github.io/
 │
 ├── support-scripts/
 │   ├── Collect-PcInventory.ps1      ... 端末情報収集
-│   ├── Test-NetworkTriage.ps1       ... ネットワーク一次切り分け
+│   ├── Test-NetworkTriage.ps1       ... ネットワークの原因調査を補助
 │   ├── Get-RecentSupportEvents.ps1  ... 警告・エラーログ抽出
 │   ├── Test-DiskCapacity.ps1        ... ディスク容量確認
 │   ├── Test-SecurityBaseline.ps1    ... Defender/Firewall/BitLocker/Update確認
@@ -245,7 +246,7 @@ ns7jp.github.io/
 │   ├── Get-StaleUserAccounts.ps1    ... AD 休眠ユーザー抽出
 │   ├── Get-M365LicenseInventory.ps1 ... M365 ライセンス棚卸し（Graph SDK）
 │   ├── Test-DatabaseHealth.ps1      ... ★ SQL Server 一次ヘルス + スロークエリ + バックアップ最新性
-│   ├── linux-triage.sh              ... Linux 一次切り分け bash
+│   ├── linux-triage.sh              ... Linuxの状態とログを確認するbash
 │   ├── lib/Triage-Lib.ps1           ... 純関数化された判定ロジック
 │   └── tests/Triage-Lib.Tests.ps1   ... Pester ユニットテスト（25ケース）
 │
@@ -257,7 +258,7 @@ ns7jp.github.io/
 │   ├── promtail/promtail-config.yml     ★ Promtail 設定
 │   └── grafana/provisioning/            （Prom + Loki データソース、2 ダッシュボード）
 │
-├── ansible/                 ... Linux ベースライン冪等化 playbook
+├── ansible/                 ... Linuxの基本設定を自動化するplaybook
 │   ├── playbook.yml
 │   ├── inventory.ini
 │   ├── cis-benchmark-mapping.md  ... ★ CIS Ubuntu 22.04 L1 への対応マッピング
