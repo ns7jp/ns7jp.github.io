@@ -223,9 +223,9 @@
                         <tbody>
                             <tr>
                                 <td>OSベースライン</td>
-                                <td>timezone、SSH、UFW、fail2ban、auditd、自動更新</td>
-                                <td><span class="status-pill measured">4 roles + site.yml 2回目changed=0</span></td>
-                                <td>Docker未導入の最小OS・引き渡し対象hostで適用</td>
+                                <td>timezone、SSH、UFW、fail2ban、auditd、自動更新。Ubuntu 22.04 / 24.04に加えAlmaLinux / Rocky 9対応（dnf、firewalld、SELinux、dnf-automatic）</td>
+                                <td><span class="status-pill measured">4 roles + site.yml 2回目changed=0</span> <span class="status-pill measured">el9シナリオ実行成功（コンテナ上）</span></td>
+                                <td>Docker未導入の最小OS・引き渡し対象hostで適用。実機AlmaLinuxホストへの適用</td>
                             </tr>
                             <tr>
                                 <td>配備</td>
