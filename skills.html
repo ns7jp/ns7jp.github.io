@@ -4,10 +4,11 @@
   ファイル名 : skills.html
   役割       : スキル一覧ページ
   概要       : 技術スキル（Office・HTML/CSS・JS・Python・PHP・DB）、
-               ITサポートスキル、ツール、ソフトスキルの4ブロックを表示する。
+               第一志望のLinuxサーバー設計・構築を先頭に、第二志望のITサポート、
+               開発・ツール・ソフトスキルを証拠区分付きで表示する。
                各スキルは星評価＋進捗バー＋習得項目で構成。
   初学者向けの読み方:
-    1. ITサポート系、技術系、ツール系、ソフトスキル系の分類を確認する
+    1. Linuxサーバー設計・構築、ITサポート、開発、ツール、ソフトスキルの順を確認する
     2. skill-detail-card の繰り返し構造で、カードUIの作り方を見る
     3. 星評価や進捗バーがHTMLとCSSの組み合わせで表現される点を見る
     4. 末尾のscriptで、スクロール時にカードへvisibleを付ける処理を見る
@@ -20,12 +21,12 @@
     <!-- スマホ対応のviewport設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 検索エンジン用の説明文 -->
-    <meta name="description" content="島田則幸のスキルページ。Linux、Ansible、Docker、Nginx、Prometheus、Grafana、Loki、Terraformと、構築・試験・障害対応の成果物を掲載しています。">
-    <title>Linuxサーバー構築・運用スキル | 島田則幸のポートフォリオ</title>
+    <meta name="description" content="島田則幸のスキルページ。第一志望のLinuxサーバー設計・構築を、設計、構築、試験、監視、復旧、引き渡しと証跡区分で紹介します。第二志望はITサポートです。">
+    <title>Linuxサーバー設計・構築スキル | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/skills.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
-    <meta property="og:title" content="Linuxサーバー構築・運用スキル | 島田則幸">
+    <meta property="og:title" content="Linuxサーバー設計・構築スキル | 島田則幸">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/skills.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -33,11 +34,11 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="Linux、Ansible、Docker、Nginx、Prometheus、Grafana、Loki、Terraformと、構築・試験・障害対応の成果物を掲載。">
+    <meta property="og:description" content="Linuxサーバーの6工程を、実装済み・実測済み・未実施に分けて掲載。第二志望のITサポートは補助成果として区別しています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Linuxサーバー構築・運用スキル | 島田則幸">
-    <meta name="twitter:description" content="Linuxの設定、動作確認、監視、ログ確認、障害復旧について、学習した内容とどこまで試したかを掲載。">
+    <meta name="twitter:title" content="Linuxサーバー設計・構築スキル | 島田則幸">
+    <meta name="twitter:description" content="設計、構築、試験、監視、復旧、引き渡しを、実装済み・実測済み・未実施に分けて掲載。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
 
@@ -122,22 +123,25 @@
 
             <!-- ===== スキル概要文 ===== -->
             <section class="skills-overview">
-                <p class="overview-text">職業訓練で学んだプログラミングの基礎と、自分で進めているLinuxサーバー構築・運用の学習内容をまとめています。特に、サーバー設定の自動化、動作確認、監視、ログ確認、障害からの復旧に取り組んでいます。</p>
-                <p class="overview-text">実際に動かした範囲と、コードや手順だけを用意した範囲を分けて記載しています。</p>
-                <div class="evidence-boundary-strip" aria-label="スキルをどの環境で確認したか">
-                    <span><strong>本人のPCで確認</strong> Windows上のLinux環境（WSL2）で、監視、ログ確認、障害復旧を練習</span>
-                    <span><strong>GitHub上の自動テストで確認</strong> 一時的なUbuntu環境で、構築から復旧までの23項目すべてに合格</span>
-                    <span><strong>AI支援の練習環境で確認</strong> 仮想環境やコンテナを使った追加演習。独立した実機での実績ではありません</span>
-                    <span><strong>未実施</strong> 独立したサーバーでの長期稼働、再起動後の確認、Slackへの実通知、AWS環境の作成・削除など</span>
+                <p class="overview-text"><strong>第一志望はLinuxサーバー設計・構築、第二志望はITサポートです。</strong>主作品「Server Monitor」で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの流れとして学びました。</p>
+                <p class="overview-text">スキル名だけで自己評価せず、コード・資料を作成した「実装済み」、日付と環境を残して動かした「実測済み」、まだ試していない「未実施（NOT RUN）」を分けています。</p>
+                <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
+                    <span><strong>実装済み</strong> 設計書、パラメータシート、Ansible、Compose、試験仕様、復旧手順、引き渡し資料</span>
+                    <span><strong>実測済み</strong> WSL2、一時Ubuntu、Docker等の学習環境で、構築、監視、復旧を日付付きで確認</span>
+                    <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy、D-2、本番変更</span>
                 </div>
-                <p class="overview-text skills-evidence-link"><a href="evidence-demo.html">詳しい日時・環境・コードの版を含む動作確認の記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></p>
+                <div class="summary-actions">
+                    <a href="https://github.com/ns7jp/server-monitor" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品を見る</a>
+                    <a href="project-brief.html#flow-title" class="btn btn-secondary"><i class="fa-solid fa-route" aria-hidden="true"></i> 6工程を見る</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 現行mainの証跡台帳</a>
+                </div>
             </section>
 
             <!-- ===== 技術スキル（プログラミング系）セクション ===== -->
             <section class="technical-skills">
                 <h2 class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
-                    <span class="heading-text">できること・学んだこと</span>
+                    <span class="heading-text">第一志望：Linuxサーバー設計・構築に直結するスキル</span>
                 </h2>
 
                 <!-- スキルカードを並べるグリッドコンテナ -->
@@ -151,20 +155,22 @@
                                 <i class="fa-brands fa-linux" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
-                                <h3>Linux / 監視 / 自動化</h3>
+                                <h3>Linuxサーバー設計・構築・運用</h3>
                             </div>
                         </div>
                         <div class="evidence-legend skill-evidence-pills" aria-label="Linuxスキルの確認状況">
-                            <span class="status-pill measured">本人PC・自動テストで確認</span>
-                            <span class="status-pill pending">一部はまだ未実施</span>
+                            <span class="status-pill validated">実装済み</span>
+                            <span class="status-pill measured">実測済み</span>
+                            <span class="status-pill pending">一部NOT RUN</span>
                         </div>
                         <div class="skill-description">
                             <ul>
-                                <li>Linuxの状態確認と原因調査（サービス、ログ、負荷、ディスク、通信状況）</li>
+                                <li><strong>設計：</strong>要件、基本設計、詳細設計、パラメータ、ネットワーク、監視、バックアップの資料を作成</li>
+                                <li><strong>構築：</strong>AnsibleとDocker Composeで設定を自動化し、一時Ubuntu環境で再実行時の差分を確認</li>
+                                <li><strong>試験：</strong>期待値、実測値、実行日、環境、対象版を記録。一連テスト23項目を実行</li>
                                 <li>Prometheus、Grafana、Lokiを使った監視値とログの確認。Windows上のLinux環境（WSL2）で起動を確認済み</li>
-                                <li>Ansibleを使ったサーバー設定の自動化。同じ設定を2回実行しても、2回目に不要な変更が出ないことを自動テストで確認済み</li>
-                                <li>問題が起きたとき、指定した前の版へ戻す練習。一時的なUbuntu環境で確認済み</li>
-                                <li>バックアップと復元の練習。同じ環境への復元は確認済みですが、別サーバーへの復元は未実施</li>
+                                <li><strong>復旧：</strong>サービス停止からの復旧と同一環境へのデータ復元を確認。D-2と別サーバーへの復元はNOT RUN</li>
+                                <li><strong>引き渡し：</strong>チェックリストと切り戻し手順を作成。独立した対象サーバーでの受け入れはNOT RUN</li>
                                 <li>AWSのネットワーク設定コード。書き方の検査までで、実際のAWS環境は作成していません</li>
                                 <li>CPU、メモリ、ディスクなどを表示するサーバー監視画面を自作（Python / Flask）</li>
                                 <li>Apacheを使ったWeb環境の構築と、レンタルサーバーへの公開</li>
@@ -174,14 +180,14 @@
                     </div>
 
                     <!-- ----- Windows / M365 / AD 運用支援 スキルカード ----- -->
-                    <!-- IT サポート職を入口とする場合の実務スキル：端末・AD・M365・ネットワーク一次対応 -->
+                    <!-- 第二志望のITサポート：端末・AD・M365・ネットワーク一次対応 -->
                     <div class="skill-detail-card">
                         <div class="skill-header">
                             <div class="skill-icon-large infra">
                                 <i class="fa-brands fa-windows" aria-hidden="true"></i>
                             </div>
                             <div class="skill-title">
-                                <h3>Windows / Microsoft 365 / Active Directory の学習</h3>
+                                <h3>第二志望：ITサポート（Windows / Microsoft 365 / Active Directory）</h3>
                             </div>
                         </div>
                         <div class="evidence-legend skill-evidence-pills" aria-label="Windows運用支援スキルの確認状況">
