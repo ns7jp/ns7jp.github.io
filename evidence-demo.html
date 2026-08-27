@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="学習用Linuxサーバーで行った動作確認の記録。構築、監視、復旧、ネットワーク確認の実施済み項目と未実施項目を分けて掲載しています。">
+    <meta name="description" content="Server Monitorの証跡ページ。コード・資料の実装済み、日付と環境を残した実測済み、未実施（NOT RUN）を分けて掲載しています。">
     <meta name="author" content="Noriyuki Shimada">
     <meta name="theme-color" content="#2C3E50">
     <meta name="robots" content="index, follow">
@@ -17,11 +17,11 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="実際に動かしたこと、自動テストで確認したこと、まだ試していないことを分けて確認できます。">
+    <meta property="og:description" content="Server Monitorの実装済み・実測済み・未実施を分け、現行mainの証跡台帳へ案内します。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="動作確認の記録 | Linuxサーバー構築・運用">
-    <meta name="twitter:description" content="実施済みと未実施を分け、日付、環境、確認方法、結果へのリンクを公開しています。">
+    <meta name="twitter:description" content="実装済み・実測済み・未実施を分け、日付、環境、確認方法、結果へのリンクを公開しています。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
 
@@ -106,20 +106,24 @@
             </nav>
 
             <section class="lab-intro evidence-intro">
-                <span class="case-label">実際に動かした結果</span>
+                <span class="case-label">実装済み・実測済み・未実施を分離</span>
                 <h2>2分で分かる動作確認のまとめ</h2>
-                <p>設計書やコードを作っただけの項目と、実際に動かして結果を保存した項目を分けて掲載しています。詳しい実行日、使った環境、コードの版、コマンドはリンク先で確認できます。</p>
+                <p>コードや資料を作ったことと、実際に動かしたことを混同せず、詳しい実行日、使った環境、対象版、コマンド、結果をリンク先で確認できるようにしています。</p>
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
                     <div>
-                        <strong>確認できた結果（2026年8月25日時点）</strong>
-                        <p>8月22日から25日に、構築から復旧までの自動テスト23項目、前の版への切り戻し、ディスク、データベース、ネットワークの練習を行いました。実際に動かして見つけた問題29件と、誤って合格にしていた6件も記録しています。一時的なUbuntu環境やDockerなどでの結果で、独立した仮想マシンや実機AlmaLinuxではまだ試していません。</p>
+                        <strong>日付付きの実測結果（2026年8月22日〜25日）</strong>
+                        <p>構築から復旧までの自動テスト23項目、前の版への切り戻し、ディスク、データベース、ネットワークの練習を行いました。実際に動かして見つけた問題29件と、誤って合格にしていた6件も記録しています。一時Ubuntu環境、WSL2、Docker等での結果で、独立した対象サーバーでの受け入れ実績ではありません。</p>
                     </div>
                 </div>
-                <div class="evidence-legend" aria-label="確認状況の説明">
-                    <span class="status-pill measured"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 実際に動作確認</span>
-                    <span class="status-pill validated"><i class="fa-solid fa-code" aria-hidden="true"></i> GitHubで自動確認</span>
-                    <span class="status-pill pending"><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> 未実施</span>
+                <div class="evidence-legend" aria-label="実装済み、実測済み、未実施の説明">
+                    <span class="status-pill validated"><i class="fa-solid fa-code" aria-hidden="true"></i> 実装済み：コード・資料あり</span>
+                    <span class="status-pill measured"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 実測済み：日付・環境・対象版あり</span>
+                    <span class="status-pill pending"><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> 未実施（NOT RUN）</span>
+                </div>
+                <div class="summary-actions">
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-check" aria-hidden="true"></i> 現行mainの証跡台帳</a>
+                    <a href="project-brief.html#flow-title" class="btn btn-secondary"><i class="fa-solid fa-route" aria-hidden="true"></i> 6工程との対応</a>
                 </div>
             </section>
 
@@ -176,7 +180,7 @@
                     <article class="evidence-step">
                         <span class="step-index">01</span>
                         <div>
-                            <span class="status-pill measured">自動テストで確認済み</span>
+                            <span class="status-pill measured">実測済み（自動テスト）</span>
                             <h3>新しい版から前の版へ戻せることを確認</h3>
                             <p>新しい版を動かしたあと、指定した前の版へ戻しました。アプリの版、不要ファイルの削除、管理画面を外部へ直接公開しない設定、ログの受信をもう一度確認しています。一時的なUbuntu環境での結果で、継続利用するサーバーでは未実施です。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-23</dd></div><div><dt>新しい版</dt><dd><code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code></dd></div><div><dt>戻した版</dt><dd><code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code></dd></div></dl>
@@ -290,14 +294,14 @@
                 <div class="status-callout pending" role="note">
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
-                        <strong>23項目は、Docker導入済みの一時Ubuntu環境で確認した結果です</strong>
-                        <p>前の版へ戻す試験は、翌日の別の自動テストで合格しました。継続利用する実機・仮想マシンでの切り戻し、72時間の連続運転、サーバー再起動後の確認、Slackへの実送信、AWS環境の作成・削除、サーバー本体の故障、別の管理PCや社内DNSからの通信は未実施です。新しいサーバーへDockerを導入する確認も含みません。</p>
+                        <strong>23項目は、Docker導入済みの一時Ubuntu環境で確認した履歴です</strong>
+                        <p>前の版へ戻す試験は、翌日の別の自動テストで合格しました。独立した対象サーバーでの切り戻しと受け入れ、72時間の連続運転、サーバー再起動後の確認、Slack実通知、AWS apply/destroy、D-2、別の管理PCや社内DNSからの通信は未実施（NOT RUN）です。新しい最小OSへDockerを導入する確認も含みません。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
                     <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list" aria-hidden="true"></i> 23項目の詳しい記録</a>
                     <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> 8月19日の過去結果</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> 動作確認の一覧</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> 現行mainの証跡台帳</a>
                 </div>
             </section>
 

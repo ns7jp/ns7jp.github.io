@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="学習用Ubuntu環境で行ったLinuxサーバー構築・運用の概要。目的、構成、作成資料、動作確認の結果、未実施の範囲を1ページにまとめています。">
+    <meta name="description" content="主作品Server Monitorで学んだLinuxサーバーの設計、構築、試験、監視、復旧、引き渡しを1ページに整理。実装済み・実測済み・未実施を分けています。">
     <meta name="author" content="Noriyuki Shimada">
     <meta name="theme-color" content="#2C3E50">
     <meta name="robots" content="index, follow">
@@ -17,7 +17,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="学習用Ubuntu環境で、準備、設定、動作確認、監視、復旧、引き継ぎ資料の作成まで取り組みました。">
+    <meta property="og:description" content="Server Monitorの6工程と、実装済み・実測済み・未実施の境界を1ページで確認できます。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="学習概要 | Linuxサーバー構築・運用">
@@ -43,8 +43,8 @@
       "@context": "https://schema.org",
       "@type": "CreativeWork",
       "name": "Linuxサーバー構築・運用の学習概要",
-      "description": "学習用Ubuntu環境で行ったサーバーの設計、構築、動作確認、監視、復旧の概要",
-      "dateModified": "2026-08-26",
+      "description": "主作品Server Monitorで学んだサーバーの設計、構築、試験、監視、復旧、引き渡しの概要",
+      "dateModified": "2026-08-27",
       "creator": { "@type": "Person", "name": "島田則幸", "url": "https://ns7jp.github.io/" },
       "url": "https://ns7jp.github.io/project-brief.html",
       "inLanguage": "ja"
@@ -108,17 +108,23 @@
 
             <section class="lab-intro project-intro">
                 <span class="case-label">Ubuntuを使った個人学習</span>
-                <h2>設計から構築、動作確認、復旧までを一通り試しました</h2>
-                <p>主作品「Server Monitor」を題材に、設計書、構築手順、テスト結果、復旧手順を作業順にまとめています。実務経験はまだありませんが、実行できたことと未実施のことを分けて説明します。</p>
+                <h2>設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの主作品で整理</h2>
+                <p>主作品「Server Monitor」を題材に、設計書、構築手順、試験結果、監視設定、復旧手順、引き渡し資料を作業順にまとめています。実務経験はまだありませんが、実装済み・実測済み・未実施（NOT RUN）を分けて説明します。</p>
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
                     <div>
-                        <strong>主な動作確認（2026年8月25日時点）</strong>
-                        <p>8月22日から25日にかけて、一連の自動テスト23項目、前の版への切り戻し、ディスク拡張、問題箇所の調査、データベース復元、ネットワーク確認を行いました。使い捨てのUbuntu環境、Docker、Linux内の分離環境での結果です。独立した仮想マシンや実機AlmaLinuxではまだ実施していません。</p>
+                        <strong>現行mainの証跡台帳を正本として参照</strong>
+                        <p>2026年8月22日から25日に記録した一連テスト23項目、前の版への切り戻し、ディスク拡張、問題箇所の調査、データベース復元、ネットワーク確認があります。いずれも使い捨てのUbuntu環境、WSL2、Docker、Linux内の分離環境での結果です。現在の確認範囲とNOT RUNは、<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>を正本とします。</p>
                     </div>
                 </div>
+                <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
+                    <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリストを公開。作成済みであること自体は稼働実績を意味しません</span>
+                    <span><strong>実測済み</strong> 日付、実行環境、対象版、結果を残した学習環境内の確認だけを実測として表示</span>
+                    <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーでの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy、D-2、本番変更</span>
+                </div>
                 <div class="summary-actions">
-                    <a href="evidence-demo.html" class="btn btn-primary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録を見る</a>
+                    <a href="https://github.com/ns7jp/server-monitor" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Server Monitorを見る</a>
+                    <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録を見る</a>
                     <a href="https://github.com/ns7jp/server-monitor/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> 構築手順・確認資料</a>
                     <a href="work-readiness.html" class="btn btn-outline-dark"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
                 </div>
@@ -155,34 +161,34 @@
                 </div>
                 <ol class="brief-flow">
                     <li class="brief-step">
-                        <span>01</span>
-                        <strong>確認</strong>
-                        <small>目的・対象・影響<br>完了条件を確認</small>
+                        <span>01 / 実装済み</span>
+                        <strong>設計</strong>
+                        <small>要件・基本設計・詳細設計<br>パラメータ・通信を定義</small>
                     </li>
                     <li class="brief-step">
-                        <span>02</span>
-                        <strong>計画</strong>
-                        <small>手順・承認・作業前の記録<br>元に戻す条件</small>
+                        <span>02 / 実測済み</span>
+                        <strong>構築</strong>
+                        <small>Ansible・Composeを実行<br>再実行時の差分も確認</small>
                     </li>
                     <li class="brief-step">
-                        <span>03</span>
-                        <strong>実施</strong>
-                        <small>差分と時刻を記録<br>手順に沿って実施</small>
+                        <span>03 / 実測済み</span>
+                        <strong>試験</strong>
+                        <small>期待値・実測値・環境<br>対象版を記録</small>
                     </li>
                     <li class="brief-step">
-                        <span>04</span>
-                        <strong>動作確認</strong>
-                        <small>期待した動きと実際の結果<br>影響した範囲を再確認</small>
+                        <span>04 / 実測済み</span>
+                        <strong>監視</strong>
+                        <small>メトリクス・ログ・通知<br>学習環境内で確認</small>
                     </li>
                     <li class="brief-step">
-                        <span>05</span>
-                        <strong>報告</strong>
-                        <small>失敗時は作業を止めて記録<br>報告・元の状態へ戻す</small>
+                        <span>05 / 一部実測済み</span>
+                        <strong>復旧</strong>
+                        <small>D-1と同一環境への復元<br>D-2はNOT RUN</small>
                     </li>
                     <li class="brief-step">
-                        <span>06</span>
+                        <span>06 / 実装済み</span>
                         <strong>引き渡し</strong>
-                        <small>変更内容・制約・監視方法<br>残った課題を共有</small>
+                        <small>チェックリストを作成<br>対象host受入はNOT RUN</small>
                     </li>
                 </ol>
             </section>
@@ -208,31 +214,31 @@
                                 <td>設計</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/01-basic-design.md" target="_blank" rel="noopener noreferrer">基本設計</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/02-detailed-design.md" target="_blank" rel="noopener noreferrer">詳細設計</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/03-parameter-sheet.md" target="_blank" rel="noopener noreferrer">パラメータシート</a></td>
                                 <td>目的、非機能、構成値、ポート、監視、バックアップの考え方</td>
-                                <td><span class="status-pill validated">文書化済み</span></td>
+                                <td><span class="status-pill validated">実装済み（文書）</span></td>
                             </tr>
                             <tr>
                                 <td>構築</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/tree/main/ansible" target="_blank" rel="noopener noreferrer">Ansible</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/compose.yaml" target="_blank" rel="noopener noreferrer">Compose</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">構築手順</a></td>
                                 <td>同じ手順を繰り返せる設定、自動化した範囲、手作業が必要な範囲</td>
-                                <td><span class="status-pill measured">2回目は<br>不要な変更なし</span></td>
+                                <td><span class="status-pill measured">実測済み<br>2回目は不要な変更なし</span></td>
                             </tr>
                             <tr>
                                 <td>試験</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">確認手順</a>／<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026年8月22日の記録</a>／<a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">以前の記録</a></td>
                                 <td>期待した結果、実際の結果、詳しい記録、未実施の項目</td>
-                                <td><span class="status-pill measured">一時Ubuntu環境<br>23項目すべて合格</span></td>
+                                <td><span class="status-pill measured">実測済み<br>一時Ubuntu環境で23項目合格</span></td>
                             </tr>
                             <tr>
-                                <td>運用・復旧</td>
+                                <td>監視・復旧</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/tree/main/docs/runbooks" target="_blank" rel="noopener noreferrer">復旧手順書</a>／<a href="https://github.com/ns7jp/server-monitor/tree/main/docs/drills" target="_blank" rel="noopener noreferrer">障害対応の練習</a></td>
                                 <td>異常を見つけた後の確認、復旧するかの判断、復旧時間、失敗からの改善</td>
-                                <td><span class="status-pill measured">アプリを1秒で復旧<br>監視データ3種類を復元</span></td>
+                                <td><span class="status-pill measured">実測済み<br>D-1・同一環境への復元</span> <span class="status-pill pending">D-2はNOT RUN</span></td>
                             </tr>
                             <tr>
                                 <td>引き渡し</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/07-handover-checklist.md" target="_blank" rel="noopener noreferrer">引き継ぎチェックリスト</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/08-change-rollback-plan.md" target="_blank" rel="noopener noreferrer">変更を戻す手順</a></td>
                                 <td>運用開始条件、既知の制約、切り戻し後の確認方法</td>
-                                <td><span class="status-pill measured">自動テストで<br>前の版への切り戻しに合格</span></td>
+                                <td><span class="status-pill validated">資料は実装済み</span> <span class="status-pill pending">対象host受入はNOT RUN</span></td>
                             </tr>
                         </tbody>
                     </table>

@@ -3,13 +3,13 @@
 ========================================================================
   ファイル名 : works.html
   役割       : 作品紹介ページ
-  概要       : Support Toolkit と6作品を「成果サマリー・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
+  概要       : 主作品Server Monitor、第二志望のITサポート資料、開発学習作品を「成果サマリー・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
                構成で詳しく紹介する。フィルターボタンで技術別に絞り込み可能。
-               カテゴリ（IT運用・サポート寄りの並び順）：Support / Infrastructure / Python / PHP / HTML/CSS
+               カテゴリ（第一志望を優先）：Infrastructure / Support / Python / PHP / HTML/CSS
   初学者向けの読み方:
     1. filter-btn の data-filter と作品カードの data-category の対応を見る
     2. work-showcase-item 1つが、1作品分の紹介カードだと理解して読む
-    3. サーバー監視や業務改善ツールがITサポート向け訴求になる点を確認する
+    3. Server Monitorを第一志望、ITサポート資料を第二志望として分けた点を確認する
     4. 末尾のscriptで、フィルター表示とフェードイン演出を追う
 ========================================================================
 -->
@@ -18,12 +18,12 @@
     <!-- 文字コード（UTF-8）と画面サイズ調整の設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸の作品ページ。Linuxサーバーの設定、動作確認、監視、障害復旧の学習成果と、Python・PHPなどの制作物を紹介します。">
-    <title>Linuxサーバー構築・運用の成果物 | 島田則幸のポートフォリオ</title>
+    <meta name="description" content="島田則幸の作品ページ。主作品Server Monitorを先頭に、Linuxサーバーの設計、構築、試験、監視、復旧、引き渡しと、第二志望のITサポート資料を紹介します。">
+    <title>Linuxサーバー設計・構築の成果物 | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/works.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
-    <meta property="og:title" content="Linuxサーバー構築・運用の成果物 | 島田則幸">
+    <meta property="og:title" content="Linuxサーバー設計・構築の成果物 | 島田則幸">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/works.html">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -31,11 +31,11 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="Linuxサーバーの設定、動作確認、監視、障害復旧の学習成果を、実施済み・未実施に分けて紹介します。">
+    <meta property="og:description" content="主作品Server Monitorの6工程を、実装済み・実測済み・未実施に分けて紹介します。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Linuxサーバー構築・運用の成果物 | 島田則幸">
-    <meta name="twitter:description" content="Linuxサーバーの構築・監視・復旧を学んだ作品と、その動作確認の記録を紹介します。">
+    <meta name="twitter:title" content="Linuxサーバー設計・構築の成果物 | 島田則幸">
+    <meta name="twitter:description" content="Server Monitorの設計、構築、試験、監視、復旧、引き渡しと証跡を紹介します。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
 
@@ -67,9 +67,9 @@
           "name": "島田則幸のLinuxサーバー構築・運用成果物",
           "itemListOrder": "ItemListOrderAscending",
           "itemListElement": [
-            { "@type": "ListItem", "position": 1, "item": { "@type": "CreativeWork", "name": "Linuxサーバー構築・運用演習", "url": "https://ns7jp.github.io/project-brief.html", "description": "Ubuntuサーバーの設計、設定、動作確認、監視、障害復旧、引き渡しを一つの演習として整理。2026年8月22日の一時Ubuntu環境で23項目すべてに合格" } },
-            { "@type": "ListItem", "position": 2, "item": { "@type": "TechArticle", "name": "動作確認の記録", "url": "https://ns7jp.github.io/evidence-demo.html", "description": "実施済みの動作確認、失敗と修正、未実施の範囲を分けたLinuxサーバー構築の記録" } },
-            { "@type": "ListItem", "position": 3, "item": { "@type": "SoftwareApplication", "name": "サーバー監視ダッシュボード", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows, Linux, macOS", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Flask + psutil + Chart.js でCPU、メモリ、ディスク、ネットワーク、プロセスを可視化" } },
+            { "@type": "ListItem", "position": 1, "item": { "@type": "SoftwareApplication", "name": "Server Monitor — Linuxサーバー設計・構築・運用", "applicationCategory": "DeveloperApplication", "operatingSystem": "Linux", "url": "https://github.com/ns7jp/server-monitor", "programmingLanguage": "Python", "description": "Linuxサーバーの設計、構築、試験、監視、復旧、引き渡しを一つの学習案件として整理" } },
+            { "@type": "ListItem", "position": 2, "item": { "@type": "CreativeWork", "name": "Server Monitor 制作概要", "url": "https://ns7jp.github.io/project-brief.html", "description": "6工程の成果物、実装済み、実測済み、未実施を1ページで案内" } },
+            { "@type": "ListItem", "position": 3, "item": { "@type": "TechArticle", "name": "動作確認の記録", "url": "https://ns7jp.github.io/evidence-demo.html", "description": "日付、環境、対象版、失敗、未実施の範囲を分けたLinuxサーバー構築の記録" } },
             { "@type": "ListItem", "position": 4, "item": { "@type": "CreativeWork", "name": "運用サポート資料集", "url": "https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs", "description": "運用手順、確認スクリプト、架空シナリオのサンプルをまとめた補助成果物" } },
             { "@type": "ListItem", "position": 5, "item": { "@type": "SoftwareApplication", "name": "定型文管理アプリ", "applicationCategory": "BusinessApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python" } },
             { "@type": "ListItem", "position": 6, "item": { "@type": "SoftwareApplication", "name": "付箋アプリ", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows", "url": "https://github.com/ns7jp/works", "programmingLanguage": "Python" } },
@@ -146,9 +146,9 @@
                         <img src="image/server-monitor.png" alt="サーバー監視ダッシュボードの画面" width="1600" height="859" loading="lazy" decoding="async">
                     </div>
                     <div class="intro-text">
-                        <h2>Linuxサーバーの学習成果から紹介します</h2>
-                        <p>サーバーの設定、動作確認、監視、障害からの復旧を一つの流れとして練習しました。</p>
-                        <p>「作ったもの」「自分で動かして確認したもの」「まだ試していないもの」を分けています。個人学習の作品であり、実務実績や人による第三者レビューの実績ではありません。</p>
+                        <h2>第一志望に直結する主作品「Server Monitor」から紹介します</h2>
+                        <p>Linuxサーバーの設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを、一つの学習案件として整理しました。第二志望のITサポート資料、その後に開発学習作品を掲載しています。</p>
+                        <p>「実装済み」「実測済み」「未実施（NOT RUN）」を分けています。個人学習の作品であり、実務実績や人による第三者レビューの実績ではありません。</p>
                         <p>詳しい日時、実行環境、検証したコードの版（コミットID）は、<a href="evidence-demo.html">動作確認の記録</a>にまとめています。</p>
                     </div>
                 </div>
@@ -159,10 +159,11 @@
                 <div class="priority-card">
                     <span class="priority-label">まず見てほしい成果物</span>
                     <div class="priority-links">
-                        <a href="project-brief.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 制作概要</a>
+                        <a href="https://github.com/ns7jp/server-monitor" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品 Server Monitor</a>
+                        <a href="project-brief.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 6工程の制作概要</a>
                         <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
                         <a href="work-readiness.html"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
-                        <a href="#work-infra-lab"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築・運用Lab</a>
+                        <a href="#work-server-monitor"><i class="fa-solid fa-server" aria-hidden="true"></i> 主作品の詳細</a>
                         <a href="#work-monitor"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> サーバー監視</a>
                         <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 一連テスト23項目合格</a>
                         <a href="demo.html" aria-label="2026年8月18日・19日の動作確認画面と復旧ログを再構成した2分15秒の記録を見る"><i class="fa-solid fa-video" aria-hidden="true"></i> 2分15秒 動作確認リプレイ</a>
@@ -171,11 +172,10 @@
             </section>
 
             <section class="works-evidence-boundary" aria-label="主作品の動作確認範囲">
-                <div class="evidence-boundary-strip">
-                    <span><strong>2026-08-22：一連テスト</strong> 一時的なUbuntu環境で、構築から復旧までの23項目すべてに合格</span>
-                    <span><strong>2026-08-23：前の版へ戻すテスト</strong> 問題が起きた場合を想定し、指定した前の版へ戻せることを自動テストで確認</span>
-                    <span><strong>2026-08-24〜25：追加演習</strong> AI支援の仮想環境やコンテナ内で実施。独立した実機での結果ではありません</span>
-                    <span><strong>未実施</strong> 独立サーバーでの72時間稼働、再起動後の確認、Slackへの実通知、AWS環境の作成・削除など</span>
+                <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
+                    <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリスト、作業結果報告書の原本</span>
+                    <span><strong>実測済み</strong> WSL2、一時Ubuntu、Docker等の学習環境で日付と対象版を残した確認結果</span>
+                    <span><strong>未実施（NOT RUN）</strong> 独立した対象hostの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy、D-2、本番変更</span>
                 </div>
             </section>
 
@@ -185,8 +185,8 @@
                 <div class="filter-tabs">
                     <!-- data-filter属性の値はJSで参照され、対応するdata-categoryの作品だけ表示される -->
                     <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true" aria-controls="works-list">すべて</button>
-                    <button type="button" class="filter-btn" data-filter="support" aria-pressed="false" aria-controls="works-list">運用サポート資料</button>
                     <button type="button" class="filter-btn" data-filter="infra" aria-pressed="false" aria-controls="works-list">サーバー・インフラ</button>
+                    <button type="button" class="filter-btn" data-filter="support" aria-pressed="false" aria-controls="works-list">第二志望：ITサポート</button>
                     <button type="button" class="filter-btn" data-filter="python" aria-pressed="false" aria-controls="works-list">Python</button>
                     <button type="button" class="filter-btn" data-filter="php" aria-pressed="false" aria-controls="works-list">PHP</button>
                     <button type="button" class="filter-btn" data-filter="html" aria-pressed="false" aria-controls="works-list">HTML/CSS</button>
@@ -197,10 +197,10 @@
             <section class="works-section">
                 <div class="works-showcase" id="works-list">
 
-                    <!-- Infra Lab + Linux Lab + Monitoring Stack + Ansible を1つの「インフラ運用Lab」作品として掲示 -->
-                    <div class="work-showcase-item support-toolkit-item" id="work-infra-lab" data-category="infra support">
+                    <!-- 主作品server-monitorを、6工程のLinuxサーバー設計・構築案件として最初に掲示 -->
+                    <div class="work-showcase-item support-toolkit-item" id="work-server-monitor" data-category="infra">
                         <div class="work-image-container">
-                            <div class="support-toolkit-visual" aria-label="Infra Lab の構成">
+                            <div class="support-toolkit-visual" aria-label="Server Monitorの6工程">
                                 <div class="toolkit-visual-header">
                                     <span></span>
                                     <span></span>
@@ -208,40 +208,38 @@
                                 </div>
                                 <div class="toolkit-visual-grid">
                                     <div>
-                                        <i class="fa-brands fa-windows" aria-hidden="true"></i>
-                                        <strong>Windows / M365 / AD</strong>
-                                        <span>監視・記録</span>
+                                        <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+                                        <strong>設計</strong>
+                                        <span>基本・詳細・パラメータ</span>
                                     </div>
                                     <div>
                                         <i class="fa-brands fa-linux" aria-hidden="true"></i>
-                                        <strong>Linux</strong>
-                                        <span>systemd / journalctl</span>
+                                        <strong>構築・試験</strong>
+                                        <span>Ansible / Compose / E2E</span>
                                     </div>
                                     <div>
                                         <i class="fa-solid fa-chart-area" aria-hidden="true"></i>
-                                        <strong>Prometheus + Grafana</strong>
-                                        <span>監視スタック</span>
+                                        <strong>監視・ログ</strong>
+                                        <span>Prometheus / Grafana / Loki</span>
                                     </div>
                                     <div>
-                                        <i class="fa-solid fa-cloud" aria-hidden="true"></i>
-                                        <strong>Cloud + Ansible</strong>
-                                        <span>Terraform / IaC</span>
+                                        <i class="fa-solid fa-people-carry-box" aria-hidden="true"></i>
+                                        <strong>復旧・引き渡し</strong>
+                                        <span>Runbook / Checklist</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="work-overlay-full">
                                 <div class="overlay-content">
-                                    <span class="work-tag">個人学習 / 手順書 / 自動設定 / 監視</span>
-                                    <h3>Linuxサーバー構築・運用演習</h3>
-                                    <p>計画、設定、動作確認、監視、障害復旧、引き渡しまでを一つの流れにまとめた学習作品</p>
+                                    <span class="work-tag">主作品 / 個人学習 / Linux Server</span>
+                                    <h3>Server Monitor</h3>
+                                    <p>設計、構築、試験、監視、復旧、引き渡しを一つの流れにまとめた学習作品</p>
                                     <div class="overlay-buttons">
-                                        <a href="project-brief.html" class="btn btn-sm btn-light"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 制作概要</a>
+                                        <a href="https://github.com/ns7jp/server-monitor" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> リポジトリ</a>
+                                        <a href="project-brief.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 6工程</a>
                                         <a href="evidence-demo.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認記録</a>
                                         <a href="infra-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
-                                        <a href="linux-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux運用</a>
-                                        <a href="cloud-lab.html" class="btn btn-sm btn-outline-light"><i class="fa-solid fa-cloud" aria-hidden="true"></i> クラウド設計</a>
-                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/monitoring-stack" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-area" aria-hidden="true"></i> Monitoring（初期作品）</a>
-                                        <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/ansible" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gears" aria-hidden="true"></i> Ansible</a>
+                                        <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-check" aria-hidden="true"></i> 現行証跡台帳</a>
                                     </div>
                                 </div>
                             </div>
@@ -251,11 +249,11 @@
                                 <span class="category"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> サーバー構築・監視・自動化</span>
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
-                            <h3>Linuxサーバー構築・運用演習</h3>
+                            <h3>Server Monitor — Linuxサーバー設計・構築・運用</h3>
                             <div class="work-summary">
-                                <div><span>目的</span><strong>サーバー構築の流れを、計画から引き渡しまで順番に学ぶ</strong></div>
-                                <div><span>確認結果</span><strong>一時的なUbuntu環境で、構築から復旧までの23項目すべてに合格</strong></div>
-                                <div><span>学んだこと</span><strong>設定の自動化、動作確認、監視、原因調査、復旧、作業記録</strong></div>
+                                <div><span>実装済み</span><strong>6工程のコード、設定、手順、結果票、引き渡し資料</strong></div>
+                                <div><span>実測済み</span><strong>一時Ubuntu環境のE2E 23項目など、日付付きの学習記録</strong></div>
+                                <div><span>NOT RUN</span><strong>独立した対象host受入、72時間、Slack実通知、AWS、D-2、本番変更</strong></div>
                             </div>
                             <div class="support-fit high">
                                 <span class="fit-label">志望職種に最も近い学習作品</span>
@@ -268,7 +266,7 @@
                                 <span class="num-chip"><strong>2</strong>Grafana ダッシュボード</span>
                                 <span class="num-chip"><strong>3</strong>復旧計画（未実施含む）</span>
                             </div>
-                            <p>「計画 → 設定 → 動作確認 → 監視 → 原因調査 → 復旧 → 引き渡し」の順で学習内容を整理しました。2026年8月22日に、テストのたびに作り直す一時的なUbuntu環境で23項目を確認しました。翌日は、問題が起きた場合を想定して前の版へ戻すテストにも合格しました。AWS、長期稼働、別サーバーへの復元、Windows / Microsoft 365の手順は、設計やサンプルを含みますが実務実績ではありません。</p>
+                            <p>「設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し」の順で学習内容を整理しました。2026年8月22日に、テストのたびに作り直す一時Ubuntu環境で23項目を確認しました。翌日は前の版へ戻す自動テストにも合格しました。個別の日付付き記録は履歴として固定し、現在の確認範囲は<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>を正本とします。</p>
                             <ul class="work-points">
                                 <li><strong>構成図：</strong>サーバーやネットワーク機器をどのようにつなぐか、図で整理しました。</li>
                                 <li><strong>設定の自動化：</strong>Ansibleを使い、同じ手順で繰り返し設定できるようにしました。</li>
@@ -390,7 +388,7 @@
                                 <div><span>学んだこと</span><strong>受付、原因の絞り込み、記録、相談、引き継ぎ</strong></div>
                             </div>
                             <div class="support-fit high">
-                                <span class="fit-label">補助作品：ITサポートを想定した練習</span>
+                                <span class="fit-label">第二志望の補助作品：ITサポートを想定した練習</span>
                                 <p>PCの初期設定、利用者アカウント、Microsoft 365、ネットワーク障害などを想定し、確認手順と記録例を作りました。すべて個人学習用の想定ケースで、会社の実環境で使った実績ではありません。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
@@ -506,8 +504,8 @@ function Get-ResourceStatus {
                                 <div><span>活用</span><strong>負荷上昇時の一次確認と説明</strong></div>
                             </div>
                             <div class="support-fit high">
-                                <span class="fit-label">志望職種に近い学習作品</span>
-                                <p>CPUやメモリの負荷、ディスク容量、動作中のプログラムを確認し、サーバーの状態を説明する練習に使っています。</p>
+                                <span class="fit-label">主作品内のアプリ実装</span>
+                                <p>CPUやメモリの負荷、ディスク容量、動作中のプログラムを確認し、サーバーの状態を説明する練習に使っています。Linuxサーバー構築案件全体は、このページ先頭のServer Monitorで案内しています。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
                                 <span class="num-chip"><strong>6</strong>カテゴリ監視</span>
