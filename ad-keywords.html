@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Active Directory初心者向けキーワード集。ドメイン、DC、DNS、OU、GPO、Kerberos、LDAP、FSMO、複製、権限、障害対応を覚え方・確認コマンド・安全な演習付きで解説します。">
+<title>初心者向けActive Directoryキーワード集 | 島田則幸のポートフォリオ</title>
+<link rel="canonical" href="https://ns7jp.github.io/ad-keywords.html">
+<meta property="og:title" content="初心者向けActive Directoryキーワード集 | 島田則幸"><meta property="og:type" content="article"><meta property="og:url" content="https://ns7jp.github.io/ad-keywords.html"><meta property="og:image" content="https://ns7jp.github.io/image/og-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ"><meta property="og:site_name" content="島田則幸のポートフォリオ"><meta property="og:description" content="Active Directoryを、名簿・案内・規則・認証・同期の5つの役割から学ぶ入門資料です。"><meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png"><meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+<script src="js/main.js?v=20260826-1" defer></script><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/style.css?v=20260826-2"><link rel="stylesheet" href="css/ad-guide.css?v=20260828-1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Top","item":"https://ns7jp.github.io/"},{"@type":"ListItem","position":2,"name":"スキル","item":"https://ns7jp.github.io/skills.html"},{"@type":"ListItem","position":3,"name":"Active Directoryキーワード集","item":"https://ns7jp.github.io/ad-keywords.html"}]},{"@type":"TechArticle","headline":"初心者向けActive Directoryキーワード集","description":"Active Directoryの基本概念、認証、DNS、OU、GPO、権限、複製、FSMO、確認コマンド、障害対応を解説する学習資料","inLanguage":"ja"}]}</script>
+</head>
+<body class="ad-page">
+<a class="skip-link" href="#main">メインコンテンツへスキップ</a><div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+<button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><i class="fa-solid fa-bars" aria-hidden="true"></i><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+<header><p class="logo"><a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a></p><nav id="site-nav"><ul><li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li><li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li><li class="active"><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li><li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li><li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li><li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li></ul></nav></header>
+<main id="main" tabindex="-1"><section class="page-hero" style="background-image: url('image/skills.jpg');"><div class="page-hero-overlay"></div><div class="page-hero-content"><h1 class="page-title"><span class="title-en">Active Directory Guide</span><span class="title-jp">初心者向けAD・<wbr>キーワード集</span></h1></div></section>
+<div class="page-content"><div class="container">
+<section class="ad-intro" aria-labelledby="intro-title"><h2 id="intro-title">ADは「会社の人・PC・ルールをまとめて管理する仕組み」です</h2><p class="ad-lead">Active Directory Domain Services（AD DS）は、利用者やPCを登録し、本人確認とアクセス権、共通設定を組織単位で管理するWindows Serverの役割です。たとえば「社員Aが会社PCへサインインし、許可された共有フォルダーだけを使える」状態を支えます。</p>
+<div class="memory-tip"><strong>最初の覚え方：名・案・規・認・同（めい・あん・き・にん・どう）</strong> — 名簿のAD DS、案内のDNS、規則のGPO、認証のKerberos、同じ情報を保つ複製。この5役から関連語をつなげます。</div>
+<div class="ad-summary-grid"><article class="ad-summary-card"><h3>名簿</h3><p>ユーザー、PC、グループなどの「オブジェクト」を登録します。</p></article><article class="ad-summary-card"><h3>案内</h3><p>DNSがドメインコントローラーの場所を案内します。</p></article><article class="ad-summary-card"><h3>規則</h3><p>OUとGPOで対象ごとにPC設定を配布します。</p></article><article class="ad-summary-card"><h3>認証</h3><p>主にKerberosで本人を確認します。</p></article><article class="ad-summary-card"><h3>同期</h3><p>複数DCが変更を複製します。</p></article><article class="ad-summary-card"><h3>運用</h3><p>DNS、時刻、複製、ログ、直前変更を順に確認します。</p></article></div>
+<nav class="ad-toc" aria-label="このページの目次"><strong>目次</strong><ul><li><a href="#foundation">基本構造</a></li><li><a href="#objects">オブジェクトと名前</a></li><li><a href="#dns-auth">DNSと認証</a></li><li><a href="#ou-gpo">OUとGPO</a></li><li><a href="#permissions">グループと権限</a></li><li><a href="#replication">複製とFSMO</a></li><li><a href="#operations">運用コマンド</a></li><li><a href="#cheatsheet">早見表</a></li><li><a href="#incident">障害対応</a></li><li><a href="#practice">安全な演習</a></li></ul></nav>
+<div class="ad-note"><strong>学習範囲：</strong>このページは理解と安全な検証計画を示す教材です。記載コマンドをこのサイト制作時に実ドメインコントローラーで実行した証跡ではありません（NOT RUN）。製品バージョン、組織の手順、権限、変更承認を確認してから隔離ラボで試します。</div></section>
+
+<section id="foundation" class="ad-section" aria-labelledby="foundation-title"><h2 id="foundation-title">1. ADの基本構造</h2><div class="ad-keyword-grid">
+<article class="ad-keyword-card"><span class="keyword-kind">全体</span><h3>Active Directory / AD DS</h3><p>Active Directoryは関連技術の総称としても使われます。AD DSは、ドメインのユーザー・PC・グループと認証情報を管理する中核のサーバー役割です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">管理範囲</span><h3>ドメイン（Domain）</h3><p>同じデータベースと管理方針を共有する基本単位です。例は <code>corp.example.com</code>。DNS名と関係しますが、WebサイトのURLそのものではありません。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">認証サーバー</span><h3>ドメインコントローラー（DC）</h3><p>AD DSを実行し、ログオン認証、検索、複製を行うサーバーです。可用性のため通常は複数台を設計します。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">複数ドメイン</span><h3>ツリー / フォレスト</h3><p>連続した名前空間のドメイン群がツリー、共通スキーマと構成を共有する最大の境界がフォレストです。フォレストは重要なセキュリティ境界です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">関係</span><h3>信頼関係（Trust）</h3><p>別ドメイン／フォレストの認証を受け入れる関係です。「信頼した＝すべて許可」ではなく、アクセスには別途権限が必要です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">情報の型</span><h3>スキーマ（Schema）</h3><p>オブジェクトの種類と属性を定義する設計図です。変更はフォレスト全体へ影響するため慎重に扱います。</p></article></div></section>
+
+<section id="objects" class="ad-section" aria-labelledby="objects-title"><h2 id="objects-title">2. 登録するものと名前の読み方</h2><div class="ad-keyword-grid">
+<article class="ad-keyword-card"><span class="keyword-kind">登録単位</span><h3>オブジェクト / 属性</h3><p>ユーザー、コンピューター、グループなど1件ずつがオブジェクトです。表示名、メール、SIDなどの情報が属性です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">一意の識別</span><h3>SID</h3><p>ユーザーやグループを識別する番号です。Windowsの権限は名前ではなくSIDへ結び付きます。同名で作り直しても元のSIDとは別物です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">ログオン名</span><h3>UPN / sAMAccountName</h3><p><code>user@corp.example.com</code> がUPN、旧来形式のログオン名に使われる属性がsAMAccountNameです。メールとUPNは同じとは限りません。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">場所を含む名前</span><h3>DN / CN</h3><p>DNは <code>CN=Taro,OU=Sales,DC=corp,DC=example,DC=com</code> のような完全な位置。CNはその中の一般名です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">検索</span><h3>LDAP</h3><p>ディレクトリを検索・参照・更新するためのプロトコルです。Kerberosなどの認証とは役割を分けて理解します。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">削除復元</span><h3>AD Recycle Bin</h3><p>有効化後に削除したオブジェクトを属性ごと復元しやすくする機能です。バックアップの代わりではありません。</p></article></div></section>
+
+<section id="dns-auth" class="ad-section" aria-labelledby="dns-auth-title"><h2 id="dns-auth-title">3. DNS・時刻・認証は一本の流れ</h2><ol class="ad-flow"><li>クライアントはDNSのSRVレコードで利用できるDCを探す。</li><li>DCとクライアントの時刻をそろえ、Kerberosで認証する。</li><li>取得したチケットでファイルサーバーなどへアクセスする。</li><li>ACLがSIDとグループ所属を評価して許可または拒否する。</li></ol><div class="ad-keyword-grid">
+<article class="ad-keyword-card"><span class="keyword-kind">名前解決</span><h3>DNS / SRVレコード</h3><p>DNSは名前をIPへ変換するだけでなく、<code>_ldap._tcp</code> などのSRVレコードでDCの場所を知らせます。ドメイン参加端末は原則AD用DNSを参照します。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">認証</span><h3>Kerberos</h3><p>パスワードを毎回サービスへ渡さず、KDCから得たチケットで本人確認します。DNS、時刻、SPNの不整合が失敗原因になります。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">認証局役</span><h3>KDC / TGT</h3><p>KDCはDC上で動きます。TGTは次のチケットを受け取るための証明、サービスチケットは目的のサービス用の証明です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">サービス名</span><h3>SPN</h3><p>Kerberosがサービスを識別する名前です。重複や誤登録はKerberos認証の失敗につながります。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">旧方式</span><h3>NTLM</h3><p>Kerberosを使えない状況などで利用される方式です。依存状況を監査し、安易に設定を変えません。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">時刻</span><h3>Windows Time / PDC Emulator</h3><p>Kerberosには時刻同期が重要です。ドメイン階層の時刻源と最上位PDC Emulatorの外部時刻源を確認します。</p></article></div>
+<div class="ad-command"><pre><code>nslookup -type=SRV _ldap._tcp.dc._msdcs.corp.example.com
+w32tm /query /source
+klist
+setspn -X</code></pre></div><div class="ad-check"><strong>切り分けの合言葉：</strong>「名・時・券」— DNSの名前解決、時刻、Kerberosチケットの順に確認します。</div></section>
+
+<section id="ou-gpo" class="ad-section" aria-labelledby="ou-gpo-title"><h2 id="ou-gpo-title">4. OUとGPOで対象へルールを配る</h2><div class="ad-keyword-grid">
+<article class="ad-keyword-card"><span class="keyword-kind">整理と委任</span><h3>OU（組織単位）</h3><p>オブジェクトを整理し、GPO適用や管理権限の委任に使う入れ物です。組織図より管理目的で設計します。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">設定集</span><h3>GPO</h3><p>ユーザーやPCへ共通設定を配るグループポリシーオブジェクトです。サイト・ドメイン・OUへリンクして使います。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">適用順</span><h3>LSDOU</h3><p>Local → Site → Domain → OUの処理順です。子OU、強制、継承のブロック、フィルター等で結果は変わります。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">対象制御</span><h3>Security / WMI Filter</h3><p>GPOを誰・どのPCへ適用するか絞ります。複雑化を避け、目的と対象を記録します。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">共有領域</span><h3>SYSVOL</h3><p>GPOテンプレートやログオンスクリプトをDC間で共有するフォルダーです。通常はDFSRで複製されます。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">結果確認</span><h3>RSoP / gpresult</h3><p>最終的な適用結果を確認します。「GPOを作った」で終わらず、対象端末の結果まで見ます。</p></article></div>
+<div class="ad-command"><pre><code>gpresult /r
+gpresult /h C:\Temp\gpresult.html
+gpupdate /force</code></pre></div><div class="ad-warning"><strong>注意：</strong><code>gpupdate /force</code> は再ログオンや再起動を求めることがあります。本番へ一斉実行せず、テストOU、小さな対象、切り戻し、周知を用意します。</div></section>
+
+<section id="permissions" class="ad-section" aria-labelledby="permissions-title"><h2 id="permissions-title">5. グループと権限：人へ直接付けない</h2><div class="ad-keyword-grid">
+<article class="ad-keyword-card"><span class="keyword-kind">まとめる</span><h3>Security Group</h3><p>複数のユーザーやPCへ権限をまとめて割り当てます。配布グループは主にメール配布用です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">範囲</span><h3>Global / Domain Local / Universal</h3><p>Globalは役割メンバー、Domain Localは資源権限、Universalは複数ドメインで使う構成に向きます。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">設計の型</span><h3>AGDLP</h3><p>Accounts → Global groups → Domain Local groups → Permissions。人を役割へ、役割を資源用グループへ入れます。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">許可表</span><h3>ACL / ACE</h3><p>ACLはアクセス許可の一覧、ACEはその1項目です。許可・拒否、継承、共有権限とNTFS権限を確認します。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">原則</span><h3>最小権限</h3><p>必要な人へ必要な範囲・期間だけ付与します。日常用と管理用を分け、Domain Adminsを常用しません。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">委任</span><h3>Delegation of Control</h3><p>パスワードリセットだけを任せるなど、OU単位で限定した管理権限を渡します。</p></article></div><div class="ad-check"><strong>覚え方：</strong>「人 → 役割 → 資源 → 権限」。異動時は役割グループを変えればよく、個人へ直接付けるより追跡しやすくなります。</div></section>
+
+<section id="replication" class="ad-section" aria-labelledby="replication-title"><h2 id="replication-title">6. 複製・サイト・FSMO</h2><div class="ad-keyword-grid">
+<article class="ad-keyword-card"><span class="keyword-kind">同期</span><h3>マルチマスター複製</h3><p>多くの変更を複数DCで受け付け相互に反映します。遅延や競合があるため「常に即時一致」とは限りません。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">通信設計</span><h3>Site / Subnet / Site Link</h3><p>物理ネットワークを表し、近いDCの選択と拠点間複製を制御します。IPサブネットとの対応が重要です。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">担当DC</span><h3>FSMO</h3><p>競合を避けるため特定DCが担う5役です。フォレスト単位2役、ドメイン単位3役があります。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">フォレスト2役</span><h3>Schema / Domain Naming Master</h3><p>スキーマ変更とドメインの追加・削除を担当します。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">ドメイン3役</span><h3>RID / PDC / Infrastructure</h3><p>RIDはSID用番号、PDC Emulatorは時刻・パスワード等、Infrastructureは他ドメイン参照の更新を担います。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">補助役</span><h3>RODC / Global Catalog</h3><p>RODCは読み取り専用DC。Global Catalogはフォレスト内検索とログオンに必要な一部属性を保持します。</p></article></div>
+<div class="ad-command"><pre><code>repadmin /replsummary
+repadmin /showrepl
+dcdiag /e /c /v
+netdom query fsmo</code></pre></div><div class="ad-warning"><strong>移行と強制奪取は別：</strong>正常なDC間ではFSMOを移行します。故障DCからの強制奪取は復旧設計を伴う非常時操作です。</div></section>
+
+<section id="operations" class="ad-section" aria-labelledby="operations-title"><h2 id="operations-title">7. 運用で使う確認コマンド</h2><div class="ad-table-wrap"><table class="ad-table"><caption>代表的なAD確認コマンドと読み取る内容</caption><thead><tr><th scope="col">コマンド</th><th scope="col">何を見るか</th><th scope="col">注意</th></tr></thead><tbody><tr><td><code>dcdiag</code></td><td>DCのDNS、サービス、複製等</td><td>対象・終了コード・個別結果を記録</td></tr><tr><td><code>repadmin /replsummary</code></td><td>複製失敗数と最大遅延</td><td><code>/showrepl</code> とイベントログも確認</td></tr><tr><td><code>nltest /dsgetdc:domain</code></td><td>クライアントが見つけたDC</td><td>期待サイトとDCか照合</td></tr><tr><td><code>gpresult /h</code></td><td>適用GPOと拒否理由</td><td>共有前に個人情報を確認</td></tr><tr><td><code>Get-ADUser</code></td><td>ユーザー属性と有効状態</td><td>検索範囲とフィルターを限定</td></tr><tr><td><code>Get-WinEvent</code></td><td>AD、DNS、DFSR等のログ</td><td>時刻・ID・対象DCを保存</td></tr></tbody></table></div>
+<div class="ad-command"><pre><code>Get-ADUser -Filter 'Enabled -eq $true' `
+  -SearchBase 'OU=Users,DC=corp,DC=example,DC=com' `
+  -Properties LastLogonDate |
+  Select-Object SamAccountName, LastLogonDate
+
+dcdiag /test:DNS
+$dcdiagExitCode = $LASTEXITCODE</code></pre></div><div class="ad-check"><strong>証跡の型：</strong>実行日時 / 実行者 / 対象DC / コマンド / 終了コード / 期待結果 / 実結果 / 判断 / 次の対応。</div></section>
+
+<section id="cheatsheet" class="ad-section" aria-labelledby="cheatsheet-title"><h2 id="cheatsheet-title">8. 目的別キーワード早見表</h2><div class="ad-table-wrap"><table class="ad-table"><caption>Active Directoryの目的別キーワード早見表</caption><thead><tr><th scope="col">知りたいこと</th><th scope="col">キーワード</th><th scope="col">一言で覚える</th></tr></thead><tbody><tr><td>管理の基本単位</td><td>Domain / DC / Forest</td><td>範囲・認証役・最大境界</td></tr><tr><td>対象を整理</td><td>Object / Attribute / OU</td><td>登録物・項目・入れ物</td></tr><tr><td>DCを探す</td><td>DNS / SRV</td><td>名前とサービスの案内</td></tr><tr><td>本人確認</td><td>Kerberos / KDC / TGT</td><td>チケットで認証</td></tr><tr><td>設定を配る</td><td>GPO / LSDOU / RSoP</td><td>作る・順に適用・結果を見る</td></tr><tr><td>権限を設計</td><td>SID / ACL / AGDLP</td><td>人→役割→資源→権限</td></tr><tr><td>DC間を同期</td><td>Replication / Site</td><td>適切な経路で複製</td></tr><tr><td>一台が担当</td><td>FSMO</td><td>競合を避ける5役</td></tr><tr><td>異常を診断</td><td>dcdiag / repadmin / Event Log</td><td>健全性・複製・記録</td></tr><tr><td>復旧する</td><td>System State / DSRM / Recycle Bin</td><td>バックアップ・復旧モード・削除復元</td></tr></tbody></table></div></section>
+
+<section id="incident" class="ad-section" aria-labelledby="incident-title"><h2 id="incident-title">9. ログオンできないときの確認順</h2><ol class="ad-flow"><li><strong>影響：</strong>1人か複数人か、1台か拠点全体か、いつからか。</li><li><strong>変更：</strong>パスワード、GPO、DNS、Firewall、時刻、更新の直前変更。</li><li><strong>クライアント：</strong>IP、AD用DNS、時刻、疎通、ユーザー名形式。</li><li><strong>認証：</strong>SRV、見つかったDC、チケット、ロック・無効・期限。</li><li><strong>DC：</strong><code>dcdiag</code>、複製、サービス、SYSVOL、容量、ログ。</li><li><strong>復旧後：</strong>ログオン、GPO、共有、複製、監視を再確認して記録。</li></ol>
+<details><summary>新しいPCをドメイン参加できない</summary><p>DNS参照先、時刻、既存コンピューターアカウント、名前重複、必要ポート、資格情報、ドメイン名、DC発見を確認します。</p></details><details><summary>GPOが適用されない</summary><p>OUリンク、ユーザー／コンピューター設定、フィルター、継承、SYSVOL、DNS、<code>gpresult</code> の拒否理由を確認します。</p></details><details><summary>複製エラーが出る</summary><p>対象DC、エラーコード、最後の成功時刻、DNS、時刻、疎通、認証、サイト、サービス、ログを確認します。安易な強制同期は行いません。</p></details><details><summary>誤ってユーザーを削除した</summary><p>変更を止め、対象・時刻・影響を記録し、Recycle BinやSystem Stateバックアップの条件を確認します。同名新規作成はSIDが変わります。</p></details></section>
+
+<section id="practice" class="ad-practice" aria-labelledby="practice-title"><h2 id="practice-title">10. 隔離ラボで行う演習</h2><p>本番や家庭の通常ネットワークから分けたHyper-V等のラボで行います。ドメイン名、固定IP、DNS、管理者資格情報、期待結果を先に設計してください。</p><div class="ad-practice-grid"><article class="ad-practice-card"><h3>演習1：図にする</h3><p>DC01、DC02、CL01、ドメイン、OU、ユーザー、グループ、共有を描きます。</p></article><article class="ad-practice-card"><h3>演習2：DNS</h3><p>CL01のDNS参照先、SRV、見つけたDCを記録します。</p></article><article class="ad-practice-card"><h3>演習3：OUとGPO</h3><p>テストOUへ無害な設定を適用し、<code>gpresult</code> で比較して戻します。</p></article><article class="ad-practice-card"><h3>演習4：AGDLP</h3><p>利用者、役割、資源用グループ、読み取り権限を分けます。</p></article><article class="ad-practice-card"><h3>演習5：正常性</h3><p><code>dcdiag</code>、<code>repadmin</code>、FSMOの結果を記録します。</p></article><article class="ad-practice-card"><h3>演習6：障害対応</h3><p>テスト端末のDNSを誤らせ、影響→確認→復旧→再確認を記録します。</p></article></div><div class="ad-warning"><strong>禁止事項：</strong>未承認DCの接続、実在認証情報の利用、本番GPOの直接編集、バックアップ未確認の削除、根拠のないFSMO強制奪取は行いません。</div><div class="ad-check"><strong>完了条件：</strong>用語を日本語で説明し、確認方法を選び、期待結果と実結果を比べ、異常時に変更を止めて報告・切り戻しできれば合格です。</div></section>
+<section class="contact-cta"><div class="cta-content"><h2>関連する学習内容</h2><p>ADの理解は、Windows Server、DNS、認証、権限、PowerShell、障害対応につながります。</p><a href="skills.html" class="btn btn-primary"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> スキル一覧へ戻る</a> <a href="linux-lab.html" class="btn btn-secondary"><i class="fa-solid fa-server" aria-hidden="true"></i> Linuxの基本確認を見る</a></div></section>
+</div></div></main>
+<footer><div class="footer-content"><div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div><div class="footer-nav"><a href="me.html">自己紹介</a><a href="skills.html">スキル</a><a href="ad-keywords.html">ADキーワード集</a><a href="sql-keywords.html">SQLキーワード集</a><a href="infra-lab.html">サーバー構築</a><a href="works.html">作品</a><a href="resume.html">履歴書</a><a href="contact.html">連絡先</a></div><div class="footer-social"><a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a><a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></div></div><div class="copyright"><p>&copy; 2026 Noriyuki Shimada. All Rights Reserved.</p></div></footer><button type="button" class="back-to-top" aria-label="ページの先頭へ戻る"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
+</body></html>
