@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="未経験者向けに、Windows Serverの一次確認で使うCMDとPowerShellコマンドを、意味、読み方、安全な例、練習問題とともに解説します。">
+    <title>初心者向けWindowsコマンド集 | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/windows-commands.html">
+    <meta property="og:title" content="初心者向けWindowsコマンド集 | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ns7jp.github.io/windows-commands.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="サーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
+    <meta property="og:description" content="Windows Serverの状態を安全に確認する基本コマンドを、覚え方と実務を想定した練習で学べます。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="サーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <script src="js/main.js?v=20260826-1" defer></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css?v=20260828-1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"TechArticle","headline":"初心者向けWindowsコマンド集","description":"Windows Serverの一次確認で使うCMDとPowerShellコマンドの学習資料","inLanguage":"ja","author":{"@type":"Person","name":"Noriyuki Shimada"},"url":"https://ns7jp.github.io/windows-commands.html"}
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+    <div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><i class="fa-solid fa-bars" aria-hidden="true"></i><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <header>
+        <p class="logo"><a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a></p>
+        <nav id="site-nav"><ul>
+            <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li>
+            <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li>
+            <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li>
+            <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li>
+            <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
+        </ul></nav>
+    </header>
+    <main id="main" tabindex="-1">
+        <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');"><div class="page-hero-overlay"></div><div class="page-hero-content"><h1 class="page-title"><span class="title-en">Windows Command Guide</span><span class="title-jp">初心者向けWindowsコマンド集</span></h1></div></section>
+        <div class="page-content infra-lab-content"><div class="container">
+            <nav class="lab-subnav" aria-label="サーバー学習内の案内">
+                <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux基本確認</a>
+                <a href="windows-commands.html" class="active" aria-current="page"><i class="fa-brands fa-windows" aria-hidden="true"></i> Windowsコマンド</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> AWS設計</a>
+            </nav>
+            <section class="lab-intro">
+                <span class="case-label">学習資料 / Windows 10・11 / Windows Server</span>
+                <h2>暗記より先に「何を確かめたいか」を覚える</h2>
+                <p>コマンドは、画面を開かずにコンピューターへ質問する短い文章です。このページでは、問い合わせや障害の一次確認で使うコマンドを、<strong>端末 → 場所 → 通信 → 動作 → 記録 → 権限</strong>の6分類で学びます。最初はすべて覚えず、「どの分類を調べればよいか」を選べれば十分です。</p>
+                <div class="memory-phrase" role="note"><strong>合言葉：端・場・通・動・記・権</strong><span>たん・ば・つう・どう・き・けん</span><p>端末情報 → ファイルの場所 → 通信 → プロセスやサービスの動作 → イベント記録 → ユーザーと権限、の順です。</p></div>
+                <div class="status-callout pending" role="note"><i class="fa-solid fa-flask" aria-hidden="true"></i><div><strong>検証範囲：学習用（実機での全コマンド一括検証は未実施）</strong><p>掲載内容はWindowsの一次確認を学ぶための例です。このページの全コマンドを同一のWindows Server実機で実行した証跡ではありません。環境により表示名や使用できるコマンドが異なります。業務環境では会社の手順、権限、対象サーバー、変更の有無を確認してください。</p></div></div>
+            </section>
+            <section class="operation-matrix-section" id="how-to-open" aria-labelledby="how-to-open-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-terminal" aria-hidden="true"></i></span><h2 class="heading-text" id="how-to-open-title">CMDとPowerShellは何が違う？</h2></div>
+                <div class="command-basics-grid">
+                    <article class="command-guide-card"><span class="command-shell">CMD</span><h3>コマンド プロンプト</h3><p>昔からあるWindowsの操作画面です。<code>ipconfig</code>、<code>ping</code>、<code>dir</code>など、短い基本コマンドを覚える入口に向いています。</p><pre><code>Win + R → cmd → Enter
+ipconfig /all</code></pre></article>
+                    <article class="command-guide-card"><span class="command-shell powershell">PowerShell</span><h3>PowerShell</h3><p>結果を文字列だけでなく「情報のまとまり」として扱えます。<code>Get-</code>は取得、<code>Test-</code>は確認、<code>Set-</code>は変更、と動詞から目的を推測できます。</p><pre><code>Win + X → ターミナル
+Get-ComputerInfo</code></pre></article>
+                </div>
+                <div class="beginner-safety-note"><strong>プロンプト記号は入力しません</strong><p>説明にある<code>C:\&gt;</code>や<code>PS C:\&gt;</code>は「入力を待っています」という表示です。入力するのは、その右側のコマンドだけです。管理者権限が必要な場合も、まず通常権限で確認し、理由が分かってから「管理者として実行」します。</p></div>
+            </section>
+            <section class="operation-matrix-section" id="quick-reference" aria-labelledby="quick-reference-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span><h2 class="heading-text" id="quick-reference-title">まず覚える読み取りコマンド早見表</h2></div>
+                <p class="evidence-note">「目的」で探し、CMDかPowerShellの使いやすい方を1つ試します。表示結果にはコンピューター名、ユーザー名、IPアドレスなどが含まれるため、公開前に機密情報がないか確認します。</p>
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるWindowsコマンド早見表" tabindex="0"><table class="operation-table">
+                    <caption class="sr-only">Windowsで確認したい内容、CMD、PowerShell、結果の読み方</caption>
+                    <thead><tr><th scope="col">目的</th><th scope="col">CMD</th><th scope="col">PowerShell</th><th scope="col">見るところ</th></tr></thead>
+                    <tbody>
+                        <tr><td>コンピューター名</td><td><code>hostname</code></td><td><code>$env:COMPUTERNAME</code></td><td>作業対象が依頼票の名前と一致するか。</td></tr>
+                        <tr><td>自分のユーザー名</td><td><code>whoami</code></td><td><code>whoami</code></td><td><code>ドメイン\ユーザー</code>の形式。別アカウントで作業していないか。</td></tr>
+                        <tr><td>OS・起動時刻</td><td><code>systeminfo</code></td><td><code>Get-ComputerInfo</code></td><td>OS名、バージョン、更新、起動時刻。出力が長い点に注意。</td></tr>
+                        <tr><td>現在の場所</td><td><code>cd</code></td><td><code>Get-Location</code></td><td>ファイル操作の対象フォルダー。削除やコピーの前に必ず確認。</td></tr>
+                        <tr><td>ファイル一覧</td><td><code>dir</code></td><td><code>Get-ChildItem</code></td><td>名前、更新日時、サイズ。PowerShellでは<code>ls</code>も別名として使用可。</td></tr>
+                        <tr><td>IP・DNS情報</td><td><code>ipconfig /all</code></td><td><code>Get-NetIPConfiguration</code></td><td>IPv4、既定ゲートウェイ、DNSサーバー、DHCPの有無。</td></tr>
+                        <tr><td>名前解決</td><td><code>nslookup server01</code></td><td><code>Resolve-DnsName server01</code></td><td>名前から期待するIPアドレスを取得できるか。</td></tr>
+                        <tr><td>到達確認</td><td><code>ping server01</code></td><td><code>Test-Connection server01 -Count 4</code></td><td>応答の有無と時間。失敗だけで停止とは断定しない。</td></tr>
+                        <tr><td>ポート確認</td><td><code>netstat -ano</code></td><td><code>Test-NetConnection server01 -Port 443</code></td><td><code>TcpTestSucceeded : True</code>なら指定ポートへTCP接続できた。</td></tr>
+                        <tr><td>動作中の処理</td><td><code>tasklist</code></td><td><code>Get-Process</code></td><td>プロセス名、PID、メモリ使用量。終了はせず、まず記録。</td></tr>
+                        <tr><td>サービス状態</td><td><code>sc query</code></td><td><code>Get-Service</code></td><td><code>Running</code>か<code>Stopped</code>か。停止が異常とは限らない。</td></tr>
+                        <tr><td>空き容量</td><td><code>fsutil volume diskfree C:</code></td><td><code>Get-Volume</code></td><td>ドライブの残り容量。<code>fsutil</code>は環境により管理者権限が必要。</td></tr>
+                        <tr><td>エラーログ</td><td><code>wevtutil qe System /c:10 /rd:true /f:text</code></td><td><code>Get-WinEvent -LogName System -MaxEvents 10</code></td><td>発生日時、レベル、ソース、イベントID、メッセージ。</td></tr>
+                        <tr><td>所属グループ</td><td><code>whoami /groups</code></td><td><code>whoami /groups</code></td><td>管理者などの強い権限を持つグループに所属しているか。</td></tr>
+                    </tbody>
+                </table></div>
+            </section>
+            <section class="operation-matrix-section" id="network" aria-labelledby="network-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span><h2 class="heading-text" id="network-title">通信障害は「自分 → 名前 → 道 → 入口」で分ける</h2></div>
+                <div class="command-step-list">
+                    <article class="command-guide-card"><span class="step-number">1</span><h3>自分の設定：<code>ipconfig /all</code></h3><p>IPv4アドレスは自分の住所、サブネットマスクは同じ地域の範囲、既定ゲートウェイは別ネットワークへの出口、DNSは名前を住所へ変換する案内所です。<code>169.254.x.x</code>は、DHCPからアドレスを取得できなかった可能性があります。</p></article>
+                    <article class="command-guide-card"><span class="step-number">2</span><h3>名前：<code>nslookup server01</code></h3><p>サーバー名が期待するIPへ変換されるかを見ます。名前では失敗し、IP直接なら成功する場合はDNSを調べます。</p></article>
+                    <article class="command-guide-card"><span class="step-number">3</span><h3>道：<code>tracert server01</code></h3><p>通信が通る機器を順番に表示します。途中の<code>*</code>は応答を返さない設定の場合もあるため、そこで障害と即断しません。</p></article>
+                    <article class="command-guide-card"><span class="step-number">4</span><h3>入口：<code>Test-NetConnection server01 -Port 443</code></h3><p>WebのHTTPS入口であるTCP 443番へ接続できるか確認します。PCからの到達、ファイアウォール、待受サービスを切り分ける材料になります。</p></article>
+                </div>
+                <div class="beginner-safety-note"><strong><code>ping</code>失敗 ＝ サーバー停止、ではありません</strong><p>セキュリティ設定でpingだけを拒否していることがあります。名前解決、対象ポート、別PCからの結果も集めて判断します。</p></div>
+            </section>
+            <section class="operation-matrix-section" id="process-service-log" aria-labelledby="process-service-log-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></span><h2 class="heading-text" id="process-service-log-title">プロセス・サービス・ログをつなげて読む</h2></div>
+                <div class="command-basics-grid">
+                    <article class="command-guide-card"><h3>プロセスは「今動くプログラム」</h3><pre><code>Get-Process |
+  Sort-Object CPU -Descending |
+  Select-Object -First 10</code></pre><p><code>|</code>（パイプ）は左の結果を右へ渡します。CPU使用時間の大きい順に10件表示しますが、値が大きいだけで異常とは限りません。普段の状態、発生時刻、継続時間と比べます。</p></article>
+                    <article class="command-guide-card"><h3>サービスは「裏側で動く機能」</h3><pre><code>Get-Service -Name W32Time
+Get-Service | Where-Object Status -eq 'Stopped'</code></pre><p>W32Timeは時刻同期サービスです。停止中一覧には、必要なときだけ起動する正常なサービスも含まれます。設計や通常時の状態を確認してから判断します。</p></article>
+                    <article class="command-guide-card"><h3>イベントログは「何が起きたかの記録」</h3><pre><code>Get-WinEvent -FilterHashtable @{
+  LogName='System'; Level=2
+} -MaxEvents 20</code></pre><p><code>Level=2</code>はエラーです。時刻、ProviderName（記録元）、Id、Messageを控えます。同じIDでも原因が同じとは限らないため、メッセージと前後の操作を合わせて読みます。</p></article>
+                    <article class="command-guide-card"><h3>結果をファイルへ保存</h3><pre><code>Get-ComputerInfo |
+  Out-File "$env:USERPROFILE\Desktop\computer-info.txt"</code></pre><p><code>Out-File</code>は結果を保存します。既存ファイルを同名で上書きする点と、端末名・更新情報などが外部へ出ないよう保存先と共有先に注意します。</p></article>
+                </div>
+            </section>
+            <section class="operation-matrix-section" id="files-users" aria-labelledby="files-users-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span><h2 class="heading-text" id="files-users-title">ファイルとユーザーを安全に確認する</h2></div>
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるファイルとユーザーのコマンド表" tabindex="0"><table class="operation-table">
+                    <caption class="sr-only">ファイルとユーザーを確認するWindowsコマンド</caption>
+                    <thead><tr><th scope="col">やりたいこと</th><th scope="col">例</th><th scope="col">初心者向け説明</th></tr></thead>
+                    <tbody>
+                        <tr><td>場所を移動</td><td><code>cd C:\Logs</code><br><code>Set-Location C:\Logs</code></td><td>操作対象をC:\Logsへ変えます。移動後に<code>cd</code>または<code>Get-Location</code>で再確認します。</td></tr>
+                        <tr><td>内容を読む</td><td><code>type app.log</code><br><code>Get-Content .\app.log -Tail 50</code></td><td>PowerShell例は末尾50行だけを表示します。大きなログを全部開くより安全で速い方法です。</td></tr>
+                        <tr><td>文字を探す</td><td><code>findstr /i "error failed" app.log</code><br><code>Select-String -Path .\app.log -Pattern 'error','failed'</code></td><td><code>/i</code>は大文字・小文字を区別しません。エラーの前後や発生時刻も確認します。</td></tr>
+                        <tr><td>コピー予定を確認</td><td><code>robocopy C:\Data D:\Backup /E /L</code></td><td><code>/L</code>は実際にはコピーせず、対象一覧だけを表示します。確認後も削除系オプションには注意します。</td></tr>
+                        <tr><td>ローカルユーザー一覧</td><td><code>net user</code><br><code>Get-LocalUser</code></td><td>無効化の有無、想定外のアカウント、説明欄を確認します。ドメインアカウントとは別です。</td></tr>
+                        <tr><td>管理者グループ</td><td><code>net localgroup Administrators</code><br><code>Get-LocalGroupMember Administrators</code></td><td>誰がローカル管理者かを確認します。日本語OSではグループ名が「Administrators」以外の場合があります。</td></tr>
+                        <tr><td>権限表示</td><td><code>icacls C:\Data</code><br><code>Get-Acl C:\Data | Format-List</code></td><td>誰に読み取り・変更・フルコントロールがあるかを確認します。継承の有無にも注目します。</td></tr>
+                    </tbody>
+                </table></div>
+            </section>
+            <section class="operation-matrix-section" id="danger" aria-labelledby="danger-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span><h2 class="heading-text" id="danger-title">止まって確認する変更コマンド</h2></div>
+                <p class="evidence-note">次のコマンドは便利ですが、サービス停止、データ消失、通信断を起こす可能性があります。対象、影響、承認、バックアップ、戻し方、確認方法がそろうまで業務環境では実行しません。</p>
+                <div class="danger-command-grid">
+                    <div><code>del / Remove-Item</code><strong>削除</strong><span>対象パスと復元方法を確認</span></div>
+                    <div><code>format / diskpart</code><strong>ディスク変更</strong><span>対象を誤るとデータ消失</span></div>
+                    <div><code>Stop-Service / sc stop</code><strong>サービス停止</strong><span>利用者と依存機能へ影響</span></div>
+                    <div><code>Restart-Computer / shutdown</code><strong>再起動・停止</strong><span>接続中の利用者と処理を確認</span></div>
+                    <div><code>netsh / Set-NetFirewallRule</code><strong>通信設定変更</strong><span>遠隔接続を失う可能性</span></div>
+                    <div><code>net user /add</code><strong>アカウント変更</strong><span>申請と最小権限を確認</span></div>
+                </div>
+                <div class="beginner-safety-note"><strong>PowerShellの安全機能</strong><p>対応コマンドでは<code>-WhatIf</code>で実行予定だけを表示し、<code>-Confirm</code>で確認を求められます。ただし全コマンドが対応するわけではありません。テスト環境、対象を限定した小さな操作、実行後の再確認を組み合わせます。</p></div>
+            </section>
+            <section class="operation-matrix-section" id="practice" aria-labelledby="practice-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span><h2 class="heading-text" id="practice-title">10分でできる3つの練習</h2></div>
+                <p class="evidence-note">自分の学習用PCで、設定を変更しない確認だけを行います。結果に個人情報が含まれるため、そのままSNSや公開リポジトリへ載せないでください。</p>
+                <div class="practice-grid">
+                    <article class="practice-card"><span>練習 1</span><h3>対象確認メモを作る</h3><ol><li><code>hostname</code>と<code>whoami</code>を実行。</li><li><code>Get-Date</code>で確認時刻を表示。</li><li>「いつ・誰が・どの端末で」を自分の言葉で説明。</li></ol><details><summary>できたか確認</summary><p>3情報を説明でき、端末名やユーザー名を公開してよい情報か判断できれば完了です。</p></details></article>
+                    <article class="practice-card"><span>練習 2</span><h3>Web接続を4段階で確認</h3><ol><li><code>ipconfig /all</code>で自分の設定。</li><li><code>nslookup example.com</code>で名前解決。</li><li><code>ping example.com</code>で応答確認。</li><li><code>Test-NetConnection example.com -Port 443</code>でHTTPS確認。</li></ol><details><summary>できたか確認</summary><p>pingが失敗しても443番が成功する場合がある理由を説明できれば完了です。</p></details></article>
+                    <article class="practice-card"><span>練習 3</span><h3>架空の障害を報告する</h3><p>「Webページが開かない」という想定で、変更せずに情報を集めます。</p><ol><li>発生時刻と対象名を記録。</li><li>DNS、443番、サービス、Systemログを確認。</li><li>事実・推測・未確認を分けて3行で報告。</li></ol><details><summary>報告例</summary><p>事実：14:05、名前解決成功、443番失敗。推測：Webサービスまたは通信許可を要確認。未確認：サーバー側サービス状態（権限なし）。</p></details></article>
+                </div>
+            </section>
+            <section class="lab-links-section">
+                <div class="lab-link-card"><h3><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i> 読み取り用PowerShellサンプル</h3><p>端末情報、ネットワーク、イベントログなどを設定変更せずに集めるサンプルがあります。サンプル出力とテストも含め、コードと実行証跡を区別しています。</p><div class="contact-actions"><a href="support-scripts/" class="btn btn-secondary">Support Scriptsを見る</a><a href="support-scripts/README.md" class="btn btn-outline-dark">使い方を読む</a></div></div>
+                <div class="lab-link-card"><h3><i class="fa-brands fa-linux" aria-hidden="true"></i> 次に学ぶ</h3><p>WindowsとLinuxではコマンド名が違っても、「対象を確認し、事実を集め、変更前に相談する」という考え方は共通です。</p><div class="contact-actions"><a href="linux-lab.html" class="btn btn-secondary">Linux基本確認へ</a><a href="work-readiness.html" class="btn btn-outline-dark">仕事の進め方へ</a></div></div>
+            </section>
+        </div></div>
+    </main>
+    <footer><div class="footer-content"><div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div><div class="footer-nav"><a href="me.html">自己紹介</a><a href="skills.html">スキル</a><a href="infra-lab.html">サーバー構築</a><a href="linux-lab.html">Linux Lab</a><a href="windows-commands.html">Windowsコマンド</a><a href="works.html">作品</a><a href="resume.html">履歴書</a><a href="contact.html">連絡先</a></div><div class="footer-social"><a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a><a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></div></div><div class="footer-bottom"><small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small><small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行い、個人制作のため人によるレビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small></div></footer>
+</body>
+</html>

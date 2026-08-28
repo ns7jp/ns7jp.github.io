@@ -126,6 +126,7 @@
 | SQL文・キーワード集 | `sql-keywords.html` | SQLの取得、集計、結合、変更、テーブル定義、権限、トランザクション、性能確認、障害対応を初心者向けに解説する |
 | サーバー構築の学習 | `infra-lab.html` | 目的確認、設計、設定、動作確認、監視、復旧、引き継ぎを順に見せる |
 | Linuxの基本確認 | `linux-lab.html` | 「重・空・動・記・通・入・壁」の覚え方と、負荷、空き容量、サービス、ログ、通信、ログイン、ファイアウォールの確認例 |
+| Windowsコマンド集 | `windows-commands.html` | CMDとPowerShellの違い、「端・場・通・動・記・権」の覚え方、結果の読み方、安全上の注意、3つの練習 |
 | AWSネットワークの学習用設計 | `cloud-lab.html` | AWS上でネットワークを分け、接続できる範囲を制限する設計例。AWSへの作成は未実施 |
 | 作品ページ | `works.html` | Linux Server Build & Operations Labを先頭に、補助成果・学習作品を紹介 |
 | 履歴書 | `resume.html` | A4 1ページ。経歴、資格、想定業務への備え、主な学習成果、AIを使った範囲を掲載 |
@@ -198,6 +199,7 @@ ns7jp.github.io/
 ├── works.html               ... 作品一覧ページ（Infra カテゴリに Lab + Support Toolkit）
 ├── infra-lab.html           ... Linux Server Build & Operations Lab
 ├── linux-lab.html           ... Linux 一次運用Lab（systemd / journalctl / SSH / rsync）
+├── windows-commands.html     ... Windows 一次確認コマンド集（CMD / PowerShell）
 ├── cloud-lab.html           ... Cloud Network Lab（AWS VPC / Terraform）
 ├── production-readiness.md  ... Lab を本番化する際に足す運用観点
 ├── contact.html             ... 連絡先ページ
