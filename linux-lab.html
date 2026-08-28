@@ -120,6 +120,32 @@
                 </div>
             </section>
 
+            <section class="operation-matrix-section" id="first-check-order" aria-labelledby="first-check-order-title">
+                <div class="section-heading">
+                    <span class="heading-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></span>
+                    <h2 class="heading-text" id="first-check-order-title">最初に覚える「事実を集める」7項目</h2>
+                </div>
+                <p class="evidence-note">いきなり再起動や設定変更をせず、まず状態を読み取ります。順番は状況に合わせて変えて構いませんが、初めは次の合言葉で確認漏れを減らします。</p>
+                <div class="memory-phrase" role="note">
+                    <strong>合言葉：重・空・動・記・通・入・壁</strong>
+                    <span>じゅう・あき・どう・き・つう・にゅう・へき</span>
+                    <p>重さ → 空き → 動作 → 記録 → 通信 → ログイン → 防火壁、の順です。</p>
+                </div>
+                <ol class="first-check-list">
+                    <li><span>重</span><div><strong>重さ（負荷・メモリ）</strong><p><code>uptime</code> と <code>free -h</code> で、処理やメモリが混んでいないかを見る。</p></div></li>
+                    <li><span>空</span><div><strong>空き（ディスク）</strong><p><code>df -h</code> で、ログやデータを書ける空きがあるかを見る。</p></div></li>
+                    <li><span>動</span><div><strong>動作（サービス）</strong><p><code>systemctl --failed</code> で、止まったサービスがないかを見る。</p></div></li>
+                    <li><span>記</span><div><strong>記録（ログ）</strong><p><code>journalctl</code> で、発生時刻とエラー内容を見る。</p></div></li>
+                    <li><span>通</span><div><strong>通信（経路・ポート）</strong><p><code>ip route</code> と <code>ss -tulnp</code> で、通信の道と受付口を見る。</p></div></li>
+                    <li><span>入</span><div><strong>ログイン（認証）</strong><p><code>last</code> とSSHログで、成功・失敗した接続を見る。</p></div></li>
+                    <li><span>壁</span><div><strong>防火壁（許可ルール）</strong><p><code>ufw status</code> などで、通信を止めるルールを見る。</p></div></li>
+                </ol>
+                <div class="beginner-safety-note">
+                    <strong>安全の基本</strong>
+                    <p>見る → 時刻と結果を保存する → 普段の値や設計と比べる → 分からなければ相談する。再起動、削除、権限変更は、影響と戻し方を確認してから行います。</p>
+                </div>
+            </section>
+
             <section class="operation-matrix-section">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span>
