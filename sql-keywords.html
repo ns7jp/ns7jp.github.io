@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SQL初心者向けキーワード集。SELECT、WHERE、JOIN、GROUP BY、INSERT、UPDATE、DELETE、CREATE TABLE、権限、トランザクション、性能確認を安全な例文と演習で解説します。">
+    <title>初心者向けSQL文・キーワード集 | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/sql-keywords.html">
+    <meta property="og:title" content="初心者向けSQL文・キーワード集 | 島田則幸">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ns7jp.github.io/sql-keywords.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
+    <meta property="og:description" content="読む、絞る、並べる、集計する、結合する、変更するという順で覚えるSQL入門。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <script src="js/main.js?v=20260826-1" defer></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css?v=20260826-2">
+    <link rel="stylesheet" href="css/sql-guide.css?v=20260828-1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {"@type":"BreadcrumbList","itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Top","item":"https://ns7jp.github.io/"},
+          {"@type":"ListItem","position":2,"name":"スキル","item":"https://ns7jp.github.io/skills.html"},
+          {"@type":"ListItem","position":3,"name":"SQL文・キーワード集","item":"https://ns7jp.github.io/sql-keywords.html"}
+        ]},
+        {"@type":"TechArticle","headline":"初心者向けSQL文・キーワード集","description":"SQLの基本、データ操作、結合、集計、テーブル定義、権限、トランザクション、性能確認を解説する学習資料","inLanguage":"ja"}
+      ]
+    }
+    </script>
+</head>
+<body class="sql-page">
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+    <div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i><i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <header>
+        <p class="logo"><a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a></p>
+        <nav id="site-nav"><ul>
+            <li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li>
+            <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li>
+            <li class="active"><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li>
+            <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li>
+            <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
+        </ul></nav>
+    </header>
+    <main id="main" tabindex="-1">
+        <section class="page-hero" style="background-image: url('image/skills.jpg');">
+            <div class="page-hero-overlay"></div>
+            <div class="page-hero-content"><h1 class="page-title"><span class="title-en">SQL Guide</span><span class="title-jp">初心者向けSQL文・<wbr>キーワード集</span></h1></div>
+        </section>
+        <div class="page-content"><div class="container">
+            <section class="sql-intro" aria-labelledby="intro-title">
+                <h2 id="intro-title">SQLは「データベースへお願いを伝える言葉」です</h2>
+                <p class="sql-lead">SQL（Structured Query Language）は、データベースに対して「見せて」「追加して」「直して」「削除して」と依頼するための言語です。サーバー構築・運用では、アプリの接続確認、監視データの調査、障害時の切り分け、バックアップ後の確認でも使います。</p>
+                <div class="memory-tip"><strong>最初の覚え方：</strong>読む <code>SELECT</code> → 絞る <code>WHERE</code> → 並べる <code>ORDER BY</code> → 集計する <code>GROUP BY</code> → つなぐ <code>JOIN</code> → 変更する <code>INSERT / UPDATE / DELETE</code> の順で練習します。</div>
+                <div class="sql-summary-grid">
+                    <article class="sql-summary-card"><h3>DQL：読む</h3><p><code>SELECT</code> で必要な行と列を取得します。調査は原則ここから始めます。</p></article>
+                    <article class="sql-summary-card"><h3>DML：データを変える</h3><p><code>INSERT / UPDATE / DELETE</code> で行を追加・更新・削除します。</p></article>
+                    <article class="sql-summary-card"><h3>DDL：器を作る</h3><p><code>CREATE / ALTER / DROP</code> でテーブルなどの構造を管理します。</p></article>
+                    <article class="sql-summary-card"><h3>DCL：権限を守る</h3><p><code>GRANT / REVOKE</code> で「誰が何をできるか」を制御します。</p></article>
+                    <article class="sql-summary-card"><h3>TCL：変更をまとめる</h3><p><code>COMMIT / ROLLBACK</code> で変更の確定・取り消しを行います。</p></article>
+                    <article class="sql-summary-card"><h3>運用：速さと安全を確かめる</h3><p><code>EXPLAIN</code>、インデックス、ログ、バックアップを組み合わせて確認します。</p></article>
+                </div>
+                <nav class="sql-toc" aria-label="このページの目次"><strong>目次</strong><ul>
+                    <li><a href="#sample">練習用テーブル</a></li><li><a href="#read">取得・絞り込み</a></li><li><a href="#aggregate">集計</a></li>
+                    <li><a href="#join">結合</a></li><li><a href="#change">追加・更新・削除</a></li><li><a href="#define">テーブル定義</a></li>
+                    <li><a href="#transaction">トランザクション</a></li><li><a href="#security">権限と安全</a></li><li><a href="#performance">性能確認</a></li>
+                    <li><a href="#cheatsheet">早見表</a></li><li><a href="#incident">障害時の確認</a></li><li><a href="#practice">演習</a></li>
+                </ul></nav>
+                <div class="dialect-note"><strong>SQL方言に注意：</strong>MySQL、PostgreSQL、SQLite、SQL Serverでは、日付関数、自動採番、文字列結合、件数制限などの書き方が異なります。このページは共通的な書き方を中心にし、実行時は利用製品の公式資料で確認します。</div>
+            </section>
+
+            <section id="sample" class="sql-section" aria-labelledby="sample-title">
+                <h2 id="sample-title">練習用テーブル：servers</h2>
+                <p>以降は、サーバー台帳を想定した次の列を使います。1行が1台のサーバー、列がその属性です。</p>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>練習用serversテーブルの列</caption><thead><tr><th scope="col">列名</th><th scope="col">意味</th><th scope="col">例</th></tr></thead><tbody>
+                    <tr><td><code>server_id</code></td><td>重複しない識別番号</td><td>101</td></tr>
+                    <tr><td><code>hostname</code></td><td>サーバー名</td><td>web-01</td></tr>
+                    <tr><td><code>role</code></td><td>役割</td><td>web / db</td></tr>
+                    <tr><td><code>environment</code></td><td>環境</td><td>dev / prod</td></tr>
+                    <tr><td><code>cpu_usage</code></td><td>CPU使用率（%）</td><td>42.5</td></tr>
+                    <tr><td><code>last_checked_at</code></td><td>最終確認日時</td><td>2026-08-28 10:00:00</td></tr>
+                </tbody></table></div>
+            </section>
+
+            <section id="read" class="sql-section" aria-labelledby="read-title">
+                <h2 id="read-title">1. データを読む・絞る・並べる</h2>
+                <div class="keyword-grid">
+                    <article class="keyword-card"><span class="keyword-kind">取得</span><h3><code>SELECT</code></h3><p>表示したい列を指定します。<code>*</code> は全列ですが、実務では必要な列を明示すると意図が伝わり、不要な転送も減らせます。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">対象</span><h3><code>FROM</code></h3><p>どのテーブルから読むかを指定します。<code>SELECT hostname FROM servers</code> のように使います。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">条件</span><h3><code>WHERE</code></h3><p>条件に合う行だけに絞ります。文字列は通常シングルクォートで囲みます。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">並び替え</span><h3><code>ORDER BY</code></h3><p><code>ASC</code> は昇順、<code>DESC</code> は降順です。省略時は通常 <code>ASC</code> です。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">重複除外</span><h3><code>DISTINCT</code></h3><p>重複する結果を1つにまとめます。環境名の一覧取得などに使います。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">件数制限</span><h3><code>LIMIT</code></h3><p>返す行数を制限します。MySQL・PostgreSQL・SQLiteで利用できます。SQL Serverは <code>TOP</code> などを使います。</p></article>
+                </div>
+                <div class="sql-example"><pre><code>SELECT hostname, role, cpu_usage
+FROM servers
+WHERE environment = 'prod' AND cpu_usage &gt;= 80
+ORDER BY cpu_usage DESC
+LIMIT 10;</code></pre></div>
+                <p><strong>読む順番：</strong>「本番環境でCPU 80%以上のサーバーを、使用率が高い順に最大10台表示」と日本語へ戻せれば理解できています。</p>
+                <div class="sql-check"><strong>よく使う条件：</strong><code>=</code>、<code>&lt;&gt;</code>（等しくない）、<code>AND</code>、<code>OR</code>、<code>NOT</code>、<code>IN (...)</code>、<code>BETWEEN A AND B</code>、<code>LIKE 'web-%'</code>、<code>IS NULL</code>。<code>NULL</code> は値がない状態なので <code>= NULL</code> ではなく <code>IS NULL</code> を使います。</div>
+            </section>
+
+            <section id="aggregate" class="sql-section" aria-labelledby="aggregate-title">
+                <h2 id="aggregate-title">2. 数える・まとめる</h2>
+                <div class="keyword-grid">
+                    <article class="keyword-card"><span class="keyword-kind">集計関数</span><h3><code>COUNT / SUM</code></h3><p><code>COUNT(*)</code> は行数、<code>SUM(column)</code> は合計を求めます。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">集計関数</span><h3><code>AVG / MIN / MAX</code></h3><p>平均・最小・最大を求めます。監視値の傾向確認に便利です。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">グループ</span><h3><code>GROUP BY</code></h3><p>同じ値ごとに行をまとめます。環境別・役割別の台数集計に使います。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">集計後の条件</span><h3><code>HAVING</code></h3><p><code>WHERE</code> は集計前の行、<code>HAVING</code> は集計後のグループを絞ります。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">別名</span><h3><code>AS</code></h3><p>列やテーブルへ分かりやすい別名を付けます。<code>AS server_count</code> のように使います。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">条件分岐</span><h3><code>CASE</code></h3><p>値に応じて表示を変えます。CPU使用率を「正常・警告・異常」に分類できます。</p></article>
+                </div>
+                <div class="sql-example"><pre><code>SELECT environment, COUNT(*) AS server_count, AVG(cpu_usage) AS avg_cpu
+FROM servers
+GROUP BY environment
+HAVING AVG(cpu_usage) &gt;= 60
+ORDER BY avg_cpu DESC;</code></pre></div>
+            </section>
+
+            <section id="join" class="sql-section" aria-labelledby="join-title">
+                <h2 id="join-title">3. 複数のテーブルをつなぐ</h2>
+                <p><code>servers.owner_id</code> と <code>owners.owner_id</code> のような共通のキーを使って、分けて保存したデータを結びます。</p>
+                <div class="keyword-grid">
+                    <article class="keyword-card"><span class="keyword-kind">一致行</span><h3><code>INNER JOIN</code></h3><p>両方のテーブルに一致する行だけを返します。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">左側を全件</span><h3><code>LEFT JOIN</code></h3><p>左側をすべて返し、右側に一致がなければ右側の列は <code>NULL</code> になります。担当未設定の発見に便利です。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">結合条件</span><h3><code>ON</code></h3><p>どの列同士を一致させるかを書きます。条件不足は行数の異常な増加につながります。</p></article>
+                </div>
+                <div class="sql-example"><pre><code>SELECT s.hostname, s.environment, o.owner_name
+FROM servers AS s
+LEFT JOIN owners AS o ON s.owner_id = o.owner_id
+WHERE s.environment = 'prod';</code></pre></div>
+                <div class="sql-warning"><strong>確認点：</strong>結合前後の件数を比べます。想定より増えた場合は、結合キーの重複や <code>ON</code> 条件不足を疑います。</div>
+            </section>
+
+            <section id="change" class="sql-section" aria-labelledby="change-title">
+                <h2 id="change-title">4. データを追加・更新・削除する</h2>
+                <div class="keyword-grid">
+                    <article class="keyword-card"><span class="keyword-kind">追加</span><h3><code>INSERT INTO</code></h3><p>新しい行を追加します。列名と値の対応を明示します。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">更新</span><h3><code>UPDATE / SET</code></h3><p>既存行の値を変更します。<code>WHERE</code> がないと全行更新になるため要注意です。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">削除</span><h3><code>DELETE FROM</code></h3><p>行を削除します。<code>WHERE</code> がないと全行削除になります。</p></article>
+                </div>
+                <div class="sql-example"><pre><code>INSERT INTO servers (server_id, hostname, role, environment, cpu_usage)
+VALUES (104, 'web-02', 'web', 'dev', 15.2);
+
+UPDATE servers
+SET last_checked_at = CURRENT_TIMESTAMP
+WHERE server_id = 104;
+
+DELETE FROM servers
+WHERE server_id = 104 AND environment = 'dev';</code></pre></div>
+                <div class="sql-warning"><strong>安全手順：</strong>変更前に同じ <code>WHERE</code> を使った <code>SELECT</code> で対象件数と内容を確認し、可能ならトランザクション内で実行します。本番では承認、バックアップ、切り戻し手順、作業ログも必要です。</div>
+            </section>
+
+            <section id="define" class="sql-section" aria-labelledby="define-title">
+                <h2 id="define-title">5. テーブルと制約を定義する</h2>
+                <div class="keyword-grid">
+                    <article class="keyword-card"><span class="keyword-kind">作成</span><h3><code>CREATE TABLE</code></h3><p>テーブル名、列名、データ型、制約を定義します。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">変更</span><h3><code>ALTER TABLE</code></h3><p>列や制約を追加・変更します。製品によって対応範囲が異なります。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">構造削除</span><h3><code>DROP TABLE</code></h3><p>テーブル構造とデータを削除します。復旧が難しい破壊的操作です。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">主キー</span><h3><code>PRIMARY KEY</code></h3><p>各行を一意に識別します。重複と <code>NULL</code> を許しません。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">外部キー</span><h3><code>FOREIGN KEY</code></h3><p>別テーブルのキーを参照し、存在しない担当者IDなどを防ぎます。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">値の規則</span><h3><code>NOT NULL / UNIQUE / CHECK / DEFAULT</code></h3><p>必須、重複禁止、条件、初期値をデータベース側で守ります。</p></article>
+                </div>
+                <div class="sql-example"><pre><code>CREATE TABLE servers (
+    server_id INTEGER PRIMARY KEY,
+    hostname VARCHAR(100) NOT NULL UNIQUE,
+    role VARCHAR(30) NOT NULL,
+    environment VARCHAR(10) NOT NULL CHECK (environment IN ('dev', 'stg', 'prod')),
+    cpu_usage DECIMAL(5,2) DEFAULT 0,
+    last_checked_at TIMESTAMP
+);</code></pre></div>
+            </section>
+
+            <section id="transaction" class="sql-section" aria-labelledby="transaction-title">
+                <h2 id="transaction-title">6. トランザクションで変更をひとまとまりにする</h2>
+                <p>複数の変更を「すべて成功」または「すべて取り消し」にする仕組みです。途中だけ反映される不整合を防ぎます。</p>
+                <div class="sql-example"><pre><code>BEGIN;
+
+UPDATE servers SET environment = 'prod' WHERE server_id = 104;
+SELECT server_id, hostname, environment FROM servers WHERE server_id = 104;
+
+-- 問題なければ確定
+COMMIT;
+-- 問題があれば COMMIT の代わりに ROLLBACK;</code></pre></div>
+                <div class="sql-check"><strong>ACIDの短い覚え方：</strong>全部かゼロか（原子性）、ルールを守る（一貫性）、同時作業を分離する（独立性）、確定後は残る（永続性）。DDLが暗黙に確定されるかなどは製品ごとに確認します。</div>
+            </section>
+
+            <section id="security" class="sql-section" aria-labelledby="security-title">
+                <h2 id="security-title">7. 権限と安全なSQL</h2>
+                <div class="keyword-grid">
+                    <article class="keyword-card"><span class="keyword-kind">付与</span><h3><code>GRANT</code></h3><p>読み取りなど必要な権限だけを付与します。最小権限の原則を守ります。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">取り消し</span><h3><code>REVOKE</code></h3><p>不要になった権限を取り消します。退職・異動・役割変更時も見直します。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">安全な入力</span><h3>プレースホルダー</h3><p>利用者入力をSQL文字列へ直接連結せず、プリペアドステートメントを使ってSQLインジェクションを防ぎます。</p></article>
+                </div>
+                <div class="sql-example"><pre><code>GRANT SELECT ON servers TO monitoring_user;
+REVOKE UPDATE, DELETE ON servers FROM monitoring_user;
+
+-- アプリ側の考え方（記法はライブラリで異なる）
+SELECT hostname FROM servers WHERE server_id = ?;</code></pre></div>
+                <div class="sql-warning"><strong>秘密情報：</strong>パスワードや接続文字列をSQLファイル、ソースコード、Gitへ直接書きません。環境変数や秘密情報管理機能を使い、漏えい時は認証情報をローテーションします。</div>
+            </section>
+
+            <section id="performance" class="sql-section" aria-labelledby="performance-title">
+                <h2 id="performance-title">8. インデックス・ビュー・実行計画</h2>
+                <div class="keyword-grid">
+                    <article class="keyword-card"><span class="keyword-kind">検索補助</span><h3><code>CREATE INDEX</code></h3><p>本の索引のように検索を速くします。ただし容量を使い、追加・更新・削除が遅くなることがあります。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">仮想表</span><h3><code>CREATE VIEW</code></h3><p>よく使う問い合わせに名前を付けます。複雑さを隠せますが、必ず高速になるわけではありません。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">計画確認</span><h3><code>EXPLAIN</code></h3><p>全件走査か、どのインデックスを使うか、結合順などを確認します。実行を伴う形式は負荷に注意します。</p></article>
+                </div>
+                <div class="sql-example"><pre><code>CREATE INDEX idx_servers_environment_role
+ON servers (environment, role);
+
+EXPLAIN
+SELECT hostname FROM servers
+WHERE environment = 'prod' AND role = 'web';</code></pre></div>
+                <ol class="sql-flow"><li>遅いSQL、実行時間、頻度、対象時間帯をログで特定する。</li><li><code>EXPLAIN</code> で実行計画と推定件数を確認する。</li><li>不要な列・行、関数、並び替え、結合条件を見直す。</li><li>必要なら候補インデックスを検証環境で比較する。</li><li>変更前後の時間、CPU、I/O、ロック、書き込み性能を記録する。</li></ol>
+            </section>
+
+            <section id="cheatsheet" class="sql-section" aria-labelledby="cheatsheet-title">
+                <h2 id="cheatsheet-title">9. SQLキーワード早見表</h2>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>SQLの目的別キーワード早見表</caption><thead><tr><th scope="col">したいこと</th><th scope="col">主なキーワード</th><th scope="col">覚え方・注意</th></tr></thead><tbody>
+                    <tr><td>読む</td><td><code>SELECT ... FROM</code></td><td>列を選び、表から読む</td></tr>
+                    <tr><td>絞る</td><td><code>WHERE</code></td><td>変更系では対象漏れに注意</td></tr>
+                    <tr><td>並べる</td><td><code>ORDER BY ... ASC/DESC</code></td><td>昇順／降順</td></tr>
+                    <tr><td>重複を除く</td><td><code>DISTINCT</code></td><td>結果の重複を1つにする</td></tr>
+                    <tr><td>まとめる</td><td><code>GROUP BY / HAVING</code></td><td>集計後の条件はHAVING</td></tr>
+                    <tr><td>つなぐ</td><td><code>JOIN ... ON</code></td><td>キーと件数を確認</td></tr>
+                    <tr><td>追加</td><td><code>INSERT INTO ... VALUES</code></td><td>列と値の順番を合わせる</td></tr>
+                    <tr><td>更新</td><td><code>UPDATE ... SET ... WHERE</code></td><td>先に同条件でSELECT</td></tr>
+                    <tr><td>削除</td><td><code>DELETE FROM ... WHERE</code></td><td>バックアップと切り戻し</td></tr>
+                    <tr><td>構造を作る</td><td><code>CREATE TABLE</code></td><td>型と制約を設計</td></tr>
+                    <tr><td>確定／取消</td><td><code>COMMIT / ROLLBACK</code></td><td>変更を一まとまりにする</td></tr>
+                    <tr><td>権限</td><td><code>GRANT / REVOKE</code></td><td>最小権限</td></tr>
+                    <tr><td>計画を見る</td><td><code>EXPLAIN</code></td><td>製品ごとの出力を読む</td></tr>
+                </tbody></table></div>
+            </section>
+
+            <section id="incident" class="sql-section" aria-labelledby="incident-title">
+                <h2 id="incident-title">10. サーバー運用でSQLエラーが起きたとき</h2>
+                <ol class="sql-flow">
+                    <li><strong>影響を確認：</strong>誰が、いつから、どの画面・処理で失敗しているかを記録する。</li>
+                    <li><strong>接続を確認：</strong>DBサービス、待受ポート、DNS、Firewall、接続先、TLS、認証を確認する。</li>
+                    <li><strong>エラーを保存：</strong>画面だけで判断せず、時刻、SQLSTATE、DBログ、アプリログを採取する。秘密情報は伏せる。</li>
+                    <li><strong>切り分け：</strong>構文、権限、ロック、容量、接続数、タイムアウト、実行計画、直前変更を順に確認する。</li>
+                    <li><strong>変更を管理：</strong>本番で思いつきのSQLを実行せず、承認、対象確認、バックアップ、切り戻し、作業記録をそろえる。</li>
+                    <li><strong>復旧後を確認：</strong>エラーが消えたことだけでなく、件数、整合性、監視、再発有無を確認し、手順へ反映する。</li>
+                </ol>
+                <details><summary>「接続できない」ときの代表例</summary><p>DBサービス停止、ホスト名・ポート間違い、Firewall遮断、接続元制限、証明書期限、ユーザー停止、パスワード変更、接続数上限を確認します。</p></details>
+                <details><summary>「遅い」ときの代表例</summary><p>全件走査、インデックス不足、統計情報、ロック待ち、同時実行数、CPU・メモリ・ディスクI/O、ネットワーク、データ急増を確認します。</p></details>
+                <details><summary>「更新できない」ときの代表例</summary><p>権限、読み取り専用、制約違反、データ型、トランザクション、デッドロック、ディスク満杯、レプリカ接続を確認します。</p></details>
+            </section>
+
+            <section id="practice" class="sql-practice" aria-labelledby="practice-title">
+                <h2 id="practice-title">11. 手を動かす演習</h2>
+                <p>最初は本番データではなく、SQLiteなどの使い捨て学習環境で実行してください。各演習は「実行SQL・期待結果・実際の結果・気づき」を記録します。</p>
+                <div class="practice-grid">
+                    <article class="practice-card"><h3>演習1：安全に読む</h3><p>本番環境のサーバー名と役割を、サーバー名順で最大20件取得してください。</p><details><summary>解答例</summary><pre><code>SELECT hostname, role
+FROM servers
+WHERE environment = 'prod'
+ORDER BY hostname ASC
+LIMIT 20;</code></pre></details></article>
+                    <article class="practice-card"><h3>演習2：集計する</h3><p>環境ごとのサーバー台数と平均CPU使用率を求めてください。</p><details><summary>解答例</summary><pre><code>SELECT environment, COUNT(*) AS server_count,
+       AVG(cpu_usage) AS avg_cpu
+FROM servers
+GROUP BY environment;</code></pre></details></article>
+                    <article class="practice-card"><h3>演習3：未設定を探す</h3><p><code>LEFT JOIN</code> を使い、担当者が設定されていないサーバーを探してください。</p><details><summary>解答例</summary><pre><code>SELECT s.hostname
+FROM servers AS s
+LEFT JOIN owners AS o ON s.owner_id = o.owner_id
+WHERE o.owner_id IS NULL;</code></pre></details></article>
+                    <article class="practice-card"><h3>演習4：更新前確認</h3><p>server_id 104の環境を変更する前に、対象を確認するSQLを書いてください。</p><details><summary>解答例</summary><pre><code>SELECT server_id, hostname, environment
+FROM servers
+WHERE server_id = 104;</code></pre></details></article>
+                    <article class="practice-card"><h3>演習5：失敗を調べる</h3><p>「アプリからDBへ接続できない」場合の確認順を、接続先、ネットワーク、認証、ログの観点で説明してください。</p></article>
+                    <article class="practice-card"><h3>演習6：説明する</h3><p><code>WHERE</code> と <code>HAVING</code>、<code>DELETE</code> と <code>DROP</code> の違いを、初学者へ1文ずつ説明してください。</p></article>
+                </div>
+                <div class="sql-check"><strong>完了条件：</strong>SQLが動くだけでなく、対象件数を予測し、結果を確認し、危険な操作と製品差を説明できたら合格です。</div>
+            </section>
+            <section class="contact-cta"><div class="cta-content"><h2>関連する学習内容</h2><p>SQLはデータベースだけでなく、監視・障害調査・権限管理・バックアップ確認にもつながります。</p><a href="skills.html" class="btn btn-primary"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> スキル一覧へ戻る</a> <a href="infra-lab.html" class="btn btn-secondary"><i class="fa-solid fa-server" aria-hidden="true"></i> サーバー構築の学習を見る</a></div></section>
+        </div></div>
+    </main>
+    <footer><div class="footer-content">
+        <div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div>
+        <div class="footer-nav"><a href="me.html">自己紹介</a><a href="skills.html">スキル</a><a href="sql-keywords.html">SQLキーワード集</a><a href="infra-lab.html">サーバー構築</a><a href="works.html">作品</a><a href="resume.html">履歴書</a><a href="contact.html">連絡先</a></div>
+        <div class="footer-social"><a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a><a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></div>
+    </div><div class="copyright"><p>&copy; 2026 Noriyuki Shimada. All Rights Reserved.</p></div></footer>
+    <button type="button" class="back-to-top" aria-label="ページの先頭へ戻る"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
+</body>
+</html>

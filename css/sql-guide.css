@@ -1,0 +1,100 @@
+.sql-page { background: #f5f7fb; }
+.sql-page .container { max-width: 1180px; }
+.sql-page .page-hero-content { width: min(calc(100% - 2rem), 1180px); }
+.sql-page .page-title .title-jp {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+.sql-intro,
+.sql-section,
+.sql-safety,
+.sql-practice { margin: 2rem 0; }
+.sql-lead { max-width: 900px; font-size: 1.05rem; line-height: 1.9; }
+.sql-summary-grid,
+.keyword-grid,
+.practice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.sql-summary-card,
+.keyword-card,
+.practice-card {
+    background: #fff;
+    border: 1px solid #dce3ee;
+    border-radius: 14px;
+    padding: 1.25rem;
+    box-shadow: 0 8px 24px rgba(27, 54, 93, .07);
+}
+.sql-summary-card h3,
+.keyword-card h3,
+.practice-card h3 { margin-top: 0; color: #12355b; }
+.sql-summary-card code,
+.keyword-card code { font-weight: 700; }
+.sql-toc {
+    margin: 1.5rem 0;
+    padding: 1.25rem;
+    background: #eaf2fb;
+    border-left: 5px solid #1769aa;
+    border-radius: 10px;
+}
+.sql-toc ul { columns: 2; margin-bottom: 0; }
+.memory-tip,
+.dialect-note,
+.sql-warning,
+.sql-check {
+    margin: 1rem 0;
+    padding: 1rem 1.1rem;
+    border-radius: 10px;
+}
+.memory-tip { background: #eaf7ef; border-left: 5px solid #258750; }
+.dialect-note { background: #fff8dd; border-left: 5px solid #d59600; }
+.sql-warning { background: #fff0f0; border-left: 5px solid #c63e3e; }
+.sql-check { background: #edf5ff; border-left: 5px solid #2b6cb0; }
+.sql-example { margin: 1rem 0 1.5rem; }
+.sql-example pre {
+    overflow-x: auto;
+    padding: 1rem;
+    color: #f7fafc;
+    background: #172033;
+    border-radius: 10px;
+    line-height: 1.65;
+}
+.sql-example code { font-family: Consolas, "Courier New", monospace; }
+.keyword-card .keyword-kind {
+    display: inline-block;
+    margin-bottom: .6rem;
+    padding: .2rem .55rem;
+    border-radius: 999px;
+    color: #fff;
+    background: #1769aa;
+    font-size: .8rem;
+    font-weight: 700;
+}
+.keyword-card ul { padding-left: 1.2rem; }
+.keyword-card li + li { margin-top: .45rem; }
+.sql-table-wrap { overflow-x: auto; }
+.sql-table { width: 100%; border-collapse: collapse; background: #fff; }
+.sql-table th,
+.sql-table td { padding: .8rem; border: 1px solid #dce3ee; text-align: left; vertical-align: top; }
+.sql-table th { background: #12355b; color: #fff; }
+.sql-table tbody tr:nth-child(even) { background: #f4f7fb; }
+.sql-flow { padding-left: 1.35rem; }
+.sql-flow li + li { margin-top: .7rem; }
+.sql-page details { margin: .75rem 0; padding: .9rem 1rem; background: #fff; border: 1px solid #dce3ee; border-radius: 10px; }
+.sql-page summary { cursor: pointer; color: #12355b; font-weight: 700; }
+.sql-page :target { scroll-margin-top: 6rem; }
+@media (max-width: 900px) {
+    .sql-summary-grid,
+    .keyword-grid,
+    .practice-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 620px) {
+    .sql-page .page-title .title-jp {
+        font-size: clamp(1.75rem, 7.5vw, 2.2rem);
+        letter-spacing: .02em;
+        line-height: 1.4;
+    }
+    .sql-summary-grid,
+    .keyword-grid,
+    .practice-grid { grid-template-columns: 1fr; }
+    .sql-toc ul { columns: 1; }
+    .sql-table th,
+    .sql-table td { min-width: 9rem; }
+}
