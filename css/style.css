@@ -3686,6 +3686,50 @@ footer .footer-bottom small {
     margin: 2px auto 15px;
 }
 
+/* ---- 初心者向けWindowsコマンド集 ---- */
+.command-basics-grid,
+.command-step-list,
+.practice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin: 28px 0;
+}
+.command-guide-card,
+.practice-card {
+    position: relative;
+    padding: 26px;
+    background: var(--bg-white);
+    border: 1px solid var(--bg-sand);
+    box-shadow: var(--shadow-soft);
+}
+.command-guide-card h3,
+.practice-card h3 { margin: 10px 0 14px; color: var(--text-dark); font-size: 1.7rem; }
+.command-guide-card p,
+.practice-card p,
+.practice-card li { color: var(--text-medium); font-size: 1.35rem; line-height: 1.8; }
+.command-guide-card pre { margin: 16px 0; padding: 16px; overflow-x: auto; color: #eef5fa; background: #172531; font-size: 1.25rem; line-height: 1.6; }
+.command-shell,
+.step-number,
+.practice-card > span { display: inline-flex; padding: 5px 10px; color: #fff; background: #355c7d; font-size: 1.15rem; font-weight: 700; letter-spacing: .5px; }
+.command-shell.powershell,
+.practice-card > span { background: #28557f; }
+.step-number { align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border-radius: 50%; background: var(--accent-gold); }
+.danger-command-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 28px 0; }
+.danger-command-grid > div { display: flex; flex-direction: column; gap: 8px; padding: 20px; border-left: 4px solid #b6534d; background: #fff3f1; }
+.danger-command-grid code { font-size: 1.25rem; }
+.danger-command-grid strong { color: var(--text-dark); font-size: 1.4rem; }
+.danger-command-grid span { color: var(--text-medium); font-size: 1.25rem; line-height: 1.6; }
+.practice-card ol { margin: 14px 0 14px 22px; }
+.practice-card details { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--bg-sand); }
+.practice-card summary { cursor: pointer; color: var(--primary-color); font-size: 1.3rem; font-weight: 700; }
+@media (max-width: 768px) {
+    .command-basics-grid,
+    .command-step-list,
+    .practice-grid,
+    .danger-command-grid { grid-template-columns: 1fr; }
+}
+
 /* ========================================
    Project Brief / Evidence Digest
    実測・CI検証・未実測を視覚的に区別し、採用担当者向けの案件導線を作る。
