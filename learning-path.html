@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="未経験からLinuxサーバーの設計、構築、試験、監視、障害対応、復旧、引き渡しまでを順番に学ぶ8段階の学習ルートです。">
+    <title>未経験者向けサーバー構築学習ルート | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/learning-path.html">
+    <meta property="og:title" content="未経験者向けサーバー構築学習ルート | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/learning-path.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="未経験者向けLinuxサーバー構築学習ルート">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
+    <meta property="og:description" content="前提、操作、期待結果、失敗例、合格条件をそろえた8段階のハンズオンです。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png"><meta name="twitter:image:alt" content="未経験者向けLinuxサーバー構築学習ルート">
+    <script src="js/main.js?v=20260826-1" defer></script>
+    <link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/style.css?v=20260828-1">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"未経験者向けLinuxサーバー構築学習ルート","description":"設計から復旧、引き渡しまでを8段階で学ぶ自主学習コース","provider":{"@type":"Person","name":"Noriyuki Shimada"}}</script>
+</head>
+<body>
+<a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+<div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+<button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><i class="fa-solid fa-bars" aria-hidden="true"></i><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+<header><p class="logo"><a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a></p><nav id="site-nav"><ul>
+<li class="active"><a href="learning-path.html" aria-current="page"><i class="fa-solid fa-route" aria-hidden="true"></i><span>学習ルート</span></a></li><li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li><li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li><li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li><li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li><li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
+</ul></nav></header>
+<main id="main" tabindex="-1">
+<section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');"><div class="page-hero-overlay"></div><div class="page-hero-content"><h1 class="page-title"><span class="title-en">Learning Path</span><span class="title-jp">ゼロから学ぶサーバー構築</span></h1></div></section>
+<div class="page-content learning-path-content"><div class="container">
+<nav class="lab-subnav" aria-label="学習ページ内の案内"><a href="#start">始める前に</a><a href="#route">8段階</a><a href="#faults">障害演習</a><a href="#assessment">修了判定</a><a href="learning-docs/glossary.md">用語集</a><a href="infra-lab.html">成果物を見る</a></nav>
+<section class="lab-intro" id="start"><span class="case-label">所要目安 12〜20時間／自分のPC内の検証環境</span><h2>読むだけでなく、「予想する → 実行する → 証拠を残す → 説明する」</h2><p>このページは成果物を見る順番ではなく、未経験者が手を動かす順番です。各段階は、目的・前提・操作・期待結果・失敗例・合格条件を同じ型で確認します。分からない言葉は<a href="learning-docs/glossary.md">一言用語集</a>へ戻ります。</p><div class="status-callout pending" role="note"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><div><strong>安全境界</strong><p>個人PC内のVMまたはWSL2で実施します。職場・学校・第三者のサーバーでは実行しません。削除・Firewall・SSH変更の前にスナップショットと戻し方を確認します。AWS、Slack実通知、72時間試験、別ホスト復元は手順設計済みですが、このリポジトリでは未実測（NOT RUN）です。</p></div></div>
+<h3>開始チェック</h3><ul class="check-list"><li>CPU、メモリ、ディスク、IPアドレスを自分の言葉で説明できる</li><li>端末を開き、現在位置と終了コードを確認できる</li><li>8GB以上の空き容量があり、検証環境を削除してよい</li><li>パスワード、秘密鍵、トークンをGitへ保存しないと理解している</li><li>困ったら作業を止め、現象・直前操作・時刻を記録できる</li></ul><p><a class="btn btn-primary" href="cui-manual.html">不足があればCUI入門から始める</a> <a class="btn btn-secondary" href="learning-docs/lab-guide.md">詳細ハンズオンを開く</a></p></section>
+<section id="route" aria-labelledby="route-title"><div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></span><h2 class="heading-text" id="route-title">8段階の学習ルート</h2></div><div class="learning-grid">
+<article class="learning-card"><span>STEP 0／30分</span><h3>環境と安全を確認</h3><p><strong>目的:</strong> 壊してよい範囲を決める。</p><p><strong>操作:</strong> OS、容量、IP、Git状態を採録。</p><p><strong>期待:</strong> 環境情報ファイルが作られる。</p><p><strong>失敗例:</strong> 実機とVMの取り違え。</p><p><strong>合格:</strong> 削除方法と秘密情報の扱いを説明できる。</p></article>
+<article class="learning-card"><span>STEP 1／60分</span><h3>要件と構成を決める</h3><p><strong>目的:</strong> 作業前に完成条件を決める。</p><p><strong>操作:</strong> 利用者、通信、RTO/RPO、除外範囲を記入。</p><p><strong>期待:</strong> 要件と構成図が対応する。</p><p><strong>失敗例:</strong> 技術名だけで目的がない。</p><p><strong>合格:</strong> 「誰が何のために使うか」を1分で説明できる。</p></article>
+<article class="learning-card"><span>STEP 2／90分</span><h3>最小OSを準備</h3><p><strong>目的:</strong> 初期状態を再現する。</p><p><strong>操作:</strong> Ubuntu VM、一般ユーザー、SSH、更新を準備。</p><p><strong>期待:</strong> 管理端末から鍵で接続できる。</p><p><strong>失敗例:</strong> SSH変更後に接続不能。</p><p><strong>合格:</strong> 再起動後も接続でき、バージョンを記録できる。</p></article>
+<article class="learning-card"><span>STEP 3／2時間</span><h3>手動で最小構築</h3><p><strong>目的:</strong> 自動化の前に構成を理解する。</p><p><strong>操作:</strong> Docker、Webサービス、Firewallを設定。</p><p><strong>期待:</strong> 許可した経路だけ応答する。</p><p><strong>失敗例:</strong> ポート公開と待受の混同。</p><p><strong>合格:</strong> 通信経路とログ位置を図で説明できる。</p></article>
+<article class="learning-card"><span>STEP 4／2時間</span><h3>Ansibleで再構築</h3><p><strong>目的:</strong> 人による手順差を減らす。</p><p><strong>操作:</strong> syntax-check、check、applyを順に実行。</p><p><strong>期待:</strong> 2回目は不要な変更が0。</p><p><strong>失敗例:</strong> 変数未定義、権限不足。</p><p><strong>合格:</strong> changed=0と差分を証跡に残せる。</p></article>
+<article class="learning-card"><span>STEP 5／2時間</span><h3>監視と通知を確認</h3><p><strong>目的:</strong> 利用者より先に異常へ気付く。</p><p><strong>操作:</strong> メトリクス、ログ、ローカル通知を確認。</p><p><strong>期待:</strong> 発生時刻と復旧時刻が追える。</p><p><strong>失敗例:</strong> 監視自身の停止を見逃す。</p><p><strong>合格:</strong> アラートからRunbookへ移動できる。</p></article>
+<article class="learning-card"><span>STEP 6／3時間</span><h3>障害を切り分ける</h3><p><strong>目的:</strong> 勘ではなく事実で原因を狭める。</p><p><strong>操作:</strong> 仮説、確認、結果、次の判断を記録。</p><p><strong>期待:</strong> 復旧前後の証拠が残る。</p><p><strong>失敗例:</strong> 記録前に再起動する。</p><p><strong>合格:</strong> 原因と再発防止を第三者へ説明できる。</p></article>
+<article class="learning-card"><span>STEP 7／3時間</span><h3>復元して引き渡す</h3><p><strong>目的:</strong> バックアップが使えることを確かめる。</p><p><strong>操作:</strong> 復元、整合性確認、RTO/RPO採録。</p><p><strong>期待:</strong> 手順だけで再現できる。</p><p><strong>失敗例:</strong> バックアップ取得だけで終了。</p><p><strong>合格:</strong> 結果票、残課題、切り戻しを引き渡せる。</p></article>
+</div></section>
+<section id="faults" aria-labelledby="fault-title"><div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-bug" aria-hidden="true"></i></span><h2 class="heading-text" id="fault-title">正常系の後に行う8つの障害演習</h2></div><div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる障害演習表" tabindex="0"><table class="operation-table"><caption class="sr-only">障害、最初の確認、完了条件</caption><thead><tr><th scope="col">障害</th><th scope="col">最初の確認</th><th scope="col">完了条件</th></tr></thead><tbody>
+<tr><td>SSH接続不可</td><td>IP → 経路 → TCP/22 → Firewall → sshd</td><td>遮断箇所を特定し別セッションで復旧</td></tr><tr><td>Web応答なし</td><td>DNS → TCP → Proxy → App → DB</td><td>依存関係ごとに合否を記録</td></tr><tr><td>ディスク逼迫</td><td>df → inode → du → ログ</td><td>削除前に原因と保持要件を確認</td></tr><tr><td>CPU高騰</td><td>uptime → top → ps → ログ</td><td>対象プロセスと発生時刻を特定</td></tr><tr><td>メモリ不足</td><td>free → ps → journal/OOM</td><td>再起動だけに頼らず原因を記録</td></tr><tr><td>設定破損</td><td>構文検査 → Git差分 → 直前変更</td><td>修正または切り戻しを選択</td></tr><tr><td>TLS期限異常</td><td>名前解決 → 時刻 → 証明書期限・SAN</td><td>更新手順と監視閾値を説明</td></tr><tr><td>バックアップ破損</td><td>サイズ → checksum → 展開 → 復元</td><td>代替世代を選び整合性を確認</td></tr>
+</tbody></table></div><p><a href="learning-docs/failure-drills.md">安全な故障注入手順と記録テンプレート</a></p></section>
+<section id="assessment" aria-labelledby="assessment-title"><div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span><h2 class="heading-text" id="assessment-title">修了判定と次の行動</h2></div><div class="assessment-grid"><div><h3>必須成果物</h3><ol><li>要件・構成図・パラメータ</li><li>構築と確認の手順</li><li>再実行結果とテスト結果</li><li>障害記録と復旧記録</li><li>引き渡し報告と残課題</li></ol></div><div><h3>100点ルーブリック</h3><ul><li>安全・秘密情報 20点</li><li>設計の説明 20点</li><li>再現可能な構築 20点</li><li>監視・切り分け 20点</li><li>復旧・記録・引き渡し 20点</li></ul><p><strong>80点以上かつ各区分12点以上</strong>で修了。未実施は0点ではなく「NOT RUN」として次の計画へ移します。</p></div></div><div class="summary-actions"><a class="btn btn-primary" href="learning-docs/assessment-rubric.md">採点表を使う</a><a class="btn btn-secondary" href="learning-docs/evidence-guide.md">証跡の残し方</a><a class="btn btn-secondary" href="learning-docs/security-threat-model.md">脅威と対策</a><a class="btn btn-outline-dark" href="production-readiness.md">本番化差分</a></div></section>
+</div></div></main>
+<footer><div class="footer-content"><div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div><div class="footer-nav"><a href="learning-path.html">学習ルート</a><a href="infra-lab.html">サーバー構築</a><a href="works.html">作品</a><a href="resume.html">履歴書</a><a href="contact.html">連絡先</a></div><div class="footer-social"><a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a><a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></div></div><div class="footer-bottom"><small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small><small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行います。</small></div></footer>
+</body></html>

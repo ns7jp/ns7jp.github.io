@@ -2,6 +2,8 @@
 
 このフォルダは、Infra Operation Lab の検証方法を短時間で確認できるようにまとめた、**架空の出力例と検証観点の置き場**です。ここにある <code>*.sample.txt</code> は説明用サンプルであり、実行日時・commit・実行環境を伴う実測証跡ではありません。
 
+実測を新しく採録する場合は `bash scripts/capture-lab-evidence.sh <label> -- <command...>` を使い、`measured/` へ保存します。CI由来の結果は `ci-generated/`、既存の `*.sample.txt` はSAMPLEとして混在させません。公開前に[証跡ガイド](../learning-docs/evidence-guide.md)に従って秘密情報と個人情報を目視確認します。
+
 公開リポジトリのため、例示するホスト名、IP、ユーザー名、コマンド出力は架空です。`static-check.yml` / `pwsh-tests.yml` / `infra-check.yml` は構文・静的検査をCIで再現するための定義であり、このフォルダ自体はCI完走を証明しません。
 
 ---

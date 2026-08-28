@@ -7,6 +7,8 @@ on:
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
+      - 'scripts/capture-lab-evidence.sh'
+      - 'learning-docs/**'
       - 'support-docs/m365-policy-examples/**'
       - '.github/workflows/infra-check.yml'
   pull_request:
@@ -15,6 +17,8 @@ on:
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
+      - 'scripts/capture-lab-evidence.sh'
+      - 'learning-docs/**'
       - 'support-docs/m365-policy-examples/**'
       - '.github/workflows/infra-check.yml'
 
@@ -126,7 +130,41 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Bash syntax check
-        run: bash -n support-scripts/linux-triage.sh
+        run: bash -n support-scripts/linux-triage.sh scripts/capture-lab-evidence.sh
+
+      - name: Install ShellCheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Run ShellCheck
+        run: shellcheck support-scripts/linux-triage.sh scripts/capture-lab-evidence.sh
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Scan repository with Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  security-config:
+    name: Filesystem security scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Scan configuration and dependencies with Trivy
+        uses: aquasecurity/trivy-action@0.33.1
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,misconfig,secret
+          severity: HIGH,CRITICAL
+          exit-code: '1'
 
   m365-policies:
     name: M365 / Intune policy JSON

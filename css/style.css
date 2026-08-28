@@ -5106,6 +5106,20 @@ article p,
     }
 }
 
+/* Beginner learning path */
+.learning-path-content section { margin-bottom: 8rem; }
+.learning-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+.learning-card { background: var(--bg-white); border: 1px solid var(--bg-sand); border-top: 4px solid var(--nature-green); border-radius: 1.2rem; padding: 2.4rem; box-shadow: var(--shadow-soft); }
+.learning-card > span { color: var(--nature-green); font-family: Montserrat, sans-serif; font-weight: 700; letter-spacing: .06em; }
+.learning-card h3 { margin: .5rem 0 1.2rem; }
+.learning-card p { margin: .5rem 0; }
+.check-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 2rem; margin: 2rem 0; }
+.check-list li { padding: 1rem 1.2rem 1rem 3.5rem; background: var(--bg-warm); border-radius: .8rem; position: relative; }
+.check-list li::before { content: "✓"; position: absolute; left: 1.2rem; color: var(--nature-green); font-weight: 700; }
+.assessment-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; margin-bottom: 2rem; }
+.assessment-grid > div { background: var(--bg-warm); border-radius: 1.2rem; padding: 2.4rem; }
+@media (max-width: 720px) { .learning-grid, .check-list, .assessment-grid { grid-template-columns: 1fr; } }
+
 /* ========================================================================
    30. Linux Command Handbook
    ======================================================================== */
