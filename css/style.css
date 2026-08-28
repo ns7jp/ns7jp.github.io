@@ -5106,6 +5106,81 @@ article p,
     }
 }
 
+/* ========================================================================
+   30. Linux Command Handbook
+   ======================================================================== */
+.command-page { background: #f7f8fa; }
+.command-intro, .command-section { margin: 0 0 52px; }
+.command-intro h2 { margin: 14px 0; font-size: clamp(2.4rem, 4vw, 3.6rem); }
+.command-intro > p, .command-section > p { font-size: 1.6rem; line-height: 1.9; }
+.command-formula { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; margin: 28px 0; padding: 24px; border-radius: 12px; background: #172332; color: #fff; }
+.command-formula span { min-width: 160px; padding: 14px 20px; border: 1px solid rgba(255,255,255,.25); border-radius: 8px; text-align: center; }
+.command-formula b { display: block; color: #f0cb78; font: 700 1.8rem/1.2 monospace; }
+.command-formula small { display: block; margin-top: 5px; font-size: 1.2rem; }
+.command-formula i { color: #f0cb78; font: 700 2.2rem/1 monospace; }
+.command-toc { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0 0 58px; padding: 22px; border: 1px solid #dce1e7; border-radius: 12px; background: #fff; }
+.command-toc strong { grid-column: 1 / -1; font-size: 1.5rem; }
+.command-toc a { padding: 10px; border-radius: 6px; background: #edf2f6; color: #243647; font-size: 1.3rem; text-align: center; }
+.command-toc a:hover, .command-toc a:focus { background: #2c3e50; color: #fff; }
+.command-section { scroll-margin-top: 90px; }
+.command-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+.command-card { overflow: hidden; border: 1px solid #dce1e7; border-radius: 10px; background: #fff; box-shadow: 0 5px 18px rgba(25,42,58,.06); }
+.command-card > header { position: static; display: flex; align-items: center; justify-content: space-between; min-height: auto; padding: 14px 18px; background: #243647; }
+.command-card > header code { color: #ffe09a; font-size: 1.8rem; font-weight: 700; }
+.command-card h3 { margin: 18px 18px 8px; font-size: 1.8rem; }
+.command-card p { margin: 0 18px 16px; font-size: 1.4rem; line-height: 1.75; }
+.command-card pre, .operator-grid pre { overflow-x: auto; margin: 12px 0 0; padding: 16px 18px; border: 0; background: #111a24; color: #e9eef3; font-size: 1.3rem; line-height: 1.65; white-space: pre; }
+.command-card .check { margin: 0; padding: 14px 18px; background: #eef6f1; border-top: 1px solid #d6e8dc; color: #294936; }
+.risk { padding: 4px 9px; border-radius: 999px; font-size: 1.1rem; font-weight: 700; }
+.risk.safe { background: #dff5e7; color: #195c32; }
+.risk.caution { background: #fff1c9; color: #704e00; }
+.risk.warning { background: #ffe0dc; color: #84291e; }
+.danger-box { display: block; margin-top: 22px; padding: 20px 22px; border: 1px solid #e9a49b; border-left: 6px solid #b93b2c; border-radius: 8px; background: #fff5f3; }
+.danger-box strong { display: block; margin-bottom: 6px; color: #84291e; font-size: 1.6rem; }
+.danger-box p { margin: 0; font-size: 1.4rem; line-height: 1.75; }
+.permission-visual { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 8px; margin: 22px 0; padding: 18px; border-radius: 10px; background: #172332; color: #fff; text-align: center; }
+.permission-visual code { color: #ffe09a; font-size: 2rem; }
+.permission-visual span { padding: 6px; border-left: 1px solid rgba(255,255,255,.2); font-size: 1.3rem; }
+.permission-visual b { display: block; color: #ffe09a; }
+.incident-flow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; padding: 18px; border-radius: 10px; background: #eaf0f5; }
+.incident-flow b { width: 100%; font-size: 1.5rem; }
+.incident-flow span { flex: 1 1 130px; padding: 10px; border-radius: 6px; background: #fff; text-align: center; font-size: 1.3rem; }
+.distro-table-wrap { overflow-x: auto; margin-top: 20px; }
+.operator-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.operator-grid article { overflow: hidden; padding-top: 18px; border: 1px solid #dce1e7; border-radius: 9px; background: #fff; text-align: center; }
+.operator-grid article > code { display: inline-block; min-width: 42px; padding: 5px 10px; border-radius: 5px; background: #243647; color: #ffe09a; font-size: 2rem; }
+.operator-grid h3 { margin: 10px 12px 4px; font-size: 1.6rem; }
+.operator-grid p { margin: 0 12px 12px; font-size: 1.3rem; }
+.operator-grid pre { text-align: left; font-size: 1.15rem; }
+.practice-steps { counter-reset: practice; display: grid; gap: 12px; margin: 22px 0; }
+.practice-steps li { display: grid; grid-template-columns: 130px minmax(0, 1.3fr) minmax(0, 1fr); gap: 12px; align-items: center; padding: 16px; border: 1px solid #dce1e7; border-radius: 8px; background: #fff; }
+.practice-steps b { color: #243647; font-size: 1.5rem; }
+.practice-steps > li > code { overflow-wrap: anywhere; color: #6f4500; font-size: 1.3rem; }
+.practice-steps span { font-size: 1.3rem; line-height: 1.6; }
+.quiz { margin: 24px 0; border: 1px solid #ccd5dd; border-radius: 9px; background: #fff; }
+.quiz summary { cursor: pointer; padding: 16px 20px; color: #243647; font-size: 1.6rem; font-weight: 700; }
+.quiz dl { padding: 0 20px 18px; }
+.quiz dt { margin-top: 14px; font-size: 1.4rem; font-weight: 700; }
+.quiz dd { margin: 4px 0 0; font-size: 1.4rem; line-height: 1.7; }
+.next-learning { padding: 26px; border-radius: 10px; background: #eaf0f5; text-align: center; }
+.next-learning h3 { font-size: 2rem; }
+.next-learning p { margin: 8px auto 18px; max-width: 720px; font-size: 1.4rem; }
+.next-learning .btn { margin: 5px; }
+.command-page kbd { padding: 1px 5px; border: 1px solid #b8c0c8; border-bottom-width: 2px; border-radius: 4px; background: #fff; font-family: monospace; }
+
+@media (max-width: 900px) {
+    .command-toc { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .operator-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .practice-steps li { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+    .command-grid, .command-toc, .operator-grid { grid-template-columns: 1fr; }
+    .permission-visual { grid-template-columns: 1fr 1fr; }
+    .permission-visual code { grid-column: 1 / -1; }
+    .command-formula i { width: 100%; text-align: center; }
+    .command-card pre { font-size: 1.15rem; }
+}
+
 /* ========================================
    N. Support Docs Link Callout - skills.html サポートドキュメント導線
    ----------------------------------------

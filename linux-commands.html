@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Linuxサーバー構築を目指す初学者向けに、基本コマンドを意味、書式、実行例、確認方法、安全上の注意、練習問題とともに解説します。">
+    <title>初心者向けLinuxコマンド集 | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/linux-commands.html">
+    <meta property="og:title" content="初心者向けLinuxコマンド集 | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ns7jp.github.io/linux-commands.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
+    <meta property="og:description" content="意味から覚えるLinux基本コマンド。安全な練習、確認方法、サーバー構築での使いどころまで段階的に解説します。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <script src="js/main.js?v=20260826-1" defer></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css?v=20260828-1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"LearningResource","name":"初心者向けLinuxコマンド集","url":"https://ns7jp.github.io/linux-commands.html","inLanguage":"ja","educationalLevel":"Beginner","learningResourceType":"Tutorial","about":["Linux","Linux commands","Server administration"]}
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+    <div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><i class="fa-solid fa-bars" aria-hidden="true"></i><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <header>
+        <p class="logo"><a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a></p>
+        <nav id="site-nav"><ul>
+            <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li>
+            <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li>
+            <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li>
+            <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li>
+            <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
+        </ul></nav>
+    </header>
+    <main id="main" tabindex="-1">
+        <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');"><div class="page-hero-overlay"></div><div class="page-hero-content"><h1 class="page-title"><span class="title-en">Linux Command Handbook</span><span class="title-jp">意味から覚えるLinuxコマンド集</span></h1></div></section>
+        <div class="page-content command-page"><div class="container">
+            <nav class="lab-subnav" aria-label="サーバー学習内の案内">
+                <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux基本確認</a>
+                <a href="linux-commands.html" class="active" aria-current="page"><i class="fa-solid fa-terminal" aria-hidden="true"></i> コマンド集</a>
+                <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> AWS設計</a>
+            </nav>
+            <section class="command-intro" aria-labelledby="start-title">
+                <span class="case-label">学習用 / Ubuntu・RHEL系Linux</span>
+                <h2 id="start-title">コマンドは「動詞 + 対象 + 条件」で読む</h2>
+                <p>Linuxコマンドは英単語の省略形が多く、名前の由来を知ると覚えやすくなります。たとえば <code>ls -la /etc</code> は「<strong>ls</strong>（list＝一覧にする）」「<strong>-l -a</strong>（詳しく・隠しファイルも）」「<strong>/etc</strong>（対象）」と分解できます。</p>
+                <div class="command-formula" aria-label="コマンドの基本構造"><span><b>command</b><small>何をする</small></span><i aria-hidden="true">+</i><span><b>-option</b><small>どう実行する</small></span><i aria-hidden="true">+</i><span><b>argument</b><small>何を対象にする</small></span></div>
+                <div class="beginner-safety-note"><strong>安全な練習場所</strong><p>自分専用のLinux仮想マシン、WSL、またはコンテナで練習します。会社・学校・公開中サーバーでは勝手に実行しません。このページの実行例は教材であり、掲載コマンドすべての実機実行証跡ではありません。</p></div>
+            </section>
+            <nav class="command-toc" aria-label="コマンド集の目次"><strong>学習順</strong><a href="#basics">1. 現在地とファイル</a><a href="#reading">2. 読む・探す</a><a href="#permissions">3. 権限</a><a href="#system">4. OS・プロセス</a><a href="#service-log">5. サービス・ログ</a><a href="#network">6. ネットワーク</a><a href="#packages">7. パッケージ</a><a href="#combine">8. 組み合わせ</a><a href="#practice">9. 演習</a></nav>
+
+            <section class="command-section" id="basics" aria-labelledby="basics-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span><h2 class="heading-text" id="basics-title">1. 現在地とファイル操作</h2></div>
+                <p class="memory-phrase"><strong>覚え方：今 → 見る → 移る → 作る → 写す → 動かす</strong><span>pwd → ls → cd → mkdir/touch → cp → mv</span></p>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>pwd</code><span class="risk safe">参照</span></header><h3>今いる場所を表示</h3><p><b>p</b>rint <b>w</b>orking <b>d</b>irectory の略。迷ったら最初に実行します。</p><pre><code>$ pwd
+/home/student</code></pre><p class="check"><b>確認：</b>出力が <code>/</code> から始まる絶対パスなら現在地を確認できています。</p></article>
+                    <article class="command-card"><header><code>ls</code><span class="risk safe">参照</span></header><h3>ファイルを一覧表示</h3><p>list の略。<code>-l</code> は詳細、<code>-a</code> は隠しファイル、<code>-h</code> は容量を読みやすくします。</p><pre><code>$ ls -lah /var/log
+-rw-r----- 1 syslog adm 12K Aug 28 syslog</code></pre><p class="check"><b>読む：</b>左から権限、リンク数、所有者、グループ、容量、更新日、名前です。</p></article>
+                    <article class="command-card"><header><code>cd</code><span class="risk safe">移動</span></header><h3>作業場所を移動</h3><p>change directory の略。<code>cd ..</code> は1つ上、<code>cd -</code> は直前、<code>cd</code> はホームへ戻ります。</p><pre><code>$ cd /etc/nginx
+$ pwd
+/etc/nginx</code></pre><p class="check"><b>確認：</b>移動後に <code>pwd</code> を実行します。</p></article>
+                    <article class="command-card"><header><code>mkdir / touch</code><span class="risk caution">作成</span></header><h3>ディレクトリ / 空ファイルを作成</h3><p><code>mkdir -p</code> は途中の階層も作成。<code>touch</code> は存在するファイルなら更新日時を変えます。</p><pre><code>$ mkdir -p ~/linux-practice/logs
+$ touch ~/linux-practice/README.txt</code></pre><p class="check"><b>確認：</b><code>ls -l ~/linux-practice</code> で作成結果を見ます。</p></article>
+                    <article class="command-card"><header><code>cp</code><span class="risk caution">変更</span></header><h3>ファイルを複製</h3><p>copy の略。設定変更前のバックアップに使います。<code>-i</code> は上書き前に確認します。</p><pre><code>$ cp -i app.conf app.conf.bak
+$ diff -u app.conf app.conf.bak</code></pre><p class="check"><b>確認：</b><code>diff</code> が何も表示しなければ内容は同じです。</p></article>
+                    <article class="command-card"><header><code>mv</code><span class="risk caution">変更</span></header><h3>移動または名前変更</h3><p>move の略。移動先が同じディレクトリなら名前変更になります。</p><pre><code>$ mv -i old-name.txt new-name.txt
+$ ls -l new-name.txt</code></pre><p class="check"><b>注意：</b>上書きを避ける練習では <code>-i</code> を付けます。</p></article>
+                </div>
+                <aside class="danger-box"><strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> rm は「ごみ箱」へ移動しない</strong><p><code>rm</code> は削除、<code>rm -r</code> はディレクトリ以下を再帰的に削除します。先に <code>pwd</code> と <code>ls</code> で対象を確認し、練習では <code>rm -i ファイル名</code> のように個別確認します。<code>sudo rm -rf</code> を例文のまま実行してはいけません。</p></aside>
+            </section>
+
+            <section class="command-section" id="reading" aria-labelledby="reading-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span><h2 class="heading-text" id="reading-title">2. ファイルを読む・探す</h2></div>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>cat / less</code><span class="risk safe">参照</span></header><h3>短い / 長いファイルを読む</h3><p><code>cat</code> は全文表示、<code>less</code> は1画面ずつ表示。lessは <kbd>/</kbd> で検索、<kbd>n</kbd> で次、<kbd>q</kbd> で終了します。</p><pre><code>$ less /etc/ssh/sshd_config</code></pre><p class="check"><b>使い分け：</b>設定やログが長いときは <code>less</code> が安全です。</p></article>
+                    <article class="command-card"><header><code>head / tail</code><span class="risk safe">参照</span></header><h3>先頭 / 末尾だけ読む</h3><p><code>-n</code> で行数を指定。<code>tail -f</code> は追記を監視します。</p><pre><code>$ tail -n 20 /var/log/syslog
+$ sudo journalctl -f</code></pre><p class="check"><b>終了：</b>監視は <kbd>Ctrl</kbd> + <kbd>C</kbd> で止めます。</p></article>
+                    <article class="command-card"><header><code>grep</code><span class="risk safe">参照</span></header><h3>文字を含む行を探す</h3><p><code>-i</code> は大文字小文字を無視、<code>-n</code> は行番号、<code>-r</code> は階層を検索します。</p><pre><code>$ grep -in "error" app.log
+42:ERROR database timeout</code></pre><p class="check"><b>確認：</b>終了コード0は一致あり、1は一致なしです。</p></article>
+                    <article class="command-card"><header><code>find</code><span class="risk safe">参照</span></header><h3>条件でファイルを探す</h3><p>「どこから」「何を条件に」の順で読みます。ワイルドカードは引用符で囲みます。</p><pre><code>$ find /var/log -type f -name "*.log" -mtime -1</code></pre><p class="check"><b>意味：</b>24時間以内に更新された、名前が .log で終わる通常ファイル。</p></article>
+                    <article class="command-card"><header><code>du / df</code><span class="risk safe">参照</span></header><h3>使用量 / ディスク全体を確認</h3><p><code>du</code> はファイルやディレクトリ、<code>df</code> はファイルシステム全体を確認します。</p><pre><code>$ du -sh /var/log
+$ df -hT</code></pre><p class="check"><b>覚え方：</b>du＝どこが使用、df＝どのディスクが満杯。</p></article>
+                    <article class="command-card"><header><code>man / --help</code><span class="risk safe">参照</span></header><h3>正しい使い方を調べる</h3><p>manual の略。説明書は <kbd>/</kbd> で検索し、<kbd>q</kbd> で終了します。</p><pre><code>$ man systemctl
+$ systemctl --help</code></pre><p class="check"><b>習慣：</b>記憶が曖昧なオプションは実行前に確認します。</p></article>
+                </div>
+            </section>
+
+            <section class="command-section" id="permissions" aria-labelledby="permissions-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></span><h2 class="heading-text" id="permissions-title">3. ユーザーと権限</h2></div>
+                <div class="permission-visual" aria-label="Linux権限の読み方"><code>- rwx r-x r--</code><span><b>-</b> 種類</span><span><b>rwx</b> 所有者</span><span><b>r-x</b> グループ</span><span><b>r--</b> その他</span></div>
+                <p><code>r</code> は読む（4）、<code>w</code> は書く（2）、<code>x</code> は実行する（1）。そのため <code>750</code> は、所有者＝7（4+2+1）、グループ＝5（4+1）、その他＝0です。</p>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>whoami / id</code><span class="risk safe">参照</span></header><h3>自分と所属グループを確認</h3><pre><code>$ whoami
+student
+$ id
+uid=1000(student) gid=1000(student) groups=1000(student),27(sudo)</code></pre><p class="check"><b>実務：</b>権限エラー時に「誰として操作中か」を最初に確認します。</p></article>
+                    <article class="command-card"><header><code>chmod</code><span class="risk warning">権限変更</span></header><h3>許可を変更</h3><p>change mode の略。実行権限の追加は <code>u+x</code> のような記号表記でも指定できます。</p><pre><code>$ chmod u+x deploy.sh
+$ chmod 640 app.conf
+$ stat -c '%A %a %n' app.conf</code></pre><p class="check"><b>注意：</b><code>777</code> は誰でも変更できるため安易に使いません。</p></article>
+                    <article class="command-card"><header><code>chown</code><span class="risk warning">所有者変更</span></header><h3>所有者・グループを変更</h3><p>change owner の略。多くの場合、管理者権限が必要です。</p><pre><code>$ sudo chown root:www-data app.conf
+$ ls -l app.conf</code></pre><p class="check"><b>注意：</b><code>-R</code> は配下すべてを変えるため、対象を事前確認します。</p></article>
+                    <article class="command-card"><header><code>sudo</code><span class="risk warning">管理者権限</span></header><h3>許可されたコマンドを管理者権限で実行</h3><p>superuser do。必要な1コマンドだけに付け、実行理由と影響を理解します。</p><pre><code>$ sudo -l
+$ sudo systemctl status nginx</code></pre><p class="check"><b>原則：</b>参照だけなら、まず一般ユーザーで試します。</p></article>
+                </div>
+            </section>
+
+            <section class="command-section" id="system" aria-labelledby="system-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-microchip" aria-hidden="true"></i></span><h2 class="heading-text" id="system-title">4. OS・負荷・プロセス</h2></div>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>uname / os-release</code><span class="risk safe">参照</span></header><h3>OS情報を確認</h3><pre><code>$ uname -r
+6.8.0-xx-generic
+$ cat /etc/os-release</code></pre><p class="check"><b>使いどころ：</b>手順書が対象OS・バージョンに合うか確認します。</p></article>
+                    <article class="command-card"><header><code>uptime</code><span class="risk safe">参照</span></header><h3>稼働時間と平均負荷を確認</h3><pre><code>$ uptime
+14:20 up 3 days, 2:10, 1 user, load average: 0.15, 0.10, 0.05</code></pre><p class="check"><b>読む：</b>右端は過去1・5・15分の実行待ちの目安。CPU数や平常値と比べます。</p></article>
+                    <article class="command-card"><header><code>free</code><span class="risk safe">参照</span></header><h3>メモリを確認</h3><pre><code>$ free -h
+              total used free shared buff/cache available
+Mem:           7.7Gi 2.1Gi 1.8Gi 120Mi 3.8Gi 5.2Gi</code></pre><p class="check"><b>読む：</b>単純な free より、アプリが利用可能な <code>available</code> を見ます。</p></article>
+                    <article class="command-card"><header><code>ps / top</code><span class="risk safe">参照</span></header><h3>動作中のプロセスを確認</h3><pre><code>$ ps aux --sort=-%cpu | head
+$ top</code></pre><p class="check"><b>用語：</b>PIDはプロセス番号。topは <kbd>q</kbd> で終了します。</p></article>
+                    <article class="command-card"><header><code>kill</code><span class="risk warning">停止</span></header><h3>プロセスへ終了要求を送る</h3><p>通常はTERM（15）で安全な終了を依頼。KILL（9）は最終手段です。</p><pre><code>$ kill -TERM 1234
+$ ps -p 1234</code></pre><p class="check"><b>注意：</b>原因・影響・自動再起動の有無を確認してから実行します。</p></article>
+                </div>
+            </section>
+
+            <section class="command-section" id="service-log" aria-labelledby="service-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-gears" aria-hidden="true"></i></span><h2 class="heading-text" id="service-title">5. サービスとログ</h2></div>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>systemctl</code><span class="risk caution">操作別</span></header><h3>サービスを確認・操作</h3><pre><code>$ systemctl status nginx
+$ systemctl is-enabled nginx
+$ systemctl --failed</code></pre><p class="check"><b>順番：</b><code>status</code> → 設定やログ確認 → 承認後に <code>restart</code> → 再度status。</p></article>
+                    <article class="command-card"><header><code>journalctl</code><span class="risk safe">参照</span></header><h3>systemdログを読む</h3><pre><code>$ sudo journalctl -u nginx --since "30 min ago"
+$ sudo journalctl -p err -b</code></pre><p class="check"><b>意味：</b><code>-u</code> は対象、<code>-p</code> は重要度、<code>-b</code> は今回の起動以降。</p></article>
+                    <article class="command-card"><header><code>systemctl reload</code><span class="risk warning">設定反映</span></header><h3>停止せず設定を再読込</h3><pre><code>$ sudo nginx -t
+$ sudo systemctl reload nginx
+$ systemctl status nginx</code></pre><p class="check"><b>安全策：</b>先に構文テスト。reload非対応のサービスもあります。</p></article>
+                </div>
+                <div class="incident-flow"><b>障害対応の基本</b><span>① 時刻を記録</span><span>② statusを見る</span><span>③ ログを見る</span><span>④ 仮説を立てる</span><span>⑤ 承認後に変更</span><span>⑥ 復旧を再確認</span></div>
+            </section>
+
+            <section class="command-section" id="network" aria-labelledby="network-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span><h2 class="heading-text" id="network-title">6. ネットワーク</h2></div>
+                <p class="memory-phrase"><strong>確認順：自分 → 道 → 名前 → 相手 → 受付口</strong><span>ip addr → ip route → getent hosts → ping/curl → ss</span></p>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>ip</code><span class="risk safe">参照</span></header><h3>IPアドレスと経路を確認</h3><pre><code>$ ip -br addr
+$ ip route</code></pre><p class="check"><b>読む：</b>自分のアドレス、インターフェース状態、default gatewayを確認します。</p></article>
+                    <article class="command-card"><header><code>getent hosts</code><span class="risk safe">参照</span></header><h3>名前解決を確認</h3><pre><code>$ getent hosts example.com
+93.184.216.34 example.com</code></pre><p class="check"><b>切り分け：</b>名前で失敗しIPでは成功するならDNSを疑います。</p></article>
+                    <article class="command-card"><header><code>ping</code><span class="risk safe">通信</span></header><h3>ICMP応答を確認</h3><pre><code>$ ping -c 4 192.0.2.10</code></pre><p class="check"><b>注意：</b>pingを禁止している相手もあるため、失敗だけで停止とは断定しません。</p></article>
+                    <article class="command-card"><header><code>curl</code><span class="risk safe">通信</span></header><h3>HTTP応答を確認</h3><pre><code>$ curl -I --max-time 5 http://localhost
+HTTP/1.1 200 OK</code></pre><p class="check"><b>読む：</b>200は成功、4xxは要求側、5xxはサーバー側の問題の目安。</p></article>
+                    <article class="command-card"><header><code>ss</code><span class="risk safe">参照</span></header><h3>待受ポートを確認</h3><pre><code>$ sudo ss -tulnp
+LISTEN 0 511 0.0.0.0:80 ... nginx</code></pre><p class="check"><b>意味：</b><code>t</code> TCP、<code>u</code> UDP、<code>l</code> 待受、<code>n</code> 数値、<code>p</code> プロセス。</p></article>
+                    <article class="command-card"><header><code>ssh</code><span class="risk caution">接続</span></header><h3>別のLinuxへ安全に接続</h3><pre><code>$ ssh -i ~/.ssh/lab_key student@192.0.2.10</code></pre><p class="check"><b>初回確認：</b>ホスト鍵の指紋を管理者または構築記録と照合します。</p></article>
+                </div>
+            </section>
+
+            <section class="command-section" id="packages" aria-labelledby="packages-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></span><h2 class="heading-text" id="packages-title">7. ソフトウェアの管理</h2></div>
+                <div class="distro-table-wrap" role="region" aria-label="横方向にスクロールできるパッケージ管理コマンド比較" tabindex="0"><table class="operation-table"><caption>Ubuntu系とRHEL系の主な対応</caption><thead><tr><th scope="col">目的</th><th scope="col">Ubuntu / Debian</th><th scope="col">RHEL / Rocky Linux</th></tr></thead><tbody><tr><td>パッケージ情報更新</td><td><code>sudo apt update</code></td><td><code>sudo dnf check-update</code></td></tr><tr><td>検索</td><td><code>apt search nginx</code></td><td><code>dnf search nginx</code></td></tr><tr><td>インストール</td><td><code>sudo apt install nginx</code></td><td><code>sudo dnf install nginx</code></td></tr><tr><td>導入済み確認</td><td><code>dpkg -l nginx</code></td><td><code>rpm -q nginx</code></td></tr></tbody></table></div>
+                <div class="beginner-safety-note"><strong>更新前の確認</strong><p>対象OS、リポジトリ、変更されるパッケージ、サービス再起動の有無、空き容量、バックアップ、切り戻し方法、作業時間帯を確認します。本番相当環境で一括更新を無断実行しません。</p></div>
+            </section>
+
+            <section class="command-section" id="combine" aria-labelledby="combine-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></span><h2 class="heading-text" id="combine-title">8. コマンドを組み合わせる記号</h2></div>
+                <div class="operator-grid">
+                    <article><code>|</code><h3>パイプ</h3><p>左の出力を右へ渡す。</p><pre><code>journalctl -u nginx | grep -i error</code></pre></article>
+                    <article><code>&gt;</code><h3>上書き保存</h3><p>出力先を新規作成または上書き。</p><pre><code>date &gt; check.txt</code></pre></article>
+                    <article><code>&gt;&gt;</code><h3>追記保存</h3><p>既存内容の末尾へ追加。</p><pre><code>df -h &gt;&gt; check.txt</code></pre></article>
+                    <article><code>&amp;&amp;</code><h3>成功したら次へ</h3><p>左が成功した場合だけ右を実行。</p><pre><code>nginx -t &amp;&amp; echo "syntax OK"</code></pre></article>
+                </div>
+                <aside class="danger-box"><strong>リダイレクトの上書きに注意</strong><p><code>&gt;</code> は既存内容を消して置き換えます。重要ファイルへ直接使わず、<code>ls -l 出力先</code> で存在を確認し、練習用ディレクトリで試します。</p></aside>
+            </section>
+
+            <section class="command-section" id="practice" aria-labelledby="practice-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span><h2 class="heading-text" id="practice-title">9. 15分でできる安全な練習</h2></div>
+                <ol class="practice-steps">
+                    <li><b>場所を作る</b><code>mkdir -p ~/linux-practice/logs &amp;&amp; cd ~/linux-practice</code><span><code>pwd</code> でホーム配下にいることを確認。</span></li>
+                    <li><b>ファイルを作る</b><code>printf 'INFO start\nERROR timeout\n' &gt; logs/app.log</code><span><code>cat logs/app.log</code> で2行を確認。</span></li>
+                    <li><b>探す</b><code>grep -n 'ERROR' logs/app.log</code><span><code>2:ERROR timeout</code> が出れば成功。</span></li>
+                    <li><b>複製する</b><code>cp -i logs/app.log logs/app.log.bak</code><span><code>diff -u</code> で差がないことを確認。</span></li>
+                    <li><b>権限を読む</b><code>stat -c '%A %a %n' logs/app.log</code><span>記号と数字の権限を対応させる。</span></li>
+                    <li><b>記録を残す</b><code>{ date; uname -r; df -h /; } &gt; server-check.txt</code><span><code>less server-check.txt</code> で読む。</span></li>
+                </ol>
+                <details class="quiz"><summary>理解度チェック（答えを見る）</summary><dl><dt>Q1. 今いる場所を確かめるコマンドは？</dt><dd><code>pwd</code>。作業前と削除前の確認に使います。</dd><dt>Q2. 長いログから error を大文字小文字を問わず探すには？</dt><dd><code>grep -i 'error' ファイル名</code>。</dd><dt>Q3. サービス再起動の前にすることは？</dt><dd>現状、ログ、設定構文、影響範囲、承認、戻し方を確認します。</dd><dt>Q4. <code>chmod 640</code> の意味は？</dt><dd>所有者は読み書き、グループは読み取り、その他は権限なしです。</dd></dl></details>
+                <div class="next-learning"><h3>次の学習へ</h3><p>基本操作を覚えたら、実際の問い合わせを想定した「重・空・動・記・通・入・壁」の順で切り分けを練習します。</p><a href="linux-lab.html#first-check-order" class="btn btn-primary">Linux基本確認へ進む</a><a href="support-scripts/linux-triage.sh" class="btn btn-outline-dark">読み取り専用スクリプトを見る</a></div>
+            </section>
+        </div></div>
+    </main>
+    <footer><div class="footer-content"><div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div><div class="footer-nav"><a href="me.html">自己紹介</a><a href="skills.html">スキル</a><a href="infra-lab.html">サーバー構築</a><a href="linux-lab.html">Linux Lab</a><a href="linux-commands.html">コマンド集</a><a href="works.html">作品</a><a href="resume.html">履歴書</a><a href="contact.html">連絡先</a></div><div class="footer-social"><a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a><a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></div></div><div class="footer-bottom"><small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small><small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行い、個人制作のため人によるレビューは受けていません。</small></div></footer>
+</body>
+</html>
