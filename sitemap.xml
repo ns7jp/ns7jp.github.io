@@ -44,7 +44,13 @@
   </url>
   <url>
     <loc>https://ns7jp.github.io/skills.html</loc>
-    <lastmod>2026-08-26</lastmod>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ns7jp.github.io/sql-keywords.html</loc>
+    <lastmod>2026-08-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
