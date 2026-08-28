@@ -123,6 +123,7 @@
 | 動作確認動画 | `demo.html` | 2026年8月18日・19日の画面と復旧ログを編集した2分15秒の動画 |
 | 自己紹介ページ | `me.html` | プロフィール、経歴、職業訓練、資格、**学習ロードマップ** を説明する |
 | スキルページ | `skills.html` | Linux構築・監視・自動化を先頭に、補助スキルを証跡区分付きで見せる |
+| Active Directoryキーワード集 | `ad-keywords.html` | AD DS、DNS、Kerberos、OU/GPO、AGDLP、複製、FSMO、確認コマンド、障害対応を覚え方と安全な演習付きで解説する |
 | SQL文・キーワード集 | `sql-keywords.html` | SQLの取得、集計、結合、変更、テーブル定義、権限、トランザクション、性能確認、障害対応を初心者向けに解説する |
 | サーバー構築の学習 | `infra-lab.html` | 目的確認、設計、設定、動作確認、監視、復旧、引き継ぎを順に見せる |
 | Linuxの基本確認 | `linux-lab.html` | 「重・空・動・記・通・入・壁」の覚え方と、負荷、空き容量、サービス、ログ、通信、ログイン、ファイアウォールの確認例 |
@@ -195,6 +196,7 @@ ns7jp.github.io/
 ├── demo.html                ... 2分15秒の証跡リプレイ（連続操作動画ではない）
 ├── me.html                  ... 自己紹介ページ（学習ロードマップ含む）
 ├── skills.html              ... スキル一覧ページ（Win / Linux 系を別カードに分割）
+├── ad-keywords.html         ... 初心者向けActive Directoryキーワード集（確認手順・演習付き）
 ├── sql-keywords.html         ... 初心者向けSQL文・キーワード集（安全手順・演習付き）
 ├── works.html               ... 作品一覧ページ（Infra カテゴリに Lab + Support Toolkit）
 ├── infra-lab.html           ... Linux Server Build & Operations Lab

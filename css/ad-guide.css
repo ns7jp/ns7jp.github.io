@@ -1,0 +1,38 @@
+.ad-page { background: #f5f7fb; }
+.ad-page .container { max-width: 1180px; }
+.ad-page .page-hero-content { width: min(calc(100% - 2rem), 1180px); }
+.ad-page .page-title .title-jp { max-width: 100%; overflow-wrap: anywhere; }
+.ad-intro, .ad-section, .ad-practice { margin: 2rem 0; }
+.ad-lead { max-width: 920px; font-size: 1.05rem; line-height: 1.9; }
+.ad-summary-grid, .ad-keyword-grid, .ad-practice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.ad-summary-card, .ad-keyword-card, .ad-practice-card { background: #fff; border: 1px solid #dce3ee; border-radius: 14px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(27, 54, 93, .07); }
+.ad-summary-card h3, .ad-keyword-card h3, .ad-practice-card h3 { margin-top: 0; color: #12355b; }
+.ad-keyword-card h3 code { font-size: .9em; }
+.ad-keyword-card .keyword-kind { display: inline-block; margin-bottom: .6rem; padding: .2rem .55rem; border-radius: 999px; color: #fff; background: #1769aa; font-size: .8rem; font-weight: 700; }
+.ad-toc { margin: 1.5rem 0; padding: 1.25rem; background: #eaf2fb; border-left: 5px solid #1769aa; border-radius: 10px; }
+.ad-toc ul { columns: 2; margin-bottom: 0; }
+.memory-tip, .ad-note, .ad-warning, .ad-check { margin: 1rem 0; padding: 1rem 1.1rem; border-radius: 10px; }
+.memory-tip { background: #eaf7ef; border-left: 5px solid #258750; }
+.ad-note { background: #fff8dd; border-left: 5px solid #d59600; }
+.ad-warning { background: #fff0f0; border-left: 5px solid #c63e3e; }
+.ad-check { background: #edf5ff; border-left: 5px solid #2b6cb0; }
+.ad-flow { padding-left: 1.35rem; }
+.ad-flow li + li { margin-top: .7rem; }
+.ad-command { margin: 1rem 0 1.5rem; }
+.ad-command pre { overflow-x: auto; padding: 1rem; color: #f7fafc; background: #172033; border-radius: 10px; line-height: 1.65; }
+.ad-command code { font-family: Consolas, "Courier New", monospace; }
+.ad-table-wrap { overflow-x: auto; }
+.ad-table { width: 100%; border-collapse: collapse; background: #fff; }
+.ad-table th, .ad-table td { padding: .8rem; border: 1px solid #dce3ee; text-align: left; vertical-align: top; }
+.ad-table th { background: #12355b; color: #fff; }
+.ad-table tbody tr:nth-child(even) { background: #f4f7fb; }
+.ad-page details { margin: .75rem 0; padding: .9rem 1rem; background: #fff; border: 1px solid #dce3ee; border-radius: 10px; }
+.ad-page summary { cursor: pointer; color: #12355b; font-weight: 700; }
+.ad-page :target { scroll-margin-top: 6rem; }
+@media (max-width: 900px) { .ad-summary-grid, .ad-keyword-grid, .ad-practice-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) {
+    .ad-page .page-title .title-jp { font-size: clamp(1.75rem, 7.5vw, 2.2rem); letter-spacing: .02em; line-height: 1.4; }
+    .ad-summary-grid, .ad-keyword-grid, .ad-practice-grid { grid-template-columns: 1fr; }
+    .ad-toc ul { columns: 1; }
+    .ad-table th, .ad-table td { min-width: 9rem; }
+}
