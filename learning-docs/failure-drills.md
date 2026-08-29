@@ -25,4 +25,3 @@ Drill ID / 日時 / commit / host / 実施者:
 | D-08 | backupのコピーを破損させる | size → checksum → extract | 原本を保護し別世代を選択 |
 
 実ネットワーク遮断、fork bomb、host全体のdisk充填、実証明書失効は行いません。
-

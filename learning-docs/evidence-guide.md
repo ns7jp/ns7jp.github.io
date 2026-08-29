@@ -29,4 +29,3 @@ infra-evidence/
 - CI結果は本人PCの実績と表現しない。
 - NOT RUNは、日時・環境・結果がそろった場合だけMEASUREDへ変更する。
 - 過去結果と現行mainの状態を分ける。
-

@@ -27,4 +27,3 @@
 | Artifact | CIが保存する結果ファイル | report / log / checksum |
 | Checksum | ファイルが同じか確かめる要約値 | `sha256sum` |
 | NOT RUN | 手順はあるが未実行 | 実績と分けて表示 |
-

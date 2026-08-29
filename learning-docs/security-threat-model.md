@@ -21,13 +21,12 @@
 | 脅威 | 予防 | 検知・確認 | 現在地 |
 |---|---|---|---|
 | SSH全世界公開 | `admin_cidr`必須、`0.0.0.0/0`拒否 | Terraform validation | 実装済み、apply NOT RUN |
-| 秘密情報のcommit | environment / GitHub Secrets | secret scan、目視 | CI追加済み |
+| 秘密情報のcommit | environment / GitHub Secrets | 高確度パターンのCI検査、目視 | CI追加済み |
 | 過剰権限 | 専用user、read-only mount | write拒否test | 一時環境で実測履歴あり |
 | 不正変更 | PR、review、required check | CIとaudit log | CIあり、required設定 NOT SET |
-| 脆弱image | version固定、更新手順 | Trivy scan | CI追加、対応判断は運用課題 |
+| 脆弱image | version固定、更新手順 | image scanner | scanner導入はNOT SET |
 | log消失・改ざん | 外部転送、保存期間、時刻同期 | 欠損alert、restore | 外部保管 NOT RUN |
 | backup利用不能 | checksum、世代、暗号化 | 別host restore | 別host NOT RUN |
 | 監視自身の停止 | dead-man alert、別経路 | heartbeat欠損 | NOT RUN |
 
 受容、軽減、移転、回避のどれを選んだかと理由を変更記録へ残します。
-

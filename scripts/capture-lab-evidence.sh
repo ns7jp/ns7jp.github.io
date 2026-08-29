@@ -9,7 +9,10 @@ label=$1; shift
 
 timestamp=$(date -u +%Y%m%dT%H%M%SZ)
 out="infra-evidence/measured/${timestamp}-${label}"
-mkdir -p "$out"
+if ! mkdir "$out"; then
+  echo "evidence directory already exists: $out" >&2
+  exit 1
+fi
 
 {
   echo "status=MEASURED_REVIEW_REQUIRED"
@@ -39,4 +42,3 @@ echo "finished_utc=$(date -u +%FT%TZ)" >> "$out/metadata.txt"
 echo "Evidence saved to $out"
 echo "Review every file for secrets and personal data before committing."
 exit "$exit_code"
-
