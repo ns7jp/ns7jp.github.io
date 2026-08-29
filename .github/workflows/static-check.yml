@@ -31,6 +31,9 @@ jobs:
       - name: Test external link checker guardrails
         run: node scripts/test-external-link-check.js
 
+      - name: Check tracked text files for committed credentials
+        run: node scripts/check-secrets.js
+
       - name: Check evidence replay video metadata
         run: node scripts/check-video-metadata.cjs
 

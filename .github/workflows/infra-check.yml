@@ -7,6 +7,8 @@ on:
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
+      - 'scripts/capture-lab-evidence.sh'
+      - 'learning-docs/**'
       - 'support-docs/m365-policy-examples/**'
       - '.github/workflows/infra-check.yml'
   pull_request:
@@ -15,6 +17,8 @@ on:
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
+      - 'scripts/capture-lab-evidence.sh'
+      - 'learning-docs/**'
       - 'support-docs/m365-policy-examples/**'
       - '.github/workflows/infra-check.yml'
 
@@ -119,14 +123,14 @@ jobs:
         run: terraform -chdir=cloud-lab/terraform validate
 
   shell:
-    name: Linux triage shell syntax
+    name: Bash syntax
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Bash syntax check
-        run: bash -n support-scripts/linux-triage.sh
+        run: bash -n support-scripts/linux-triage.sh scripts/capture-lab-evidence.sh
 
   m365-policies:
     name: M365 / Intune policy JSON
