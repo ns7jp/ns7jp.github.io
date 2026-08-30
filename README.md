@@ -130,6 +130,7 @@
 | サーバー構築の学習 | `infra-lab.html` | 目的確認、設計、設定、動作確認、監視、復旧、引き継ぎを順に見せる |
 | Linuxの基本確認 | `linux-lab.html` | 「重・空・動・記・通・入・壁」の覚え方と、負荷、空き容量、サービス、ログ、通信、ログイン、ファイアウォールの確認例 |
 | CUIコマンド操作マニュアル | `cui-manual.html` | 端末の開き方、コマンドの読み方、パス、補完、履歴、パイプ、終了コード、安全確認、一次切り分けを段階演習付きで解説する |
+| CLI操作演習案件パック | `cli-exercise-pack.html` | ★ 「受・見・決・動・確・残」の合言葉で覚える、想定チケット14件の演習パック。ファイル・プロセス・サービス・権限・ネットワーク・容量・Windows対比・総合演習を、難易度3段階と模範解答付きで解説する |
 | Windowsコマンド集 | `windows-commands.html` | CMDとPowerShellの違い、「端・場・通・動・記・権」の覚え方、結果の読み方、安全上の注意、3つの練習 |
 | AWSネットワークの学習用設計 | `cloud-lab.html` | AWS上でネットワークを分け、接続できる範囲を制限する設計例。AWSへの作成は未実施 |
 | 作品ページ | `works.html` | Linux Server Build & Operations Labを先頭に、補助成果・学習作品を紹介 |
@@ -206,6 +207,7 @@ ns7jp.github.io/
 ├── infra-lab.html           ... Linux Server Build & Operations Lab
 ├── linux-lab.html           ... Linux 一次運用Lab（systemd / journalctl / SSH / rsync）
 ├── cui-manual.html          ... 未経験者向けCUIコマンド操作マニュアル（Linux / Windows共通）
+├── cli-exercise-pack.html   ★ CLI操作演習案件パック（想定チケット14件、難易度3段階、模範解答付き）
 ├── windows-commands.html     ... Windows 一次確認コマンド集（CMD / PowerShell）
 ├── cloud-lab.html           ... Cloud Network Lab（AWS VPC / Terraform）
 ├── production-readiness.md  ... Lab を本番化する際に足す運用観点
