@@ -5543,3 +5543,16 @@ footer {
         display: none;
     }
 }
+
+/* ===== Excel演習案件パック用：スプレッドシート風テーブル ===== */
+.xl-table-wrap { overflow-x: auto; margin: 16px 0 20px; }
+.xl-table { width: 100%; border-collapse: collapse; background: #fff; font-size: 1.3rem; }
+.xl-table caption { caption-side: top; text-align: left; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); font-size: 1.4rem; }
+.xl-table th, .xl-table td { border: 1px solid #dce1e7; padding: 8px 12px; text-align: left; }
+.xl-table thead th { background: #243647; color: #fff; font-weight: 700; }
+.xl-table tbody tr:nth-child(even) { background: #f7f8fa; }
+.xl-formula-table td:first-child { font-family: monospace; color: #28557f; font-weight: 700; white-space: nowrap; }
+.xl-formula-table td:nth-child(2) code { background: #111a24; color: #ffe09a; padding: 2px 6px; border-radius: 4px; font-size: 1.2rem; }
+.xl-ui-steps { margin: 14px 0; padding: 16px 18px; background: #eef2f6; border-left: 4px solid #28557f; border-radius: 6px; }
+.xl-ui-steps strong { display: block; margin-bottom: 6px; color: var(--text-dark); }
+.xl-ui-steps li { margin: 4px 0 4px 18px; font-size: 1.3rem; color: var(--text-medium); }

@@ -127,6 +127,7 @@
 | スキルページ | `skills.html` | Linux構築・監視・自動化を先頭に、補助スキルを証跡区分付きで見せる |
 | Active Directoryキーワード集 | `ad-keywords.html` | AD DS、DNS、Kerberos、OU/GPO、AGDLP、複製、FSMO、確認コマンド、障害対応を覚え方と安全な演習付きで解説する |
 | SQL文・キーワード集 | `sql-keywords.html` | SQLの取得、集計、結合、変更、テーブル定義、権限、トランザクション、性能確認、障害対応を初心者向けに解説する |
+| Excel基礎演習案件パック | `excel-exercise-pack.html` | ★ 「受・見・決・動・確・残」の合言葉で覚える、想定案件14件の演習パック。表の整形・入力規則・関数（SUM/IF/VLOOKUP/COUNTIFS）・データ整理・ピボットテーブル・印刷設定・シート保護・マクロを、数式例と模範解答付きで解説する |
 | サーバー構築の学習 | `infra-lab.html` | 目的確認、設計、設定、動作確認、監視、復旧、引き継ぎを順に見せる |
 | Linuxの基本確認 | `linux-lab.html` | 「重・空・動・記・通・入・壁」の覚え方と、負荷、空き容量、サービス、ログ、通信、ログイン、ファイアウォールの確認例 |
 | CUIコマンド操作マニュアル | `cui-manual.html` | 端末の開き方、コマンドの読み方、パス、補完、履歴、パイプ、終了コード、安全確認、一次切り分けを段階演習付きで解説する |
@@ -203,6 +204,7 @@ ns7jp.github.io/
 ├── skills.html              ... スキル一覧ページ（Win / Linux 系を別カードに分割）
 ├── ad-keywords.html         ... 初心者向けActive Directoryキーワード集（確認手順・演習付き）
 ├── sql-keywords.html         ... 初心者向けSQL文・キーワード集（安全手順・演習付き）
+├── excel-exercise-pack.html ★ Excel基礎演習案件パック（想定案件14件、難易度3段階、数式例・模範解答付き）
 ├── works.html               ... 作品一覧ページ（Infra カテゴリに Lab + Support Toolkit）
 ├── infra-lab.html           ... Linux Server Build & Operations Lab
 ├── linux-lab.html           ... Linux 一次運用Lab（systemd / journalctl / SSH / rsync）
