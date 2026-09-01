@@ -24,7 +24,7 @@
 
 - **目的**: 構築前の初期状態を再現する。
 - **前提**: 2 CPU、4 GB RAM、20 GB diskを目安としたUbuntu 24.04 VM。値は実測に合わせて記録する。
-- **操作**: 一般ユーザー作成、更新、時刻同期、管理端末からSSH鍵接続、再起動、再接続。
+- **操作**: 一般ユーザー作成（例: `sudo adduser <username>`）、`sudo apt update && sudo apt upgrade`で更新、`timedatectl`で時刻同期を確認、管理端末で`ssh-keygen -t ed25519`により鍵を作成し公開鍵を登録してSSH鍵接続、`sudo reboot`で再起動、再接続。
 - **期待結果**: passwordをGitへ残さず、再起動後も鍵で接続できる。
 - **失敗時**: sshdを再起動する前に `sshd -t`。別セッションを閉じず、consoleから戻す。
 - **合格条件**: clean OSからの操作ログと再起動後の確認をMEASUREDで残す。
@@ -34,7 +34,7 @@
 ## Step 3 — 最小サービスを手動構築
 
 - **目的**: 自動化対象を理解する。
-- **操作**: Docker導入、最小Webサービス起動、`ss -lntp`、`curl`、Firewallの許可/拒否、ログ確認。
+- **操作**: Docker導入、最小Webサービス起動、`ss -lntp`、`curl`、Firewall（`ufw`を使用。例: `sudo ufw allow from <管理CIDR> to any port 22 proto tcp`、`sudo ufw default deny incoming`、`sudo ufw enable`）の許可/拒否、`sudo ufw status verbose`とログで確認。
 - **期待結果**: 管理元から許可portだけ接続でき、不要portは拒否される。
 - **失敗時**: DNS、route、TCP、service、applicationの順で確認する。
 - **合格条件**: 接続元 → 宛先 → protocol/port → process → logを図と結果票で対応づける。
@@ -47,10 +47,47 @@
 - **失敗時**: task名、対象host、変数、権限、moduleの順に読む。いきなり `ignore_errors` を足さない。
 - **合格条件**: 実行版、inventory、結果、差分、切り戻し方法がそろう。
 
+### 付録: 最小構成のplaybook/inventory例
+
+以下はStep 4で使う最小構成のサンプルです（IPやhost名は架空。実際の値は各自の環境に置き換えます）。YAMLはtabを使わず半角スペースのインデントで階層を表し、`key: value`の形と`-`で始まるリストだけで書けます。
+
+`inventory.ini`:
+
+```ini
+[web]
+lab-vm ansible_host=192.0.2.10 ansible_user=deploy ansible_ssh_private_key_file=~/.ssh/id_ed25519
+```
+
+`playbook.yml`:
+
+```yaml
+---
+- name: Deploy minimal web service
+  hosts: web
+  become: true
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Install nginx
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: Ensure nginx is running
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+```
+
+実行例: `ansible-playbook -i inventory.ini playbook.yml --syntax-check`
+
 ## Step 5 — 監視と通知
 
 - **目的**: 異常を利用者より先に検知する。
-- **操作**: target、CPU、memory、disk、service、logを確認。テストアラートをローカルwebhookへ送る。
+- **操作**: target、CPU、memory、disk、service、logを確認。テストアラートをローカルwebhookへ送る（例: `curl -X POST -H 'Content-Type: application/json' -d '{"text":"test alert"}' http://localhost:5001/webhook`）。
 - **期待結果**: 発生、通知、確認、復旧の時刻がつながる。
 - **失敗時**: 監視対象だけでなく、Prometheus / collector / notification経路自身を確認する。
 - **合格条件**: alertから対応Runbookへ移動でき、正常復帰も確認できる。

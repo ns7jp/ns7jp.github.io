@@ -21,7 +21,7 @@ infra-evidence/
 8. 残課題と再試験条件
 9. 各fileのSHA-256
 
-`bash scripts/capture-lab-evidence.sh <label> -- <command...>` はmetadata、command、stdout、stderr、exit code、checksumを同じdirectoryへ保存します。保存後に必ず目視し、IP、username、tokenなどを公開してよいか確認します。自動マスキングだけを信用しません。
+`bash scripts/capture-lab-evidence.sh <label> -- <command...>` はmetadata、command、stdout、stderr、exit code、checksumを同じdirectoryへ保存します。保存後に必ず目視し、IP、username、tokenなどを公開してよいか確認します。`scripts/check-secrets.js`によるCI検査などの自動マスキングだけを信用しません。
 
 ## 昇格条件
 
