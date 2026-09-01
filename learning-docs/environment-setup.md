@@ -8,7 +8,10 @@
 |---|---|---:|---|
 | Windows + WSL2（推奨） | まずCUIとLinux操作を試したい | 30〜60分 / 8GB以上 | 独立VMではないため、再起動・別host復元・一部のsystemd演習は代替確認になる |
 | Ubuntu VM | サーバーの起動、SSH、snapshot、復元まで練習したい | 60〜120分 / 25GB以上 | PCの仮想化対応と十分なメモリが必要 |
+| Mac — VM（UTM / Parallels / VirtualBox等） | Macでサーバー構築を練習したい | 60〜120分 / 25GB以上 | 手順はコースBを土台に、ソフトごとの画面差を自分で読み替える |
 | 既存Linux | すでに自分専用の破棄可能な環境がある | 15分 | 本番・共有環境は不可。Step 0で条件を確認する |
+
+Macの場合、コースA（WSL2）はそのまま使えないため、コースBの手順をUTM（無料）、Parallels Desktop、VirtualBoxなどに読み替えて進めます。画面や導入手順は製品ごとに異なりますが、「ISO取得 → VM作成 → 一般ユーザー作成 → snapshot取得」という流れは共通です。Apple Silicon（M1以降）の場合はARM64版のUbuntu ISOを選びます。
 
 判断に迷う場合はWSL2で[CUIの最初の30分](./first-30-minutes.md)まで進み、Step 2以降はUbuntu VMへ移ります。
 
@@ -22,7 +25,7 @@
 
 ### 操作
 
-1. PowerShellを管理者として開き、`wsl --status` で現状を記録する。
+1. PowerShellを管理者として開き、`wsl --status > wsl-status-before.txt` のようにファイルへリダイレクトして現状を記録する。`cat wsl-status-before.txt`（PowerShellでは `type wsl-status-before.txt`）で内容を見返せます。
 2. 未導入の場合だけ `wsl --install -d Ubuntu-24.04` を実行し、表示に従って再起動する。
 3. Ubuntuを開き、Linux用の一般ユーザー名と長いパスワードを作る。入力中のパスワードが画面に表示されないのは正常。
 4. 次を1行ずつ実行する。
@@ -36,6 +39,29 @@ df -h /
 
 **期待結果:** Ubuntuのバージョン、自分のユーザー名、`/home/<ユーザー名>`、空き容量が表示される。
 
+出力例（架空値。実測ではなく、実際の表示は環境ごとに異なります）:
+
+```text
+$ cat /etc/os-release
+PRETTY_NAME="Ubuntu 24.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+
+$ whoami
+example-user
+
+$ pwd
+/home/example-user
+
+$ df -h /
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdb        250G   12G  226G   6% /
+```
+
+### Dockerを使う場合の準備（Step 3で必要）
+
+[lab-guide.mdのStep 3](./lab-guide.md#step-3--最小サービスを手動構築)ではDockerを使います。WSL2内に直接Docker Engineを入れる代わりに、Windows側にDocker Desktopを導入し、設定の「Settings > Resources > WSL Integration」で使用中のUbuntuディストロを有効にする方法があります。有効化するとWSL2のUbuntuからそのまま `docker` コマンドが使えるようになるため、Step 3へ進む前に済ませておくとスムーズです。
+
 ### 終了・削除方法
 
 - 一時停止: PowerShellで `wsl --shutdown`
@@ -47,6 +73,8 @@ df -h /
 ## コースB — Ubuntu VM
 
 利用する仮想化ソフトは自分のPCで利用可能なHyper-V、VirtualBoxなどから1つだけ選びます。公式配布元以外からOSイメージを取得しません。
+
+WSL2はHyper-V系の仮想化基盤を使うため、コースAでWSL2（Hyper-V）を先に有効化している場合、VirtualBoxを起動すると「VT-x is not available」のようなエラーが出ることがあります。VirtualBoxを使う場合は、仮想化ソフトをHyper-Vに変更するか、Windowsの機能から「Hyper-V」「仮想マシンプラットフォーム」を一時的に無効化してWSLを使わない状態にしてから作業します。
 
 1. Ubuntu 24.04 LTSのISOを公式配布元から取得する。
 2. 目安として2 CPU、4GB RAM、25GBの可変ディスク、NATネットワークでVMを作る。
@@ -89,3 +117,10 @@ df -h /
 | 戻し方が分からない | snapshot一覧とconsole経路 | Firewall・SSH変更へ進まない |
 
 環境が用意できたら、[最初の30分](./first-30-minutes.md)を実施し、その後[Step 0](./lab-guide.md#step-0--安全境界と環境採録)へ進みます。
+
+## 翌日以降にもう一度開くには
+
+一度作った環境は、PCを再起動しても消えません。次回は新規作成せず、次の方法で前回の続きから再開します。
+
+- **WSL2（コースA）:** スタートメニューで「Ubuntu」と検索し、表示されたアプリを起動するだけで、前回終了した状態（作成したファイルなど）に戻れます。ターミナルを閉じても中のファイルは消えません。
+- **Ubuntu VM（コースB / Mac）:** 使用している仮想化ソフトの管理画面（Hyper-VマネージャーやVirtualBoxのマネージャーなど）を開き、対象のVMを選んで「起動」します。前回シャットダウンしていれば通常起動、一時停止（サスペンド）していればその状態から再開します。
