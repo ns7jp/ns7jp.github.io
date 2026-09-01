@@ -5120,6 +5120,15 @@ article p,
 .assessment-grid > div { background: var(--bg-warm); border-radius: 1.2rem; padding: 2.4rem; }
 @media (max-width: 720px) { .learning-grid, .check-list, .assessment-grid { grid-template-columns: 1fr; } }
 
+/* Step progress state（未着手/進行中/完了）。roadmap-item done/current の配色を踏襲 */
+.step-status { display: inline-block; margin-left: .8rem; padding: .15rem .9rem; border-radius: 999px; background: var(--bg-warm); color: var(--text-medium); font-family: Montserrat, sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .04em; vertical-align: middle; }
+.learning-card.step-card.current { background: #fdf6e7; border-color: var(--accent-gold); }
+.learning-card.step-card.current .step-status { background: var(--accent-gold); color: var(--text-light); }
+.learning-card.step-card.done { background: #f4f8f1; border-color: #c4d8b8; }
+.learning-card.step-card.done .step-status { background: var(--nature-sage); color: var(--text-light); }
+.step-toggle { display: flex; align-items: center; gap: .8rem; margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px dashed var(--bg-sand); font-size: 1.3rem; color: var(--text-medium); cursor: pointer; }
+.step-toggle input { width: 1.7rem; height: 1.7rem; flex-shrink: 0; }
+
 /* ========================================================================
    30. Linux Command Handbook
    ======================================================================== */
