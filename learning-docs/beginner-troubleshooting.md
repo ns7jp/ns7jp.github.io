@@ -1,5 +1,7 @@
 # 初心者向けエラーFAQ
 
+分からない言葉が出てきたら、まず[用語集](./glossary.md)で意味を確認します。
+
 ## まず行うこと
 
 1. 追加操作を止める。
@@ -7,18 +9,18 @@
 3. パスワード、Token、秘密鍵、実在IPを共有用の記録から除く。
 4. 次の表で意味を確認し、対象を再確認してから1つだけ対処する。
 
-| 表示・現象 | 主な意味 | 最初に確認 | 避けること |
-|---|---|---|---|
-| `command not found` | コマンド名の誤り、または未導入 | 綴り、使っているshell、教材の前提 | 意味不明なインストール手順をそのまま実行 |
-| `Permission denied` | 実行・読取・変更権限がない | `whoami`、`pwd`、`ls -l <対象>` | すぐに`sudo`や`chmod 777`を付ける |
-| `No such file or directory` | 指定した場所に対象がない | `pwd`、`ls -la`、大文字小文字 | 推測した絶対パスで削除する |
-| sudoで文字が出ない | パスワード入力を画面へ表示しない仕様 | 自分のパスワードを入力してEnter | 何度も貼り付ける、パスワードを記録する |
-| `>`で内容が消えた | 出力先を上書きした | shell履歴、backup、Git差分 | 同じファイルへさらに書き込む |
-| SSHのhost確認が出た | 初めて見る接続先の鍵を確認中 | hostname、IP、fingerprintを別経路で照合 | 不明なまま`yes`と答える |
-| `Connection refused` | 宛先へ到達したがportで受付がない | 宛先、port、`ss -lntp`、service | Firewallだけを何度も変更する |
-| `Connection timed out` | 経路上で応答がない | IP、route、Firewall、接続元制限 | service再起動だけで直そうとする |
-| Docker daemonへ接続不可 | daemon停止または利用権限不足 | `systemctl status docker`、利用環境 | socketへ広すぎる権限を付ける |
-| WSLを閉じると停止する | WSLのライフサイクルと連動 | `wsl --list --verbose`、再現条件 | 独立VMの常時稼働実績として扱う |
+| 表示・現象 | 主な意味 | 最初に確認 | 対処法 | 避けること |
+|---|---|---|---|---|
+| `command not found` | コマンド名の誤り、または未導入 | 綴り、使っているshell、教材の前提 | 綴りを見直し、教材が前提とするshell / OSで再実行する | 意味不明なインストール手順をそのまま実行 |
+| `Permission denied` | 実行・読取・変更権限がない | `whoami`、`pwd`、`ls -l <対象>` | 所有者と権限を`ls -l`で確認し、必要な範囲だけ`sudo`を付けて再実行する | すぐに`sudo`や`chmod 777`を付ける |
+| `No such file or directory` | 指定した場所に対象がない | `pwd`、`ls -la`、大文字小文字 | `pwd`で現在地、`ls -la`で対象名の綴り・大文字小文字を確認してから再実行する | 推測した絶対パスで削除する |
+| sudoで文字が出ない | パスワード入力を画面へ表示しない仕様 | 自分のパスワードを入力してEnter | そのまま自分のパスワードを入力しEnterを押す(貼り付けや連打はしない) | 何度も貼り付ける、パスワードを記録する |
+| `>`で内容が消えた | 出力先を上書きした | shell履歴、backup、Git差分 | backupやGit差分から復元できるか確認し、以後は`>>`か事前backupを使う | 同じファイルへさらに書き込む |
+| SSHのhost確認が出た | 初めて見る接続先の鍵を確認中([fingerprint](./glossary.md#term-fingerprint)は鍵の内容を短く要約した値) | hostname、IP、fingerprintを別経路で照合 | 個人学習環境ではクラウドの管理画面やVM作成時のコンソール出力に表示されるfingerprintと、接続時にterminalへ表示された値が一致する場合だけ`yes`と答える | 不明なまま`yes`と答える |
+| `Connection refused` | 宛先へ到達したがportで受付がない | 宛先、port、`ss -lntp`、service | `ss -lntp`で対象serviceが該当portで起動しているか確認し、停止していれば起動してから再接続する | Firewallだけを何度も変更する |
+| `Connection timed out` | 経路上で応答がない | IP、route、Firewall、接続元制限 | 経路上のFirewallや接続元制限(security groupなど)で対象IP/portが許可されているか確認する | service再起動だけで直そうとする |
+| Docker daemonへ接続不可 | daemon停止または利用権限不足 | `systemctl status docker`、利用環境 | `sudo systemctl status docker`でdaemonの起動状態を確認し、停止していれば起動してから再実行する | socketへ広すぎる権限を付ける |
+| WSLを閉じると停止する | WSLのライフサイクルと連動 | `wsl --list --verbose`、再現条件 | 学習用の一時停止として扱い、常時稼働が必要なら独立VMなど別方式を検討する | 独立VMの常時稼働実績として扱う |
 
 ## 端末から抜けられない
 
