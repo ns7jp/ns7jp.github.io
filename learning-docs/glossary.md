@@ -2,6 +2,25 @@
 
 | 用語 | 一言で | このLabでの確認 |
 |---|---|---|
+| OS | hardwareとapplicationの間で基本機能を提供するsoftware | `cat /etc/os-release` |
+| Application | 利用目的のために動くprogram | Web serviceの応答を確認 |
+| File | 名前を付けて保存したdata | `ls -l` / `cat` |
+| Directory | fileやdirectoryをまとめる場所 | `pwd` / `ls` |
+| Terminal | 文字で入出力するための画面 | Windows Terminalなどを開く |
+| Shell | 入力したcommandを解釈するprogram | `echo "$SHELL"` |
+| Command | shellへ依頼する命令 | command名、option、argumentに分ける |
+| Option | commandの動作を切り替える指定 | `ls -l`の`-l` |
+| Argument | commandが処理する対象や値 | `cat note.txt`の`note.txt` |
+| Standard output / error | 通常結果とerrorを分ける出力経路 | 表示とexit codeを保存 |
+| Environment variable | processへ渡す名前付きの設定値 | `printenv HOME`。秘密情報は表示・保存しない |
+| Administrator / general user | 全体を変更できる強い権限 / 通常作業の権限 | `whoami`。通常は一般userから開始 |
+| Process | 実行中のprogramの単位 | `ps` |
+| Service | backgroundで継続して機能を提供するprocess | `systemctl status` |
+| Host | network上で識別されるcomputerやVM | `hostname` |
+| Client / Server | 要求する側 / 機能を提供する側 | clientから`curl`してserver logを確認 |
+| localhost | 今操作している環境自身を指す名前 | `getent hosts localhost` |
+| Package | 導入・更新しやすくまとめたsoftware | package名とversionを記録 |
+| Repository | packageやsource codeを保管・配布する場所 | 配布元を確認 |
 | IP address | 機器の通信上の住所 | `ip address` |
 | CIDR | IP範囲を `/24` などで表す書き方 | 管理元を `/32` に限定 |
 | Subnet | 同じ通信範囲として分けたネットワーク | Public / Privateを分離 |
