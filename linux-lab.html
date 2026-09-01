@@ -92,6 +92,7 @@
         <div class="container">
 
             <nav class="lab-subnav" aria-label="サーバー学習内の案内">
+                <a href="learning-path.html"><i class="fa-solid fa-route" aria-hidden="true"></i> 初心者向け学習ルート</a>
                 <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
                 <a href="cui-manual.html"><i class="fa-solid fa-keyboard" aria-hidden="true"></i> CUI入門</a>
                 <a href="cli-exercise-pack.html"><i class="fa-solid fa-ticket" aria-hidden="true"></i> 演習案件パック</a>
@@ -108,6 +109,7 @@
                 <span class="case-label">学習用 / Ubuntu・RHEL系Linux</span>
                 <h2>「サーバーが重い」「ログインできない」ときの確認順序</h2>
                 <p>UbuntuやRHEL系Linuxで問い合わせを受けたときに、<strong>負荷・空き容量・サービス・ログ・通信・ログイン・ファイアウォール</strong>の順で状態を確認する練習です。ここに掲載した確認コマンドは情報を見るためのもので、設定変更や再起動は別の手順として扱います。</p>
+                <p><strong>対象読者:</strong> Linuxコマンドの経験がない方も対象です。実行環境として、UbuntuまたはRHEL系のVM、もしくはWindowsのWSL2とターミナルを用意してから進めてください。環境をお持ちでない場合は、先に<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>をご覧ください。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-microchip" aria-hidden="true"></i> systemd</span>
                     <span><i class="fa-solid fa-book" aria-hidden="true"></i> journalctl</span>
@@ -183,19 +185,19 @@
                             <tr>
                                 <td>ディスク</td>
                                 <td>容量 / 作成できるファイル数（inode） / 読み書きの遅れ</td>
-                                <td><code>df -hPT -x tmpfs</code><br><code>df -hPi -x tmpfs</code><br><code>iostat -x 1 3</code></td>
+                                <td><code>df -hPT -x tmpfs</code><br><code>df -hPi -x tmpfs</code><br><code>iostat -x 1 3</code>†</td>
                                 <td>容量90%以上、inode 80%以上、読み書きの待ち時間が普段より長い状態が続く場合は、結果を保存して相談します。</td>
                             </tr>
                             <tr>
                                 <td>サービス</td>
                                 <td>停止・失敗したサービス / 自動起動の設定</td>
-                                <td><code>systemctl --failed</code><br><code>systemctl status sshd</code><br><code>systemctl list-unit-files --state=enabled</code></td>
+                                <td><code>systemctl --failed</code><br><code>systemctl status ssh</code>（Ubuntu）<br><code>systemctl status sshd</code>（RHEL系）<br><code>systemctl list-unit-files --state=enabled</code></td>
                                 <td>失敗したサービスがあれば記録します。自動起動の設定があるのに停止している場合は、設計上正しい状態かを確認して担当者へ相談します。</td>
                             </tr>
                             <tr>
                                 <td>ログ</td>
                                 <td>直近のエラー / 該当サービス / 起動失敗</td>
-                                <td><code>journalctl -p err --since "30 min ago"</code><br><code>journalctl -u nginx -n 50</code><br><code>dmesg -T --level=err | tail</code></td>
+                                <td><code>journalctl -p err --since "30 min ago"</code>※<br><code>journalctl -u nginx -n 50</code><br><code>dmesg -T --level=err | tail</code>※</td>
                                 <td>同じエラーの繰り返し、OS内部の重大エラー、メモリ不足による強制終了があれば、ログと発生時刻を添えて上位担当者へ相談します。</td>
                             </tr>
                             <tr>
@@ -207,18 +209,19 @@
                             <tr>
                                 <td>認証</td>
                                 <td>SSH接続の失敗 / ログイン履歴 / アカウントのロック</td>
-                                <td><code>journalctl -u ssh -p warning</code><br><code>last -n 20</code><br><code>lastb -n 20</code></td>
+                                <td><code>journalctl -u ssh -p warning</code>（Ubuntu）<br><code>journalctl -u sshd -p warning</code>（RHEL系）<br><code>last -n 20</code><br><code>lastb -n 20</code>※</td>
                                 <td>同じIPアドレスからログイン失敗が繰り返されていれば、記録を保存してセキュリティまたはネットワーク担当者へ相談します。</td>
                             </tr>
                             <tr>
                                 <td>ファイアウォール</td>
                                 <td>許可されている通信 / ルールの適用状態</td>
-                                <td><code>ufw status verbose</code><br><code>firewall-cmd --list-all</code><br><code>iptables -L -n -v</code></td>
+                                <td><code>ufw status verbose</code>（Ubuntu）※<br><code>firewall-cmd --list-all</code>（RHEL系）※<br><code>iptables -L -n -v</code>※</td>
                                 <td>申請にない通信許可、想定外の許可、ルールが設定されていない状態を見つけた場合は、変更せず担当者へ確認します。</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <p class="evidence-note">※ 権限エラー（<code>Permission denied</code>など）が出た場合は、root権限が必要な可能性があります。command前に<code>sudo</code>を付けて再実行してください。　† <code>iostat</code>はsysstatパッケージが必要です（<code>apt install sysstat</code> / <code>dnf install sysstat</code>）。SSHのservice名はUbuntuで<code>ssh</code>、RHEL系（RHEL/CentOS/Rocky Linux/AlmaLinuxなど）で<code>sshd</code>です。firewallはUbuntu/Debian系が<code>ufw</code>、RHEL系は標準で<code>firewalld</code>（<code>firewall-cmd</code>）を使います。</p>
             </section>
 
             <section class="operation-matrix-section">
@@ -241,6 +244,7 @@
                         <h3>権限・ファイルシステム</h3>
                         <ul>
                             <li><code>chown</code>や<code>chmod</code>では、必要な利用者だけが操作できる権限にします。個別に権限を追加するときはACL（<code>setfacl</code>）を使います。</li>
+                            <li>例: <code>setfacl -m u:username:rx /path</code>で、指定した利用者だけに読み取り・実行権限を追加できます（設定結果は<code>getfacl /path</code>で確認）。</li>
                             <li>機密ファイルは専用グループだけが読める権限にし、<code>ls -la</code>で設定結果を確認します。</li>
                             <li>通常より強い権限（SUID / SGID）が付いたファイルは、必要なものか定期的に確認します。</li>
                         </ul>
@@ -274,6 +278,7 @@
                     <p>同じサーバー内の別ディスクへ、設定ファイルとWebコンテンツを毎日コピーする学習例です。本番環境で実行した実績ではありません。同じサーバー内だけでは機器故障に備えられないため、実務では別の機器や離れた場所にも保存し、定期的に復元できるかを確認します。</p>
                     <p class="evidence-note"><strong>実行前の注意:</strong> <code>--delete</code>はバックアップ先の余分なファイルを削除し、末尾の<code>find ... rm -rf</code>は30日を超えた保存先を削除します。最初はテスト用ディレクトリへ変更し、<code>rsync --dry-run</code>で対象と差分を確認してください。</p>
 <pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
+#!/bin/bash
 # /usr/local/sbin/daily-backup.sh
 SRC1=/etc
 SRC2=/var/www
@@ -305,6 +310,13 @@ OnCalendar=*-*-* 03:00:00
 Persistent=true
 [Install]
 WantedBy=timers.target
+</pre>
+                    <p style="margin-top:14px;">実際に有効化する場合のコマンド例（学習環境での実行を想定）:</p>
+<pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
+sudo chmod +x /usr/local/sbin/daily-backup.sh
+sudo mkdir -p /mnt/backup
+sudo systemctl daemon-reload
+sudo systemctl enable --now daily-backup.timer
 </pre>
                     <p style="margin-top:14px;">復元手順と確認計画は、別の<a href="support-docs/backup-restore-runbook.md">バックアップ・復元手順</a>にまとめています。</p>
                 </div>

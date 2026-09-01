@@ -64,9 +64,9 @@
                 <h2 id="start-title">コマンドは「動詞 + 対象 + 条件」で読む</h2>
                 <p>Linuxコマンドは英単語の省略形が多く、名前の由来を知ると覚えやすくなります。たとえば <code>ls -la /etc</code> は「<strong>ls</strong>（list＝一覧にする）」「<strong>-l -a</strong>（詳しく・隠しファイルも）」「<strong>/etc</strong>（対象）」と分解できます。</p>
                 <div class="command-formula" aria-label="コマンドの基本構造"><span><b>command</b><small>何をする</small></span><i aria-hidden="true">+</i><span><b>-option</b><small>どう実行する</small></span><i aria-hidden="true">+</i><span><b>argument</b><small>何を対象にする</small></span></div>
-                <div class="beginner-safety-note"><strong>安全な練習場所</strong><p>自分専用のLinux仮想マシン、WSL、またはコンテナで練習します。会社・学校・公開中サーバーでは勝手に実行しません。このページの実行例は教材であり、掲載コマンドすべての実機実行証跡ではありません。</p></div>
+                <div class="beginner-safety-note"><strong>安全な練習場所</strong><p>自分専用のLinux仮想マシン、WSL、またはコンテナで練習します。会社・学校・公開中サーバーでは勝手に実行しません。このページの実行例は教材であり、掲載コマンドすべての実機実行証跡ではありません。</p><p>VM/WSLをまだ用意していない場合は、先に<a href="learning-docs/environment-setup.md">環境準備ガイド</a>を行ってください。</p></div>
             </section>
-            <nav class="command-toc" aria-label="コマンド集の目次"><strong>学習順</strong><a href="#basics">1. 現在地とファイル</a><a href="#reading">2. 読む・探す</a><a href="#permissions">3. 権限</a><a href="#system">4. OS・プロセス</a><a href="#service-log">5. サービス・ログ</a><a href="#network">6. ネットワーク</a><a href="#packages">7. パッケージ</a><a href="#combine">8. 組み合わせ</a><a href="#practice">9. 演習</a></nav>
+            <nav class="command-toc" aria-label="コマンド集の目次"><strong>学習順</strong><a href="#basics">1. 現在地とファイル</a><a href="#reading">2. 読む・探す</a><a href="#permissions">3. 権限</a><a href="#system">4. OS・プロセス</a><a href="#service-log">5. サービス・ログ</a><a href="#network">6. ネットワーク</a><a href="#packages">7. パッケージ</a><a href="#combine">8. 組み合わせ</a><a href="#errors">9. よくあるエラー</a><a href="#practice">10. 演習</a></nav>
 
             <section class="command-section" id="basics" aria-labelledby="basics-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span><h2 class="heading-text" id="basics-title">1. 現在地とファイル操作</h2></div>
@@ -79,7 +79,7 @@
                     <article class="command-card"><header><code>cd</code><span class="risk safe">移動</span></header><h3>作業場所を移動</h3><p>change directory の略。<code>cd ..</code> は1つ上、<code>cd -</code> は直前、<code>cd</code> はホームへ戻ります。</p><pre><code>$ cd /etc/nginx
 $ pwd
 /etc/nginx</code></pre><p class="check"><b>確認：</b>移動後に <code>pwd</code> を実行します。</p></article>
-                    <article class="command-card"><header><code>mkdir / touch</code><span class="risk caution">作成</span></header><h3>ディレクトリ / 空ファイルを作成</h3><p><code>mkdir -p</code> は途中の階層も作成。<code>touch</code> は存在するファイルなら更新日時を変えます。</p><pre><code>$ mkdir -p ~/linux-practice/logs
+                    <article class="command-card"><header><code>mkdir / touch</code><span class="risk caution">作成</span></header><h3>ディレクトリ / 空ファイルを作成</h3><p><code>mkdir -p</code> は途中の階層も作成します。<code>touch</code> は存在しないファイル名を指定すると空ファイルを新規作成し、既存ファイルなら更新日時だけを変えます。</p><pre><code>$ mkdir -p ~/linux-practice/logs
 $ touch ~/linux-practice/README.txt</code></pre><p class="check"><b>確認：</b><code>ls -l ~/linux-practice</code> で作成結果を見ます。</p></article>
                     <article class="command-card"><header><code>cp</code><span class="risk caution">変更</span></header><h3>ファイルを複製</h3><p>copy の略。設定変更前のバックアップに使います。<code>-i</code> は上書き前に確認します。</p><pre><code>$ cp -i app.conf app.conf.bak
 $ diff -u app.conf app.conf.bak</code></pre><p class="check"><b>確認：</b><code>diff</code> が何も表示しなければ内容は同じです。</p></article>
@@ -113,7 +113,7 @@ $ systemctl --help</code></pre><p class="check"><b>習慣：</b>記憶が曖昧�
                     <article class="command-card"><header><code>whoami / id</code><span class="risk safe">参照</span></header><h3>自分と所属グループを確認</h3><pre><code>$ whoami
 student
 $ id
-uid=1000(student) gid=1000(student) groups=1000(student),27(sudo)</code></pre><p class="check"><b>実務：</b>権限エラー時に「誰として操作中か」を最初に確認します。</p></article>
+uid=1000(student) gid=1000(student) groups=1000(student),27(sudo)</code></pre><p class="check"><b>実務：</b>権限エラー時に「誰として操作中か」を最初に確認します。<code>groups</code>欄に<code>sudo</code>（または<code>wheel</code>）が含まれていない場合は、以降のsudo例が実行できません。VM作成時の設定を確認してください。</p></article>
                     <article class="command-card"><header><code>chmod</code><span class="risk warning">権限変更</span></header><h3>許可を変更</h3><p>change mode の略。実行権限の追加は <code>u+x</code> のような記号表記でも指定できます。</p><pre><code>$ chmod u+x deploy.sh
 $ chmod 640 app.conf
 $ stat -c '%A %a %n' app.conf</code></pre><p class="check"><b>注意：</b><code>777</code> は誰でも変更できるため安易に使いません。</p></article>
@@ -137,7 +137,7 @@ $ cat /etc/os-release</code></pre><p class="check"><b>使いどころ：</b>手�
 Mem:           7.7Gi 2.1Gi 1.8Gi 120Mi 3.8Gi 5.2Gi</code></pre><p class="check"><b>読む：</b>単純な free より、アプリが利用可能な <code>available</code> を見ます。</p></article>
                     <article class="command-card"><header><code>ps / top</code><span class="risk safe">参照</span></header><h3>動作中のプロセスを確認</h3><pre><code>$ ps aux --sort=-%cpu | head
 $ top</code></pre><p class="check"><b>用語：</b>PIDはプロセス番号。topは <kbd>q</kbd> で終了します。</p></article>
-                    <article class="command-card"><header><code>kill</code><span class="risk warning">停止</span></header><h3>プロセスへ終了要求を送る</h3><p>通常はTERM（15）で安全な終了を依頼。KILL（9）は最終手段です。</p><pre><code>$ kill -TERM 1234
+                    <article class="command-card"><header><code>kill</code><span class="risk warning">停止</span></header><h3>プロセスへ終了要求を送る</h3><p>通常はTERM（15）で安全な終了を依頼。KILL（9）は最終手段です。上の<code>ps</code>コマンドで確認したPID（例では1234）を指定します。</p><pre><code>$ kill -TERM 1234
 $ ps -p 1234</code></pre><p class="check"><b>注意：</b>原因・影響・自動再起動の有無を確認してから実行します。</p></article>
                 </div>
             </section>
@@ -146,10 +146,16 @@ $ ps -p 1234</code></pre><p class="check"><b>注意：</b>原因・影響・自�
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-gears" aria-hidden="true"></i></span><h2 class="heading-text" id="service-title">5. サービスとログ</h2></div>
                 <div class="command-grid">
                     <article class="command-card"><header><code>systemctl</code><span class="risk caution">操作別</span></header><h3>サービスを確認・操作</h3><pre><code>$ systemctl status nginx
+● nginx.service - A high performance web server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled)
+     Active: active (running) since Mon 2026-08-31 09:12:03 JST; 3h ago
+   Main PID: 812 (nginx)
 $ systemctl is-enabled nginx
-$ systemctl --failed</code></pre><p class="check"><b>順番：</b><code>status</code> → 設定やログ確認 → 承認後に <code>restart</code> → 再度status。</p></article>
+$ systemctl --failed</code></pre><p class="check"><b>読む：</b><code>Active:</code>行の<code>active (running)</code>と稼働時間、<code>Main PID</code>を確認します。<b>順番：</b><code>status</code> → 設定やログ確認 → 承認後に <code>restart</code> → 再度status。</p></article>
                     <article class="command-card"><header><code>journalctl</code><span class="risk safe">参照</span></header><h3>systemdログを読む</h3><pre><code>$ sudo journalctl -u nginx --since "30 min ago"
-$ sudo journalctl -p err -b</code></pre><p class="check"><b>意味：</b><code>-u</code> は対象、<code>-p</code> は重要度、<code>-b</code> は今回の起動以降。</p></article>
+Aug 31 09:12:03 server01 systemd[1]: Started A high performance web server.
+Aug 31 09:12:05 server01 nginx[812]: 2026/08/31 09:12:05 [notice] start worker processes
+$ sudo journalctl -p err -b</code></pre><p class="check"><b>読む：</b>各行は日時・ホスト名・unit名・メッセージの順です。<code>-u</code> は対象、<code>-p</code> は重要度、<code>-b</code> は今回の起動以降で絞り込みます。</p></article>
                     <article class="command-card"><header><code>systemctl reload</code><span class="risk warning">設定反映</span></header><h3>停止せず設定を再読込</h3><pre><code>$ sudo nginx -t
 $ sudo systemctl reload nginx
 $ systemctl status nginx</code></pre><p class="check"><b>安全策：</b>先に構文テスト。reload非対応のサービスもあります。</p></article>
@@ -170,7 +176,10 @@ $ ip route</code></pre><p class="check"><b>読む：</b>自分のアドレス、
 HTTP/1.1 200 OK</code></pre><p class="check"><b>読む：</b>200は成功、4xxは要求側、5xxはサーバー側の問題の目安。</p></article>
                     <article class="command-card"><header><code>ss</code><span class="risk safe">参照</span></header><h3>待受ポートを確認</h3><pre><code>$ sudo ss -tulnp
 LISTEN 0 511 0.0.0.0:80 ... nginx</code></pre><p class="check"><b>意味：</b><code>t</code> TCP、<code>u</code> UDP、<code>l</code> 待受、<code>n</code> 数値、<code>p</code> プロセス。</p></article>
-                    <article class="command-card"><header><code>ssh</code><span class="risk caution">接続</span></header><h3>別のLinuxへ安全に接続</h3><pre><code>$ ssh -i ~/.ssh/lab_key student@192.0.2.10</code></pre><p class="check"><b>初回確認：</b>ホスト鍵の指紋を管理者または構築記録と照合します。</p></article>
+                    <article class="command-card"><header><code>ssh</code><span class="risk caution">接続</span></header><h3>別のLinuxへ安全に接続</h3><pre><code>$ ssh -i ~/.ssh/lab_key student@192.0.2.10
+The authenticity of host '192.0.2.10 (192.0.2.10)' can't be established.
+ED25519 key fingerprint is SHA256:EXAMPLE1234fakeFingerprint5678.
+Are you sure you want to continue connecting (yes/no/fingerprint)?</code></pre><p class="check"><b>初回確認：</b>表示されたfingerprintを、VM作成時のコンソール出力やクラウドの管理画面に表示された値と照合します。個人学習環境では、その値と一致する場合だけ<code>yes</code>と答え、一致しない・照合できない場合は接続を中断します。</p></article>
                 </div>
             </section>
 
@@ -191,11 +200,22 @@ LISTEN 0 511 0.0.0.0:80 ... nginx</code></pre><p class="check"><b>意味：</b><
                 <aside class="danger-box"><strong>リダイレクトの上書きに注意</strong><p><code>&gt;</code> は既存内容を消して置き換えます。重要ファイルへ直接使わず、<code>ls -l 出力先</code> で存在を確認し、練習用ディレクトリで試します。</p></aside>
             </section>
 
+            <section class="command-section" id="errors" aria-labelledby="errors-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span><h2 class="heading-text" id="errors-title">9. よくあるエラーメッセージと意味</h2></div>
+                <p>操作を止めて、原因を1つずつ確認します。より詳しい切り分け表は<a href="learning-docs/beginner-troubleshooting.md">初心者向けエラーFAQ</a>を参照してください。</p>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>command not found</code><span class="risk safe">入力</span></header><h3>コマンド名が見つからない</h3><p>綴りの誤り、または未導入のコマンドです。綴りと使っているshell・OSを確認し、教材の前提に合わせて再実行します。</p></article>
+                    <article class="command-card"><header><code>Permission denied</code><span class="risk caution">権限</span></header><h3>権限が不足している</h3><p>実行・読取・変更のいずれかの権限がありません。<code>ls -l 対象</code>で所有者と権限を確認し、必要な範囲だけ<code>sudo</code>を付けて再実行します。</p></article>
+                    <article class="command-card"><header><code>No such file or directory</code><span class="risk caution">パス</span></header><h3>指定した場所に対象がない</h3><p>パスや名前の誤り、または現在地の勘違いです。<code>pwd</code>と<code>ls -la</code>で現在地、綴り、大文字小文字を確認してから再実行します。</p></article>
+                    <article class="command-card"><header><code>user is not in the sudoers file</code><span class="risk warning">管理者権限</span></header><h3>sudoを許可されていない</h3><p>そのユーザーがsudoグループ（またはsudoers設定）に含まれていません。個人学習環境ではVM作成時に作った管理者アカウント設定を確認し、必要なら管理者アカウントでsudoersへ追加します。</p></article>
+                </div>
+            </section>
+
             <section class="command-section" id="practice" aria-labelledby="practice-title">
-                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span><h2 class="heading-text" id="practice-title">9. 15分でできる安全な練習</h2></div>
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span><h2 class="heading-text" id="practice-title">10. 15分でできる安全な練習</h2></div>
                 <ol class="practice-steps">
                     <li><b>場所を作る</b><code>mkdir -p ~/linux-practice/logs &amp;&amp; cd ~/linux-practice</code><span><code>pwd</code> でホーム配下にいることを確認。</span></li>
-                    <li><b>ファイルを作る</b><code>printf 'INFO start\nERROR timeout\n' &gt; logs/app.log</code><span><code>cat logs/app.log</code> で2行を確認。</span></li>
+                    <li><b>ファイルを作る</b><code>printf 'INFO start\nERROR timeout\n' &gt; logs/app.log</code><span><code>\n</code>は改行を表す特殊な書き方です。<code>cat logs/app.log</code> で2行を確認。</span></li>
                     <li><b>探す</b><code>grep -n 'ERROR' logs/app.log</code><span><code>2:ERROR timeout</code> が出れば成功。</span></li>
                     <li><b>複製する</b><code>cp -i logs/app.log logs/app.log.bak</code><span><code>diff -u</code> で差がないことを確認。</span></li>
                     <li><b>権限を読む</b><code>stat -c '%A %a %n' logs/app.log</code><span>記号と数字の権限を対応させる。</span></li>

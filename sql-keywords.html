@@ -85,19 +85,38 @@
                     <li><a href="#cheatsheet">早見表</a></li><li><a href="#incident">障害時の確認</a></li><li><a href="#practice">演習</a></li>
                 </ul></nav>
                 <div class="dialect-note"><strong>SQL方言に注意：</strong>MySQL、PostgreSQL、SQLite、SQL Serverでは、日付関数、自動採番、文字列結合、件数制限などの書き方が異なります。このページは共通的な書き方を中心にし、実行時は利用製品の公式資料で確認します。</div>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>方言差異の代表例（各1行）</caption><thead><tr><th scope="col">分類</th><th scope="col">MySQL</th><th scope="col">PostgreSQL</th><th scope="col">SQLite</th><th scope="col">SQL Server</th></tr></thead><tbody>
+                    <tr><td>現在日時を取る日付関数</td><td><code>NOW()</code></td><td><code>NOW()</code> / <code>CURRENT_TIMESTAMP</code></td><td><code>CURRENT_TIMESTAMP</code></td><td><code>GETDATE()</code></td></tr>
+                    <tr><td>自動採番</td><td><code>AUTO_INCREMENT</code></td><td><code>GENERATED ... AS IDENTITY</code> / <code>SERIAL</code></td><td><code>INTEGER PRIMARY KEY</code>（自動的に採番）</td><td><code>IDENTITY(1,1)</code></td></tr>
+                    <tr><td>文字列結合</td><td><code>CONCAT(a, b)</code></td><td><code>a || b</code></td><td><code>a || b</code></td><td><code>a + b</code></td></tr>
+                    <tr><td>件数制限</td><td><code>LIMIT n</code></td><td><code>LIMIT n</code></td><td><code>LIMIT n</code></td><td><code>TOP n</code></td></tr>
+                </tbody></table></div>
             </section>
 
             <section id="sample" class="sql-section" aria-labelledby="sample-title">
                 <h2 id="sample-title">練習用テーブル：servers</h2>
-                <p>以降は、サーバー台帳を想定した次の列を使います。1行が1台のサーバー、列がその属性です。</p>
+                <p>以降は、サーバー台帳を想定した次の列を使います。1行が1台のサーバー、列がその属性です。<code>owner_id</code> は担当者を表す番号で、<a href="#join">結合（JOIN）</a>で使う <code>owners</code> テーブルの主キーに対応します。</p>
                 <div class="sql-table-wrap"><table class="sql-table"><caption>練習用serversテーブルの列</caption><thead><tr><th scope="col">列名</th><th scope="col">意味</th><th scope="col">例</th></tr></thead><tbody>
                     <tr><td><code>server_id</code></td><td>重複しない識別番号</td><td>101</td></tr>
                     <tr><td><code>hostname</code></td><td>サーバー名</td><td>web-01</td></tr>
                     <tr><td><code>role</code></td><td>役割</td><td>web / db</td></tr>
                     <tr><td><code>environment</code></td><td>環境</td><td>dev / prod</td></tr>
+                    <tr><td><code>owner_id</code></td><td>担当者ID（<code>owners</code>テーブルへの外部キー、未設定は<code>NULL</code>）</td><td>1 / NULL</td></tr>
                     <tr><td><code>cpu_usage</code></td><td>CPU使用率（%）</td><td>42.5</td></tr>
                     <tr><td><code>last_checked_at</code></td><td>最終確認日時</td><td>2026-08-28 10:00:00</td></tr>
                 </tbody></table></div>
+                <p>この列に、以下のような架空のサンプルデータが入っているものとして、このページの例と演習を進めます。</p>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>serversテーブルのサンプルデータ（架空）</caption><thead><tr><th scope="col">server_id</th><th scope="col">hostname</th><th scope="col">role</th><th scope="col">environment</th><th scope="col">owner_id</th><th scope="col">cpu_usage</th><th scope="col">last_checked_at</th></tr></thead><tbody>
+                    <tr><td>101</td><td>web-01</td><td>web</td><td>prod</td><td>1</td><td>82.3</td><td>2026-08-28 09:50:00</td></tr>
+                    <tr><td>102</td><td>web-02</td><td>web</td><td>prod</td><td>2</td><td>45.1</td><td>2026-08-28 09:55:00</td></tr>
+                    <tr><td>103</td><td>db-01</td><td>db</td><td>prod</td><td>1</td><td>91.7</td><td>2026-08-28 10:00:00</td></tr>
+                    <tr><td>104</td><td>db-02</td><td>db</td><td>dev</td><td>NULL</td><td>15.2</td><td>2026-08-20 08:00:00</td></tr>
+                    <tr><td>105</td><td>app-01</td><td>app</td><td>stg</td><td>2</td><td>66.4</td><td>2026-08-27 22:10:00</td></tr>
+                    <tr><td>106</td><td>app-02</td><td>app</td><td>prod</td><td>NULL</td><td>88.9</td><td>2026-08-28 09:40:00</td></tr>
+                    <tr><td>107</td><td>batch-01</td><td>batch</td><td>dev</td><td>3</td><td>12.0</td><td>2026-08-15 07:30:00</td></tr>
+                    <tr><td>108</td><td>cache-01</td><td>cache</td><td>prod</td><td>3</td><td>77.5</td><td>2026-08-28 09:45:00</td></tr>
+                </tbody></table></div>
+                <div class="sql-check"><strong>注記：</strong>このサンプルデータは学習用に作成した架空の値です。実機で実行して得た結果ではありません（NOT RUN）。#practiceの手順を使って、自分の手元の環境で同じデータを作り、実際に実行して確かめてください。</div>
             </section>
 
             <section id="read" class="sql-section" aria-labelledby="read-title">
@@ -115,6 +134,12 @@ FROM servers
 WHERE environment = 'prod' AND cpu_usage &gt;= 80
 ORDER BY cpu_usage DESC
 LIMIT 10;</code></pre></div>
+                <p><strong>このデータに対する実行結果（#sampleのサンプルデータで再現した例。架空のデータであり、実機で実行した記録ではありません）：</strong></p>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>実行結果例</caption><thead><tr><th scope="col">hostname</th><th scope="col">role</th><th scope="col">cpu_usage</th></tr></thead><tbody>
+                    <tr><td>db-01</td><td>db</td><td>91.7</td></tr>
+                    <tr><td>app-02</td><td>app</td><td>88.9</td></tr>
+                    <tr><td>web-01</td><td>web</td><td>82.3</td></tr>
+                </tbody></table></div>
                 <p><strong>読む順番：</strong>「本番環境でCPU 80%以上のサーバーを、使用率が高い順に最大10台表示」と日本語へ戻せれば理解できています。</p>
                 <div class="sql-check"><strong>よく使う条件：</strong><code>=</code>、<code>&lt;&gt;</code>（等しくない）、<code>AND</code>、<code>OR</code>、<code>NOT</code>、<code>IN (...)</code>、<code>BETWEEN A AND B</code>、<code>LIKE 'web-%'</code>、<code>IS NULL</code>。<code>NULL</code> は値がない状態なので <code>= NULL</code> ではなく <code>IS NULL</code> を使います。</div>
             </section>
@@ -127,18 +152,29 @@ LIMIT 10;</code></pre></div>
                     <article class="keyword-card"><span class="keyword-kind">グループ</span><h3><code>GROUP BY</code></h3><p>同じ値ごとに行をまとめます。環境別・役割別の台数集計に使います。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">集計後の条件</span><h3><code>HAVING</code></h3><p><code>WHERE</code> は集計前の行、<code>HAVING</code> は集計後のグループを絞ります。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">別名</span><h3><code>AS</code></h3><p>列やテーブルへ分かりやすい別名を付けます。<code>AS server_count</code> のように使います。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">条件分岐</span><h3><code>CASE</code></h3><p>値に応じて表示を変えます。CPU使用率を「正常・警告・異常」に分類できます。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">条件分岐</span><h3><code>CASE</code></h3><p>値に応じて表示を変えます。CPU使用率を「正常・警告・異常」に分類できます。<code>CASE WHEN cpu_usage &gt;= 90 THEN '異常' WHEN cpu_usage &gt;= 70 THEN '警告' ELSE '正常' END</code> のように使います。</p></article>
                 </div>
                 <div class="sql-example"><pre><code>SELECT environment, COUNT(*) AS server_count, AVG(cpu_usage) AS avg_cpu
 FROM servers
 GROUP BY environment
 HAVING AVG(cpu_usage) &gt;= 60
 ORDER BY avg_cpu DESC;</code></pre></div>
+                <p><strong>このデータに対する実行結果（#sampleのサンプルデータで再現した架空の例）：</strong></p>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>実行結果例</caption><thead><tr><th scope="col">environment</th><th scope="col">server_count</th><th scope="col">avg_cpu</th></tr></thead><tbody>
+                    <tr><td>prod</td><td>5</td><td>77.10</td></tr>
+                    <tr><td>stg</td><td>1</td><td>66.40</td></tr>
+                </tbody></table></div>
+                <p>devは平均CPU使用率が13.6と60未満のため、<code>HAVING</code>で除外されて結果に含まれません。</p>
             </section>
 
             <section id="join" class="sql-section" aria-labelledby="join-title">
                 <h2 id="join-title">3. 複数のテーブルをつなぐ</h2>
-                <p><code>servers.owner_id</code> と <code>owners.owner_id</code> のような共通のキーを使って、分けて保存したデータを結びます。</p>
+                <p><code>servers.owner_id</code> と <code>owners.owner_id</code> のような共通のキーを使って、分けて保存したデータを結びます。担当者を管理する <code>owners</code> テーブルは、次の列を持つものとします。</p>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>練習用ownersテーブルの列とサンプルデータ（架空）</caption><thead><tr><th scope="col">owner_id</th><th scope="col">owner_name</th></tr></thead><tbody>
+                    <tr><td>1</td><td>インフラ担当</td></tr>
+                    <tr><td>2</td><td>アプリ担当</td></tr>
+                    <tr><td>3</td><td>監視担当</td></tr>
+                </tbody></table></div>
                 <div class="keyword-grid">
                     <article class="keyword-card"><span class="keyword-kind">一致行</span><h3><code>INNER JOIN</code></h3><p>両方のテーブルに一致する行だけを返します。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">左側を全件</span><h3><code>LEFT JOIN</code></h3><p>左側をすべて返し、右側に一致がなければ右側の列は <code>NULL</code> になります。担当未設定の発見に便利です。</p></article>
@@ -148,6 +184,15 @@ ORDER BY avg_cpu DESC;</code></pre></div>
 FROM servers AS s
 LEFT JOIN owners AS o ON s.owner_id = o.owner_id
 WHERE s.environment = 'prod';</code></pre></div>
+                <p><strong>このデータに対する実行結果（#sample・上記ownersのサンプルデータで再現した架空の例）：</strong></p>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>実行結果例</caption><thead><tr><th scope="col">hostname</th><th scope="col">environment</th><th scope="col">owner_name</th></tr></thead><tbody>
+                    <tr><td>web-01</td><td>prod</td><td>インフラ担当</td></tr>
+                    <tr><td>web-02</td><td>prod</td><td>アプリ担当</td></tr>
+                    <tr><td>db-01</td><td>prod</td><td>インフラ担当</td></tr>
+                    <tr><td>app-02</td><td>prod</td><td>NULL</td></tr>
+                    <tr><td>cache-01</td><td>prod</td><td>監視担当</td></tr>
+                </tbody></table></div>
+                <p>app-02は<code>owner_id</code>が<code>NULL</code>のため、<code>LEFT JOIN</code>により行は残りつつ<code>owner_name</code>が<code>NULL</code>になります。これが演習3で探す「担当者未設定」の状態です。</p>
                 <div class="sql-warning"><strong>確認点：</strong>結合前後の件数を比べます。想定より増えた場合は、結合キーの重複や <code>ON</code> 条件不足を疑います。</div>
             </section>
 
@@ -174,20 +219,33 @@ WHERE server_id = 104 AND environment = 'dev';</code></pre></div>
                 <h2 id="define-title">5. テーブルと制約を定義する</h2>
                 <div class="keyword-grid">
                     <article class="keyword-card"><span class="keyword-kind">作成</span><h3><code>CREATE TABLE</code></h3><p>テーブル名、列名、データ型、制約を定義します。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">変更</span><h3><code>ALTER TABLE</code></h3><p>列や制約を追加・変更します。製品によって対応範囲が異なります。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">構造削除</span><h3><code>DROP TABLE</code></h3><p>テーブル構造とデータを削除します。復旧が難しい破壊的操作です。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">変更</span><h3><code>ALTER TABLE</code></h3><p>列や制約を追加・変更します。製品によって対応範囲が異なります。<code>ALTER TABLE servers ADD COLUMN memo VARCHAR(200);</code> のように使います。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">構造削除</span><h3><code>DROP TABLE</code></h3><p>テーブル構造とデータを削除します。復旧が難しい破壊的操作です。<code>DROP TABLE servers;</code> のように使います。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">主キー</span><h3><code>PRIMARY KEY</code></h3><p>各行を一意に識別します。重複と <code>NULL</code> を許しません。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">外部キー</span><h3><code>FOREIGN KEY</code></h3><p>別テーブルのキーを参照し、存在しない担当者IDなどを防ぎます。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">値の規則</span><h3><code>NOT NULL / UNIQUE / CHECK / DEFAULT</code></h3><p>必須、重複禁止、条件、初期値をデータベース側で守ります。</p></article>
                 </div>
-                <div class="sql-example"><pre><code>CREATE TABLE servers (
+                <div class="sql-example"><pre><code>CREATE TABLE owners (
+    owner_id INTEGER PRIMARY KEY,
+    owner_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE servers (
     server_id INTEGER PRIMARY KEY,
     hostname VARCHAR(100) NOT NULL UNIQUE,
     role VARCHAR(30) NOT NULL,
     environment VARCHAR(10) NOT NULL CHECK (environment IN ('dev', 'stg', 'prod')),
+    owner_id INTEGER,
     cpu_usage DECIMAL(5,2) DEFAULT 0,
-    last_checked_at TIMESTAMP
+    last_checked_at TIMESTAMP,
+    FOREIGN KEY (owner_id) REFERENCES owners (owner_id)
 );</code></pre></div>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>主なデータ型の早見表</caption><thead><tr><th scope="col">型</th><th scope="col">意味</th></tr></thead><tbody>
+                    <tr><td><code>INTEGER</code></td><td>整数</td></tr>
+                    <tr><td><code>VARCHAR(n)</code></td><td>最大n文字までの可変長文字列（例：<code>VARCHAR(100)</code>は最大100文字）</td></tr>
+                    <tr><td><code>DECIMAL(p,s)</code></td><td>合計p桁のうち小数点以下s桁を持つ数値（例：<code>DECIMAL(5,2)</code>は999.99まで表現可能）</td></tr>
+                    <tr><td><code>TIMESTAMP</code></td><td>日付と時刻</td></tr>
+                </tbody></table></div>
             </section>
 
             <section id="transaction" class="sql-section" aria-labelledby="transaction-title">
@@ -206,6 +264,15 @@ COMMIT;
 
             <section id="security" class="sql-section" aria-labelledby="security-title">
                 <h2 id="security-title">7. 権限と安全なSQL</h2>
+                <p>まず、SQLインジェクションと呼ばれる典型的な事故の悪い例を見ます。利用者の入力をそのままSQL文へ文字列連結すると、入力次第で想定外のSQLが実行されてしまいます。</p>
+                <div class="sql-example"><pre><code>-- 悪い例：入力値をそのまま文字列連結している（アプリ側の疑似コード、実行しないでください）
+sql = "SELECT * FROM servers WHERE hostname = '" + input + "'";
+
+-- 利用者が hostname 欄に  ' OR '1'='1  と入力すると、
+-- 実際に実行される文は次のようになってしまう
+SELECT * FROM servers WHERE hostname = '' OR '1'='1';
+-- WHERE条件が常に真になり、絞り込みたかった一部の行ではなく全行が返る</code></pre></div>
+                <div class="sql-warning"><strong>危険性：</strong>件数の想定外の増加だけでなく、連結の仕方によっては条件を偽装した更新・削除にもつながります。これを防ぐのが次のプレースホルダーです。</div>
                 <div class="keyword-grid">
                     <article class="keyword-card"><span class="keyword-kind">付与</span><h3><code>GRANT</code></h3><p>読み取りなど必要な権限だけを付与します。最小権限の原則を守ります。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">取り消し</span><h3><code>REVOKE</code></h3><p>不要になった権限を取り消します。退職・異動・役割変更時も見直します。</p></article>
@@ -223,7 +290,7 @@ SELECT hostname FROM servers WHERE server_id = ?;</code></pre></div>
                 <h2 id="performance-title">8. インデックス・ビュー・実行計画</h2>
                 <div class="keyword-grid">
                     <article class="keyword-card"><span class="keyword-kind">検索補助</span><h3><code>CREATE INDEX</code></h3><p>本の索引のように検索を速くします。ただし容量を使い、追加・更新・削除が遅くなることがあります。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">仮想表</span><h3><code>CREATE VIEW</code></h3><p>よく使う問い合わせに名前を付けます。複雑さを隠せますが、必ず高速になるわけではありません。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">仮想表</span><h3><code>CREATE VIEW</code></h3><p>よく使う問い合わせに名前を付けます。複雑さを隠せますが、必ず高速になるわけではありません。<code>CREATE VIEW prod_servers AS SELECT hostname, cpu_usage FROM servers WHERE environment = 'prod';</code> のように使います。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">計画確認</span><h3><code>EXPLAIN</code></h3><p>全件走査か、どのインデックスを使うか、結合順などを確認します。実行を伴う形式は負荷に注意します。</p></article>
                 </div>
                 <div class="sql-example"><pre><code>CREATE INDEX idx_servers_environment_role
@@ -232,6 +299,11 @@ ON servers (environment, role);
 EXPLAIN
 SELECT hostname FROM servers
 WHERE environment = 'prod' AND role = 'web';</code></pre></div>
+                <p><strong>実行計画の出力例（製品によって列名や表示は異なります。架空の例であり、実機で実行した記録ではありません）：</strong></p>
+                <div class="sql-table-wrap"><table class="sql-table"><caption>EXPLAIN出力例</caption><thead><tr><th scope="col">id</th><th scope="col">select_type</th><th scope="col">table</th><th scope="col">type</th><th scope="col">key</th><th scope="col">rows</th></tr></thead><tbody>
+                    <tr><td>1</td><td>SIMPLE</td><td>servers</td><td>ref</td><td>idx_servers_environment_role</td><td>12</td></tr>
+                </tbody></table></div>
+                <p><code>type</code>が<code>ref</code>で<code>key</code>に作成したインデックス名が表示され、推定行数（<code>rows</code>）が全件より少なければ、インデックスが使われていると判断できます。<code>type</code>が<code>ALL</code>で<code>key</code>が空の場合は全件走査（フルスキャン）です。</p>
                 <ol class="sql-flow"><li>遅いSQL、実行時間、頻度、対象時間帯をログで特定する。</li><li><code>EXPLAIN</code> で実行計画と推定件数を確認する。</li><li>不要な列・行、関数、並び替え、結合条件を見直す。</li><li>必要なら候補インデックスを検証環境で比較する。</li><li>変更前後の時間、CPU、I/O、ロック、書き込み性能を記録する。</li></ol>
             </section>
 
@@ -272,6 +344,43 @@ WHERE environment = 'prod' AND role = 'web';</code></pre></div>
             <section id="practice" class="sql-practice" aria-labelledby="practice-title">
                 <h2 id="practice-title">11. 手を動かす演習</h2>
                 <p>最初は本番データではなく、SQLiteなどの使い捨て学習環境で実行してください。各演習は「実行SQL・期待結果・実際の結果・気づき」を記録します。</p>
+                <p>学習環境の用意の仕方は、主に次の2通りです。</p>
+                <ol class="sql-flow">
+                    <li><strong>ブラウザで動くオンライン実行環境を使う：</strong>検索エンジンで「SQLite オンライン実行」などと調べると、インストール不要でSQLiteを試せる学習用サービスが見つかります。そこに下記のSQL文を貼り付けて実行します。</li>
+                    <li><strong>自分のPCに手元の環境を作る：</strong>PCにSQLite（<code>sqlite3</code>コマンドなど）を用意し、同じSQL文をローカルで実行してテーブルを作ります。</li>
+                </ol>
+                <p>いずれの方法でも、まず次のSQL文をそのまま実行してください。#defineで説明したテーブル定義（<code>owners</code>・<code>servers</code>）と、#sampleのサンプルデータを再現できます。</p>
+                <div class="sql-example"><pre><code>CREATE TABLE owners (
+    owner_id INTEGER PRIMARY KEY,
+    owner_name VARCHAR(50) NOT NULL
+);
+
+INSERT INTO owners (owner_id, owner_name) VALUES
+    (1, 'インフラ担当'),
+    (2, 'アプリ担当'),
+    (3, '監視担当');
+
+CREATE TABLE servers (
+    server_id INTEGER PRIMARY KEY,
+    hostname VARCHAR(100) NOT NULL UNIQUE,
+    role VARCHAR(30) NOT NULL,
+    environment VARCHAR(10) NOT NULL CHECK (environment IN ('dev', 'stg', 'prod')),
+    owner_id INTEGER,
+    cpu_usage DECIMAL(5,2) DEFAULT 0,
+    last_checked_at TIMESTAMP,
+    FOREIGN KEY (owner_id) REFERENCES owners (owner_id)
+);
+
+INSERT INTO servers (server_id, hostname, role, environment, owner_id, cpu_usage, last_checked_at) VALUES
+    (101, 'web-01', 'web', 'prod', 1, 82.3, '2026-08-28 09:50:00'),
+    (102, 'web-02', 'web', 'prod', 2, 45.1, '2026-08-28 09:55:00'),
+    (103, 'db-01', 'db', 'prod', 1, 91.7, '2026-08-28 10:00:00'),
+    (104, 'db-02', 'db', 'dev', NULL, 15.2, '2026-08-20 08:00:00'),
+    (105, 'app-01', 'app', 'stg', 2, 66.4, '2026-08-27 22:10:00'),
+    (106, 'app-02', 'app', 'prod', NULL, 88.9, '2026-08-28 09:40:00'),
+    (107, 'batch-01', 'batch', 'dev', 3, 12.0, '2026-08-15 07:30:00'),
+    (108, 'cache-01', 'cache', 'prod', 3, 77.5, '2026-08-28 09:45:00');</code></pre></div>
+                <div class="sql-check"><strong>注記：</strong>上記のINSERT文は#sampleの架空データを再現するためのものです。実際にこの内容で実行して動作確認した記録ではありません（NOT RUN）。まず自分の手元で実行し、このページの実行結果例と一致するかを確かめてください。</div>
                 <div class="practice-grid">
                     <article class="practice-card"><h3>演習1：安全に読む</h3><p>本番環境のサーバー名と役割を、サーバー名順で最大20件取得してください。</p><details><summary>解答例</summary><pre><code>SELECT hostname, role
 FROM servers
@@ -289,8 +398,16 @@ WHERE o.owner_id IS NULL;</code></pre></details></article>
                     <article class="practice-card"><h3>演習4：更新前確認</h3><p>server_id 104の環境を変更する前に、対象を確認するSQLを書いてください。</p><details><summary>解答例</summary><pre><code>SELECT server_id, hostname, environment
 FROM servers
 WHERE server_id = 104;</code></pre></details></article>
-                    <article class="practice-card"><h3>演習5：失敗を調べる</h3><p>「アプリからDBへ接続できない」場合の確認順を、接続先、ネットワーク、認証、ログの観点で説明してください。</p></article>
-                    <article class="practice-card"><h3>演習6：説明する</h3><p><code>WHERE</code> と <code>HAVING</code>、<code>DELETE</code> と <code>DROP</code> の違いを、初学者へ1文ずつ説明してください。</p></article>
+                    <article class="practice-card"><h3>演習5：失敗を調べる</h3><p>「アプリからDBへ接続できない」場合の確認順を、接続先、ネットワーク、認証、ログの観点で説明してください。</p><details><summary>確認観点の例</summary><ul>
+<li><strong>接続先：</strong>ホスト名・ポート番号・DB名・接続文字列に誤りがないかを確認する。</li>
+<li><strong>ネットワーク：</strong>DNS解決、Firewall・セキュリティグループ、経路上の到達性を確認する。</li>
+<li><strong>認証：</strong>ユーザー名・パスワード、権限、証明書の期限、アカウントの有効期限を確認する。</li>
+<li><strong>ログ：</strong>アプリ側のエラーメッセージ、DBサーバー側の接続ログ、直前の設定変更履歴を確認する。</li>
+</ul></details></article>
+                    <article class="practice-card"><h3>演習6：説明する</h3><p><code>WHERE</code> と <code>HAVING</code>、<code>DELETE</code> と <code>DROP</code> の違いを、初学者へ1文ずつ説明してください。</p><details><summary>模範解答例</summary><ul>
+<li><strong>WHERE と HAVING：</strong><code>WHERE</code>は集計前の行を1行ずつ絞り込む条件で、<code>HAVING</code>は<code>GROUP BY</code>でまとめた後のグループを絞り込む条件です。</li>
+<li><strong>DELETE と DROP：</strong><code>DELETE</code>はテーブル構造を残したまま行（データ）だけを削除する操作で、<code>DROP TABLE</code>はテーブルの構造自体をデータごと削除する操作です。</li>
+</ul></details></article>
                 </div>
                 <div class="sql-check"><strong>完了条件：</strong>SQLが動くだけでなく、対象件数を予測し、結果を確認し、危険な操作と製品差を説明できたら合格です。</div>
             </section>

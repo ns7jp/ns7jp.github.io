@@ -28,7 +28,35 @@ RTO / RPO: 60分 / 24時間（目標。別host実測はNOT RUN）
 前提 / リスク / 戻し方: NAT内、snapshot取得、consoleからrollback
 ```
 
-この例は「目的、通信、対象外、目標、戻し方」が試験へ追跡できるため設計区分12点相当です。脅威ごとの判断理由や非機能試験まで実測できれば16〜20点を検討します。
+この例は「目的、通信、対象外、目標、戻し方」が試験へ追跡できるため設計区分12点相当です。以下に16点・20点相当の架空の記入例を示します。
+
+### 16点相当の架空例
+
+```text
+目的 / 利用者: 学習者が管理端末からLab Webの状態を確認し、障害を自分で切り分けられるようにする
+成功条件: 管理元だけSSH、clientからHTTPS、異常を5分以内にローカル検知、切り分け手順で原因箇所まで特定できる
+対象 / 対象外: Ubuntu VMとLab container、監視・alert経路 / 公開DNS・本番通信・複数VM構成は対象外
+接続元 → 宛先 → protocol/port: admin → VM → TCP/22、client → proxy → TCP/443、monitor → exporter → TCP/9100（各通信をfailure-drills.mdの該当drillへ対応付け）
+データ / backup: 設定とtest dataを日次保存、checksumを確認、復元手順書へ追跡できる
+RTO / RPO: 60分 / 24時間（目標。別host実測はNOT RUN。lab-guide.md Step7で実施予定）
+前提 / リスク / 戻し方: NAT内、snapshot取得、consoleからrollback、各リスクの試験項目をsecurity-threat-model.mdへ記載
+```
+
+この例（架空の記入例）は要件の各項目を試験手順まで追跡できるため設計区分16点相当です。
+
+### 20点相当の架空例
+
+```text
+目的 / 利用者: 学習者が管理端末からLab Webの状態を確認し、障害を自分で切り分けて復旧できるようにする
+成功条件: 管理元だけSSH、clientからHTTPS、異常を5分以内にローカル検知、非機能要件（可用性・性能の目標値）を明記し達成有無を判定できる
+対象 / 対象外: Ubuntu VMとLab container、監視・alert経路、脅威モデルの主要リスク / 公開DNS・本番通信・複数VM構成は対象外（理由: 個人検証環境のため）
+接続元 → 宛先 → protocol/port: admin → VM → TCP/22、client → proxy → TCP/443、monitor → exporter → TCP/9100（security-threat-model.mdの通信フロー表と対応、各行の脅威・軽減策・受容理由を記載）
+データ / backup: 設定とtest dataを日次保存、checksumを確認、暗号化方式と鍵の保管場所を明記、復元試験の合否まで追跡
+RTO / RPO: 60分 / 24時間（目標として明記。別host実測はNOT RUN、lab-guide.md Step7で実施予定）
+前提 / リスク / 戻し方: NAT内、snapshot取得、consoleからrollback。各リスクについて受容・軽減・移転・回避のどれを選んだか理由付きで記載
+```
+
+この例（架空の記入例）は非機能要件・脅威ごとの判断理由まで説明しているため設計区分20点相当です。いずれも架空の記入例であり、実際に検証した結果ではありません。
 
 ## 2. 作業・確認記録
 

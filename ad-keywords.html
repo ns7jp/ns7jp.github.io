@@ -48,18 +48,18 @@
 <div class="ad-command"><pre><code>nslookup -type=SRV _ldap._tcp.dc._msdcs.corp.example.com
 w32tm /query /source
 klist
-setspn -X</code></pre></div><div class="ad-check"><strong>切り分けの合言葉：</strong>「名・時・券」— DNSの名前解決、時刻、Kerberosチケットの順に確認します。</div></section>
+setspn -X</code></pre></div><div class="ad-check"><strong>オプションの意味：</strong><code>setspn -X</code>の<code>-X</code>は、重複して登録されているSPNがないかを検索する指定です。コマンドのオプション記号の調べ方は<a href="windows-commands.html#option-notes">Windowsコマンド集</a>にまとめています。</div><div class="ad-check"><strong>切り分けの合言葉：</strong>「名・時・券」— DNSの名前解決、時刻、Kerberosチケットの順に確認します。</div></section>
 
 <section id="ou-gpo" class="ad-section" aria-labelledby="ou-gpo-title"><h2 id="ou-gpo-title">4. OUとGPOで対象へルールを配る</h2><div class="ad-keyword-grid">
 <article class="ad-keyword-card"><span class="keyword-kind">整理と委任</span><h3>OU（組織単位）</h3><p>オブジェクトを整理し、GPO適用や管理権限の委任に使う入れ物です。組織図より管理目的で設計します。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">設定集</span><h3>GPO</h3><p>ユーザーやPCへ共通設定を配るグループポリシーオブジェクトです。サイト・ドメイン・OUへリンクして使います。</p></article>
-<article class="ad-keyword-card"><span class="keyword-kind">適用順</span><h3>LSDOU</h3><p>Local → Site → Domain → OUの処理順です。子OU、強制、継承のブロック、フィルター等で結果は変わります。</p></article>
+<article class="ad-keyword-card"><span class="keyword-kind">適用順</span><h3>LSDOU</h3><p>Local → Site → Domain → OUの処理順です。子OU、強制、継承のブロック、フィルター等で結果は変わります。継承とは、親フォルダーの権限設定が子フォルダーにも自動的に及ぶ仕組みのことで、GPOでは親OUの設定が子OUにも及ぶ動作を指します。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">対象制御</span><h3>Security / WMI Filter</h3><p>GPOを誰・どのPCへ適用するか絞ります。複雑化を避け、目的と対象を記録します。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">共有領域</span><h3>SYSVOL</h3><p>GPOテンプレートやログオンスクリプトをDC間で共有するフォルダーです。通常はDFSRで複製されます。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">結果確認</span><h3>RSoP / gpresult</h3><p>最終的な適用結果を確認します。「GPOを作った」で終わらず、対象端末の結果まで見ます。</p></article></div>
 <div class="ad-command"><pre><code>gpresult /r
 gpresult /h C:\Temp\gpresult.html
-gpupdate /force</code></pre></div><div class="ad-warning"><strong>注意：</strong><code>gpupdate /force</code> は再ログオンや再起動を求めることがあります。本番へ一斉実行せず、テストOU、小さな対象、切り戻し、周知を用意します。</div></section>
+gpupdate /force</code></pre></div><div class="ad-warning"><strong>注意：</strong><code>gpupdate /force</code> は再ログオンや再起動を求めることがあります。本番へ一斉実行せず、テストOU、小さな対象、切り戻し、周知を用意します。</div><div class="ad-check"><strong>具体例：</strong>営業部の太郎さんのユーザーアカウントは<code>OU=Sales</code>に入っています。このOUにリンクしたGPOで既定のプリンター設定を配布すると、太郎さんが使う端末にもログオン時に同じ設定が適用されます。この続き（太郎さんがどの権限を得るか）は次の「5. グループと権限」で扱います。</div></section>
 
 <section id="permissions" class="ad-section" aria-labelledby="permissions-title"><h2 id="permissions-title">5. グループと権限：人へ直接付けない</h2><div class="ad-keyword-grid">
 <article class="ad-keyword-card"><span class="keyword-kind">まとめる</span><h3>Security Group</h3><p>複数のユーザーやPCへ権限をまとめて割り当てます。配布グループは主にメール配布用です。</p></article>
@@ -67,21 +67,37 @@ gpupdate /force</code></pre></div><div class="ad-warning"><strong>注意：</str
 <article class="ad-keyword-card"><span class="keyword-kind">設計の型</span><h3>AGDLP</h3><p>Accounts → Global groups → Domain Local groups → Permissions。人を役割へ、役割を資源用グループへ入れます。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">許可表</span><h3>ACL / ACE</h3><p>ACLはアクセス許可の一覧、ACEはその1項目です。許可・拒否、継承、共有権限とNTFS権限を確認します。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">原則</span><h3>最小権限</h3><p>必要な人へ必要な範囲・期間だけ付与します。日常用と管理用を分け、Domain Adminsを常用しません。</p></article>
-<article class="ad-keyword-card"><span class="keyword-kind">委任</span><h3>Delegation of Control</h3><p>パスワードリセットだけを任せるなど、OU単位で限定した管理権限を渡します。</p></article></div><div class="ad-check"><strong>覚え方：</strong>「人 → 役割 → 資源 → 権限」。異動時は役割グループを変えればよく、個人へ直接付けるより追跡しやすくなります。</div></section>
+<article class="ad-keyword-card"><span class="keyword-kind">委任</span><h3>Delegation of Control</h3><p>パスワードリセットだけを任せるなど、OU単位で限定した管理権限を渡します。</p></article></div><div class="ad-check"><strong>覚え方：</strong>「人 → 役割 → 資源 → 権限」。異動時は役割グループを変えればよく、個人へ直接付けるより追跡しやすくなります。</div><div class="ad-check"><strong>具体例（AGDLPの流れ）：</strong>4. で登場した太郎さんを役割グループ<code>Sales_Global</code>（Global group）のメンバーにし、そのSales_Globalを資源グループ<code>Sales_Share_ReadOnly</code>（Domain Local group）へ入れ、Sales_Share_ReadOnlyへ共有フォルダーの読み取り権限を割り当てます。太郎さんが異動したときはGlobalグループのメンバーを入れ替えるだけでよく、共有フォルダー側のACLは変更しません。</div></section>
 
 <section id="replication" class="ad-section" aria-labelledby="replication-title"><h2 id="replication-title">6. 複製・サイト・FSMO</h2><div class="ad-keyword-grid">
 <article class="ad-keyword-card"><span class="keyword-kind">同期</span><h3>マルチマスター複製</h3><p>多くの変更を複数DCで受け付け相互に反映します。遅延や競合があるため「常に即時一致」とは限りません。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">通信設計</span><h3>Site / Subnet / Site Link</h3><p>物理ネットワークを表し、近いDCの選択と拠点間複製を制御します。IPサブネットとの対応が重要です。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">担当DC</span><h3>FSMO</h3><p>競合を避けるため特定DCが担う5役です。フォレスト単位2役、ドメイン単位3役があります。</p></article>
 <article class="ad-keyword-card"><span class="keyword-kind">フォレスト2役</span><h3>Schema / Domain Naming Master</h3><p>スキーマ変更とドメインの追加・削除を担当します。</p></article>
-<article class="ad-keyword-card"><span class="keyword-kind">ドメイン3役</span><h3>RID / PDC / Infrastructure</h3><p>RIDはSID用番号、PDC Emulatorは時刻・パスワード等、Infrastructureは他ドメイン参照の更新を担います。</p></article>
-<article class="ad-keyword-card"><span class="keyword-kind">補助役</span><h3>RODC / Global Catalog</h3><p>RODCは読み取り専用DC。Global Catalogはフォレスト内検索とログオンに必要な一部属性を保持します。</p></article></div>
+<article class="ad-keyword-card"><span class="keyword-kind">ドメイン3役</span><h3>RID / PDC / Infrastructure</h3><p>RIDはSID用番号、PDC Emulatorは時刻・パスワード等、Infrastructureは他ドメイン参照の更新を担います。</p></article></div>
+<div class="ad-table-wrap"><table class="ad-table"><caption>FSMO 5役のまとめ</caption><thead><tr><th scope="col">役割名</th><th scope="col">フォレスト／ドメイン</th><th scope="col">一言での役割</th></tr></thead><tbody>
+<tr><td>Schema Master</td><td>フォレスト</td><td>スキーマ（オブジェクトの設計図）の変更を許可する</td></tr>
+<tr><td>Domain Naming Master</td><td>フォレスト</td><td>ドメインの追加・削除を管理する</td></tr>
+<tr><td>RID Master</td><td>ドメイン</td><td>SIDに使う番号（RID）を各DCへ配布する</td></tr>
+<tr><td>PDC Emulator</td><td>ドメイン</td><td>時刻同期やパスワード変更などの基準になる</td></tr>
+<tr><td>Infrastructure Master</td><td>ドメイン</td><td>他ドメインのオブジェクト参照情報を更新する</td></tr>
+</tbody></table></div>
+<details><summary>発展知識：RODCとGlobal Catalog</summary><p>RODCは読み取り専用のドメインコントローラーです。Global Catalogはフォレスト内検索とログオンに必要な一部属性を保持します。どちらもFSMOの5役ではありません。まずは上のFSMO 5役を説明できれば十分で、この2つは余裕があるときに学びます。</p></details>
 <div class="ad-command"><pre><code>repadmin /replsummary
 repadmin /showrepl
 dcdiag /e /c /v
-netdom query fsmo</code></pre></div><div class="ad-warning"><strong>移行と強制奪取は別：</strong>正常なDC間ではFSMOを移行します。故障DCからの強制奪取は復旧設計を伴う非常時操作です。</div></section>
+netdom query fsmo</code></pre></div><div class="ad-check"><strong>オプションの意味：</strong><code>dcdiag /e</code>はフォレスト内の全DCを対象にし、<code>/c</code>は主要な項目をまとめて実行し、<code>/v</code>は詳細（verbose）な出力にする指定です。</div><div class="ad-warning"><strong>移行と強制奪取は別：</strong>正常なDC間ではFSMOを移行します。故障DCからの強制奪取は復旧設計を伴う非常時操作です。</div></section>
 
 <section id="operations" class="ad-section" aria-labelledby="operations-title"><h2 id="operations-title">7. 運用で使う確認コマンド</h2><div class="ad-table-wrap"><table class="ad-table"><caption>代表的なAD確認コマンドと読み取る内容</caption><thead><tr><th scope="col">コマンド</th><th scope="col">何を見るか</th><th scope="col">注意</th></tr></thead><tbody><tr><td><code>dcdiag</code></td><td>DCのDNS、サービス、複製等</td><td>対象・終了コード・個別結果を記録</td></tr><tr><td><code>repadmin /replsummary</code></td><td>複製失敗数と最大遅延</td><td><code>/showrepl</code> とイベントログも確認</td></tr><tr><td><code>nltest /dsgetdc:domain</code></td><td>クライアントが見つけたDC</td><td>期待サイトとDCか照合</td></tr><tr><td><code>gpresult /h</code></td><td>適用GPOと拒否理由</td><td>共有前に個人情報を確認</td></tr><tr><td><code>Get-ADUser</code></td><td>ユーザー属性と有効状態</td><td>検索範囲とフィルターを限定</td></tr><tr><td><code>Get-WinEvent</code></td><td>AD、DNS、DFSR等のログ</td><td>時刻・ID・対象DCを保存</td></tr></tbody></table></div>
+<p>PowerShellのコマンドは、まず最小の形から出発し、条件を1つずつ足していくと理解しやすくなります。</p>
+<div class="ad-command"><pre><code>Get-ADUser -Filter *</code></pre></div><p>条件も検索範囲も指定しない、最も単純な形です。これだけでドメイン内の全ユーザーを取得します。ここから1つずつ役割を加えます。</p>
+<ol class="ad-flow">
+<li><strong>-Filter</strong>：取得する対象を条件で絞り込みます。<code>-Filter 'Enabled -eq $true'</code>にすると、無効化されていない（有効な）ユーザーだけが対象になります。</li>
+<li><strong>-SearchBase</strong>：検索する開始位置（OU）を指定します。<code>-SearchBase 'OU=Users,DC=corp,DC=example,DC=com'</code>にすると、そのOU配下だけに検索範囲を限定できます。</li>
+<li><strong>パイプ（<code>|</code>）</strong>：左側のコマンドが返した結果を、そのまま右側のコマンドへ渡します。ここでは<code>Get-ADUser</code>が取得したユーザー一覧を次のコマンドへ渡します。</li>
+<li><strong>Select-Object</strong>：表示する属性（列）を選びます。<code>Select-Object SamAccountName, LastLogonDate</code>にすると、ログオン名と最終ログオン日時だけに絞って表示できます。</li>
+</ol>
+<p>4つの役割を1つの文にまとめると、次の複合コマンドになります。行末のバッククォート（`）は「次の行へ続く」という行継続の記号です。</p>
 <div class="ad-command"><pre><code>Get-ADUser -Filter 'Enabled -eq $true' `
   -SearchBase 'OU=Users,DC=corp,DC=example,DC=com' `
   -Properties LastLogonDate |
@@ -95,7 +111,10 @@ $dcdiagExitCode = $LASTEXITCODE</code></pre></div><div class="ad-check"><strong>
 <section id="incident" class="ad-section" aria-labelledby="incident-title"><h2 id="incident-title">9. ログオンできないときの確認順</h2><ol class="ad-flow"><li><strong>影響：</strong>1人か複数人か、1台か拠点全体か、いつからか。</li><li><strong>変更：</strong>パスワード、GPO、DNS、Firewall、時刻、更新の直前変更。</li><li><strong>クライアント：</strong>IP、AD用DNS、時刻、疎通、ユーザー名形式。</li><li><strong>認証：</strong>SRV、見つかったDC、チケット、ロック・無効・期限。</li><li><strong>DC：</strong><code>dcdiag</code>、複製、サービス、SYSVOL、容量、ログ。</li><li><strong>復旧後：</strong>ログオン、GPO、共有、複製、監視を再確認して記録。</li></ol>
 <details><summary>新しいPCをドメイン参加できない</summary><p>DNS参照先、時刻、既存コンピューターアカウント、名前重複、必要ポート、資格情報、ドメイン名、DC発見を確認します。</p></details><details><summary>GPOが適用されない</summary><p>OUリンク、ユーザー／コンピューター設定、フィルター、継承、SYSVOL、DNS、<code>gpresult</code> の拒否理由を確認します。</p></details><details><summary>複製エラーが出る</summary><p>対象DC、エラーコード、最後の成功時刻、DNS、時刻、疎通、認証、サイト、サービス、ログを確認します。安易な強制同期は行いません。</p></details><details><summary>誤ってユーザーを削除した</summary><p>変更を止め、対象・時刻・影響を記録し、Recycle BinやSystem Stateバックアップの条件を確認します。同名新規作成はSIDが変わります。</p></details></section>
 
-<section id="practice" class="ad-practice" aria-labelledby="practice-title"><h2 id="practice-title">10. 隔離ラボで行う演習</h2><p>本番や家庭の通常ネットワークから分けたHyper-V等のラボで行います。ドメイン名、固定IP、DNS、管理者資格情報、期待結果を先に設計してください。</p><div class="ad-practice-grid"><article class="ad-practice-card"><h3>演習1：図にする</h3><p>DC01、DC02、CL01、ドメイン、OU、ユーザー、グループ、共有を描きます。</p></article><article class="ad-practice-card"><h3>演習2：DNS</h3><p>CL01のDNS参照先、SRV、見つけたDCを記録します。</p></article><article class="ad-practice-card"><h3>演習3：OUとGPO</h3><p>テストOUへ無害な設定を適用し、<code>gpresult</code> で比較して戻します。</p></article><article class="ad-practice-card"><h3>演習4：AGDLP</h3><p>利用者、役割、資源用グループ、読み取り権限を分けます。</p></article><article class="ad-practice-card"><h3>演習5：正常性</h3><p><code>dcdiag</code>、<code>repadmin</code>、FSMOの結果を記録します。</p></article><article class="ad-practice-card"><h3>演習6：障害対応</h3><p>テスト端末のDNSを誤らせ、影響→確認→復旧→再確認を記録します。</p></article></div><div class="ad-warning"><strong>禁止事項：</strong>未承認DCの接続、実在認証情報の利用、本番GPOの直接編集、バックアップ未確認の削除、根拠のないFSMO強制奪取は行いません。</div><div class="ad-check"><strong>完了条件：</strong>用語を日本語で説明し、確認方法を選び、期待結果と実結果を比べ、異常時に変更を止めて報告・切り戻しできれば合格です。</div></section>
+<section id="practice" class="ad-practice" aria-labelledby="practice-title"><h2 id="practice-title">10. 隔離ラボで行う演習</h2><p>本番や家庭の通常ネットワークから分けたHyper-V等のラボで行います。ドメイン名、固定IP、DNS、管理者資格情報、期待結果を先に設計してください。</p>
+<div class="ad-check"><strong>最初の到達点：</strong>Hyper-Vや検証用ADサーバーをまだ用意できていなくても構いません。まずはこのページに出てきた用語を自分の言葉で説明できることを最初の目標にしてください。ラボ環境の構築は、余裕ができてから下記の参考リンクを見ながら次のステップとして進めます。</div>
+<ul class="ad-flow"><li><a href="https://learn.microsoft.com/ja-jp/windows-server/virtualization/hyper-v/get-started/install-hyper-v" target="_blank" rel="noopener noreferrer">Hyper-Vの有効化・インストール手順（Microsoft Learn）</a></li><li><a href="https://learn.microsoft.com/ja-jp/windows-server/identity/ad-ds/deploy/install-active-directory-domain-services--level-100-" target="_blank" rel="noopener noreferrer">検証用ADドメインサービスの構築手順（Microsoft Learn）</a></li></ul>
+<div class="ad-practice-grid"><article class="ad-practice-card"><h3>演習1：図にする</h3><p>DC01、DC02、CL01、ドメイン、OU、ユーザー、グループ、共有を描きます。</p></article><article class="ad-practice-card"><h3>演習2：DNS</h3><p>CL01のDNS参照先、SRV、見つけたDCを記録します。</p></article><article class="ad-practice-card"><h3>演習3：OUとGPO</h3><p>テストOUへ無害な設定を適用し、<code>gpresult</code> で比較して戻します。</p></article><article class="ad-practice-card"><h3>演習4：AGDLP</h3><p>利用者、役割、資源用グループ、読み取り権限を分けます。</p></article><article class="ad-practice-card"><h3>演習5：正常性</h3><p><code>dcdiag</code>、<code>repadmin</code>、FSMOの結果を記録します。</p></article><article class="ad-practice-card"><h3>演習6：障害対応</h3><p>テスト端末のDNSを誤らせ、影響→確認→復旧→再確認を記録します。</p></article></div><div class="ad-warning"><strong>禁止事項：</strong>未承認DCの接続、実在認証情報の利用、本番GPOの直接編集、バックアップ未確認の削除、根拠のないFSMO強制奪取は行いません。</div><div class="ad-check"><strong>完了条件：</strong>用語を日本語で説明し、確認方法を選び、期待結果と実結果を比べ、異常時に変更を止めて報告・切り戻しできれば合格です。</div></section>
 <section class="contact-cta"><div class="cta-content"><h2>関連する学習内容</h2><p>ADの理解は、Windows Server、DNS、認証、権限、PowerShell、障害対応につながります。</p><a href="skills.html" class="btn btn-primary"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> スキル一覧へ戻る</a> <a href="linux-lab.html" class="btn btn-secondary"><i class="fa-solid fa-server" aria-hidden="true"></i> Linuxの基本確認を見る</a></div></section>
 </div></div></main>
 <footer><div class="footer-content"><div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div><div class="footer-nav"><a href="me.html">自己紹介</a><a href="skills.html">スキル</a><a href="ad-keywords.html">ADキーワード集</a><a href="sql-keywords.html">SQLキーワード集</a><a href="infra-lab.html">サーバー構築</a><a href="works.html">作品</a><a href="resume.html">履歴書</a><a href="contact.html">連絡先</a></div><div class="footer-social"><a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a><a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></div></div><div class="copyright"><p>&copy; 2026 Noriyuki Shimada. All Rights Reserved.</p></div></footer><button type="button" class="back-to-top" aria-label="ページの先頭へ戻る"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>

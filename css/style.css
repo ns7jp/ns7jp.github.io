@@ -1941,6 +1941,30 @@ footer .footer-bottom small {
     font-weight: 400;
 }
 
+/* .mnemonic-tag は windows-commands.html の合言葉「端・場・通・動・記・権」と
+   各セクション見出しの対応を示す小さなラベル（冒頭の合言葉部分へのアンカーリンク）。 */
+.mnemonic-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--bg-warm);
+    color: var(--accent-gold);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.mnemonic-tag:hover,
+.mnemonic-tag:focus-visible {
+    text-decoration: underline;
+}
+
 /* ========================================
    18. Profile Section (About Page) - me.html プロフィールカード
    ----------------------------------------
@@ -4854,7 +4878,12 @@ article p,
         flex-direction: column;
         text-align: center;
     }
-    
+
+    .mnemonic-tag {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+
     .container {
         padding: 0 25px;
     }
