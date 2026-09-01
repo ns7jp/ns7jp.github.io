@@ -21,7 +21,7 @@ infra-evidence/
 8. 残課題と再試験条件
 9. 各fileのSHA-256
 
-`bash scripts/capture-lab-evidence.sh <label> -- <command...>` はmetadata、command、stdout、stderr、exit code、checksumを同じdirectoryへ保存します。保存後に必ず目視し、IP、username、tokenなどを公開してよいか確認します。`scripts/check-secrets.js`によるCI検査などの自動マスキングだけを信用しません。
+`bash scripts/capture-lab-evidence.sh <label> -- <command...>` はmetadata、command、stdout、stderr、exit code、checksumを同じdirectoryへ保存します。保存後に必ず目視し、IP、username、tokenなどを公開してよいか確認します。`scripts/check-secrets.js`によるCI検査は、追跡対象ファイルから既知のcredentialパターンを検出して止めるものであり、内容をマスキング・削除するものではありません（未追跡fileは検査対象外です）。この自動検出だけを信用せず、必ず目視でも確認します。
 
 ## 昇格条件
 

@@ -278,6 +278,7 @@
                     <p>同じサーバー内の別ディスクへ、設定ファイルとWebコンテンツを毎日コピーする学習例です。本番環境で実行した実績ではありません。同じサーバー内だけでは機器故障に備えられないため、実務では別の機器や離れた場所にも保存し、定期的に復元できるかを確認します。</p>
                     <p class="evidence-note"><strong>実行前の注意:</strong> <code>--delete</code>はバックアップ先の余分なファイルを削除し、末尾の<code>find ... rm -rf</code>は30日を超えた保存先を削除します。最初はテスト用ディレクトリへ変更し、<code>rsync --dry-run</code>で対象と差分を確認してください。</p>
 <pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
+#!/bin/bash
 # /usr/local/sbin/daily-backup.sh
 SRC1=/etc
 SRC2=/var/www
