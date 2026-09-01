@@ -111,6 +111,7 @@
                 <p>主作品「Server Monitor」をUbuntuサーバー1台の学習課題として作りました。6工程のコード、設定、手順、結果票を結び付け、実装済み・実測済み・未実施（NOT RUN）を分けています。</p>
                 <p><strong>2026年8月22日:</strong> 自動テスト用の一時的なUbuntu環境で、構築、再実行、11個のサービス起動、通信制限、監視、復旧、バックアップからの復元を確認しました。23項目すべて合格しています。なお、Dockerはあらかじめ導入済みの環境です。</p>
                 <p><strong>2026年8月23日:</strong> 新しい版を確認したあと、前の版へ戻す「切り戻し」の自動テストにも合格しました。GitHub上に詳しい結果を公開していますが、継続利用する実機や仮想マシンではまだ実施していません。</p>
+                <p><strong>対象読者:</strong> Linux未経験の方も対象です。実行環境として、UbuntuまたはRHEL系のVM、もしくはWindowsのWSL2とターミナルを用意してから進めてください。環境をお持ちでない場合は、先に<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>をご覧ください。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 設計</span>
                     <span><i class="fa-solid fa-gears" aria-hidden="true"></i> 構築</span>
@@ -123,6 +124,12 @@
                     <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリスト、作業結果報告書の原本</span>
                     <span><strong>実測済み</strong> WSL2、一時Ubuntu、Docker等の学習環境で記録した確認結果</span>
                     <span><strong>未実施（NOT RUN）</strong> 独立した対象hostの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy、D-2、本番変更</span>
+                </div>
+                <div class="beginner-safety-note">
+                    <strong>このページで使う略語・専門用語</strong>
+                    <p><strong>changed=0</strong>：構成管理ツール（Ansible）を2回目に実行しても差分が出ない状態のことで、冪等性の確認に使います。<br>
+                    <strong>D-1 / D-2</strong>：障害復旧演習の呼び名です。D-1はアプリのプロセス停止からの自動復旧演習、D-2は別サーバーへ復元するホスト障害演習で、D-2はこのLabではNOT RUNです。<br>
+                    <strong>NOT SET / NOT RUN / NOT READY</strong>：NOT SETは値がまだ確定していない状態、NOT RUNは手順はあるが未実行の状態、NOT READYは完了と判定するための条件がまだ揃っていない状態を指します。</p>
                 </div>
                 <div class="summary-actions" style="margin-top: 1.5rem;">
                     <a href="learning-path.html" class="btn btn-primary"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> ゼロから学ぶ8段階</a>
@@ -191,7 +198,7 @@
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
                         <strong>未実施（NOT RUN）の範囲</strong>
-                        <p>テスト環境にはDockerが最初から入っていました。何も入っていないOSからの構築、独立した対象hostと管理端末での受け入れ、実際のSlack通知、AWS apply/destroy、D-2、別サーバーへの復旧、再起動後・24時間・72時間の確認、本番環境での利用はNOT RUNです。</p>
+                        <p>テスト環境にはDockerが最初から入っていました。何もないOSへの導入は<a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener noreferrer">Docker公式のUbuntu向け導入手順</a>を想定していますが、この導入作業を含め、何も入っていないOSからの構築、独立した対象hostと管理端末での受け入れ、実際のSlack通知、AWS apply/destroy、D-2、別サーバーへの復旧、再起動後・24時間・72時間の確認、本番環境での利用はNOT RUNです。</p>
                     </div>
                 </div>
             </section>
@@ -215,6 +222,18 @@
                     <li class="brief-step"><span>10</span><strong>立ち上げ・受け入れ</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/10-host-bringup-and-acceptance.md" target="_blank" rel="noopener noreferrer">資料を見る</a>／対象hostはNOT RUN</small></li>
                     <li class="brief-step"><span>11</span><strong>作業結果・引き渡し報告</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/11-work-result-report.md" target="_blank" rel="noopener noreferrer">原本を見る</a>／実案件欄はNOT SET</small></li>
                 </ol>
+                <div class="lab-link-card architecture-notes" style="margin-top:24px;">
+                    <h3><i class="fa-solid fa-list-check" aria-hidden="true"></i> 05 構築手順書の要点（要約）</h3>
+                    <p>資料そのものは長いため、流れだけをここに要約します。詳しい手順・コマンド全文は原本をご覧ください。</p>
+                    <ul>
+                        <li><strong>作業前確認：</strong>対象VM、sudoの利用可否、対象IP・作業時間・ロールバック条件、対象commit SHAを先に固定します。</li>
+                        <li><strong>準備〜構築：</strong>管理端末にAnsibleを用意し、inventoryと秘密値（vault）を設定したあと、<code>--check --diff</code>のプレフライト確認を経て本実行します。</li>
+                        <li><strong>冪等性確認：</strong>同じplaybookをもう一度実行し、<code>failed=0</code>かつ<code>changed=0</code>であることを記録します。</li>
+                        <li><strong>構築後確認・障害試験：</strong>サービス状態やポート待受を確認したあと、D-1（プロセス停止）演習を実行し、検知・復旧時間を記録します。</li>
+                        <li><strong>ロールバック・作業終了：</strong>問題があれば変更前commitへ戻し、結果票とログを保存して作業結果報告書へ複製します。</li>
+                    </ul>
+                    <p><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">詳細版（05-build-procedure.md）を見る</a></p>
+                </div>
             </section>
 
             <section class="brief-section" aria-labelledby="server-operation-title">

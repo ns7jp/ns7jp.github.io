@@ -21,7 +21,7 @@
     <meta name="twitter:image:alt" content="サーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <script src="js/main.js?v=20260826-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20260828-1">
+    <link rel="stylesheet" href="css/style.css?v=20260901-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -57,13 +57,14 @@
                 <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
                 <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux基本確認</a>
                 <a href="windows-commands.html" class="active" aria-current="page"><i class="fa-brands fa-windows" aria-hidden="true"></i> Windowsコマンド</a>
+                <a href="ad-keywords.html"><i class="fa-solid fa-sitemap" aria-hidden="true"></i> ADキーワード集</a>
                 <a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> AWS設計</a>
             </nav>
             <section class="lab-intro">
                 <span class="case-label">学習資料 / Windows 10・11 / Windows Server</span>
                 <h2>暗記より先に「何を確かめたいか」を覚える</h2>
                 <p>コマンドは、画面を開かずにコンピューターへ質問する短い文章です。このページでは、問い合わせや障害の一次確認で使うコマンドを、<strong>端末 → 場所 → 通信 → 動作 → 記録 → 権限</strong>の6分類で学びます。最初はすべて覚えず、「どの分類を調べればよいか」を選べれば十分です。</p>
-                <div class="memory-phrase" role="note"><strong>合言葉：端・場・通・動・記・権</strong><span>たん・ば・つう・どう・き・けん</span><p>端末情報 → ファイルの場所 → 通信 → プロセスやサービスの動作 → イベント記録 → ユーザーと権限、の順です。</p></div>
+                <div class="memory-phrase" role="note" id="mnemonic"><strong>合言葉：端・場・通・動・記・権</strong><span>たん・ば・つう・どう・き・けん</span><p>端末情報 → ファイルの場所 → 通信 → プロセスやサービスの動作 → イベント記録 → ユーザーと権限、の順です。以降の見出し横にある小さなラベルは、その節がどの文字に対応するかを示します。</p></div>
                 <div class="status-callout pending" role="note"><i class="fa-solid fa-flask" aria-hidden="true"></i><div><strong>検証範囲：学習用（実機での全コマンド一括検証は未実施）</strong><p>掲載内容はWindowsの一次確認を学ぶための例です。このページの全コマンドを同一のWindows Server実機で実行した証跡ではありません。環境により表示名や使用できるコマンドが異なります。業務環境では会社の手順、権限、対象サーバー、変更の有無を確認してください。</p></div></div>
             </section>
             <section class="operation-matrix-section" id="how-to-open" aria-labelledby="how-to-open-title">
@@ -77,14 +78,14 @@ Get-ComputerInfo</code></pre></article>
                 <div class="beginner-safety-note"><strong>プロンプト記号は入力しません</strong><p>説明にある<code>C:\&gt;</code>や<code>PS C:\&gt;</code>は「入力を待っています」という表示です。入力するのは、その右側のコマンドだけです。管理者権限が必要な場合も、まず通常権限で確認し、理由が分かってから「管理者として実行」します。</p></div>
             </section>
             <section class="operation-matrix-section" id="quick-reference" aria-labelledby="quick-reference-title">
-                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span><h2 class="heading-text" id="quick-reference-title">まず覚える読み取りコマンド早見表</h2></div>
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span><h2 class="heading-text" id="quick-reference-title">まず覚える読み取りコマンド早見表</h2><a class="mnemonic-tag" href="#mnemonic" title="合言葉「端・場・通・動・記・権」の6分類すべてに対応">端場通動記権</a></div>
                 <p class="evidence-note">「目的」で探し、CMDかPowerShellの使いやすい方を1つ試します。表示結果にはコンピューター名、ユーザー名、IPアドレスなどが含まれるため、公開前に機密情報がないか確認します。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるWindowsコマンド早見表" tabindex="0"><table class="operation-table">
                     <caption class="sr-only">Windowsで確認したい内容、CMD、PowerShell、結果の読み方</caption>
                     <thead><tr><th scope="col">目的</th><th scope="col">CMD</th><th scope="col">PowerShell</th><th scope="col">見るところ</th></tr></thead>
                     <tbody>
                         <tr><td>コンピューター名</td><td><code>hostname</code></td><td><code>$env:COMPUTERNAME</code></td><td>作業対象が依頼票の名前と一致するか。</td></tr>
-                        <tr><td>自分のユーザー名</td><td><code>whoami</code></td><td><code>whoami</code></td><td><code>ドメイン\ユーザー</code>の形式。別アカウントで作業していないか。</td></tr>
+                        <tr><td>自分のユーザー名</td><td><code>whoami</code></td><td><code>whoami</code></td><td><code>ドメイン\ユーザー</code>の形式。別アカウントで作業していないか。ドメインとは何かは<a href="ad-keywords.html">Active Directoryキーワード集</a>で解説しています。</td></tr>
                         <tr><td>OS・起動時刻</td><td><code>systeminfo</code></td><td><code>Get-ComputerInfo</code></td><td>OS名、バージョン、更新、起動時刻。出力が長い点に注意。</td></tr>
                         <tr><td>現在の場所</td><td><code>cd</code></td><td><code>Get-Location</code></td><td>ファイル操作の対象フォルダー。削除やコピーの前に必ず確認。</td></tr>
                         <tr><td>ファイル一覧</td><td><code>dir</code></td><td><code>Get-ChildItem</code></td><td>名前、更新日時、サイズ。PowerShellでは<code>ls</code>も別名として使用可。</td></tr>
@@ -99,9 +100,10 @@ Get-ComputerInfo</code></pre></article>
                         <tr><td>所属グループ</td><td><code>whoami /groups</code></td><td><code>whoami /groups</code></td><td>管理者などの強い権限を持つグループに所属しているか。</td></tr>
                     </tbody>
                 </table></div>
+                <div class="beginner-safety-note" id="option-notes"><strong>オプション記号の意味</strong><p><code>wevtutil qe System /c:10 /rd:true /f:text</code>の<code>/c:10</code>は取得件数を10件に、<code>/rd:true</code>は新しい順（reverse direction）に並べ、<code>/f:text</code>は出力形式をテキストにする指定です。分からないオプションが出てきたら、コマンド名の末尾に<code>/?</code>を付けて実行すると、使い方の説明が表示されます（例：<code>wevtutil /?</code>）。</p></div>
             </section>
             <section class="operation-matrix-section" id="network" aria-labelledby="network-title">
-                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span><h2 class="heading-text" id="network-title">通信障害は「自分 → 名前 → 道 → 入口」で分ける</h2></div>
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span><h2 class="heading-text" id="network-title">通信障害は「自分 → 名前 → 道 → 入口」で分ける</h2><a class="mnemonic-tag" href="#mnemonic" title="合言葉「端・場・通・動・記・権」の「通」に対応">通</a></div>
                 <div class="command-step-list">
                     <article class="command-guide-card"><span class="step-number">1</span><h3>自分の設定：<code>ipconfig /all</code></h3><p>IPv4アドレスは自分の住所、サブネットマスクは同じ地域の範囲、既定ゲートウェイは別ネットワークへの出口、DNSは名前を住所へ変換する案内所です。<code>169.254.x.x</code>は、DHCPからアドレスを取得できなかった可能性があります。</p></article>
                     <article class="command-guide-card"><span class="step-number">2</span><h3>名前：<code>nslookup server01</code></h3><p>サーバー名が期待するIPへ変換されるかを見ます。名前では失敗し、IP直接なら成功する場合はDNSを調べます。</p></article>
@@ -111,7 +113,7 @@ Get-ComputerInfo</code></pre></article>
                 <div class="beginner-safety-note"><strong><code>ping</code>失敗 ＝ サーバー停止、ではありません</strong><p>セキュリティ設定でpingだけを拒否していることがあります。名前解決、対象ポート、別PCからの結果も集めて判断します。</p></div>
             </section>
             <section class="operation-matrix-section" id="process-service-log" aria-labelledby="process-service-log-title">
-                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></span><h2 class="heading-text" id="process-service-log-title">プロセス・サービス・ログをつなげて読む</h2></div>
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-heart-pulse" aria-hidden="true"></i></span><h2 class="heading-text" id="process-service-log-title">プロセス・サービス・ログをつなげて読む</h2><a class="mnemonic-tag" href="#mnemonic" title="合言葉「端・場・通・動・記・権」の「動」「記」に対応">動記</a></div>
                 <div class="command-basics-grid">
                     <article class="command-guide-card"><h3>プロセスは「今動くプログラム」</h3><pre><code>Get-Process |
   Sort-Object CPU -Descending |
@@ -126,7 +128,7 @@ Get-Service | Where-Object Status -eq 'Stopped'</code></pre><p>W32Timeは時刻�
                 </div>
             </section>
             <section class="operation-matrix-section" id="files-users" aria-labelledby="files-users-title">
-                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span><h2 class="heading-text" id="files-users-title">ファイルとユーザーを安全に確認する</h2></div>
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span><h2 class="heading-text" id="files-users-title">ファイルとユーザーを安全に確認する</h2><a class="mnemonic-tag" href="#mnemonic" title="合言葉「端・場・通・動・記・権」の「場」「権」に対応">場権</a></div>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるファイルとユーザーのコマンド表" tabindex="0"><table class="operation-table">
                     <caption class="sr-only">ファイルとユーザーを確認するWindowsコマンド</caption>
                     <thead><tr><th scope="col">やりたいこと</th><th scope="col">例</th><th scope="col">初心者向け説明</th></tr></thead>
@@ -137,7 +139,7 @@ Get-Service | Where-Object Status -eq 'Stopped'</code></pre><p>W32Timeは時刻�
                         <tr><td>コピー予定を確認</td><td><code>robocopy C:\Data D:\Backup /E /L</code></td><td><code>/L</code>は実際にはコピーせず、対象一覧だけを表示します。確認後も削除系オプションには注意します。</td></tr>
                         <tr><td>ローカルユーザー一覧</td><td><code>net user</code><br><code>Get-LocalUser</code></td><td>無効化の有無、想定外のアカウント、説明欄を確認します。ドメインアカウントとは別です。</td></tr>
                         <tr><td>管理者グループ</td><td><code>net localgroup Administrators</code><br><code>Get-LocalGroupMember Administrators</code></td><td>誰がローカル管理者かを確認します。日本語OSではグループ名が「Administrators」以外の場合があります。</td></tr>
-                        <tr><td>権限表示</td><td><code>icacls C:\Data</code><br><code>Get-Acl C:\Data | Format-List</code></td><td>誰に読み取り・変更・フルコントロールがあるかを確認します。継承の有無にも注目します。</td></tr>
+                        <tr><td>権限表示</td><td><code>icacls C:\Data</code><br><code>Get-Acl C:\Data | Format-List</code></td><td>誰に読み取り・変更・フルコントロールがあるかを確認します。継承（＝親フォルダーの権限設定が子フォルダーにも自動的に及ぶ仕組み）の有無にも注目します。</td></tr>
                     </tbody>
                 </table></div>
             </section>
