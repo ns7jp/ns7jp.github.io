@@ -4,12 +4,17 @@
 
 | 読む順番 | 文書 | 目的 |
 |---|---|---|
+| 0 | [environment-setup.md](./environment-setup.md) | WSL2 / Ubuntu VMを選び、安全に用意・削除する |
+| 0.5 | [first-30-minutes.md](./first-30-minutes.md) | CUIで最初の成功体験を作る |
 | 1 | [lab-guide.md](./lab-guide.md) | 8段階の操作と合格条件 |
-| 2 | [glossary.md](./glossary.md) | 用語を一言で確認 |
-| 3 | [failure-drills.md](./failure-drills.md) | 安全な障害演習 |
-| 4 | [evidence-guide.md](./evidence-guide.md) | 実測・CI・架空例を分離 |
-| 5 | [assessment-rubric.md](./assessment-rubric.md) | 100点の修了判定 |
-| 6 | [security-threat-model.md](./security-threat-model.md) | 脅威から対策を考える |
+| 2 | [glossary.md](./glossary.md) | 基礎語と運用語を一言で確認 |
+| 3 | [beginner-troubleshooting.md](./beginner-troubleshooting.md) | よくあるerrorから安全に復帰する |
+| 4 | [failure-drills.md](./failure-drills.md) | 安全な障害演習 |
+| 5 | [evidence-guide.md](./evidence-guide.md) | 実測・CI・架空例を分離 |
+| 6 | [deliverable-templates.md](./deliverable-templates.md) | 空欄、途中、合格水準を見比べる |
+| 7 | [assessment-rubric.md](./assessment-rubric.md) | 100点の修了判定 |
+| 8 | [question-template.md](./question-template.md) | 秘密を除いて相談する |
+| 9 | [security-threat-model.md](./security-threat-model.md) | 脅威から対策を考える |
 
 ## 状態表示
 
