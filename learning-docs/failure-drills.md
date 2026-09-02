@@ -2,7 +2,9 @@
 
 ## 共通ルール
 
-自分の破棄可能なLabだけで行います。開始前にsnapshot、console接続、終了条件を確認し、1回に1つだけ壊します。次を演習票の先頭に記録します。
+> **かんたんに言うと** 障害演習とは、壊してもよい練習用の環境でわざと故障を起こし、気づいてから直すまでを練習することです。本番で慌てないための予行演習です。
+
+演習は、自分の壊してもよいLab（練習用の使い捨て環境）だけで行います。目的は、障害に気づいてから直すまでの手順と時間を、安全な場所で確かめることです。開始前には次の3つを確認します。snapshot（その時点の状態をまるごと保存したもの）、console接続（ネットワーク越しではなく画面から直接操作する経路）、そして演習をやめる終了条件です。壊すのは1回に1つだけにします。次の項目を、演習票（演習の記録用紙）の先頭に記録します。枠の中のRTO（Recovery Time Objective）は、復旧までにかけてよい時間の目標です。実測RTOには、検知から復旧まで実際にかかった時間を書きます。
 
 ```text
 Drill ID / 日時 / commit / host / 実施者:
@@ -13,22 +15,30 @@ Drill ID / 日時 / commit / host / 実施者:
 原因 / 復旧 / 再発防止 / 残課題:
 ```
 
+> **かんたんに言うと** 次の表は、練習用の環境でわざと起こす8種類の故障と、その調べ方・戻し方の一覧です。
+
+「故障注入」はわざと起こす不具合、「観測順」は原因を絞り込むために見ていく順番です。矢印は、左から右へ順番に確認していくことを表します。
+
 | ID | 故障注入 | 観測順 | 復旧・成功条件 |
 |---|---|---|---|
-| D-01 | LabのWeb containerを1つ停止 | alert → `docker compose ps` → log | Runbookで起動、alert resolved |
-| D-02 | Lab専用portのFirewall許可を外す | client curl → route → `ss` → firewall counter | ruleを復元し許可/拒否を再試験 |
-| D-03 | Lab volumeへ上限付きdummy fileを作成 | alert → `df` → inode → `du` | 対象確認後だけdummyを削除 |
-| D-04 | CPU制限containerで短い負荷 | load → process → container metrics | 時間上限で自動停止し正常化 |
-| D-05 | memory制限container内だけで負荷 | memory → cgroup → OOM log | hostへ影響せず原因を特定 |
-| D-06 | コピーした設定へ構文誤りを入れる | config check（対象: nginx設定fileは`sudo nginx -t`、Ansible playbookは`ansible-playbook --syntax-check`で検査） → Git diff | 本番fileへ置く前に検査で阻止 |
-| D-07 | 期限切れtest証明書をローカルだけで使う | DNS → clock → expiry → SAN | 有効なtest証明書へ戻す |
-| D-08 | backupのコピーを破損させる | size → checksum → extract | 原本を保護し別世代を選択 |
+| D-01 | LabのWebコンテナを1つ停止 | アラート → `docker compose ps` → ログ | Runbook（状況別の運用手順書）で起動し、alertがresolved（解消）になる |
+| D-02 | Lab専用ポートのファイアウォール許可を外す | クライアントから`curl` → 経路 → `ss` → ファイアウォールのカウンタ | ルールを戻し、許可と拒否を再試験 |
+| D-03 | Labのvolumeへ上限付きのダミーファイルを作成 | アラート → `df` → inode → `du` | 対象を確認してから、作ったダミーだけを削除する |
+| D-04 | CPU制限つきコンテナで短時間の負荷をかける | 負荷 → プロセス → コンテナの指標 | 時間の上限で自動停止し、正常に戻る |
+| D-05 | メモリ制限つきコンテナの中だけで負荷をかける | メモリ → cgroup → OOMのログ | ホストに影響を出さずに原因を特定する |
+| D-06 | コピーした設定へ構文誤りを入れる | 構文チェック（nginx設定ファイルは`sudo nginx -t`、Ansible playbookは`ansible-playbook --syntax-check`） → Git diff | 本番fileへ置く前に検査で阻止 |
+| D-07 | 期限切れのテスト用証明書をローカルだけで使う | DNS → 時刻 → 有効期限 → SAN | 有効なテスト用証明書へ戻す |
+| D-08 | backupのコピーをわざと壊す | サイズ → checksum（内容が同じか確かめる値） → 展開 | 原本は触らずに守り、別の世代のbackupを選ぶ |
 
-実ネットワーク遮断、fork bomb、host全体のdisk充填、実証明書失効は行いません。
+表に出てくる用語の意味は次のとおりです。volumeは、コンテナのデータを保存しておく領域です。inodeは、ファイルを管理するための情報で、ファイル数の上限にも関わります。cgroupは、コンテナが使えるCPUやメモリの量を制限するLinuxの仕組みです。OOMは、メモリ不足でプロセスが強制終了される現象です。SAN（Subject Alternative Name）は、その証明書が有効なホスト名の一覧です。
+
+次の操作は行いません。実ネットワークの遮断、fork bomb（プロセスを次々に増やして機械を止めてしまう操作）、ホスト全体のディスクを埋め尽くすこと、実際に使っている証明書の失効です。
 
 ## 前提Step（lab-guide.mdとの対応）
 
-各drillは、対応する[lab-guide.md](./lab-guide.md)のStepが完了している前提です。未完了のStepがある場合は先にそちらを実施します。
+> **かんたんに言うと** 演習には順番があります。先にlab-guide.mdのStepでLabを組み立て、そのあとで組み立てた部分をわざと壊します。組み立てていないものは壊せないためです。
+
+各drill（演習）は、対応する[lab-guide.md](./lab-guide.md)のStepが完了していることを前提にしています。まだ終わっていないStepがある場合は、先にそちらを実施します。
 
 - D-01: Step 3・Step 5実施後（Webサービスと監視alertが稼働している前提）
 - D-02: Step 3実施後（ufwなどでFirewallルールが設定済みの前提）
@@ -36,5 +46,5 @@ Drill ID / 日時 / commit / host / 実施者:
 - D-04: Step 3実施後（CPU制限付きcontainerが起動済みの前提）
 - D-05: Step 3実施後（memory制限付きcontainerが起動済みの前提）
 - D-06: Step 3またはStep 4実施後（nginx設定またはStep 4のplaybookが存在する前提）
-- D-07: Step 3実施後（HTTPSで終端するWebサービスがローカルで稼働している前提）
+- D-07: Step 3実施後（HTTPSで終端するWebサービスがローカルで稼働している前提）。HTTPSで終端するとは、暗号化された通信をそのサーバーで受け止めて元に戻すことです。
 - D-08: Step 7実施後、backupが存在する前提

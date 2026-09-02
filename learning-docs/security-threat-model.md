@@ -1,34 +1,48 @@
 # 小さな脅威モデル
 
-> 以下の通信フロー表は、bastion / app / monitor / collectorなどを別ホスト・別ネットワーク区画へ分離する、本番運用を想定した設計です。bastion SGのような行は、ホストやVM単位の境界で通信を許可・拒否するcloudの設定を前提としています。[lab-guide.md Step 0](./lab-guide.md#step-0--安全境界と環境採録)で定義する8段階ハンズオンは、単一のUbuntu VM内でコンテナとして各役割を動かす、より小さな構成です。そのため表にある境界の一部（特にhost/VM単位のSG）は、単一VM構成ではそのままの形では構築しません。複数ホストへ分離する設計を検討する際の参考として本表を使ってください。
+> 以下の通信フロー表は、本番運用を想定した設計です。bastion（踏み台サーバー／管理者が外から最初に入る中継用のサーバー）、app（サービス本体を動かすサーバー）、monitor（監視用のサーバー）、collector（ログを集めて送る仕組み）といった役割を分けて考えます。これらをそれぞれ別のホスト、別のネットワーク区画へ分離する前提です。表の「bastion SG」のような行は、クラウド側の設定を前提としています。SG（Security Group）とは、ホストやVM（仮想マシン）の単位で通信を許可・拒否する仕組みです。[lab-guide.md Step 0](./lab-guide.md#step-0--安全境界と環境採録)で定義する8段階ハンズオンは、単一のUbuntu VM内でコンテナとして各役割を動かす、より小さな構成です。そのため表にある境界の一部（特にhost/VM単位のSG）は、単一VM構成ではそのままの形では構築しません。複数ホストへ分離する設計を検討する際の参考として本表を使ってください。
 
 ## 保護対象と境界
 
-- 保護対象: 管理鍵、設定、監視データ、backup、操作証跡。
-- 利用者: 管理者、閲覧者、自動化用service account。
-- 境界: 管理端末、Internet/edge、bastion、private server、monitoring、backup先。
+> **かんたんに言うと** 「何を守るのか」「誰が使うのか」「どこからが内側でどこからが外側か」を先に決めます。ここが決まっていないと、どの対策が必要かを判断できません。
+
+- 保護対象: 守る対象は、管理鍵、設定、監視データ、バックアップ、操作証跡（誰がいつ何をしたかの記録）です。
+- 利用者: 使う側は、管理者、閲覧者、そして自動化用のサービスアカウント（人ではなくプログラムが使う専用の利用者）です。
+- 境界: 内と外を区切る線は、管理端末、インターネット/エッジ（外部との出入口）、bastion、非公開サーバー、監視、バックアップ先の間に引きます。
 
 ## 通信フロー
 
+> **かんたんに言うと** どこからどこへ、どの通信を通してよいかを1行ずつ決めた表です。通してよい理由、通さない条件、記録が残る場所をセットで書きます。
+
+表の読み方: 「Protocol / port」は通信の種類と番号です。ポート番号は通信の窓口の番号だと考えてください。「拒否条件」に当てはまる通信は通しません。「Log」は、その通信の記録が残る場所です。
+
+用語: exporter は、監視対象の数値を外へ出す小さなプログラムです。メトリクスは、監視のために集める測定値です。collector は、ログを集めて転送するプログラムです。CIDR は、許可するIPアドレスの範囲を表す書き方です。
+
 | # | 通信元 → 先 | Protocol / port | 理由 | 拒否条件 | Log |
 |---|---|---|---|---|---|
-| 1 | 管理端末 → bastion | SSH / 22 | 管理 | 管理CIDR外、鍵不一致 | auth / firewall |
-| 2 | bastion → app | SSH / 22 | private管理 | bastion SG（Security Group：VM/host単位で通信を許可・拒否するcloudの設定）外 | auth / flow |
-| 3 | monitor → exporter | HTTP / 9100 | metrics取得 | monitor外、書込 | Prometheus / firewall |
-| 4 | collector → Loki | HTTP / 3100 | log転送 | collector外 | Loki |
-| 5 | Alertmanager → 通知先 | HTTPS / 443 | alert通知 | 未承認先 | Alertmanager |
+| 1 | 管理端末 → bastion | SSH / 22 | 運用管理 | 管理CIDR外、鍵不一致 | auth / firewall |
+| 2 | bastion → app | SSH / 22 | 非公開サーバーの管理 | bastion SG外 | auth / flow |
+| 3 | monitor → exporter | HTTP / 9100 | メトリクス取得 | monitor外、書き込み | Prometheus / firewall |
+| 4 | collector → Loki | HTTP / 3100 | ログ転送 | collector外 | Loki |
+| 5 | Alertmanager → 通知先 | HTTPS / 443 | アラート通知 | 未承認先 | Alertmanager |
 
 ## 脅威と確認
 
+> **かんたんに言うと** 起こると困ることを先に並べ、それぞれに「起きにくくする手」と「起きたら気づく手」を対応させた表です。右端の「現在地」には、今どこまで手を打てているかをそのまま書きます。
+
+表に出てくる略語: CI は、変更のたびに自動で検査を走らせる仕組みです。PR（プルリクエスト）は、変更をすぐ反映せず、他の人が確認してから取り込む手続きです。`0.0.0.0/0` は「どのIPアドレスからでも接続できる」という指定で、SSHでこれを許すと入口を全世界へ開けたことになります。
+
+「現在地」欄の読み方: NOT RUN はまだ実行していないこと、NOT SET はまだ設定していないことを表します。「実装済み、apply NOT RUN」は、設定は書いたものの、実際の環境へ反映する操作（apply）はまだ行っていない状態です。
+
 | 脅威 | 予防 | 検知・確認 | 現在地 |
 |---|---|---|---|
-| SSH全世界公開 | `admin_cidr`必須、`0.0.0.0/0`拒否 | Terraform validation | 実装済み、apply NOT RUN |
-| 秘密情報のcommit | environment / GitHub Secrets | 高確度パターンのCI検査、目視 | CI追加済み |
-| 過剰権限 | 専用user、read-only mount | write拒否test | 一時環境で実測履歴あり |
-| 不正変更 | PR、review、required check | CIとaudit log | CIあり、required設定 NOT SET |
-| 脆弱image | version固定、更新手順 | image scanner | scanner導入はNOT SET |
-| log消失・改ざん | 外部転送、保存期間、時刻同期 | 欠損alert、restore | 外部保管 NOT RUN |
-| backup利用不能 | checksum、世代、暗号化 | 別host restore | 別host NOT RUN |
-| 監視自身の停止 | dead-man alert（監視自身の停止を検知する逆方向のalert）、別経路 | heartbeat欠損 | NOT RUN |
+| SSH全世界公開 | `admin_cidr`必須、`0.0.0.0/0`拒否 | Terraformの検証 | 実装済み、apply NOT RUN |
+| 秘密情報のコミット | environment / GitHub Secrets | 高確度パターンのCI検査、目視 | CI追加済み |
+| 過剰権限 | 専用ユーザー、読み取り専用マウント | 書き込み拒否の試験 | 一時環境で実測履歴あり |
+| 不正変更 | PR、レビュー、必須チェック | CIと監査ログ | CIあり、required設定 NOT SET |
+| 脆弱なイメージ | バージョン固定、更新手順 | イメージ検査ツール | scanner導入はNOT SET |
+| ログ消失・改ざん | 外部転送、保存期間、時刻同期 | 欠損アラート、リストア | 外部保管 NOT RUN |
+| バックアップ利用不能 | チェックサム、世代、暗号化 | 別ホストでリストア | 別host NOT RUN |
+| 監視自身の停止 | dead-man alert（監視自身の停止を検知する逆方向のアラート）、別経路 | heartbeat（生存信号）の欠損 | NOT RUN |
 
-受容、軽減、移転、回避のどれを選んだかと理由を変更記録へ残します。
+受容（そのまま受け入れる）、軽減（起きにくくする、または被害を小さくする）、移転（保険や外部サービスへ任せる）、回避（その仕組み自体をやめる）のどれを選んだかと、その理由を変更記録へ残します。後から「なぜその判断をしたのか」を自分の言葉で説明できるようにするためです。

@@ -71,11 +71,11 @@
                 <p class="sql-lead">SQL（Structured Query Language）は、データベースに対して「見せて」「追加して」「直して」「削除して」と依頼するための言語です。サーバー構築・運用では、アプリの接続確認、監視データの調査、障害時の切り分け、バックアップ後の確認でも使います。</p>
                 <div class="memory-tip"><strong>最初の覚え方：</strong>読む <code>SELECT</code> → 絞る <code>WHERE</code> → 並べる <code>ORDER BY</code> → 集計する <code>GROUP BY</code> → つなぐ <code>JOIN</code> → 変更する <code>INSERT / UPDATE / DELETE</code> の順で練習します。</div>
                 <div class="sql-summary-grid">
-                    <article class="sql-summary-card"><h3>DQL：読む</h3><p><code>SELECT</code> で必要な行と列を取得します。調査は原則ここから始めます。</p></article>
-                    <article class="sql-summary-card"><h3>DML：データを変える</h3><p><code>INSERT / UPDATE / DELETE</code> で行を追加・更新・削除します。</p></article>
-                    <article class="sql-summary-card"><h3>DDL：器を作る</h3><p><code>CREATE / ALTER / DROP</code> でテーブルなどの構造を管理します。</p></article>
-                    <article class="sql-summary-card"><h3>DCL：権限を守る</h3><p><code>GRANT / REVOKE</code> で「誰が何をできるか」を制御します。</p></article>
-                    <article class="sql-summary-card"><h3>TCL：変更をまとめる</h3><p><code>COMMIT / ROLLBACK</code> で変更の確定・取り消しを行います。</p></article>
+                    <article class="sql-summary-card"><h3>DQL（Data Query Language／データを問い合わせる命令）：読む</h3><p><code>SELECT</code> で必要な行と列を取得します。調査は原則ここから始めます。</p></article>
+                    <article class="sql-summary-card"><h3>DML（Data Manipulation Language／データを操作する命令）：データを変える</h3><p><code>INSERT / UPDATE / DELETE</code> で行を追加・更新・削除します。</p></article>
+                    <article class="sql-summary-card"><h3>DDL（Data Definition Language／データの入れ物を定義する命令）：器を作る</h3><p><code>CREATE / ALTER / DROP</code> でテーブルなどの構造を管理します。ここでいう「器」とは、データを入れる表そのもののことです。</p></article>
+                    <article class="sql-summary-card"><h3>DCL（Data Control Language／権限を制御する命令）：権限を守る</h3><p><code>GRANT / REVOKE</code> で「誰が何をできるか」を制御します。</p></article>
+                    <article class="sql-summary-card"><h3>TCL（Transaction Control Language／変更のまとまりを制御する命令）：変更をまとめる</h3><p><code>COMMIT / ROLLBACK</code> で変更の確定・取り消しを行います。</p></article>
                     <article class="sql-summary-card"><h3>運用：速さと安全を確かめる</h3><p><code>EXPLAIN</code>、インデックス、ログ、バックアップを組み合わせて確認します。</p></article>
                 </div>
                 <nav class="sql-toc" aria-label="このページの目次"><strong>目次</strong><ul>
@@ -84,7 +84,7 @@
                     <li><a href="#transaction">トランザクション</a></li><li><a href="#security">権限と安全</a></li><li><a href="#performance">性能確認</a></li>
                     <li><a href="#cheatsheet">早見表</a></li><li><a href="#incident">障害時の確認</a></li><li><a href="#practice">演習</a></li>
                 </ul></nav>
-                <div class="dialect-note"><strong>SQL方言に注意：</strong>MySQL、PostgreSQL、SQLite、SQL Serverでは、日付関数、自動採番、文字列結合、件数制限などの書き方が異なります。このページは共通的な書き方を中心にし、実行時は利用製品の公式資料で確認します。</div>
+                <div class="dialect-note"><strong>SQL方言（データベース製品ごとの書き方の違い）に注意：</strong>MySQL、PostgreSQL、SQLite、SQL Serverでは、日付関数、自動採番、文字列結合、件数制限などの書き方が異なります。このページは共通的な書き方を中心にし、実行時は利用製品の公式資料で確認します。</div>
                 <div class="sql-table-wrap"><table class="sql-table"><caption>方言差異の代表例（各1行）</caption><thead><tr><th scope="col">分類</th><th scope="col">MySQL</th><th scope="col">PostgreSQL</th><th scope="col">SQLite</th><th scope="col">SQL Server</th></tr></thead><tbody>
                     <tr><td>現在日時を取る日付関数</td><td><code>NOW()</code></td><td><code>NOW()</code> / <code>CURRENT_TIMESTAMP</code></td><td><code>CURRENT_TIMESTAMP</code></td><td><code>GETDATE()</code></td></tr>
                     <tr><td>自動採番</td><td><code>AUTO_INCREMENT</code></td><td><code>GENERATED ... AS IDENTITY</code> / <code>SERIAL</code></td><td><code>INTEGER PRIMARY KEY</code>（自動的に採番）</td><td><code>IDENTITY(1,1)</code></td></tr>
@@ -95,7 +95,7 @@
 
             <section id="sample" class="sql-section" aria-labelledby="sample-title">
                 <h2 id="sample-title">練習用テーブル：servers</h2>
-                <p>以降は、サーバー台帳を想定した次の列を使います。1行が1台のサーバー、列がその属性です。<code>owner_id</code> は担当者を表す番号で、<a href="#join">結合（JOIN）</a>で使う <code>owners</code> テーブルの主キーに対応します。</p>
+                <p>以降は、サーバー台帳を想定した次の列を使います。1行が1台のサーバー、列がその属性です。<code>owner_id</code> は担当者を表す番号で、<a href="#join">結合（JOIN）</a>で使う <code>owners</code> テーブルの主キー（その表の中で1行を見分けるための、重複しない列）に対応します。</p>
                 <div class="sql-table-wrap"><table class="sql-table"><caption>練習用serversテーブルの列</caption><thead><tr><th scope="col">列名</th><th scope="col">意味</th><th scope="col">例</th></tr></thead><tbody>
                     <tr><td><code>server_id</code></td><td>重複しない識別番号</td><td>101</td></tr>
                     <tr><td><code>hostname</code></td><td>サーバー名</td><td>web-01</td></tr>
@@ -116,15 +116,15 @@
                     <tr><td>107</td><td>batch-01</td><td>batch</td><td>dev</td><td>3</td><td>12.0</td><td>2026-08-15 07:30:00</td></tr>
                     <tr><td>108</td><td>cache-01</td><td>cache</td><td>prod</td><td>3</td><td>77.5</td><td>2026-08-28 09:45:00</td></tr>
                 </tbody></table></div>
-                <div class="sql-check"><strong>注記：</strong>このサンプルデータは学習用に作成した架空の値です。実機で実行して得た結果ではありません（NOT RUN）。#practiceの手順を使って、自分の手元の環境で同じデータを作り、実際に実行して確かめてください。</div>
+                <div class="sql-check"><strong>注記：</strong>このサンプルデータは学習用に作成した架空の値です。実際の機器で実行して得た結果ではありません（NOT RUN＝未実行）。このページの「11. 手を動かす演習」にある手順を使って、自分の手元の環境で同じデータを作り、実際に実行して確かめてください。</div>
             </section>
 
             <section id="read" class="sql-section" aria-labelledby="read-title">
                 <h2 id="read-title">1. データを読む・絞る・並べる</h2>
                 <div class="keyword-grid">
-                    <article class="keyword-card"><span class="keyword-kind">取得</span><h3><code>SELECT</code></h3><p>表示したい列を指定します。<code>*</code> は全列ですが、実務では必要な列を明示すると意図が伝わり、不要な転送も減らせます。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">取得</span><h3><code>SELECT</code></h3><p>表示したい列を指定します。<code>*</code> と書くと、すべての列を取り出せます。ただし実務では、必要な列だけを書き並べます。何を見たいのかが他の人に伝わり、無駄なデータのやり取りも減らせるからです。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">対象</span><h3><code>FROM</code></h3><p>どのテーブルから読むかを指定します。<code>SELECT hostname FROM servers</code> のように使います。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">条件</span><h3><code>WHERE</code></h3><p>条件に合う行だけに絞ります。文字列は通常シングルクォートで囲みます。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">条件</span><h3><code>WHERE</code></h3><p>条件に合う行だけに絞り込みます。文字のデータは、通常シングルクォート（<code>'</code>）で囲みます。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">並び替え</span><h3><code>ORDER BY</code></h3><p><code>ASC</code> は昇順、<code>DESC</code> は降順です。省略時は通常 <code>ASC</code> です。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">重複除外</span><h3><code>DISTINCT</code></h3><p>重複する結果を1つにまとめます。環境名の一覧取得などに使います。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">件数制限</span><h3><code>LIMIT</code></h3><p>返す行数を制限します。MySQL・PostgreSQL・SQLiteで利用できます。SQL Serverは <code>TOP</code> などを使います。</p></article>
@@ -140,17 +140,18 @@ LIMIT 10;</code></pre></div>
                     <tr><td>app-02</td><td>app</td><td>88.9</td></tr>
                     <tr><td>web-01</td><td>web</td><td>82.3</td></tr>
                 </tbody></table></div>
-                <p><strong>読む順番：</strong>「本番環境でCPU 80%以上のサーバーを、使用率が高い順に最大10台表示」と日本語へ戻せれば理解できています。</p>
-                <div class="sql-check"><strong>よく使う条件：</strong><code>=</code>、<code>&lt;&gt;</code>（等しくない）、<code>AND</code>、<code>OR</code>、<code>NOT</code>、<code>IN (...)</code>、<code>BETWEEN A AND B</code>、<code>LIKE 'web-%'</code>、<code>IS NULL</code>。<code>NULL</code> は値がない状態なので <code>= NULL</code> ではなく <code>IS NULL</code> を使います。</div>
+                <p><strong>読み解き方：</strong>上のSQLを「本番環境（prod）でCPU使用率が80%以上のサーバーを、使用率が高い順に最大10台表示する」と日本語へ戻せれば理解できています。面接では「条件で絞り、並べ替え、件数を制限する流れを説明できる」と言えます。</p>
+                <div class="sql-check"><strong>よく使う条件：</strong><code>=</code>、<code>&lt;&gt;</code>（等しくない）、<code>AND</code>、<code>OR</code>、<code>NOT</code>、<code>IN (...)</code>（かっこ内のどれかに一致）、<code>BETWEEN A AND B</code>（AからBまでの範囲に入る）、<code>LIKE 'web-%'</code>（<code>%</code>は任意の文字列を表すので「web-」で始まる名前に一致）、<code>IS NULL</code>（値が入っていない）。<code>NULL</code> は値がない状態なので <code>= NULL</code> ではなく <code>IS NULL</code> を使います。</div>
             </section>
 
             <section id="aggregate" class="sql-section" aria-labelledby="aggregate-title">
                 <h2 id="aggregate-title">2. 数える・まとめる</h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>ここでは、1行ずつ見るのをやめて「同じ仲間ごとにまとめて数える」方法を学びます。まとめる単位を決めるのが <code>GROUP BY</code>、まとめたあとの結果を絞り込むのが <code>HAVING</code> です。</p>
                 <div class="keyword-grid">
                     <article class="keyword-card"><span class="keyword-kind">集計関数</span><h3><code>COUNT / SUM</code></h3><p><code>COUNT(*)</code> は行数、<code>SUM(column)</code> は合計を求めます。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">集計関数</span><h3><code>AVG / MIN / MAX</code></h3><p>平均・最小・最大を求めます。監視値の傾向確認に便利です。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">グループ</span><h3><code>GROUP BY</code></h3><p>同じ値ごとに行をまとめます。環境別・役割別の台数集計に使います。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">集計後の条件</span><h3><code>HAVING</code></h3><p><code>WHERE</code> は集計前の行、<code>HAVING</code> は集計後のグループを絞ります。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">集計後の条件</span><h3><code>HAVING</code></h3><p><code>WHERE</code> は、まとめる前の行を1行ずつ絞り込みます。<code>HAVING</code> は、<code>GROUP BY</code> でまとめたあとのグループを絞り込みます。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">別名</span><h3><code>AS</code></h3><p>列やテーブルへ分かりやすい別名を付けます。<code>AS server_count</code> のように使います。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">条件分岐</span><h3><code>CASE</code></h3><p>値に応じて表示を変えます。CPU使用率を「正常・警告・異常」に分類できます。<code>CASE WHEN cpu_usage &gt;= 90 THEN '異常' WHEN cpu_usage &gt;= 70 THEN '警告' ELSE '正常' END</code> のように使います。</p></article>
                 </div>
@@ -169,7 +170,7 @@ ORDER BY avg_cpu DESC;</code></pre></div>
 
             <section id="join" class="sql-section" aria-labelledby="join-title">
                 <h2 id="join-title">3. 複数のテーブルをつなぐ</h2>
-                <p><code>servers.owner_id</code> と <code>owners.owner_id</code> のような共通のキーを使って、分けて保存したデータを結びます。担当者を管理する <code>owners</code> テーブルは、次の列を持つものとします。</p>
+                <p><code>servers.owner_id</code> と <code>owners.owner_id</code> のように、両方の表に共通する列をキー（つなぎ合わせるための目印）として使います。こうして、別々の表に分けて保存したデータを1つの結果にまとめます。担当者を管理する <code>owners</code> テーブルは、次の列を持つものとします。</p>
                 <div class="sql-table-wrap"><table class="sql-table"><caption>練習用ownersテーブルの列とサンプルデータ（架空）</caption><thead><tr><th scope="col">owner_id</th><th scope="col">owner_name</th></tr></thead><tbody>
                     <tr><td>1</td><td>インフラ担当</td></tr>
                     <tr><td>2</td><td>アプリ担当</td></tr>
@@ -178,7 +179,7 @@ ORDER BY avg_cpu DESC;</code></pre></div>
                 <div class="keyword-grid">
                     <article class="keyword-card"><span class="keyword-kind">一致行</span><h3><code>INNER JOIN</code></h3><p>両方のテーブルに一致する行だけを返します。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">左側を全件</span><h3><code>LEFT JOIN</code></h3><p>左側をすべて返し、右側に一致がなければ右側の列は <code>NULL</code> になります。担当未設定の発見に便利です。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">結合条件</span><h3><code>ON</code></h3><p>どの列同士を一致させるかを書きます。条件不足は行数の異常な増加につながります。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">結合条件</span><h3><code>ON</code></h3><p>どの列同士を一致させるかを書きます。この条件が足りないと、結果の行数が想定外に増えてしまいます。</p></article>
                 </div>
                 <div class="sql-example"><pre><code>SELECT s.hostname, s.environment, o.owner_name
 FROM servers AS s
@@ -193,7 +194,7 @@ WHERE s.environment = 'prod';</code></pre></div>
                     <tr><td>cache-01</td><td>prod</td><td>監視担当</td></tr>
                 </tbody></table></div>
                 <p>app-02は<code>owner_id</code>が<code>NULL</code>のため、<code>LEFT JOIN</code>により行は残りつつ<code>owner_name</code>が<code>NULL</code>になります。これが演習3で探す「担当者未設定」の状態です。</p>
-                <div class="sql-warning"><strong>確認点：</strong>結合前後の件数を比べます。想定より増えた場合は、結合キーの重複や <code>ON</code> 条件不足を疑います。</div>
+                <div class="sql-warning"><strong>確認点：</strong>結合する前と後で、行の件数を比べます。結合の失敗で件数が水増しされていないかを確かめるためです。想定より増えた場合は、結合に使ったキーの値が重複していないか、<code>ON</code> の条件が足りていないかを疑います。</div>
             </section>
 
             <section id="change" class="sql-section" aria-labelledby="change-title">
@@ -212,18 +213,19 @@ WHERE server_id = 104;
 
 DELETE FROM servers
 WHERE server_id = 104 AND environment = 'dev';</code></pre></div>
-                <div class="sql-warning"><strong>安全手順：</strong>変更前に同じ <code>WHERE</code> を使った <code>SELECT</code> で対象件数と内容を確認し、可能ならトランザクション内で実行します。本番では承認、バックアップ、切り戻し手順、作業ログも必要です。</div>
+                <div class="sql-warning"><strong>安全手順：</strong>変更する前に、同じ <code>WHERE</code> を付けた <code>SELECT</code> を実行します。どの行が何件変わるのかを、先に自分の目で確認するためです。可能ならトランザクション（複数の変更をひとまとめにして、失敗したら取り消せる仕組み）の中で実行します。本番環境では、これに加えて作業の承認、バックアップの取得、切り戻し手順（元の状態へ戻す手順）の用意、作業ログの記録もそろえる必要があります。</div>
             </section>
 
             <section id="define" class="sql-section" aria-labelledby="define-title">
                 <h2 id="define-title">5. テーブルと制約を定義する</h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>データを入れる前に、表の形と「入れてよい値の決まり」を先に決めます。この決まりを制約と呼びます。制約を付けておけば、間違ったデータがそもそも入らなくなります。</p>
                 <div class="keyword-grid">
-                    <article class="keyword-card"><span class="keyword-kind">作成</span><h3><code>CREATE TABLE</code></h3><p>テーブル名、列名、データ型、制約を定義します。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">作成</span><h3><code>CREATE TABLE</code></h3><p>テーブル名、列名、データ型（その列に入る値の種類）、制約（値が満たすべき決まり）を決めて、新しい表を作ります。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">変更</span><h3><code>ALTER TABLE</code></h3><p>列や制約を追加・変更します。製品によって対応範囲が異なります。<code>ALTER TABLE servers ADD COLUMN memo VARCHAR(200);</code> のように使います。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">構造削除</span><h3><code>DROP TABLE</code></h3><p>テーブル構造とデータを削除します。復旧が難しい破壊的操作です。<code>DROP TABLE servers;</code> のように使います。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">主キー</span><h3><code>PRIMARY KEY</code></h3><p>各行を一意に識別します。重複と <code>NULL</code> を許しません。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">外部キー</span><h3><code>FOREIGN KEY</code></h3><p>別テーブルのキーを参照し、存在しない担当者IDなどを防ぎます。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">値の規則</span><h3><code>NOT NULL / UNIQUE / CHECK / DEFAULT</code></h3><p>必須、重複禁止、条件、初期値をデータベース側で守ります。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">値の規則</span><h3><code>NOT NULL / UNIQUE / CHECK / DEFAULT</code></h3><p><code>NOT NULL</code>は必須入力、<code>UNIQUE</code>は重複禁止、<code>CHECK</code>は値が満たすべき条件、<code>DEFAULT</code>は初期値を表します。アプリ側だけでなく、データベース側でもこれらの決まりを守らせます。</p></article>
                 </div>
                 <div class="sql-example"><pre><code>CREATE TABLE owners (
     owner_id INTEGER PRIMARY KEY,
@@ -259,12 +261,12 @@ SELECT server_id, hostname, environment FROM servers WHERE server_id = 104;
 -- 問題なければ確定
 COMMIT;
 -- 問題があれば COMMIT の代わりに ROLLBACK;</code></pre></div>
-                <div class="sql-check"><strong>ACIDの短い覚え方：</strong>全部かゼロか（原子性）、ルールを守る（一貫性）、同時作業を分離する（独立性）、確定後は残る（永続性）。DDLが暗黙に確定されるかなどは製品ごとに確認します。</div>
+                <div class="sql-check"><strong>ACIDの短い覚え方：</strong>トランザクションが備えるべき4つの性質のことです。すべて反映されるか、まったく反映されないかのどちらかになる（原子性）。決めたルールを壊さない（一貫性）。同時に動く作業どうしが干渉しない（独立性）。確定した変更は消えずに残る（永続性）。なお、<code>CREATE TABLE</code> などのDDLを実行すると、その時点で変更が自動的に確定されてしまう製品もあります。使う製品ごとに確認します。</div>
             </section>
 
             <section id="security" class="sql-section" aria-labelledby="security-title">
                 <h2 id="security-title">7. 権限と安全なSQL</h2>
-                <p>まず、SQLインジェクションと呼ばれる典型的な事故の悪い例を見ます。利用者の入力をそのままSQL文へ文字列連結すると、入力次第で想定外のSQLが実行されてしまいます。</p>
+                <p>まず、SQLインジェクション（利用者が入力した文字を悪用して、想定外のSQLを実行させる攻撃）という典型的な事故の悪い例を見ます。利用者が入力した文字を、そのままSQL文へつなぎ合わせてはいけません。入力の内容しだいで、作った人が想定していないSQLが実行されてしまいます。</p>
                 <div class="sql-example"><pre><code>-- 悪い例：入力値をそのまま文字列連結している（アプリ側の疑似コード、実行しないでください）
 sql = "SELECT * FROM servers WHERE hostname = '" + input + "'";
 
@@ -276,22 +278,23 @@ SELECT * FROM servers WHERE hostname = '' OR '1'='1';
                 <div class="keyword-grid">
                     <article class="keyword-card"><span class="keyword-kind">付与</span><h3><code>GRANT</code></h3><p>読み取りなど必要な権限だけを付与します。最小権限の原則を守ります。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">取り消し</span><h3><code>REVOKE</code></h3><p>不要になった権限を取り消します。退職・異動・役割変更時も見直します。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">安全な入力</span><h3>プレースホルダー</h3><p>利用者入力をSQL文字列へ直接連結せず、プリペアドステートメントを使ってSQLインジェクションを防ぎます。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">安全な入力</span><h3>プレースホルダー</h3><p>利用者が入力した値を、SQLの文字列へ直接つなぎません。値を入れる場所だけを空けておいたSQLを先に用意する、プリペアドステートメント（準備済みのSQL）という仕組みを使います。空けておいた場所がプレースホルダーです。これでSQLインジェクションを防げます。</p></article>
                 </div>
                 <div class="sql-example"><pre><code>GRANT SELECT ON servers TO monitoring_user;
 REVOKE UPDATE, DELETE ON servers FROM monitoring_user;
 
 -- アプリ側の考え方（記法はライブラリで異なる）
 SELECT hostname FROM servers WHERE server_id = ?;</code></pre></div>
-                <div class="sql-warning"><strong>秘密情報：</strong>パスワードや接続文字列をSQLファイル、ソースコード、Gitへ直接書きません。環境変数や秘密情報管理機能を使い、漏えい時は認証情報をローテーションします。</div>
+                <div class="sql-warning"><strong>秘密情報：</strong>パスワードや接続文字列（接続先やユーザー名をまとめた設定用の文字列）を、SQLファイル、ソースコード、Gitのリポジトリへ直接書きません。代わりに環境変数（実行時に外から渡す設定値）や、秘密情報管理の機能を使います。万一漏れたときは、認証情報をローテーション（新しいものへ入れ替えること）します。</div>
             </section>
 
             <section id="performance" class="sql-section" aria-labelledby="performance-title">
                 <h2 id="performance-title">8. インデックス・ビュー・実行計画</h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>「なぜ遅いのか」を調べて速くする章です。インデックスは本の索引にあたる検索の近道、ビューはよく使うSQLに付けた名前、実行計画はデータベースがどう処理するつもりかを見せてくれる説明書です。</p>
                 <div class="keyword-grid">
                     <article class="keyword-card"><span class="keyword-kind">検索補助</span><h3><code>CREATE INDEX</code></h3><p>本の索引のように検索を速くします。ただし容量を使い、追加・更新・削除が遅くなることがあります。</p></article>
                     <article class="keyword-card"><span class="keyword-kind">仮想表</span><h3><code>CREATE VIEW</code></h3><p>よく使う問い合わせに名前を付けます。複雑さを隠せますが、必ず高速になるわけではありません。<code>CREATE VIEW prod_servers AS SELECT hostname, cpu_usage FROM servers WHERE environment = 'prod';</code> のように使います。</p></article>
-                    <article class="keyword-card"><span class="keyword-kind">計画確認</span><h3><code>EXPLAIN</code></h3><p>全件走査か、どのインデックスを使うか、結合順などを確認します。実行を伴う形式は負荷に注意します。</p></article>
+                    <article class="keyword-card"><span class="keyword-kind">計画確認</span><h3><code>EXPLAIN</code></h3><p>データベースがそのSQLをどう処理するつもりかを表示します。全件走査（表を先頭から最後まで全部読む方法）になっていないか、どのインデックスを使うか、どの順でテーブルをつなぐかを確認できます。なお、実際にSQLを実行して計測する形式もあり、その場合はサーバーへの負荷に注意します。</p></article>
                 </div>
                 <div class="sql-example"><pre><code>CREATE INDEX idx_servers_environment_role
 ON servers (environment, role);
@@ -303,7 +306,7 @@ WHERE environment = 'prod' AND role = 'web';</code></pre></div>
                 <div class="sql-table-wrap"><table class="sql-table"><caption>EXPLAIN出力例</caption><thead><tr><th scope="col">id</th><th scope="col">select_type</th><th scope="col">table</th><th scope="col">type</th><th scope="col">key</th><th scope="col">rows</th></tr></thead><tbody>
                     <tr><td>1</td><td>SIMPLE</td><td>servers</td><td>ref</td><td>idx_servers_environment_role</td><td>12</td></tr>
                 </tbody></table></div>
-                <p><code>type</code>が<code>ref</code>で<code>key</code>に作成したインデックス名が表示され、推定行数（<code>rows</code>）が全件より少なければ、インデックスが使われていると判断できます。<code>type</code>が<code>ALL</code>で<code>key</code>が空の場合は全件走査（フルスキャン）です。</p>
+                <p><code>type</code>が<code>ref</code>で<code>key</code>には、実際に使われたインデックスの名前が入ります。ここに作成したインデックス名が表示され、推定行数（<code>rows</code>）が表全体の行数より少なければ、インデックスが使われたと判断できます。面接では「実行計画を見て、インデックスが使われたことを確認した」と説明できます。<code>type</code>が<code>ALL</code>で<code>key</code>が空の場合は全件走査（フルスキャン）です。</p>
                 <ol class="sql-flow"><li>遅いSQL、実行時間、頻度、対象時間帯をログで特定する。</li><li><code>EXPLAIN</code> で実行計画と推定件数を確認する。</li><li>不要な列・行、関数、並び替え、結合条件を見直す。</li><li>必要なら候補インデックスを検証環境で比較する。</li><li>変更前後の時間、CPU、I/O、ロック、書き込み性能を記録する。</li></ol>
             </section>
 
@@ -330,8 +333,8 @@ WHERE environment = 'prod' AND role = 'web';</code></pre></div>
                 <h2 id="incident-title">10. サーバー運用でSQLエラーが起きたとき</h2>
                 <ol class="sql-flow">
                     <li><strong>影響を確認：</strong>誰が、いつから、どの画面・処理で失敗しているかを記録する。</li>
-                    <li><strong>接続を確認：</strong>DBサービス、待受ポート、DNS、Firewall、接続先、TLS、認証を確認する。</li>
-                    <li><strong>エラーを保存：</strong>画面だけで判断せず、時刻、SQLSTATE、DBログ、アプリログを採取する。秘密情報は伏せる。</li>
+                    <li><strong>接続を確認：</strong>データベースのサービスが動いているか、待受ポート（接続を受け付ける番号）、DNS（ホスト名からIPアドレスを調べる仕組み）、ファイアウォール（決めた条件で通信を許可・拒否する関所）、接続先の設定、TLS（通信の暗号化）、認証の順に確認する。</li>
+                    <li><strong>エラーを保存：</strong>画面の表示だけで判断しない。発生時刻、SQLSTATE（SQLの標準エラーコード）、データベースのログ、アプリのログを採取する。パスワードなどの秘密情報は伏せる。</li>
                     <li><strong>切り分け：</strong>構文、権限、ロック、容量、接続数、タイムアウト、実行計画、直前変更を順に確認する。</li>
                     <li><strong>変更を管理：</strong>本番で思いつきのSQLを実行せず、承認、対象確認、バックアップ、切り戻し、作業記録をそろえる。</li>
                     <li><strong>復旧後を確認：</strong>エラーが消えたことだけでなく、件数、整合性、監視、再発有無を確認し、手順へ反映する。</li>
@@ -343,7 +346,7 @@ WHERE environment = 'prod' AND role = 'web';</code></pre></div>
 
             <section id="practice" class="sql-practice" aria-labelledby="practice-title">
                 <h2 id="practice-title">11. 手を動かす演習</h2>
-                <p>最初は本番データではなく、SQLiteなどの使い捨て学習環境で実行してください。各演習は「実行SQL・期待結果・実際の結果・気づき」を記録します。</p>
+                <p>最初は本番データではなく、SQLiteなどの使い捨て学習環境で実行してください。各演習では「実行したSQL・予想した結果・実際に出た結果・気づいたこと」を記録します。記録が残っていれば、面接や報告のときに「何を試して、何が分かったのか」を自分の言葉で説明できます。</p>
                 <p>学習環境の用意の仕方は、主に次の2通りです。</p>
                 <ol class="sql-flow">
                     <li><strong>ブラウザで動くオンライン実行環境を使う：</strong>検索エンジンで「SQLite オンライン実行」などと調べると、インストール不要でSQLiteを試せる学習用サービスが見つかります。そこに下記のSQL文を貼り付けて実行します。</li>

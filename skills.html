@@ -124,16 +124,17 @@
             <!-- ===== スキル概要文 ===== -->
             <section class="skills-overview">
                 <p class="overview-text"><strong>第一志望はLinuxサーバー設計・構築、第二志望はITサポートです。</strong>主作品「Server Monitor」で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの流れとして学びました。</p>
-                <p class="overview-text">スキル名だけで自己評価せず、コード・資料を作成した「実装済み」、日付と環境を残して動かした「実測済み」、まだ試していない「未実施（NOT RUN）」を分けています。</p>
+                <p class="overview-text">スキル名だけで自己評価せず、コード・資料を作成した「実装済み」、日付と環境を残して動かした「実測済み」、まだ試していない「未実施（NOT RUN）」を分けています。NOT RUNは英語で「実行していない」という意味です。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>下の3つは、どこまで自分で確かめたかを表す区分です。「実装済み」は資料やコードを作った段階、「実測済み」は実際に動かして日付付きで結果を残した段階、「未実施（NOT RUN）」はまだ一度も試していない段階を指します。</p>
                 <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
                     <span><strong>実装済み</strong> 設計書、パラメータシート、Ansible、Compose、試験仕様、復旧手順、引き渡し資料</span>
-                    <span><strong>実測済み</strong> WSL2、一時Ubuntu、Docker等の学習環境で、構築、監視、復旧を日付付きで確認</span>
-                    <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy、D-2、本番変更</span>
+                    <span><strong>実測済み</strong> WSL2（Windowsの中でLinuxを動かす仕組み）、一時Ubuntu（使い捨てのLinux）、Docker（アプリを箱ごと動かす仕組み）等の学習環境で、構築、監視、復旧を日付付きで確認</span>
+                    <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy（クラウド上に実際に環境を作って消す操作）、D-2（別のサーバーへ復元するホスト障害の演習）、本番変更</span>
                 </div>
                 <div class="summary-actions">
                     <a href="https://github.com/ns7jp/server-monitor" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品を見る</a>
                     <a href="project-brief.html#flow-title" class="btn btn-secondary"><i class="fa-solid fa-route" aria-hidden="true"></i> 6工程を見る</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 現行mainの証跡台帳</a>
+                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 現行mainの証跡台帳（最新版の確認記録の一覧）</a>
                 </div>
             </section>
 
@@ -143,6 +144,8 @@
                     <span class="heading-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
                     <span class="heading-text">第一志望：Linuxサーバー設計・構築に直結するスキル</span>
                 </h2>
+
+                <p class="plain-summary"><strong>かんたんに言うと</strong>Linuxサーバーの設計・構築とは、会社のサービスを動かすコンピューター（サーバー）の構成を決め、実際に組み立て、正しく動くか試し、壊れたときに直せる状態にするまでの仕事です。以下のカードは、その仕事に必要な技術を種類ごとにまとめたものです。</p>
 
                 <!-- スキルカードを並べるグリッドコンテナ -->
                 <div class="skill-cards-grid">
@@ -166,15 +169,15 @@
                         <div class="skill-description">
                             <ul>
                                 <li><strong>設計：</strong>要件、基本設計、詳細設計、パラメータ、ネットワーク、監視、バックアップの資料を作成</li>
-                                <li><strong>構築：</strong>AnsibleとDocker Composeで設定を自動化し、一時Ubuntu環境で再実行時の差分を確認</li>
-                                <li><strong>試験：</strong>期待値、実測値、実行日、環境、対象版を記録。一連テスト23項目を実行</li>
-                                <li>Prometheus、Grafana、Lokiを使った監視値とログの確認。Windows上のLinux環境（WSL2）で起動を確認済み</li>
+                                <li><strong>構築：</strong>AnsibleとDocker Compose（どちらも設定作業を自動で行う道具）で設定を自動化しました。使い捨てのUbuntu環境で同じ手順をもう一度流し、前回との差分（変わってしまった点）が出ないことを確認しています。何度実行しても同じ状態になる、と言えます。</li>
+                                <li><strong>試験：</strong>期待値（こうなるはずの値）、実測値（実際に出た値）、実行日、環境、対象版を記録します。あとから別の人が同じ条件でやり直せるようにするためです。一連テスト23項目を実行しました。</li>
+                                <li>Prometheus（監視の数値を集める道具）、Grafana（集めた数値をグラフで見る道具）、Loki（ログを集めて検索する道具）を使い、監視値とログを確認しました。Windows上のLinux環境（WSL2）で起動を確認済みです。</li>
                                 <li><strong>復旧：</strong>サービス停止からの復旧と同一環境へのデータ復元を確認。D-2と別サーバーへの復元はNOT RUN</li>
-                                <li><strong>引き渡し：</strong>チェックリストと切り戻し手順を作成。独立した対象サーバーでの受け入れはNOT RUN</li>
-                                <li>AWSのネットワーク設定コード。書き方の検査までで、実際のAWS環境は作成していません</li>
+                                <li><strong>引き渡し：</strong>チェックリストと、切り戻し手順（問題が起きたときに前の状態へ戻す手順）を作成しました。独立した対象サーバーでの受け入れはNOT RUN（未実施）です。</li>
+                                <li>AWS（アマゾンのクラウドサービス）のネットワーク設定をコードで書きました。書き方の検査（文法チェック）までで、実際のAWS環境は作成していません。</li>
                                 <li>CPU、メモリ、ディスクなどを表示するサーバー監視画面を自作（Python / Flask）</li>
                                 <li>Apacheを使ったWeb環境の構築と、レンタルサーバーへの公開</li>
-                                <li>Kubernetes <span class="learning-tag">学習中</span></li>
+                                <li>Kubernetes（たくさんのコンテナをまとめて動かす仕組み） <span class="learning-tag">学習中</span></li>
                             </ul>
                         </div>
                     </div>
@@ -196,13 +199,13 @@
                         </div>
                         <div class="skill-description">
                             <ul>
-                                <li>PowerShell 9本（読み取り中心、JSON/CSV/HTML出力、Pesterテスト + CI付き）</li>
+                                <li>PowerShell（Windowsを命令文で操作する仕組み）のスクリプト9本。読み取り中心で、結果をJSON（プログラムが読みやすい文字データの形式）・CSV・HTMLで出力します。Pester（PowerShell用の自動テスト）と、CI（変更のたびに自動でテストを回す仕組み）を付けています。</li>
                                 <li>Active Directory（社内アカウント管理）の確認練習。使われていない利用者や所属グループを調べる手順</li>
                                 <li>Microsoft 365 ライセンス棚卸し（Microsoft Graph PowerShell SDK）</li>
                                 <li>PC初期設定、退職者アカウント停止、Active Directory・Microsoft 365変更の想定手順</li>
-                                <li>Microsoft 365サンプルデータ（JSON 5本）と補助PowerShell（2本）。本番テナント実績ではありません</li>
-                                <li>ネットワーク基礎（TCP/IP・DNS・DHCP・Wi-Fi 接続トラブル）</li>
-                                <li>セキュリティベースライン確認（Defender / Firewall / BitLocker / Update）</li>
+                                <li>Microsoft 365のサンプルデータ（JSON形式で5本）と、補助のPowerShell（2本）です。テナント（会社ごとに割り当てられるMicrosoft 365の領域）の本番実績ではありません。</li>
+                                <li>ネットワークの基礎。TCP/IP（通信の共通ルール）、DNS（名前をIPアドレスに変換する仕組み）、DHCP（IPアドレスを自動で配る仕組み）、Wi-Fiの接続トラブル対応。</li>
+                                <li>セキュリティの基本設定（ベースライン）の確認。Defender（ウイルス対策）、Firewall（決めた条件で通信を許可・拒否する関所）、BitLocker（ディスクの暗号化）、Update（更新プログラムの適用）を見ます。</li>
                                 <li>リモートサポート（Quick Assist・TeamViewer・AnyDesk）<span class="learning-tag">学習中</span></li>
                             </ul>
                             <p><a href="ad-keywords.html" class="btn btn-sm btn-primary"><i class="fa-solid fa-book-open" aria-hidden="true"></i> 初心者向けADキーワード集</a></p>
@@ -246,7 +249,7 @@
                         </div>
                         <div class="skill-description">
                             <ul>
-                                <li>SQLite（Pulse：PDO／自動生成）</li>
+                                <li>SQLite（1つのファイルで動く軽量なデータベース）。作品「Pulse」で、PDO（PHPからデータベースを操作する仕組み）と自動生成を使いました。</li>
                                 <li>MySQL基礎（掲示板：XAMPP）</li>
                                 <li>SQL文と、データの登録・表示・編集・削除</li>
                                 <li>テーブル設計・外部キー</li>
@@ -299,7 +302,7 @@
                             <ul>
                                 <li>フォーム処理・PDO</li>
                                 <li>セッション認証</li>
-                                <li>CSRF・XSS対策</li>
+                                <li>CSRF（利用者になりすまして操作させる攻撃）とXSS（悪意のあるプログラムを画面に埋め込む攻撃）への対策</li>
                                 <li>bcryptパスワード管理</li>
                             </ul>
                         </div>
@@ -387,7 +390,7 @@
                             <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
                         </div>
                         <h3>問い合わせ対応・知識の共有</h3>
-                        <p>要件確認、不明点の言語化と質問、改善提案の展開。少人数チームでの協調作業、立場の違う相手への説明経験を保有。</p>
+                        <p>依頼された内容をまず確認し、分からない点は言葉にして質問します。気づいた改善案はチームへ共有します。少人数のチームで協力して作業した経験と、立場の違う相手へ説明した経験があります。</p>
                     </div>
                 </div>
             </section>
@@ -399,6 +402,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
                     <span class="heading-text">仕事を想定した問い合わせ対応例</span>
                 </h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>ここから先は実際の業務記録ではなく、想定した問い合わせの場面です。「もしこう聞かれたら、どの順番で何を確認し、どこから先を上の担当へ渡すか」を書き出したものです。</p>
                 <div class="support-case-grid">
                     <div class="support-case-card">
                         <span class="case-label">PCが重い</span>
@@ -432,7 +436,7 @@
                             <ul>
                                 <li>確認: <code>ipconfig /all</code>、<code>Test-Connection</code>、DNS名前解決</li>
                                 <li>添付: network-triage CSV、対象端末、影響範囲、発生時刻</li>
-                                <li>連携: 複数端末・同一セグメントで発生ならネットワーク側として共有</li>
+                                <li>連携: 複数の端末や、同じセグメント（同じネットワークのまとまり）で起きていれば、端末ではなくネットワーク側の問題として共有します。</li>
                             </ul>
                         </div>
                     </div>
@@ -448,9 +452,9 @@
                         <div class="case-evidence">
                             <span>残す記録</span>
                             <ul>
-                                <li>確認: CPU / Memory / Disk / Network、プロセス上位、直近変更</li>
+                                <li>確認: CPU、メモリ、ディスク、ネットワークの使用状況。負荷の高いプロセス（動作中のプログラム）の上位。直近の変更内容。</li>
                                 <li>添付: 監視画面、時系列メモ、ログ抜粋、影響サービス</li>
-                                <li>連携: しきい値超過継続、再起動判断、顧客影響ありなら即時共有</li>
+                                <li>連携: しきい値（あらかじめ決めた上限値）を超えた状態が続く、再起動の判断が必要、顧客への影響がある。いずれかに当てはまれば即時共有します。</li>
                             </ul>
                         </div>
                     </div>
@@ -563,7 +567,7 @@
                 <div class="support-docs-link">
                     <p class="support-docs-text">
                         <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                        さらに詳しい <strong>PC キッティング手順書</strong>、<strong>障害対応事例集（10ケース）</strong>、<strong>PowerShell 実務スクリプト</strong> を公開しています。
+                        さらに詳しい <strong>PC キッティング手順書</strong>（新しいPCを業務で使える状態まで設定する作業の手順書）、<strong>障害対応事例集（10ケース）</strong>、<strong>PowerShell 実務スクリプト</strong> を公開しています。
                     </p>
                     <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-github" aria-hidden="true"></i> 詳細ドキュメントを見る

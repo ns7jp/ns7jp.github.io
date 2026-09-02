@@ -108,8 +108,8 @@
             <section class="lab-intro">
                 <span class="case-label">学習用 / Ubuntu・RHEL系Linux</span>
                 <h2>「サーバーが重い」「ログインできない」ときの確認順序</h2>
-                <p>UbuntuやRHEL系Linuxで問い合わせを受けたときに、<strong>負荷・空き容量・サービス・ログ・通信・ログイン・ファイアウォール</strong>の順で状態を確認する練習です。ここに掲載した確認コマンドは情報を見るためのもので、設定変更や再起動は別の手順として扱います。</p>
-                <p><strong>対象読者:</strong> Linuxコマンドの経験がない方も対象です。実行環境として、UbuntuまたはRHEL系のVM、もしくはWindowsのWSL2とターミナルを用意してから進めてください。環境をお持ちでない場合は、先に<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>をご覧ください。</p>
+                <p>UbuntuやRHEL系Linux（RHEL/CentOS/Rocky Linux/AlmaLinuxなど、企業でよく使われるLinuxの仲間）で問い合わせを受けたときに、<strong>負荷・空き容量・サービス・ログ・通信・ログイン・ファイアウォール</strong>の順で状態を確認する練習です。ここに掲載した確認コマンドは情報を見るためのもので、設定変更や再起動は別の手順として扱います。</p>
+                <p><strong>対象読者:</strong> Linuxコマンドの経験がない方も対象です。実行環境は2通りあります。1つはUbuntuまたはRHEL系のVM（仮想マシン／パソコンの中に作るもう1台のコンピューター）です。もう1つはWindowsのWSL2（Windowsの中でLinuxを動かす仕組み）と、ターミナル（文字でコマンドを打ち込む画面）です。どちらかを用意してから進めてください。環境をお持ちでない場合は、先に<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>をご覧ください。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-microchip" aria-hidden="true"></i> systemd</span>
                     <span><i class="fa-solid fa-book" aria-hidden="true"></i> journalctl</span>
@@ -121,7 +121,7 @@
                     <i class="fa-solid fa-terminal" aria-hidden="true"></i>
                     <div>
                         <strong>確認できた範囲と、まだ確認していない範囲</strong>
-                        <p>このページの全コマンドを1台の実機で試したわけではありません。<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026年8月22日の実行記録</a>では、Dockerが事前に入った使い捨てのUbuntu 24.04環境で、構築手順の実行、11個のコンテナ起動、通信制限、アプリ復旧、監視データの復元など23項目を確認し、すべて合格しました。WSL2上で行った監視と復旧の練習は2026年8月17日〜19日の別記録です。詳しい環境と未実施項目は<a href="evidence-demo.html">実行記録ページ</a>で分けて掲載しています。</p>
+                        <p>このページの全コマンドを1台の実機で試したわけではありません。<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026年8月22日の実行記録</a>で使ったのは、Docker（アプリを箱に入れて動かす仕組み）が事前に入った使い捨てのUbuntu 24.04環境です。そこでは、構築手順の実行、11個のコンテナ（アプリを入れた箱）の起動、通信制限、アプリ復旧、監視データの復元など23項目を確認しました。結果はすべて合格でした。WSL2上で行った監視と復旧の練習は2026年8月17日〜19日の別記録です。詳しい環境と未実施項目は<a href="evidence-demo.html">実行記録ページ</a>で分けて掲載しています。</p>
                     </div>
                 </div>
             </section>
@@ -131,6 +131,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="first-check-order-title">最初に覚える「事実を集める」7項目</h2>
                 </div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>トラブルの連絡を受けても、すぐ直そうとしないでください。まず「今どうなっているか」を7か所だけ順番に見て、事実をメモします。原因を決めつけて、よけいに壊さないための手順です。</p>
                 <p class="evidence-note">いきなり再起動や設定変更をせず、まず状態を読み取ります。順番は状況に合わせて変えて構いませんが、初めは次の合言葉で確認漏れを減らします。</p>
                 <div class="memory-phrase" role="note">
                     <strong>合言葉：重・空・動・記・通・入・壁</strong>
@@ -140,15 +141,15 @@
                 <ol class="first-check-list">
                     <li><span>重</span><div><strong>重さ（負荷・メモリ）</strong><p><code>uptime</code> と <code>free -h</code> で、処理やメモリが混んでいないかを見る。</p></div></li>
                     <li><span>空</span><div><strong>空き（ディスク）</strong><p><code>df -h</code> で、ログやデータを書ける空きがあるかを見る。</p></div></li>
-                    <li><span>動</span><div><strong>動作（サービス）</strong><p><code>systemctl --failed</code> で、止まったサービスがないかを見る。</p></div></li>
-                    <li><span>記</span><div><strong>記録（ログ）</strong><p><code>journalctl</code> で、発生時刻とエラー内容を見る。</p></div></li>
-                    <li><span>通</span><div><strong>通信（経路・ポート）</strong><p><code>ip route</code> と <code>ss -tulnp</code> で、通信の道と受付口を見る。</p></div></li>
-                    <li><span>入</span><div><strong>ログイン（認証）</strong><p><code>last</code> とSSHログで、成功・失敗した接続を見る。</p></div></li>
+                    <li><span>動</span><div><strong>動作（サービス）</strong><p><code>systemctl --failed</code> で、止まったサービス（OSが裏側で動かし続けるプログラム）がないかを見る。</p></div></li>
+                    <li><span>記</span><div><strong>記録（ログ）</strong><p><code>journalctl</code>（OSやサービスが残した記録を読む道具）で、発生時刻とエラー内容を見る。</p></div></li>
+                    <li><span>通</span><div><strong>通信（経路・ポート）</strong><p><code>ip route</code> で通信の通り道を、<code>ss -tulnp</code> で外からの接続を待っている受付口（ポート）を見る。</p></div></li>
+                    <li><span>入</span><div><strong>ログイン（認証）</strong><p><code>last</code> とSSH（離れた場所から安全にサーバーへログインする仕組み）のログで、成功・失敗した接続を見る。</p></div></li>
                     <li><span>壁</span><div><strong>防火壁（許可ルール）</strong><p><code>ufw status</code> などで、通信を止めるルールを見る。</p></div></li>
                 </ol>
                 <div class="beginner-safety-note">
                     <strong>安全の基本</strong>
-                    <p>見る → 時刻と結果を保存する → 普段の値や設計と比べる → 分からなければ相談する。再起動、削除、権限変更は、影響と戻し方を確認してから行います。</p>
+                    <p>まず状態を見ます。次に、確認した時刻と結果を保存します。そのうえで、普段の値や設計と比べます。分からなければ相談します。再起動、削除、権限変更は、影響と戻し方を確認してから行います。</p>
                 </div>
             </section>
 
@@ -157,7 +158,8 @@
                     <span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span>
                     <span class="heading-text">Linuxの基本確認コマンド早見表</span>
                 </div>
-                <p class="evidence-note">下記の数値は一律の正解ではなく、異常の可能性に気づくための目安です。普段の状態や設計値と比べ、判断できない場合は結果を保存して上位担当者へ相談します。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>この表は「どこを、どのコマンドで見て、どうなっていたら人に相談するか」の一覧です。数字を暗記するための表ではありません。</p>
+                <p class="evidence-note">下記の数値は一律の正解ではなく、異常の可能性に気づくための目安です。まず普段の状態や設計値（そのシステムで想定している値）と比べます。それでも判断できない場合は、結果を保存して上位担当者へ相談します。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるLinux一次運用表" tabindex="0">
                     <table class="operation-table">
                         <caption class="sr-only">Linuxサーバーの基本確認項目、コマンド、相談の目安</caption>
@@ -221,7 +223,7 @@
                         </tbody>
                     </table>
                 </div>
-                <p class="evidence-note">※ 権限エラー（<code>Permission denied</code>など）が出た場合は、root権限が必要な可能性があります。command前に<code>sudo</code>を付けて再実行してください。　† <code>iostat</code>はsysstatパッケージが必要です（<code>apt install sysstat</code> / <code>dnf install sysstat</code>）。SSHのservice名はUbuntuで<code>ssh</code>、RHEL系（RHEL/CentOS/Rocky Linux/AlmaLinuxなど）で<code>sshd</code>です。firewallはUbuntu/Debian系が<code>ufw</code>、RHEL系は標準で<code>firewalld</code>（<code>firewall-cmd</code>）を使います。</p>
+                <p class="evidence-note">※ 権限エラー（<code>Permission denied</code>など）が出た場合は、root権限（サーバーの管理者権限）が必要な可能性があります。コマンドの前に<code>sudo</code>（管理者として実行する命令）を付けて再実行してください。　† <code>iostat</code>を使うには、sysstatパッケージ（追加ソフトのまとまり）をあとから入れる必要があります（<code>apt install sysstat</code> / <code>dnf install sysstat</code>）。SSHのサービス名は、Ubuntuでは<code>ssh</code>、RHEL系（RHEL/CentOS/Rocky Linux/AlmaLinuxなど）では<code>sshd</code>です。ファイアウォール（決めた条件で通信を許可・拒否する関所）は、Ubuntu/Debian系では<code>ufw</code>を使います。RHEL系は標準で<code>firewalld</code>（操作するコマンドは<code>firewall-cmd</code>）を使います。</p>
             </section>
 
             <section class="operation-matrix-section">
@@ -234,27 +236,27 @@
                     <div class="architecture-notes">
                         <h3>SSH 鍵運用</h3>
                         <ul>
-                            <li><code>ssh-keygen -t ed25519</code>で接続用の鍵を作り、鍵を守るパスフレーズを設定します。</li>
-                            <li>サーバー側の鍵ファイルは、ほかの利用者から読まれない権限にします（ファイルは<code>600</code>、ディレクトリは<code>700</code>）。</li>
-                            <li>パスワード接続や管理者の直接ログインを無効にする場合は、先に別の接続手段を確認してから設定します。</li>
+                            <li><code>ssh-keygen -t ed25519</code>で接続用の鍵（ed25519は暗号方式の名前）を作り、鍵を守るパスフレーズを設定します。パスワードの代わりに鍵で本人確認をして、推測による不正ログインを防ぐためです。</li>
+                            <li>サーバー側の鍵ファイルは、ほかの利用者から読まれない権限にします（ファイルは<code>600</code>＝本人だけが読み書きできる、ディレクトリは<code>700</code>＝本人だけが読み書きと出入りをできる）。鍵を他人に読まれると、そのまま本人になりすまされるためです。</li>
+                            <li>パスワード接続や管理者の直接ログインを無効にする場合は、先に別の接続手段を確認してから設定します。設定を間違えると自分もログインできなくなり、その場で戻せなくなるためです。</li>
                             <li>退職・異動時は不要になった鍵を削除し、運用台帳と照合します。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>権限・ファイルシステム</h3>
                         <ul>
-                            <li><code>chown</code>や<code>chmod</code>では、必要な利用者だけが操作できる権限にします。個別に権限を追加するときはACL（<code>setfacl</code>）を使います。</li>
+                            <li><code>chown</code>（ファイルの持ち主を変える）や<code>chmod</code>（読み書きの許可を変える）では、必要な利用者だけが操作できる権限にします。特定の人にだけ個別に権限を追加するときは、ACL（Access Control List／利用者ごとに細かく許可を決める仕組み）の<code>setfacl</code>を使います。</li>
                             <li>例: <code>setfacl -m u:username:rx /path</code>で、指定した利用者だけに読み取り・実行権限を追加できます（設定結果は<code>getfacl /path</code>で確認）。</li>
                             <li>機密ファイルは専用グループだけが読める権限にし、<code>ls -la</code>で設定結果を確認します。</li>
-                            <li>通常より強い権限（SUID / SGID）が付いたファイルは、必要なものか定期的に確認します。</li>
+                            <li>通常より強い権限（SUID / SGID＝実行した人ではなく、ファイルの持ち主や所属グループの権限で動く設定）が付いたファイルは、必要なものか定期的に確認します。不要なものが残っていると、一般の利用者が管理者と同じ操作をできてしまうためです。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>cron / systemd timer</h3>
                         <ul>
-                            <li>定期実行の設定場所は、OS全体の設定と利用者ごとの設定に分かれます。</li>
-                            <li>新しい定期処理は、実行結果をログで追いやすい<code>systemd timer</code>の利用を検討します。</li>
-                            <li>追加時は、誰が実行するか、結果の保存先、失敗時の再試行、制限時間を記録します。</li>
+                            <li>cron（決めた時刻に処理を自動で走らせる仕組み）の設定場所は、OS全体の設定と利用者ごとの設定に分かれます。</li>
+                            <li>新しい定期処理は、実行結果をログで追いやすい<code>systemd timer</code>（Linuxの起動・停止を管理するsystemdが持つタイマー機能）の利用を検討します。</li>
+                            <li>定期処理を追加するときは、次の4つを記録します。誰の権限で実行するか、結果をどこへ保存するか、失敗したら何回やり直すか、何分で打ち切るか、です。あとから別の人が引き継げるようにするためです。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
@@ -262,7 +264,7 @@
                         <ul>
                             <li><code>logrotate</code>は、古いログを一定期間ごとに整理し、ディスク不足を防ぐ仕組みです。</li>
                             <li>新しいアプリを追加するときは、ログの保存期間とディスク使用率の監視も決めます。</li>
-                            <li>変更前に<code>logrotate -d</code>を使い、実際には処理せず設定内容だけを確認します。</li>
+                            <li>変更前に<code>logrotate -d</code>を使い、実際には処理せず設定内容だけを確認します。これで「設定を書き間違えていないこと」を、ログを消してしまう前に確かめられたと言えます。</li>
                         </ul>
                     </div>
                 </div>
@@ -275,8 +277,9 @@
                 </div>
                 <div class="lab-link-card">
                     <h3><i class="fa-solid fa-terminal" aria-hidden="true"></i> 毎日の差分バックアップ例</h3>
+                    <p class="plain-summary"><strong>かんたんに言うと</strong>下のスクリプトは、毎日決まった時刻に<code>/etc</code>と<code>/var/www</code>を別のディスクへコピーし、30日より古いコピーを消す、という内容です。</p>
                     <p>同じサーバー内の別ディスクへ、設定ファイルとWebコンテンツを毎日コピーする学習例です。本番環境で実行した実績ではありません。同じサーバー内だけでは機器故障に備えられないため、実務では別の機器や離れた場所にも保存し、定期的に復元できるかを確認します。</p>
-                    <p class="evidence-note"><strong>実行前の注意:</strong> <code>--delete</code>はバックアップ先の余分なファイルを削除し、末尾の<code>find ... rm -rf</code>は30日を超えた保存先を削除します。最初はテスト用ディレクトリへ変更し、<code>rsync --dry-run</code>で対象と差分を確認してください。</p>
+                    <p class="evidence-note"><strong>実行前の注意:</strong> <code>--delete</code>はバックアップ先の余分なファイルを削除し、末尾の<code>find ... rm -rf</code>は30日を超えた保存先を削除します。最初は、コピー先をテスト用のディレクトリ（フォルダ）へ変更してください。そのうえで<code>rsync --dry-run</code>（実際にはコピーせず、何が起きるかだけを表示する実行）で、対象と差分を確認してください。いきなり本番のパスで実行すると、必要なファイルまで消えるおそれがあります。</p>
 <pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
 #!/bin/bash
 # /usr/local/sbin/daily-backup.sh
@@ -311,7 +314,7 @@ Persistent=true
 [Install]
 WantedBy=timers.target
 </pre>
-                    <p style="margin-top:14px;">実際に有効化する場合のコマンド例（学習環境での実行を想定）:</p>
+                    <p style="margin-top:14px;">実際に有効化する場合のコマンド例（学習環境での実行を想定）です。<code>daemon-reload</code>で追加した設定を読み直し、<code>enable --now</code>で自動実行の登録とその場での開始を行います:</p>
 <pre style="background:#1e1e1e;color:#dcdcdc;padding:18px;overflow:auto;font-size:1.2rem;line-height:1.6;font-family:monospace;">
 sudo chmod +x /usr/local/sbin/daily-backup.sh
 sudo mkdir -p /mnt/backup
@@ -325,7 +328,7 @@ sudo systemctl enable --now daily-backup.timer
             <section class="lab-links-section">
                 <div class="lab-link-card">
                     <h3><i class="fa-solid fa-terminal" aria-hidden="true"></i> 基本情報を集めるbashスクリプト</h3>
-                    <p>ここまでの確認項目を1本にまとめた、設定を変更しない読み取り専用のスクリプトです。問い合わせを受けた直後に実行し、結果をテキストとして記録できます。</p>
+                    <p>ここまでの確認項目を1本にまとめたスクリプト（複数のコマンドを順番に実行する台本ファイル）です。状態を読み取るだけで、設定は変更しません。問い合わせを受けた直後に実行し、結果をテキストとして記録できます。面接や報告では「連絡を受けた時点のサーバーの状態を、手作業の抜けなく記録できる」と説明できます。</p>
                     <div class="contact-actions">
                         <a href="support-scripts/linux-triage.sh" class="btn btn-secondary">linux-triage.sh を見る</a>
                         <a href="linux-commands.html" class="btn btn-outline-dark">基本コマンドを学ぶ</a>

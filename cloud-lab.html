@@ -104,12 +104,13 @@
             <section class="lab-intro">
                 <span class="case-label">学習用設計 / AWS・Terraform</span>
                 <h2>社内ネットワークとAWSの考え方を比べる学習用設計</h2>
-                <p>AWS上でネットワークを分け、接続できる範囲を制限する方法を学ぶための設計例です。Terraformで設定をコードとして記録し、書式と構文が正しいことを自動テストで確認しています。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>会社の中に作るネットワークと、AWS（Amazon Web Services／インターネット経由で借りるサーバーやネットワークのサービス）で作るネットワークを、同じ考え方で並べて整理した学習ノートです。設計図とコードは書きましたが、AWS上に実際の環境はまだ作っていません。</p>
+                <p>AWS上でネットワークを分け、接続できる範囲を制限する方法を学ぶための設計例です。設定内容はTerraform（サーバーやネットワークの構成を設定ファイルに書き残し、その通りに作れるようにする道具）で記録しています。書式と構文が正しいことは自動テストで確認しています。</p>
                 <div class="status-callout pending" role="note">
                     <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i>
                     <div>
-                        <strong>確認済みは設計とコードの構文まで／AWS上での作成は未実施</strong>
-                        <p>AWS環境の作成・削除、実際の通信確認、利用料金の確認はまだ行っていません。料金が発生するEC2、NAT Gateway、Elastic IPは作成対象から外しています。このページは構築済みAWS環境の実績ではありません。</p>
+                        <strong>確認できたのは設計とコードの構文までです。AWS上に環境を作る作業は未実施です。</strong>
+                        <p>AWS環境の作成・削除、実際の通信確認、利用料金の確認はまだ行っていません。料金が発生するEC2（AWSで借りる仮想サーバー）、NAT Gateway（内側から外へ通信を出すための中継サービス）、Elastic IP（固定の外向けIPアドレス）は作成対象から外しています。このページは構築済みAWS環境の実績ではありません。</p>
                     </div>
                 </div>
                 <div class="lab-badges" aria-label="Cloud Labで確認できる領域">
@@ -126,6 +127,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-cloud" aria-hidden="true"></i></span>
                     <span class="heading-text">学習用のAWSネットワーク構成</span>
                 </div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>下の図は、AWSの中にネットワークを1つ用意し、その中を2つの区画に分けた形です。上の区画はインターネットとつながる場所、下の区画はつながらない場所です。外から中へ入るときは、必ず入口用のサーバーを1台だけ経由します。</p>
                 <figure class="network-figure" style="text-align: center;">
                     <div class="mermaid">
                     graph TD
@@ -155,6 +157,8 @@
                     </div>
                     <figcaption>AWSネットワークの学習用構成図。AWS上へ実際に作成した構成ではありません（クリックで拡大できます）。</figcaption>
                 </figure>
+                <p>図の中の英語表記は次の意味です。Internet Gatewayは、AWSのネットワークとインターネットをつなぐ出入口です。Route Tableは、通信をどこへ流すかを決める行き先の表です。Subnetは、ネットワークを区切った小さな区画です。Bastionは、外から中へ入るときだけ通る踏み台サーバーです。Security Groupは、サーバーごとの通信許可ルールです。SSHは、離れた場所からサーバーを文字で操作する通信です。Admin CIDRは、管理者が使うIPアドレスの範囲を指します。</p>
+                <p><code>10.20.0.0/16</code>のような表記は、使えるIPアドレスの範囲を表します。斜線の後ろの数字が小さいほど範囲は広く、<code>/16</code>は<code>/24</code>より広い範囲を指します。</p>
             </section>
 
             <section class="operation-matrix-section">
@@ -178,7 +182,7 @@
                                 <td>VPC<br><small>AWS上のネットワーク全体</small></td>
                                 <td><code>10.20.0.0/16</code></td>
                                 <td>拠点やデータセンター全体のネットワーク</td>
-                                <td>将来の拡張を考え、ほかの拠点やVPNとIPアドレスの範囲が重ならないようにします。</td>
+                                <td>将来の拡張に備え、ほかの拠点やVPN（拠点同士を安全につなぐ通信）とIPアドレスの範囲が重ならないようにします。重なると通信の行き先が定まらなくなるためです。</td>
                             </tr>
                             <tr>
                                 <td>Public Subnet<br><small>外部接続用の領域</small></td>
@@ -214,36 +218,37 @@
                     <span class="heading-icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span>
                     <span class="heading-text">コード確認・安全・料金への配慮</span>
                 </div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>この節は、AWSに実際に作る前の自己点検の内容です。コードの書き方が正しいかを確かめること、誰でも接続できる設定を避けること、料金が発生するものは作らないことの3点をまとめています。あわせて、実務環境ではさらに何が必要かも並べています。</p>
                 <div class="lab-architecture-grid">
                     <div class="architecture-notes">
-                        <h3>変更前確認</h3>
+                        <h3>変更前の確認（AWSに作る前のコード点検）</h3>
                         <ul>
                             <li><code>terraform fmt -check</code>でコードの書式を確認します。</li>
-                            <li><code>terraform init -backend=false</code>で必要な部品を取得し、初期化できることを確認します。</li>
-                            <li><code>terraform validate</code>で構文と設定同士の参照関係を確認します。</li>
+                            <li><code>terraform init -backend=false</code>で、AWSを操作するための部品（プロバイダ）を取り込み、初期化できることを確認します。<code>-backend=false</code>は、状態を保存する外部の置き場所に接続せずに確認するための指定です。</li>
+                            <li><code>terraform validate</code>で、書き方の誤りと、設定同士の参照（あるまとまりが別のまとまりを正しく指しているか）を確認します。AWSに実際に作る前の段階で、コードの誤りに気づけたと言えます。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>セキュリティ</h3>
                         <ul>
-                            <li>SSH接続は管理者が使うIPアドレスの範囲だけに限定し、誰でも接続できる設定（<code>0.0.0.0/0</code>）を禁止します。</li>
+                            <li>SSH接続は管理者が使うIPアドレスの範囲だけに限定し、誰でも接続できる設定（<code>0.0.0.0/0</code>＝すべてのIPアドレスを表す書き方）を禁止します。世界中の見知らぬ相手から接続を試される状態を防ぐためです。</li>
                             <li>外部へ直接公開しない領域は、管理用の入口から必要な通信だけを許可します。</li>
-                            <li>実務では、会社で指定された安全な接続方法（SSM Session Manager、VPNなど）を優先します。</li>
+                            <li>実務では、会社で指定された安全な接続方法（SSM Session Manager、VPNなど）を優先します。SSM Session Managerは、SSH用の入口を開けずにAWSの管理画面経由でサーバーを操作できる仕組みです。開ける入口を減らせるため、より安全に運用できます。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>コスト</h3>
                         <ul>
                             <li>この学習用設計では、料金が発生するEC2、NAT Gateway、Elastic IPを作りません。</li>
-                            <li>将来作成する場合は、予算の通知と削除手順を先に用意します。</li>
-                            <li>検証用の項目には、目的と環境が分かるタグを付ける想定です。</li>
+                            <li>将来これらを作成する場合は、予算の通知と削除手順を先に用意します。消し忘れによって料金が増え続けることを防ぐためです。</li>
+                            <li>検証用に作ったもの（サーバーやネットワークなど）には、目的と環境が分かるタグ（名前付きの目印）を付ける想定です。あとから見たときに、消してよいものを見分けられるようにするためです。</li>
                         </ul>
                     </div>
                     <div class="architecture-notes">
                         <h3>実務環境で追加するもの（未実施）</h3>
                         <ul>
-                            <li>操作記録、通信ログ、異常検知を追加します（CloudTrail、VPC Flow Logsなど）。</li>
-                            <li>異常通知と、通知を受けたあとの対応手順を結び付けます。</li>
+                            <li>操作記録、通信ログ、異常検知の仕組みを追加します（CloudTrail、VPC Flow Logsなど）。CloudTrailは「誰がAWSで何を操作したか」を、VPC Flow Logsは「どの通信が行き来したか」を残す機能です。問題が起きたときに原因をたどれるようにするためです。</li>
+                            <li>異常を知らせる通知と、通知を受けたあとの対応手順を対応させておきます。通知だけが届いて、誰も次に何をすればよいか分からない状態を防ぐためです。</li>
                             <li>バックアップを設定し、定期的に復元できるかを確認します。</li>
                         </ul>
                     </div>
@@ -255,14 +260,14 @@
                     <h3><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Terraformコードと確認記録</h3>
                     <p>学習用の詳細設計、Terraformコード、自動テストで確認したコマンドを掲載しています。AWS実環境での動作記録ではありません。</p>
                     <div class="contact-actions">
-                        <a href="cloud-lab/" class="btn btn-secondary">Cloud Lab README</a>
+                        <a href="cloud-lab/" class="btn btn-secondary">Cloud Labの説明ページ（README）</a>
                         <a href="cloud-lab/terraform/main.tf" class="btn btn-outline-dark">Terraformを見る</a>
                         <a href="infra-evidence/" class="btn btn-outline-dark">実行記録を見る</a>
                     </div>
                 </div>
                 <div class="lab-link-card">
                     <h3><i class="fa-solid fa-shield" aria-hidden="true"></i> 実務環境へ進む前の学習項目</h3>
-                    <p>監視、通知、ログイン方法、秘密情報、バックアップ、変更手順など、まだ確認が必要な内容を別資料にまとめています。以下は学習資料であり、実際の本番運用を行った実績ではありません。</p>
+                    <p>監視、通知、ログイン方法、秘密情報（パスワードや鍵の扱い）、バックアップ、変更手順など、まだ確認が必要な内容を別資料にまとめています。以下はいずれも学習用の資料です。実際の本番運用を行った実績ではありません。</p>
                     <div class="next-scope-list">
                         <span><a href="production-readiness.md" style="color:inherit;">実務環境へ進む前の確認事項</a></span>
                         <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">サービス目標の学習メモ</a></span>

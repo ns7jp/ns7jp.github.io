@@ -108,10 +108,11 @@
             <section class="lab-intro" id="build-overview">
                 <span class="case-label">Ubuntuを使った個人学習</span>
                 <h2>設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを順番に学習</h2>
-                <p>主作品「Server Monitor」をUbuntuサーバー1台の学習課題として作りました。6工程のコード、設定、手順、結果票を結び付け、実装済み・実測済み・未実施（NOT RUN）を分けています。</p>
-                <p><strong>2026年8月22日:</strong> 自動テスト用の一時的なUbuntu環境で、構築、再実行、11個のサービス起動、通信制限、監視、復旧、バックアップからの復元を確認しました。23項目すべて合格しています。なお、Dockerはあらかじめ導入済みの環境です。</p>
-                <p><strong>2026年8月23日:</strong> 新しい版を確認したあと、前の版へ戻す「切り戻し」の自動テストにも合格しました。GitHub上に詳しい結果を公開していますが、継続利用する実機や仮想マシンではまだ実施していません。</p>
-                <p><strong>対象読者:</strong> Linux未経験の方も対象です。実行環境として、UbuntuまたはRHEL系のVM、もしくはWindowsのWSL2とターミナルを用意してから進めてください。環境をお持ちでない場合は、先に<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>をご覧ください。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>サーバーを1台つくる仕事は、決めて（設計）、組み立てて（構築）、確かめて（試験）、見張って（監視）、壊れたら直して（復旧）、次の担当者へ渡す（引き渡し）という順番で進みます。このページは、その6つの工程を自分で一通りやってみた記録です。</p>
+                <p>主作品「Server Monitor」は、Ubuntuサーバー1台を題材にした学習課題として作りました。上の6工程それぞれについて、プログラム、設定ファイル、作業手順、結果票（確認した項目と結果を書き込む記録用紙）をひとまとめにしています。そのうえで、実装済み・実測済み・未実施（NOT RUN）の3つに分けて示しています。</p>
+                <p><strong>2026年8月22日:</strong> 自動テスト用の一時的なUbuntu環境で、一連の動作を確認しました。確認したのは、構築、もう一度同じ手順を実行したときの結果、11個のサービスの起動、通信の制限、監視、復旧、バックアップからの復元です。23項目すべて合格しています。なお、Dockerはあらかじめ導入済みの環境です。</p>
+                <p><strong>2026年8月23日:</strong> 新しい版を確認したあと、前の版へ戻す「切り戻し」の自動テストにも合格しました。詳しい結果はGitHub上に公開しています。ただし、継続して使い続ける実機（本物のパソコンやサーバー）や仮想マシンでは、まだ実施していません。</p>
+                <p><strong>対象読者:</strong> Linux未経験の方も対象です。手を動かすには、練習用のLinuxを1つ用意してください。用意するものは、UbuntuまたはRHEL系（Red Hat系のLinux）のVM（仮想マシン。パソコンの中に作るもう1台のコンピューター）です。Windowsをお使いなら、WSL2（Windowsの中でLinuxを動かす機能）とターミナル（文字で命令を打つ画面）でもかまいません。環境をお持ちでない場合は、先に<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>をご覧ください。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 設計</span>
                     <span><i class="fa-solid fa-gears" aria-hidden="true"></i> 構築</span>
@@ -123,12 +124,12 @@
                 <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
                     <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリスト、作業結果報告書の原本</span>
                     <span><strong>実測済み</strong> WSL2、一時Ubuntu、Docker等の学習環境で記録した確認結果</span>
-                    <span><strong>未実施（NOT RUN）</strong> 独立した対象hostの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy、D-2、本番変更</span>
+                    <span><strong>未実施（NOT RUN）</strong> 独立した対象host（監視される側のサーバー本体）の受け入れ、72時間の連続稼働、Slackへの実際の通知、AWSのapply/destroy（構築と削除）、D-2、本番環境での変更</span>
                 </div>
                 <div class="beginner-safety-note">
                     <strong>このページで使う略語・専門用語</strong>
-                    <p><strong>changed=0</strong>：構成管理ツール（Ansible）を2回目に実行しても差分が出ない状態のことで、冪等性の確認に使います。<br>
-                    <strong>D-1 / D-2</strong>：障害復旧演習の呼び名です。D-1はアプリのプロセス停止からの自動復旧演習、D-2は別サーバーへ復元するホスト障害演習で、D-2はこのLabではNOT RUNです。<br>
+                    <p><strong>changed=0</strong>：構成管理ツール（Ansible）を2回目に実行しても、変わった箇所が0件という意味です。冪等性（同じ操作を何度実行しても結果が変わらない性質）を確認するために使います。<br>
+                    <strong>D-1 / D-2</strong>：障害復旧演習の呼び名です。D-1は、アプリのプロセス（動いているプログラム）をわざと止めて、自動で復旧するかを見る演習です。D-2は、サーバー本体が壊れた想定で、別のサーバーへ復元する演習です。D-2はこのLabではNOT RUNです。<br>
                     <strong>NOT SET / NOT RUN / NOT READY</strong>：NOT SETは値がまだ確定していない状態、NOT RUNは手順はあるが未実行の状態、NOT READYは完了と判定するための条件がまだ揃っていない状態を指します。</p>
                 </div>
                 <div class="summary-actions" style="margin-top: 1.5rem;">
@@ -145,6 +146,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="build-status-title">主な確認結果</h2>
                 </div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>下のカードは、自分で試して記録が残っている結果の一覧です。カードをクリックすると、その根拠になった記録ファイルを見られます。</p>
                 <div class="metric-grid">
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">前の版へ</span>
@@ -164,7 +166,7 @@
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">3項目</span>
                         <strong>情報は読取のみ許可</strong>
-                        <small>読取成功／書込拒否／ログ到達</small>
+                        <small>読み取りは成功、書き込みは拒否、記録も残った</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-17-molecule.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">4種類</span>
@@ -191,14 +193,14 @@
                     <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
                     <div>
                         <strong>現行状況と日付付きの過去結果を分けて掲載</strong>
-                        <p>現在の実測済み・NOT RUNは現行mainの証跡台帳を正本とします。23項目の自動テストと前の版へ戻すテストは、2026年8月22日・23日の一時環境での履歴です。監視サービス9個の起動と13秒での復旧は8月17〜19日の履歴です。2分15秒の動画も当時の画面とログを再構成したもので、連続した操作録画ではありません。</p>
+                        <p>現在の実測済み・NOT RUNは、現行main（GitHubで公開している最新版）の証跡台帳（確認した記録をまとめた一覧表）を正本、つまり最も信頼できる原本とします。23項目の自動テストと前の版へ戻すテストは、2026年8月22日・23日の一時環境での履歴です。監視サービス9個の起動と13秒での復旧は8月17〜19日の履歴です。2分15秒の動画も当時の画面とログを再構成したもので、連続した操作録画ではありません。</p>
                     </div>
                 </div>
                 <div class="status-callout pending" role="note">
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
                         <strong>未実施（NOT RUN）の範囲</strong>
-                        <p>テスト環境にはDockerが最初から入っていました。何もないOSへの導入は<a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener noreferrer">Docker公式のUbuntu向け導入手順</a>を想定していますが、この導入作業を含め、何も入っていないOSからの構築、独立した対象hostと管理端末での受け入れ、実際のSlack通知、AWS apply/destroy、D-2、別サーバーへの復旧、再起動後・24時間・72時間の確認、本番環境での利用はNOT RUNです。</p>
+                        <p>テスト環境にはDockerが最初から入っていました。何もないOSへの導入は<a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener noreferrer">Docker公式のUbuntu向け導入手順</a>を想定しています。ただし、この導入作業そのものはまだ行っていません。次の項目もすべてNOT RUN（手順はあるが未実行）です。何も入っていないOSからの構築、独立した対象hostと管理端末での受け入れ、実際のSlack通知、AWSのapply/destroy、D-2、別サーバーへの復旧、再起動後・24時間・72時間の確認、そして本番環境での利用です。</p>
                     </div>
                 </div>
             </section>
@@ -208,6 +210,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="deliverables-title">作成した12種類の番号付き成果物</h2>
                 </div>
+                <p>実際の構築案件では、作業のたびに決めたことと確かめたことを書類として残します。ここでは、その流れをまねて、00から11まで番号を付けた12種類の資料を自分で作りました。番号順に読むと、何を決め、どう作り、どう確認し、どう引き渡すのかが追えます。</p>
                 <ol class="brief-flow build-package-flow">
                     <li class="brief-step"><span>00</span><strong>目的と条件</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/00-requirements.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
                     <li class="brief-step"><span>01</span><strong>全体の設計</strong><small><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/01-basic-design.md" target="_blank" rel="noopener noreferrer">資料を見る</a></small></li>
@@ -226,11 +229,11 @@
                     <h3><i class="fa-solid fa-list-check" aria-hidden="true"></i> 05 構築手順書の要点（要約）</h3>
                     <p>資料そのものは長いため、流れだけをここに要約します。詳しい手順・コマンド全文は原本をご覧ください。</p>
                     <ul>
-                        <li><strong>作業前確認：</strong>対象VM、sudoの利用可否、対象IP・作業時間・ロールバック条件、対象commit SHAを先に固定します。</li>
-                        <li><strong>準備〜構築：</strong>管理端末にAnsibleを用意し、inventoryと秘密値（vault）を設定したあと、<code>--check --diff</code>のプレフライト確認を経て本実行します。</li>
-                        <li><strong>冪等性確認：</strong>同じplaybookをもう一度実行し、<code>failed=0</code>かつ<code>changed=0</code>であることを記録します。</li>
-                        <li><strong>構築後確認・障害試験：</strong>サービス状態やポート待受を確認したあと、D-1（プロセス停止）演習を実行し、検知・復旧時間を記録します。</li>
-                        <li><strong>ロールバック・作業終了：</strong>問題があれば変更前commitへ戻し、結果票とログを保存して作業結果報告書へ複製します。</li>
+                        <li><strong>作業前確認：</strong>作業を始める前に、条件を先に決めて固定します。決めるのは、対象VM（作業する仮想マシン）、sudo（管理者の権限で命令を実行する仕組み）が使えるかどうか、対象IP、作業時間、ロールバック条件（元に戻すと判断する基準）、対象commit SHA（変更履歴の1点を指す番号）です。作業中に迷わず、後から同じ状態を再現できるようにするためです。</li>
+                        <li><strong>準備〜構築：</strong>まず、作業する側のパソコン（管理端末）にAnsibleを用意します。次に、inventory（作業対象のサーバー一覧）と、パスワードなどの秘密値（vault）を設定します。そのうえで<code>--check --diff</code>を付けて実行し、実際には変更せずに何が変わるかだけを先に確認します（プレフライト確認）。問題がなければ本番どおりに実行します。</li>
+                        <li><strong>冪等性確認：</strong>同じplaybook（Ansibleの作業手順書ファイル）をもう一度実行し、<code>failed=0</code>かつ<code>changed=0</code>であることを記録します。2回目でも何も変わらなければ、手順が何度実行しても安全だと言えます。</li>
+                        <li><strong>構築後確認・障害試験：</strong>まず、サービスが動いているか、ポート待受（外からの通信を受け付けている状態）になっているかを確認します。そのうえでD-1（プロセス停止）演習を行い、異常に気づくまでの時間と復旧までの時間を記録します。止まったときに何秒で戻せるかを数字で言えるようにするためです。</li>
+                        <li><strong>ロールバック・作業終了：</strong>問題があれば、変更前のcommit（変更履歴の1点）まで戻します。これがロールバック（元の状態へ戻すこと）です。最後に結果票とログを保存し、作業結果報告書へ写して作業を終えます。</li>
                     </ul>
                     <p><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">詳細版（05-build-procedure.md）を見る</a></p>
                 </div>
@@ -241,6 +244,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="server-operation-title">構築・運用の確認一覧</h2>
                 </div>
+                <p>表に出てくる道具の名前を先に補足します。Prometheusは数値を集める道具、Grafanaは集めた数値をグラフで見せる画面、Lokiはログを集める道具、Alloyはそれらへデータを送り届ける役、Alertmanagerは異常を知らせる役です。webhookは、異常が起きたときに別のプログラムへ自動で知らせを送る仕組みを指します。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるサーバー構築工程表" tabindex="0">
                     <table class="operation-table">
                         <caption class="sr-only">サーバー構築・運用の工程、動作確認の結果、次に確認すること</caption>
@@ -274,7 +278,7 @@
                             <tr>
                                 <td>監視</td>
                                 <td>Prometheus、Grafana、Loki、Alloy、Alertmanager</td>
-                                <td><span class="status-pill measured">実測済み：監視・ログ・local webhookを確認</span></td>
+                                <td><span class="status-pill measured">実測済み：監視・ログ・手元のwebhook通知を確認</span></td>
                                 <td>Slack実通知と72時間稼働はNOT RUN</td>
                             </tr>
                             <tr>
@@ -300,8 +304,9 @@
                     <span class="heading-text">第二志望・補助成果：ITサポート（Windows / M365 / AD）</span>
                 </div>
 
-                <p style="margin-bottom: 1.5rem;"><strong>第二志望の補助学習：</strong>以下はITサポートを想定し、Windows、Microsoft 365、Active Directoryの問い合わせ対応を学ぶために作成した設計例です。実際の組織環境を構築・運用した実績ではなく、第一志望のLinuxサーバー設計・構築とは分けて掲載しています。</p>
+                <p style="margin-bottom: 1.5rem;"><strong>第二志望の補助学習：</strong>ここから下は、ITサポートの仕事を想定した設計例です。Windows、Microsoft 365、Active Directory（社内のパソコンと利用者アカウントをまとめて管理するMicrosoftの仕組み）についての問い合わせ対応を学ぶために作りました。実際の組織の環境を構築・運用した実績ではありません。第一志望のLinuxサーバー設計・構築とは分けて掲載しています。</p>
 
+                <p class="plain-summary"><strong>かんたんに言うと</strong>下の図は、会社の中のネットワークを用途ごとに部屋分けした設計例です。VLANはその「部屋」にあたる区切りで、外部に見せるサーバー、社内サーバー、社員のパソコン、来客用Wi-Fiを別々にしています。分けておくと、1か所で問題が起きても他へ広がりにくくなります。</p>
                 <figure class="network-figure" style="text-align: center; margin-bottom: 2rem;">
                     <div class="mermaid">
                     graph TD
@@ -339,7 +344,7 @@
                         M365((Microsoft 365)) -. Entra Connect .-> ADDS
                         Internet --> M365
                     </div>
-                    <figcaption>VLAN 構成図（Mermaid.js による動的描画。クリックで拡大可能）</figcaption>
+                    <figcaption>VLAN（用途ごとに分けたネットワークの区画）の構成図です。Mermaid.js という作図ツールで表示しています。クリックすると拡大できます。</figcaption>
                 </figure>
 
                 <div class="lab-architecture-grid" style="margin-top:34px;">
@@ -347,7 +352,7 @@
                         <h3>想定運用シナリオ</h3>
                         <ul>
                             <li>問い合わせ受付後、端末・ネットワーク・アカウント・ライセンスを順に確認する。</li>
-                            <li>確認結果はチケットへ添付しやすい JSON / CSV / HTML に残す。</li>
+                            <li>確認した結果は、問い合わせ記録（チケット）へ添付しやすいJSON・CSV・HTMLの形式で残す。</li>
                             <li>利用者影響、再現性、変更履歴、セキュリティ影響を見てエスカレーションを判断する。</li>
                             <li>対応後は再発防止メモとナレッジ更新候補を残す。</li>
                         </ul>
@@ -355,11 +360,11 @@
                     <div class="architecture-notes">
                         <h3>セグメント設計の考え方</h3>
                         <ul>
-                            <li><strong>DMZ VLAN 10</strong>: 外部公開サービスのみ。内部VLANへの戻りはACLで明示許可されたものだけ。</li>
+                            <li><strong>DMZ VLAN 10</strong>: 外部へ公開するサービスだけを置く区画。ここから社内側のVLANへ戻る通信は、ACL（通信を許可・拒否する条件の一覧）で明示的に許可したものだけ通す。</li>
                             <li><strong>Server VLAN 20</strong>: AD/DNS/DHCP/ファイル/監視。クライアントVLANから必要ポートのみ許可。</li>
                             <li><strong>User VLAN 30</strong>: 業務端末。サーバーVLANへは必要ポートのみ、Guest VLANは完全分離。</li>
                             <li><strong>Guest / IoT VLAN 40</strong>: インターネット出口のみ許可。社内資産には到達不可。</li>
-                            <li><strong>Microsoft 365</strong>: Entra ID と Entra Connect でオンプレ AD と同期。条件付きアクセスでデバイス準拠を強制。</li>
+                            <li><strong>Microsoft 365</strong>: クラウド側の利用者管理であるEntra IDと、同期の仕組みであるEntra Connectを使い、社内に置いたAD（Active Directory）とアカウント情報をそろえる。条件付きアクセスの設定で、会社の基準を満たした端末以外は接続させない。</li>
                         </ul>
                     </div>
                 </div>
@@ -425,7 +430,7 @@
                     <div class="flow-step">
                         <span>02</span>
                         <h3>原因の場所を絞る</h3>
-                        <p>端末、ネットワーク、アカウント、サービス側を順に分離。</p>
+                        <p>端末、ネットワーク、アカウント、サービス側のどこに原因があるかを、順番に切り分けます。</p>
                     </div>
                     <div class="flow-step">
                         <span>03</span>
@@ -440,7 +445,7 @@
                     <div class="flow-step">
                         <span>05</span>
                         <h3>再発防止</h3>
-                        <p>手順書更新、FAQ化、監視項目追加、棚卸し対象化を検討。</p>
+                        <p>同じ問い合わせを繰り返さないために、手順書の更新、よくある質問（FAQ）への追加、監視項目の追加、定期点検の対象にすることを検討します。</p>
                     </div>
                 </div>
             </section>
@@ -458,6 +463,7 @@
                 <div class="lab-link-card">
                     <h3><i class="fa-solid fa-arrows-spin" aria-hidden="true"></i> 関連する学習内容</h3>
                     <p>最初に見ていただきたいのはLinuxサーバーの構築手順と確認資料です。Windows、Microsoft 365、Active Directory、クラウド、問い合わせ対応の資料は補助学習として掲載しています。</p>
+                    <p>以下は関連資料へのリンクです。英字の名前が並びますが、SLOはサービスの品質目標、Error Budgetは許される失敗の量、Runbookは手順書、Postmortemは障害の振り返り記録、Production Readinessは本番で使ってよいかの点検表を指します。</p>
                     <div class="next-scope-list">
                         <span><a href="linux-lab.html" style="color:inherit;">Linux Lab</a></span>
                         <span><a href="cloud-lab.html" style="color:inherit;">Cloud Lab</a></span>

@@ -32,6 +32,7 @@
     24. Contact Page Styles ........ contact.html 連絡先カード
     25. Article Base Styles ........ サブページ共通のコンテナ
     26. Responsive Design .......... スマホ・タブレット用の調整
+    27. Plain Summary .............. 「かんたんに言うと」要約ボックス
    ------------------------------------------------------------------------
    ▼ 用語解説（初学者向け）
      - var(--xxx) ：CSS変数を呼び出す書き方。:root内で定義した色などを再利用
@@ -5594,3 +5595,52 @@ footer {
 .xl-ui-steps { margin: 14px 0; padding: 16px 18px; background: #eef2f6; border-left: 4px solid #28557f; border-radius: 6px; }
 .xl-ui-steps strong { display: block; margin-bottom: 6px; color: var(--text-dark); }
 .xl-ui-steps li { margin: 4px 0 4px 18px; font-size: 1.3rem; color: var(--text-medium); }
+
+/* ========================================
+   27. Plain Summary - 「かんたんに言うと」要約ボックス
+   ----------------------------------------
+   専門的な説明のすぐ近くに置き、同じ内容を初心者向けの
+   やさしい日本語へ1〜2文で言い換えるための共通パーツ。
+   使い方:
+     <p class="plain-summary"><strong>かんたんに言うと</strong>やさしい説明の本文</p>
+   1ページあたり多用せず、つまずきやすい節の先頭にだけ置く。
+======================================== */
+.plain-summary {
+    margin: 14px 0 20px;
+    padding: 14px 18px;
+    background: var(--bg-warm);
+    border-left: 4px solid var(--nature-green);
+    font-size: 1.4rem;
+    line-height: 1.9;
+    color: var(--text-dark);
+}
+
+.plain-summary strong {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--nature-green);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+}
+
+.plain-summary code {
+    padding: 1px 5px;
+    background: var(--bg-sand);
+    font-size: 1.25rem;
+}
+
+/* 暗い背景のセクション内でも読めるように配色だけ差し替える */
+.hero .plain-summary,
+.page-hero .plain-summary,
+footer .plain-summary {
+    background: rgba(255, 255, 255, 0.14);
+    border-left-color: var(--accent-gold-light);
+    color: var(--text-light);
+}
+
+.hero .plain-summary strong,
+.page-hero .plain-summary strong,
+footer .plain-summary strong {
+    color: var(--accent-gold-light);
+}

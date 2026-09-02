@@ -63,23 +63,24 @@
             <section class="lab-intro">
                 <span class="case-label">学習資料 / Windows 10・11 / Windows Server</span>
                 <h2>暗記より先に「何を確かめたいか」を覚える</h2>
-                <p>コマンドは、画面を開かずにコンピューターへ質問する短い文章です。このページでは、問い合わせや障害の一次確認で使うコマンドを、<strong>端末 → 場所 → 通信 → 動作 → 記録 → 権限</strong>の6分類で学びます。最初はすべて覚えず、「どの分類を調べればよいか」を選べれば十分です。</p>
-                <div class="memory-phrase" role="note" id="mnemonic"><strong>合言葉：端・場・通・動・記・権</strong><span>たん・ば・つう・どう・き・けん</span><p>端末情報 → ファイルの場所 → 通信 → プロセスやサービスの動作 → イベント記録 → ユーザーと権限、の順です。以降の見出し横にある小さなラベルは、その節がどの文字に対応するかを示します。</p></div>
-                <div class="status-callout pending" role="note"><i class="fa-solid fa-flask" aria-hidden="true"></i><div><strong>検証範囲：学習用（実機での全コマンド一括検証は未実施）</strong><p>掲載内容はWindowsの一次確認を学ぶための例です。このページの全コマンドを同一のWindows Server実機で実行した証跡ではありません。環境により表示名や使用できるコマンドが異なります。業務環境では会社の手順、権限、対象サーバー、変更の有無を確認してください。</p></div></div>
+                <p>コマンドは、画面を開かずにコンピューターへ質問する短い文章です。このページでは、問い合わせや障害の一次確認（原因を決めつける前に、まず状況を事実として確かめる最初の調査）で使うコマンドを、<strong>端末 → 場所 → 通信 → 動作 → 記録 → 権限</strong>の6分類で学びます。最初はすべて覚えず、「どの分類を調べればよいか」を選べれば十分です。</p>
+                <div class="memory-phrase" role="note" id="mnemonic"><strong>合言葉：端・場・通・動・記・権</strong><span>たん・ば・つう・どう・き・けん</span><p>端末情報 → ファイルの場所 → 通信 → プロセス（今動いているプログラム）やサービス（画面に出ず裏側で動き続ける機能）の動作 → イベント記録（システムが自動で残す出来事の記録） → ユーザーと権限、の順です。以降の見出し横にある小さなラベルは、その節がどの文字に対応するかを示します。</p></div>
+                <div class="status-callout pending" role="note"><i class="fa-solid fa-flask" aria-hidden="true"></i><div><strong>検証範囲：学習用（実機での全コマンド一括検証は未実施）</strong><p>掲載内容はWindowsの一次確認を学ぶための例です。このページの全コマンドを同一のWindows Server実機で実行した証跡（実際に実行したことを示す記録）ではありません。環境により表示名や使用できるコマンドが異なります。業務環境で実行する前には、次の4点を確認してください。会社で決められた手順があるか。自分にその操作の権限があるか。対象のサーバーを間違えていないか。設定を変えてしまう操作が含まれていないか。</p></div></div>
             </section>
             <section class="operation-matrix-section" id="how-to-open" aria-labelledby="how-to-open-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-terminal" aria-hidden="true"></i></span><h2 class="heading-text" id="how-to-open-title">CMDとPowerShellは何が違う？</h2></div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>どちらも「文字で命令を打ち込んで操作する画面」です。CMDは昔からある簡単な画面、PowerShellは新しく結果を細かく扱える画面、という違いです。最初はどちらか片方が使えれば十分です。</p>
                 <div class="command-basics-grid">
-                    <article class="command-guide-card"><span class="command-shell">CMD</span><h3>コマンド プロンプト</h3><p>昔からあるWindowsの操作画面です。<code>ipconfig</code>、<code>ping</code>、<code>dir</code>など、短い基本コマンドを覚える入口に向いています。</p><pre><code>Win + R → cmd → Enter
+                    <article class="command-guide-card"><span class="command-shell">CMD</span><h3>コマンド プロンプト</h3><p>CMD（コマンド プロンプトの略）は、昔からあるWindowsの操作画面です。マウスでボタンを押す代わりに、文字で命令を打ち込んで使います。<code>ipconfig</code>、<code>ping</code>、<code>dir</code>など、短い基本コマンドを覚える入口に向いています。</p><pre><code>Win + R → cmd → Enter
 ipconfig /all</code></pre></article>
-                    <article class="command-guide-card"><span class="command-shell powershell">PowerShell</span><h3>PowerShell</h3><p>結果を文字列だけでなく「情報のまとまり」として扱えます。<code>Get-</code>は取得、<code>Test-</code>は確認、<code>Set-</code>は変更、と動詞から目的を推測できます。</p><pre><code>Win + X → ターミナル
+                    <article class="command-guide-card"><span class="command-shell powershell">PowerShell</span><h3>PowerShell</h3><p>結果を、ただの文字の並びとしてではなく「項目ごとに分かれた情報のまとまり」として扱えます。そのため、名前や状態だけを取り出す、並べ替えるといった加工が簡単です。コマンド名は動詞で始まり、<code>Get-</code>は取得、<code>Test-</code>は確認、<code>Set-</code>は変更を表すので、名前から目的を推測できます。</p><pre><code>Win + X → ターミナル
 Get-ComputerInfo</code></pre></article>
                 </div>
                 <div class="beginner-safety-note"><strong>プロンプト記号は入力しません</strong><p>説明にある<code>C:\&gt;</code>や<code>PS C:\&gt;</code>は「入力を待っています」という表示です。入力するのは、その右側のコマンドだけです。管理者権限が必要な場合も、まず通常権限で確認し、理由が分かってから「管理者として実行」します。</p></div>
             </section>
             <section class="operation-matrix-section" id="quick-reference" aria-labelledby="quick-reference-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span><h2 class="heading-text" id="quick-reference-title">まず覚える読み取りコマンド早見表</h2><a class="mnemonic-tag" href="#mnemonic" title="合言葉「端・場・通・動・記・権」の6分類すべてに対応">端場通動記権</a></div>
-                <p class="evidence-note">「目的」で探し、CMDかPowerShellの使いやすい方を1つ試します。表示結果にはコンピューター名、ユーザー名、IPアドレスなどが含まれるため、公開前に機密情報がないか確認します。</p>
+                <p class="evidence-note">表は「目的」の列から探します。CMDとPowerShellのうち、使いやすい方を1つだけ試せば十分です。表に出てくる用語の意味は次のとおりです。DNSは名前をIPアドレスへ変換する仕組み、DHCPはIPアドレスを自動で配る仕組み、既定ゲートウェイは別のネットワークへ出るときの出口、ポートはサーバー上の入口の番号、TCPはその入口へ確実につなぐための通信の決まりです。表示結果にはコンピューター名、ユーザー名、IPアドレスなどが含まれるため、公開前に機密情報がないか確認します。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるWindowsコマンド早見表" tabindex="0"><table class="operation-table">
                     <caption class="sr-only">Windowsで確認したい内容、CMD、PowerShell、結果の読み方</caption>
                     <thead><tr><th scope="col">目的</th><th scope="col">CMD</th><th scope="col">PowerShell</th><th scope="col">見るところ</th></tr></thead>
@@ -93,22 +94,23 @@ Get-ComputerInfo</code></pre></article>
                         <tr><td>名前解決</td><td><code>nslookup server01</code></td><td><code>Resolve-DnsName server01</code></td><td>名前から期待するIPアドレスを取得できるか。</td></tr>
                         <tr><td>到達確認</td><td><code>ping server01</code></td><td><code>Test-Connection server01 -Count 4</code></td><td>応答の有無と時間。失敗だけで停止とは断定しない。</td></tr>
                         <tr><td>ポート確認</td><td><code>netstat -ano</code></td><td><code>Test-NetConnection server01 -Port 443</code></td><td><code>TcpTestSucceeded : True</code>なら指定ポートへTCP接続できた。</td></tr>
-                        <tr><td>動作中の処理</td><td><code>tasklist</code></td><td><code>Get-Process</code></td><td>プロセス名、PID、メモリ使用量。終了はせず、まず記録。</td></tr>
+                        <tr><td>動作中の処理</td><td><code>tasklist</code></td><td><code>Get-Process</code></td><td>プロセス名、PID（処理ごとに付く番号）、メモリ使用量。終了はさせず、まず記録します。</td></tr>
                         <tr><td>サービス状態</td><td><code>sc query</code></td><td><code>Get-Service</code></td><td><code>Running</code>か<code>Stopped</code>か。停止が異常とは限らない。</td></tr>
                         <tr><td>空き容量</td><td><code>fsutil volume diskfree C:</code></td><td><code>Get-Volume</code></td><td>ドライブの残り容量。<code>fsutil</code>は環境により管理者権限が必要。</td></tr>
                         <tr><td>エラーログ</td><td><code>wevtutil qe System /c:10 /rd:true /f:text</code></td><td><code>Get-WinEvent -LogName System -MaxEvents 10</code></td><td>発生日時、レベル、ソース、イベントID、メッセージ。</td></tr>
                         <tr><td>所属グループ</td><td><code>whoami /groups</code></td><td><code>whoami /groups</code></td><td>管理者などの強い権限を持つグループに所属しているか。</td></tr>
                     </tbody>
                 </table></div>
-                <div class="beginner-safety-note" id="option-notes"><strong>オプション記号の意味</strong><p><code>wevtutil qe System /c:10 /rd:true /f:text</code>の<code>/c:10</code>は取得件数を10件に、<code>/rd:true</code>は新しい順（reverse direction）に並べ、<code>/f:text</code>は出力形式をテキストにする指定です。分からないオプションが出てきたら、コマンド名の末尾に<code>/?</code>を付けて実行すると、使い方の説明が表示されます（例：<code>wevtutil /?</code>）。</p></div>
+                <div class="beginner-safety-note" id="option-notes"><strong>オプション記号の意味</strong><p><code>wevtutil qe System /c:10 /rd:true /f:text</code>の<code>/c:10</code>は、取得する件数を10件に絞る指定です。<code>/rd:true</code>は、新しいものから順に並べる指定です（rdはreverse direction＝逆向き、の略）。<code>/f:text</code>は、出力の形式を文字だけのテキストにする指定です。分からないオプションが出てきたら、コマンド名の末尾に<code>/?</code>を付けて実行すると、使い方の説明が表示されます（例：<code>wevtutil /?</code>）。</p></div>
             </section>
             <section class="operation-matrix-section" id="network" aria-labelledby="network-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-network-wired" aria-hidden="true"></i></span><h2 class="heading-text" id="network-title">通信障害は「自分 → 名前 → 道 → 入口」で分ける</h2><a class="mnemonic-tag" href="#mnemonic" title="合言葉「端・場・通・動・記・権」の「通」に対応">通</a></div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>「つながらない」と言われたら、自分のパソコンの設定、名前からIPアドレスへの変換、途中の通り道、相手側の入口の4つを、手前から順に1つずつ確かめます。どこまで正常だったかが分かれば、原因の範囲を大きく狭められます。</p>
                 <div class="command-step-list">
-                    <article class="command-guide-card"><span class="step-number">1</span><h3>自分の設定：<code>ipconfig /all</code></h3><p>IPv4アドレスは自分の住所、サブネットマスクは同じ地域の範囲、既定ゲートウェイは別ネットワークへの出口、DNSは名前を住所へ変換する案内所です。<code>169.254.x.x</code>は、DHCPからアドレスを取得できなかった可能性があります。</p></article>
-                    <article class="command-guide-card"><span class="step-number">2</span><h3>名前：<code>nslookup server01</code></h3><p>サーバー名が期待するIPへ変換されるかを見ます。名前では失敗し、IP直接なら成功する場合はDNSを調べます。</p></article>
-                    <article class="command-guide-card"><span class="step-number">3</span><h3>道：<code>tracert server01</code></h3><p>通信が通る機器を順番に表示します。途中の<code>*</code>は応答を返さない設定の場合もあるため、そこで障害と即断しません。</p></article>
-                    <article class="command-guide-card"><span class="step-number">4</span><h3>入口：<code>Test-NetConnection server01 -Port 443</code></h3><p>WebのHTTPS入口であるTCP 443番へ接続できるか確認します。PCからの到達、ファイアウォール、待受サービスを切り分ける材料になります。</p></article>
+                    <article class="command-guide-card"><span class="step-number">1</span><h3>自分の設定：<code>ipconfig /all</code></h3><p>住所にたとえると分かりやすくなります。IPv4アドレスは自分の住所です。サブネットマスクは、同じ地域とみなす範囲です。既定ゲートウェイは、別のネットワークへ出るときの出口です。DNSは、名前を住所へ変換してくれる案内所です。<code>169.254.x.x</code>で始まるアドレスが表示されたときは、DHCP（IPアドレスを自動で配る仕組み）からアドレスを受け取れなかった可能性があります。</p></article>
+                    <article class="command-guide-card"><span class="step-number">2</span><h3>名前：<code>nslookup server01</code></h3><p>サーバー名が期待するIPへ変換されるかを見ます。サーバー名を指定すると失敗し、IPアドレスを直接指定すると成功する場合は、名前を変換するDNS側の設定や登録内容を調べます。名前の変換だけが失敗していると分かるからです。</p></article>
+                    <article class="command-guide-card"><span class="step-number">3</span><h3>道：<code>tracert server01</code></h3><p>通信が通っていく機器を、手前から順番に表示します。どこまで届いているかを目で確かめるためです。途中に<code>*</code>が表示されても、その機器が応答を返さない設定になっているだけの場合があります。そこだけを見て障害と決めつけません。</p></article>
+                    <article class="command-guide-card"><span class="step-number">4</span><h3>入口：<code>Test-NetConnection server01 -Port 443</code></h3><p>Webページの表示に使うHTTPS（内容を暗号化した通信）は、サーバーの443番という入口を使います。この443番へ実際につなげるかを確認します。結果は、自分のパソコンから届いているか、ファイアウォール（決めた条件で通信を許可・拒否する関所）で止められていないか、サーバー側で待ち受けるサービスが動いているか、を切り分ける材料になります。</p></article>
                 </div>
                 <div class="beginner-safety-note"><strong><code>ping</code>失敗 ＝ サーバー停止、ではありません</strong><p>セキュリティ設定でpingだけを拒否していることがあります。名前解決、対象ポート、別PCからの結果も集めて判断します。</p></div>
             </section>
@@ -117,14 +119,14 @@ Get-ComputerInfo</code></pre></article>
                 <div class="command-basics-grid">
                     <article class="command-guide-card"><h3>プロセスは「今動くプログラム」</h3><pre><code>Get-Process |
   Sort-Object CPU -Descending |
-  Select-Object -First 10</code></pre><p><code>|</code>（パイプ）は左の結果を右へ渡します。CPU使用時間の大きい順に10件表示しますが、値が大きいだけで異常とは限りません。普段の状態、発生時刻、継続時間と比べます。</p></article>
+  Select-Object -First 10</code></pre><p><code>|</code>（パイプ）は、左のコマンドの結果を右のコマンドへ渡す記号です。この例では、取得したプロセスをCPU（計算を担当する中心部品）の使用時間が大きい順に並べ替え、上から10件だけ表示しています。使用時間が大きいというだけでは、異常とは限りません。普段の状態、発生時刻、継続時間と比べます。</p></article>
                     <article class="command-guide-card"><h3>サービスは「裏側で動く機能」</h3><pre><code>Get-Service -Name W32Time
-Get-Service | Where-Object Status -eq 'Stopped'</code></pre><p>W32Timeは時刻同期サービスです。停止中一覧には、必要なときだけ起動する正常なサービスも含まれます。設計や通常時の状態を確認してから判断します。</p></article>
+Get-Service | Where-Object Status -eq 'Stopped'</code></pre><p>1行目の<code>Get-Service -Name W32Time</code>は、W32Time（時刻を合わせるサービス）1つだけの状態を見ます。2行目は、停止中のサービスだけを絞り込んで一覧にします。停止中一覧には、必要なときだけ起動する正常なサービスも含まれます。設計や通常時の状態を確認してから判断します。</p></article>
                     <article class="command-guide-card"><h3>イベントログは「何が起きたかの記録」</h3><pre><code>Get-WinEvent -FilterHashtable @{
   LogName='System'; Level=2
-} -MaxEvents 20</code></pre><p><code>Level=2</code>はエラーです。時刻、ProviderName（記録元）、Id、Messageを控えます。同じIDでも原因が同じとは限らないため、メッセージと前後の操作を合わせて読みます。</p></article>
+} -MaxEvents 20</code></pre><p>この例は、Systemログからエラーだけを新しい順に20件取り出します。<code>Level=2</code>がエラーを表す番号です。控えるのは、発生時刻、ProviderName（記録元の機能名）、Id（イベントID＝出来事ごとに決まった番号）、Message（記録の本文）の4つです。同じIDでも原因が同じとは限らないため、メッセージと前後の操作を合わせて読みます。</p></article>
                     <article class="command-guide-card"><h3>結果をファイルへ保存</h3><pre><code>Get-ComputerInfo |
-  Out-File "$env:USERPROFILE\Desktop\computer-info.txt"</code></pre><p><code>Out-File</code>は結果を保存します。既存ファイルを同名で上書きする点と、端末名・更新情報などが外部へ出ないよう保存先と共有先に注意します。</p></article>
+  Out-File "$env:USERPROFILE\Desktop\computer-info.txt"</code></pre><p><code>Out-File</code>は、画面に出た結果をファイルへ保存します。後から見返したり、報告に添えたりできるようにするためです。注意点は2つあります。同じ名前のファイルがあると、確認なしで上書きされます。また、、端末名・更新情報などが外部へ出ないよう保存先と共有先に注意します。</p></article>
                 </div>
             </section>
             <section class="operation-matrix-section" id="files-users" aria-labelledby="files-users-title">
@@ -145,7 +147,8 @@ Get-Service | Where-Object Status -eq 'Stopped'</code></pre><p>W32Timeは時刻�
             </section>
             <section class="operation-matrix-section" id="danger" aria-labelledby="danger-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span><h2 class="heading-text" id="danger-title">止まって確認する変更コマンド</h2></div>
-                <p class="evidence-note">次のコマンドは便利ですが、サービス停止、データ消失、通信断を起こす可能性があります。対象、影響、承認、バックアップ、戻し方、確認方法がそろうまで業務環境では実行しません。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>ここから先は、実行するとシステムそのものが変わってしまうコマンドです。学習用のパソコンで試すのはよいですが、仕事の環境では自分の判断だけで実行しません。必ず先輩や責任者に確認します。</p>
+                <p class="evidence-note">次のコマンドは便利ですが、サービス停止、データ消失、通信断を起こす可能性があります。業務環境では、次の6つがそろうまで実行しません。どのサーバーやファイルが対象か。実行すると誰に影響が出るか。上長や依頼元の承認を得たか。バックアップ（元に戻すための控え）を取ったか。失敗したときに戻す手順があるか。実行後に成功を確かめる方法があるか。</p>
                 <div class="danger-command-grid">
                     <div><code>del / Remove-Item</code><strong>削除</strong><span>対象パスと復元方法を確認</span></div>
                     <div><code>format / diskpart</code><strong>ディスク変更</strong><span>対象を誤るとデータ消失</span></div>
@@ -154,13 +157,13 @@ Get-Service | Where-Object Status -eq 'Stopped'</code></pre><p>W32Timeは時刻�
                     <div><code>netsh / Set-NetFirewallRule</code><strong>通信設定変更</strong><span>遠隔接続を失う可能性</span></div>
                     <div><code>net user /add</code><strong>アカウント変更</strong><span>申請と最小権限を確認</span></div>
                 </div>
-                <div class="beginner-safety-note"><strong>PowerShellの安全機能</strong><p>対応コマンドでは<code>-WhatIf</code>で実行予定だけを表示し、<code>-Confirm</code>で確認を求められます。ただし全コマンドが対応するわけではありません。テスト環境、対象を限定した小さな操作、実行後の再確認を組み合わせます。</p></div>
+                <div class="beginner-safety-note"><strong>PowerShellの安全機能</strong><p>対応しているコマンドなら、<code>-WhatIf</code>を付けると、実行はせずに「何が起きる予定か」だけを表示します。<code>-Confirm</code>を付けると、実行前に「本当に実行しますか」と聞いてきます。ただし、すべてのコマンドが対応しているわけではありません。テスト環境で試す、対象を限定して小さく実行する、実行後にもう一度状態を確かめる、この3つを組み合わせます。</p></div>
             </section>
             <section class="operation-matrix-section" id="practice" aria-labelledby="practice-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span><h2 class="heading-text" id="practice-title">10分でできる3つの練習</h2></div>
-                <p class="evidence-note">自分の学習用PCで、設定を変更しない確認だけを行います。結果に個人情報が含まれるため、そのままSNSや公開リポジトリへ載せないでください。</p>
+                <p class="evidence-note">自分の学習用PCで、設定を変更しない確認だけを行います。結果には個人情報が含まれます。そのままSNSや公開リポジトリ（GitHubなど、誰でも中身を見られる保管場所）へ載せないでください。</p>
                 <div class="practice-grid">
-                    <article class="practice-card"><span>練習 1</span><h3>対象確認メモを作る</h3><ol><li><code>hostname</code>と<code>whoami</code>を実行。</li><li><code>Get-Date</code>で確認時刻を表示。</li><li>「いつ・誰が・どの端末で」を自分の言葉で説明。</li></ol><details><summary>できたか確認</summary><p>3情報を説明でき、端末名やユーザー名を公開してよい情報か判断できれば完了です。</p></details></article>
+                    <article class="practice-card"><span>練習 1</span><h3>対象確認メモを作る</h3><ol><li><code>hostname</code>と<code>whoami</code>を実行します。今どの端末に、誰としてログインしているかを確かめるためです。</li><li><code>Get-Date</code>で確認時刻を表示。</li><li>「いつ・誰が・どの端末で」を自分の言葉で説明。</li></ol><details><summary>できたか確認</summary><p>3情報を説明でき、端末名やユーザー名を公開してよい情報か判断できれば完了です。</p></details></article>
                     <article class="practice-card"><span>練習 2</span><h3>Web接続を4段階で確認</h3><ol><li><code>ipconfig /all</code>で自分の設定。</li><li><code>nslookup example.com</code>で名前解決。</li><li><code>ping example.com</code>で応答確認。</li><li><code>Test-NetConnection example.com -Port 443</code>でHTTPS確認。</li></ol><details><summary>できたか確認</summary><p>pingが失敗しても443番が成功する場合がある理由を説明できれば完了です。</p></details></article>
                     <article class="practice-card"><span>練習 3</span><h3>架空の障害を報告する</h3><p>「Webページが開かない」という想定で、変更せずに情報を集めます。</p><ol><li>発生時刻と対象名を記録。</li><li>DNS、443番、サービス、Systemログを確認。</li><li>事実・推測・未確認を分けて3行で報告。</li></ol><details><summary>報告例</summary><p>事実：14:05、名前解決成功、443番失敗。推測：Webサービスまたは通信許可を要確認。未確認：サーバー側サービス状態（権限なし）。</p></details></article>
                 </div>
