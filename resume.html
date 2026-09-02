@@ -118,6 +118,25 @@
             margin-bottom: 14px;
         }
 
+        /* このページはcss/style.cssを読み込まないため、共通の.plain-summaryを
+           このファイル専用の配色（--r-*）で個別に定義する */
+        .plain-summary {
+            background: var(--r-bg-soft);
+            border-left: 3px solid var(--r-accent);
+            padding: 7px 10px;
+            font-size: 11.5px;
+            line-height: 1.6;
+            color: var(--r-muted);
+            margin-bottom: 4px;
+        }
+        .plain-summary strong {
+            display: block;
+            margin-bottom: 2px;
+            color: var(--r-primary);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
         .resume-body {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -338,7 +357,7 @@
         </header>
 
         <section class="resume-summary">
-            <strong>Linuxサーバー設計・構築を第一志望、ITサポートを第二志望</strong>としています。実務経験はまだありませんが、主作品「Server Monitor」で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの流れとして学んでいます。入社後は手順と確認者がいる基礎業務から取り組みます。
+            <strong>Linuxサーバー設計・構築を第一志望、ITサポートを第二志望</strong>としています。実務経験はまだありませんが、主作品「Server Monitor」（Linuxサーバーを1台つくり、動きを見張る自作の学習プロジェクト）で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しという6つの工程を、一つの流れとして学んでいます。入社後はまず、決められた手順があり、作業結果を確認してくれる担当者がいる基礎業務から取り組みます。
         </section>
 
         <div class="resume-body">
@@ -348,8 +367,8 @@
                 <table>
                     <tr>
                         <td class="year">2026-07<br>〜現在</td>
-                        <td>人材派遣会社（アデコ株式会社）を通じ、IT企業にて派遣社員としてトライアル就業中（トライアル期間2か月。就業先の社名は面談時に開示）<br>
-                            <span style="color:#666;font-size:11px;">研修としてWindows/Linuxサーバー構築、AWS/Azure構築を学習（実務案件の構築実績ではありません）</span></td>
+                        <td>人材派遣会社（アデコ株式会社）を通じ、IT企業に派遣社員として就業中。現在はトライアル就業（適性を確かめるために期間を区切って働くこと）で、期間は2か月。就業先の社名は面談時に開示<br>
+                            <span style="color:#666;font-size:11px;">研修としてWindows/Linuxサーバー構築、AWS/Azure（インターネット越しに借りるサーバーの代表的なサービス）の構築を学習（実務案件の構築実績ではありません）</span></td>
                     </tr>
                     <tr>
                         <td class="year">2025-10<br>〜2026-01</td>
@@ -359,7 +378,7 @@
                     <tr>
                         <td class="year">〜2025</td>
                         <td>製造・物流現場で 15 年以上勤務<br>
-                            <span style="color:#666;font-size:11px;">業務改善、在庫管理、現場対応、トラブルシューティング／作業計測により1日約1時間の作業短縮を実現</span></td>
+                            <span style="color:#666;font-size:11px;">業務改善、在庫管理、現場対応、トラブルシューティング（不具合の原因を調べて直す作業）を担当。作業時間を計測して手順を見直し、1日約1時間の作業短縮を実現</span></td>
                     </tr>
                 </table>
             </section>
@@ -371,18 +390,19 @@
                     <tr><td class="year">2026-01</td><td>PHP8技術者認定初級試験 合格</td></tr>
                     <tr><td class="year">2025-12</td><td>Python3エンジニア認定基礎試験 合格</td></tr>
                     <tr><td class="year">2026-06</td><td>ITパスポート 合格</td></tr>
-                    <tr><td class="year">学習中</td><td>基本情報技術者試験（FE）／LPIC-1（101・102）</td></tr>
+                    <tr><td class="year">学習中</td><td>基本情報技術者試験（FE／ITの基礎を問う国家試験）／LPIC-1（Linuxの基本操作を問う認定資格。101・102の2試験で1つの資格）</td></tr>
                 </table>
             </section>
 
             <section class="resume-section">
                 <h2><i class="fa-solid fa-laptop-code" aria-hidden="true"></i>SKILLS / スキル</h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>ここに並ぶのは、学習と研修で実際に手を動かした範囲です。「NOT RUN」と書いた項目は、まだ試していないことを正直に示しています。</p>
                 <div class="resume-skills">
-                    <div><strong>設計</strong>基本設計、詳細設計、パラメータシート、ネットワーク設計を作成</div>
-                    <div><strong>構築・試験</strong>Ansible、Docker Compose、GitHub上の一時Ubuntu環境で確認</div>
-                    <div><strong>監視・復旧</strong>状態、ログ、通知、サービス復旧、同一環境へのデータ復元を確認</div>
-                    <div><strong>引き渡し</strong>チェックリストと切り戻し手順を作成。対象host受入はNOT RUN</div>
-                    <div><strong>その他</strong>Python / PowerShell / Git / GitHub / Terraform（AWS適用はNOT RUN）</div>
+                    <div><strong>設計</strong>基本設計、詳細設計、パラメータシート（設定値をまとめた一覧表）、ネットワーク設計を作成</div>
+                    <div><strong>構築・試験</strong>Ansible（サーバー設定を自動で行う道具）とDocker Composeを使用。GitHub上の一時Ubuntu環境（毎回作り直される使い捨ての検証環境）で確認</div>
+                    <div><strong>監視・復旧</strong>サーバーの状態、ログ（動作の記録）、通知、サービス復旧、同一環境へのデータ復元を確認</div>
+                    <div><strong>引き渡し</strong>チェックリストと切り戻し手順（問題が起きたときに元の状態へ戻す手順）を作成。対象ホストの受け入れはNOT RUN（未実施）</div>
+                    <div><strong>その他</strong>Python / PowerShell / Git / GitHub / Terraform（設定ファイルからサーバーを用意する道具。AWS適用はNOT RUN）</div>
                 </div>
             </section>
 
@@ -392,18 +412,19 @@
                     <div class="work-item">
                         <span class="work-name">Server Monitor — Linuxサーバー設計・構築・運用</span>
                         <span class="work-tag">設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し</span>
-                        <div class="work-desc">Ubuntu 1台を想定し、6工程のコード、設定、手順、確認記録を公開。</div>
+                        <div class="work-desc">Ubuntu（Linuxの代表的な種類）のサーバー1台を想定し、上に挙げた6工程それぞれのコード、設定、手順、確認記録を公開。</div>
                     </div>
                     <div class="work-item">
                         <span class="work-name">動作確認の記録（2026-08-25時点）</span>
                         <span class="work-tag">実装済み / 実測済み / 未実施（NOT RUN）</span>
-                        <div class="work-desc">学習用Ubuntu環境で23項目を確認。独立した対象サーバーの受け入れ、72時間稼働、AWS適用、本番変更はNOT RUN。</div>
+                        <div class="work-desc">学習用のUbuntu環境で23項目の動作を確認。独立した対象サーバーの受け入れ、72時間の連続稼働、AWS適用、本番環境（実際に利用者が使う環境）での変更はNOT RUN。</div>
                     </div>
                 </div>
             </section>
 
             <section class="resume-section resume-readiness">
                 <h2><i class="fa-solid fa-table-list" aria-hidden="true"></i>READINESS / 想定業務 × 学習で取り組んだこと</h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>この表は、インフラ運用の仕事でよくある作業に対して、学習でどこまで試したか、どこが未実施かを並べたものです。</p>
                 <table>
                     <caption class="sr-only">想定業務に対する学習内容と、どこまで試したか</caption>
                     <thead>
@@ -419,7 +440,7 @@
                         </tr>
                         <tr>
                             <td class="task">構築 / 試験</td>
-                            <td class="evidence"><strong>実測済み：</strong>一時Ubuntu環境で設定を2回実行し、2回目に不要な変更が出ないことと、23項目の動作を確認。</td>
+                            <td class="evidence"><strong>実測済み：</strong>一時Ubuntu環境で設定を2回実行。同じ操作を繰り返しても結果が変わらないことを確かめるためで、2回目に不要な変更が出ないことと、23項目の動作を確認。</td>
                         </tr>
                         <tr>
                             <td class="task">監視 / 復旧</td>
@@ -434,7 +455,7 @@
             </section>
 
             <aside class="resume-production-note">
-                <strong>仕事の進め方・制作体制：</strong>手順の確認、必要な相談と承認、作業前後の確認、結果の記録と報告を大切にします。何を作り、何を確認するかは本人が決め、Claude Code / Codexはプログラム作成、問題調査、文章整理の補助に使いました。個人制作のため、第三者によるレビューは受けていません。詳細は<a href="work-readiness.html">仕事の進め方</a>。
+                <strong>仕事の進め方・制作体制：</strong>作業前に手順を確認します。必要な相談と承認を得てから進めます。作業の前後で結果を確かめ、記録して報告します。この4点を大切にしています。何を作り、何を確認するかは本人が決め、Claude Code / Codexはプログラム作成、問題調査、文章整理の補助に使いました。個人制作のため、第三者によるレビューは受けていません。詳細は<a href="work-readiness.html">仕事の進め方</a>。
             </aside>
 
         </div>

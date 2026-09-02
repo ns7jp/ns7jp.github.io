@@ -64,7 +64,8 @@
                 <h2 id="start-title">コマンドは「動詞 + 対象 + 条件」で読む</h2>
                 <p>Linuxコマンドは英単語の省略形が多く、名前の由来を知ると覚えやすくなります。たとえば <code>ls -la /etc</code> は「<strong>ls</strong>（list＝一覧にする）」「<strong>-l -a</strong>（詳しく・隠しファイルも）」「<strong>/etc</strong>（対象）」と分解できます。</p>
                 <div class="command-formula" aria-label="コマンドの基本構造"><span><b>command</b><small>何をする</small></span><i aria-hidden="true">+</i><span><b>-option</b><small>どう実行する</small></span><i aria-hidden="true">+</i><span><b>argument</b><small>何を対象にする</small></span></div>
-                <div class="beginner-safety-note"><strong>安全な練習場所</strong><p>自分専用のLinux仮想マシン、WSL、またはコンテナで練習します。会社・学校・公開中サーバーでは勝手に実行しません。このページの実行例は教材であり、掲載コマンドすべての実機実行証跡ではありません。</p><p>VM/WSLをまだ用意していない場合は、先に<a href="learning-docs/environment-setup.md">環境準備ガイド</a>を行ってください。</p></div>
+                <p>各カード右上の札は、その操作の種類と注意の度合いを表します。「参照」「通信」は見るだけで、システムは変わりません。「作成」「変更」「移動」はファイルが変わります。「権限変更」「所有者変更」「管理者権限」「停止」「設定反映」はシステムやサービスに影響するため、実行前に対象と理由を確認します。</p>
+                <div class="beginner-safety-note"><strong>安全な練習場所</strong><p>練習は自分専用の環境で行います。Linux仮想マシン（パソコンの中に作る仮想のコンピューター）、WSL（Windows Subsystem for Linux／WindowsでLinuxを動かす仕組み）、コンテナ（Linux環境を軽く切り分けて動かす仕組み）のどれかを使います。会社・学校・公開中サーバーでは勝手に実行しません。このページの実行例は教材です。掲載したコマンドをすべて実機で実行した証跡（実行した証拠として残す記録）ではありません。</p><p>VM/WSLをまだ用意していない場合は、先に<a href="learning-docs/environment-setup.md">環境準備ガイド</a>を行ってください。</p></div>
             </section>
             <nav class="command-toc" aria-label="コマンド集の目次"><strong>学習順</strong><a href="#basics">1. 現在地とファイル</a><a href="#reading">2. 読む・探す</a><a href="#permissions">3. 権限</a><a href="#system">4. OS・プロセス</a><a href="#service-log">5. サービス・ログ</a><a href="#network">6. ネットワーク</a><a href="#packages">7. パッケージ</a><a href="#combine">8. 組み合わせ</a><a href="#errors">9. よくあるエラー</a><a href="#practice">10. 演習</a></nav>
 
@@ -73,9 +74,9 @@
                 <p class="memory-phrase"><strong>覚え方：今 → 見る → 移る → 作る → 写す → 動かす</strong><span>pwd → ls → cd → mkdir/touch → cp → mv</span></p>
                 <div class="command-grid">
                     <article class="command-card"><header><code>pwd</code><span class="risk safe">参照</span></header><h3>今いる場所を表示</h3><p><b>p</b>rint <b>w</b>orking <b>d</b>irectory の略。迷ったら最初に実行します。</p><pre><code>$ pwd
-/home/student</code></pre><p class="check"><b>確認：</b>出力が <code>/</code> から始まる絶対パスなら現在地を確認できています。</p></article>
+/home/student</code></pre><p class="check"><b>確認：</b>出力が <code>/</code> から始まる絶対パス（一番上の階層からたどった住所のような書き方）なら、現在地を確認できています。</p></article>
                     <article class="command-card"><header><code>ls</code><span class="risk safe">参照</span></header><h3>ファイルを一覧表示</h3><p>list の略。<code>-l</code> は詳細、<code>-a</code> は隠しファイル、<code>-h</code> は容量を読みやすくします。</p><pre><code>$ ls -lah /var/log
--rw-r----- 1 syslog adm 12K Aug 28 syslog</code></pre><p class="check"><b>読む：</b>左から権限、リンク数、所有者、グループ、容量、更新日、名前です。</p></article>
+-rw-r----- 1 syslog adm 12K Aug 28 syslog</code></pre><p class="check"><b>読む：</b>1行は左から順に、権限、リンク数（そのファイルを指す名前の数）、所有者、グループ、容量、更新日、名前を表します。</p></article>
                     <article class="command-card"><header><code>cd</code><span class="risk safe">移動</span></header><h3>作業場所を移動</h3><p>change directory の略。<code>cd ..</code> は1つ上、<code>cd -</code> は直前、<code>cd</code> はホームへ戻ります。</p><pre><code>$ cd /etc/nginx
 $ pwd
 /etc/nginx</code></pre><p class="check"><b>確認：</b>移動後に <code>pwd</code> を実行します。</p></article>
@@ -86,7 +87,7 @@ $ diff -u app.conf app.conf.bak</code></pre><p class="check"><b>確認：</b><co
                     <article class="command-card"><header><code>mv</code><span class="risk caution">変更</span></header><h3>移動または名前変更</h3><p>move の略。移動先が同じディレクトリなら名前変更になります。</p><pre><code>$ mv -i old-name.txt new-name.txt
 $ ls -l new-name.txt</code></pre><p class="check"><b>注意：</b>上書きを避ける練習では <code>-i</code> を付けます。</p></article>
                 </div>
-                <aside class="danger-box"><strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> rm は「ごみ箱」へ移動しない</strong><p><code>rm</code> は削除、<code>rm -r</code> はディレクトリ以下を再帰的に削除します。先に <code>pwd</code> と <code>ls</code> で対象を確認し、練習では <code>rm -i ファイル名</code> のように個別確認します。<code>sudo rm -rf</code> を例文のまま実行してはいけません。</p></aside>
+                <aside class="danger-box"><strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> rm は「ごみ箱」へ移動しない</strong><p><code>rm</code> はファイルを削除します。<code>rm -r</code> はディレクトリの中身を下の階層までまとめて削除します（これを再帰的な削除と呼びます）。先に <code>pwd</code> と <code>ls</code> で対象を確認し、練習では <code>rm -i ファイル名</code> のように個別確認します。<code>sudo rm -rf</code> を例文のまま実行してはいけません。</p></aside>
             </section>
 
             <section class="command-section" id="reading" aria-labelledby="reading-title">
@@ -96,9 +97,9 @@ $ ls -l new-name.txt</code></pre><p class="check"><b>注意：</b>上書きを�
                     <article class="command-card"><header><code>head / tail</code><span class="risk safe">参照</span></header><h3>先頭 / 末尾だけ読む</h3><p><code>-n</code> で行数を指定。<code>tail -f</code> は追記を監視します。</p><pre><code>$ tail -n 20 /var/log/syslog
 $ sudo journalctl -f</code></pre><p class="check"><b>終了：</b>監視は <kbd>Ctrl</kbd> + <kbd>C</kbd> で止めます。</p></article>
                     <article class="command-card"><header><code>grep</code><span class="risk safe">参照</span></header><h3>文字を含む行を探す</h3><p><code>-i</code> は大文字小文字を無視、<code>-n</code> は行番号、<code>-r</code> は階層を検索します。</p><pre><code>$ grep -in "error" app.log
-42:ERROR database timeout</code></pre><p class="check"><b>確認：</b>終了コード0は一致あり、1は一致なしです。</p></article>
-                    <article class="command-card"><header><code>find</code><span class="risk safe">参照</span></header><h3>条件でファイルを探す</h3><p>「どこから」「何を条件に」の順で読みます。ワイルドカードは引用符で囲みます。</p><pre><code>$ find /var/log -type f -name "*.log" -mtime -1</code></pre><p class="check"><b>意味：</b>24時間以内に更新された、名前が .log で終わる通常ファイル。</p></article>
-                    <article class="command-card"><header><code>du / df</code><span class="risk safe">参照</span></header><h3>使用量 / ディスク全体を確認</h3><p><code>du</code> はファイルやディレクトリ、<code>df</code> はファイルシステム全体を確認します。</p><pre><code>$ du -sh /var/log
+42:ERROR database timeout</code></pre><p class="check"><b>確認：</b>終了コード（コマンドが終わるときに返す結果の番号）が0なら一致あり、1なら一致なしです。</p></article>
+                    <article class="command-card"><header><code>find</code><span class="risk safe">参照</span></header><h3>条件でファイルを探す</h3><p>「どこから」「何を条件に」の順で読みます。ワイルドカード（<code>*</code> のように任意の文字列を表す記号）は引用符で囲みます。</p><pre><code>$ find /var/log -type f -name "*.log" -mtime -1</code></pre><p class="check"><b>意味：</b>24時間以内に更新された、名前が .log で終わる通常ファイル。</p></article>
+                    <article class="command-card"><header><code>du / df</code><span class="risk safe">参照</span></header><h3>使用量 / ディスク全体を確認</h3><p><code>du</code> は指定したファイルやディレクトリの使用量を確認します。<code>df</code> はファイルシステム（OSがディスクを管理する単位）ごとの空き状況を確認します。</p><pre><code>$ du -sh /var/log
 $ df -hT</code></pre><p class="check"><b>覚え方：</b>du＝どこが使用、df＝どのディスクが満杯。</p></article>
                     <article class="command-card"><header><code>man / --help</code><span class="risk safe">参照</span></header><h3>正しい使い方を調べる</h3><p>manual の略。説明書は <kbd>/</kbd> で検索し、<kbd>q</kbd> で終了します。</p><pre><code>$ man systemctl
 $ systemctl --help</code></pre><p class="check"><b>習慣：</b>記憶が曖昧なオプションは実行前に確認します。</p></article>
@@ -107,19 +108,20 @@ $ systemctl --help</code></pre><p class="check"><b>習慣：</b>記憶が曖昧�
 
             <section class="command-section" id="permissions" aria-labelledby="permissions-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-key" aria-hidden="true"></i></span><h2 class="heading-text" id="permissions-title">3. ユーザーと権限</h2></div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>Linuxではファイル1つずつに「誰が読めるか・書けるか・実行できるか」が決められています。この節では、その許可の読み方と変え方を扱います。</p>
                 <div class="permission-visual" aria-label="Linux権限の読み方"><code>- rwx r-x r--</code><span><b>-</b> 種類</span><span><b>rwx</b> 所有者</span><span><b>r-x</b> グループ</span><span><b>r--</b> その他</span></div>
                 <p><code>r</code> は読む（4）、<code>w</code> は書く（2）、<code>x</code> は実行する（1）。そのため <code>750</code> は、所有者＝7（4+2+1）、グループ＝5（4+1）、その他＝0です。</p>
                 <div class="command-grid">
                     <article class="command-card"><header><code>whoami / id</code><span class="risk safe">参照</span></header><h3>自分と所属グループを確認</h3><pre><code>$ whoami
 student
 $ id
-uid=1000(student) gid=1000(student) groups=1000(student),27(sudo)</code></pre><p class="check"><b>実務：</b>権限エラー時に「誰として操作中か」を最初に確認します。<code>groups</code>欄に<code>sudo</code>（または<code>wheel</code>）が含まれていない場合は、以降のsudo例が実行できません。VM作成時の設定を確認してください。</p></article>
+uid=1000(student) gid=1000(student) groups=1000(student),27(sudo)</code></pre><p class="check"><b>実務：</b>権限エラーが出たら、まず「誰として操作しているか」を確認します。<code>uid</code>は利用者の番号、<code>gid</code>は所属グループの番号、<code>groups</code>は所属するグループの一覧です。この<code>groups</code>欄に<code>sudo</code>（または<code>wheel</code>）が含まれていない場合は、以降のsudo例が実行できません。VM作成時の設定を確認してください。</p></article>
                     <article class="command-card"><header><code>chmod</code><span class="risk warning">権限変更</span></header><h3>許可を変更</h3><p>change mode の略。実行権限の追加は <code>u+x</code> のような記号表記でも指定できます。</p><pre><code>$ chmod u+x deploy.sh
 $ chmod 640 app.conf
 $ stat -c '%A %a %n' app.conf</code></pre><p class="check"><b>注意：</b><code>777</code> は誰でも変更できるため安易に使いません。</p></article>
                     <article class="command-card"><header><code>chown</code><span class="risk warning">所有者変更</span></header><h3>所有者・グループを変更</h3><p>change owner の略。多くの場合、管理者権限が必要です。</p><pre><code>$ sudo chown root:www-data app.conf
 $ ls -l app.conf</code></pre><p class="check"><b>注意：</b><code>-R</code> は配下すべてを変えるため、対象を事前確認します。</p></article>
-                    <article class="command-card"><header><code>sudo</code><span class="risk warning">管理者権限</span></header><h3>許可されたコマンドを管理者権限で実行</h3><p>superuser do。必要な1コマンドだけに付け、実行理由と影響を理解します。</p><pre><code>$ sudo -l
+                    <article class="command-card"><header><code>sudo</code><span class="risk warning">管理者権限</span></header><h3>許可されたコマンドを管理者権限で実行</h3><p>superuser do（スーパーユーザーとして実行する）の略です。必要な1コマンドだけに付けます。実行する理由と影響を理解してから使います。<code>sudo -l</code> は、自分にどのコマンドが許可されているかを確認するために実行します。</p><pre><code>$ sudo -l
 $ sudo systemctl status nginx</code></pre><p class="check"><b>原則：</b>参照だけなら、まず一般ユーザーで試します。</p></article>
                 </div>
             </section>
@@ -131,19 +133,20 @@ $ sudo systemctl status nginx</code></pre><p class="check"><b>原則：</b>参�
 6.8.0-xx-generic
 $ cat /etc/os-release</code></pre><p class="check"><b>使いどころ：</b>手順書が対象OS・バージョンに合うか確認します。</p></article>
                     <article class="command-card"><header><code>uptime</code><span class="risk safe">参照</span></header><h3>稼働時間と平均負荷を確認</h3><pre><code>$ uptime
-14:20 up 3 days, 2:10, 1 user, load average: 0.15, 0.10, 0.05</code></pre><p class="check"><b>読む：</b>右端は過去1・5・15分の実行待ちの目安。CPU数や平常値と比べます。</p></article>
+14:20 up 3 days, 2:10, 1 user, load average: 0.15, 0.10, 0.05</code></pre><p class="check"><b>読む：</b>右端の <code>load average</code>（平均負荷）は、過去1分・5分・15分の実行待ちの多さの目安です。CPUの数や普段の値と比べて判断します。</p></article>
                     <article class="command-card"><header><code>free</code><span class="risk safe">参照</span></header><h3>メモリを確認</h3><pre><code>$ free -h
               total used free shared buff/cache available
-Mem:           7.7Gi 2.1Gi 1.8Gi 120Mi 3.8Gi 5.2Gi</code></pre><p class="check"><b>読む：</b>単純な free より、アプリが利用可能な <code>available</code> を見ます。</p></article>
+Mem:           7.7Gi 2.1Gi 1.8Gi 120Mi 3.8Gi 5.2Gi</code></pre><p class="check"><b>読む：</b><code>free</code>列は完全に空いているメモリです。アプリが実際に使える量は<code>buff/cache</code>から回せる分も含むため、判断には<code>available</code>列を見ます。</p></article>
                     <article class="command-card"><header><code>ps / top</code><span class="risk safe">参照</span></header><h3>動作中のプロセスを確認</h3><pre><code>$ ps aux --sort=-%cpu | head
-$ top</code></pre><p class="check"><b>用語：</b>PIDはプロセス番号。topは <kbd>q</kbd> で終了します。</p></article>
-                    <article class="command-card"><header><code>kill</code><span class="risk warning">停止</span></header><h3>プロセスへ終了要求を送る</h3><p>通常はTERM（15）で安全な終了を依頼。KILL（9）は最終手段です。上の<code>ps</code>コマンドで確認したPID（例では1234）を指定します。</p><pre><code>$ kill -TERM 1234
+$ top</code></pre><p class="check"><b>用語：</b>プロセスとは、実行中のプログラム1つ1つのことです。PIDはそのプロセスに付く番号です。<code>ps aux --sort=-%cpu | head</code> は、CPUを多く使っている順に上位だけを表示し、負荷の原因を絞り込むために実行します。topは <kbd>q</kbd> で終了します。</p></article>
+                    <article class="command-card"><header><code>kill</code><span class="risk warning">停止</span></header><h3>プロセスへ終了要求を送る</h3><p>プロセスにはシグナル（合図の番号）を送って終了を依頼します。通常はTERM（15）を送り、後片付けをしてから安全に終わってもらいます。KILL（9）は強制終了で、最終手段です。上の<code>ps</code>コマンドで確認したPID（例では1234）を指定します。</p><pre><code>$ kill -TERM 1234
 $ ps -p 1234</code></pre><p class="check"><b>注意：</b>原因・影響・自動再起動の有無を確認してから実行します。</p></article>
                 </div>
             </section>
 
             <section class="command-section" id="service-log" aria-labelledby="service-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-gears" aria-hidden="true"></i></span><h2 class="heading-text" id="service-title">5. サービスとログ</h2></div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>サーバーで常に動き続けるプログラムを「サービス」と呼びます。それを起動・停止・監視する仕組みがsystemd（システムディー）です。この節では、状態を<code>systemctl</code>で見て、動きの記録（ログ）を<code>journalctl</code>で読む流れを扱います。</p>
                 <div class="command-grid">
                     <article class="command-card"><header><code>systemctl</code><span class="risk caution">操作別</span></header><h3>サービスを確認・操作</h3><pre><code>$ systemctl status nginx
 ● nginx.service - A high performance web server
@@ -155,10 +158,10 @@ $ systemctl --failed</code></pre><p class="check"><b>読む：</b><code>Active:<
                     <article class="command-card"><header><code>journalctl</code><span class="risk safe">参照</span></header><h3>systemdログを読む</h3><pre><code>$ sudo journalctl -u nginx --since "30 min ago"
 Aug 31 09:12:03 server01 systemd[1]: Started A high performance web server.
 Aug 31 09:12:05 server01 nginx[812]: 2026/08/31 09:12:05 [notice] start worker processes
-$ sudo journalctl -p err -b</code></pre><p class="check"><b>読む：</b>各行は日時・ホスト名・unit名・メッセージの順です。<code>-u</code> は対象、<code>-p</code> は重要度、<code>-b</code> は今回の起動以降で絞り込みます。</p></article>
+$ sudo journalctl -p err -b</code></pre><p class="check"><b>読む：</b>各行は日時、ホスト名、ユニット名（systemdが管理するサービスの単位に付いた名前）、メッセージの順に並びます。<code>-u</code> は対象、<code>-p</code> は重要度、<code>-b</code> は今回の起動以降で絞り込みます。</p></article>
                     <article class="command-card"><header><code>systemctl reload</code><span class="risk warning">設定反映</span></header><h3>停止せず設定を再読込</h3><pre><code>$ sudo nginx -t
 $ sudo systemctl reload nginx
-$ systemctl status nginx</code></pre><p class="check"><b>安全策：</b>先に構文テスト。reload非対応のサービスもあります。</p></article>
+$ systemctl status nginx</code></pre><p class="check"><b>安全策：</b>先に <code>nginx -t</code> で設定ファイルの書式を検査します。書式の誤りに気づかないまま再読み込みすると、サービスが止まるおそれがあるためです。なお、再読み込み（reload）に対応していないサービスもあります。</p></article>
                 </div>
                 <div class="incident-flow"><b>障害対応の基本</b><span>① 時刻を記録</span><span>② statusを見る</span><span>③ ログを見る</span><span>④ 仮説を立てる</span><span>⑤ 承認後に変更</span><span>⑥ 復旧を再確認</span></div>
             </section>
@@ -168,29 +171,31 @@ $ systemctl status nginx</code></pre><p class="check"><b>安全策：</b>先に�
                 <p class="memory-phrase"><strong>確認順：自分 → 道 → 名前 → 相手 → 受付口</strong><span>ip addr → ip route → getent hosts → ping/curl → ss</span></p>
                 <div class="command-grid">
                     <article class="command-card"><header><code>ip</code><span class="risk safe">参照</span></header><h3>IPアドレスと経路を確認</h3><pre><code>$ ip -br addr
-$ ip route</code></pre><p class="check"><b>読む：</b>自分のアドレス、インターフェース状態、default gatewayを確認します。</p></article>
+$ ip route</code></pre><p class="check"><b>読む：</b>自分のIPアドレスと、ネットワークの接続口（インターフェース）が有効かどうかを確認します。あわせて、外へ出るときの既定の出口であるデフォルトゲートウェイ（default gateway）も確認します。</p></article>
                     <article class="command-card"><header><code>getent hosts</code><span class="risk safe">参照</span></header><h3>名前解決を確認</h3><pre><code>$ getent hosts example.com
-93.184.216.34 example.com</code></pre><p class="check"><b>切り分け：</b>名前で失敗しIPでは成功するならDNSを疑います。</p></article>
-                    <article class="command-card"><header><code>ping</code><span class="risk safe">通信</span></header><h3>ICMP応答を確認</h3><pre><code>$ ping -c 4 192.0.2.10</code></pre><p class="check"><b>注意：</b>pingを禁止している相手もあるため、失敗だけで停止とは断定しません。</p></article>
+93.184.216.34 example.com</code></pre><p class="check"><b>切り分け：</b>名前（example.comなど）では失敗し、IPアドレスの指定では成功する場合は、DNS（名前をIPアドレスに変換する仕組み）を疑います。</p></article>
+                    <article class="command-card"><header><code>ping</code><span class="risk safe">通信</span></header><h3>ICMP応答を確認</h3><pre><code>$ ping -c 4 192.0.2.10</code></pre><p class="check"><b>意味：</b>相手にICMP（機器同士が疎通の確認に使う通信の種類）で問い合わせ、返事が返るかを見ます。<b>注意：</b>pingを禁止している相手もあるため、失敗しただけで停止とは断定しません。</p></article>
                     <article class="command-card"><header><code>curl</code><span class="risk safe">通信</span></header><h3>HTTP応答を確認</h3><pre><code>$ curl -I --max-time 5 http://localhost
-HTTP/1.1 200 OK</code></pre><p class="check"><b>読む：</b>200は成功、4xxは要求側、5xxはサーバー側の問題の目安。</p></article>
+HTTP/1.1 200 OK</code></pre><p class="check"><b>読む：</b>1行目の数字はHTTP（Webのやり取りの決まりごと）の応答コードです。200は成功、400番台（4xx）は要求した側、500番台（5xx）はサーバー側に問題がある目安です。</p></article>
                     <article class="command-card"><header><code>ss</code><span class="risk safe">参照</span></header><h3>待受ポートを確認</h3><pre><code>$ sudo ss -tulnp
-LISTEN 0 511 0.0.0.0:80 ... nginx</code></pre><p class="check"><b>意味：</b><code>t</code> TCP、<code>u</code> UDP、<code>l</code> 待受、<code>n</code> 数値、<code>p</code> プロセス。</p></article>
+LISTEN 0 511 0.0.0.0:80 ... nginx</code></pre><p class="check"><b>意味：</b>ポート（サービスごとの受付番号）のうち、接続を待っているものを一覧にします。オプションは、<code>t</code> がTCP（確実に届ける通信方式）、<code>u</code> がUDP（速さ優先の通信方式）、<code>l</code> が待受中のみ、<code>n</code> が数値表示、<code>p</code> が使用中のプロセス表示です。</p></article>
                     <article class="command-card"><header><code>ssh</code><span class="risk caution">接続</span></header><h3>別のLinuxへ安全に接続</h3><pre><code>$ ssh -i ~/.ssh/lab_key student@192.0.2.10
 The authenticity of host '192.0.2.10 (192.0.2.10)' can't be established.
 ED25519 key fingerprint is SHA256:EXAMPLE1234fakeFingerprint5678.
-Are you sure you want to continue connecting (yes/no/fingerprint)?</code></pre><p class="check"><b>初回確認：</b>表示されたfingerprintを、VM作成時のコンソール出力やクラウドの管理画面に表示された値と照合します。個人学習環境では、その値と一致する場合だけ<code>yes</code>と答え、一致しない・照合できない場合は接続を中断します。</p></article>
+Are you sure you want to continue connecting (yes/no/fingerprint)?</code></pre><p class="check"><b>初回確認：</b>初回の接続では、相手の鍵のfingerprint（指紋にあたる短い識別文字列）が表示されます。この値を、VM作成時のコンソール出力やクラウドの管理画面に表示された値と照合します。個人学習環境では、その値と一致する場合だけ<code>yes</code>と答え、一致しない・照合できない場合は接続を中断します。</p></article>
                 </div>
             </section>
 
             <section class="command-section" id="packages" aria-labelledby="packages-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></span><h2 class="heading-text" id="packages-title">7. ソフトウェアの管理</h2></div>
+                <p>パッケージとは、ソフトを導入しやすい形にまとめたものです。<code>apt</code> や <code>dnf</code> は、リポジトリ（配布元の保管庫）から必要なパッケージを取り寄せて導入します。次の表は、Ubuntu系（Debian系）とRHEL系（Red Hat Enterprise Linux系）で使うコマンドの対応です。</p>
                 <div class="distro-table-wrap" role="region" aria-label="横方向にスクロールできるパッケージ管理コマンド比較" tabindex="0"><table class="operation-table"><caption>Ubuntu系とRHEL系の主な対応</caption><thead><tr><th scope="col">目的</th><th scope="col">Ubuntu / Debian</th><th scope="col">RHEL / Rocky Linux</th></tr></thead><tbody><tr><td>パッケージ情報更新</td><td><code>sudo apt update</code></td><td><code>sudo dnf check-update</code></td></tr><tr><td>検索</td><td><code>apt search nginx</code></td><td><code>dnf search nginx</code></td></tr><tr><td>インストール</td><td><code>sudo apt install nginx</code></td><td><code>sudo dnf install nginx</code></td></tr><tr><td>導入済み確認</td><td><code>dpkg -l nginx</code></td><td><code>rpm -q nginx</code></td></tr></tbody></table></div>
-                <div class="beginner-safety-note"><strong>更新前の確認</strong><p>対象OS、リポジトリ、変更されるパッケージ、サービス再起動の有無、空き容量、バックアップ、切り戻し方法、作業時間帯を確認します。本番相当環境で一括更新を無断実行しません。</p></div>
+                <div class="beginner-safety-note"><strong>更新前の確認</strong><p>次の8点を確認します。対象OS、配布元のリポジトリ、変更されるパッケージ、サービス再起動の有無、空き容量、バックアップの有無です。加えて、切り戻し方法（元の状態へ戻す手順）と、作業してよい時間帯も確認します。本番相当環境で一括更新を無断実行しません。</p></div>
             </section>
 
             <section class="command-section" id="combine" aria-labelledby="combine-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></span><h2 class="heading-text" id="combine-title">8. コマンドを組み合わせる記号</h2></div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>コマンドの結果は、画面に出すだけでなく、別のコマンドへ渡したりファイルへ保存したりできます。ここで紹介する4つの記号が、その渡し先を指定する道具です。</p>
                 <div class="operator-grid">
                     <article><code>|</code><h3>パイプ</h3><p>左の出力を右へ渡す。</p><pre><code>journalctl -u nginx | grep -i error</code></pre></article>
                     <article><code>&gt;</code><h3>上書き保存</h3><p>出力先を新規作成または上書き。</p><pre><code>date &gt; check.txt</code></pre></article>
@@ -204,7 +209,7 @@ Are you sure you want to continue connecting (yes/no/fingerprint)?</code></pre><
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span><h2 class="heading-text" id="errors-title">9. よくあるエラーメッセージと意味</h2></div>
                 <p>操作を止めて、原因を1つずつ確認します。より詳しい切り分け表は<a href="learning-docs/beginner-troubleshooting.md">初心者向けエラーFAQ</a>を参照してください。</p>
                 <div class="command-grid">
-                    <article class="command-card"><header><code>command not found</code><span class="risk safe">入力</span></header><h3>コマンド名が見つからない</h3><p>綴りの誤り、または未導入のコマンドです。綴りと使っているshell・OSを確認し、教材の前提に合わせて再実行します。</p></article>
+                    <article class="command-card"><header><code>command not found</code><span class="risk safe">入力</span></header><h3>コマンド名が見つからない</h3><p>綴りの誤り、または未導入のコマンドです。綴りと使っているシェル（コマンドを受け付ける入力窓口のソフト）とOSを確認し、教材の前提に合わせて再実行します。</p></article>
                     <article class="command-card"><header><code>Permission denied</code><span class="risk caution">権限</span></header><h3>権限が不足している</h3><p>実行・読取・変更のいずれかの権限がありません。<code>ls -l 対象</code>で所有者と権限を確認し、必要な範囲だけ<code>sudo</code>を付けて再実行します。</p></article>
                     <article class="command-card"><header><code>No such file or directory</code><span class="risk caution">パス</span></header><h3>指定した場所に対象がない</h3><p>パスや名前の誤り、または現在地の勘違いです。<code>pwd</code>と<code>ls -la</code>で現在地、綴り、大文字小文字を確認してから再実行します。</p></article>
                     <article class="command-card"><header><code>user is not in the sudoers file</code><span class="risk warning">管理者権限</span></header><h3>sudoを許可されていない</h3><p>そのユーザーがsudoグループ（またはsudoers設定）に含まれていません。個人学習環境ではVM作成時に作った管理者アカウント設定を確認し、必要なら管理者アカウントでsudoersへ追加します。</p></article>
@@ -219,7 +224,7 @@ Are you sure you want to continue connecting (yes/no/fingerprint)?</code></pre><
                     <li><b>探す</b><code>grep -n 'ERROR' logs/app.log</code><span><code>2:ERROR timeout</code> が出れば成功。</span></li>
                     <li><b>複製する</b><code>cp -i logs/app.log logs/app.log.bak</code><span><code>diff -u</code> で差がないことを確認。</span></li>
                     <li><b>権限を読む</b><code>stat -c '%A %a %n' logs/app.log</code><span>記号と数字の権限を対応させる。</span></li>
-                    <li><b>記録を残す</b><code>{ date; uname -r; df -h /; } &gt; server-check.txt</code><span><code>less server-check.txt</code> で読む。</span></li>
+                    <li><b>記録を残す</b><code>{ date; uname -r; df -h /; } &gt; server-check.txt</code><span>日時、OSのバージョン、ディスクの空きをまとめて1つのファイルに保存します。作業前後の状態を後から示せるようにするためです。<code>less server-check.txt</code> で読みます。</span></li>
                 </ol>
                 <details class="quiz"><summary>理解度チェック（答えを見る）</summary><dl><dt>Q1. 今いる場所を確かめるコマンドは？</dt><dd><code>pwd</code>。作業前と削除前の確認に使います。</dd><dt>Q2. 長いログから error を大文字小文字を問わず探すには？</dt><dd><code>grep -i 'error' ファイル名</code>。</dd><dt>Q3. サービス再起動の前にすることは？</dt><dd>現状、ログ、設定構文、影響範囲、承認、戻し方を確認します。</dd><dt>Q4. <code>chmod 640</code> の意味は？</dt><dd>所有者は読み書き、グループは読み取り、その他は権限なしです。</dd></dl></details>
                 <div class="next-learning"><h3>次の学習へ</h3><p>基本操作を覚えたら、実際の問い合わせを想定した「重・空・動・記・通・入・壁」の順で切り分けを練習します。</p><a href="linux-lab.html#first-check-order" class="btn btn-primary">Linux基本確認へ進む</a><a href="support-scripts/linux-triage.sh" class="btn btn-outline-dark">読み取り専用スクリプトを見る</a></div>

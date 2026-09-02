@@ -106,14 +106,15 @@
             </nav>
 
             <section class="lab-intro evidence-intro">
-                <span class="case-label">実装済み・実測済み・未実施を分離</span>
+                <span class="case-label">実装済み・実測済み・未実施を分けて掲載</span>
                 <h2>2分で分かる動作確認のまとめ</h2>
-                <p>コードや資料を作ったことと、実際に動かしたことを混同せず、詳しい実行日、使った環境、対象版、コマンド、結果をリンク先で確認できるようにしています。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>このページは「作っただけのこと」と「実際に動かして確かめたこと」を分けて書いた記録です。実装済みはコードや資料を用意した状態、実測済みは日付と環境を残して実際に動かした状態、未実施（NOT RUN）はまだ実行していない状態を指します。</p>
+                <p>このページでは、コードや資料を作っただけのことと、実際に動かして確かめたことを分けて書いています。それぞれについて、実行した日、使った環境、対象版（試験に使ったプログラムの版）、実行したコマンド、結果を記録しました。くわしい内容はリンク先で確認できます。なお、このあと出てくる「証跡台帳」とは、いつ何をどこまで確かめたかをまとめた一覧のことです。</p>
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
                     <div>
                         <strong>日付付きの実測結果（2026年8月22日〜25日）</strong>
-                        <p>構築から復旧までの自動テスト23項目、前の版への切り戻し、ディスク、データベース、ネットワークの練習を行いました。実際に動かして見つけた問題29件と、誤って合格にしていた6件も記録しています。一時Ubuntu環境、WSL2、Docker等での結果で、独立した対象サーバーでの受け入れ実績ではありません。</p>
+                        <p>構築から復旧までを自動で確かめる23項目の試験を行いました。あわせて、前の版への切り戻し（新しい版に問題が出たときに、ひとつ前の版へ戻す作業）も試しました。ディスク、データベース、ネットワークの練習も行いました。実際に動かして見つけた問題29件と、誤って合格にしていた6件も記録しています。これは、使い捨ての一時的なUbuntu環境、WSL2（WindowsのなかでLinuxを動かす仕組み）、Docker（アプリを小さな箱に入れて動かす仕組み）などで得た結果です。実際に使い続ける独立した対象サーバーで、受け入れ試験まで行った実績ではありません。</p>
                     </div>
                 </div>
                 <div class="evidence-legend" aria-label="実装済み、実測済み、未実施の説明">
@@ -156,12 +157,12 @@
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">3項目</span>
                         <strong>情報は読取のみ許可</strong>
-                        <small>読取成功／書込拒否／ログ到達</small>
+                        <small>読み取りは成功、書き込みは拒否、ログは到達しました</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">1秒</span>
                         <strong>同じ環境で自動復旧</strong>
-                        <small>目標5分以内／合格</small>
+                        <small>目標は5分以内、結果は合格です</small>
                     </a>
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
                         <span class="metric-value">3種類</span>
@@ -182,7 +183,7 @@
                         <div>
                             <span class="status-pill measured">実測済み（自動テスト）</span>
                             <h3>新しい版から前の版へ戻せることを確認</h3>
-                            <p>新しい版を動かしたあと、指定した前の版へ戻しました。アプリの版、不要ファイルの削除、管理画面を外部へ直接公開しない設定、ログの受信をもう一度確認しています。一時的なUbuntu環境での結果で、継続利用するサーバーでは未実施です。</p>
+                            <p>新しい版を動かしたあと、指定した前の版へ戻しました。戻したあとに、アプリの版が正しく戻ったかを確認しました。不要なファイルが消えていること、管理画面を外部へ直接公開しない設定であることも確かめています。ログを受け取れることも、もう一度確認しました。下に並ぶ長い英数字は、その版を表す記号（コミットID）です。一時的なUbuntu環境での結果で、継続利用するサーバーでは未実施です。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-23</dd></div><div><dt>新しい版</dt><dd><code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code></dd></div><div><dt>戻した版</dt><dd><code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code></dd></div></dl>
                             <a href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">自動テストの詳細を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
@@ -192,7 +193,7 @@
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>同じ構築手順を2回実行</h3>
-                            <p>同じ自動構築の手順を2回実行し、2回目には不要な変更が発生しないことを確認しました。使ったのはDockerがあらかじめ入っている一時的なUbuntu環境です。Dockerを最初から導入する部分は、この試験には含まれません。</p>
+                            <p>同じ自動構築の手順を2回実行し、2回目には不要な変更が発生しないことを確認しました。これは、同じ手順を何度実行しても結果が変わらないことを確かめるためです。2回目で何も変わらなければ、この手順は安心して繰り返せると言えます。使ったのはDockerがあらかじめ入っている一時的なUbuntu環境です。Dockerを最初から導入する部分は、この試験には含まれません。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>GitHub上の一時Ubuntu</dd></div><div><dt>前提</dt><dd>Docker導入済み</dd></div></dl>
                             <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">23項目の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
@@ -202,7 +203,7 @@
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>監視に必要な11個のサービスを起動</h3>
-                            <p>監視に必要な10個のサービスと、通知を受け取るテスト用サービスを起動しました。異常を検知した通知と、復旧した通知の両方を確認しています。Slackへ実際に送信する試験ではありません。</p>
+                            <p>監視に必要な10個のサービスと、通知を受け取るテスト用サービスを起動しました。異常を検知した通知と、復旧した通知の両方を確認しています。テスト環境の中では、異常を知らせる仕組みが動いたと言えます。ただし、Slackへ実際に送信する試験ではありません。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>Docker / 11サービス</dd></div><div><dt>結果</dt><dd>異常・復旧の通知を確認</dd></div></dl>
                             <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">起動・通知の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
@@ -212,7 +213,7 @@
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>Dockerの情報は読み取りだけ許可</h3>
-                            <p>監視サービスからDockerの情報を読む操作は許可し、設定を変える操作は拒否できることを確認しました。ログも監視画面へ届いています。読み取り権限は残るため、考えられる危険と対策を<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/security.md" target="_blank" rel="noopener noreferrer">セキュリティ方針</a>に記録しています。</p>
+                            <p>監視サービスからDockerの情報を読む操作は許可し、設定を変える操作は拒否できることを確認しました。これは、監視に必要な情報だけを渡し、万一乗っ取られたときの被害を小さくするためです。ログも監視画面へ届いています。読み取り権限は残るため、考えられる危険と対策を<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/security.md" target="_blank" rel="noopener noreferrer">セキュリティ方針</a>に記録しています。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>対象版</dt><dd><code>7622a9d</code></dd></div><div><dt>結果</dt><dd>読み取り合格・書き込み拒否・ログ到達</dd></div></dl>
                             <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">通信制限の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
@@ -222,7 +223,7 @@
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>テスト環境内のネットワークを確認</h3>
-                            <p>一時的なUbuntu環境の中で、ネットワークの設定、待ち受けポート、ファイアウォール、サービス間の通信を確認しました。別の管理用PCや継続利用するサーバー、社内DNSを使った通信は未実施です。</p>
+                            <p>一時的なUbuntu環境の中で、ネットワークの設定を確認しました。待ち受けポート（外からの通信を受け付ける番号）、ファイアウォール（通してよい通信だけを許す仕組み）、サービス同士の通信も確かめています。別の管理用PCや継続利用するサーバー、社内DNS（社内で名前とアドレスを対応づける仕組み）を使った通信は未実施です。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>GitHub上の一時Ubuntu</dd></div><div><dt>範囲</dt><dd>同じテスト環境内</dd></div></dl>
                             <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">ネットワーク確認の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
@@ -232,7 +233,7 @@
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>アプリを1秒で復旧し、監視データも復元</h3>
-                            <p>アプリの動作を意図的に止め、1秒で自動復旧することを確認しました。目標にした5分以内を満たしています。監視データ3種類もバックアップから元に戻せました。</p>
+                            <p>アプリの動作を意図的に止め、1秒で自動復旧することを確認しました。わざと止めるのは、本番で同じことが起きても自動で元に戻せるかを確かめるためです。目標にした5分以内を満たしています。監視データ3種類もバックアップから元に戻せました。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>復旧時間</dt><dd>1秒</dd></div><div><dt>復元</dt><dd>監視データ3種類</dd></div></dl>
                             <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">復旧の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
@@ -245,6 +246,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="test-status-title">自動テストの結果 — 2026年8月22日 / 23項目すべて合格</h2>
                 </div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>人が手で操作する代わりに、決められた23項目をコンピューターが順番に試して、すべて合格した記録です。ただし、使い捨ての一時的な環境で行った結果です。</p>
                 <p class="evidence-note">2026年8月22日、特定のコードの版を使って、構築から復旧までの23項目を自動で確認し、すべて合格しました。<a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">詳しい実行記録</a>には、日付、コードの版、確認方法を残しています。8月19日の結果は、以前の確認範囲を示す記録として別に保存しています。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる自動テスト結果表" tabindex="0">
                     <table class="operation-table evidence-status-table">
@@ -295,7 +297,7 @@
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
                         <strong>23項目は、Docker導入済みの一時Ubuntu環境で確認した履歴です</strong>
-                        <p>前の版へ戻す試験は、翌日の別の自動テストで合格しました。独立した対象サーバーでの切り戻しと受け入れ、72時間の連続運転、サーバー再起動後の確認、Slack実通知、AWS apply/destroy、D-2、別の管理PCや社内DNSからの通信は未実施（NOT RUN）です。新しい最小OSへDockerを導入する確認も含みません。</p>
+                        <p>前の版へ戻す試験は、翌日の別の自動テストで合格しました。次のことは未実施（NOT RUN／まだ実行していないという意味）です。独立した対象サーバーでの切り戻しと受け入れ試験、72時間の連続運転、サーバー再起動後の確認、Slackへの実通知、AWS（インターネット越しに借りるサーバー）での構築（apply）と削除（destroy）、演習D-2、別の管理PCや社内DNSからの通信です。新しい最小OSへDockerを導入する確認も含みません。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
@@ -310,7 +312,8 @@
                     <span class="heading-icon"><i class="fa-solid fa-flask-vial" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="b-series-title">4つの追加練習 — 2026年8月24日に実行</h2>
                 </div>
-                <p class="evidence-note">ディスク容量の追加、問題が起きた場所の確認、データベースの復元、ネットワーク設定の確認を練習しました。いずれもAI支援を使える学習環境で実行した結果です。手元のWSL2とDockerで再現できる「問題箇所の確認」と「データベース復元」は、面接でも再実演できます。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>よくあるトラブルをわざと自分で起こして、直す練習をした記録です。B-1からB-4は、その練習に付けた番号です。</p>
+                <p class="evidence-note">ディスク容量の追加、問題が起きた場所の確認、データベースの復元、ネットワーク設定の確認を練習しました。いずれもAI支援を使える学習環境で実行した結果です。下の表にある「220M→457M」は、使える容量が約220メガバイトから約457メガバイトに増えたことを表します。手元のWSL2とDockerで再現できる「問題箇所の確認」と「データベース復元」は、面接でも再実演できます。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるB-1からB-4の演習結果表" tabindex="0">
                     <table class="operation-table evidence-status-table">
                         <caption class="sr-only">2026年8月24日に実行したB-1からB-4の演習結果</caption>
@@ -324,7 +327,7 @@
                         <tbody>
                             <tr>
                                 <td>B-1 ディスク容量の追加</td>
-                                <td>使用できる領域を作り、容量が足りない状態から追加の領域を広げる</td>
+                                <td>使える領域を作り、容量が足りなくなった状態から領域を広げる</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-1.md" target="_blank" rel="noopener noreferrer">5項目合格 / 不合格0</a>（220M→457M）</td>
                             </tr>
                             <tr>
@@ -340,7 +343,7 @@
                             <tr>
                                 <td>B-4 ネットワーク設定の確認</td>
                                 <td>同じネットワーク内と、別のネットワーク間の通信設定を確認する</td>
-                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-4.md" target="_blank" rel="noopener noreferrer">6項目合格 / 不合格0 / 環境上3項目未実施</a></td>
+                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-4.md" target="_blank" rel="noopener noreferrer">6項目合格 / 不合格0 / 環境の制約で3項目は未実施</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -349,7 +352,7 @@
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
                         <strong>実際に動かしたことで、これまでに29件の問題を見つけました</strong>
-                        <p>書式や文法の確認だけでは見つからず、実行中に初めて分かった問題です。中には、壊れているのにテストが合格と表示する問題も6件ありました。症状、見つけ方、修正内容は<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" target="_blank" rel="noopener noreferrer">問題と修正の一覧</a>にまとめています。Ubuntu以外のLinux向け自動テストも<a href="https://github.com/ns7jp/server-monitor/actions/runs/32811100007" target="_blank" rel="noopener noreferrer">コンテナ内で実施</a>しましたが、実機のAlmaLinuxへの適用は未実施です。</p>
+                        <p>書式や文法の確認だけでは見つからず、実行中に初めて分かった問題です。中には、壊れているのにテストが合格と表示する問題も6件ありました。症状、見つけ方、修正内容は<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" target="_blank" rel="noopener noreferrer">問題と修正の一覧</a>にまとめています。Ubuntu以外のLinux向け自動テストも<a href="https://github.com/ns7jp/server-monitor/actions/runs/32811100007" target="_blank" rel="noopener noreferrer">コンテナ内で実施</a>しましたが、実機のAlmaLinux（Ubuntuとは別の種類のLinux）への適用は未実施です。ここでの「コンテナ内」とは、Dockerの箱の中で動かしたという意味です。実機とは、実際に使うサーバー機そのもののことです。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
@@ -373,7 +376,7 @@
                     <article class="decision-card">
                         <span class="decision-number">02</span>
                         <h3>2回目にも不要な変更が発生</h3>
-                        <p><a href="https://github.com/ns7jp/server-monitor/actions/runs/32571890175" target="_blank" rel="noopener noreferrer">次の自動テスト</a>で、一時ファイルと同期処理がぶつかっていることを確認しました。実行方法を変更して解決しました。</p>
+                        <p><a href="https://github.com/ns7jp/server-monitor/actions/runs/32571890175" target="_blank" rel="noopener noreferrer">次の自動テスト</a>で、一時ファイル（作業の途中で作られる仮のファイル）と、ファイルの内容をそろえる同期処理がぶつかっていることを確認しました。実行方法を変更して解決しました。</p>
                     </article>
                     <article class="decision-card">
                         <span class="decision-number">03</span>

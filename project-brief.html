@@ -109,18 +109,18 @@
             <section class="lab-intro project-intro">
                 <span class="case-label">Ubuntuを使った個人学習</span>
                 <h2>設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの主作品で整理</h2>
-                <p>主作品「Server Monitor」を題材に、設計書、構築手順、試験結果、監視設定、復旧手順、引き渡し資料を作業順にまとめています。実務経験はまだありませんが、実装済み・実測済み・未実施（NOT RUN）を分けて説明します。</p>
+                <p>主作品「Server Monitor」は、Ubuntuサーバーの構築と監視を学ぶために自分で作った作品です。この作品を題材に、設計書、構築手順、試験結果、監視設定、復旧手順、引き渡し資料を作業順にまとめています。実務経験はまだありませんが、実装済み・実測済み・未実施（NOT RUN）を分けて説明します。3つの言葉の意味は、すぐ下の帯にまとめています。</p>
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
                     <div>
-                        <strong>現行mainの証跡台帳を正本として参照</strong>
-                        <p>2026年8月22日から25日に記録した一連テスト23項目、前の版への切り戻し、ディスク拡張、問題箇所の調査、データベース復元、ネットワーク確認があります。いずれも使い捨てのUbuntu環境、WSL2、Docker、Linux内の分離環境での結果です。現在の確認範囲とNOT RUNは、<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>を正本とします。</p>
+                        <strong>現行main（公開中の最新版）の証跡台帳を正本として参照</strong>
+                        <p>2026年8月22日から25日にかけて、次の記録を残しました。通しでの動作テスト23項目、前の版への切り戻し（変更を前のバージョンに戻す作業）、ディスク拡張、問題箇所の調査、データベース復元、ネットワーク確認です。いずれも、使い捨てのUbuntu（無料で使えるLinuxの一種）環境、WSL2（Windowsの中でLinuxを動かす仕組み）、Docker（アプリを箱に入れて動かす仕組み）、Linux内の分離環境で得た結果です。長く動かし続けている実際のサーバーでの結果ではありません。現在の確認範囲と未実施（NOT RUN）の範囲は、<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>を正本（もとになる正しい記録）とします。証跡台帳とは、いつ、どの環境で、何を確認したかを一覧にした記録です。</p>
                     </div>
                 </div>
                 <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
-                    <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリストを公開。作成済みであること自体は稼働実績を意味しません</span>
-                    <span><strong>実測済み</strong> 日付、実行環境、対象版、結果を残した学習環境内の確認だけを実測として表示</span>
-                    <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーでの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy、D-2、本番変更</span>
+                    <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリストを作って公開しました。作成済みであること自体は、稼働実績を意味しません</span>
+                    <span><strong>実測済み</strong> 日付、実行環境、対象の版、結果を記録した確認だけを「実測済み」と表示します。いずれも学習環境の中での確認です</span>
+                    <span><strong>未実施（NOT RUN）</strong> 次はまだ行っていません。独立した対象サーバーでの受け入れ確認、72時間の連続稼働、Slackへの実際の通知、AWS apply/destroy（クラウド上に環境を作って消す操作）、D-2（2つ目の復旧演習）、本番環境の変更です</span>
                 </div>
                 <div class="summary-actions">
                     <a href="https://github.com/ns7jp/server-monitor" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Server Monitorを見る</a>
@@ -139,12 +139,12 @@
                     <article class="brief-summary-card">
                         <span>学習課題</span>
                         <h3>小規模なWebサービスをUbuntu上で動かす</h3>
-                        <p>Webアプリ、外部との接続、監視、ログ、異常通知を設定し、動作確認、復旧、引き継ぎ資料まで用意します。</p>
+                        <p>Webアプリ、外部からの接続、監視、ログ、異常時の通知を設定します。そのうえで、動作確認、復旧の練習、引き継ぎ資料の作成まで行います。</p>
                     </article>
                     <article class="brief-summary-card">
                         <span>前提・制約</span>
                         <h3>個人学習／AIを補助として使用</h3>
-                        <p>個人制作で、AIをプログラム作成や問題調査にも使用しました。第三者レビュー、独立した仮想マシンや実機、本番変更は未実施です。</p>
+                        <p>個人制作です。プログラムの作成や問題の調査には、AIも補助として使用しました。ほかの人によるレビュー（第三者レビュー）は受けていません。独立した仮想マシンや実機（専用の物理サーバー）での確認、本番環境の変更も未実施です。</p>
                     </article>
                     <article class="brief-summary-card">
                     <span>目標</span>
@@ -159,6 +159,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="flow-title">実務を想定した作業フロー</h2>
                 </div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>サーバーを1台つくって人に渡すまでを、6つの段階に分けています。設計（何をどう作るか決める）、構築（実際に組み立てる）、試験（決めたとおりに動くか確かめる）、監視（異常に気づく仕組みを入れる）、復旧（壊れたときに元へ戻す練習）、引き渡し（次の人が運用できる状態にする）の順です。</p>
                 <ol class="brief-flow">
                     <li class="brief-step">
                         <span>01 / 実装済み</span>
@@ -168,7 +169,7 @@
                     <li class="brief-step">
                         <span>02 / 実測済み</span>
                         <strong>構築</strong>
-                        <small>Ansible・Composeを実行<br>再実行時の差分も確認</small>
+                        <small>Ansible（設定作業の自動化ツール）とCompose（複数のコンテナをまとめて起動する仕組み）を実行<br>2回目に不要な差が出ないかも確認しました</small>
                     </li>
                     <li class="brief-step">
                         <span>03 / 実測済み</span>
@@ -178,17 +179,17 @@
                     <li class="brief-step">
                         <span>04 / 実測済み</span>
                         <strong>監視</strong>
-                        <small>メトリクス・ログ・通知<br>学習環境内で確認</small>
+                        <small>メトリクス（機械の状態を表す数値）・ログ・通知を<br>学習環境の中で確認しました</small>
                     </li>
                     <li class="brief-step">
                         <span>05 / 一部実測済み</span>
                         <strong>復旧</strong>
-                        <small>D-1と同一環境への復元<br>D-2はNOT RUN</small>
+                        <small>D-1（1つ目の復旧演習）で同一環境へ復元<br>D-2（2つ目の復旧演習）はNOT RUN（未実施）</small>
                     </li>
                     <li class="brief-step">
                         <span>06 / 実装済み</span>
                         <strong>引き渡し</strong>
-                        <small>チェックリストを作成<br>対象host受入はNOT RUN</small>
+                        <small>チェックリストを作成<br>対象ホスト（引き渡し先のサーバー）での受け入れはNOT RUN（未実施）</small>
                     </li>
                 </ol>
             </section>
@@ -198,6 +199,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="artifact-title">作成した資料</h2>
                 </div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>下の表は「どの工程で、どんな資料を作ったか」と「その資料が、作っただけなのか、実際に動かして確かめたのかどうか」を並べたものです。成果物の欄のリンクから、実物の資料をそのまま読めます。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる工程成果物表" tabindex="0">
                     <table class="operation-table">
                         <caption class="sr-only">Linuxサーバー構築学習で作成した資料と確認状況</caption>
@@ -213,7 +215,7 @@
                             <tr>
                                 <td>設計</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/01-basic-design.md" target="_blank" rel="noopener noreferrer">基本設計</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/02-detailed-design.md" target="_blank" rel="noopener noreferrer">詳細設計</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/03-parameter-sheet.md" target="_blank" rel="noopener noreferrer">パラメータシート</a></td>
-                                <td>目的、非機能、構成値、ポート、監視、バックアップの考え方</td>
+                                <td>目的、非機能（性能や安全性など）、構成値、ポート、監視、バックアップの考え方</td>
                                 <td><span class="status-pill validated">実装済み（文書）</span></td>
                             </tr>
                             <tr>
@@ -238,7 +240,7 @@
                                 <td>引き渡し</td>
                                 <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/07-handover-checklist.md" target="_blank" rel="noopener noreferrer">引き継ぎチェックリスト</a>／<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/build-package/08-change-rollback-plan.md" target="_blank" rel="noopener noreferrer">変更を戻す手順</a></td>
                                 <td>運用開始条件、既知の制約、切り戻し後の確認方法</td>
-                                <td><span class="status-pill validated">資料は実装済み</span> <span class="status-pill pending">対象host受入はNOT RUN</span></td>
+                                <td><span class="status-pill validated">資料は実装済み</span> <span class="status-pill pending">対象ホスト受入はNOT RUN</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -250,6 +252,7 @@
                     <span class="heading-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="decision-title">なぜこの構成にしたか</h2>
                 </div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>ADRとは、設計で迷ったときに「何をどう決めたか」と「なぜそう決めたか」を残しておく記録のことです。ここでは、5つの決めごとを理由つきで並べています。</p>
                 <div class="decision-grid">
                     <article class="decision-card">
                         <span class="decision-number">ADR-01</span>
@@ -259,12 +262,12 @@
                     <article class="decision-card">
                         <span class="decision-number">ADR-02</span>
                         <h3>自動設定を用途ごとに分ける</h3>
-                        <p>Ansibleの設定を基本、Docker、Web接続、監視に分け、変更した場所を見つけやすくしました。同じ設定を2回実行しても不要な変更が出ないことも確認しました。</p>
+                        <p>Ansibleの設定を、基本、Docker、Web接続、監視の4つに分けました。役割ごとに分けたので、変更した場所を見つけやすくなりました。同じ設定を2回実行しても、2回目に不要な変更が出ないことも確認しました。</p>
                     </article>
                     <article class="decision-card">
                         <span class="decision-number">ADR-03</span>
                         <h3>管理画面を外部へ直接公開しない</h3>
-                        <p>監視画面は、原則としてサーバー内部からだけ接続できる設定にしました。別の管理端末や独立した実機からの接続はまだ確認していません。</p>
+                        <p>監視画面は、原則としてサーバー内部からだけ接続できる設定にしました。外部に公開すると、誰でも監視画面をのぞける状態になってしまうためです。別の管理端末や独立した実機からの接続は、まだ確認していません。</p>
                     </article>
                     <article class="decision-card">
                         <span class="decision-number">ADR-04</span>
@@ -288,7 +291,7 @@
                     <article class="architecture-notes">
                         <h3>実際に確認できたこと</h3>
                         <ul>
-                            <li>一時的なUbuntu環境で設定を2回実行し、2回目に不要な変更が出ないことを確認。</li>
+                            <li>一時的なUbuntu環境で設定を2回実行し、2回目に不要な変更が出ないことを確認しました。同じ手順を繰り返しても同じ状態になる、と言えます。</li>
                             <li>監視に必要な11個のサービスを起動し、異常と復旧の通知、ログの受け取りを確認。</li>
                             <li>停止させたサービスの自動復旧と、監視データをバックアップから戻せることを確認。</li>
                             <li>前の版への切り戻し、ディスク拡張、データベース復元、通信障害の調査を練習。</li>
@@ -299,7 +302,7 @@
                         <h3>まだ確認していないこと</h3>
                         <ul>
                             <li>継続して使うサーバーでの切り戻し、72時間の連続稼働、再起動後の確認。</li>
-                            <li>監視ツールから実際のSlackへ通知すること。</li>
+                            <li>監視ツールから実際のSlack（チャットの連絡ツール）へ通知することは、まだ試していません。</li>
                             <li>AWS上での作成・削除と、別サーバーへの復旧。</li>
                             <li>独立した管理端末とサーバーを使った構築、接続、運用。</li>
                         </ul>
@@ -309,7 +312,7 @@
                     <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
                     <div>
                         <strong>面接で説明できる改善事例</strong>
-                        <p>D-1演習では2回失敗し、障害注入方法と古いローカルブランチを原因として切り分けました。成功結果だけでなく、誤った前提、確認コマンド、修正、再試験まで記録しています。</p>
+                        <p>D-1演習では2回失敗しました。原因は、障害をわざと起こす方法（障害注入）の誤りと、手元に残っていた古いブランチ（作業用の枝分かれ）だと切り分けました。成功した結果だけでなく、誤った前提、確認に使ったコマンド、修正、やり直した試験まで記録しています。</p>
                     </div>
                 </div>
                 <div class="summary-actions">

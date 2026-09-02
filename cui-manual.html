@@ -59,26 +59,26 @@
             <section class="command-intro" aria-labelledby="start-title">
                 <span class="case-label">未経験者向け / Linux・Windows共通</span>
                 <h2 id="start-title">CUIは「文字でコンピューターへ依頼する画面」</h2>
-                <p><strong>CUI（Character User Interface）</strong>は、マウスでボタンを押す代わりに文字で命令する操作方法です。CLI（Command Line Interface）とも呼ばれます。サーバーでは、遠隔操作しやすい、操作を記録しやすい、同じ手順を再現しやすいという利点があります。</p>
+                <p><strong>CUI（Character User Interface）</strong>は、マウスでボタンを押す代わりに文字で命令する操作方法です。CLI（Command Line Interface）とも呼ばれます。サーバーでは、次の3つの利点があります。離れた場所から操作しやすいこと、操作した内容を文字で記録に残せること、同じ手順をもう一度そのまま再現できることです。</p>
                 <div class="command-formula" aria-label="CUI操作の基本サイクル"><span><b>見る</b><small>対象と現在地</small></span><i aria-hidden="true">→</i><span><b>考える</b><small>目的と影響</small></span><i aria-hidden="true">→</i><span><b>実行</b><small>小さく操作</small></span><i aria-hidden="true">→</i><span><b>確かめる</b><small>結果と終了状態</small></span></div>
-                <div class="beginner-safety-note"><strong>このマニュアルの約束</strong><p>例は自分専用の仮想マシン、WSL、または学習用PCで試します。会社・学校・公開中サーバーでは、承認、バックアップ、影響範囲、戻し方を確認してから操作します。掲載例は教材であり、すべてを本番環境で実行した証跡ではありません。</p><p>VM/WSLをまだ用意していない場合は、先に<a href="learning-docs/environment-setup.md">環境準備ガイド</a>を行ってください。</p></div>
+                <div class="beginner-safety-note"><strong>このマニュアルの約束</strong><p>例は自分専用の仮想マシン（1台のパソコンの中に作る、もう1台の仮想のパソコン）、WSL（Windowsの中でLinuxを動かす仕組み）、または学習用PCで試します。会社・学校・公開中サーバーでは、承認、バックアップ、影響範囲、戻し方を確認してから操作します。掲載例は教材であり、すべてを本番環境で実行した証跡ではありません。</p><p>仮想マシン（VM）やWSLをまだ用意していない場合は、先に<a href="learning-docs/environment-setup.md">環境準備ガイド</a>を行ってください。</p></div>
             </section>
             <nav class="command-toc" aria-label="CUIマニュアルの目次"><strong>学習順</strong><a href="#start">1. 端末</a><a href="#read">2. 読み方</a><a href="#paths">3. パス</a><a href="#keys">4. 入力</a><a href="#connect">5. 組み合わせ</a><a href="#result">6. 結果</a><a href="#safety">7. 安全</a><a href="#triage">8. 障害対応</a><a href="#practice">9. 演習</a></nav>
 
             <section class="command-section" id="start" aria-labelledby="terminal-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-window-maximize" aria-hidden="true"></i></span><h2 class="heading-text" id="terminal-title">1. 端末を開き、種類を見分ける</h2></div>
-                <p>端末はCUIを表示する窓、シェルは入力を解釈するプログラムです。同じ端末でも、LinuxのBash、WindowsのPowerShell、コマンドプロンプトでは文法が少し違います。</p>
+                <p>端末（ターミナル）は、CUIを表示するための窓です。シェルは、打ち込んだ文字を読み取って実行するプログラムです。同じ端末でも、LinuxのBash、WindowsのPowerShell、コマンドプロンプトでは文法が少し違います。</p>
                 <div class="command-grid">
-                    <article class="command-card"><header><code>Bash</code><span class="risk safe">Linux</span></header><h3>Linux / WSL</h3><p>Linuxでは端末アプリを開きます。WindowsのWSLならWindows TerminalからUbuntuなどを選びます。</p><pre><code>student@server01:~$</code></pre><p class="check"><b>読む：</b>ユーザー名、端末名、現在地、一般ユーザーを示す<code>$</code>です。</p></article>
+                    <article class="command-card"><header><code>Bash</code><span class="risk safe">Linux</span></header><h3>Linux / WSL</h3><p>Linuxでは端末アプリを開きます。WindowsのWSLを使う場合は、Windows Terminal（Windows標準の端末アプリ）を開き、その中からUbuntu（Linuxの種類の一つ）などを選びます。</p><pre><code>student@server01:~$</code></pre><p class="check"><b>読む：</b>左から順に、ログイン中のユーザー名、接続先の端末名、今いる場所（現在地）が並びます。最後の<code>$</code>は、管理者ではない一般ユーザーとして操作していることを示します。</p></article>
                     <article class="command-card"><header><code>PowerShell</code><span class="risk safe">Windows</span></header><h3>Windows Terminal</h3><p>スタートメニューで「ターミナル」または「PowerShell」を検索します。</p><pre><code>PS C:\Users\student&gt;</code></pre><p class="check"><b>読む：</b><code>PS</code>はPowerShell、続く文字は現在のフォルダーです。</p></article>
-                    <article class="command-card"><header><code>cmd.exe</code><span class="risk safe">Windows</span></header><h3>コマンドプロンプト</h3><p><kbd>Win</kbd> + <kbd>R</kbd>で<code>cmd</code>と入力して開けます。古い手順や短い確認コマンドで使われます。</p><pre><code>C:\Users\student&gt;</code></pre><p class="check"><b>注意：</b>PowerShellとCMDは似ていますが、変数やパイプの扱いが異なります。</p></article>
+                    <article class="command-card"><header><code>cmd.exe</code><span class="risk safe">Windows</span></header><h3>コマンドプロンプト</h3><p><kbd>Win</kbd> + <kbd>R</kbd>で<code>cmd</code>と入力して開けます。古い手順や短い確認コマンドで使われます。</p><pre><code>C:\Users\student&gt;</code></pre><p class="check"><b>注意：</b>PowerShellとCMDは見た目が似ていますが、変数（値を入れておく入れ物）やパイプ（前のコマンドの結果を次へ渡す仕組み）の扱いが異なります。片方で動いた書き方が、もう片方ではそのまま動かないことがあります。</p></article>
                 </div>
-                <aside class="danger-box"><strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> プロンプト記号は入力しない</strong><p>手順書の<code>$</code>、<code>#</code>、<code>PS C:\&gt;</code>は「入力待ち」を表します。たとえば<code>$ pwd</code>と書かれていたら、入力するのは<code>pwd</code>だけです。Linuxの<code>#</code>や「管理者」と表示されたWindows端末は強い権限を示すため、通常権限から始めます。</p></aside>
+                <aside class="danger-box"><strong><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> プロンプト記号は入力しない</strong><p>手順書の<code>$</code>、<code>#</code>、<code>PS C:\&gt;</code>は「入力待ち」を表します。たとえば<code>$ pwd</code>と書かれていたら、入力するのは<code>pwd</code>だけです。Linuxの<code>#</code>や、「管理者」と表示されたWindowsの端末は、強い権限で操作していることを示します。強い権限では、うっかりの1回の操作でも影響が大きくなります。まずは通常の権限で始めてください。</p></aside>
             </section>
 
             <section class="command-section" id="read" aria-labelledby="read-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-spell-check" aria-hidden="true"></i></span><h2 class="heading-text" id="read-title">2. コマンドを3つに分けて読む</h2></div>
-                <div class="command-formula" aria-label="コマンドの構造"><span><b>command</b><small>何をする</small></span><i aria-hidden="true">+</i><span><b>option</b><small>どのように</small></span><i aria-hidden="true">+</i><span><b>argument</b><small>何を対象に</small></span></div>
+                <div class="command-formula" aria-label="コマンドの構造"><span><b>command</b><small>コマンド／何をする</small></span><i aria-hidden="true">+</i><span><b>option</b><small>オプション／どのように</small></span><i aria-hidden="true">+</i><span><b>argument</b><small>引数／何を対象に</small></span></div>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるコマンドの読み方の表" tabindex="0"><table class="operation-table"><caption class="sr-only">Linux、PowerShell、CMDのコマンド構造の例</caption><thead><tr><th scope="col">環境</th><th scope="col">例</th><th scope="col">分解</th><th scope="col">日本語にすると</th></tr></thead><tbody>
                     <tr><td>Linux</td><td><code>ls -lah /var/log</code></td><td><code>ls</code> + <code>-lah</code> + <code>/var/log</code></td><td>/var/logを、隠し項目も含め、詳しく読みやすい単位で一覧にする。</td></tr>
                     <tr><td>PowerShell</td><td><code>Get-Service -Name sshd</code></td><td><code>Get-Service</code> + <code>-Name</code> + <code>sshd</code></td><td>sshdという名前のサービス情報を取得する。</td></tr>
@@ -89,9 +89,9 @@
 
             <section class="command-section" id="paths" aria-labelledby="paths-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-route" aria-hidden="true"></i></span><h2 class="heading-text" id="paths-title">3. パスはファイルの住所</h2></div>
-                <p><strong>絶対パス</strong>は一番上から書く完全な住所、<strong>相対パス</strong>は現在地から見た住所です。Linuxは<code>/</code>、Windowsは通常<code>\</code>で階層を区切ります。</p>
+                <p><strong>絶対パス</strong>は、一番上から書いた完全な住所です。<strong>相対パス</strong>は、今いる場所から見た道順の書き方です。Linuxは<code>/</code>、Windowsは通常<code>\</code>で階層を区切ります。</p>
                 <div class="command-grid">
-                    <article class="command-card"><header><code>/var/log/nginx</code><span class="risk safe">Linux</span></header><h3>Linuxのパス</h3><p>先頭の<code>/</code>はルート（最上位）。<code>~</code>は自分のホーム、<code>.</code>は現在地、<code>..</code>は1つ上です。</p><pre><code>$ pwd
+                    <article class="command-card"><header><code>/var/log/nginx</code><span class="risk safe">Linux</span></header><h3>Linuxのパス</h3><p>先頭の<code>/</code>は、ルート（すべての入り口になる最上位のフォルダー）を表します。<code>~</code>は自分のホーム（利用者ごとに用意された自分専用のフォルダー）、<code>.</code>は現在地、<code>..</code>は1つ上の階層です。</p><pre><code>$ pwd
 /home/student
 $ cd ..
 $ pwd
@@ -99,8 +99,8 @@ $ pwd
                     <article class="command-card"><header><code>C:\Logs\app.log</code><span class="risk safe">Windows</span></header><h3>Windowsのパス</h3><p><code>C:</code>はドライブ。<code>.</code>は現在地、<code>..</code>は1つ上を表します。</p><pre><code>PS&gt; Get-Location
 C:\Users\student
 PS&gt; Set-Location ..</code></pre></article>
-                    <article class="command-card"><header><code>"Monthly Report.txt"</code><span class="risk caution">共通</span></header><h3>空白を含む名前</h3><p>空白は区切りと解釈されるため、パス全体を引用符で囲みます。</p><pre><code>less "Monthly Report.txt"
-Get-Content ".\Monthly Report.txt"</code></pre><p class="check"><b>安全策：</b>入力しにくい名前はTab補完を使います。</p></article>
+                    <article class="command-card"><header><code>"Monthly Report.txt"</code><span class="risk caution">共通</span></header><h3>空白を含む名前</h3><p>シェルは空白を「ここで区切り」という記号として読みます。そのため、名前に空白があると別々の指定と受け取られます。これを防ぐため、パス全体を引用符（ダブルクォート）で囲みます。</p><pre><code>less "Monthly Report.txt"
+Get-Content ".\Monthly Report.txt"</code></pre><p class="check"><b>安全策：</b>入力しにくい名前は、Tab補完（途中まで打って<kbd>Tab</kbd>キーを押すと、残りを自動で補ってくれる機能）を使います。打ち間違いを防げます。</p></article>
                 </div>
             </section>
 
@@ -113,35 +113,37 @@ Get-Content ".\Monthly Report.txt"</code></pre><p class="check"><b>安全策：<
                     <tr><td><kbd>Ctrl</kbd> + <kbd>L</kbd></td><td>画面を整理</td><td>BashやPowerShellの表示を見やすくする。</td><td>履歴やファイルは消えない。</td></tr>
                     <tr><td><kbd>q</kbd></td><td>閲覧画面を終了</td><td><code>less</code>、<code>man</code>などから戻る。</td><td>通常のプロンプトでは文字qが入力されるだけ。</td></tr>
                 </tbody></table></div>
-                <div class="beginner-safety-note"><strong>反応しないと感じたら</strong><p>パスワード入力中は、画面に文字や<code>*</code>が表示されないことがあります。入力後に<kbd>Enter</kbd>を押します。引用符が閉じていない場合は次の行で入力待ちになるため、<kbd>Ctrl</kbd> + <kbd>C</kbd>で中断して最初から入力し直します。</p></div>
+                <div class="beginner-safety-note"><strong>反応しないと感じたら</strong><p>パスワード入力中は、画面に文字や<code>*</code>が表示されないことがあります。これは故障ではなく、のぞき見を防ぐための動作です。そのまま最後まで打ち、<kbd>Enter</kbd>を押します。引用符が閉じていない場合は、次の行が入力待ちのまま止まります。そのときは<kbd>Ctrl</kbd> + <kbd>C</kbd>で中断し、最初から入力し直します。</p></div>
             </section>
 
             <section class="command-section" id="connect" aria-labelledby="connect-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></span><h2 class="heading-text" id="connect-title">5. コマンドを組み合わせる</h2></div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>コマンドは1つずつ使うだけでなく、つなげて使えます。<code>|</code>は前の結果を次のコマンドへ渡し、<code>&gt;</code>は結果をファイルへ書き出し、<code>&amp;&amp;</code>は前が成功したときだけ次へ進みます。</p>
                 <div class="command-grid">
                     <article class="command-card"><header><code>|</code><span class="risk safe">パイプ</span></header><h3>左の結果を右へ渡す</h3><pre><code>$ journalctl -u nginx | tail -n 20
-PS&gt; Get-Service | Where-Object Status -eq 'Running'</code></pre><p class="check"><b>読む：</b>多い結果から必要な情報だけを絞ります。PowerShellは文字列ではなくオブジェクトを渡します。</p></article>
+PS&gt; Get-Service | Where-Object Status -eq 'Running'</code></pre><p class="check"><b>読む：</b><code>|</code>（パイプ）は、左のコマンドの結果を右のコマンドへ渡す記号です。表示が多すぎるとき、必要な情報だけに絞り込めます。PowerShellでは、文字の並びではなくオブジェクト（項目名と値をひとまとめにしたデータ）を渡します。</p></article>
                     <article class="command-card"><header><code>&gt; / &gt;&gt;</code><span class="risk warning">ファイル変更</span></header><h3>結果をファイルへ保存</h3><pre><code>$ hostname &gt; check.txt
 $ date &gt;&gt; check.txt
 PS&gt; Get-Date | Out-File check.txt -Append</code></pre><p class="check"><b>重要：</b><code>&gt;</code>は既存内容を上書き、<code>&gt;&gt;</code>は末尾へ追加します。</p></article>
-                    <article class="command-card"><header><code>&amp;&amp;</code><span class="risk caution">条件実行</span></header><h3>成功したときだけ次へ進む</h3><pre><code>$ test -f app.conf &amp;&amp; echo "found"</code></pre><p class="check"><b>Linux：</b>左が成功（終了コード0）の場合だけ右を実行します。PowerShell 7でも利用できますが、Windows PowerShell 5.1では使えません。</p></article>
-                    <article class="command-card"><header><code>* / ?</code><span class="risk warning">複数対象</span></header><h3>ワイルドカードで候補をまとめる</h3><pre><code>$ ls *.log
-PS&gt; Get-ChildItem *.log</code></pre><p class="check"><b>注意：</b>削除・移動と組み合わせる前に、同じパターンを一覧表示コマンドで確認します。</p></article>
+                    <article class="command-card"><header><code>&amp;&amp;</code><span class="risk caution">条件実行</span></header><h3>成功したときだけ次へ進む</h3><pre><code>$ test -f app.conf &amp;&amp; echo "found"</code></pre><p class="check"><b>Linux：</b>左のコマンドが成功したとき、つまり終了コード（コマンドの結果を表す数字）が0のときだけ、右のコマンドを実行します。PowerShell 7でも利用できますが、Windows PowerShell 5.1では使えません。</p></article>
+                    <article class="command-card"><header><code>* / ?</code><span class="risk warning">複数対象</span></header><h3>ワイルドカードで候補をまとめる</h3><p>ワイルドカードは、名前の一部を「何でもよい」として指定する記号です。<code>*</code>は任意の文字の並び、<code>?</code>は任意の1文字に一致します。</p><pre><code>$ ls *.log
+PS&gt; Get-ChildItem *.log</code></pre><p class="check"><b>注意：</b>削除や移動と組み合わせる前に、同じ書き方を一覧表示コマンドで試します。意図しないファイルまで一致していないかを、消す前に目で確かめるためです。</p></article>
                 </div>
             </section>
 
             <section class="command-section" id="result" aria-labelledby="result-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span><h2 class="heading-text" id="result-title">6. 「表示された」だけで成功と決めない</h2></div>
-                <p>コマンド操作は、入力より結果確認が重要です。標準出力、エラー出力、終了コード、変更後の状態を区別します。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>画面に何か表示されても、それだけでは成功したかどうか分かりません。結果を4つに分けて読むと、成功と失敗を自分で判断できます。</p>
+                <p>コマンド操作は、入力よりも結果の確認が重要です。次の4つを区別します。標準出力（うまくいったときの通常の表示）、エラー出力（失敗を知らせる表示）、終了コード（成功か失敗かを表す数字）、そして操作したあとの実際の状態です。</p>
                 <div class="command-grid">
                     <article class="command-card"><header><code>$?</code><span class="risk safe">Linux</span></header><h3>終了コードを確認</h3><pre><code>$ grep -n "error" app.log
 $ echo $?
-0</code></pre><p class="check"><b>読む：</b>一般に0は成功、0以外は未検出やエラーです。意味は説明書で確認します。</p></article>
+0</code></pre><p class="check"><b>読む：</b>一般に0は成功、0以外は「見つからなかった」やエラーを表します。数字の意味はコマンドごとに違うため、そのコマンドの説明書で確認します。</p></article>
                     <article class="command-card"><header><code>$LASTEXITCODE</code><span class="risk safe">PowerShell</span></header><h3>外部コマンドの終了コード</h3><pre><code>PS&gt; ping -n 1 server01
-PS&gt; $LASTEXITCODE</code></pre><p class="check"><b>重要：</b>別の外部コマンドを実行する前に、すぐ保存または確認します。</p></article>
+PS&gt; $LASTEXITCODE</code></pre><p class="check"><b>重要：</b><code>$LASTEXITCODE</code>には、直前に実行した外部コマンド（PowerShell専用ではない、単独のプログラム）の結果だけが残ります。次の外部コマンドを実行すると上書きされるため、その前にすぐ確認するか、別の変数へ保存します。</p></article>
                     <article class="command-card"><header><code>再確認</code><span class="risk caution">共通</span></header><h3>状態を別コマンドで確かめる</h3><pre><code>$ sudo systemctl restart nginx
 $ systemctl is-active nginx
-$ curl -I http://localhost</code></pre><p class="check"><b>考え方：</b>再起動、サービス状態、実際の応答を段階的に確認します。</p></article>
+$ curl -I http://localhost</code></pre><p class="check"><b>考え方：</b>再起動したあと、サービスが動いているか、そして実際に応答が返るかを順番に確かめます。ここまで確認できて初めて、「利用者から見ても復旧した」と言えます。</p></article>
                 </div>
                 <p class="memory-phrase"><strong>記録：「いつ・誰が・どこで・何を・結果・次の判断」</strong><span>成功例だけでなく、失敗メッセージと未確認事項も残します。</span></p>
             </section>
@@ -149,19 +151,20 @@ $ curl -I http://localhost</code></pre><p class="check"><b>考え方：</b>再�
             <section class="command-section" id="safety" aria-labelledby="safety-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span><h2 class="heading-text" id="safety-title">7. 変更コマンドの前に6点確認</h2></div>
                 <div class="operator-grid">
-                    <article><span>1</span><h3>対象</h3><p><code>hostname</code>、<code>whoami</code>、<code>pwd</code> / <code>Get-Location</code>で確認。</p></article>
+                    <article><span>1</span><h3>対象</h3><p><code>hostname</code>（機器の名前）、<code>whoami</code>（今のユーザー名）、<code>pwd</code> / <code>Get-Location</code>（現在地）を使い、これから操作する場所が正しいかを確認します。</p></article>
                     <article><span>2</span><h3>目的</h3><p>何を直し、どうなれば成功かを1文で説明。</p></article>
                     <article><span>3</span><h3>影響</h3><p>停止、通信断、上書き、権限変更の影響を確認。</p></article>
                     <article><span>4</span><h3>退避</h3><p>設定やデータをバックアップし、復元方法を確認。</p></article>
-                    <article><span>5</span><h3>戻し方</h3><p>復旧コマンド、判断基準、連絡先を用意。</p></article>
+                    <article><span>5</span><h3>戻し方</h3><p>元に戻すコマンド、いつ戻すと決めるかの判断基準、困ったときの連絡先を、операции前に用意します。</p></article>
                     <article><span>6</span><h3>再確認</h3><p>状態、ログ、利用者から見た動作を確認。</p></article>
                 </div>
-                <aside class="danger-box"><strong><i class="fa-solid fa-ban" aria-hidden="true"></i> コピーしてすぐ実行しない</strong><p><code>rm -rf</code>、<code>Remove-Item -Recurse</code>、<code>chmod -R</code>、サービス停止、再起動、ファイアウォール変更は広い影響を与えます。変数が空でないか、ワイルドカードが何に一致するか、対象が学習環境かを確認します。パスワード、秘密鍵、トークンはコマンド行や公開ログへ書きません。</p></aside>
+                <aside class="danger-box"><strong><i class="fa-solid fa-ban" aria-hidden="true"></i> コピーしてすぐ実行しない</strong><p><code>rm -rf</code>、<code>Remove-Item -Recurse</code>、<code>chmod -R</code>、サービス停止、再起動、ファイアウォール変更は広い影響を与えます。実行の前に3つを確認します。変数（値を入れておく入れ物）が空になっていないか、ワイルドカードが実際に何と一致するか、そして操作の対象が学習用の環境かどうかです。パスワード、秘密鍵（本人であることを証明する鍵のファイル）、トークン（合言葉のような認証用の文字列）は、コマンド行や公開するログへ書きません。入力履歴や記録に残り、他人に読まれてしまうためです。</p></aside>
             </section>
 
             <section class="command-section" id="triage" aria-labelledby="triage-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i></span><h2 class="heading-text" id="triage-title">8. 障害対応は変更せず事実を集める</h2></div>
-                <p>「Webが開かない」とき、いきなり再起動すると原因の手掛かりが消えることがあります。対象 → 時刻 → 名前解決 → 経路 → ポート → サービス → ログの順に確認します。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>障害のときは、すぐ直そうとせず、まず事実を集めます。手前（自分の端末）から奥（サーバーの中）へ順に見ていくと、どこで止まっているかが分かります。</p>
+                <p>「Webが開かない」とき、いきなり再起動すると原因の手掛かりが消えることがあります。次の順で確認します。対象 → 時刻 → 名前解決（名前をIPアドレスへ変換すること） → 経路（通信が通る道すじ） → ポート（サービスごとの入口の番号） → サービス → ログ。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる一次切り分け表" tabindex="0"><table class="operation-table"><caption class="sr-only">サーバー障害の一次切り分け手順</caption><thead><tr><th scope="col">順</th><th scope="col">確認</th><th scope="col">Linux例</th><th scope="col">Windows例</th><th scope="col">見るところ</th></tr></thead><tbody>
                     <tr><td>1</td><td>対象・時刻</td><td><code>hostname; date; whoami</code></td><td><code>hostname</code><br><code>Get-Date</code><br><code>whoami</code></td><td>正しい端末とアカウントか。</td></tr>
                     <tr><td>2</td><td>IPと経路</td><td><code>ip addr</code><br><code>ip route</code></td><td><code>ipconfig /all</code></td><td>期待するIP、ゲートウェイか。</td></tr>
@@ -170,7 +173,7 @@ $ curl -I http://localhost</code></pre><p class="check"><b>考え方：</b>再�
                     <tr><td>5</td><td>サービス</td><td><code>systemctl status nginx</code></td><td><code>Get-Service -Name W3SVC</code></td><td>起動状態と直近エラー。</td></tr>
                     <tr><td>6</td><td>ログ</td><td><code>journalctl -u nginx -n 50</code></td><td><code>Get-WinEvent -LogName System -MaxEvents 50</code></td><td>発生時刻付近の記録。</td></tr>
                 </tbody></table></div>
-                <div class="beginner-safety-note"><strong>報告は「事実・推測・未確認」を分ける</strong><p>例：事実＝14:05から名前解決は成功、TCP 443は失敗。推測＝サービス停止または通信許可を要確認。未確認＝サーバー側の状態（権限がないため）。断定ミスと無断変更を防げます。</p></div>
+                <div class="beginner-safety-note"><strong>報告は「事実・推測・未確認」を分ける</strong><p>例をあげます。事実＝14:05の時点で名前解決は成功、TCP 443（HTTPS通信で使う入口の番号）は失敗。推測＝サービスの停止か、通信許可の設定を要確認。未確認＝サーバー側の状態（権限がないため確認できていない）。このように分けて書くと、思い込みでの断定や、勝手な変更を防げます。</p></div>
             </section>
 
             <section class="command-section" id="practice" aria-labelledby="practice-title">

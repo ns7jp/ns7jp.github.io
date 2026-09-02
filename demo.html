@@ -94,9 +94,10 @@
         <div class="container">
             <section class="demo-intro">
                 <span class="case-label">2分15秒 / 日本語字幕 / 自動再生なし</span>
-                <h2>サービスの起動、監視画面、停止後13秒での復旧を短時間で確認できます</h2>
-                <p class="evidence-notice" role="note"><strong>この動画は、実際の操作を最初から最後まで撮影したものではありません。</strong>2026年8月18日・19日に保存した動作確認画面とD-1復旧ログを、時間順にまとめたものです。</p>
-                <p>確認できたことと未実施のことは<a href="evidence-demo.html">動作確認のまとめ</a>、取り組み全体は<a href="project-brief.html">取り組み概要</a>で確認できます。2026年8月22日に端末で行った一括動作確認（Full-stack E2E）は、この動画とは別の確認であり、動画には含めていません。</p>
+                <h2>サービスの起動、監視画面、そしてサービスが止まってから13秒で元に戻るまでを、短い時間で確認できます</h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>自分で作ったサーバー監視の仕組みが動いたときの画面と記録を、2分15秒の動画にまとめたページです。動画の下には、もとになった画面写真と記録へのリンクも置いています。</p>
+                <p class="evidence-notice" role="note"><strong>この動画は、実際の操作を最初から最後まで撮影したものではありません。</strong>2026年8月18日・19日に保存した動作確認画面と、D-1復旧ログ（わざとサービスを止めて、元に戻せるかを確かめた練習の記録）を、時間順にまとめたものです。</p>
+                <p>確認できたことと未実施のことは<a href="evidence-demo.html">動作確認のまとめ</a>、取り組み全体は<a href="project-brief.html">取り組み概要</a>で確認できます。2026年8月22日に端末で行った一括動作確認（Full-stack E2E／画面からサーバーまでを通しで動かして確かめる確認）は、この動画とは別の確認です。動画には含めていません。</p>
             </section>
 
             <section class="demo-player-section" aria-labelledby="demo-player-title">
@@ -117,36 +118,38 @@
                     <article>
                         <span>2026-08-18</span>
                         <h3>監視用サービスを起動</h3>
-                        <p>Linux上で9個のサービスが起動し、アプリが正常な状態であることを記録しました。</p>
+                        <p>Linux上で9個のサービス（背景で動き続けるプログラム）が起動しました。アプリが正常な状態であることも記録しています。監視に必要なプログラムがそろって動いていた、と言えます。</p>
                     </article>
                     <article>
                         <span>2026-08-18</span>
                         <h3>監視画面で実際の数値を確認</h3>
-                        <p>Grafanaで、アプリとLinuxサーバーのCPU・メモリ・稼働目標（SLO）の表示を確認しました。</p>
+                        <p>監視画面ツールのGrafana（グラファナ）を使いました。アプリとLinuxサーバーのCPU・メモリ・稼働目標（SLO／どれだけ止まらずに動けたかの目標値）の表示を確認しました。</p>
                     </article>
                     <article>
                         <span>2026-08-19</span>
                         <h3>サービス停止からの復旧練習（D-1）</h3>
-                        <p>アプリを停止した後、正常確認用URL（healthz）が13秒で復旧しました。再起動回数は0回から1回になりました。</p>
+                        <p>アプリを停止した後、正常確認用URL（healthz／サーバーが元気かどうかを返す確認用のページ）が13秒で復旧しました。再起動回数は0回から1回になりました。これは、止めたアプリが立ち上がり直したことを示す数字です。</p>
                     </article>
                 </div>
             </section>
 
             <section class="demo-transcript" aria-labelledby="transcript-title">
                 <h2 id="transcript-title">動画の文字起こし</h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>動画で何を映しているかを、時間の順に文章で書き出したものです。動画を再生できないときも、ここを読めば内容が分かります。</p>
                 <ol>
                     <li><time datetime="PT0S">0:00</time><div><strong>この動画について</strong><p>実際の操作を最初から最後まで撮影したものではなく、保存した動作確認の記録を時間順にまとめた動画です。</p></div></li>
                     <li><time datetime="PT12S">0:12</time><div><strong>サービスの起動</strong><p>作業時点の記録番号（commit）は<code>aab2fcc</code>です。監視に必要な9個のサービスが起動し、アプリが正常な状態であることを示します。</p></div></li>
                     <li><time datetime="PT32S">0:32</time><div><strong>監視の数値とログ</strong><p>Grafanaで、アプリとLinuxサーバーの実際の数値を確認します。</p></div></li>
-                    <li><time datetime="PT56S">0:56</time><div><strong>表示している期間</strong><p>稼働目標（SLO）の値は、学習用環境を起動してから数時間分です。30日間の本番運用結果ではありません。</p></div></li>
-                    <li><time datetime="PT78S">1:18</time><div><strong>サービス停止からの復旧練習（D-1）</strong><p>作業時点の記録番号（commit）は<code>5dfc67d</code>です。05:38:27Zに停止し、05:38:40Zに復旧しました。復旧までの時間（RTO）は13秒で、判定は合格（PASS）です。</p></div></li>
-                    <li><time datetime="PT108S">1:48</time><div><strong>うまくいかなかった点と修正</strong><p>最初に試した<code>docker compose kill</code>では想定どおりに再起動しなかったため、Linux側のプロセス番号（PID）を指定する<code>kill -9</code>へ修正しました。この経緯も記録しています。</p></div></li>
-                    <li><time datetime="PT122S">2:02</time><div><strong>この動画で確認できないこと</strong><p>Slackへの実際の通知、Alertmanagerの画面、AWS環境への反映、最初から最後までの連続した操作録画は、この動画では確認できません。</p></div></li>
+                    <li><time datetime="PT56S">0:56</time><div><strong>表示している期間</strong><p>稼働目標（SLO）の値は、学習用環境を起動してから数時間分の記録です。30日間の本番運用（実際に人が使う環境での運用）の結果ではありません。</p></div></li>
+                    <li><time datetime="PT78S">1:18</time><div><strong>サービス停止からの復旧練習（D-1）</strong><p>作業時点の記録番号（commit）は<code>5dfc67d</code>です。05:38:27Z（末尾のZは世界標準時UTCを表します）に停止し、05:38:40Zに復旧しました。復旧までの時間（RTO／Recovery Time Objective）は13秒で、判定は合格（PASS）です。</p></div></li>
+                    <li><time datetime="PT108S">1:48</time><div><strong>うまくいかなかった点と修正</strong><p>最初に試した<code>docker compose kill</code>（アプリをまとめて止めるコマンド）では、想定どおりに再起動しませんでした。そのため、Linux側のプロセス番号（PID）を指定して止める<code>kill -9</code>へ修正しました。この経緯も記録しています。</p></div></li>
+                    <li><time datetime="PT122S">2:02</time><div><strong>この動画で確認できないこと</strong><p>この動画では、次の4つは確認できません。Slackへの実際の通知、警報をまとめるAlertmanager（アラートマネージャー）の画面、AWS（アマゾンのクラウドサービス）環境への反映、最初から最後まで連続して撮った操作の録画です。</p></div></li>
                 </ol>
             </section>
 
             <section class="demo-sources" aria-labelledby="sources-title">
                 <h2 id="sources-title">元の動作確認記録</h2>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>動画のもとになった画面写真と、当時の記録の置き場所です。画像をクリックすると、大きなサイズの画面写真をそのまま確認できます。</p>
                 <div class="demo-source-grid">
                     <a href="media/demo-sources/compose-ps_aab2fcc_20260818.png">
                         <img src="media/demo-sources/compose-ps_aab2fcc_20260818.png" alt="docker compose psで9サービスがUpであることを示す実測画面" loading="lazy" width="613" height="345">

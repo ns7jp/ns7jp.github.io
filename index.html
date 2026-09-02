@@ -176,7 +176,7 @@
                 <span class="line1">Linux Server</span>
                 <span class="line2">Design, Build &amp; Operations</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">主作品「Server Monitor」で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの流れとして学習。<br>実装済み・実測済み・未実施（NOT RUN）を分けて公開しています</p>
+            <p class="hero-description animate-fade-in-delay">主作品「Server Monitor」で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの流れとして学習しました。<br>実装済み・実測済み・未実施（NOT RUN／まだ実行していない項目）を分けて公開しています</p>
             <!-- CTA（Call To Action）ボタン群。採用担当者向けの主導線を3本に絞る。 -->
             <div class="hero-buttons animate-fade-in-delay2">
                 <a href="#one-minute-summary" class="btn btn-primary"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 1分サマリ</a>
@@ -199,7 +199,7 @@
             </div>
             <div class="role-strip-item"><i class="fa-solid fa-headset" aria-hidden="true"></i><span>第二志望<br>ITサポート</span></div>
             <div class="role-strip-item"><i class="fa-solid fa-route" aria-hidden="true"></i><span>設計 → 構築 → 試験<br>監視 → 復旧 → 引き渡し</span></div>
-            <div class="role-strip-item"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>個人学習<br>実務・本番実績ではありません</span></div>
+            <div class="role-strip-item"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>個人学習<br>実務・本番（実際に使われている環境）の実績ではありません</span></div>
         </div>
     </section>
 
@@ -210,10 +210,10 @@
             <h2 id="beginner-guide-title">サーバー構築は「決める・作る・確かめる・守る」</h2>
             <p class="beginner-guide-lead">サーバーは、Webサイトやデータを必要なときに提供するコンピューターです。難しい製品名を覚える前に、仕事の流れを4つの言葉で整理しました。</p>
             <ol class="beginner-guide-steps">
-                <li><span>1</span><div><strong>決める</strong><p>目的、利用者、IPアドレス、必要な機能、安全のルールを設計します。</p></div></li>
-                <li><span>2</span><div><strong>作る</strong><p>OSやソフトウェアを入れ、同じ設定を再現できる手順を用意します。</p></div></li>
-                <li><span>3</span><div><strong>確かめる</strong><p>期待どおり動くか、通信できるか、失敗時に戻せるかを試験します。</p></div></li>
-                <li><span>4</span><div><strong>守る</strong><p>監視とログで変化に気づき、原因を調べ、復旧して記録を残します。</p></div></li>
+                <li><span>1</span><div><strong>決める</strong><p>目的、利用者、IPアドレス（機器を見分けるための住所のような番号）、必要な機能、安全のルールを設計します。</p></div></li>
+                <li><span>2</span><div><strong>作る</strong><p>OS（機械を動かす基本のソフト）やソフトウェアを入れます。あわせて、同じ設定をいつでも再現できる手順を用意します。手順を残すのは、別のサーバーでも同じ状態を作り直せるようにするためです。</p></div></li>
+                <li><span>3</span><div><strong>確かめる</strong><p>期待どおり動くか、通信できるか、失敗したときに元へ戻せるかを試験します。ここを確認できると、「作ったものが決めたとおりに動く」と説明できます。</p></div></li>
+                <li><span>4</span><div><strong>守る</strong><p>監視とログ（機器やソフトが自動で残す動作の記録）で変化に気づきます。そのうえで原因を調べ、復旧して記録を残します。</p></div></li>
             </ol>
             <div class="beginner-guide-memory" role="note">
                 <strong>覚え方：決・作・確・守（けっ・さく・かく・しゅ）</strong>
@@ -222,8 +222,8 @@
             <div class="summary-actions">
                 <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-map" aria-hidden="true"></i> 図で全体を見る</a>
                 <a href="linux-lab.html#first-check-order" class="btn btn-outline-dark"><i class="fa-solid fa-terminal" aria-hidden="true"></i> 基本の確認順を覚える</a>
-                <a href="cui-manual.html" class="btn btn-outline-dark"><i class="fa-solid fa-terminal" aria-hidden="true"></i> はじめてのCUI操作</a>
-                <a href="cli-exercise-pack.html" class="btn btn-outline-dark"><i class="fa-solid fa-ticket" aria-hidden="true"></i> CLI演習案件パック</a>
+                <a href="cui-manual.html" class="btn btn-outline-dark"><i class="fa-solid fa-terminal" aria-hidden="true"></i> はじめてのCUI操作（文字で操作する画面）</a>
+                <a href="cli-exercise-pack.html" class="btn btn-outline-dark"><i class="fa-solid fa-ticket" aria-hidden="true"></i> CLI演習案件パック（問い合わせを想定したコマンド練習）</a>
                 <a href="linux-commands.html" class="btn btn-outline-dark"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linuxコマンド集</a>
             </div>
         </div>
@@ -235,6 +235,7 @@
                 <span class="title-en">Why This Portfolio</span>
                 <span class="title-jp">採用担当者に確認いただきたい3点</span>
             </h2>
+            <p class="plain-summary"><strong>かんたんに言うと</strong>このサイトでは、資料や設定を作った段階を「実装済み」、実際に動かして結果を記録した段階を「実測済み」、まだ試していないものを「未実施（NOT RUN）」と書き分けています。</p>
             <div class="value-grid">
                 <article class="value-card">
                     <i class="fa-solid fa-folder-tree" aria-hidden="true"></i>
@@ -251,14 +252,14 @@
                 <article class="value-card">
                     <i class="fa-solid fa-people-group" aria-hidden="true"></i>
                     <h3>安全な仕事の進め方を意識</h3>
-                    <p>最初は手順と確認者がいる作業を担当し、作業前の記録、承認、作業後の確認、報告を大切にします。</p>
+                    <p>最初は、手順書があり確認者もいる作業を担当します。作業前の記録、作業の承認、作業後の確認、報告を大切にします。</p>
                     <a href="work-readiness.html">仕事の進め方を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
             </div>
             <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
-                <span><strong>実装済み</strong> 設計書、パラメータシート、Ansible、Compose、試験仕様、復旧手順、引き渡し資料を公開</span>
-                <span><strong>実測済み</strong> 日付と環境を記録したWSL2・一時Ubuntu・Docker等の学習環境で、構築、監視、復旧を確認</span>
-                <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーでの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy、D-2、本番変更</span>
+                <span><strong>実装済み</strong> 設計書、パラメータシート（設定値をまとめた一覧表）、Ansible、Compose（どちらもサーバーの設定を自動で組み立てる道具）、試験仕様、復旧手順、引き渡し資料を公開</span>
+                <span><strong>実測済み</strong> 日付と環境を記録したWSL2・一時Ubuntu・Docker等の学習環境（実機のサーバーではなく、パソコン上に作った使い捨てのLinux環境）で、構築、監視、復旧を確認</span>
+                <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーでの受け入れ確認、72時間の連続稼働、Slackへの実際の通知、AWSでの作成と削除（apply/destroy）、D-2（別サーバーへ復元するホスト障害の復旧演習）、本番環境での変更</span>
             </div>
             <div class="summary-actions">
                 <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 制作概要を見る</a>
@@ -275,6 +276,7 @@
                 <span class="title-en">One-minute Summary</span>
                 <span class="title-jp" id="one-minute-summary-title">採用担当者向け1分サマリ</span>
             </h2>
+            <p class="plain-summary"><strong>かんたんに言うと</strong>見る場所は3か所だけです。(1) 作ったもの、(2) 仕事の流れ、(3) どこまで実際に動かして確かめたか、の順に見てください。</p>
             <div class="summary-grid">
                 <div class="summary-card">
                     <span class="summary-label">01 / Main Work</span>
@@ -297,7 +299,7 @@
                     <h3>証拠の範囲を確認</h3>
                     <ul class="time-budget-links">
                         <li><a href="evidence-demo.html">実測結果のまとめ</a><span>日付、環境、結果、失敗、NOT RUNを確認</span></li>
-                        <li><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a><span>現在の実測済み・未実施を原本で確認</span></li>
+                        <li><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a><span>main（GitHubの最新版）にある証跡台帳です。実測済み・未実施の最新の状況を、大もとの記録で確認できます</span></li>
                     </ul>
                 </div>
             </div>
@@ -316,7 +318,7 @@
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h2>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了し、現在は人材派遣会社（アデコ株式会社）を通じ、IT企業にて派遣社員としてトライアル就業中です（2026年7月〜。就業先の社名は面談時に開示します）。Linuxサーバー設計・構築を第一志望、ITサポートを第二志望としてキャリア移行を目指しています。製造・物流現場では作業を計測し、棚配置・補充ルール・手順を見直して1日約1時間を短縮しました。この「計測 → 原因特定 → 手順化 → 定着」を構築、試験、監視、障害復旧にもつなげています。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了しました。現在は人材派遣会社（アデコ株式会社）を通じて、IT企業で派遣社員としてトライアル就業中です（2026年7月〜）。就業先の社名は面談時に開示します。Linuxサーバー設計・構築を第一志望、ITサポートを第二志望としてキャリア移行を目指しています。製造・物流現場では作業を計測し、棚配置・補充ルール・手順を見直して1日約1時間を短縮しました。この「計測 → 原因特定 → 手順化 → 定着」を構築、試験、監視、障害復旧にもつなげています。</p>
                     <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
                     <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
@@ -339,6 +341,7 @@
                 <span class="title-en">Skills</span>
                 <span class="title-jp">スキル</span>
             </h2>
+            <p class="plain-summary"><strong>かんたんに言うと</strong>6枚のカードは、仕事の流れ（設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し）の順に並べています。それぞれ、どこまで自分で確かめたかを示しています。</p>
             <!-- 自己評価の割合ではなく、6工程の成果物と証跡で説明する。 -->
             <div class="skills-grid">
                 <div class="skill-card">
@@ -355,7 +358,7 @@
                     </div>
                     <span class="status-pill measured">実測済み</span>
                     <h3>構築</h3>
-                    <p>AnsibleとComposeを実行し、2回目に不要な変更が出ないことを確認</p>
+                    <p>AnsibleとComposeを実行し、2回目に不要な変更が出ないことを確認。同じ手順を何度実行しても同じ状態になる、という確認です</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
@@ -371,7 +374,7 @@
                     </div>
                     <span class="status-pill measured">実測済み</span>
                     <h3>監視</h3>
-                    <p>Prometheus、Grafana、Loki、Alloy、Alertmanagerを学習環境で確認</p>
+                    <p>Prometheus、Grafana、Loki、Alloy、Alertmanager（数値やログを集めて画面に表示し、異常を知らせる道具）を学習環境で確認</p>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">
@@ -387,7 +390,7 @@
                     </div>
                     <span class="status-pill validated">実装済み</span>
                     <h3>引き渡し</h3>
-                    <p>チェックリストと切り戻し手順を作成。対象サーバーでの受け入れはNOT RUN</p>
+                    <p>チェックリストと切り戻し手順（問題が起きたときに前の状態へ戻す手順）を作成。対象サーバーでの受け入れはNOT RUN</p>
                 </div>
             </div>
             <!-- スキル一覧ページへの誘導ボタン -->
@@ -472,7 +475,7 @@
                 <a href="skills.html">スキル</a>
                 <a href="project-brief.html">制作概要</a>
                 <a href="infra-lab.html">サーバー構築</a>
-                <a href="demo.html">Demo Replay</a>
+                <a href="demo.html">動作確認動画</a>
                 <a href="evidence-demo.html">動作確認の記録</a>
                 <a href="work-readiness.html">仕事の進め方</a>
                 <a href="works.html">作品</a>
@@ -490,7 +493,7 @@
         <!-- 著作権表示。&copy;は©（コピーライト記号）の実体参照。 -->
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行い、個人制作のため人によるレビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行いました。個人制作のため、人によるレビュー（第三者による確認）は受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 
