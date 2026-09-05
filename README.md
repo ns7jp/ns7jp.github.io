@@ -13,9 +13,13 @@
 
 ## 開発体制について
 
-このポートフォリオと主作品 [Server Monitor](https://github.com/ns7jp/server-monitor) では、文章、プログラム、テストの作成補助にClaude Code / Codexを使用しました。どの方法を採用するかを決めるのは本人です。出てきた結果を確認し、未実施の項目をそのまま書き残すのも本人です。面談で内容を説明する責任も、本人が持ちます。個人制作であり、人による第三者レビューは受けていません。
+このポートフォリオと主作品 [Server Monitor](https://github.com/ns7jp/server) では、文章、プログラム、テストの作成補助にClaude Code / Codexを使用しました。どの方法を採用するかを決めるのは本人です。出てきた結果を確認し、未実施の項目をそのまま書き残すのも本人です。面談で内容を説明する責任も、本人が持ちます。個人制作であり、人による第三者レビューは受けていません。
 
 ## はじめに見てほしいページ
+
+**学ぶ本人は、[まず取り組む3つ](https://ns7jp.github.io/learning-path.html#first-step)から始めます。** [プロフィールの入門ガイド](https://github.com/ns7jp/ns7jp/blob/main/docs/beginner-guide.md)で意味を知り、[環境準備](./learning-docs/environment-setup.md)と[最初の30分](./learning-docs/first-30-minutes.md)で操作し、[1分説明](https://ns7jp.github.io/learning-path.html#explain)で確認します。次に実行するコードは[主作品 server の README](https://github.com/ns7jp/server#readme)へ進みます。
+
+採用担当者は、次の順に成果と確認範囲をご覧ください。
 
 | 順番 | 見るもの | 何が分かるか |
 |---|---|---|
@@ -27,10 +31,12 @@
 
 ## 実施状況
 
-> **かんたんに言うと** 「どこまで自分の手で確かめたか」を4つに分けた一覧です。上の3つは確認できたこと、いちばん下の「未実施」はまだ試していないことです。
+> **かんたんに言うと** 「どの環境で、どこまで確かめたか」の一覧です。日付付きの過去記録は、その版で行った試験を示します。公開中の最新コード全体を再試験した意味ではありません。
+
+- **2026年9月4日・本人PC上のVMで確認:** [Ubuntuの基盤構築](https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md)では、Hyper-V上のVMへAnsibleの`foundation.yml`を適用し、基本設定・Docker・再実行時の変更なしを確認しました。[AlmaLinux 9.7への適用](https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-el9-build.md)では、以前使ったVMを再利用して同じ基盤の適用と再実行を確認しました。AlmaLinuxの新規構築やSSHだけを公開する状態は未証明です。いずれも監視システム全体の構築完了や実務経験を示す記録ではありません。
 
 - **本人のPCで確認:** Windows上のLinux環境（WSL2）で、監視、ログ確認、サービスの復旧、ネットワーク障害の原因調査を練習しました。
-- **GitHub上の自動テストで確認:** テストのたびに作り直す一時的なUbuntu環境で、構築から復旧までの23項目すべてに合格しました。前の版へ戻すテストも行いました。
+- **2026年8月のGitHub上の自動テストで確認:** テストのたびに作り直す一時的なUbuntu環境で、構築から復旧までの23項目すべてに合格しました。前の版へ戻すテストも行いました。対象版と実行日は下の技術記録に記載しています。
 - **AI支援の練習環境で確認:** 仮想環境や、コンテナ（アプリを動かすのに必要なものを一式まとめた軽い箱）を使った追加演習です。独立した実機での構築実績ではありません。
 - **未実施:** 次の項目は、まだ試していません。独立サーバーでの72時間稼働、再起動後の確認、Slack（業務用チャットツール）への実通知、AWS（Amazonが提供するクラウドサービス）環境の作成・削除、別サーバーへの復元、本番通信などです。
 
@@ -43,7 +49,7 @@
 - [前の版へ戻すテスト](https://github.com/ns7jp/server-monitor/actions/runs/32611251044): PR（プルリクエスト。変更をまとめて取り込んでもらうための申請）#77の途中のコード `84e1492` から、前の版 `59aa88e` へ戻せることを確認しました。PR #77自体は、後にmainへ取り込みました。ただしこの結果は、取り込んだ後のmainで同じテストをもう一度実行したものではありません。
 - 2026年8月24日の追加演習はAI支援の仮想・コンテナ環境で行いました。面談で再現できると約束するのは、本人のWSL2 + Dockerで実行できるB-2 / B-3のみです。
 - 2026年8月25日はAlmaLinux / Rocky Linux 9系向けのAnsible設定をコンテナ上で確認しました。実機AlmaLinuxサーバーでの結果ではありません。
-- 公開中の2分15秒映像は、2026年8月18日・19日の画面と復旧ログを再構成したものです。実操作を最初から最後まで連続録画した映像ではありません。収録方法は[収録ガイド](https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md)に分けています。
+- 公開中の2分15秒映像は、2026年8月18日・19日の画面と復旧ログを再構成したものです。実操作を最初から最後まで連続録画した映像ではありません。収録方法は[収録ガイド](https://github.com/ns7jp/server/blob/main/docs/demo-capture-guide.md)に分けています。
 
 </details>
 
@@ -144,7 +150,7 @@
 | Support Toolkit | `works.html#work-support-toolkit` | 16ガイド+README、確認スクリプト、想定ケースを補助成果としてまとめる |
 | サポート文書 | `support-docs/` | 16ガイド+README。架空ケース・計画・テンプレートを含み、実運用実績ではない |
 | 確認スクリプト | `support-scripts/` | PowerShell 9本 + bash 1本、純関数ライブラリとPesterテスト |
-| Monitoring Stack（アーカイブ） | `monitoring-stack/` | Prometheus + Grafana + node_exporter + Loki + Promtail の docker-compose 一式。**2026-03 に Promtail が EOL となり、主作品側は Grafana Alloy へ移行済み**（[monitoring-stack/README.md](./monitoring-stack/README.md)）。現行構成は [server-monitor](https://github.com/ns7jp/server-monitor) |
+| Monitoring Stack（アーカイブ） | `monitoring-stack/` | Prometheus + Grafana + node_exporter + Loki + Promtail の docker-compose 一式。**2026-03 に Promtail が EOL となり、主作品側は Grafana Alloy へ移行済み**（[monitoring-stack/README.md](./monitoring-stack/README.md)）。現行構成は [server](https://github.com/ns7jp/server) |
 | 自動構築の設定 | `ansible/` | Ubuntuの基本設定を自動化。同じ手順を繰り返しても不要な変更が出ないように作成 |
 | 出力サンプル | `infra-evidence/` | 架空・未採録の`.sample.txt`。実測した証跡（実際に動かした証拠）としては扱わない |
 | 本番化差分 | `production-readiness.md` | Lab から本番運用へ足す監視、通知、認証、秘密情報、バックアップ、変更管理 |
@@ -269,7 +275,7 @@ ns7jp.github.io/
 │   ├── lib/Triage-Lib.ps1           ... 純関数化された判定ロジック
 │   └── tests/Triage-Lib.Tests.ps1   ... Pester ユニットテスト（25ケース）
 │
-├── monitoring-stack/        ... ★ アーカイブ（学習用の初期構成。現行は server-monitor）
+├── monitoring-stack/        ... ★ アーカイブ（学習用の初期構成。現行は server）
 │   ├── docker-compose.yml
 │   ├── prometheus/prometheus.yml
 │   ├── prometheus/alert.rules.yml

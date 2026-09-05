@@ -108,6 +108,15 @@
             <section class="lab-intro evidence-intro">
                 <span class="case-label">実装済み・実測済み・未実施を分けて掲載</span>
                 <h2>2分で分かる動作確認のまとめ</h2>
+                <p><strong>読み方:</strong> 「何を確認したか → どの環境か → どの版か → 何が未実施か」の順に見ます。過去の合格は、その記録に書かれた版と環境での結果です。現在のコード全体の再試験結果や、閲覧者自身の実績には置き換えません。<a href="learning-path.html#explain">自分の記録と説明の型</a>も使えます。</p>
+                <div class="status-callout validated evidence-scope-note" role="note">
+                    <i class="fa-solid fa-server" aria-hidden="true"></i>
+                    <div><strong>2026年9月4日：本人PC上のVMへAnsibleの基盤を適用</strong>
+                        <p><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md" target="_blank" rel="noopener noreferrer">Ubuntuの結果票</a>では、Hyper-VのVMへ<code>foundation.yml</code>（基本設定とDocker）を適用し、鍵での接続、Dockerの動作、2回目の不要な変更なしなどを確認しています。対象版は結果票に記載された<code>44cf16a</code>です。</p>
+                        <p><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-el9-build.md" target="_blank" rel="noopener noreferrer">AlmaLinux 9.7の結果票</a>も、同じ基盤の適用と再実行を記録しています。ただし以前使ったVMの再利用で、別用途のサービスが残っています。新規構築・SSHだけの最小公開は未証明です。対象版は結果票の表記どおり<code>537d9be</code>相当です。</p>
+                        <p>いずれも個人学習で、監視構成全体の<code>site.yml</code>適用、72時間稼働、再起動後確認、本番運用の完了を示していません。以下の8月の自動テストとは別の記録です。</p>
+                    </div>
+                </div>
                 <p class="plain-summary"><strong>かんたんに言うと</strong>このページは「作っただけのこと」と「実際に動かして確かめたこと」を分けて書いた記録です。実装済みはコードや資料を用意した状態、実測済みは日付と環境を残して実際に動かした状態、未実施（NOT RUN）はまだ実行していない状態を指します。</p>
                 <p>このページでは、コードや資料を作っただけのことと、実際に動かして確かめたことを分けて書いています。それぞれについて、実行した日、使った環境、対象版（試験に使ったプログラムの版）、実行したコマンド、結果を記録しました。くわしい内容はリンク先で確認できます。なお、このあと出てくる「証跡台帳」とは、いつ何をどこまで確かめたかをまとめた一覧のことです。</p>
                 <div class="status-callout validated evidence-scope-note" role="note">
@@ -123,7 +132,7 @@
                     <span class="status-pill pending"><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> 未実施（NOT RUN）</span>
                 </div>
                 <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-check" aria-hidden="true"></i> 現行mainの証跡台帳</a>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-check" aria-hidden="true"></i> 現行mainの証跡台帳</a>
                     <a href="project-brief.html#flow-title" class="btn btn-secondary"><i class="fa-solid fa-route" aria-hidden="true"></i> 6工程との対応</a>
                 </div>
             </section>
@@ -131,7 +140,7 @@
             <section class="evidence-overview" aria-labelledby="snapshot-title">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="snapshot-title">主な結果</h2>
+                    <h2 class="heading-text" id="snapshot-title">2026年8月の主な結果</h2>
                 </div>
                 <div class="metric-grid">
                     <a class="metric-card" href="https://github.com/ns7jp/server-monitor/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">
@@ -213,7 +222,7 @@
                         <div>
                             <span class="status-pill measured">実測済み</span>
                             <h3>Dockerの情報は読み取りだけ許可</h3>
-                            <p>監視サービスからDockerの情報を読む操作は許可し、設定を変える操作は拒否できることを確認しました。これは、監視に必要な情報だけを渡し、万一乗っ取られたときの被害を小さくするためです。ログも監視画面へ届いています。読み取り権限は残るため、考えられる危険と対策を<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/security.md" target="_blank" rel="noopener noreferrer">セキュリティ方針</a>に記録しています。</p>
+                            <p>監視サービスからDockerの情報を読む操作は許可し、設定を変える操作は拒否できることを確認しました。これは、監視に必要な情報だけを渡し、万一乗っ取られたときの被害を小さくするためです。ログも監視画面へ届いています。読み取り権限は残るため、考えられる危険と対策を<a href="https://github.com/ns7jp/server/blob/main/docs/security.md" target="_blank" rel="noopener noreferrer">セキュリティ方針</a>に記録しています。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>対象版</dt><dd><code>7622a9d</code></dd></div><div><dt>結果</dt><dd>読み取り合格・書き込み拒否・ログ到達</dd></div></dl>
                             <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">通信制限の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
@@ -303,7 +312,7 @@
                 <div class="summary-actions">
                     <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list" aria-hidden="true"></i> 23項目の詳しい記録</a>
                     <a href="https://github.com/ns7jp/server-monitor/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> 8月19日の過去結果</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> 現行mainの証跡台帳</a>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> 現行mainの証跡台帳</a>
                 </div>
             </section>
 
@@ -328,22 +337,22 @@
                             <tr>
                                 <td>B-1 ディスク容量の追加</td>
                                 <td>使える領域を作り、容量が足りなくなった状態から領域を広げる</td>
-                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-1.md" target="_blank" rel="noopener noreferrer">5項目合格 / 不合格0</a>（220M→457M）</td>
+                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/drills/logs/2026-08-24-B-1.md" target="_blank" rel="noopener noreferrer">5項目合格 / 不合格0</a>（220M→457M）</td>
                             </tr>
                             <tr>
                                 <td>B-2 問題が起きた場所の確認</td>
                                 <td>Web・アプリ・データベースのどこで止まっているかを順に確認する</td>
-                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-2.md" target="_blank" rel="noopener noreferrer">9項目合格 / 不合格0</a></td>
+                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/drills/logs/2026-08-24-B-2.md" target="_blank" rel="noopener noreferrer">9項目合格 / 不合格0</a></td>
                             </tr>
                             <tr>
                                 <td>B-3 データベースの復元</td>
                                 <td>バックアップからデータベースを戻し、内容が元と一致するか確認する</td>
-                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-3.md" target="_blank" rel="noopener noreferrer">7項目合格 / 不合格0</a>（復旧0.149秒）</td>
+                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/drills/logs/2026-08-24-B-3.md" target="_blank" rel="noopener noreferrer">7項目合格 / 不合格0</a>（復旧0.149秒）</td>
                             </tr>
                             <tr>
                                 <td>B-4 ネットワーク設定の確認</td>
                                 <td>同じネットワーク内と、別のネットワーク間の通信設定を確認する</td>
-                                <td><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/drills/logs/2026-08-24-B-4.md" target="_blank" rel="noopener noreferrer">6項目合格 / 不合格0 / 環境の制約で3項目は未実施</a></td>
+                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/drills/logs/2026-08-24-B-4.md" target="_blank" rel="noopener noreferrer">6項目合格 / 不合格0 / 環境の制約で3項目は未実施</a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -351,13 +360,13 @@
                 <div class="status-callout pending" role="note">
                     <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
                     <div>
-                        <strong>実際に動かしたことで、これまでに29件の問題を見つけました</strong>
-                        <p>書式や文法の確認だけでは見つからず、実行中に初めて分かった問題です。中には、壊れているのにテストが合格と表示する問題も6件ありました。症状、見つけ方、修正内容は<a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" target="_blank" rel="noopener noreferrer">問題と修正の一覧</a>にまとめています。Ubuntu以外のLinux向け自動テストも<a href="https://github.com/ns7jp/server-monitor/actions/runs/32811100007" target="_blank" rel="noopener noreferrer">コンテナ内で実施</a>しましたが、実機のAlmaLinux（Ubuntuとは別の種類のLinux）への適用は未実施です。ここでの「コンテナ内」とは、Dockerの箱の中で動かしたという意味です。実機とは、実際に使うサーバー機そのもののことです。</p>
+                        <strong>2026年8月25日までの記録では、実行中に見つけた問題は29件です</strong>
+                        <p>書式や文法の確認だけでは見つからず、実行中に初めて分かった問題です。中には、壊れているのにテストが合格と表示する問題も6件ありました。症状、見つけ方、修正内容は<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/defects-found.md" target="_blank" rel="noopener noreferrer">問題と修正の一覧</a>にまとめています。Ubuntu以外のLinux向け自動テストも<a href="https://github.com/ns7jp/server-monitor/actions/runs/32811100007" target="_blank" rel="noopener noreferrer">コンテナ内で実施</a>しましたが、この8月の記録はコンテナ内の検証です。9月4日には、上に示した再利用AlmaLinux VMへ基本設定とDockerを適用しました。新規の専用VMでの最小公開と、監視構成全体の適用は別に確認が必要です。</p>
                     </div>
                 </div>
                 <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/defects-found.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bug" aria-hidden="true"></i> 問題と修正の一覧（29件）</a>
-                    <a href="https://github.com/ns7jp/server-monitor/tree/main/ansible/roles/common/molecule/el9" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server" aria-hidden="true"></i> Ubuntu以外のテスト設定</a>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/defects-found.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bug" aria-hidden="true"></i> 問題と修正の一覧（29件）</a>
+                    <a href="https://github.com/ns7jp/server/tree/main/ansible/roles/common/molecule/el9" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server" aria-hidden="true"></i> Ubuntu以外のテスト設定</a>
                 </div>
             </section>
 
@@ -425,7 +434,7 @@
                 </div>
                 <div class="summary-actions">
                     <a href="demo.html" class="btn btn-primary"><i class="fa-solid fa-play" aria-hidden="true"></i> 動作確認動画を見る</a>
-                    <a href="https://github.com/ns7jp/server-monitor/blob/main/docs/demo-capture-guide.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-ol" aria-hidden="true"></i> 連続撮影の手順案</a>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/demo-capture-guide.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-ol" aria-hidden="true"></i> 連続撮影の手順案</a>
                     <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 取り組み概要へ</a>
                 </div>
             </section>
@@ -465,7 +474,7 @@
         </div>
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行い、個人制作のため人によるレビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。実施者・環境・確認範囲は各証跡に記載しています。個人制作のため、人による第三者レビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 </body>

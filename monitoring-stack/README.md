@@ -3,7 +3,7 @@
 > ## ⚠ この構成はアーカイブです（2026-08-23）
 >
 > **Promtail は 2026-03-02 に EOL** となりました。主作品の
-> [server-monitor](https://github.com/ns7jp/server-monitor) は収集エージェントを
+> [server-monitor](https://github.com/ns7jp/server) は収集エージェントを
 > **Grafana Alloy** へ移行済みで、Docker socket も直接マウントせず、
 > GET / HEAD 限定の専用 proxy 経由に変更しています。
 >
@@ -13,9 +13,9 @@
 >
 > | 現行 | 場所 |
 > | --- | --- |
-> | 監視スタック本体（Alloy 版） | [server-monitor `compose.yaml`](https://github.com/ns7jp/server-monitor/blob/main/compose.yaml) |
-> | 収集エージェントの移行理由 | [server-monitor README「ログ集約」](https://github.com/ns7jp/server-monitor#ログ集約) |
-> | 実測証跡 | [検証証跡台帳](https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md) |
+> | 監視スタック本体（Alloy 版） | [server-monitor `compose.yaml`](https://github.com/ns7jp/server/blob/main/compose.yaml) |
+> | 収集エージェントの移行理由 | [server-monitor README「ログ集約」](https://github.com/ns7jp/server#ログ集約) |
+> | 実測証跡 | [検証証跡台帳](https://github.com/ns7jp/server/blob/main/docs/evidence/README.md) |
 >
 > 以下は当時のままの記述です。
 
@@ -148,7 +148,7 @@ Grafana > Explore で Loki を選び、以下のクエリで現場と同じ調�
 
 ## ポートフォリオでの位置づけ
 
-- **自作 Flask 監視ダッシュボード** ([ns7jp/server-monitor](https://github.com/ns7jp/server-monitor)) は **psutil の挙動とAPI設計の学習** が目的
+- **自作 Flask 監視ダッシュボード** ([ns7jp/server-monitor](https://github.com/ns7jp/server)) は **psutil の挙動とAPI設計の学習** が目的
 - **このスタック** は **既存運用に合流できる "業界標準" を扱える** ことを示すのが目的
 - Metrics (Prometheus) と Logs (Loki) を**同一 UI から横断検索**できる構成にすることで、観測性の三本柱のうち二本を Lab 向けに設計・実装していることを示す（現時点の検証証跡は `docker compose config` / `promtool check` / `loki -verify-config` / `promtail -check-syntax` による**構成・構文検証**まで — 実際に起動した Grafana / Loki の画面キャプチャやアラート発火ログなど、稼働中の実機観測はまだ未取得）
 - 両方を同じポートフォリオ上に並べることで、自作と既製の **棲み分けを理解している** ことを伝える

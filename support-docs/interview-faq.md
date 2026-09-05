@@ -73,7 +73,7 @@ Support Toolkit に[障害対応事例集（10 ケース）](./troubleshooting-c
 **書いたコード量では PowerShell が一番手数があります**（Support Toolkit の 8 本を自分で書き、Pester のテストもセット）。ただし**第一志望は Linux サーバー構築**で、そちらへの投入時間は増やしている最中です。
 
 - PowerShell: 業務シナリオを書ききれる（端末情報・AD/M365・セキュリティ）
-- Linux (bash): 一次切り分け（`linux-triage.sh`）、Ansible playbook の構築・冪等性確認、LVM・3 層構成・L2/L3 切り分けの演習を実行済み（[server-monitor](https://github.com/ns7jp/server-monitor)、[Linux Lab](https://ns7jp.github.io/linux-lab.html)）
+- Linux (bash): 一次切り分け（`linux-triage.sh`）、Ansible playbook の構築・冪等性確認、LVM・3 層構成・L2/L3 切り分けの演習を実行済み（[server-monitor](https://github.com/ns7jp/server)、[Linux Lab](https://ns7jp.github.io/linux-lab.html)）
 - AWS: VPC / Subnet / SG / Terraform validate まで。本番 apply の経験は無し（[Cloud Lab](https://ns7jp.github.io/cloud-lab.html)）
 
 書いた分量は PowerShell が多いですが、**志望順位で言えば Linux が一番**です。「現場でどれが必要か聞いて、まず触り始める」のは抵抗ありません。

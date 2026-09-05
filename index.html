@@ -174,14 +174,14 @@
             <p class="hero-greeting animate-fade-in">未経験から、Linuxサーバー設計・構築エンジニアを第一志望</p>
             <h1 class="hero-title animate-slide-up">
                 <span class="line1">Linux Server</span>
-                <span class="line2">Design, Build &amp; Operations</span>
+                <span class="line2">作り、確かめ、直す</span>
             </h1>
             <p class="hero-description animate-fade-in-delay">主作品「Server Monitor」で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの流れとして学習しました。<br>実装済み・実測済み・未実施（NOT RUN／まだ実行していない項目）を分けて公開しています</p>
-            <!-- CTA（Call To Action）ボタン群。採用担当者向けの主導線を3本に絞る。 -->
+            <!-- 学ぶ本人、採用担当者、主作品コードへの入口。 -->
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="#one-minute-summary" class="btn btn-primary"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 1分サマリ</a>
-                <a href="https://github.com/ns7jp/server-monitor" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品のリポジトリ</a>
-                <a href="resume.html" class="btn btn-outline"><i class="fa-solid fa-id-card" aria-hidden="true"></i> 1ページ履歴書</a>
+                <a href="learning-path.html#first-step" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> 初めての方：理解して試す</a>
+                <a href="#one-minute-summary" class="btn btn-outline"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 採用担当者向け1分サマリ</a>
+                <a href="https://github.com/ns7jp/server" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品のリポジトリ</a>
             </div>
         </div>
         <!-- 「下にスクロールしてね」と促すアニメーション付きのインジケーター -->
@@ -220,11 +220,9 @@
                 <span>このサイトの「設計 → 構築 → 試験 → 監視・復旧」を、最初はこの4語に置き換えて読めます。</span>
             </div>
             <div class="summary-actions">
-                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-map" aria-hidden="true"></i> 図で全体を見る</a>
-                <a href="linux-lab.html#first-check-order" class="btn btn-outline-dark"><i class="fa-solid fa-terminal" aria-hidden="true"></i> 基本の確認順を覚える</a>
-                <a href="cui-manual.html" class="btn btn-outline-dark"><i class="fa-solid fa-terminal" aria-hidden="true"></i> はじめてのCUI操作（文字で操作する画面）</a>
-                <a href="cli-exercise-pack.html" class="btn btn-outline-dark"><i class="fa-solid fa-ticket" aria-hidden="true"></i> CLI演習案件パック（問い合わせを想定したコマンド練習）</a>
-                <a href="linux-commands.html" class="btn btn-outline-dark"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linuxコマンド集</a>
+                <a href="learning-path.html#first-step" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> まず取り組む3つを見る</a>
+                <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-map" aria-hidden="true"></i> 図で全体を見る</a>
+                <a href="learning-path.html#explain" class="btn btn-outline-dark"><i class="fa-solid fa-comment" aria-hidden="true"></i> 自分の言葉で説明する</a>
             </div>
         </div>
     </section>
@@ -258,7 +256,7 @@
             </div>
             <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
                 <span><strong>実装済み</strong> 設計書、パラメータシート（設定値をまとめた一覧表）、Ansible、Compose（どちらもサーバーの設定を自動で組み立てる道具）、試験仕様、復旧手順、引き渡し資料を公開</span>
-                <span><strong>実測済み</strong> 日付と環境を記録したWSL2・一時Ubuntu・Docker等の学習環境（実機のサーバーではなく、パソコン上や使い捨てのクラウド環境で作った検証用のLinux環境）で、構築、監視、復旧を確認</span>
+                <span><strong>実測済み</strong> 日付付きの検証環境で確認。本人PC上のVM、WSL2、一時Ubuntu、Dockerなど、各記録に示した範囲です。本番業務の実績ではありません</span>
                 <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーでの受け入れ確認、72時間の連続稼働、Slackへの実際の通知、AWSでの作成と削除（apply/destroy）、D-2（別サーバーへ復元するホスト障害の復旧演習）、本番環境での変更</span>
             </div>
             <div class="summary-actions">
@@ -282,7 +280,7 @@
                     <span class="summary-label">01 / Main Work</span>
                     <h3>主作品を確認</h3>
                     <ul class="time-budget-links">
-                        <li><a href="https://github.com/ns7jp/server-monitor" target="_blank" rel="noopener noreferrer">Server Monitor</a><span>Linuxサーバー設計・構築・監視・復旧のコードと資料</span></li>
+                        <li><a href="https://github.com/ns7jp/server" target="_blank" rel="noopener noreferrer">Server Monitor</a><span>Linuxサーバー設計・構築・監視・復旧のコードと資料</span></li>
                         <li><a href="project-brief.html">制作概要</a><span>6工程、成果物、制約を1ページで確認</span></li>
                     </ul>
                 </div>
@@ -299,7 +297,7 @@
                     <h3>証拠の範囲を確認</h3>
                     <ul class="time-budget-links">
                         <li><a href="evidence-demo.html">実測結果のまとめ</a><span>日付、環境、結果、失敗、NOT RUNを確認</span></li>
-                        <li><a href="https://github.com/ns7jp/server-monitor/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a><span>main（GitHubの最新版）にある証跡台帳です。実測済み・未実施の最新の状況を、大もとの記録で確認できます</span></li>
+                        <li><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a><span>main（GitHubの最新版）にある証跡台帳です。実測済み・未実施の最新の状況を、大もとの記録で確認できます</span></li>
                     </ul>
                 </div>
             </div>
@@ -410,7 +408,7 @@
             </h2>
             <div class="works-grid">
                 <div class="work-card">
-                    <a href="https://github.com/ns7jp/server-monitor" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/ns7jp/server" target="_blank" rel="noopener noreferrer">
                     <div class="work-image" style="background-image: url('image/server-monitor.png')">
                         <div class="work-overlay">
                             <span class="work-category">主作品 / Linux Server</span>
@@ -493,7 +491,7 @@
         <!-- 著作権表示。&copy;は©（コピーライト記号）の実体参照。 -->
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。最終判断と動作確認は本人が行いました。個人制作のため、人によるレビュー（第三者による確認）は受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。実施者・環境・確認範囲は各証跡に記載しています。個人制作のため、人によるレビュー（第三者による確認）は受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 
