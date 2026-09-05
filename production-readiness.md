@@ -121,7 +121,7 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 - [Infra Operation Lab](./infra-lab.html)
 - [Linux Lab](./linux-lab.html)
 - [Cloud Network Lab](./cloud-lab.html)
-- [Monitoring Stack（アーカイブ）](./monitoring-stack/) — 学習用の初期構成。現行は [server-monitor](https://github.com/ns7jp/server-monitor)（Prometheus + Grafana + Loki + Alloy）
+- [Monitoring Stack（アーカイブ）](./monitoring-stack/) — 学習用の初期構成。現行は [server-monitor](https://github.com/ns7jp/server)（Prometheus + Grafana + Loki + Alloy）
 - [Ansible Playbook](./ansible/) / [CIS Benchmark マッピング](./ansible/cis-benchmark-mapping.md) — 業界標準への対応表
 - [Infra Evidence](./infra-evidence/) — 検証コマンドサンプル + 失敗→修正対比
 - [SLO / Error Budget](./support-docs/slo-error-budget.md) — 運用品質の数値設計（具体例）
