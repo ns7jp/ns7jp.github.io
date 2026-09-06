@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="サーバー構築の初心者向けインフラ基礎用語集。サーバー、OS、CPU/メモリ/ストレージ、IPアドレス、サブネット、DNS、ポート、TCP/UDP、権限、systemd、監視、バックアップ、RTO/RPO、セキュリティ、IaC、クラウドまでを、覚え方・確認コマンド・具体例つきで解説します。">
+<title>初心者向けインフラ基礎用語集 | 島田則幸のポートフォリオ</title>
+<link rel="canonical" href="https://ns7jp.github.io/infra-keywords.html">
+<meta property="og:title" content="初心者向けインフラ基礎用語集 | 島田則幸"><meta property="og:type" content="article"><meta property="og:url" content="https://ns7jp.github.io/infra-keywords.html"><meta property="og:image" content="https://ns7jp.github.io/image/og-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ"><meta property="og:site_name" content="島田則幸のポートフォリオ"><meta property="og:description" content="インフラの言葉を「箱・線・土・番・盾」の5つに整理して覚える、サーバー構築の入門用語集です。"><meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png"><meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+<script src="js/main.js?v=20260826-1" defer></script><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/style.css?v=20260826-2"><link rel="stylesheet" href="css/infra-guide.css?v=20260906-1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Top","item":"https://ns7jp.github.io/"},{"@type":"ListItem","position":2,"name":"スキル","item":"https://ns7jp.github.io/skills.html"},{"@type":"ListItem","position":3,"name":"インフラ基礎用語集","item":"https://ns7jp.github.io/infra-keywords.html"}]},{"@type":"TechArticle","headline":"初心者向けインフラ基礎用語集","description":"サーバー、ハードウェア、OS、ネットワーク、Linux操作、構築工程、運用監視、バックアップ、セキュリティ、自動化とクラウドの基礎用語を、覚え方と確認方法つきで解説する学習資料","inLanguage":"ja"}]}</script>
+</head>
+<body class="terms-page">
+<a class="skip-link" href="#main">メインコンテンツへスキップ</a><div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+<button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><i class="fa-solid fa-bars" aria-hidden="true"></i><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+<header><p class="logo"><a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a></p><nav id="site-nav"><ul><li><a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li><li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li><li class="active"><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li><li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li><li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li><li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li></ul></nav></header>
+<main id="main" tabindex="-1"><section class="page-hero" style="background-image: url('image/server-monitor.png');"><div class="page-hero-overlay"></div><div class="page-hero-content"><h1 class="page-title"><span class="title-en">Infrastructure Glossary</span><span class="title-jp">初心者向けインフラ・<wbr>基礎用語集</span></h1></div></section>
+<div class="page-content"><div class="container">
+<nav class="lab-subnav" aria-label="サーバー学習内の案内">
+<a href="learning-path.html"><i class="fa-solid fa-route" aria-hidden="true"></i> 初心者向け学習ルート</a>
+<a href="infra-keywords.html" class="active" aria-current="page"><i class="fa-solid fa-book-open" aria-hidden="true"></i> インフラ用語集</a>
+<a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
+<a href="cui-manual.html"><i class="fa-solid fa-keyboard" aria-hidden="true"></i> CUI入門</a>
+<a href="linux-commands.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linuxコマンド</a>
+<a href="windows-commands.html"><i class="fa-brands fa-windows" aria-hidden="true"></i> Windowsコマンド</a>
+<a href="linux-lab.html"><i class="fa-solid fa-stethoscope" aria-hidden="true"></i> Linux基本確認</a>
+<a href="cloud-lab.html"><i class="fa-solid fa-cloud" aria-hidden="true"></i> AWS設計</a>
+</nav>
+
+<section class="terms-intro" aria-labelledby="intro-title">
+<h2 id="intro-title">インフラは「サービスを動かし続けるための土台」です</h2>
+<p class="terms-lead">インフラ（infrastructure＝土台、基盤）とは、アプリやWebサイトが動くために必要な、機械・通信・基本ソフト・運用の仕組みをまとめた言い方です。利用者が見るのはアプリの画面だけですが、その裏では「どの機械で動かすか」「どうつなぐか」「止まったらどう気づくか」「壊れたらどう戻すか」を、あらかじめ決めて用意しています。サーバー構築エンジニアの仕事は、この土台を設計し、組み立て、確かめ、引き渡すことです。</p>
+<p class="plain-summary"><strong>かんたんに言うと</strong>インフラの用語は数が多く見えますが、行き先は5つしかありません。「どの箱で動かすか（機械）」「どの線でつなぐか（通信）」「どの土台ソフトを載せるか（OS）」「誰が見張るか（運用）」「どう守るか（安全）」です。新しい言葉が出てきたら、まずこの5つのどこの話かを決めてください。それだけで、覚える量が5分の1に感じられます。</p>
+<div class="memory-tip"><strong>最初の覚え方：箱・線・土・番・盾（はこ・せん・ど・ばん・たて）</strong> — <strong>箱</strong>＝サーバーなどの機械、<strong>線</strong>＝ネットワーク、<strong>土</strong>＝OSとミドルウェア（土台のソフト）、<strong>番</strong>＝運用と監視（見張り番）、<strong>盾</strong>＝セキュリティとバックアップ（守り）。この5語から関連語を枝分かれさせて覚えます。</div>
+<div class="terms-summary-grid">
+<article class="terms-summary-card"><h3>箱（機械）</h3><p>計算する本体です。CPU・メモリ・ストレージを持つ物理サーバー、仮想サーバー（VM）、コンテナが当てはまります。</p></article>
+<article class="terms-summary-card"><h3>線（通信）</h3><p>機械どうしをつなぐ道です。IPアドレス、サブネット、ルーティング、DNS、ポート番号が当てはまります。</p></article>
+<article class="terms-summary-card"><h3>土（土台ソフト）</h3><p>機械の上で動く基本ソフトです。OS、Linuxディストリビューション、Webサーバー、データベースが当てはまります。</p></article>
+<article class="terms-summary-card"><h3>番（運用・監視）</h3><p>動き続けているかを見張る仕組みです。監視、ログ、アラート、SLO、手順書（Runbook）が当てはまります。</p></article>
+<article class="terms-summary-card"><h3>盾（守り）</h3><p>壊されない・失わない工夫です。権限、認証、暗号化、パッチ、バックアップ、冗長化が当てはまります。</p></article>
+<article class="terms-summary-card"><h3>作り方（工程）</h3><p>土台を作る順番です。要件定義、設計、構築、試験、移行、引き渡しの流れで進みます。</p></article>
+</div>
+<nav class="terms-toc" aria-label="このページの目次"><strong>目次</strong><ul>
+<li><a href="#overview">1. 全体像とサーバーの種類</a></li>
+<li><a href="#hardware">2. ハードウェアと単位</a></li>
+<li><a href="#os">3. OSと仮想化</a></li>
+<li><a href="#network-address">4. ネットワーク①住所と経路</a></li>
+<li><a href="#network-protocol">5. ネットワーク②約束ごと</a></li>
+<li><a href="#linux">6. Linuxサーバーの操作</a></li>
+<li><a href="#roles">7. サーバーの役割分担</a></li>
+<li><a href="#process">8. 構築の流れと工程用語</a></li>
+<li><a href="#operation">9. 運用と監視</a></li>
+<li><a href="#backup">10. バックアップと可用性</a></li>
+<li><a href="#security">11. セキュリティ</a></li>
+<li><a href="#automation">12. 自動化とクラウド</a></li>
+<li><a href="#cheatsheet">13. 早見表（用語→一言→確認）</a></li>
+<li><a href="#confusing">14. 混同しやすい言葉</a></li>
+<li><a href="#practice">15. 覚えるための練習</a></li>
+</ul></nav>
+<div class="terms-note"><strong>このページの位置づけ：</strong>用語を初めて覚える人が、意味・使いどころ・自分で確かめる方法をひと続きで理解するための教材です。掲載しているコマンドは、Linuxの練習環境（VMやWSL2）で確認する目的の例です。すべてを実機で実行した記録（証跡）ではありません。実行する前に、対象の環境、OSの版、自分の権限、影響範囲を確認してください。会社や学校のサーバーでは、勝手に実行しないでください。</div>
+</section>
+
+<section id="overview" class="terms-section" aria-labelledby="overview-title">
+<h2 id="overview-title">1. 全体像とサーバーの種類</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>「サーバー」は特別な機械の名前ではなく、<strong>役割の名前</strong>です。ほかのコンピューターから頼まれた仕事を引き受ける側がサーバー、頼む側がクライアントです。同じ1台が、ある通信ではサーバー、別の通信ではクライアントになることもあります。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">役割</span><h3 id="term-server">サーバー（Server）</h3><p>ほかのコンピューターからの要求（リクエスト）を受け取り、機能やデータを返す側のコンピューター、またはその役割を担うソフトです。Webページを返す、ファイルを保管する、名前をIPアドレスに変換するなど、担当する仕事によって「Webサーバー」「ファイルサーバー」「DNSサーバー」と呼び分けます。<span class="term-example"><strong>例：</strong>ブラウザーで <code>https://example.com</code> を開くと、要求を受け取ってHTMLを返しているのがWebサーバーです。</span></p></article>
+<article class="terms-card"><span class="term-kind">役割</span><h3 id="term-client">クライアント（Client）</h3><p>サーバーへ要求を出し、結果を受け取る側です。あなたのPC、スマートフォン、ブラウザー、<code>curl</code> のようなコマンドもクライアントになります。<span class="term-example"><strong>例：</strong><code>curl http://localhost/</code> と打った端末が、その通信ではクライアントです。</span></p></article>
+<article class="terms-card"><span class="term-kind">単位</span><h3 id="term-host">ホスト（Host）</h3><p>ネットワーク上で1台として数えられるコンピューターです。物理サーバーでも仮想サーバーでも、通信できる1台であればホストと呼びます。名前（ホスト名）とIPアドレスを持ちます。<span class="term-example"><strong>確認：</strong><code>hostname</code> で今操作しているホストの名前が分かります。</span></p></article>
+<article class="terms-card"><span class="term-kind">置き場所</span><h3 id="term-onpremise">オンプレミス（On-Premises）</h3><p>自社の建物やデータセンターに機械を置き、自分たちで運用する方式です。「オンプレ」と略します。機械の購入・設置・保守も自分たちの仕事になります。<span class="term-example"><strong>対比：</strong>クラウドは「借りる」、オンプレミスは「持つ」と覚えます。</span></p></article>
+<article class="terms-card"><span class="term-kind">置き場所</span><h3 id="term-cloud">クラウド（Cloud）</h3><p>事業者が用意した機械やサービスを、必要な分だけ借りて使う方式です。AWS、Azure、Google Cloudなどがあります。数分で増やせて、使った分だけ費用がかかるのが特徴です。<span class="term-example"><strong>注意：</strong>借りていても、設定ミスの責任は利用者側にあります（<a href="#term-shared-responsibility">責任共有モデル</a>）。</span></p></article>
+<article class="terms-card"><span class="term-kind">置き場所</span><h3 id="term-datacenter">データセンター / ラック</h3><p>データセンターは、サーバーを安全に置くための専用の建物です。電源、空調、耐震、入退室の管理が備わっています。ラックは、その中でサーバーを縦に積んで収める棚です。高さは「U（ユー）」という単位で数えます（1U＝約4.4cm）。</p></article>
+<article class="terms-card"><span class="term-kind">層</span><h3 id="term-middleware">ミドルウェア（Middleware）</h3><p>OSとアプリの間で働くソフトです。Webサーバー（Apache、Nginx）、データベース（MySQL、PostgreSQL）、アプリケーションサーバーなどが当てはまります。<span class="term-example"><strong>順番：</strong>ハードウェア → OS → ミドルウェア → アプリ、の4段重ねで覚えます。</span></p></article>
+<article class="terms-card"><span class="term-kind">構成</span><h3 id="term-three-tier">3層構成（Web / AP / DB）</h3><p>役割ごとにサーバーを分ける、よくある構成です。Web層が画面と入口、AP層が処理、DB層がデータ保管を担当します。分けておくと、混雑した層だけを増やせて、障害の切り分けもしやすくなります。</p></article>
+<article class="terms-card"><span class="term-kind">品質</span><h3 id="term-availability">可用性（Availability）</h3><p>止まらずに使い続けられる度合いです。1年のうち何%動いていたかで表します。99.9%なら年間で約8時間46分まで停止してよい、という意味になります。<span class="term-example"><strong>関連：</strong>可用性を上げる手段が<a href="#term-redundancy">冗長化</a>です。</span></p></article>
+</div>
+<div class="terms-check"><strong>ここだけ押さえる：</strong>サーバーは「役割」、ホストは「1台の数え方」、オンプレミスとクラウドは「置き場所」の話です。同じ機械を、違う切り口で呼んでいるだけだと分かると混乱しません。</div>
+</section>
+
+<section id="hardware" class="terms-section" aria-labelledby="hardware-title">
+<h2 id="hardware-title">2. ハードウェアと単位の読み方</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>サーバーの中身は、家庭のPCと同じ部品でできています。「考える人（CPU）」「作業机（メモリ）」「書庫（ストレージ）」「電話線（NIC）」の4つにたとえると覚えやすくなります。性能不足の相談は、たいていこの4つのどれかの話です。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">計算</span><h3 id="term-cpu">CPU（中央処理装置）</h3><p>計算を担当する部品です。「コア数」は同時に処理できる作業台の数、「クロック（GHz）」は1つの作業台の速さにあたります。CPU使用率が高い状態が続くと、処理待ちが増えて応答が遅くなります。<span class="term-example"><strong>確認：</strong><code>lscpu</code>（構成）、<code>top</code>（今の使用率）</span></p></article>
+<article class="terms-card"><span class="term-kind">作業領域</span><h3 id="term-memory">メモリ（RAM／主記憶）</h3><p>今使っているデータを一時的に置く場所です。作業机の広さにあたり、広いほど同時にたくさん開けます。電源を切ると中身は消えます。足りなくなると極端に遅くなったり、プロセスが強制終了（OOM Kill）されたりします。<span class="term-example"><strong>確認：</strong><code>free -h</code></span></p></article>
+<article class="terms-card"><span class="term-kind">保存</span><h3 id="term-storage">ストレージ（HDD / SSD）</h3><p>電源を切っても消えない保存場所です。HDDは円盤を回して読み書きする方式で安価・大容量、SSDは半導体に記録する方式で高速です。サーバーではOS用とデータ用を分けて設計することがよくあります。<span class="term-example"><strong>確認：</strong><code>df -h</code>（空き容量）、<code>lsblk</code>（ディスク構成）</span></p></article>
+<article class="terms-card"><span class="term-kind">保存</span><h3 id="term-raid">RAID（レイド）</h3><p>複数のディスクを1つにまとめ、速度や安全性を高める仕組みです。RAID1は同じ内容を2本に書く「ミラー」、RAID5は誤り訂正用の情報を分散して1本の故障に耐えます。<span class="term-example"><strong>重要：</strong>RAIDはディスク故障への備えであり、<a href="#term-backup">バックアップ</a>の代わりにはなりません。誤って消したファイルは、RAIDでは戻せません。</span></p></article>
+<article class="terms-card"><span class="term-kind">通信部品</span><h3 id="term-nic">NIC（ネットワークカード）</h3><p>ネットワークにつなぐための部品です。1つのNICに固有の<strong>MACアドレス</strong>（機器ごとの製造番号のような識別子）が割り当てられ、そこへIPアドレスを設定して通信します。<span class="term-example"><strong>確認：</strong><code>ip address</code>（インターフェース名とIPの一覧）</span></p></article>
+<article class="terms-card"><span class="term-kind">起動</span><h3 id="term-bios">BIOS / UEFI</h3><p>電源を入れた直後に動く、機械側の基本プログラムです。部品を確認し、どのディスクからOSを読み込むかを決めて、OSへ処理を渡します。時刻設定や起動順の変更もここで行います。</p></article>
+<article class="terms-card"><span class="term-kind">単位</span><h3 id="term-unit-byte">ビットとバイト（bit / Byte）</h3><p>bit（ビット）は0か1の最小単位、Byte（バイト）は8ビットです。容量はB（バイト）、通信速度はbps（ビット毎秒）で表すのが慣習です。<span class="term-example"><strong>目安：</strong>100Mbpsの回線で1GBのファイルを送ると、理論値でも約80秒かかります（1GB＝約8000Mbit）。</span></p></article>
+<article class="terms-card"><span class="term-kind">単位</span><h3 id="term-unit-prefix">K・M・G・T（キロ・メガ・ギガ・テラ）</h3><p>1000倍ごとに単位が上がります。コンピューターの世界では1024倍で数える流儀もあり、<code>df -h</code> の表示と製品カタログの数字が少しずれて見えるのはこのためです。<span class="term-example"><strong>覚え方：</strong>K→M→G→T→P（ペタ）の順。1段上がるごとに約1000倍。</span></p></article>
+<article class="terms-card"><span class="term-kind">性能の見方</span><h3 id="term-bottleneck">ボトルネック</h3><p>全体の速度を決めてしまっている、いちばん詰まっている箇所のことです。CPU・メモリ・ディスク・ネットワークのどれが詰まっているかを先に特定します。特定せずに増強すると、費用だけかかって速くなりません。<span class="term-example"><strong>順番：</strong>負荷（<code>uptime</code>）→ CPU/メモリ（<code>top</code>）→ ディスク（<code>df -h</code>）→ 通信（<code>ss -lntp</code>）</span></p></article>
+</div>
+<div class="terms-command"><pre><code># サーバーの「体格」を確認する4点セット（すべて見るだけ。システムは変わりません）
+lscpu            # CPUのコア数・種類
+free -h          # メモリの搭載量と空き
+df -h            # ディスクの空き容量
+ip address       # ネットワークインターフェースとIPアドレス</code></pre></div>
+<div class="terms-check"><strong>覚え方：</strong>「重・空・動・記」— 重さ（負荷）、空き（容量）、動き（サービス）、記録（ログ）の順に見ます。詳しい確認例は<a href="linux-lab.html">Linuxの基本確認</a>にまとめています。</div>
+</section>
+
+<section id="os" class="terms-section" aria-labelledby="os-title">
+<h2 id="os-title">3. OSと仮想化</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>OSは、機械とアプリの間に立つ「支配人」です。どのアプリにCPUを使わせるか、ファイルをどこに置くか、誰にどこまで触らせるかを決めています。仮想化は、1台の機械の中に「仮の機械」を何台も作る技術です。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">基本ソフト</span><h3 id="term-os">OS（オペレーティングシステム）</h3><p>機械の部品を管理し、アプリが動くための共通機能（ファイル、通信、権限、プロセス管理）を提供する基本ソフトです。サーバーではLinuxとWindows Serverが主流です。<span class="term-example"><strong>確認：</strong><code>cat /etc/os-release</code>（Linuxの種類と版）</span></p></article>
+<article class="terms-card"><span class="term-kind">中核</span><h3 id="term-kernel">カーネル（Kernel）</h3><p>OSの中心部分です。CPUやメモリの割り当て、機器の制御など、いちばん深いところを担当します。カーネルの更新は再起動が必要になることが多く、更新計画では停止時間を見込みます。<span class="term-example"><strong>確認：</strong><code>uname -r</code>（カーネルの版）</span></p></article>
+<article class="terms-card"><span class="term-kind">配布形態</span><h3 id="term-distribution">ディストリビューション</h3><p>Linuxカーネルに、必要な道具と導入の仕組みをまとめて配っている「製品の形」です。Ubuntu、Debian、Red Hat Enterprise Linux（RHEL）、Rocky Linuxなどがあります。<span class="term-example"><strong>違いの出る所：</strong>パッケージ管理（<code>apt</code>系か<code>dnf</code>系か）、設定ファイルの置き場所、サポート期間です。</span></p></article>
+<article class="terms-card"><span class="term-kind">仮想化</span><h3 id="term-virtualization">仮想化 / ハイパーバイザー</h3><p>1台の物理サーバーの上に、独立した仮想のコンピューターを複数作る技術です。その土台となるソフトをハイパーバイザーと呼びます（VMware ESXi、Hyper-V、KVMなど）。機械を効率よく使えます。</p></article>
+<article class="terms-card"><span class="term-kind">仮想化</span><h3 id="term-vm">VM（仮想マシン）</h3><p>仮想化で作られた1台分のコンピューターです。中にOSを入れて、本物のサーバーと同じように使えます。学習環境は、この使い捨てのVMの中で作るのが安全です。<span class="term-example"><strong>関連：</strong>スナップショット（今の状態をまるごと保存する機能）を取ってから練習すると、失敗しても戻せます。</span></p></article>
+<article class="terms-card"><span class="term-kind">仮想化</span><h3 id="term-container">コンテナ（Container）</h3><p>アプリと、そのアプリが必要とする部品だけをまとめて隔離し、動かす単位です。OSはホストと共有するため、VMより軽く速く起動します。Dockerが代表的な道具です。<span class="term-example"><strong>使い分け：</strong>OSごと分けたいならVM、アプリ単位で素早く配りたいならコンテナ。</span></p></article>
+<article class="terms-card"><span class="term-kind">ひな型</span><h3 id="term-image">イメージ（Image）</h3><p>コンテナやVMを作るための、読み取り専用のひな型です。同じイメージからは、いつでも同じ状態の環境が作れます。<span class="term-example"><strong>注意：</strong>版を<code>latest</code>のままにせず固定すると、「昨日と違うものが動いた」を防げます。</span></p></article>
+<article class="terms-card"><span class="term-kind">Windows上のLinux</span><h3 id="term-wsl">WSL2</h3><p>Windowsの中でLinuxを動かす仕組みです。VMを用意しなくても、Windows PCだけでLinuxコマンドの練習ができます。<span class="term-example"><strong>用途：</strong>学習の最初の一歩として、この環境から始めるのが手軽です。</span></p></article>
+<article class="terms-card"><span class="term-kind">実行単位</span><h3 id="term-process">プロセス（Process）</h3><p>実行中のプログラム1つ分です。それぞれにPID（プロセスID）という番号が付き、使用メモリやCPU時間を個別に確認できます。<span class="term-example"><strong>確認：</strong><code>ps aux</code>（一覧）、<code>top</code>（負荷の高い順）</span></p></article>
+</div>
+<div class="terms-warning"><strong>練習の前に：</strong>OSやカーネルの更新、仮想マシンの削除は、元に戻せない操作を含みます。自分専用の練習環境（VM／WSL2）で、スナップショットを取ってから試してください。会社・学校・第三者のサーバーでは実行しません。</div>
+</section>
+
+<section id="network-address" class="terms-section" aria-labelledby="network-address-title">
+<h2 id="network-address-title">4. ネットワーク①：住所と経路</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>ネットワークは郵便に似ています。IPアドレスが「住所」、サブネットが「同じ町内の範囲」、デフォルトゲートウェイが「町の外へ出るときの出口」、ルーティングが「どの道を通るかの案内」、DNSが「名前から住所を調べる電話帳」です。通信できないときは、この順に確認します。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">住所</span><h3 id="term-ip">IPアドレス</h3><p>ネットワーク上の機器を示す住所です。IPv4は <code>192.168.1.10</code> のように0〜255の数字4つで表します。数が足りなくなったため、より長いIPv6（<code>2001:db8::1</code> のような形式）も使われています。<span class="term-example"><strong>確認：</strong><code>ip address</code> / Windowsは <code>ipconfig</code></span></p></article>
+<article class="terms-card"><span class="term-kind">住所の種類</span><h3 id="term-private-ip">プライベートIP / グローバルIP</h3><p>プライベートIPは社内や家庭内だけで使える住所で、<code>10.x.x.x</code>、<code>172.16〜31.x.x</code>、<code>192.168.x.x</code> の範囲が決められています。グローバルIPはインターネット上で世界に1つの住所です。<span class="term-example"><strong>覚え方：</strong>「192.168で始まったら家の中」と覚えると、まず間違いません。</span></p></article>
+<article class="terms-card"><span class="term-kind">範囲</span><h3 id="term-subnet">サブネットマスク / CIDR</h3><p>IPアドレスのうち「どこまでが町名（ネットワーク部）で、どこからが番地（ホスト部）か」を決める指定です。<code>255.255.255.0</code> は <code>/24</code> とも書き、同じ町内に約254台を置けます。<span class="term-example"><strong>例：</strong><code>192.168.1.0/24</code> は <code>192.168.1.1</code>〜<code>192.168.1.254</code> が使える範囲です。<code>/32</code> は「1つの住所だけ」を指します。</span></p></article>
+<article class="terms-card"><span class="term-kind">区画</span><h3 id="term-segment">セグメント / LAN・WAN</h3><p>セグメントは、同じ範囲としてまとめたネットワークの区画です。LANは建物内など狭い範囲、WANは拠点間やインターネットなど広い範囲を指します。<span class="term-example"><strong>設計：</strong>公開する側（Public）と、内部だけの側（Private）にセグメントを分けるのが基本です。</span></p></article>
+<article class="terms-card"><span class="term-kind">出口</span><h3 id="term-gateway">デフォルトゲートウェイ</h3><p>自分の町内（同じセグメント）にない宛先へ送るとき、まず渡す相手です。多くの場合ルーターがこの役割を持ちます。ここが誤っていると、同じ社内には通じるのに外へ出られない状態になります。<span class="term-example"><strong>確認：</strong><code>ip route</code> の <code>default via ...</code> の行</span></p></article>
+<article class="terms-card"><span class="term-kind">経路</span><h3 id="term-route">ルーティング（経路制御）</h3><p>宛先ごとに「次にどこへ渡すか」を決める仕組みです。ルーティングテーブル（経路表）に、宛先の範囲と次の渡し先が並んでいます。<span class="term-example"><strong>読み方：</strong><code>0.0.0.0/0 via 192.168.1.1</code> は「上に該当がなければ、すべて192.168.1.1へ渡す」という意味です。</span></p></article>
+<article class="terms-card"><span class="term-kind">自動配布</span><h3 id="term-dhcp">DHCP</h3><p>IPアドレス、サブネットマスク、ゲートウェイ、DNSサーバーの情報を自動で配る仕組みです。人が手で設定する方式は「固定IP（静的IP）」と呼びます。<span class="term-example"><strong>使い分け：</strong>利用者のPCはDHCP、サーバーは固定IPにするのが一般的です。住所が勝手に変わると、接続先として指定できなくなるためです。</span></p></article>
+<article class="terms-card"><span class="term-kind">住所変換</span><h3 id="term-nat">NAT / NAPT</h3><p>プライベートIPをグローバルIPに変換して、内部の機器がインターネットへ出られるようにする仕組みです。多くの家庭用ルーターは、ポート番号も併用して1つのグローバルIPを大勢で共有しています（NAPT）。</p></article>
+<article class="terms-card"><span class="term-kind">機器の識別</span><h3 id="term-mac">MACアドレス</h3><p>NICごとに製造時から付いている固有の識別子です（<code>00:1a:2b:3c:4d:5e</code> のような形式）。IPアドレスが「住所」なら、MACアドレスは「機器そのものの背番号」にあたります。同じセグメント内の配達に使われます。</p></article>
+<article class="terms-card"><span class="term-kind">論理分割</span><h3 id="term-vlan">VLAN</h3><p>1台のスイッチ（機器同士をつなぐ装置）の中を、設定で複数のネットワークに分ける技術です。配線を増やさずに、部署ごと・用途ごとに通信範囲を分けられます。</p></article>
+<article class="terms-card"><span class="term-kind">到達確認</span><h3 id="term-ping">ping / ICMP</h3><p>相手まで届くかを確かめる、いちばん基本の確認です。ICMPという通信の種類を使い、往復にかかった時間を表示します。<span class="term-example"><strong>注意：</strong>安全のためICMPを止めている環境もあります。<code>ping</code>が返らない＝故障、とは限りません。</span></p></article>
+<article class="terms-card"><span class="term-kind">経路確認</span><h3 id="term-traceroute">traceroute / tracert</h3><p>宛先までに通過した中継地点を、順番に表示するコマンドです。どこまで届いていて、どこから返らないのかが分かるため、切り分けが早くなります。<span class="term-example"><strong>確認：</strong>Linuxは <code>traceroute</code> または <code>tracepath</code>、Windowsは <code>tracert</code></span></p></article>
+</div>
+<div class="terms-command"><pre><code># つながらないときの確認順（すべて見るだけのコマンド）
+ip address                  # 1. 自分の住所は正しいか
+ip route                    # 2. 出口（デフォルトゲートウェイ）はあるか
+ping -c 3 192.168.1.1       # 3. 同じ町内の相手に届くか
+ping -c 3 8.8.8.8           # 4. 外の住所に届くか（名前は使わない）
+dig example.com +short      # 5. 名前をIPに変換できるか</code></pre></div>
+<div class="terms-check"><strong>切り分けの合言葉：「住・出・隣・外・名」</strong> — 住所 → 出口 → 隣（同一セグメント） → 外（インターネット） → 名前解決。手順4が成功して手順5が失敗したら、原因はネットワークではなく<a href="#term-dns">DNS</a>だと判断できます。</div>
+</section>
+
+<section id="network-protocol" class="terms-section" aria-labelledby="network-protocol-title">
+<h2 id="network-protocol-title">5. ネットワーク②：約束ごと（プロトコル）</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>プロトコルは「話し方のルール」です。同じ住所に届いても、話し方が合わなければ会話になりません。そしてポート番号は、1つの住所の中にある「部屋番号」です。80号室はWeb、22号室はSSH、というように部屋ごとに担当が決まっています。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">約束</span><h3 id="term-protocol">プロトコル（Protocol）</h3><p>通信の手順を定めた取り決めです。どんな順番で、どんな形式でやり取りするかが決まっているため、機種やOSが違っても通信できます。<span class="term-example"><strong>例：</strong>HTTP（Webページ）、SMTP（メール送信）、SSH（遠隔操作）。</span></p></article>
+<article class="terms-card"><span class="term-kind">部屋番号</span><h3 id="term-port">ポート番号</h3><p>1台の中で、どのサービス宛ての通信かを分ける番号です。0〜65535まであり、よく使う番号（ウェルノウンポート）は用途が決まっています。<span class="term-example"><strong>確認：</strong><code>ss -lntp</code> で「今どの番号で待ち受けているか」が分かります。</span></p></article>
+<article class="terms-card"><span class="term-kind">確実に送る</span><h3 id="term-tcp">TCP</h3><p>相手と接続を確立してから送り、届いたかを確認しながら順番も保証する方式です。確実ですが、その分やり取りが増えます。Web、メール、SSH、データベースなど多くがTCPです。<span class="term-example"><strong>たとえ：</strong>受け取りのサインをもらう宅配便。</span></p></article>
+<article class="terms-card"><span class="term-kind">速く送る</span><h3 id="term-udp">UDP</h3><p>確認をせずに送りっぱなしにする方式です。速く軽い代わりに、届かなくても気づきません。DNSの問い合わせ、音声・映像の配信、NTPなどで使われます。<span class="term-example"><strong>たとえ：</strong>ポストに投函するハガキ。</span></p></article>
+<article class="terms-card"><span class="term-kind">電話帳</span><h3 id="term-dns">DNS</h3><p>ホスト名（<code>example.com</code>）とIPアドレスを対応づける仕組みです。人が覚えやすい名前で通信するために欠かせません。DNSが止まると、サーバーが正常でも「つながらない」状態になります。<span class="term-example"><strong>確認：</strong><code>dig example.com</code>、参照先の設定は <code>resolvectl status</code></span></p></article>
+<article class="terms-card"><span class="term-kind">Web</span><h3 id="term-http">HTTP / HTTPS</h3><p>Webページやデータをやり取りする約束ごとです。HTTPSは、そこに暗号化（TLS）を加えたもので、通信の盗み見と改ざんを防ぎます。既定のポートはHTTPが80、HTTPSが443です。<span class="term-example"><strong>状態コード：</strong>200は成功、404は見つからない、500はサーバー側の異常、502/503は裏側のサービスに届かない、を表します。</span></p></article>
+<article class="terms-card"><span class="term-kind">暗号化</span><h3 id="term-tls">TLS / SSL証明書</h3><p>通信を暗号化し、接続先が本物であることを証明する仕組みです。証明書には有効期限があり、切れるとブラウザーに警告が出て利用できなくなります。<span class="term-example"><strong>運用の要点：</strong>期限切れは代表的な事故です。自動更新の設定と、期限が近づいたら知らせる監視の両方を用意します。</span></p></article>
+<article class="terms-card"><span class="term-kind">遠隔操作</span><h3 id="term-ssh">SSH</h3><p>離れた場所からサーバーを安全に操作するための仕組みです。通信は暗号化されます。パスワードより、公開鍵認証（鍵ファイルによる認証）を使うほうが安全です。既定のポートは22です。<span class="term-example"><strong>接続例：</strong><code>ssh ユーザー名@192.168.1.10</code></span></p></article>
+<article class="terms-card"><span class="term-kind">時刻合わせ</span><h3 id="term-ntp">NTP</h3><p>サーバーの時計を正しい時刻に合わせる仕組みです。時刻がずれると、ログの前後関係が分からなくなり、証明書や認証も失敗しやすくなります。<span class="term-example"><strong>確認：</strong><code>timedatectl</code>（同期状態とタイムゾーン）</span></p></article>
+<article class="terms-card"><span class="term-kind">階層モデル</span><h3 id="term-osi">OSI参照モデル / TCP-IP 4層</h3><p>通信の役割を段に分けて整理した考え方です。実務では「物理（線）→ ネットワーク（IP）→ トランスポート（TCP/ポート）→ アプリ（HTTPなど）」の下から順に切り分けます。<span class="term-example"><strong>使い方：</strong>障害時は必ず下の段から確認します。線が抜けているのにアプリの設定を疑っても、原因にはたどり着きません。</span></p></article>
+<article class="terms-card"><span class="term-kind">通信の関所</span><h3 id="term-firewall">ファイアウォール</h3><p>決めた条件で通信を許可・拒否する関所です。「どの接続元から」「どのポートへ」の組み合わせで規則を書きます。<span class="term-example"><strong>基本方針：</strong>既定は拒否にしておき、必要な通信だけを許可します（ホワイトリスト方式）。</span></p></article>
+<article class="terms-card"><span class="term-kind">待ち受け</span><h3 id="term-listen">リッスン（LISTEN）</h3><p>サービスが「この番号で要求を待っています」という状態です。<code>0.0.0.0:80</code> はどこからでも受け付ける状態、<code>127.0.0.1:80</code> は自分自身からのみ受け付ける状態を表します。<span class="term-example"><strong>切り分け：</strong>外から接続できないときは、まず<code>ss -lntp</code>でこの待ち受けアドレスを確認します。</span></p></article>
+</div>
+<div class="terms-table-wrap"><table class="terms-table">
+<caption>よく使うポート番号（覚えておくと切り分けが速くなる12個）</caption>
+<thead><tr><th scope="col">番号</th><th scope="col">プロトコル</th><th scope="col">用途</th><th scope="col">補足</th></tr></thead>
+<tbody>
+<tr><td>22</td><td>SSH（TCP）</td><td>サーバーの遠隔操作</td><td>接続元を制限するのが基本</td></tr>
+<tr><td>25 / 587</td><td>SMTP（TCP）</td><td>メール送信</td><td>587は認証つきの送信</td></tr>
+<tr><td>53</td><td>DNS（UDP / TCP）</td><td>名前解決</td><td>通常はUDP、大きな応答はTCP</td></tr>
+<tr><td>80</td><td>HTTP（TCP）</td><td>Web（暗号化なし）</td><td>現在は443へ転送する構成が一般的</td></tr>
+<tr><td>123</td><td>NTP（UDP）</td><td>時刻同期</td><td>ずれるとログも認証も乱れる</td></tr>
+<tr><td>143 / 993</td><td>IMAP（TCP）</td><td>メール受信</td><td>993は暗号化あり</td></tr>
+<tr><td>389 / 636</td><td>LDAP（TCP）</td><td>利用者情報の検索</td><td>636は暗号化あり。<a href="ad-keywords.html">AD</a>で使用</td></tr>
+<tr><td>443</td><td>HTTPS（TCP）</td><td>Web（暗号化あり）</td><td>証明書の期限切れに注意</td></tr>
+<tr><td>3306</td><td>MySQL（TCP）</td><td>データベース接続</td><td>インターネットへ公開しない</td></tr>
+<tr><td>3389</td><td>RDP（TCP）</td><td>Windowsのリモートデスクトップ</td><td>直接公開しない</td></tr>
+<tr><td>5432</td><td>PostgreSQL（TCP）</td><td>データベース接続</td><td>インターネットへ公開しない</td></tr>
+<tr><td>9090 / 3000</td><td>HTTP（TCP）</td><td>Prometheus / Grafana</td><td>監視画面。社内限定で公開</td></tr>
+</tbody></table></div>
+<div class="terms-command"><pre><code># 「サービスは動いているのに、つながらない」ときの3点確認
+systemctl status nginx      # 1. サービス自体は起動しているか
+ss -lntp                    # 2. 目的のポートで待ち受けているか
+sudo ufw status             # 3. ファイアウォールで止めていないか（Ubuntuの例）</code></pre></div>
+<div class="terms-check"><strong>覚え方：「動・受・壁」</strong> — サービスが動いているか、そのポートで受けているか、壁（ファイアウォール）で止めていないか。この3つで、接続できない原因の多くが特定できます。</div>
+</section>
+
+<section id="linux" class="terms-section" aria-labelledby="linux-title">
+<h2 id="linux-title">6. Linuxサーバーの操作でよく出る言葉</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>Linuxサーバーの操作は、画面のボタンではなく文字の命令（コマンド）で行います。覚えることは「今どこにいるか」「誰として実行しているか」「そのファイルに触れる権限があるか」「サービスは動いているか」「記録はどこに出るか」の5つです。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">入口</span><h3 id="term-shell">シェル（Shell）</h3><p>入力したコマンドを受け取り、OSへ実行を依頼するプログラムです。Linuxでは<code>bash</code>がよく使われます。命令を並べたファイル（シェルスクリプト）にすれば、同じ作業を自動化できます。<span class="term-example"><strong>確認：</strong><code>echo "$SHELL"</code></span></p></article>
+<article class="terms-card"><span class="term-kind">命令の形</span><h3 id="term-command">コマンド / オプション / 引数</h3><p>コマンドは「何をするか」、オプション（<code>-l</code> など）は「どう実行するか」、引数は「何を対象にするか」です。<span class="term-example"><strong>例：</strong><code>ls -l /etc</code> は「一覧表示する（ls）／詳しく（-l）／/etcを（引数）」と読みます。詳しくは<a href="linux-commands.html">Linuxコマンド集</a>へ。</span></p></article>
+<article class="terms-card"><span class="term-kind">場所</span><h3 id="term-path">パス / ディレクトリ</h3><p>ディレクトリは、ファイルをまとめる入れ物（フォルダー）です。パスはその場所を表す文字列で、<code>/etc/nginx/nginx.conf</code> のように <code>/</code> から始まるものを絶対パス、今いる場所からの表記を相対パスと呼びます。<span class="term-example"><strong>確認：</strong><code>pwd</code>（今いる場所）</span></p></article>
+<article class="terms-card"><span class="term-kind">配置の決まり</span><h3 id="term-fhs">主なディレクトリ（/etc・/var・/home）</h3><p>Linuxは置き場所が決まっています。<code>/etc</code>は設定ファイル、<code>/var/log</code>はログ、<code>/home</code>は利用者のファイル、<code>/usr/bin</code>はコマンド本体、<code>/tmp</code>は一時ファイルです。<span class="term-example"><strong>覚え方：</strong>設定は<code>/etc</code>、記録は<code>/var/log</code>。この2つだけでも先に覚えると調査が速くなります。</span></p></article>
+<article class="terms-card"><span class="term-kind">権限</span><h3 id="term-permission">パーミッション（権限）</h3><p>ファイルごとに「読む（r）／書く（w）／実行する（x）」を、所有者・グループ・その他の3者に対して設定します。<code>rw-r--r--</code> は「所有者は読み書き、ほかは読むだけ」です。数字では644と表します。<span class="term-example"><strong>確認：</strong><code>ls -l</code>。秘密鍵は<code>600</code>（所有者だけが読み書き）にします。</span></p></article>
+<article class="terms-card"><span class="term-kind">利用者</span><h3 id="term-user">ユーザー / グループ</h3><p>ユーザーは操作する人（またはサービス）の単位、グループはユーザーをまとめた単位です。権限は人ごとではなくグループへ与えると、異動や退職のときに変更が1か所で済みます。<span class="term-example"><strong>確認：</strong><code>whoami</code>（今の自分）、<code>id</code>（所属グループ）</span></p></article>
+<article class="terms-card"><span class="term-kind">管理者</span><h3 id="term-root">root / sudo</h3><p>rootは、すべてを変更できる管理者です。<code>sudo</code>は、普段は一般ユーザーのまま、必要なときだけ管理者権限でコマンドを実行する仕組みです。<span class="term-example"><strong>原則：</strong>常にrootで作業しないこと。誤操作の被害範囲を小さくするための、いちばん基本的な守りです。</span></p></article>
+<article class="terms-card"><span class="term-kind">起動管理</span><h3 id="term-systemd">systemd / サービス（Service）</h3><p>サービスは、画面の裏側で動き続けて機能を提供するプログラムです。systemdは、その起動・停止・自動起動を管理する仕組みで、管理単位を「ユニット」と呼びます。<span class="term-example"><strong>確認：</strong><code>systemctl status nginx</code>。<code>enabled</code>は再起動後も自動で立ち上がる状態です。</span></p></article>
+<article class="terms-card"><span class="term-kind">記録</span><h3 id="term-log">ログ / journal</h3><p>ログは、起きたできごとを時刻順に残した記録です。systemdの環境では<code>journalctl</code>でまとめて読めます。個別のログは<code>/var/log</code>配下にもあります。<span class="term-example"><strong>確認：</strong><code>journalctl -u nginx -n 50 --no-pager</code>（直近50行）</span></p></article>
+<article class="terms-card"><span class="term-kind">導入</span><h3 id="term-package">パッケージ / リポジトリ</h3><p>パッケージは、ソフトを導入・更新しやすい形にまとめたものです。リポジトリはその配布元です。Ubuntu系は<code>apt</code>、RHEL系は<code>dnf</code>で扱います。<span class="term-example"><strong>確認：</strong><code>apt list --installed</code>。導入したソフトは名前と版を記録します。</span></p></article>
+<article class="terms-card"><span class="term-kind">定期実行</span><h3 id="term-cron">cron / タイマー</h3><p>決めた時刻に処理を自動実行する仕組みです。バックアップやログの整理でよく使います。<span class="term-example"><strong>書式：</strong><code>0 3 * * * /path/to/backup.sh</code> は「毎日3時00分に実行」という意味です（分 時 日 月 曜日の順）。</span></p></article>
+<article class="terms-card"><span class="term-kind">終了状態</span><h3 id="term-exit-code">終了コード（exit code）</h3><p>コマンドが成功したか失敗したかを表す数字です。0が成功、0以外が失敗を意味します。自動化では、この値を見て次の処理を止めるかどうかを判断します。<span class="term-example"><strong>確認：</strong>直前のコマンドの後に <code>echo $?</code></span></p></article>
+</div>
+<div class="terms-command"><pre><code># サーバーへ入って最初に見る5点（すべて見るだけ。状態は変わりません）
+whoami                                   # 誰として作業しているか
+hostname                                 # どのサーバーにいるか
+uptime                                   # いつから動いていて、混み具合はどうか
+systemctl --failed                       # 失敗しているサービスはないか
+journalctl -p err -n 30 --no-pager       # 直近のエラー記録30行</code></pre></div>
+<div class="terms-warning"><strong>変更コマンドの前に：</strong><code>rm</code>（削除）、<code>chmod</code>（権限変更）、<code>systemctl stop</code>（停止）は、影響が戻せないことがあります。実行前に「対象は何か」「なぜ必要か」「戻し方は何か」の3つを言葉にしてから実行します。手順は<a href="cui-manual.html#safety">CUI入門の安全確認</a>にまとめています。</div>
+</section>
+
+<section id="roles" class="terms-section" aria-labelledby="roles-title">
+<h2 id="roles-title">7. サーバーの役割分担</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>1台に全部を詰め込むこともできますが、実務では役割ごとに分けます。分けると、混んでいる部分だけを増やせて、障害が起きたときも「どこで止まったか」がすぐ分かるからです。</p>
+<ol class="terms-flow">
+<li>利用者のブラウザーが、<a href="#term-dns">DNS</a>で <code>example.com</code> のIPアドレスを調べます。</li>
+<li>そのIPアドレスの443番ポートへ、<a href="#term-lb">ロードバランサー</a>または<a href="#term-web-server">Webサーバー</a>が応答します。</li>
+<li>画像やHTMLはWebサーバーが返し、計算が必要な処理は<a href="#term-ap-server">APサーバー</a>へ渡します。</li>
+<li>APサーバーは、必要なデータを<a href="#term-db-server">DBサーバー</a>へ問い合わせます。</li>
+<li>結果が逆の順で戻り、利用者の画面に表示されます。</li>
+</ol>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">入口</span><h3 id="term-web-server">Webサーバー</h3><p>ブラウザーからの要求を受け取り、HTMLや画像を返す役割です。ApacheやNginxが代表です。<span class="term-example"><strong>確認：</strong><code>curl -I http://localhost/</code> で応答の状態コードを見ます。</span></p></article>
+<article class="terms-card"><span class="term-kind">処理</span><h3 id="term-ap-server">APサーバー（アプリケーションサーバー）</h3><p>プログラムを実行して、計算や判断を行う役割です。ログイン処理や注文処理など、その業務そのものを担当します。</p></article>
+<article class="terms-card"><span class="term-kind">保管</span><h3 id="term-db-server">DBサーバー（データベース）</h3><p>データを保存し、検索・更新に応える役割です。MySQL、PostgreSQL、SQL Serverなどがあります。<span class="term-example"><strong>関連：</strong>問い合わせに使う言葉がSQLです。<a href="sql-keywords.html">SQLキーワード集</a>で解説しています。</span></p></article>
+<article class="terms-card"><span class="term-kind">振り分け</span><h3 id="term-lb">ロードバランサー（負荷分散装置）</h3><p>複数のサーバーへ要求を振り分けて、混雑を防ぐ装置です。応答しないサーバーを自動的に外すため、可用性を上げる役割も兼ねます。<span class="term-example"><strong>効果：</strong>1台を停止して更新しても、サービスを止めずに済みます。</span></p></article>
+<article class="terms-card"><span class="term-kind">受付</span><h3 id="term-reverse-proxy">リバースプロキシ</h3><p>利用者と裏側のサーバーの間に立ち、要求を代理で受けて転送する仕組みです。暗号化（TLS）の終端、キャッシュ、経路の振り分けをまとめて担当できます。<span class="term-example"><strong>対比：</strong>社内から外へ出るときに代理で通信するのがフォワードプロキシ、外から中へ入る要求を受けるのがリバースプロキシです。</span></p></article>
+<article class="terms-card"><span class="term-kind">一時保存</span><h3 id="term-cache">キャッシュ（Cache）</h3><p>よく使うデータを手元に一時的に置いて、次回を速くする仕組みです。RedisやMemcachedのほか、ブラウザーやCDNもキャッシュを持ちます。<span class="term-example"><strong>注意：</strong>更新したのに古い内容が出る場合、原因はキャッシュのことがあります。</span></p></article>
+<article class="terms-card"><span class="term-kind">共有</span><h3 id="term-file-server">ファイルサーバー</h3><p>複数の利用者でファイルを共有・保管する役割です。Windows環境ではSMB、Linux環境ではNFSという方式がよく使われます。</p></article>
+<article class="terms-card"><span class="term-kind">入口の集約</span><h3 id="term-bastion">踏み台サーバー（Bastion）</h3><p>管理用の接続を1か所に集めて中継するサーバーです。ここだけを厳しく守れば、内部の各サーバーを直接インターネットへ出さずに済みます。<span class="term-example"><strong>設計：</strong>踏み台への接続元IPを絞り、操作ログを残すのが基本です。</span></p></article>
+<article class="terms-card"><span class="term-kind">名前と時刻</span><h3 id="term-infra-service">DNSサーバー / NTPサーバー</h3><p>社内の名前解決を担当するのがDNSサーバー、時刻を配るのがNTPサーバーです。どちらも地味ですが、止まると認証・ログ・証明書など広い範囲に影響します。</p></article>
+</div>
+<div class="terms-check"><strong>切り分けに使う：</strong>「Webが見られない」という連絡が来たら、この並び順（DNS → LB → Web → AP → DB）に沿って、どこまで正常かを1つずつ確認します。順番を決めておくと、慌てずに原因へ近づけます。</div>
+</section>
+
+<section id="process" class="terms-section" aria-labelledby="process-title">
+<h2 id="process-title">8. 構築の流れと工程用語</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>サーバー構築は、いきなり作り始めません。「何が必要か決める → どう作るか決める → 作る → 確かめる → 引き渡す」の順に進みます。この順番を守るのは、後戻りの費用がいちばん大きいのが「決め忘れ」だからです。</p>
+<ol class="terms-flow">
+<li><strong>要件定義：</strong>何を、いつまでに、どのくらいの性能で必要かを決めます。利用者数、必要な稼働率、予算、守るべき決まりを確認します。</li>
+<li><strong>基本設計：</strong>全体の構成を決めます。何台にするか、どう分けるか、どうつなぐか、止まったときどうするかを図と文章にします。</li>
+<li><strong>詳細設計：</strong>実際に設定する値を決めます。IPアドレス、ホスト名、利用者、権限、監視のしきい値などを一覧（パラメータシート）にします。</li>
+<li><strong>構築：</strong>設計どおりにOSを入れ、設定します。同じ作業を繰り返すなら、この時点で自動化（<a href="#term-iac">IaC</a>）にしておくと後が楽です。</li>
+<li><strong>試験：</strong>期待どおりに動くかを確かめ、結果を記録します。単体試験、結合試験、性能試験、障害試験の順に行います。</li>
+<li><strong>移行・リリース：</strong>本番環境へ切り替えます。切り戻し手順と、いつまでに判断するかの期限を決めてから実施します。</li>
+<li><strong>引き渡し・運用：</strong>手順書と連絡先を渡し、運用担当が回せる状態にします。ここまで終えて「構築が完了した」と言えます。</li>
+</ol>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">設計資料</span><h3 id="term-parameter-sheet">パラメータシート</h3><p>設定する値を一覧にした表です。ホスト名、IPアドレス、利用者名、ディスク構成、サービスの設定値などを並べます。<span class="term-example"><strong>効果：</strong>これがあると、同じ環境をもう一度作れます。また、障害時に「設計どおりか」を比べられます。</span></p></article>
+<article class="terms-card"><span class="term-kind">環境</span><h3 id="term-environment">本番 / 検証 / 開発環境</h3><p>本番は実際に利用者が使う環境、検証（ステージング）は本番に近い形で試す環境、開発は自由に壊してよい環境です。<span class="term-example"><strong>鉄則：</strong>変更は必ず検証環境で試してから本番へ。本番で初めて試す作業は作りません。</span></p></article>
+<article class="terms-card"><span class="term-kind">初期設定</span><h3 id="term-kitting">キッティング</h3><p>機器を使える状態にする初期設定作業です。OSの導入、初期の利用者設定、必要なソフトの導入、資産番号の登録などを含みます。</p></article>
+<article class="terms-card"><span class="term-kind">試験</span><h3 id="term-test">単体試験 / 結合試験</h3><p>単体試験は部品ごと（このサービスは起動するか）、結合試験はつないだ状態（画面から登録するとDBに保存されるか）を確認します。<span class="term-example"><strong>記録の型：</strong>「期待結果」と「実際の結果」と「実施日時」を必ず並べて残します。</span></p></article>
+<article class="terms-card"><span class="term-kind">証拠</span><h3 id="term-evidence">エビデンス（証跡）</h3><p>作業した内容と結果を、後から確認できる形で残した記録です。コマンドの出力、画面の写し、ログが該当します。<span class="term-example"><strong>実例：</strong>この学習での残し方は<a href="evidence-demo.html">動作確認の記録</a>で公開しています。</span></p></article>
+<article class="terms-card"><span class="term-kind">戻し方</span><h3 id="term-rollback">切り戻し（ロールバック）</h3><p>変更前の状態へ戻すことです。作業前に「どうやって戻すか」「どこまでなら戻せるか」を決めておきます。<span class="term-example"><strong>原則：</strong>戻し方が決まっていない変更は、実施しません。</span></p></article>
+<article class="terms-card"><span class="term-kind">承認</span><h3 id="term-change-management">変更管理</h3><p>いつ・誰が・何を・なぜ変えるかを事前に申請し、承認を得てから実施する仕組みです。影響範囲、実施時間、切り戻し手順、連絡先を書きます。<span class="term-example"><strong>理由：</strong>障害の多くは「直前の変更」が原因です。記録があると原因特定が早くなります。</span></p></article>
+<article class="terms-card"><span class="term-kind">受け入れ</span><h3 id="term-handover">引き渡し（ハンドオーバー）</h3><p>構築した環境を運用担当へ渡す作業です。構成図、パラメータシート、手順書、監視設定、連絡体制をそろえて説明します。<span class="term-example"><strong>合格条件：</strong>「作った本人がいなくても運用できる」状態になっていることです。</span></p></article>
+<article class="terms-card"><span class="term-kind">見積り</span><h3 id="term-capacity">キャパシティプランニング</h3><p>将来必要になる資源（CPU、メモリ、容量、通信量）を見積もり、あらかじめ用意する作業です。<span class="term-example"><strong>やり方：</strong>今の使用量の推移を記録し、増え方から「いつ足りなくなるか」を計算します。</span></p></article>
+</div>
+<div class="terms-check"><strong>覚え方：「決・図・値・作・試・渡」</strong> — 決める（要件）、図にする（基本設計）、値を決める（詳細設計）、作る（構築）、試す（試験）、渡す（引き渡し）。実際の進め方は<a href="infra-lab.html">サーバー構築の学習</a>で、工程ごとの資料として公開しています。</div>
+</section>
+
+<section id="operation" class="terms-section" aria-labelledby="operation-title">
+<h2 id="operation-title">9. 運用と監視</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>監視とは「異常に、人より先に気づく仕組み」です。目的は数字を集めることではなく、利用者が困る前に手を打つことです。だから「何を測るか」より「どうなったら誰に知らせるか」を先に決めます。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">生死確認</span><h3 id="term-alive-check">死活監視</h3><p>サーバーやサービスが動いているかを、定期的に確認することです。<code>ping</code>への応答、ポートへの接続、Webページの応答内容などで判定します。<span class="term-example"><strong>注意：</strong>「pingが返る＝サービスが正常」ではありません。OSは生きていてもアプリが停止していることがあります。</span></p></article>
+<article class="terms-card"><span class="term-kind">数値</span><h3 id="term-metrics">メトリクス（Metrics）</h3><p>時間の経過に沿って記録する数値データです。CPU使用率、メモリ使用量、ディスク空き容量、応答時間、リクエスト数などが該当します。<span class="term-example"><strong>使い方：</strong>点ではなく線で見ます。「今80%」より「3日で20%→80%に増えた」ほうが重要な情報です。</span></p></article>
+<article class="terms-card"><span class="term-kind">記録</span><h3 id="term-logs">ログ（Logs）</h3><p>起きたできごとを時刻順に残した記録です。メトリクスが「どのくらい」を示すのに対し、ログは「何が起きたか」を示します。<span class="term-example"><strong>組み合わせ：</strong>メトリクスで異常な時刻を特定し、その時刻のログで原因を読む、という順に使います。</span></p></article>
+<article class="terms-card"><span class="term-kind">境目</span><h3 id="term-threshold">しきい値（Threshold）</h3><p>「この値を超えたら異常とみなす」と決めた境目です。<span class="term-example"><strong>決め方：</strong>厳しすぎると通知が多すぎて誰も見なくなり、緩すぎると気づけません。普段の値を1〜2週間測ってから決めます。</span></p></article>
+<article class="terms-card"><span class="term-kind">通知</span><h3 id="term-alert">アラート（Alert）</h3><p>しきい値を超えたことを知らせる通知です。メール、チャット、電話などへ送ります。<span class="term-example"><strong>良い設計：</strong>発生した時だけでなく、元に戻った時（復旧）も通知します。戻った通知がないと、収束したかを人が確認し続けることになります。</span></p></article>
+<article class="terms-card"><span class="term-kind">監視の監視</span><h3 id="term-dead-man">死活監視の逆（dead-man alert）</h3><p>監視の仕組み自体が止まったことを知らせる、逆向きの通知です。定期信号（heartbeat）が途切れたら発報します。<span class="term-example"><strong>理由：</strong>アラートが来ない状態には、「平穏」と「監視が壊れている」の2通りがあります。両者を区別するために必要です。</span></p></article>
+<article class="terms-card"><span class="term-kind">出来事</span><h3 id="term-incident">インシデント / 一次対応</h3><p>インシデントは、サービスに影響する出来事です。一次対応は、原因究明より先に、影響を止める・広げないための応急処置を指します。<span class="term-example"><strong>順番：</strong>影響の把握 → 記録 → 応急処置 → 報告 → 原因調査 → 再発防止。</span></p></article>
+<article class="terms-card"><span class="term-kind">引き継ぎ</span><h3 id="term-escalation">エスカレーション</h3><p>自分の権限や知識で対応できないときに、上位の担当者へ引き継ぐことです。<span class="term-example"><strong>伝える4点：</strong>いつから、何が、どこまで影響していて、自分は何を確認済みか。これだけで引き継ぎの速さが変わります。</span></p></article>
+<article class="terms-card"><span class="term-kind">手順書</span><h3 id="term-runbook">Runbook（運用手順書）</h3><p>「この通知が来たら、この順に確認して、こう対処する」を具体的に書いた手順書です。<span class="term-example"><strong>良い書き方：</strong>アラートの通知文から、対応するRunbookへ直接たどり着けるようにしておきます。</span></p></article>
+<article class="terms-card"><span class="term-kind">約束</span><h3 id="term-slo">SLA / SLO / SLI</h3><p>SLAは利用者との契約上の品質保証、SLOは自分たちが目指す品質目標、SLIはそれを測る実際の指標です。<span class="term-example"><strong>例：</strong>SLI「月間の成功応答率」、SLO「99.9%以上」、SLA「99.5%を下回ったら返金」。SLOはSLAより少し厳しい値にして、契約に触れる前に手を打てるようにします。</span></p></article>
+<article class="terms-card"><span class="term-kind">指標</span><h3 id="term-mttr">MTBF / MTTR</h3><p>MTBFは故障と故障の間隔（どれだけ壊れにくいか）、MTTRは復旧までの平均時間（どれだけ早く直せるか）です。<span class="term-example"><strong>考え方：</strong>壊さない努力と、早く直す準備の両方が必要です。後者は手順書と練習で確実に短くできます。</span></p></article>
+<article class="terms-card"><span class="term-kind">道具</span><h3 id="term-monitoring-tools">Prometheus / Grafana / Loki</h3><p>Prometheusはメトリクスを集めて条件を判定する道具、Grafanaはそれをグラフで見せる道具、Lokiはログを集めて検索する道具です。<span class="term-example"><strong>実例：</strong>この3つを使った構成例は<a href="infra-lab.html">サーバー構築の学習</a>で公開しています。</span></p></article>
+</div>
+<div class="terms-check"><strong>覚え方：「測・超・報・対・記」</strong> — 測る（メトリクス）、超えたら（しきい値）、報せる（アラート）、対処する（Runbook）、記録する（インシデント記録）。この5つがそろって、初めて「監視している」と言えます。</div>
+</section>
+
+<section id="backup" class="terms-section" aria-labelledby="backup-title">
+<h2 id="backup-title">10. バックアップと可用性</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>バックアップの目的は「取ること」ではなく「戻せること」です。取れているのに戻せなかった、という事故は実際に起こります。だから定期的に復元の練習をして、何分で戻せるかを実測しておきます。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">複製保管</span><h3 id="term-backup">バックアップ（Backup）</h3><p>失われたときに備えて、データを別の場所へ複製し保管しておくことです。<span class="term-example"><strong>3-2-1の原則：</strong>コピーを3つ、媒体を2種類、うち1つは離れた場所へ。この形にしておくと、機器故障と災害の両方に備えられます。</span></p></article>
+<article class="terms-card"><span class="term-kind">取り方</span><h3 id="term-backup-type">フル / 差分 / 増分</h3><p>フルは毎回すべて、差分は前回のフルからの変化分、増分は前回のバックアップからの変化分を取ります。<span class="term-example"><strong>特徴：</strong>増分は取得が速く容量も小さい代わりに、復元時に多くの世代が必要です。速さと復元しやすさの交換になっています。</span></p></article>
+<article class="terms-card"><span class="term-kind">保存期間</span><h3 id="term-generation">世代管理</h3><p>何回分（何日分）のバックアップを残すかの決めごとです。<span class="term-example"><strong>理由：</strong>1世代だけだと、壊れたデータをそのまま上書きしてしまいます。「気づくまでの時間」より長く保持する必要があります。</span></p></article>
+<article class="terms-card"><span class="term-kind">戻す</span><h3 id="term-restore">リストア（復元）</h3><p>バックアップからデータを元へ戻す作業です。<span class="term-example"><strong>必須の習慣：</strong>定期的に復元試験を行い、「本当に戻るか」「何分かかるか」を実測して記録します。試していないバックアップは、あるとは言えません。</span></p></article>
+<article class="terms-card"><span class="term-kind">目標時間</span><h3 id="term-rto">RTO（目標復旧時間）</h3><p>障害発生から復旧までに、かけてよい時間の目標です。<span class="term-example"><strong>例：</strong>RTO 4時間なら、4時間以内に使える状態へ戻す準備（手順、担当、予備機）が必要です。</span></p></article>
+<article class="terms-card"><span class="term-kind">目標地点</span><h3 id="term-rpo">RPO（目標復旧地点）</h3><p>失ってもよいデータの時間の上限です。<span class="term-example"><strong>例：</strong>RPO 1時間なら、少なくとも1時間ごとにバックアップを取る必要があります。RTOは「時間」、RPOは「地点」と覚えます。</span></p></article>
+<article class="terms-card"><span class="term-kind">二重化</span><h3 id="term-redundancy">冗長化（Redundancy）</h3><p>同じ役割の機器や経路を複数用意し、1つ壊れても止まらないようにすることです。電源、ネットワーク、サーバー、ディスクなど、各層で検討します。<span class="term-example"><strong>考え方：</strong>「単一障害点（SPOF）」＝そこが壊れると全部止まる箇所を探し、1つずつ減らします。</span></p></article>
+<article class="terms-card"><span class="term-kind">切り替え</span><h3 id="term-failover">フェイルオーバー / クラスタ</h3><p>フェイルオーバーは、故障を検知して予備側へ自動的に切り替える動作です。クラスタは、そのために複数台を組にした構成を指します。<span class="term-example"><strong>確認：</strong>切り替わることだけでなく、切り戻し（フェイルバック）も試験します。</span></p></article>
+<article class="terms-card"><span class="term-kind">複製</span><h3 id="term-replication">レプリケーション</h3><p>データを別のサーバーへ、ほぼ同時に複製し続ける仕組みです。<span class="term-example"><strong>重要な違い：</strong>誤って削除した内容も、そのまま複製されます。だからレプリケーションはバックアップの代わりになりません。</span></p></article>
+<article class="terms-card"><span class="term-kind">一時保存</span><h3 id="term-snapshot">スナップショット</h3><p>ある時点の状態をまるごと記録し、そこへ戻せるようにする機能です。仮想マシンでよく使います。<span class="term-example"><strong>用途：</strong>作業前に取れば、失敗しても数分で戻せます。ただし長期保存には向きません。</span></p></article>
+<article class="terms-card"><span class="term-kind">災害対策</span><h3 id="term-dr">DR（災害復旧） / BCP</h3><p>DRは、地震や火災などで拠点ごと使えなくなったときに、別拠点で復旧する備えです。BCPは、事業全体を継続するための計画で、DRはその一部にあたります。</p></article>
+<article class="terms-card"><span class="term-kind">整合確認</span><h3 id="term-checksum">チェックサム</h3><p>ファイルが壊れていないか、同じ内容かを確かめるための要約値です。<span class="term-example"><strong>確認：</strong><code>sha256sum backup.tar.gz</code>。取得時と復元時の値を比べます。</span></p></article>
+</div>
+<div class="terms-warning"><strong>よくある失敗：</strong>「バックアップは毎日成功していた。しかし復元したら、必要なデータベースが対象から漏れていた」。取得の成功通知だけを見て、<strong>戻せることを確かめていない</strong>のが原因です。取得の成功と、復元の成功は、別々に確認します。</div>
+</section>
+
+<section id="security" class="terms-section" aria-labelledby="security-title">
+<h2 id="security-title">11. セキュリティの基礎</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>守りの基本は3つだけです。「入口を減らす（必要な通信だけ許可）」「権限を絞る（できることを最小限に）」「新しくする（更新を当てる）」。難しい対策より、この3つの徹底のほうが効果があります。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">本人確認</span><h3 id="term-authn">認証（Authentication）</h3><p>「あなたが誰か」を確かめることです。パスワード、鍵ファイル、ICカード、生体情報などを使います。<span class="term-example"><strong>強化：</strong>知識（パスワード）と所持（スマホ）など、種類の違う2つを組み合わせるのが多要素認証（MFA）です。</span></p></article>
+<article class="terms-card"><span class="term-kind">許可範囲</span><h3 id="term-authz">認可（Authorization）</h3><p>「その人に何をさせるか」を決めることです。認証を通っても、認可がなければ操作はできません。<span class="term-example"><strong>覚え方：</strong>認証は「入館証の確認」、認可は「どの部屋に入れるか」。</span></p></article>
+<article class="terms-card"><span class="term-kind">原則</span><h3 id="term-least-privilege">最小権限の原則</h3><p>業務に必要な最小限の権限だけを与える考え方です。<span class="term-example"><strong>実践：</strong>常時rootで作業せず<code>sudo</code>を使う。参照だけでよい人には参照権限だけを渡す。使わなくなった権限は速やかに外す。</span></p></article>
+<article class="terms-card"><span class="term-kind">鍵</span><h3 id="term-key-auth">公開鍵認証 / 秘密鍵</h3><p>手元に秘密鍵、サーバーに公開鍵を置き、対になっていることで本人と判断する方式です。パスワード認証より安全です。<span class="term-example"><strong>絶対の注意：</strong>秘密鍵は他人へ渡さず、Gitへも保存しません。権限は<code>600</code>にします。</span></p></article>
+<article class="terms-card"><span class="term-kind">弱点</span><h3 id="term-vulnerability">脆弱性 / CVE</h3><p>脆弱性は、攻撃に使われうるソフトの弱点です。CVEは、その弱点1件ごとに付けられる世界共通の番号です（<code>CVE-2024-12345</code> のような形式）。<span class="term-example"><strong>運用：</strong>使っている製品のCVE情報を定期的に確認し、影響の有無を判断します。</span></p></article>
+<article class="terms-card"><span class="term-kind">更新</span><h3 id="term-patch">パッチ / 脆弱性対応</h3><p>脆弱性を修正する更新プログラムです。<span class="term-example"><strong>手順：</strong>影響調査 → 検証環境で適用 → 影響確認 → 本番へ適用 → 結果記録。「すぐ当てる」より「順番どおり当てる」ほうが安全です。</span></p></article>
+<article class="terms-card"><span class="term-kind">隠す</span><h3 id="term-encryption">暗号化</h3><p>内容を読めない形へ変換し、鍵を持つ相手だけが戻せるようにすることです。通信の暗号化（TLS）と、保存データの暗号化（ディスク暗号化）があります。</p></article>
+<article class="terms-card"><span class="term-kind">秘密情報</span><h3 id="term-secret">クレデンシャル / シークレット</h3><p>パスワード、APIキー、トークン、秘密鍵など、他人に知られてはいけない情報です。<span class="term-example"><strong>禁止：</strong>ソースコード、設定ファイル、コマンド履歴、公開ログへ書きません。専用の保管の仕組み（シークレット管理）を使います。</span></p></article>
+<article class="terms-card"><span class="term-kind">攻撃面</span><h3 id="term-attack-surface">攻撃対象領域（Attack Surface）</h3><p>外から狙える入口の総量です。開いているポート、公開しているサービス、有効な利用者アカウントが該当します。<span class="term-example"><strong>減らし方：</strong>使っていないサービスは止める。管理用の通信は接続元IPで絞る。不要なアカウントは無効化する。</span></p></article>
+<article class="terms-card"><span class="term-kind">記録と点検</span><h3 id="term-audit-log">監査ログ</h3><p>誰が、いつ、何をしたかを残す記録です。事故が起きたときの調査と、不正の抑止に使います。<span class="term-example"><strong>注意：</strong>操作した本人が消せる場所に置くと、記録の意味が薄れます。別のサーバーへ転送して保管します。</span></p></article>
+<article class="terms-card"><span class="term-kind">考え方</span><h3 id="term-zero-trust">ゼロトラスト</h3><p>「社内ネットワークの中だから安全」とは考えず、すべての通信で毎回確認する考え方です。接続元、利用者、端末の状態を、そのつど検証します。</p></article>
+<article class="terms-card"><span class="term-kind">責任分界</span><h3 id="term-shared-responsibility">責任共有モデル</h3><p>クラウドでは、事業者と利用者で責任の範囲が分かれます。事業者は建物・機械・基盤を守り、利用者は自分が置いたOS・設定・データ・権限を守ります。<span class="term-example"><strong>事故の実例：</strong>ストレージの公開設定を誤って情報が流出する事故は、利用者側の責任範囲で起きます。</span></p></article>
+</div>
+<div class="terms-check"><strong>覚え方：「減・絞・新・見・守」</strong> — 入口を減らす、権限を絞る、更新で新しくする、ログで見る、鍵とデータを守る。この学習で使っている脅威の整理は<a href="learning-docs/security-threat-model.md">セキュリティ脅威モデル</a>にまとめています。</div>
+</section>
+
+<section id="automation" class="terms-section" aria-labelledby="automation-title">
+<h2 id="automation-title">12. 自動化とクラウド</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>手作業は、同じ作業をしても毎回少しずつ違う結果になります。設定を「コード」に書いておけば、誰が何回実行しても同じ状態になります。これが自動化のいちばんの利点で、速さは二番目です。</p>
+<div class="terms-card-grid">
+<article class="terms-card"><span class="term-kind">考え方</span><h3 id="term-iac">IaC（Infrastructure as Code）</h3><p>サーバーやネットワークの設定を、手作業ではなくコード（設定ファイル）として管理する方法です。<span class="term-example"><strong>利点：</strong>変更履歴が残る、同じ環境を再現できる、レビューできる、の3つです。</span></p></article>
+<article class="terms-card"><span class="term-kind">性質</span><h3 id="term-idempotency">冪等性（べきとうせい）</h3><p>同じ操作を何度繰り返しても、結果が変わらない性質です。<span class="term-example"><strong>確認：</strong>Ansibleを2回実行して、2回目が <code>changed=0</code>（変更なし）になれば、冪等性が保たれています。</span></p></article>
+<article class="terms-card"><span class="term-kind">構成管理</span><h3 id="term-ansible">Ansible</h3><p>サーバーへ接続し、決めた状態になるよう設定を適用する道具です。手順書をYAML形式で書いた「Playbook」を実行します。<span class="term-example"><strong>特徴：</strong>対象サーバーに専用ソフトを入れず、SSHで接続して実行できます。</span></p></article>
+<article class="terms-card"><span class="term-kind">環境構築</span><h3 id="term-terraform">Terraform</h3><p>クラウド上のネットワークやサーバーそのものを、コードから作成・変更・削除する道具です。<span class="term-example"><strong>使い分け：</strong>Terraformは「箱を用意する」、Ansibleは「箱の中を整える」と覚えます。</span></p></article>
+<article class="terms-card"><span class="term-kind">実行環境</span><h3 id="term-docker">Docker / Docker Compose</h3><p>Dockerはコンテナを作って動かす道具、Docker Composeは複数のコンテナの構成をファイルにまとめて一度に起動する道具です。<span class="term-example"><strong>利点：</strong>「自分のPCでは動く」問題が起きにくくなります。</span></p></article>
+<article class="terms-card"><span class="term-kind">まとめて管理</span><h3 id="term-kubernetes">Kubernetes</h3><p>たくさんのコンテナを、複数のサーバーにまたがってまとめて動かす仕組みです。落ちたコンテナの再起動や、負荷に応じた増減を自動で行います。</p></article>
+<article class="terms-card"><span class="term-kind">履歴管理</span><h3 id="term-git">Git</h3><p>ファイルの変更履歴を記録し、いつ・誰が・何を変えたかを追える仕組みです。設定をコードで管理するなら必須の道具です。<span class="term-example"><strong>注意：</strong>パスワードや秘密鍵をコミットしないこと。一度入れると履歴に残り続けます。</span></p></article>
+<article class="terms-card"><span class="term-kind">自動確認</span><h3 id="term-cicd">CI / CD</h3><p>CIは、変更のたびに自動で検査やテストを行う仕組みです。CDは、その結果を自動で配布・反映する仕組みです。<span class="term-example"><strong>効果：</strong>「書き間違えたまま本番へ反映」を、人が気をつけるのではなく仕組みで防げます。</span></p></article>
+<article class="terms-card"><span class="term-kind">提供形態</span><h3 id="term-xaas">IaaS / PaaS / SaaS</h3><p>IaaSは機械とネットワークだけを借りる形、PaaSは実行環境まで用意された形、SaaSは完成したソフトを使う形です。<span class="term-example"><strong>覚え方：</strong>借りる範囲が広いほど、自分で管理する手間は減り、自由度も減ります。</span></p></article>
+<article class="terms-card"><span class="term-kind">場所</span><h3 id="term-region-az">リージョン / アベイラビリティゾーン</h3><p>リージョンは地域（東京、大阪など）、アベイラビリティゾーン（AZ）はその地域内で電源や建物が分かれた区画です。<span class="term-example"><strong>設計：</strong>複数のAZへ分けて配置すると、片方の設備障害でもサービスを継続できます。</span></p></article>
+<article class="terms-card"><span class="term-kind">AWSの基本語</span><h3 id="term-aws-terms">VPC / EC2 / S3 / IAM</h3><p>VPCはクラウド上に作る自分専用のネットワーク、EC2は仮想サーバー、S3はファイルの保管場所、IAMは利用者と権限の管理です。<span class="term-example"><strong>対応：</strong>VPC＝社内ネットワーク、EC2＝サーバー、S3＝ファイルサーバー、IAM＝アカウント管理、と読み替えると分かりやすくなります。</span></p></article>
+<article class="terms-card"><span class="term-kind">通信制御</span><h3 id="term-sg">セキュリティグループ（SG）</h3><p>クラウド上のサーバー単位で、通信を許可・拒否する設定です。ファイアウォールのクラウド版と考えて差し支えありません。<span class="term-example"><strong>設計例：</strong>Webサーバーには443だけを全体へ許可し、22番は管理者のIPだけに絞ります。実例は<a href="cloud-lab.html">AWSネットワークの学習用設計</a>にあります。</span></p></article>
+</div>
+<div class="terms-command"><pre><code># 自動化が「同じ結果になる」ことを確かめる（Ansibleの例）
+ansible-playbook playbook.yml --syntax-check   # 1. 書式に誤りがないか
+ansible-playbook playbook.yml --check          # 2. 実際には変更せず、何が変わるか確認
+ansible-playbook playbook.yml                  # 3. 適用
+ansible-playbook playbook.yml                  # 4. もう一度実行し changed=0 を確認</code></pre></div>
+<div class="terms-check"><strong>ここが重要：</strong>手順4で <code>changed=0</code> になれば、その設定は「何度実行しても同じ状態になる」と言えます。この確認をしていない自動化は、実行するたびに結果が変わる危険があります。</div>
+</section>
+
+<section id="cheatsheet" class="terms-section" aria-labelledby="cheatsheet-title">
+<h2 id="cheatsheet-title">13. 早見表：用語 → 一言 → 自分で確かめる方法</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>この表は、意味を思い出すためだけの表ではありません。3列目のコマンドを自分の練習環境で実行すると、言葉と実物が結びついて記憶に残ります。読むだけで終わらせず、1日3つずつ動かしてみてください。</p>
+<div class="terms-table-wrap"><table class="terms-table">
+<caption>インフラ基礎用語の早見表（コマンドはLinuxの練習環境で実行する例。すべて見るだけの操作です）</caption>
+<thead><tr><th scope="col">用語</th><th scope="col">一言で</th><th scope="col">自分の環境での確認方法</th></tr></thead>
+<tbody>
+<tr><td>OS</td><td>機械とアプリの間に入る基本ソフト</td><td><code>cat /etc/os-release</code></td></tr>
+<tr><td>カーネル</td><td>OSの中心。資源の割り当てを担当</td><td><code>uname -r</code></td></tr>
+<tr><td>ホスト名</td><td>ネットワーク上でのこの機械の名前</td><td><code>hostname</code></td></tr>
+<tr><td>CPU</td><td>計算を担当する部品</td><td><code>lscpu</code> / <code>top</code></td></tr>
+<tr><td>メモリ</td><td>作業中のデータを置く一時領域</td><td><code>free -h</code></td></tr>
+<tr><td>ストレージ</td><td>電源を切っても消えない保存領域</td><td><code>df -h</code> / <code>lsblk</code></td></tr>
+<tr><td>負荷（ロードアベレージ）</td><td>処理待ちの行列の長さ</td><td><code>uptime</code></td></tr>
+<tr><td>プロセス</td><td>実行中のプログラム1つ分</td><td><code>ps aux</code></td></tr>
+<tr><td>サービス</td><td>裏側で動き続けて機能を提供する仕組み</td><td><code>systemctl status &lt;名前&gt;</code></td></tr>
+<tr><td>自動起動</td><td>再起動後も自動で立ち上がる設定</td><td><code>systemctl is-enabled &lt;名前&gt;</code></td></tr>
+<tr><td>ログ</td><td>できごとの時刻順の記録</td><td><code>journalctl -u &lt;名前&gt; -n 50 --no-pager</code></td></tr>
+<tr><td>IPアドレス</td><td>ネットワーク上の住所</td><td><code>ip address</code></td></tr>
+<tr><td>サブネット / CIDR</td><td>同じ範囲としてまとめた区画の広さ</td><td><code>ip -br address</code> の <code>/24</code> 部分</td></tr>
+<tr><td>デフォルトゲートウェイ</td><td>区画の外へ出るときの渡し先</td><td><code>ip route</code> の <code>default via</code> 行</td></tr>
+<tr><td>DNS</td><td>名前とIPアドレスを結びつける仕組み</td><td><code>dig example.com +short</code></td></tr>
+<tr><td>ポート</td><td>1台の中でサービスを分ける番号</td><td><code>ss -lntp</code></td></tr>
+<tr><td>TCP / UDP</td><td>確実に送る方式 / 速く送る方式</td><td><code>ss -lntu</code>（tがTCP、uがUDP）</td></tr>
+<tr><td>ファイアウォール</td><td>条件で通信を許可・拒否する関所</td><td><code>sudo ufw status</code>（Ubuntuの例）</td></tr>
+<tr><td>SSH</td><td>暗号化して遠隔操作する仕組み</td><td><code>ssh -V</code> / <code>systemctl status ssh</code></td></tr>
+<tr><td>パーミッション</td><td>読み・書き・実行の許可設定</td><td><code>ls -l</code></td></tr>
+<tr><td>ユーザーとグループ</td><td>操作する人の単位とそのまとまり</td><td><code>whoami</code> / <code>id</code></td></tr>
+<tr><td>sudo</td><td>必要なときだけ管理者権限で実行する仕組み</td><td><code>sudo -l</code>（自分に許された範囲）</td></tr>
+<tr><td>パッケージ</td><td>導入・更新しやすい形にまとめたソフト</td><td><code>apt list --installed | head</code></td></tr>
+<tr><td>時刻同期</td><td>正しい時刻に合わせる仕組み</td><td><code>timedatectl</code></td></tr>
+<tr><td>終了コード</td><td>直前のコマンドの成功（0）／失敗（0以外）</td><td><code>echo $?</code></td></tr>
+<tr><td>コンテナ</td><td>アプリと必要部品をまとめた隔離実行単位</td><td><code>docker ps</code></td></tr>
+<tr><td>チェックサム</td><td>ファイルが同じか確かめる要約値</td><td><code>sha256sum &lt;ファイル&gt;</code></td></tr>
+<tr><td>冪等性</td><td>何度実行しても同じ結果になる性質</td><td>Ansibleを2回実行し <code>changed=0</code> を確認</td></tr>
+</tbody></table></div>
+<div class="terms-note"><strong>コマンドの読み方が分からないとき：</strong>オプション記号の調べ方と、コマンドの分解の仕方は<a href="linux-commands.html">Linuxコマンド集</a>と<a href="cui-manual.html">CUI操作マニュアル</a>で解説しています。Windows側の対応コマンドは<a href="windows-commands.html">Windowsコマンド集</a>にあります。</div>
+</section>
+
+<section id="confusing" class="terms-section" aria-labelledby="confusing-title">
+<h2 id="confusing-title">14. 混同しやすい言葉の違い</h2>
+<p class="plain-summary"><strong>かんたんに言うと</strong>用語の暗記でつまずく原因の多くは、「似ているのに役割が違う言葉」を一緒に覚えてしまうことです。ここでは、実務でも取り違えやすい10組を、対比の形で整理します。</p>
+<details><summary>サーバーとホストは何が違う？</summary><p>サーバーは「要求に応える役割」、ホストは「ネットワーク上の1台という数え方」です。1台のホストの上で、Webサーバーとデータベースサーバーの両方を動かすこともできます。「サーバーが3台」と言うときは、たいてい「ホストが3台」の意味で使われています。</p></details>
+<details><summary>IPアドレスとMACアドレスは何が違う？</summary><p>IPアドレスは設定で変えられる「住所」、MACアドレスは機器に付いた「背番号」です。引っ越し（別のネットワークへ移動）すると住所は変わりますが、背番号は変わりません。同じ区画の中の配達にはMACアドレス、区画をまたぐ配達にはIPアドレスが使われます。</p></details>
+<details><summary>DNSとDHCPは何が違う？</summary><p>DNSは「名前からIPアドレスを調べる」仕組み、DHCPは「IPアドレスを自動で配る」仕組みです。DHCPは配るときに、使うべきDNSサーバーの情報も一緒に渡します。名前だけ引けないときはDNS、そもそもIPアドレスが付いていないときはDHCPを疑います。</p></details>
+<details><summary>TCPとUDPはどちらを使えばよい？</summary><p>確実に届ける必要があるならTCP、多少落ちても速さを優先するならUDPです。Web、メール、SSH、データベースはTCP。DNSの問い合わせ、音声・映像、NTPはUDPが中心です。用途で決まっているので、迷ったら「そのサービスの既定はどちらか」を調べます。</p></details>
+<details><summary>再起動（restart）と再読み込み（reload）は何が違う？</summary><p>restartはサービスを一度止めてから起動し直すため、その間つながりません。reloadは動かしたまま設定だけを読み直すため、原則として通信が切れません。設定を変えただけならreloadで足りるか、まず確認します。</p></details>
+<details><summary>バックアップとレプリケーションは何が違う？</summary><p>バックアップは「過去の時点に戻すため」の複製、レプリケーションは「常に同じ状態を保つため」の複製です。誤って削除した場合、レプリケーション先でも同じように削除されます。だから両方が必要で、どちらか一方では守れません。</p></details>
+<details><summary>認証と認可は何が違う？</summary><p>認証は「誰であるか」の確認、認可は「何をしてよいか」の判断です。ログインできたのにファイルを開けないのは、認証は成功し、認可で拒否された状態です。エラーを読むとき、この区別ができると原因が絞れます。</p></details>
+<details><summary>可用性と冗長化は何が違う？</summary><p>可用性は「止まらない度合い」という目標、冗長化は「そのために二重化する」という手段です。冗長化しても、切り替えの試験をしていなければ可用性は上がりません。目標と手段を分けて話すと、設計の議論がぶれません。</p></details>
+<details><summary>VMとコンテナはどう使い分ける？</summary><p>VMはOSごと分けるため、OSの種類を変えられて隔離も強い代わりに重くなります。コンテナはOSを共有するため軽く速い代わりに、ホストと同じ系統のOSで動かす前提になります。OS単位で分けたいならVM、アプリ単位で素早く配りたいならコンテナです。</p></details>
+<details><summary>「サーバーが重い」と言われたら何を見る？</summary><p>「重い」には少なくとも4種類あります。CPU待ち、メモリ不足、ディスクの読み書き待ち、ネットワークの遅延です。まず<code>uptime</code>で負荷、<code>top</code>でCPUとメモリ、<code>df -h</code>で容量、<code>ss -s</code>で接続数を見て、どれが原因かを決めてから対処します。原因を決めずに再起動すると、記録も消えて再発時に困ります。</p></details>
+</section>
+
+<section id="practice" class="terms-practice" aria-labelledby="practice-title">
+<h2 id="practice-title">15. 覚えるための練習</h2>
+<p>用語は、読むだけでは定着しません。「自分の言葉で説明する」「実際に確認する」「人に伝える形にする」の3段階を回すのが、いちばん近道です。以下は、練習環境（VMやWSL2）だけで完結する演習です。</p>
+<div class="terms-check"><strong>最初の到達点：</strong>まだ練習環境を用意できていなくても構いません。まずは「箱・線・土・番・盾」の5語を言えること、そして<a href="#cheatsheet">早見表</a>の用語を自分の言葉で説明できることを最初の目標にしてください。環境の準備は<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>を見ながら、次のステップとして進めます。</div>
+<div class="terms-practice-grid">
+<article class="terms-practice-card"><h3>演習1：5語に仕分ける</h3><p>この用語集から20語を選び、「箱・線・土・番・盾」のどれに属するかを分類します。迷った語は、なぜ迷ったかをメモします。その迷いが、理解が浅い箇所です。</p></article>
+<article class="terms-practice-card"><h3>演習2：自分の環境を採録する</h3><p><code>hostname</code>、<code>ip address</code>、<code>df -h</code>、<code>free -h</code> を実行し、自分の環境の値を1枚の表にまとめます。これが、いちばん小さなパラメータシートになります。</p></article>
+<article class="terms-practice-card"><h3>演習3：通信を追う</h3><p><code>ip route</code> と <code>dig example.com</code> と <code>ss -lntp</code> の結果を並べ、「住所・出口・名前・待ち受け」がそれぞれどこに出ているかを指し示します。</p></article>
+<article class="terms-practice-card"><h3>演習4：サービスの状態を読む</h3><p>任意のサービスに対して <code>systemctl status</code> を実行し、「起動しているか」「自動起動は有効か」「直近のログは何か」の3点を読み取って説明します。</p></article>
+<article class="terms-practice-card"><h3>演習5：わざと失敗させる</h3><p>存在しないコマンドを実行し、<code>echo $?</code> で終了コードが0以外になることを確認します。次に正常なコマンドで0になることを確認し、違いを説明します。</p></article>
+<article class="terms-practice-card"><h3>演習6：説明文を書く</h3><p>「サーバーとは何か」を、ITに詳しくない人向けに5行で書きます。専門用語を使うたびに、その語の説明も1行で添えます。書けない語が、次に学ぶ語です。</p></article>
+</div>
+<div class="terms-warning"><strong>演習の前提：</strong>すべて自分専用の練習環境（VM／WSL2）で行います。会社・学校・第三者のサーバーでは実行しません。パスワード、秘密鍵、トークンは、コマンド行や公開する記録に書きません。変更をともなう操作を試すときは、先にスナップショットを取ります。</div>
+<div class="terms-check"><strong>合格の目安：</strong>次の4つができれば、基礎用語は身についたと言えます。①「箱・線・土・番・盾」で用語を分類できる。②早見表の用語を自分の言葉で説明できる。③つながらないときに「住・出・隣・外・名」の順で確認できる。④異常を見つけたら作業を止め、現象・直前の操作・時刻を記録して報告できる。</div>
+</section>
+
+<section class="contact-cta"><div class="cta-content"><h2>次に進む順番</h2><p>用語を覚えたら、実際に手を動かします。コマンドの操作は「CUI入門」、確認の手順は「Linuxの基本確認」、工程全体は「サーバー構築の学習」へ進むのがおすすめです。</p><a href="learning-path.html" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> 初心者向け学習ルートへ</a> <a href="cui-manual.html" class="btn btn-secondary"><i class="fa-solid fa-keyboard" aria-hidden="true"></i> CUI入門から始める</a> <a href="skills.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> スキル一覧へ戻る</a></div></section>
+</div></div></main>
+<footer><div class="footer-content"><div class="footer-logo"><span class="logo-main">Noriyuki Shimada</span><span class="logo-sub">Portfolio</span></div><div class="footer-nav"><a href="me.html">自己紹介</a><a href="skills.html">スキル</a><a href="infra-keywords.html">インフラ用語集</a><a href="ad-keywords.html">ADキーワード集</a><a href="sql-keywords.html">SQLキーワード集</a><a href="infra-lab.html">サーバー構築</a><a href="works.html">作品</a><a href="resume.html">履歴書</a><a href="contact.html">連絡先</a></div><div class="footer-social"><a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a><a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a></div></div><div class="copyright"><p>&copy; 2026 Noriyuki Shimada. All Rights Reserved.</p></div></footer><button type="button" class="back-to-top" aria-label="ページの先頭へ戻る"><i class="fa-solid fa-chevron-up" aria-hidden="true"></i></button>
+</body></html>
