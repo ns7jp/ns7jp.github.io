@@ -1,0 +1,43 @@
+/* infra-keywords.html 専用のスタイル。ad-guide.css / sql-guide.css と同じ考え方で、
+   カード・目次・注意書き・表だけをこのページ用に定義する。 */
+.terms-page { background: #f5f7fb; }
+.terms-page .container { max-width: 1180px; }
+.terms-page .page-hero-content { width: min(calc(100% - 2rem), 1180px); }
+.terms-page .page-title .title-jp { max-width: 100%; overflow-wrap: anywhere; }
+.terms-intro, .terms-section, .terms-practice { margin: 2rem 0; }
+.terms-lead { max-width: 920px; font-size: 1.05rem; line-height: 1.9; }
+.terms-summary-grid, .terms-card-grid, .terms-practice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.terms-summary-card, .terms-card, .terms-practice-card { background: #fff; border: 1px solid #dce3ee; border-radius: 14px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(27, 54, 93, .07); }
+.terms-summary-card h3, .terms-card h3, .terms-practice-card h3 { margin-top: 0; color: #12355b; }
+.terms-card h3 code { font-size: .9em; }
+.terms-card p + p { margin-top: .6rem; }
+.terms-card .term-kind { display: inline-block; margin-bottom: .6rem; padding: .2rem .55rem; border-radius: 999px; color: #fff; background: #1769aa; font-size: .8rem; font-weight: 700; }
+.terms-card .term-example { display: block; margin-top: .6rem; padding-top: .6rem; border-top: 1px dashed #dce3ee; font-size: .92rem; color: #43506b; }
+.terms-toc { margin: 1.5rem 0; padding: 1.25rem; background: #eaf2fb; border-left: 5px solid #1769aa; border-radius: 10px; }
+.terms-toc ul { columns: 2; margin-bottom: 0; }
+.memory-tip, .terms-note, .terms-warning, .terms-check { margin: 1rem 0; padding: 1rem 1.1rem; border-radius: 10px; }
+.memory-tip { background: #eaf7ef; border-left: 5px solid #258750; }
+.terms-note { background: #fff8dd; border-left: 5px solid #d59600; }
+.terms-warning { background: #fff0f0; border-left: 5px solid #c63e3e; }
+.terms-check { background: #edf5ff; border-left: 5px solid #2b6cb0; }
+.terms-flow { padding-left: 1.35rem; }
+.terms-flow li + li { margin-top: .7rem; }
+.terms-command { margin: 1rem 0 1.5rem; }
+.terms-command pre { overflow-x: auto; padding: 1rem; color: #f7fafc; background: #172033; border-radius: 10px; line-height: 1.65; }
+.terms-command code { font-family: Consolas, "Courier New", monospace; }
+.terms-table-wrap { overflow-x: auto; }
+.terms-table { width: 100%; border-collapse: collapse; background: #fff; }
+.terms-table th, .terms-table td { padding: .8rem; border: 1px solid #dce3ee; text-align: left; vertical-align: top; }
+.terms-table th { background: #12355b; color: #fff; }
+.terms-table tbody tr:nth-child(even) { background: #f4f7fb; }
+.terms-table caption { padding: .6rem 0; color: #43506b; font-size: .95rem; text-align: left; }
+.terms-page details { margin: .75rem 0; padding: .9rem 1rem; background: #fff; border: 1px solid #dce3ee; border-radius: 10px; }
+.terms-page summary { cursor: pointer; color: #12355b; font-weight: 700; }
+.terms-page :target { scroll-margin-top: 6rem; }
+@media (max-width: 900px) { .terms-summary-grid, .terms-card-grid, .terms-practice-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) {
+    .terms-page .page-title .title-jp { font-size: clamp(1.75rem, 7.5vw, 2.2rem); letter-spacing: .02em; line-height: 1.4; }
+    .terms-summary-grid, .terms-card-grid, .terms-practice-grid { grid-template-columns: 1fr; }
+    .terms-toc ul { columns: 1; }
+    .terms-table th, .terms-table td { min-width: 9rem; }
+}
