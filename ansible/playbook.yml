@@ -29,10 +29,6 @@
 - name: Baseline hardening for Ubuntu hosts
   hosts: linux_servers
   become: true
-  collections:
-    - ansible.builtin
-    - ansible.posix
-    - community.general
   vars:
     admin_user: opsadmin
     admin_pubkey: "ssh-ed25519 AAAA... ops@laptop"   # 実環境では Ansible Vault に分ける

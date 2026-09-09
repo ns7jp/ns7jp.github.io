@@ -99,7 +99,7 @@ jobs:
         run: ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --syntax-check
 
       - name: Run ansible-lint
-        run: ansible-lint --profile min ansible/playbook.yml
+        run: ansible-lint ansible/playbook.yml
 
   cloud-terraform:
     name: Cloud Lab Terraform validate
