@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'ansible/**'
+      - '.ansible-lint'
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
@@ -14,6 +15,7 @@ on:
   pull_request:
     paths:
       - 'ansible/**'
+      - '.ansible-lint'
       - 'cloud-lab/**'
       - 'monitoring-stack/**'
       - 'support-scripts/linux-triage.sh'
