@@ -111,7 +111,7 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 | P1 | リストアテスト記録 + 年次 DR ドリル（[Failover Runbook](./support-docs/failover-runbook.md) 実行） | バックアップ・副系切替の実効性を示す |
 | P1 | CIS Benchmark 自動監査（OpenSCAP / Lynis） | [現状マッピング](./ansible/cis-benchmark-mapping.md)を継続検証する仕組み |
 | P2 | CloudTrail / Flow Logs / GuardDuty | クラウド監査と検知を補う |
-| P2 | ansible-lint のプロファイルをさらに引き上げ（`moderate` → `safety`）+ CI失敗をマージ必須（required）チェック化 | ansible-lint は `moderate` プロファイルに引き上げ済み（[.ansible-lint](./.ansible-lint) / [infra-check.yml](./.github/workflows/infra-check.yml)、`collections:` キーワード廃止と FQCN 統一も対応）。Terraform `validate` も CI で実行済み。残るのは `safety` プロファイルへの到達と、CI失敗時にマージをブロックできる状態（branch protection の required checks 化）にすること |
+| P2 | CI失敗をマージ必須（required）チェック化 | ansible-lint は最高プロファイル `production` に到達済み（[.ansible-lint](./.ansible-lint) / [infra-check.yml](./.github/workflows/infra-check.yml)、`collections:` キーワード廃止と FQCN 統一も対応）。Terraform `validate` も CI で実行済み。残るのは CI失敗時にマージをブロックできる状態（branch protection の required checks 化）にすること |
 | P3 | SLO / Error Budget | 運用品質を数値で説明できるようにする |
 
 ---
