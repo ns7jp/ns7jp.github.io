@@ -109,7 +109,7 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 | P1 | Alertmanager + 通知先 + Runbook link | 障害検知から初動までをつなぐ |
 | P1 | Secrets / Vault / SSO | 公開サンプルから本番運用へ移る際の最低条件 |
 | P1 | リストアテスト記録 + 年次 DR ドリル（[Failover Runbook](./support-docs/failover-runbook.md) 実行） | バックアップ・副系切替の実効性を示す |
-| P1 | CIS Benchmark 自動監査（OpenSCAP / Lynis） | [現状マッピング](./ansible/cis-benchmark-mapping.md)を継続検証する仕組み |
+| P1 | CIS Benchmark 自動監査（OpenSCAP / Lynis）を playbook 適用先にも広げる | CI runner に対する Lynis 監査は `infra-check.yml`（`lynis-audit` ジョブ）で稼働済み。残るのは playbook 適用後のサーバー / コンテナに対する継続監査（[現状マッピング](./ansible/cis-benchmark-mapping.md) §8 参照） |
 | P2 | CloudTrail / Flow Logs / GuardDuty | クラウド監査と検知を補う |
 | P2 | CI失敗をマージ必須（required）チェック化 | ansible-lint は最高プロファイル `production` に到達済み（[.ansible-lint](./.ansible-lint) / [infra-check.yml](./.github/workflows/infra-check.yml)、`collections:` キーワード廃止と FQCN 統一も対応）。Terraform `validate` も CI で実行済み。残るのは CI失敗時にマージをブロックできる状態（branch protection の required checks 化）にすること |
 | P3 | SLO / Error Budget | 運用品質を数値で説明できるようにする |

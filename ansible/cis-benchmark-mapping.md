@@ -224,7 +224,7 @@ CIS Benchmark への準拠**チェック**は、以下のような OSS ツール
 | [**Lynis**](https://cisofy.com/lynis/) | 軽量 OSS の総合監査（CIS だけでなく PCI/HIPAA も） | `sudo lynis audit system` |
 | [**Chef InSpec**](https://www.inspec.io/) | プロファイルベースの監査（CIS Benchmark プロファイル公式提供） | `inspec exec cis-ubuntu-22.04-benchmark` |
 
-`infra-check.yml` への追加候補として、`Lynis` の実行を `--quiet --report-file` モードで回し、`hardening index` を Markdown に貼り付ける運用が現実的です。
+`infra-check.yml` の `lynis-audit` ジョブで、CI runner 自体に対して `Lynis` を実行し、`hardening index` / warnings / suggestions を Job Summary に出力している（GitHub Actions の実行結果ページで確認可能）。ただし対象は **playbook 未適用の CI runner** であり、本 playbook を適用したサーバーの CIS 準拠状況を示すものではない。playbook 適用先そのものを継続監査するには、対象サーバー上での `Lynis` cron 実行、または OpenSCAP / Chef InSpec によるコンテナ/VM 単位の評価が引き続き本番化候補。
 
 ---
 
