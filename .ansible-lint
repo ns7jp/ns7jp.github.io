@@ -1,0 +1,10 @@
+---
+# profile: min → moderate への引き上げ（production-readiness.md ロードマップ P2）。
+#
+# name[casing] は「タスク名は英大文字始まり」を要求するルールだが、本 playbook の
+# タスク名は日本語（大文字/小文字の概念がない）で統一しているため、常に誤検知する。
+# 可読性のため日本語タスク名を維持し、このルールのみ除外する。
+profile: moderate
+
+skip_list:
+  - name[casing]
