@@ -112,7 +112,7 @@ AD / M365 の具体例は [support-docs/ad-m365-change-case.md](./support-docs/a
 | P1 | CIS Benchmark 自動監査（OpenSCAP / Lynis）を playbook 適用先にも広げる | CI runner に対する Lynis 監査は `infra-check.yml`（`lynis-audit` ジョブ）で稼働済み。残るのは playbook 適用後のサーバー / コンテナに対する継続監査（[現状マッピング](./ansible/cis-benchmark-mapping.md) §8 参照） |
 | P2 | CloudTrail / Flow Logs / GuardDuty | クラウド監査と検知を補う |
 | P2 | CI失敗をマージ必須（required）チェック化 | ansible-lint は最高プロファイル `production` に到達済み（[.ansible-lint](./.ansible-lint) / [infra-check.yml](./.github/workflows/infra-check.yml)、`collections:` キーワード廃止と FQCN 統一も対応）。Terraform `validate` も CI で実行済み。残るのは CI失敗時にマージをブロックできる状態（branch protection の required checks 化）にすること |
-| P3 | SLO / Error Budget | 運用品質を数値で説明できるようにする |
+| ~~P3~~ | ~~SLO / Error Budget~~ | 対応済み。[SLO / Error Budget](./support-docs/slo-error-budget.md) で Lab サービスの SLI → SLO → Error Budget → 運用判断までを具体例つきで整理済み |
 
 ---
 
