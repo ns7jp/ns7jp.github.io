@@ -141,6 +141,10 @@ jobs:
           sudo lynis audit system --quick --no-colors
         continue-on-error: true
 
+      - name: Copy report to a runner-owned path
+        run: |
+          sudo install -m 0644 -o "$(id -u)" -g "$(id -g)" /var/log/lynis-report.dat lynis-report.dat
+
       - name: Summarize hardening index
         env:
           MAPPING_DOC_URL: ${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/ansible/cis-benchmark-mapping.md
@@ -150,16 +154,16 @@ jobs:
             echo
             echo "CI runner 自体を対象にした参考監査です。[\`ansible/cis-benchmark-mapping.md\`]($MAPPING_DOC_URL) §8 の「自動監査」候補ツールを実際に動かし、hardening index の推移を継続的に見える化することが目的で、対象サーバーのCIS準拠状況そのものを示すものではありません（CI runner は playbook 未適用の汎用イメージのため）。"
             echo
-            grep -m1 "^hardening_index=" /var/log/lynis-report.dat | sed 's/^/- /'
-            echo "- warnings: $(grep -c '^warning\[\]=' /var/log/lynis-report.dat)"
-            echo "- suggestions: $(grep -c '^suggestion\[\]=' /var/log/lynis-report.dat)"
+            grep -m1 "^hardening_index=" lynis-report.dat | sed 's/^/- /'
+            echo "- warnings: $(grep -c '^warning\[\]=' lynis-report.dat)"
+            echo "- suggestions: $(grep -c '^suggestion\[\]=' lynis-report.dat)"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload Lynis report
         uses: actions/upload-artifact@v4
         with:
           name: lynis-report
-          path: /var/log/lynis-report.dat
+          path: lynis-report.dat
           retention-days: 30
 
   shell:
