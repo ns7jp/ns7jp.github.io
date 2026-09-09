@@ -166,6 +166,67 @@ jobs:
           path: lynis-report.dat
           retention-days: 30
 
+  playbook-lynis-audit:
+    name: Lynis before/after ansible/playbook.yml (informational)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Lynis and Ansible tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y lynis python3-pip
+          python -m pip install --upgrade pip
+          python -m pip install ansible-core
+          ansible-galaxy collection install -r ansible/requirements.yml
+
+      - name: Lynis baseline (before playbook)
+        run: sudo lynis audit system --quick --no-colors
+        continue-on-error: true
+
+      - name: Save baseline report
+        run: sudo install -m 0644 -o "$(id -u)" -g "$(id -g)" /var/log/lynis-report.dat lynis-report-before.dat
+
+      - name: Apply ansible/playbook.yml to this runner
+        run: |
+          printf '[linux_servers]\nlocalhost ansible_connection=local\n' > /tmp/inventory.ini
+          ansible-playbook -i /tmp/inventory.ini ansible/playbook.yml
+        continue-on-error: true
+
+      - name: Lynis re-audit (after playbook)
+        run: sudo lynis audit system --quick --no-colors
+        continue-on-error: true
+
+      - name: Save post-playbook report
+        run: sudo install -m 0644 -o "$(id -u)" -g "$(id -g)" /var/log/lynis-report.dat lynis-report-after.dat
+
+      - name: Summarize hardening index delta
+        env:
+          MAPPING_DOC_URL: ${{ github.server_url }}/${{ github.repository }}/blob/${{ github.sha }}/ansible/cis-benchmark-mapping.md
+        run: |
+          before=$(grep -m1 "^hardening_index=" lynis-report-before.dat | cut -d= -f2)
+          after=$(grep -m1 "^hardening_index=" lynis-report-after.dat | cut -d= -f2)
+          {
+            echo "### Lynis before/after \`ansible/playbook.yml\` (informational)"
+            echo
+            echo "[\`ansible/cis-benchmark-mapping.md\`]($MAPPING_DOC_URL) §8 の「playbook 適用先の継続監査」に対応するための実行結果。GitHub Actions の ubuntu-latest ランナーに実際に playbook を適用し、Lynis の hardening index の変化を計測している（ランナーはジョブ終了後に破棄される使い捨て環境）。"
+            echo
+            echo "- hardening index (before): ${before:-N/A}"
+            echo "- hardening index (after): ${after:-N/A}"
+            echo
+            echo "対象はあくまで CI ランナーであり、実サーバー / VM への適用結果を保証するものではない。playbook 適用ステップまたは Lynis 実行が失敗した場合も、このジョブ自体は informational（\`continue-on-error\`）のためワークフロー全体は失敗させない。"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload before/after Lynis reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: lynis-report-playbook-before-after
+          path: |
+            lynis-report-before.dat
+            lynis-report-after.dat
+          retention-days: 30
+
   shell:
     name: Bash syntax
     runs-on: ubuntu-latest
