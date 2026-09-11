@@ -6,11 +6,12 @@
 
 ## 迷ったら、この順番で始める
 
-1. **意味を知る:** [プロフィールの入門ガイド](https://github.com/ns7jp/ns7jp/blob/main/docs/beginner-guide.md)で、サーバーの役割と主作品を読む。
-2. **1回操作する:** [環境準備](./environment-setup.md)を済ませ、[最初の30分](./first-30-minutes.md)でファイルを作り、内容と現在位置を確かめる。
-3. **1分で説明する:** [学習ページの説明練習](https://ns7jp.github.io/learning-path.html#explain)に、自分が行った操作と実際の結果を書く。
+1. **意味を知る:** [学習ページの最初の一歩](https://ns7jp.github.io/learning-path.html#first-step)で、要求が入口のnginxからappへ届き、返答が戻る流れを読む。
+2. **小さく動かす:** [主作品の初回手順](https://github.com/ns7jp/server/blob/main/docs/beginner-learning-guide.md)で、専用Ubuntuの準備から2サービスの起動・認証・停止・再開まで進める。
+3. **結果を確かめる:** 期待したHTTPコードと自分の実際の応答を比べ、日時・環境・コードの版と一緒に記録する。
+4. **1分で説明する:** [学習ページの説明練習](https://ns7jp.github.io/learning-path.html#explain)に、目的・自分の操作・結果の根拠・未実施を書く。
 
-操作できるようになったら、[主作品 server の README](https://github.com/ns7jp/server#readme)から小さい構成を試します。このサイトは学習の案内、主作品のリポジトリは実行するコードと結果の記録、という役割です。最初から下の教材を全部読む必要はありません。
+文字での操作が初めてなら、先に[環境準備](./environment-setup.md)と[最初の30分](./first-30-minutes.md)を行います。小さい構成の実習後に、下の8段階の教材へ進みます。このサイトは学習の案内、主作品 `server` は実行するコードと検証記録の置き場です。最初から下の教材を全部読む必要はありません。
 
 | 読む順番 | 文書 | 目的 |
 |---|---|---|

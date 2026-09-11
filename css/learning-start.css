@@ -1,0 +1,203 @@
+/* The first practice only; the existing eight-step course keeps its styles. */
+.learning-path-content .beginner-start {
+    text-align: left;
+}
+.learning-path-content .beginner-start h2 {
+    line-height: 1.55;
+}
+.learning-path-content .beginner-start h3[id] {
+    scroll-margin-top: 100px;
+}
+.learning-path-content .learning-loop {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin: 24px 0 32px;
+    padding: 0;
+    list-style: none;
+}
+.learning-path-content .learning-loop a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    padding: 12px;
+    border: 1px solid var(--bg-sand);
+    border-radius: 8px;
+    background: var(--bg-warm);
+    font-weight: 700;
+}
+.learning-path-content .learning-loop span {
+    display: inline-grid;
+    flex: 0 0 26px;
+    width: 26px;
+    height: 26px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 1.3rem;
+}
+.learning-path-content .request-diagram {
+    margin: 24px 0;
+    padding: 24px;
+    border: 1px solid var(--bg-sand);
+    border-radius: 12px;
+    background: var(--bg-warm);
+}
+.learning-path-content .request-flow {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin: 0 0 18px;
+    padding: 0;
+    list-style: none;
+}
+.learning-path-content .request-flow li {
+    position: relative;
+    min-width: 0;
+    padding: 16px 12px;
+    border: 1px solid #c6d0d5;
+    border-radius: 8px;
+    background: #fff;
+    text-align: center;
+}
+.learning-path-content .request-flow li:not(:last-child)::after {
+    content: "\2192";
+    position: absolute;
+    top: 50%;
+    right: -28px;
+    width: 24px;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 700;
+}
+.learning-path-content .request-flow .request-role {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+    font-size: 1.35rem;
+}
+.learning-path-content .request-flow strong {
+    display: block;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+.learning-path-content .request-flow p {
+    margin: 8px 0;
+    text-align: center;
+    font-size: 1.45rem;
+}
+.learning-path-content .request-flow code {
+    font-size: 1.25rem;
+    overflow-wrap: anywhere;
+}
+.learning-path-content .request-diagram figcaption {
+    font-size: 1.35rem;
+    line-height: 1.8;
+    color: var(--text-medium);
+}
+.learning-path-content .request-foundation {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #c6d0d5;
+}
+.learning-path-content .request-foundation strong {
+    display: block;
+}
+.learning-path-content .practice-gate,
+.learning-path-content .practice-next {
+    margin: 20px 0;
+    padding: 18px 22px;
+    border-left: 4px solid var(--nature-green);
+    background: var(--bg-warm);
+}
+.learning-path-content .practice-gate > strong {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+}
+.learning-path-content .practice-gate ul,
+.learning-path-content .http-errors {
+    margin: 12px 0;
+    padding-left: 22px;
+    list-style: disc;
+}
+.learning-path-content .practice-gate li + li,
+.learning-path-content .http-errors li + li {
+    margin-top: 10px;
+}
+.learning-path-content .http-command {
+    margin: 18px 0;
+    padding: 18px;
+    overflow-x: auto;
+    border-radius: 8px;
+    background: var(--primary-dark);
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+.learning-path-content .http-command code {
+    color: inherit;
+    background: transparent;
+    white-space: pre;
+}
+.learning-path-content .beginner-start .operation-table th,
+.learning-path-content .beginner-start .operation-table td {
+    vertical-align: top;
+}
+.learning-path-content .beginner-start .operation-table caption {
+    margin: 0 0 10px;
+    text-align: left;
+    font-size: 1.4rem;
+    line-height: 1.8;
+}
+.learning-path-content .beginner-answer summary {
+    line-height: 1.8;
+}
+.learning-path-content .practice-record {
+    margin: 18px 0;
+    padding-left: 24px;
+    list-style: decimal;
+}
+.learning-path-content .practice-record li + li {
+    margin-top: 12px;
+}
+.learning-path-content .explain-script {
+    margin: 18px 0;
+    padding: 20px 24px;
+    border-left: 4px solid var(--primary-color);
+    background: var(--bg-warm);
+}
+.learning-path-content .explain-script p {
+    margin: 0;
+}
+@media (max-width: 700px) {
+    .learning-path-content .learning-loop {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .learning-path-content .request-diagram {
+        padding: 18px;
+    }
+    .learning-path-content .request-flow {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .learning-path-content .request-flow li:not(:last-child)::after {
+        content: "\2193";
+        top: auto;
+        right: auto;
+        bottom: -31px;
+        left: 50%;
+        transform: translateX(-50%);
+        line-height: 30px;
+    }
+    .learning-path-content .request-flow p br {
+        display: none;
+    }
+    .learning-path-content .practice-gate,
+    .learning-path-content .practice-next,
+    .learning-path-content .explain-script {
+        padding: 16px;
+    }
+}

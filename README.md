@@ -17,7 +17,16 @@
 
 ## はじめに見てほしいページ
 
-**学ぶ本人は、[まず取り組む3つ](https://ns7jp.github.io/learning-path.html#first-step)から始めます。** [プロフィールの入門ガイド](https://github.com/ns7jp/ns7jp/blob/main/docs/beginner-guide.md)で意味を知り、[環境準備](./learning-docs/environment-setup.md)と[最初の30分](./learning-docs/first-30-minutes.md)で操作し、[1分説明](https://ns7jp.github.io/learning-path.html#explain)で確認します。次に実行するコードは[主作品 server の README](https://github.com/ns7jp/server#readme)へ進みます。
+**初めて学ぶ方は、[学習ページの「最初の一歩」](https://ns7jp.github.io/learning-path.html#first-step)から始めます。** 主作品「Server Monitor」は、Linuxの負荷や状態を確認する学習用Webアプリです。最初は通信の入口 `nginx` と、返答を作る `app` の2つを題材にします。
+
+| 順番 | やること | 次へ進める目安 |
+|---|---|---|
+| 1. 理解 | [通信の流れと部品の役割](https://ns7jp.github.io/learning-path.html#first-step)を読む | 要求がどこを通り、どこから返るか言える |
+| 2. 実習 | [主作品の初回手順](https://github.com/ns7jp/server/blob/main/docs/beginner-learning-guide.md)で準備・起動・停止・再開する | 専用Ubuntuで2サービスの状態を記録できる |
+| 3. 確認 | 学習ページの期待値と、自分のHTTP応答を比べる | 認証なしの401も想定した結果だと説明できる |
+| 4. 説明 | [4行の記録と1分説明](https://ns7jp.github.io/learning-path.html#explain)を自分の結果で埋める | 目的・操作・根拠・未実施を言える |
+
+文字での操作が初めてなら、[環境準備](./learning-docs/environment-setup.md)と[最初の30分](./learning-docs/first-30-minutes.md)を先に行います。2サービスの実習ができたら、[8段階の構築演習](https://ns7jp.github.io/learning-path.html#route)でOS設定、自動化、監視、復旧へ進みます。読むこと・教材の検査成功・本人の習得は、それぞれ別に確認します。
 
 採用担当者は、次の順に成果と確認範囲をご覧ください。
 
@@ -91,7 +100,7 @@
 |------|------------------|
 | HTML | 見出し、文章、画像、リンク、ナビゲーションなど、ページの骨組みを作る |
 | CSS | 色、余白、文字サイズ、2カラム配置、カード表示、スマホ対応、アニメーションを担当 |
-| JavaScript（Vanilla） | ハンバーガーメニュー、作品フィルター、スクロール処理などの動きを担当（`js/main.js` に集約、外部ライブラリ非依存） |
+| JavaScript（Vanilla） | ハンバーガーメニュー、作品フィルター、スクロール処理などの動きを担当（共通処理は `js/main.js`、学習進捗は学習ページ内の処理） |
 | 画像・動画ファイル | ヒーロー画像、プロフィール画像、作品スクリーンショット、証跡リプレイを表示 |
 | GitHub Pages | 作成した静的ファイルをインターネット上に公開 |
 

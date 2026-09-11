@@ -176,10 +176,10 @@
                 <span class="line1">Linux Server</span>
                 <span class="line2">作り、確かめ、直す</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">主作品「Server Monitor」で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの流れとして学習しました。<br>実装済み・実測済み・未実施（NOT RUN／まだ実行していない項目）を分けて公開しています</p>
+            <p class="hero-description animate-fade-in-delay">主作品「Server Monitor」は、Linuxの負荷や状態を画面で確認する学習用のWebアプリです。<br>動かす環境を作り、応答と認証を確かめ、停止したサービスを戻す過程を記録しています。実務経験はまだありません。</p>
             <!-- 学ぶ本人、採用担当者、主作品コードへの入口。 -->
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="learning-path.html#first-step" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> 初めての方：理解して試す</a>
+                <a href="learning-path.html#first-step" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> 学ぶ方：仕組みから始める</a>
                 <a href="#one-minute-summary" class="btn btn-outline"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 採用担当者向け1分サマリ</a>
                 <a href="https://github.com/ns7jp/server" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品のリポジトリ</a>
             </div>
@@ -206,22 +206,22 @@
     <!-- ===== 初めてサーバー構築を見る人向けの入口 ===== -->
     <section class="beginner-guide" aria-labelledby="beginner-guide-title">
         <div class="container">
-            <p class="beginner-guide-kicker">SERVER BUILD IN SIMPLE WORDS</p>
+            <p class="beginner-guide-kicker">サーバー構築を、1つの作品で学ぶ</p>
             <h2 id="beginner-guide-title">サーバー構築は「決める・作る・確かめる・守る」</h2>
-            <p class="beginner-guide-lead">サーバーは、Webサイトやデータを必要なときに提供するコンピューターです。難しい製品名を覚える前に、仕事の流れを4つの言葉で整理しました。</p>
+            <p class="beginner-guide-lead">サーバーは、要求を受けてページやデータを返すコンピューターです。この作品では「Linuxの状態を、認証した利用者が画面で見られるようにする」ことを題材に、次の仕事を練習します。</p>
             <ol class="beginner-guide-steps">
-                <li><span>1</span><div><strong>決める</strong><p>目的、利用者、IPアドレス（機器を見分けるための住所のような番号）、必要な機能、安全のルールを設計します。</p></div></li>
-                <li><span>2</span><div><strong>作る</strong><p>OS（機械を動かす基本のソフト）やソフトウェアを入れます。あわせて、同じ設定をいつでも再現できる手順を用意します。手順を残すのは、別のサーバーでも同じ状態を作り直せるようにするためです。</p></div></li>
-                <li><span>3</span><div><strong>確かめる</strong><p>期待どおり動くか、通信できるか、失敗したときに元へ戻せるかを試験します。ここを確認できると、「作ったものが決めたとおりに動く」と説明できます。</p></div></li>
-                <li><span>4</span><div><strong>守る</strong><p>監視とログ（機器やソフトが自動で残す動作の記録）で変化に気づきます。そのうえで原因を調べ、復旧して記録を残します。</p></div></li>
+                <li><span>1</span><div><strong>決める</strong><p>誰が、何を見るかを決めます。例：学習者だけが、PC内の検証環境でLinuxの状態を見る。</p></div></li>
+                <li><span>2</span><div><strong>作る</strong><p>UbuntuというOS（土台）を用意し、入口のnginxと、返答を作るappを動かします。設定と作業手順を残します。</p></div></li>
+                <li><span>3</span><div><strong>確かめる</strong><p>「正しい認証なら見られる」「認証なしでは拒否される」を、予想した結果と実際の応答で比べます。</p></div></li>
+                <li><span>4</span><div><strong>守る</strong><p>状態とログ（動作の記録）を調べます。練習用サービスを計画的に停止・再開し、同じ確認で戻ったことを確かめます。</p></div></li>
             </ol>
             <div class="beginner-guide-memory" role="note">
-                <strong>覚え方：決・作・確・守（けっ・さく・かく・しゅ）</strong>
-                <span>このサイトの「設計 → 構築 → 試験 → 監視・復旧」を、最初はこの4語に置き換えて読めます。</span>
+                <strong>最初の到達点：小さい構成を動かし、結果を1分で説明する</strong>
+                <span>学習ページで仕組みを読み、主作品の手順で実行し、自分の記録で確認します。コンテナ2つの実習の後に、OS構築・自動化・監視へ進みます。</span>
             </div>
             <div class="summary-actions">
-                <a href="learning-path.html#first-step" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> まず取り組む3つを見る</a>
-                <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-map" aria-hidden="true"></i> 図で全体を見る</a>
+                <a href="learning-path.html#first-step" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> 理解 → 実習 → 確認 → 説明へ</a>
+                <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-map" aria-hidden="true"></i> 採用担当者向けの制作概要</a>
                 <a href="learning-path.html#explain" class="btn btn-outline-dark"><i class="fa-solid fa-comment" aria-hidden="true"></i> 自分の言葉で説明する</a>
             </div>
         </div>
@@ -255,7 +255,7 @@
                 </article>
             </div>
             <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
-                <span><strong>実装済み</strong> 設計書、パラメータシート（設定値をまとめた一覧表）、Ansible、Compose（どちらもサーバーの設定を自動で組み立てる道具）、試験仕様、復旧手順、引き渡し資料を公開</span>
+                <span><strong>実装済み</strong> 設計書、パラメータシート（設定値をまとめた一覧表）、Ansible（OSなどの設定を自動化）、Compose（コンテナをまとめて起動）、試験仕様、復旧手順、引き渡し資料を公開</span>
                 <span><strong>実測済み</strong> 日付付きの検証環境で確認。本人PC上のVM、WSL2、一時Ubuntu、Dockerなど、各記録に示した範囲です。本番業務の実績ではありません</span>
                 <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーでの受け入れ確認、72時間の連続稼働、Slackへの実際の通知、AWSでの作成と削除（apply/destroy）、D-2（別サーバーへ復元するホスト障害の復旧演習）、本番環境での変更</span>
             </div>
