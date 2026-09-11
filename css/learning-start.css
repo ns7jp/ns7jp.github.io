@@ -1,3 +1,76 @@
+/* Keep today's task visible before the longer course and reference navigation. */
+.learning-page main {
+    padding-top: 90px;
+}
+.learning-page .page-hero {
+    height: auto;
+    min-height: 145px;
+    background-attachment: scroll;
+}
+.learning-page .page-title .title-jp {
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+}
+.learning-page .learning-path-content {
+    padding-top: 28px;
+}
+.learning-path-content .today-start {
+    max-width: 1000px;
+    margin: 0 auto 28px;
+    scroll-margin-top: 100px;
+}
+.today-start h2 {
+    margin: 0 0 10px;
+    font-size: clamp(2.2rem, 3vw, 2.8rem);
+    line-height: 1.5;
+}
+.today-start p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+}
+.today-options {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin: 20px 0 14px;
+    padding: 0;
+    list-style: none;
+}
+.today-options li {
+    padding: 18px;
+    border: 1px solid #c6d0d5;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 8px;
+    background: #fff;
+}
+.today-options span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+    color: var(--text-medium);
+}
+.today-options a {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.6;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+.today-options a:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 5px;
+}
+.today-options p {
+    margin: 0;
+}
+.today-start .today-note {
+    font-size: 1.4rem;
+}
+.learning-page .step-status,
+.learning-page .step-toggle {
+    font-size: 1.4rem;
+}
 /* The first practice only; the existing eight-step course keeps its styles. */
 .learning-path-content .beginner-start {
     text-align: left;
@@ -173,6 +246,16 @@
     margin: 0;
 }
 @media (max-width: 700px) {
+    .today-options {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .today-options li {
+        padding: 14px 16px;
+    }
+    .learning-page .page-hero {
+        min-height: 120px;
+    }
     .learning-path-content .learning-loop {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }

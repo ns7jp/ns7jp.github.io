@@ -31,6 +31,9 @@ jobs:
       - name: Test external link checker guardrails
         run: node scripts/test-external-link-check.js
 
+      - name: Test learning progress and unavailable browser storage
+        run: node scripts/test-learning-progress.cjs
+
       - name: Check tracked text files for committed credentials
         run: node scripts/check-secrets.js
 
