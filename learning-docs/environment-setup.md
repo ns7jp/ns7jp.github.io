@@ -4,18 +4,28 @@
 
 ## 先に選ぶ
 
+**どの練習をするかで、必要な環境が変わります。** 最初のファイル操作に、Dockerや新しいVMは不要です。
+
+| 次に行う練習 | 用意する環境 | 進む場所 |
+|---|---|---|
+| ファイルを作り、コピーして確かめる | 自分専用のWSL2 Ubuntu、またはUbuntu VM。Ubuntuの端末で実行する | [CUIの最初の30分](./first-30-minutes.md) |
+| 主作品の小さい構成を動かす | 主作品の入門手順に書かれたUbuntu・Docker・Composeの条件を確認する。WSL2の場合もDockerが使える状態が別途必要 | [主作品 server の入門手順](https://github.com/ns7jp/server/blob/main/docs/beginner-learning-guide.md) |
+| 8段階でOS構築から復元まで進める | Step 0・1はWSL2でも準備できる。Step 2以降は、再起動・直接画面での復旧・スナップショットを使える専用のUbuntu VM | [8段階ハンズオン](./lab-guide.md) |
+
+ファイル操作の完了、小さい構成の動作確認、8段階全体の修了は、それぞれ別の到達点です。実際に試した環境と範囲を記録します。
+
 > **かんたんに言うと** 練習用のLinux環境をどの方法で作るかを、最初に1つだけ選びます。WSL2はWindowsの中でLinuxのコマンド操作を手軽に試す方法、VM（仮想マシン。PCの中にもう1台のPCを作るソフト）はサーバー1台をまるごと再現する方法です。迷ったらWSL2から始めます。
 
 | コース | 向いている人 | 目安 | この教材での制限 |
 |---|---|---:|---|
-| Windows + WSL2（推奨） | まずCUIとLinux操作を試したい | 30〜60分 / 8GB以上 | 独立した仮想マシンではないため、再起動・別ホストへの復元・一部のsystemd（Linuxのサービス管理の仕組み）演習は代替の確認になる |
+| Windows + WSL2（最初のファイル操作に推奨） | まずCUIとLinux操作を試したい | 30〜60分 / 8GB以上 | サーバー1台の起動・再起動・別ホストへの復元を通して確かめる8段階本編は、Step 2からUbuntu VMで行う |
 | Ubuntu VM | サーバーの起動、SSH、snapshot、復元まで練習したい | 60〜120分 / 25GB以上 | PCの仮想化対応と十分なメモリが必要 |
 | Mac — VM（UTM / Parallels / VirtualBox等） | Macでサーバー構築を練習したい | 60〜120分 / 25GB以上 | 手順はコースBを土台に、ソフトごとの画面差を自分で読み替える |
 | 既存Linux | すでに自分専用の、壊して捨ててよい環境がある | 15分 | 実際に使われている環境（本番）や共有環境は不可。Step 0で条件を確認する |
 
 Macの場合、コースA（WSL2）はそのまま使えません。コースBの手順を、UTM（無料）、Parallels Desktop、VirtualBoxなどの仮想化ソフトに読み替えて進めます。画面や導入手順は製品ごとに異なりますが、流れは共通です。ISO（OSをインストールするための1つのファイル）を取得し、VMを作り、一般ユーザーを作り、最後にsnapshot（その時点の状態をまるごと保存したもの）を取る、という4段階です。Apple Silicon（M1以降）のMacはCPUの種類が違うため、ARM64版のUbuntu ISOを選びます。
 
-判断に迷う場合は、まずWSL2で[CUIの最初の30分](./first-30-minutes.md)まで進みます。CUIとは、マウスではなく文字のコマンドでPCを操作する方式のことです。Step 2以降はUbuntu VMへ移ります。
+Windowsで判断に迷う場合は、まずWSL2で[CUIの最初の30分](./first-30-minutes.md)まで進みます。CUIとは、マウスではなく文字のコマンドでPCを操作する方式のことです。8段階本編を選ぶ場合は、Step 2へ進む前にコースBのUbuntu VMを用意します。WSLで作ったメモは、そのまま保存しておきます。
 
 ## コースA — Windows + WSL2
 
@@ -30,7 +40,7 @@ Macの場合、コースA（WSL2）はそのまま使えません。コースB�
 1. PowerShellを管理者として開き、`wsl --status > wsl-status-before.txt` のようにファイルへリダイレクト（画面に出る内容をファイルへ書き出すこと）して現状を記録する。作業前の状態を残しておくと、あとで「自分が何を変えたのか」を説明できます。`cat wsl-status-before.txt`（PowerShellでは `type wsl-status-before.txt`）で内容を見返せます。
 2. 手順1で記録した内容を見て、まだWSLが入っていない場合だけ `wsl --install -d Ubuntu-24.04` を実行し、表示に従って再起動する。すでに入っている場合は、この手順を飛ばす。
 3. Ubuntuを開き、Linux用の一般ユーザー名と長いパスワードを作る。ここで作るのは、Windowsのアカウントとは別のLinux側のアカウントです。入力中のパスワードが画面に表示されないのは正常です。文字は入力されているので、そのまま最後までタイプしてEnterを押します。
-4. 次を1行ずつ実行する。
+4. **Ubuntuの端末に切り替えてから**、次を1行ずつ実行する。
 
 ```bash
 cat /etc/os-release
@@ -60,11 +70,22 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/sdb        250G   12G  226G   6% /
 ```
 
-### Dockerを使う場合の準備（Step 3で必要）
+### WSL2で主作品の小さい構成を試す場合だけ
 
-> **かんたんに言うと** Docker（アプリを箱に詰めて動かす仕組み）は、Windows側にDocker Desktopを入れ、設定でUbuntuとつなぐのが近道です。Step 3に入る前に済ませておくと、そこで手が止まりません。
+Docker（アプリを箱に詰めて動かす仕組み）は、ファイル操作の練習には使いません。主作品の入門手順がDockerを必要とする段階で準備します。すでにDockerが使える場合は、追加で別のDockerを入れず、次の確認から始めます。
 
-[lab-guide.mdのStep 3](./lab-guide.md#step-3--最小サービスを手動構築)ではDockerを使います。WSL2のUbuntuの中に直接Docker Engine（Dockerの本体）を入れる方法もありますが、ここではWindows側にDocker Desktop（画面操作つきのDocker一式）を導入する方法を紹介します。導入したら、設定の「Settings > Resources > WSL Integration」で、使用中のUbuntuディストロ（WSLに入れたLinuxの種類）を有効にします。有効化するとWSL2のUbuntuからそのまま `docker` コマンドが使えるようになるため、Step 3へ進む前に済ませておくとスムーズです。
+Windowsでの方法の1つは、Docker Desktop（画面操作つきのDocker一式）のWSL2連携です。[Docker公式のWSL2手順](https://docs.docker.com/desktop/features/wsl/)で利用条件を確認し、導入した場合は「Settings > Resources > WSL Integration」で使用するUbuntuを有効にします。
+
+Ubuntuの端末で、次を確認します。
+
+```bash
+docker version
+docker compose version
+```
+
+**進める目安:** `docker version` にClient（命令を送る側）とServer（コンテナを動かす側）のバージョンが出て、`docker compose version` にComposeのバージョンが表示されること。接続エラーなら起動や連携設定を調べ、主作品の起動へ進みません。ここで確認できるのはDockerの準備までです。
+
+8段階本編のStep 3を行う場合は、コースBで作ったUbuntu VM内の手順に従います。Windows上のDocker Desktopが動いていても、そのVM内でDockerが動くことの確認にはなりません。
 
 ### 終了・削除方法
 
@@ -76,9 +97,11 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 ## コースB — Ubuntu VM
 
-利用する仮想化ソフトは、自分のPCで利用可能なHyper-V、VirtualBoxなどから1つだけ選びます。複数を同時に有効にすると、次の段落のように互いに衝突して起動できないことがあるためです。OSイメージ（さきほどのISOファイルのこと）は、公式配布元以外から取得しません。配布元が不明なファイルは、中身が書き換えられている危険があるためです。
+利用する仮想化ソフトは、自分のPCで利用可能なHyper-V、VirtualBoxなどから1つ選び、この練習ではそのソフトでVMを管理します。OSイメージ（ISOファイル）は、公式配布元から取得します。
 
-WSL2はHyper-V系の仮想化基盤（PCの中で別のPCを動かすための土台）を使います。そのため、コースAでWSL2（Hyper-V）を先に有効化していると、VirtualBoxを起動したときに「VT-x is not available」（CPUの仮想化機能を今は使えません、という意味）のようなエラーが出ることがあります。土台を2つ同時には使えないためです。VirtualBoxを使う場合は、仮想化ソフトをHyper-Vに変更するか、Windowsの機能から「Hyper-V」「仮想マシンプラットフォーム」を一時的に無効化してWSLを使わない状態にしてから作業します。
+VirtualBoxとHyper-Vの併用可否は、バージョンやWindowsの設定によって変わります。[Oracle VirtualBox 7.2公式ガイド「Using Hyper-V with Oracle VirtualBox」](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/EN-VBOX-7-2-USER.pdf)には、Hyper-VとWindows Hypervisor Platformが動く環境での利用方法と、性能が低下する場合があることが説明されています。「同時には使えない」と決めつけず、自分のバージョンの公式手順を確認します。
+
+起動できないときは、Windowsの版、仮想化ソフトの版、エラー全文を先に記録します。**この教材の対処として、Hyper-VやWindowsのセキュリティ機能を一律に無効化することは勧めません。** 既存のWSL2などにも影響するため、原因と影響を確認してから対処を選びます。
 
 1. Ubuntu 24.04 LTSのISOを公式配布元から取得する。
 2. 目安として2 CPU、4GB RAM（メモリ）、25GBの可変ディスク（使った分だけ実際のファイルが大きくなる仮想ディスク）、NATネットワークでVMを作る。NATの意味は、この手順のあとで説明します。
@@ -122,7 +145,7 @@ df -h /
 | ネットへ出られない | `ip address` → `ip route` → DNS | 一度に設定を変えず、どこまで成功するか記録 |
 | 戻し方が分からない | snapshotの一覧と、consoleでつなぐ手段 | ファイアウォールやSSHの設定変更には進まない |
 
-環境が用意できたら、[最初の30分](./first-30-minutes.md)を実施し、その後[Step 0](./lab-guide.md#step-0--安全境界と環境採録)へ進みます。
+環境が用意できたら、[最初の30分](./first-30-minutes.md)でファイルを作り、結果の記録を保存します。次は冒頭の表で選んだ練習へ進みます。8段階本編なら[Step 0](./lab-guide.md#step-0--安全境界と環境採録)から始めます。
 
 ## 翌日以降にもう一度開くには
 

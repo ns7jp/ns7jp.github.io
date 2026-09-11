@@ -44,7 +44,7 @@
       "@type": "CreativeWork",
       "name": "Linuxサーバー構築・運用の学習概要",
       "description": "主作品Server Monitorで学んだサーバーの設計、構築、試験、監視、復旧、引き渡しの概要",
-      "dateModified": "2026-09-05",
+      "dateModified": "2026-09-11",
       "creator": { "@type": "Person", "name": "島田則幸", "url": "https://ns7jp.github.io/" },
       "url": "https://ns7jp.github.io/project-brief.html",
       "inLanguage": "ja"
@@ -108,17 +108,20 @@
 
             <section class="lab-intro project-intro">
                 <span class="case-label">Ubuntuを使った個人学習</span>
-                <h2>設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの主作品で整理</h2>
-                <p><strong>初めて読む方へ:</strong> 全体の意味は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/beginner-guide.md" target="_blank" rel="noopener noreferrer">プロフィールの入門ガイド</a>、最初の操作は<a href="learning-path.html#first-step">学習の開始手順</a>、説明の練習は<a href="learning-path.html#explain">4行の記録と1分説明</a>から進めます。</p>
-                <p>主作品「Server Monitor」は、Ubuntuサーバーの構築と監視を学ぶために自分で作った作品です。この作品を題材に、設計書、構築手順、試験結果、監視設定、復旧手順、引き渡し資料を作業順にまとめています。実務経験はまだありませんが、実装済み・実測済み・未実施（NOT RUN）を分けて説明します。3つの言葉の意味は、すぐ下の帯にまとめています。</p>
+                <h2>Linuxの状態を見られるWebアプリを動かし、確かめ、復旧する</h2>
+                <p><strong>学ぶ方へ:</strong> <a href="learning-path.html#first-step">仕組み → 小さい実習 → 結果の確認</a>を順に進め、<a href="learning-path.html#explain">自分の記録で1分説明</a>します。採用担当者の方は、このページで作品の目的と確認範囲をご覧ください。</p>
+                <p>主作品「Server Monitor」は、CPUの使用率やメモリなど、Linuxの状態を確認する学習用のWebアプリです。Ubuntu（OSという土台）の上で、nginx（通信の入口）がapp（応答を作るプログラム）へ要求を渡します。アプリを置くだけでなく、設定・認証・動作確認・復旧・引き継ぎまでを学ぶ題材にしています。実務経験はまだありません。AIによる文章・コード・テストの作成補助を含み、本人の実行範囲は記録で示します。</p>
+                <details class="beginner-answer">
+                    <summary>過去の検証記録：いつ、どの環境で、何を確認したか</summary>
                 <div class="status-callout validated evidence-scope-note" role="note">
                     <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
                     <div>
-                        <strong>現行main（公開中の最新版）の証跡台帳を正本として参照</strong>
+                        <strong>記録した日付・環境・コードの版に限った結果です</strong>
                         <p><strong>2026年9月4日の追加記録:</strong> 本人PCのHyper-V上で、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md" target="_blank" rel="noopener noreferrer">Ubuntuの基盤構築</a>を実施しました。Ansibleの<code>foundation.yml</code>で基本設定とDockerを用意し、再実行時に不要な変更が出ないことを確認しています。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-el9-build.md" target="_blank" rel="noopener noreferrer">AlmaLinux 9.7の記録</a>は、以前使ったVMへの基盤適用と再実行です。新規構築・SSHだけの最小公開は未証明です。監視システム全体の実行や本番稼働を示すものではありません。</p>
                         <p>2026年8月22日から25日にかけて、次の記録を残しました。通しでの動作テスト23項目、前の版への切り戻し（変更を前のバージョンに戻す作業）、ディスク拡張、問題箇所の調査、データベース復元、ネットワーク確認です。いずれも、使い捨てのUbuntu（無料で使えるLinuxの一種）環境、WSL2（Windowsの中でLinuxを動かす仕組み）、Docker（アプリを箱に入れて動かす仕組み）、Linux内の分離環境で得た結果です。長く動かし続けている実際のサーバーでの結果ではありません。現在の確認範囲と未実施（NOT RUN）の範囲は、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>を正本（もとになる正しい記録）とします。証跡台帳とは、いつ、どの環境で、何を確認したかを一覧にした記録です。</p>
                     </div>
                 </div>
+                </details>
                 <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
                     <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリストを作って公開しました。作成済みであること自体は、稼働実績を意味しません</span>
                     <span><strong>実測済み</strong> 日付、実行環境、対象の版、結果を記録した確認だけを「実測済み」と表示します。いずれも学習環境の中での確認です</span>
