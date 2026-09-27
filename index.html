@@ -171,15 +171,15 @@
         <!-- ヒーローエリアの中央に表示するテキストとボタン -->
         <div class="hero-content">
             <!-- アニメーションクラス「animate-fade-in」でCSS側でフェードイン演出 -->
-            <p class="hero-greeting animate-fade-in">未経験から、Linuxサーバー設計・構築エンジニアを第一志望</p>
+            <p class="hero-greeting animate-fade-in">未経験から、Linux / Windows Server の設計・構築エンジニアを目指しています</p>
             <h1 class="hero-title animate-slide-up">
                 <span class="line1">Linux Server</span>
                 <span class="line2">作り、確かめ、直す</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">主作品「Server Monitor」は、Linuxの負荷や状態を画面で確認する学習用のWebアプリです。<br>動かす環境を作り、応答と認証を確かめ、停止したサービスを戻す過程を記録しています。実務経験はまだありません。</p>
-            <!-- 学ぶ本人、採用担当者、主作品コードへの入口。 -->
+            <p class="hero-description animate-fade-in-delay">2026年9月、手元のHyper-V上の仮想マシンでWindows Server 2022のActive Directoryを構築し、2台目のドメインコントローラー、復元、役割の奪取まで確かめました。<br>Ubuntu Serverの初期構築と監視も記録しています。個人の学習記録で、実務経験はまだありません。</p>
+            <!-- 採用担当者向けの3本の記録、1分サマリ、主作品コードへの入口。 -->
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="learning-path.html#today" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> 学ぶ方：今日の1作業を選ぶ</a>
+                <a href="#three-records" class="btn btn-primary"><i class="fa-solid fa-list-check" aria-hidden="true"></i> まず見ていただきたい3本</a>
                 <a href="#one-minute-summary" class="btn btn-outline"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 採用担当者向け1分サマリ</a>
                 <a href="https://github.com/ns7jp/server" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品のリポジトリ</a>
             </div>
@@ -197,32 +197,43 @@
                 <span>FIRST CHOICE</span>
                 <strong>Linuxサーバー設計・構築</strong>
             </div>
-            <div class="role-strip-item"><i class="fa-solid fa-headset" aria-hidden="true"></i><span>第二志望<br>ITサポート</span></div>
+            <div class="role-strip-item"><i class="fa-brands fa-windows" aria-hidden="true"></i><span>Windows Server / AD にも対応<br>第二志望：ITサポート</span></div>
             <div class="role-strip-item"><i class="fa-solid fa-route" aria-hidden="true"></i><span>設計 → 構築 → 試験<br>監視 → 復旧 → 引き渡し</span></div>
             <div class="role-strip-item"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>個人学習<br>実務・本番（実際に使われている環境）の実績ではありません</span></div>
         </div>
     </section>
 
-    <!-- ===== 初めてサーバー構築を見る人向けの入口 ===== -->
-    <section class="beginner-guide" aria-labelledby="beginner-guide-title">
+    <!-- ===== 採用担当者に最初に見ていただきたい3本の記録 ===== -->
+    <section class="recruiter-value" id="three-records" aria-labelledby="three-records-title">
         <div class="container">
-            <p class="beginner-guide-kicker">サーバー構築を、1つの作品で学ぶ</p>
-            <h2 id="beginner-guide-title">サーバー構築は「決める・作る・確かめる・守る」</h2>
-            <p class="beginner-guide-lead">サーバーは、要求を受けてページやデータを返すコンピューターです。この作品では「Linuxの状態を、認証した利用者が画面で見られるようにする」ことを題材に、次の仕事を練習します。</p>
-            <ol class="beginner-guide-steps">
-                <li><span>1</span><div><strong>決める</strong><p>誰が、何を見るかを決めます。例：学習者だけが、PC内の検証環境でLinuxの状態を見る。</p></div></li>
-                <li><span>2</span><div><strong>作る</strong><p>UbuntuというOS（土台）を用意し、入口のnginxと、返答を作るappを動かします。設定と作業手順を残します。</p></div></li>
-                <li><span>3</span><div><strong>確かめる</strong><p>「正しい認証なら見られる」「認証なしでは拒否される」を、予想した結果と実際の応答で比べます。</p></div></li>
-                <li><span>4</span><div><strong>守る</strong><p>状態とログ（動作の記録）を調べます。練習用サービスを計画的に停止・再開し、同じ確認で戻ったことを確かめます。</p></div></li>
-            </ol>
-            <div class="beginner-guide-memory" role="note">
-                <strong>最初の到達点：小さい構成を動かし、結果を1分で説明する</strong>
-                <span>初日は10分、図で3つの役割を知るところから始められます。準備ができたら主作品の手順で実行し、予想と実結果を比べます。コンテナ2つの実習の後に、OS構築・自動化・監視へ進みます。</span>
+            <h2 class="section-title center">
+                <span class="title-en">Three Records</span>
+                <span class="title-jp" id="three-records-title">まず見ていただきたい3本</span>
+            </h2>
+            <p class="plain-summary"><strong>かんたんに言うと</strong>2026年9月に手元のHyper-V上の仮想マシンで行った記録から、特に説明したいものを3本に絞りました。AIの手順案内を受けながら私が操作し、結果を画面で確かめたものです。</p>
+            <div class="value-grid">
+                <article class="value-card">
+                    <i class="fa-solid fa-sitemap" aria-hidden="true"></i>
+                    <h3>ADの冗長化と復旧</h3>
+                    <p>Windows Server 2022でActive Directoryを構築し、試験の必須31項目がすべて合格。2台目のドメインコントローラーで複製を確かめ、バックアップからの復元と、1台を失った想定での役割（FSMO）の奪取まで行いました。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ad-fsmo-seize.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+                <article class="value-card">
+                    <i class="fa-brands fa-linux" aria-hidden="true"></i>
+                    <h3>Ubuntuの構築と監視</h3>
+                    <p>固定IP・SSH鍵認証・UFW・時刻同期・自動更新を手作業で設定し、わざと起こした設定不備から復旧。Prometheus / Grafanaで、サービスの停止と復帰が表示に出ることを確かめました。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-initial-build.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
+                <article class="value-card">
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                    <h3>原因の切り分け</h3>
+                    <p>更新配信サーバー（WSUS）の試験が不合格に。承認件数を突き合わせて前日の仮説を否定し、「分類・製品が0件だと絞り込みなしと解釈される」という本当の原因を特定して、手順書を直しました。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                </article>
             </div>
             <div class="summary-actions">
-                <a href="learning-path.html#today" class="btn btn-primary"><i class="fa-solid fa-route" aria-hidden="true"></i> 今日の1作業から始める</a>
-                <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-map" aria-hidden="true"></i> 採用担当者向けの制作概要</a>
-                <a href="learning-path.html#explain" class="btn btn-outline-dark"><i class="fa-solid fa-comment" aria-hidden="true"></i> 自分の言葉で説明する</a>
+                <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> すべての記録（検証証跡台帳）</a>
+                <a href="https://github.com/ns7jp/ns7jp" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> プロフィール（GitHub）</a>
             </div>
         </div>
     </section>
@@ -316,7 +327,7 @@
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h2>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了しました。現在は人材派遣会社（アデコ株式会社）を通じて、IT企業で派遣社員としてトライアル就業中です（2026年7月〜）。就業先の社名は面談時に開示します。Linuxサーバー設計・構築を第一志望、ITサポートを第二志望としてキャリア移行を目指しています。製造・物流現場では作業を計測し、棚配置・補充ルール・手順を見直して1日約1時間を短縮しました。この「計測 → 原因特定 → 手順化 → 定着」を構築、試験、監視、障害復旧にもつなげています。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了しました。2026年7月から人材派遣会社（アデコ株式会社）を通じてIT企業でトライアル就業し、Windows / LinuxサーバーとAWS / Azureの構築研修を受けました（2026年9月15日に終了）。現在は求職中で、すぐに勤務を開始できます。Linuxサーバー設計・構築を第一志望、ITサポートを第二志望としてキャリア移行を目指しています。製造・物流現場では作業を計測し、棚配置・補充ルール・手順を見直して1日約1時間を短縮しました。この「計測 → 原因特定 → 手順化 → 定着」を構築、試験、監視、障害復旧にもつなげています。</p>
                     <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
                     <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
