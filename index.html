@@ -214,8 +214,8 @@
             <div class="value-grid">
                 <article class="value-card">
                     <i class="fa-solid fa-sitemap" aria-hidden="true"></i>
-                    <h3>ADの冗長化と復旧</h3>
-                    <p>Windows Server 2022でActive Directoryを構築し、試験の必須31項目がすべて合格。2台目のドメインコントローラーで複製を確かめ、バックアップからの復元と、1台を失った想定での役割（FSMO）の奪取まで行いました。</p>
+                    <h3>ADの2台構成・復元・役割の奪取</h3>
+                    <p>Windows Server 2022でActive Directoryを構築し、試験の必須31項目がすべて合格。2台目のドメインコントローラーで複製を確かめ、バックアップからの復元と、1台を失った想定での役割（FSMO）の奪取まで行いました。奪取の演習の結果、最終的な構成はドメインコントローラー1台です。</p>
                     <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ad-fsmo-seize.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
                 <article class="value-card">
@@ -227,7 +227,7 @@
                 <article class="value-card">
                     <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                     <h3>原因の切り分け</h3>
-                    <p>更新配信サーバー（WSUS）の試験が不合格に。承認件数を突き合わせて前日の仮説を否定し、「分類・製品が0件だと絞り込みなしと解釈される」という本当の原因を特定して、手順書を直しました。</p>
+                    <p>更新配信サーバー（WSUS）の試験が不合格に。承認件数を突き合わせて前日の仮説を否定し、「分類・製品が0件だと絞り込みなしと解釈される」ことを確かめて、手順書を直しました。0件になったきっかけは最有力の候補まで絞り込みましたが、再現はできていません。</p>
                     <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
             </div>
