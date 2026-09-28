@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸（Noriyuki Shimada）の1ページ履歴書（A4印刷対応）。第一志望はLinuxサーバー設計・構築エンジニア、第二志望はITサポート。経歴、資格、学習内容、主作品を掲載しています。">
+    <meta name="description" content="島田則幸（Noriyuki Shimada）の1ページ履歴書（A4印刷対応）。第一志望はLinuxサーバー設計・構築。Windows Server / AD、入口としてのインフラ監視・運用にも対応し、応募先によってはITサポートも担当可。希望条件、経歴、学歴、資格、2026年9月の仮想マシンでの記録を掲載しています。">
     <meta name="robots" content="noindex">
     <title>1ページ履歴書 | 島田則幸のポートフォリオ</title>
 
@@ -109,6 +109,13 @@
         .resume-contact i { color: var(--r-primary); margin-right: 4px; }
         .resume-contact a { color: var(--r-muted); text-decoration: none; }
 
+        .resume-conditions {
+            font-size: 12px;
+            color: var(--r-primary);
+            margin: -6px 0 10px;
+        }
+        .resume-conditions strong { margin-right: 6px; }
+
         .resume-summary {
             background: var(--r-bg-soft);
             border-left: 3px solid var(--r-accent);
@@ -152,6 +159,7 @@
             letter-spacing: 0.05em;
         }
         .resume-section h2 i { color: var(--r-accent); margin-right: 6px; }
+        .resume-section h2.resume-subhead { margin-top: 10px; }
 
         .resume-section table {
             width: 100%;
@@ -267,7 +275,7 @@
         }
         .roadmap-step .step-note { color: var(--r-muted); display: block; margin-top: 2px; }
 
-        @media (max-width: 800px) {
+        @media screen and (max-width: 800px) {
             .roadmap-track { grid-template-columns: 1fr 1fr; }
         }
 
@@ -286,9 +294,11 @@
             .resume-name .en { font-size: 11px; }
             .resume-role { font-size: 12px; margin-top: 0; }
             .resume-contact { font-size: 11px; line-height: 1.45; }
+            .resume-conditions { font-size: 11px; margin: -2px 0 4px; }
             .resume-summary { padding: 5px 8px; margin-bottom: 6px; font-size: 11.5px; line-height: 1.45; }
             .resume-header { padding-bottom: 3px; margin-bottom: 4px; }
             .resume-section h2 { font-size: 11.5px; padding-bottom: 2px; margin-bottom: 4px; }
+            .resume-section h2.resume-subhead { margin-top: 5px; }
             .resume-section table td { padding: 1px 0; font-size: 11px; }
             .resume-section td.year { width: 56px; }
             .resume-skills div { font-size: 11px; margin-bottom: 1px; }
@@ -314,7 +324,7 @@
             @page { size: A4 portrait; margin: 0; }
         }
 
-        @media (max-width: 800px) {
+        @media screen and (max-width: 800px) {
             body { padding: 8px; }
             .resume { width: 100%; padding: 16px; }
             .resume-header, .resume-body { grid-template-columns: 1fr; }
@@ -346,7 +356,7 @@
         <header class="resume-header">
             <div>
                 <h1 class="resume-name">島田 則幸<span class="en">Noriyuki Shimada</span></h1>
-                <div class="resume-role">第一志望：Linuxサーバー設計・構築エンジニア ／ 第二志望：ITサポート</div>
+                <div class="resume-role">第一志望：Linuxサーバー設計・構築 ／ Windows Server・AD、入口の監視・運用にも対応 ／ 応募先によりITサポートも可</div>
             </div>
             <div class="resume-contact">
                 <div><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:net7jp@gmail.com">net7jp@gmail.com</a></div>
@@ -356,24 +366,21 @@
             </div>
         </header>
 
+        <p class="resume-conditions"><strong>希望条件</strong>すぐに勤務可能 ／ 東京都内通勤可能圏 ／ 24/365監視のシフト勤務（夜勤・交代制）可 ／ SES可 ／ 正社員としてのインフラ職を志望 ／ 希望年収は応相談 ／ 普通自動車免許なし</p>
+
         <section class="resume-summary">
-            <strong>Linuxサーバー設計・構築を第一志望、ITサポートを第二志望</strong>としています。Windows Server / Active Directoryの構築にも対応します（2026年9月、手元のHyper-V上でAD 2台構成・復元・役割の奪取、WSUSの構築と原因特定を実施）。実務経験はまだありませんが、主作品「Server Monitor」（Linuxサーバーを1台つくり、動きを見張る自作の学習プロジェクト）で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しという6つの工程を、一つの流れとして学んでいます。入社後はまず、決められた手順があり、作業結果を確認してくれる担当者がいる基礎業務から取り組みます。
+            <strong>Linuxサーバー設計・構築を第一志望</strong>に、Windows Server / Active Directoryの構築・運用、入口としてのインフラ監視・運用にも対応します。応募先によってはITサポートも担当できます。2026年9月、手元のHyper-V上の仮想マシンでADの構築・試験・復元・2台目のDCと役割の奪取、WSUSの構築（判定FAIL・原因調査）、Ubuntu Serverの手作業での初期構築を行いました（AIの手順案内を受けて本人が操作）。実務経験はまだありません。入社後はまず、決められた手順があり、作業結果を確認してくれる担当者がいる基礎業務から取り組みます。
         </section>
 
         <div class="resume-body">
 
             <section class="resume-section">
-                <h2><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>EXPERIENCE &amp; TRAINING / 経歴・研修</h2>
+                <h2><i class="fa-solid fa-briefcase" aria-hidden="true"></i>EXPERIENCE / 経歴</h2>
                 <table>
                     <tr>
                         <td class="year">2026-07<br>〜2026-09</td>
                         <td>人材派遣会社（アデコ株式会社）を通じ、IT企業で派遣社員としてトライアル就業（適性を確かめるために期間を区切って働くこと）。2026-09-15に終了し、現在は求職中（すぐに勤務可能）。就業先の社名は面談時に開示<br>
                             <span style="color:#666;font-size:11px;">研修としてWindows/Linuxサーバー構築、AWS/Azure（インターネット越しに借りるサーバーの代表的なサービス）の構築を学習（実務案件の構築実績ではありません）</span></td>
-                    </tr>
-                    <tr>
-                        <td class="year">2025-10<br>〜2026-01</td>
-                        <td>公共職業訓練「情報処理（Pythonエンジニア）コース」 修了<br>
-                            <span style="color:#666;font-size:11px;">HTML/CSS, JavaScript, Python, PHP, MySQL, Flask</span></td>
                     </tr>
                     <tr>
                         <td class="year">〜2025</td>
@@ -393,17 +400,23 @@
                     <tr><td class="year">次に受験</td><td>LinuC-1 101（LPI-Japanが実施する、Linuxの基本操作を問う認定資格。101・102の2試験で1つの資格）</td></tr>
                     <tr><td class="year">学習中</td><td>基本情報技術者試験（FE／ITの基礎を問う国家試験。2026年12月までに受験予定）</td></tr>
                 </table>
+                <h2 class="resume-subhead"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>EDUCATION &amp; TRAINING / 学歴・職業訓練</h2>
+                <table>
+                    <tr><td class="year">2007-03</td><td>中部大学 応用生物学部 応用生物化学科 卒業</td></tr>
+                    <tr><td class="year">2025-10<br>〜2026-01</td><td>公共職業訓練「情報処理（Pythonエンジニア）コース」修了<br>
+                        <span style="color:#666;font-size:11px;">HTML/CSS, JavaScript, Python, PHP, MySQL, Flask</span></td></tr>
+                </table>
             </section>
 
             <section class="resume-section">
                 <h2><i class="fa-solid fa-laptop-code" aria-hidden="true"></i>SKILLS / スキル</h2>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>ここに並ぶのは、学習と研修で実際に手を動かした範囲です。「NOT RUN」と書いた項目は、まだ試していないことを正直に示しています。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>学習と研修で実際に手を動かした範囲です。「NOT RUN」は、まだ試していないことを示します。</p>
                 <div class="resume-skills">
                     <div><strong>設計</strong>基本設計、詳細設計、パラメータシート（設定値をまとめた一覧表）、ネットワーク設計を作成</div>
-                    <div><strong>構築・試験</strong>Ansible（サーバー設定を自動で行う道具）とDocker Composeを使用。GitHub上の一時Ubuntu環境（毎回作り直される使い捨ての検証環境）で確認</div>
+                    <div><strong>構築・試験</strong>手元のHyper-V上でUbuntu Server・Windows Serverを構築し、試験仕様書に沿って確認。Ansible（設定を自動で行う道具）とDocker Composeも使用</div>
                     <div><strong>監視・復旧</strong>サーバーの状態、ログ（動作の記録）、通知、サービス復旧、同一環境へのデータ復元を確認</div>
                     <div><strong>引き渡し</strong>チェックリストと切り戻し手順（問題が起きたときに元の状態へ戻す手順）を作成。対象ホストの受け入れはNOT RUN（未実施）</div>
-                    <div><strong>その他</strong>Python / PowerShell / Git / GitHub / Terraform（設定ファイルからサーバーを用意する道具。AWS適用はNOT RUN）</div>
+                    <div><strong>その他</strong>Python / PowerShell / Git / Terraform（AWS適用はNOT RUN）</div>
                 </div>
             </section>
 
@@ -411,15 +424,23 @@
                 <h2><i class="fa-solid fa-briefcase" aria-hidden="true"></i>SELECTED WORKS / 主な成果物</h2>
                 <div class="resume-works">
                     <div class="work-item">
-                        <span class="work-name">Server Monitor — Linuxサーバー設計・構築・運用</span>
-                        <span class="work-tag">設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し</span>
-                        <div class="work-desc">Ubuntu（Linuxの代表的な種類）のサーバー1台を想定し、上に挙げた6工程それぞれのコード、設定、手順、確認記録を公開。</div>
+                        <span class="work-name">Windows Server 2022 / AD（2026-09-01〜04）</span>
+                        <div class="work-desc">手元のHyper-V上でADを構築し、試験の必須31項目がPASS。System State復元、2台目のDCと複製（失敗0/5）、1台を失った想定でのFSMO役割の奪取まで実施（最終構成はDC 1台）。</div>
                     </div>
                     <div class="work-item">
-                        <span class="work-name">動作確認の記録（2026-08-25時点）</span>
-                        <span class="work-tag">実装済み / 実測済み / 未実施（NOT RUN）</span>
-                        <div class="work-desc">学習用のUbuntu環境で23項目の動作を確認。独立した対象サーバーの受け入れ、72時間の連続稼働、AWS適用、本番環境（実際に利用者が使う環境）での変更はNOT RUN。</div>
+                        <span class="work-name">WSUSの構築（2026-09-07〜08）</span>
+                        <div class="work-desc">必須28項目中26 PASSで判定はFAIL。残った2件を調べて最有力の原因を突き止め、手順書を修正（再現と通しの再試験は未実施）。</div>
                     </div>
+                    <div class="work-item">
+                        <span class="work-name">Ubuntu Server 24.04の初期構築（2026-09-07〜08）</span>
+                        <div class="work-desc">固定IP、SSH鍵認証、sudo、UFW、時刻同期、自動更新を手作業で設定。わざと起こした設定不備を、ログの照合で復旧。</div>
+                    </div>
+                    <div class="work-item">
+                        <span class="work-name">Server Monitor — Linuxサーバー設計・構築・運用</span>
+                        <span class="work-tag">設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し</span>
+                        <div class="work-desc">6工程のコード、設定、手順、確認記録を公開。GitHub上の一時Ubuntu環境で23項目PASS（2026-08-22）。</div>
+                    </div>
+                    <div class="work-desc">9月の記録はAIの手順案内を受けて本人が操作したもの。AIなしの再構築、長期稼働、本番環境での変更はNOT RUN。</div>
                 </div>
             </section>
 
@@ -441,15 +462,15 @@
                         </tr>
                         <tr>
                             <td class="task">構築 / 試験</td>
-                            <td class="evidence"><strong>実測済み：</strong>一時Ubuntu環境で設定を2回実行。同じ操作を繰り返しても結果が変わらないことを確かめるためで、2回目に不要な変更が出ないことと、23項目の動作を確認。</td>
+                            <td class="evidence"><strong>実測済み：</strong>手元の仮想マシンでUbuntu Serverを手作業で初期構築し、ADとWSUSを試験仕様書に沿って確認（2026-09）。一時Ubuntu環境では設定を2回実行し、2回目に不要な変更が出ないことを確認（2026-08）。</td>
                         </tr>
                         <tr>
                             <td class="task">監視 / 復旧</td>
-                            <td class="evidence"><strong>実測済み：</strong>学習環境で状態とログを確認し、サービス停止、同一環境へのデータ復元、通信障害の調査を練習。</td>
+                            <td class="evidence"><strong>実測済み：</strong>学習環境で状態とログを確認し、サービス停止、同一環境へのデータ復元を練習。ADではSystem State復元と、DC 1台停止中の継続を確認。</td>
                         </tr>
                         <tr>
                             <td class="task">引き渡し</td>
-                            <td class="evidence"><strong>実装済み：</strong>チェックリストと切り戻し手順を作成。<strong>NOT RUN：</strong>独立した対象サーバーの受け入れ、本番環境での作業。</td>
+                            <td class="evidence"><strong>実装済み：</strong>チェックリストと切り戻し手順を作成。<strong>NOT RUN：</strong>独立した対象サーバーの受け入れ、長期稼働、本番環境での作業。</td>
                         </tr>
                     </tbody>
                 </table>
@@ -462,8 +483,8 @@
         </div>
 
         <footer class="resume-footer">
-            学習用の構築資料、Linux確認手順、動作確認の記録は <a href="https://ns7jp.github.io/">ns7jp.github.io</a> に公開 / 最終更新 2026-08
-            <br>プログラム作成や文章整理にAI（Claude）を補助として使用しています。実施者・環境・確認範囲は各証跡に記載しています。
+            学習用の構築資料、Linux確認手順、動作確認の記録は <a href="https://ns7jp.github.io/">ns7jp.github.io</a> に公開 / 最終更新 2026-09
+            <br>プログラム作成や文章整理にAI（Claude Code / Codex）を補助として使用しています。実施者・環境・確認範囲は各証跡に記載しています。
         </footer>
     </main>
 
