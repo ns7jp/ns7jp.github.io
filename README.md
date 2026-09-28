@@ -54,9 +54,9 @@
 <details>
 <summary>コミットIDを含む詳しい技術記録</summary>
 
-- [構築から復旧までの一連テスト（E2E）23項目](https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md): テストは、使い捨ての一時的なUbuntu環境で実施しました。実行したコードは `7622a9d` です。記録を含む変更は、公開用の本流であるmainブランチ（変更をまとめていく中心の枝）の `4a292026` へ取り込み済みです。
-- [前の版へ戻すテスト](https://github.com/ns7jp/server-monitor/actions/runs/32611251044): PR（プルリクエスト。変更をまとめて取り込んでもらうための申請）#77の途中のコード `84e1492` から、前の版 `59aa88e` へ戻せることを確認しました。PR #77自体は、後にmainへ取り込みました。ただしこの結果は、取り込んだ後のmainで同じテストをもう一度実行したものではありません。
-- 2026年8月24日の追加演習はAI支援の仮想・コンテナ環境で行いました。面談で再現できると約束するのは、本人のWSL2 + Dockerで実行できるB-2 / B-3のみです。
+- [構築から復旧までの一連テスト（E2E）23項目](https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md): テストは、使い捨ての一時的なUbuntu環境で実施しました。実行したコードは `7622a9d` です。記録を含む変更は、公開用の本流であるmainブランチ（変更をまとめていく中心の枝）の `4a292026` へ取り込み済みです。
+- [前の版へ戻すテスト](https://github.com/ns7jp/server/actions/runs/32611251044): PR（プルリクエスト。変更をまとめて取り込んでもらうための申請）#77の途中のコード `84e1492` から、前の版 `59aa88e` へ戻せることを確認しました。PR #77自体は、後にmainへ取り込みました。ただしこの結果は、取り込んだ後のmainで同じテストをもう一度実行したものではありません。
+- 2026年8月24日の追加演習はAI支援の仮想・コンテナ環境で行いました。B-2 / B-3は本人のWSL2 + Dockerで動かせる構成ですが、本人の環境ではまだ通して実行していないため、面談で再現できるとは約束していません。
 - 2026年8月25日はAlmaLinux / Rocky Linux 9系向けのAnsible設定をコンテナ上で確認しました。実機AlmaLinuxサーバーでの結果ではありません。
 - 公開中の2分15秒映像は、2026年8月18日・19日の画面と復旧ログを再構成したものです。実操作を最初から最後まで連続録画した映像ではありません。収録方法は[収録ガイド](https://github.com/ns7jp/server/blob/main/docs/demo-capture-guide.md)に分けています。
 
@@ -332,8 +332,8 @@ ns7jp.github.io/
 | ③ | Support Toolkit | Markdown / PowerShell / bash | 補助成果 | 16ガイド+README、10確認スクリプト、M365サンプル、架空ケース | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
 | ④ | 定型文管理アプリ | Python / Flet | 補助スキル | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ⑤ | 付箋アプリ | Python / Tkinter | 補助スキル | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
-| ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | 学習作品 | 感情ムードを選んで投稿するSNS | [保存済み画面](image/pulse.png)（公開コードの参照先は未確認） |
-| ⑦ | 掲示板アプリ | PHP / MySQL | 学習作品 | ユーザー登録、投稿、返信ができる掲示板 | [保存済み画面](image/post.png)（公開コードの参照先は未確認） |
+| ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | 学習作品 | 感情ムードを選んで投稿するSNS | [保存済み画面](image/pulse.png)（コードは現在非公開） |
+| ⑦ | 掲示板アプリ | PHP / MySQL | 学習作品 | ユーザー登録、投稿、返信ができる掲示板 | [保存済み画面](image/post.png)（コードは現在非公開） |
 | ⑧ | サンプル企業サイト | HTML / CSS / JavaScript | 学習作品 | 架空企業のレスポンシブ対応コーポレートサイト | [保存済み画面](image/magic.png)（公開コードの参照先は未確認） |
 
 作品ページでは、単に「何を作ったか」だけでなく、「どんな場面で使えるか」「作る中で何に困ったか」「どう解決したか」も記載しています。これは、完成物だけでなく、問題解決の過程も伝えるためです。

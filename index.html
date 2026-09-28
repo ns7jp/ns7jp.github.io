@@ -91,7 +91,7 @@
           "@id": "https://ns7jp.github.io/#website",
           "url": "https://ns7jp.github.io/",
           "name": "島田則幸のポートフォリオ",
-          "description": "Linuxサーバー設計・構築を第一志望、ITサポートを第二志望とするポートフォリオサイト",
+          "description": "Linuxサーバー設計・構築を第一志望に、Windows Server / ADの構築・運用、入口としてのインフラ監視・運用にも対応し、応募先によってはITサポートも担当できる人のポートフォリオサイト",
           "inLanguage": "ja",
           "publisher": { "@id": "https://ns7jp.github.io/#person" }
         },
@@ -105,7 +105,7 @@
           "description": "未経験からLinuxサーバー設計・構築エンジニアを第一志望とし、Server Monitorを題材に設計、構築、試験、監視、復旧、引き渡しを扱うポートフォリオを公開しています。",
           "email": "mailto:net7jp@gmail.com",
           "sameAs": ["https://github.com/ns7jp"],
-          "knowsAbout": ["Linux", "Ubuntu", "Ansible", "Docker", "Nginx", "Prometheus", "Grafana", "Loki", "Terraform", "Python", "サーバー構築", "インフラ運用"]
+          "knowsAbout": ["Linux", "Ubuntu", "Windows Server", "Active Directory", "Ansible", "Docker", "Nginx", "Prometheus", "Grafana", "Loki", "Terraform", "Python", "サーバー構築", "インフラ運用"]
         }
       ]
     }
@@ -191,13 +191,13 @@
         </div>
     </section>
 
-    <section class="role-strip" aria-label="第一志望、第二志望、主作品の概要">
+    <section class="role-strip" aria-label="志望と対応できる領域、主作品の概要">
         <div class="container role-strip-inner">
             <div class="role-strip-lead">
                 <span>FIRST CHOICE</span>
                 <strong>Linuxサーバー設計・構築</strong>
             </div>
-            <div class="role-strip-item"><i class="fa-brands fa-windows" aria-hidden="true"></i><span>Windows Server / AD にも対応<br>第二志望：ITサポート</span></div>
+            <div class="role-strip-item"><i class="fa-brands fa-windows" aria-hidden="true"></i><span>Windows Server / AD、入口の監視・運用にも対応<br>応募先によってはITサポートも可</span></div>
             <div class="role-strip-item"><i class="fa-solid fa-route" aria-hidden="true"></i><span>設計 → 構築 → 試験<br>監視 → 復旧 → 引き渡し</span></div>
             <div class="role-strip-item"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>個人学習<br>実務・本番（実際に使われている環境）の実績ではありません</span></div>
         </div>
@@ -214,8 +214,8 @@
             <div class="value-grid">
                 <article class="value-card">
                     <i class="fa-solid fa-sitemap" aria-hidden="true"></i>
-                    <h3>ADの冗長化と復旧</h3>
-                    <p>Windows Server 2022でActive Directoryを構築し、試験の必須31項目がすべて合格。2台目のドメインコントローラーで複製を確かめ、バックアップからの復元と、1台を失った想定での役割（FSMO）の奪取まで行いました。</p>
+                    <h3>ADの2台構成・復元・役割の奪取</h3>
+                    <p>Windows Server 2022でActive Directoryを構築し、試験の必須31項目がすべて合格。2台目のドメインコントローラーで複製を確かめ、バックアップからの復元と、1台を失った想定での役割（FSMO）の奪取まで行いました。奪取の演習の結果、最終的な構成はドメインコントローラー1台です。</p>
                     <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ad-fsmo-seize.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
                 <article class="value-card">
@@ -227,7 +227,7 @@
                 <article class="value-card">
                     <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
                     <h3>原因の切り分け</h3>
-                    <p>更新配信サーバー（WSUS）の試験が不合格に。承認件数を突き合わせて前日の仮説を否定し、「分類・製品が0件だと絞り込みなしと解釈される」という本当の原因を特定して、手順書を直しました。</p>
+                    <p>更新配信サーバー（WSUS）の試験が不合格に。承認件数を突き合わせて前日の仮説を否定し、「分類・製品が0件だと絞り込みなしと解釈される」ことを確かめて、手順書を直しました。0件になったきっかけは最有力の候補まで絞り込みましたが、再現はできていません。</p>
                     <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
             </div>
@@ -327,7 +327,7 @@
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h2>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了しました。2026年7月から人材派遣会社（アデコ株式会社）を通じてIT企業でトライアル就業し、Windows / LinuxサーバーとAWS / Azureの構築研修を受けました（2026年9月15日に終了）。現在は求職中で、すぐに勤務を開始できます。Linuxサーバー設計・構築を第一志望、ITサポートを第二志望としてキャリア移行を目指しています。製造・物流現場では作業を計測し、棚配置・補充ルール・手順を見直して1日約1時間を短縮しました。この「計測 → 原因特定 → 手順化 → 定着」を構築、試験、監視、障害復旧にもつなげています。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了しました。2026年7月から人材派遣会社（アデコ株式会社）を通じてIT企業でトライアル就業し、Windows / LinuxサーバーとAWS / Azureの構築研修を受けました（2026年9月15日に終了）。現在は求職中で、すぐに勤務を開始できます。Linuxサーバー設計・構築を第一志望に、Windows Server / ADの構築・運用、入口としてのインフラ監視・運用にも対応します。応募先によってはITサポートも担当できます。製造・物流現場では作業を計測し、棚配置・補充ルール・手順を見直して1日約1時間を短縮しました。この「計測 → 原因特定 → 手順化 → 定着」を構築、試験、監視、障害復旧にもつなげています。</p>
                     <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
                     <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
@@ -502,7 +502,7 @@
         <!-- 著作権表示。&copy;は©（コピーライト記号）の実体参照。 -->
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。実施者・環境・確認範囲は各証跡に記載しています。個人制作のため、人によるレビュー（第三者による確認）は受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。実施者・環境・確認範囲は各証跡に記載しています。個人制作のため、人によるレビュー（第三者による確認）は受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#3-つの前提ai-の利用を含む" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 

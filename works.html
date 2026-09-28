@@ -3,13 +3,13 @@
 ========================================================================
   ファイル名 : works.html
   役割       : 作品紹介ページ
-  概要       : 主作品Server Monitor、第二志望のITサポート資料、開発学習作品を「成果サマリー・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
+  概要       : 主作品Server Monitor、応募先に応じたITサポート資料、開発学習作品を「成果サマリー・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
                構成で詳しく紹介する。フィルターボタンで技術別に絞り込み可能。
                カテゴリ（第一志望を優先）：Infrastructure / Support / Python / PHP / HTML/CSS
   初学者向けの読み方:
     1. filter-btn の data-filter と作品カードの data-category の対応を見る
     2. work-showcase-item 1つが、1作品分の紹介カードだと理解して読む
-    3. Server Monitorを第一志望、ITサポート資料を第二志望として分けた点を確認する
+    3. Server Monitorを第一志望の作品、ITサポート資料を応募先に応じた補助作品として分けた点を確認する
     4. 末尾のscriptで、フィルター表示とフェードイン演出を追う
 ========================================================================
 -->
@@ -18,7 +18,7 @@
     <!-- 文字コード（UTF-8）と画面サイズ調整の設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="島田則幸の作品ページ。主作品Server Monitorを先頭に、Linuxサーバーの設計、構築、試験、監視、復旧、引き渡しと、第二志望のITサポート資料を紹介します。">
+    <meta name="description" content="島田則幸の作品ページ。主作品Server Monitorを先頭に、Linuxサーバーの設計、構築、試験、監視、復旧、引き渡しと、応募先によって担当できるITサポートの資料を紹介します。">
     <title>Linuxサーバー設計・構築の成果物 | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/works.html">
 
@@ -147,7 +147,7 @@
                     </div>
                     <div class="intro-text">
                         <h2>第一志望に直結する主作品「Server Monitor」から紹介します</h2>
-                        <p>Linuxサーバーの設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを、一つの学習案件として整理しました。第二志望のITサポート資料、その後に開発学習作品を掲載しています。</p>
+                        <p>Linuxサーバーの設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを、一つの学習案件として整理しました。続いて、応募先によって担当できるITサポートを想定した資料、その後に開発学習作品を掲載しています。</p>
                         <p>このページでは、作品の状態を3つに分けて書いています。「実装済み」は、作って形になったものです。「実測済み」は、実際に動かして結果を記録したものです。「未実施（NOT RUN／まだ実行していないこと）」は、まだ試していないものです。個人学習の作品であり、実務実績や人による第三者レビューの実績ではありません。</p>
                         <p>詳しい日時、実行環境、検証したコードの版（コミットID／コードの変更ひとつずつに付く固有の番号）は、<a href="evidence-demo.html">動作確認の記録</a>にまとめています。</p>
                     </div>
@@ -165,7 +165,7 @@
                         <a href="work-readiness.html"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
                         <a href="#work-server-monitor"><i class="fa-solid fa-server" aria-hidden="true"></i> 主作品の詳細</a>
                         <a href="#work-monitor"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> サーバー監視</a>
-                        <a href="https://github.com/ns7jp/server-monitor/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 一連テスト23項目合格</a>
+                        <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 一連テスト23項目合格</a>
                         <a href="demo.html" aria-label="2026年8月18日・19日の動作確認画面と復旧ログを再構成した2分15秒の記録を見る"><i class="fa-solid fa-video" aria-hidden="true"></i> 2分15秒 動作確認リプレイ</a>
                     </div>
                 </div>
@@ -186,7 +186,7 @@
                     <!-- data-filter属性の値はJSで参照され、対応するdata-categoryの作品だけ表示される -->
                     <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true" aria-controls="works-list">すべて</button>
                     <button type="button" class="filter-btn" data-filter="infra" aria-pressed="false" aria-controls="works-list">サーバー・インフラ</button>
-                    <button type="button" class="filter-btn" data-filter="support" aria-pressed="false" aria-controls="works-list">第二志望：ITサポート</button>
+                    <button type="button" class="filter-btn" data-filter="support" aria-pressed="false" aria-controls="works-list">ITサポート（応募先により）</button>
                     <button type="button" class="filter-btn" data-filter="python" aria-pressed="false" aria-controls="works-list">Python</button>
                     <button type="button" class="filter-btn" data-filter="php" aria-pressed="false" aria-controls="works-list">PHP</button>
                     <button type="button" class="filter-btn" data-filter="html" aria-pressed="false" aria-controls="works-list">HTML/CSS</button>
@@ -389,7 +389,7 @@
                                 <div><span>学んだこと</span><strong>受付、原因の絞り込み、記録、相談、引き継ぎ</strong></div>
                             </div>
                             <div class="support-fit high">
-                                <span class="fit-label">第二志望の補助作品：ITサポートを想定した練習</span>
+                                <span class="fit-label">補助作品：応募先によって担当するITサポートを想定した練習</span>
                                 <p>PCの初期設定、利用者アカウント、Microsoft 365、ネットワーク障害などを想定し、確認手順と記録例を作りました。すべて個人学習用の想定ケースで、会社の実環境で使った実績ではありません。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
@@ -705,7 +705,7 @@ def api_stats():
                                     <div class="overlay-buttons">
                                         <a href="image/pulse.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="SNSアプリPulseの画面を見る"><i class="fa-solid fa-image" aria-hidden="true"></i> 画面</a>
                                     </div>
-                                    <p class="demo-note">公開コードの参照先は現在確認できていません。画面は保存済みスクリーンショットで確認できます。</p>
+                                    <p class="demo-note">コードは現在非公開です。画面は保存済みスクリーンショットで確認できます。</p>
                                 </div>
                             </div>
                         </div>
@@ -773,7 +773,7 @@ def api_stats():
                                     <div class="overlay-buttons">
                                         <a href="image/post.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="掲示板アプリの画面を見る"><i class="fa-solid fa-image" aria-hidden="true"></i> 画面</a>
                                     </div>
-                                    <p class="demo-note">公開コードの参照先は現在確認できていません。画面は保存済みスクリーンショットで確認できます。</p>
+                                    <p class="demo-note">コードは現在非公開です。画面は保存済みスクリーンショットで確認できます。</p>
                                 </div>
                             </div>
                         </div>
@@ -812,7 +812,6 @@ def api_stats():
                                     <li><strong>趣味コミュニティ：</strong>ゲーム攻略・読書感想・推し活など、テーマ別スレッドで深く語り合うニッチコミュニティ用の交流場として最適。</li>
                                     <li><strong>学習グループのQ&A：</strong>勉強会メンバー間で質問・回答・解説をスレッド化。返信機能で議論が枝分かれし、過去ログとして学習資産にもなる。</li>
                                     <li><strong>イベント参加者交流：</strong>勉強会・オフ会・ワークショップ参加者向けの限定掲示板。事前の自己紹介、当日の感想シェア、アフターフォローに利用可能。</li>
-                                    <li><strong>PHP/MySQL学習教材：</strong>ソースコード公開済みのため、CRUD操作・認証・セキュリティ対策の実装例として学習者の参考になる。</li>
                                 </ul>
                             </div>
                             <div class="work-troubleshoot">
@@ -929,7 +928,7 @@ def api_stats():
         </div>
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。実施者・環境・確認範囲は各証跡に記載しています。個人制作のため、人による第三者レビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#ai-の利用について" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品では、文章とプログラム作成の補助にAI（Claude / Codex）を使用しています。実施者・環境・確認範囲は各証跡に記載しています。個人制作のため、人による第三者レビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#3-つの前提ai-の利用を含む" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
         </div>
     </footer>
 
