@@ -184,7 +184,7 @@ if (!executablePath) throw new Error('Chrome or Edge was not found. Set CHROME_P
         x.fillStyle = 'rgba(0, 0, 0, .42)';
         x.fillRect(70, 348, 1140, 188);
         wrap(notice, 112, 404, 1050, 43, { size: 23, weight: 500, color: '#f5f1e7' });
-        footer('実測日: 2026-08-18 / 2026-08-19　　公開元: github.com/ns7jp/server-monitor');
+        footer('実測日: 2026-08-18 / 2026-08-19　　公開元: github.com/ns7jp/server');
       } else if (t < 32) {
         label('01 / Running services');
         title('監視スタック9サービスをLinux上で起動');
