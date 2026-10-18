@@ -13,7 +13,7 @@
 
 ## 開発体制について
 
-このポートフォリオと主作品 [Server Monitor](https://github.com/ns7jp/server) では、文章、プログラム、テストの作成補助にClaude Code / Codexを使用しました。どの方法を採用するかを決めるのは本人です。出てきた結果を確認し、未実施の項目をそのまま書き残すのも本人です。面談で内容を説明する責任も、本人が持ちます。個人制作であり、人による第三者レビューは受けていません。
+このポートフォリオと主作品 [Server Monitor](https://github.com/ns7jp/server) では、文章、プログラム、テストの作成に、Claude Code / Codex の支援を大きく受けています。どの方法を採用するかを決めるのは本人です。出てきた結果を確認し、未実施の項目をそのまま書き残すのも本人です。面談で内容を説明する責任も、本人が持ちます。個人制作であり、人による第三者レビューは受けていません。
 
 ## はじめに見てほしいページ
 
@@ -42,14 +42,15 @@
 
 > **かんたんに言うと** 「どの環境で、どこまで確かめたか」の一覧です。日付付きの過去記録は、その版で行った試験を示します。公開中の最新コード全体を再試験した意味ではありません。
 
+- **2026年9月1日〜10月1日・本人PC上のVMで確認:** Windows Server 2022 の AD 構築・試験（必須31項目PASS）と WSUS 構築（判定FAIL）、Ubuntu Serverの手作業での初期構築、監視・ログ復元・アプリの自動再起動の部分演習、新しいVMでのSSH鍵認証（接続の成功は本人の報告）とDocker最小構成を、AIの手順案内を受けて本人が操作して確かめました（[証跡台帳](https://github.com/ns7jp/server/blob/main/docs/evidence/README.md)）。
 - **2026年9月4日・本人PC上のVMで確認:** [Ubuntuの基盤構築](https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md)では、Hyper-V上のVMへAnsibleの`foundation.yml`を適用し、基本設定・Docker・再実行時の変更なしを確認しました。[AlmaLinux 9.7への適用](https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-el9-build.md)では、以前使ったVMを再利用して同じ基盤の適用と再実行を確認しました。AlmaLinuxの新規構築やSSHだけを公開する状態は未証明です。いずれも監視システム全体の構築完了や実務経験を示す記録ではありません。
 
 - **本人のPCで確認:** Windows上のLinux環境（WSL2）で、監視、ログ確認、サービスの復旧、ネットワーク障害の原因調査を練習しました。
 - **2026年8月のGitHub上の自動テストで確認:** テストのたびに作り直す一時的なUbuntu環境で、構築から復旧までの23項目すべてに合格しました。前の版へ戻すテストも行いました。対象版と実行日は下の技術記録に記載しています。
 - **AI支援の練習環境で確認:** 仮想環境や、コンテナ（アプリを動かすのに必要なものを一式まとめた軽い箱）を使った追加演習です。独立した実機での構築実績ではありません。
-- **未実施:** 次の項目は、まだ試していません。独立サーバーでの72時間稼働、再起動後の確認、Slack（業務用チャットツール）への実通知、AWS（Amazonが提供するクラウドサービス）環境の作成・削除、別サーバーへの復元、本番通信などです。
+- **未実施:** 次の項目は、まだ試していません。独立サーバーでの72時間稼働と再起動後の確認（手元の仮想マシンでOSだけを再起動した確認は2026年9月7〜8日に実施）、Slack（業務用チャットツール）への実通知、AWS（Amazonが提供するクラウドサービス）環境の作成・削除、別サーバーへの復元、本番通信などです。
 
-自動テストに使ったUbuntuには、Docker（アプリを箱に詰めて動かす仕組み）があらかじめ入っていました。そのため、何も入っていないOSへDockerを自分で導入した実績とは表現しません。詳しい実行条件と、検証したコードの版（コミットID）は以下に残しています。
+自動テストに使ったUbuntuには、Docker（アプリを箱に詰めて動かす仕組み）があらかじめ入っていました。そのため、自動テストの結果を、何も入っていないOSへDockerを導入した実績とは表現しません（Dockerが入っていないUbuntuへの導入は、2026年9月8日・10月1日に手元の仮想マシンで、AIの手順案内を受けて本人が行っています）。詳しい実行条件と、検証したコードの版（コミットID）は以下に残しています。
 
 <details>
 <summary>コミットIDを含む詳しい技術記録</summary>
@@ -122,7 +123,7 @@
    Linuxサーバー構築演習の全体像と、実際に確認した結果、まだ試していない範囲を確認できます。
 
 4. **サーバー構築 / スキル**
-   要件の確認から引き渡しまでを、1から10まで番号を付けた10個の成果物として並べています。あわせて、Linux、Ansible（設定作業を自動化する道具）、Docker、監視、復旧のスキルを確認できます。Windows と M365（Microsoft 365）、および開発技術は、補助成果として区別しています。
+   要件の確認から引き渡しまでを、00から11まで番号を付けた12個の成果物として並べています。あわせて、Linux、Ansible（設定作業を自動化する道具）、Docker、監視、復旧のスキルを確認できます。Windows と M365（Microsoft 365）、および開発技術は、補助成果として区別しています。
 
 5. **作品**
    Linux Server Build & Operations LabとServer Monitorを先頭に、Support Toolkit、業務改善・開発学習作品を詳しく紹介しています。
@@ -157,8 +158,8 @@
 | 作品ページ | `works.html` | Linux Server Build & Operations Labを先頭に、補助成果・学習作品を紹介 |
 | 履歴書 | `resume.html` | A4 1ページ。経歴、資格、想定業務への備え、主な学習成果、AIを使った範囲を掲載 |
 | 連絡先ページ | `contact.html` | メールや GitHub などの連絡先を掲載する |
-| Support Toolkit | `works.html#work-support-toolkit` | 16ガイド+README、確認スクリプト、想定ケースを補助成果としてまとめる |
-| サポート文書 | `support-docs/` | 16ガイド+README。架空ケース・計画・テンプレートを含み、実運用実績ではない |
+| Support Toolkit | `works.html#work-support-toolkit` | 15ガイド+README、確認スクリプト、想定ケースを補助成果としてまとめる |
+| サポート文書 | `support-docs/` | 15ガイド+README。架空ケース・計画・テンプレートを含み、実運用実績ではない |
 | 確認スクリプト | `support-scripts/` | PowerShell 9本 + bash 1本、純関数ライブラリとPesterテスト |
 | Monitoring Stack（アーカイブ） | `monitoring-stack/` | Prometheus + Grafana + node_exporter + Loki + Promtail の docker-compose 一式。**2026-03 に Promtail が EOL となり、主作品側は Grafana Alloy へ移行済み**（[monitoring-stack/README.md](./monitoring-stack/README.md)）。現行構成は [server](https://github.com/ns7jp/server) |
 | 自動構築の設定 | `ansible/` | Ubuntuの基本設定を自動化。同じ手順を繰り返しても不要な変更が出ないように作成 |
@@ -202,7 +203,7 @@
 
 ### `support-docs/`
 
-補助成果として「手順書整備」「ナレッジ共有」「切り分けの型」を示す想定ドキュメントです。標準業務手順4本と障害対応3本を含みます。いずれも想定環境・架空ケースであり、実運用実績ではありません。
+補助成果として「手順書整備」「ナレッジ共有」「切り分けの型」を示す想定ドキュメントです。標準業務手順4本と障害対応4本を含みます。いずれも想定環境・架空ケースであり、実運用実績ではありません。
 
 ### `support-scripts/`
 
@@ -326,9 +327,9 @@ ns7jp.github.io/
 
 | # | 作品名 | 主な技術 | 位置づけ | 内容 | 参照先 |
 |---|--------|----------|----------|------|------------|
-| ① | Linux Server Build & Operations | Ubuntu / Ansible / Docker / Prometheus / Loki / Alloy | 主成果 | 要件から引き渡しまでの番号付き成果物10件と、2026年8月22日の通し試験（Full-stack E2E）23項目中23項目合格 | [ns7jp/server](https://github.com/ns7jp/server) |
+| ① | Linux Server Build & Operations | Ubuntu / Ansible / Docker / Prometheus / Loki / Alloy | 主成果 | 要件から引き渡しまでの番号付き成果物12件（00〜11）と、2026年8月22日の通し試験（Full-stack E2E）23項目中23項目合格 | [ns7jp/server](https://github.com/ns7jp/server) |
 | ② | サーバー監視ダッシュボード | Python / Flask / psutil / Chart.js | 主成果 | PCやサーバーの状態をブラウザで可視化する監視ツール | [ns7jp/server](https://github.com/ns7jp/server) |
-| ③ | Support Toolkit | Markdown / PowerShell / bash | 補助成果 | 16ガイド+README、10確認スクリプト、M365サンプル、架空ケース | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
+| ③ | Support Toolkit | Markdown / PowerShell / bash | 補助成果 | 15ガイド+README、10確認スクリプト、M365サンプル、架空ケース | [support-docs](./support-docs/) / [support-scripts](./support-scripts/) |
 | ④ | 定型文管理アプリ | Python / Flet | 補助スキル | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ⑤ | 付箋アプリ | Python / Tkinter | 補助スキル | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | 学習作品 | 感情ムードを選んで投稿するSNS | [保存済み画面](image/pulse.png)（コードは現在非公開） |

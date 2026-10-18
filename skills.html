@@ -125,10 +125,10 @@
             <section class="skills-overview">
                 <p class="overview-text"><strong>第一志望はインフラエンジニア（Linuxサーバー設計・構築が中心）です。Windows Server / ADの構築・運用、入口としてのインフラ監視・運用にも対応し、応募先によってはITサポートも担当できます。</strong>主作品「Server Monitor」で、設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを一つの流れとして学びました。</p>
                 <p class="overview-text">スキル名だけで自己評価せず、コード・資料を作成した「実装済み」、日付と環境を残して動かした「実測済み」、まだ試していない「未実施（NOT RUN）」を分けています。NOT RUNは英語で「実行していない」という意味です。</p>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>下の3つは、どこまで自分で確かめたかを表す区分です。「実装済み」は資料やコードを作った段階、「実測済み」は実際に動かして日付付きで結果を残した段階、「未実施（NOT RUN）」はまだ一度も試していない段階を指します。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>下の3つは、どこまで確かめたかを表す区分です。「実装済み」は資料やコードを作った段階、「実測済み」は実際に動かして日付付きで結果を残した段階、「未実施（NOT RUN）」はまだ一度も試していない段階を指します。</p>
                 <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
                     <span><strong>実装済み</strong> 設計書、パラメータシート、Ansible、Compose、試験仕様、復旧手順、引き渡し資料</span>
-                    <span><strong>実測済み</strong> WSL2（Windowsの中でLinuxを動かす仕組み）、一時Ubuntu（使い捨てのLinux）、Docker（アプリを箱ごと動かす仕組み）等の学習環境で、構築、監視、復旧を日付付きで確認</span>
+                    <span><strong>実測済み</strong> 手元のHyper-Vの仮想マシン、WSL2（Windowsの中でLinuxを動かす仕組み）、一時Ubuntu（使い捨てのLinux）、Docker（アプリを箱ごと動かす仕組み）等の学習環境で、構築、監視、復旧を日付付きで確認</span>
                     <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーの受け入れ、72時間稼働、Slack実通知、AWS apply/destroy（クラウド上に実際に環境を作って消す操作）、D-2（別のサーバーへ復元するホスト障害の演習）、本番変更</span>
                 </div>
                 <div class="summary-actions">
@@ -170,7 +170,7 @@
                             <ul>
                                 <li><strong>設計：</strong>要件、基本設計、詳細設計、パラメータ、ネットワーク、監視、バックアップの資料を作成（AI支援で作成した学習用の文書で、設計工程の実務経験には数えていません）</li>
                                 <li><strong>構築：</strong>AnsibleとDocker Compose（どちらも設定作業を自動で行う道具）で設定を自動化しました。使い捨てのUbuntu環境で同じ手順をもう一度流し、前回との差分（変わってしまった点）が出ないことを確認しています。何度実行しても同じ状態になる、と言えます。</li>
-                                <li><strong>試験：</strong>期待値（こうなるはずの値）、実測値（実際に出た値）、実行日、環境、対象版を記録します。あとから別の人が同じ条件でやり直せるようにするためです。一連テスト23項目を実行しました。</li>
+                                <li><strong>試験：</strong>期待値（こうなるはずの値）、実測値（実際に出た値）、実行日、環境、対象版を記録します。あとから別の人が同じ条件でやり直せるようにするためです。一連テスト23項目は、GitHubの自動テスト（使い捨てのUbuntu環境）で実行しました。</li>
                                 <li>Prometheus（監視の数値を集める道具）、Grafana（集めた数値をグラフで見る道具）、Loki（ログを集めて検索する道具）を使い、監視値とログを確認しました。Windows上のLinux環境（WSL2）で起動を確認済みです。</li>
                                 <li><strong>復旧：</strong>サービス停止からの復旧と同一環境へのデータ復元を確認。D-2と別サーバーへの復元はNOT RUN</li>
                                 <li><strong>引き渡し：</strong>チェックリストと、切り戻し手順（問題が起きたときに前の状態へ戻す手順）を作成しました。独立した対象サーバーでの受け入れはNOT RUN（未実施）です。</li>
@@ -568,7 +568,7 @@
                 <div class="support-docs-link">
                     <p class="support-docs-text">
                         <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                        さらに詳しい <strong>PC キッティング手順書</strong>（新しいPCを業務で使える状態まで設定する作業の手順書）、<strong>障害対応事例集（10ケース）</strong>、<strong>PowerShell 実務スクリプト</strong> を公開しています。
+                        さらに詳しい <strong>PC キッティング手順書</strong>（新しいPCを業務で使える状態まで設定する作業の手順書）、<strong>障害対応事例集（10ケース）</strong>、<strong>PowerShell の学習用サンプルスクリプト</strong> を公開しています。
                     </p>
                     <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
                         <i class="fa-brands fa-github" aria-hidden="true"></i> 詳細ドキュメントを見る

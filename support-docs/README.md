@@ -1,8 +1,8 @@
 # Support Docs — IT サポート実務向けドキュメント集
 
-ITサポート・社内SE・運用監視業務で実際に使われる手順書・事例集をまとめたフォルダです。**Windows 11 + Microsoft 365 + Active Directory** を標準的な業務環境として想定し、現場で参考になる粒度で記述しています。
+ITサポート・社内SE・運用監視業務を想定して作った、学習用の手順書・事例集のフォルダです（架空のサンプルで、実務で使った記録ではありません）。**Windows 11 + Microsoft 365 + Active Directory** を標準的な業務環境として想定し、現場で参考になる粒度で記述しています。
 
-ポートフォリオ作品（Web アプリ・サーバー監視ツール）が「**コードが書けること**」の証明であるのに対し、このフォルダのドキュメントは「**手順書を整備し、ナレッジを共有できること**」の証明として用意しました。
+このフォルダのドキュメントは、「**手順書を整備し、ナレッジを共有する**」ための型を学ぶ目的で、AI（Claude・Codex）の支援を大きく受けて作った架空のサンプルです。実務で手順書を整備した実績を示すものではありません。
 
 ---
 
@@ -98,7 +98,7 @@ Intune Compliance Policy / Configuration Profile、Conditional Access、Defender
 
 ---
 
-### 🧰 関連: 実務 PowerShell + bash スクリプト
+### 🧰 関連: PowerShell + bash の学習用サンプルスクリプト
 
 #### → [support-scripts/](../support-scripts/)
 
@@ -143,4 +143,4 @@ Intune Compliance Policy / Configuration Profile、Conditional Access、Defender
 
 ---
 
-**著者**：島田則幸（Noriyuki Shimada） / 📧 net7jp@gmail.com
+**著者**：島田則幸（Noriyuki Shimada。AI の支援を大きく受けて作成） / 📧 net7jp@gmail.com

@@ -66,7 +66,7 @@
                 <p>Linuxコマンドは英単語の省略形が多く、名前の由来を知ると覚えやすくなります。たとえば <code>ls -la /etc</code> は「<strong>ls</strong>（list＝一覧にする）」「<strong>-l -a</strong>（詳しく・隠しファイルも）」「<strong>/etc</strong>（対象）」と分解できます。</p>
                 <div class="command-formula" aria-label="コマンドの基本構造"><span><b>command</b><small>何をする</small></span><i aria-hidden="true">+</i><span><b>-option</b><small>どう実行する</small></span><i aria-hidden="true">+</i><span><b>argument</b><small>何を対象にする</small></span></div>
                 <p>各カード右上の札は、その操作の種類と注意の度合いを表します。「参照」「通信」は見るだけで、システムは変わりません。「作成」「変更」「移動」はファイルが変わります。「権限変更」「所有者変更」「管理者権限」「停止」「設定反映」はシステムやサービスに影響するため、実行前に対象と理由を確認します。</p>
-                <div class="beginner-safety-note"><strong>安全な練習場所</strong><p>練習は自分専用の環境で行います。Linux仮想マシン（パソコンの中に作る仮想のコンピューター）、WSL（Windows Subsystem for Linux／WindowsでLinuxを動かす仕組み）、コンテナ（Linux環境を軽く切り分けて動かす仕組み）のどれかを使います。会社・学校・公開中サーバーでは勝手に実行しません。このページの実行例は教材です。掲載したコマンドをすべて実機で実行した証跡（実行した証拠として残す記録）ではありません。</p><p>VM/WSLをまだ用意していない場合は、先に<a href="learning-docs/environment-setup.md">環境準備ガイド</a>を行ってください。</p></div>
+                <div class="beginner-safety-note"><strong>安全な練習場所</strong><p>練習は自分専用の環境で行います。Linux仮想マシン（パソコンの中に作る仮想のコンピューター）、WSL（Windows Subsystem for Linux／WindowsでLinuxを動かす仕組み）、コンテナ（Linux環境を軽く切り分けて動かす仕組み）のどれかを使います。会社・学校・公開中サーバーでは勝手に実行しません。このページの実行例は教材です。掲載したコマンドをすべて実機で実行した証跡（実行した証拠として残す記録）ではありません。</p><p>VM/WSLをまだ用意していない場合は、先に<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/environment-setup.md">環境準備ガイド</a>を行ってください。</p></div>
             </section>
             <nav class="command-toc" aria-label="コマンド集の目次"><strong>学習順</strong><a href="#basics">1. 現在地とファイル</a><a href="#reading">2. 読む・探す</a><a href="#permissions">3. 権限</a><a href="#system">4. OS・プロセス</a><a href="#service-log">5. サービス・ログ</a><a href="#network">6. ネットワーク</a><a href="#packages">7. パッケージ</a><a href="#combine">8. 組み合わせ</a><a href="#errors">9. よくあるエラー</a><a href="#practice">10. 演習</a></nav>
 
@@ -208,7 +208,7 @@ Are you sure you want to continue connecting (yes/no/fingerprint)?</code></pre><
 
             <section class="command-section" id="errors" aria-labelledby="errors-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i></span><h2 class="heading-text" id="errors-title">9. よくあるエラーメッセージと意味</h2></div>
-                <p>操作を止めて、原因を1つずつ確認します。より詳しい切り分け表は<a href="learning-docs/beginner-troubleshooting.md">初心者向けエラーFAQ</a>を参照してください。</p>
+                <p>操作を止めて、原因を1つずつ確認します。より詳しい切り分け表は<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/beginner-troubleshooting.md">初心者向けエラーFAQ</a>を参照してください。</p>
                 <div class="command-grid">
                     <article class="command-card"><header><code>command not found</code><span class="risk safe">入力</span></header><h3>コマンド名が見つからない</h3><p>綴りの誤り、または未導入のコマンドです。綴りと使っているシェル（コマンドを受け付ける入力窓口のソフト）とOSを確認し、教材の前提に合わせて再実行します。</p></article>
                     <article class="command-card"><header><code>Permission denied</code><span class="risk caution">権限</span></header><h3>権限が不足している</h3><p>実行・読取・変更のいずれかの権限がありません。<code>ls -l 対象</code>で所有者と権限を確認し、必要な範囲だけ<code>sudo</code>を付けて再実行します。</p></article>

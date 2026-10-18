@@ -44,7 +44,7 @@
       "@type": "CreativeWork",
       "name": "Linuxサーバー構築・運用の学習概要",
       "description": "主作品Server Monitorで学んだサーバーの設計、構築、試験、監視、復旧、引き渡しの概要",
-      "dateModified": "2026-09-11",
+      "dateModified": "2026-10-18",
       "creator": { "@type": "Person", "name": "島田則幸", "url": "https://ns7jp.github.io/" },
       "url": "https://ns7jp.github.io/project-brief.html",
       "inLanguage": "ja"
@@ -117,8 +117,9 @@
                     <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
                     <div>
                         <strong>記録した日付・環境・コードの版に限った結果です</strong>
+                        <p><strong>2026年9月7日〜10月1日の追加記録:</strong> 手元のHyper-V上の仮想マシンで、Ubuntu Serverの手作業での初期構築（固定IP・SSH鍵認証・UFW・時刻同期）、監視の停止と復帰の表示、ログの別ボリュームへの復元、アプリの自動再起動を確かめました。9月30日・10月1日には新しい仮想マシンで、SSH鍵での接続（接続の成功は本人の報告）とDockerの最小構成（appとnginx）を確かめています。いずれもAIの手順案内を受けて本人が操作した記録です（<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">証跡台帳</a>）。</p>
                         <p><strong>2026年9月4日の追加記録:</strong> 本人PCのHyper-V上で、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md" target="_blank" rel="noopener noreferrer">Ubuntuの基盤構築</a>を実施しました。Ansibleの<code>foundation.yml</code>で基本設定とDockerを用意し、再実行時に不要な変更が出ないことを確認しています。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-el9-build.md" target="_blank" rel="noopener noreferrer">AlmaLinux 9.7の記録</a>は、以前使ったVMへの基盤適用と再実行です。新規構築・SSHだけの最小公開は未証明です。監視システム全体の実行や本番稼働を示すものではありません。</p>
-                        <p>2026年8月22日から25日にかけて、次の記録を残しました。通しでの動作テスト23項目、前の版への切り戻し（変更を前のバージョンに戻す作業）、ディスク拡張、問題箇所の調査、データベース復元、ネットワーク確認です。いずれも、使い捨てのUbuntu（無料で使えるLinuxの一種）環境、WSL2（Windowsの中でLinuxを動かす仕組み）、Docker（アプリを箱に入れて動かす仕組み）、Linux内の分離環境で得た結果です。長く動かし続けている実際のサーバーでの結果ではありません。現在の確認範囲と未実施（NOT RUN）の範囲は、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>を正本（もとになる正しい記録）とします。証跡台帳とは、いつ、どの環境で、何を確認したかを一覧にした記録です。</p>
+                        <p>2026年8月22日から25日にかけての記録です。通しでの動作テスト23項目と前の版への切り戻し（変更を前のバージョンに戻す作業）は、GitHubの自動テストが使い捨てのUbuntu（無料で使えるLinuxの一種）環境で実行した結果です。ディスク拡張、問題箇所の調査、データベース復元、ネットワーク確認は、AI支援セッションがAI側の作業環境（仮想ディスク付きのUbuntu、Docker（アプリを箱に入れて動かす仕組み）、Linux内の分離環境）で実行した結果で、本人が操作したものではありません。長く動かし続けている実際のサーバーでの結果ではありません。現在の確認範囲と未実施（NOT RUN）の範囲は、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>を正本（もとになる正しい記録）とします。証跡台帳とは、いつ、どの環境で、何を確認したかを一覧にした記録です。</p>
                     </div>
                 </div>
                 </details>
@@ -267,7 +268,7 @@
                     <article class="decision-card">
                         <span class="decision-number">ADR-02</span>
                         <h3>自動設定を用途ごとに分ける</h3>
-                        <p>Ansibleの設定を、基本、Docker、Web接続、監視の4つに分けました。役割ごとに分けたので、変更した場所を見つけやすくなりました。同じ設定を2回実行しても、2回目に不要な変更が出ないことも確認しました。</p>
+                        <p>Ansibleの設定を、基本、Docker、Web接続、アプリ、監視、バックアップの6つに分けました。役割ごとに分けたので、変更した場所を見つけやすくなりました。同じ設定を2回実行しても、2回目に不要な変更が出ないことも確認しました。</p>
                     </article>
                     <article class="decision-card">
                         <span class="decision-number">ADR-03</span>
@@ -296,11 +297,11 @@
                     <article class="architecture-notes">
                         <h3>実際に確認できたこと</h3>
                         <ul>
-                            <li>一時的なUbuntu環境で設定を2回実行し、2回目に不要な変更が出ないことを確認しました。同じ手順を繰り返しても同じ状態になる、と言えます。</li>
-                            <li>監視に必要な11個のサービスを起動し、異常と復旧の通知、ログの受け取りを確認。</li>
+                            <li>GitHubの自動テスト（一時的なUbuntu環境）で設定を2回実行し、2回目に不要な変更が出ないことを確認しました。同じ手順を繰り返しても同じ状態になる、と言えます。</li>
+                            <li>同じ自動テストで、監視用の10個のサービスと、通知を受け取るテスト用の1個（計11個）を起動し、異常と復旧の通知、ログの受け取りを確認。</li>
                             <li>停止させたサービスの自動復旧と、監視データをバックアップから戻せることを確認。</li>
-                            <li>前の版への切り戻し、ディスク拡張、データベース復元、通信障害の調査を練習。</li>
-                            <li>実際に動かして見つけた問題29件を記録し、誤って合格にしていた6件はテスト方法も修正。</li>
+                            <li>前の版への切り戻しはGitHubの自動テストで確認。ディスク拡張、データベース復元、通信障害の調査の演習は、AI支援セッションがAI側の作業環境で実行した記録です（同じ演習は、本人の環境ではまだ行っていません）。</li>
+                            <li>実行して初めて見つかった問題を欠陥台帳に記録しています（2026年10月時点で49件。うち、誤って合格と判定していたもの10件）。AI支援セッションや自動テストの実行で見つかったものが多く、手元の仮想マシンでの作業で見つかったものも含みます。</li>
                         </ul>
                     </article>
                     <article class="architecture-notes">

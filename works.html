@@ -262,11 +262,11 @@
                             <div class="work-numbers" aria-label="主要スペック">
                                 <span class="num-chip"><strong>5</strong>学習テーマ</span>
                                 <span class="num-chip"><strong>23/23</strong>テスト合格</span>
-                                <span class="num-chip"><strong>4</strong>監視アラート</span>
+                                <span class="num-chip"><strong>14</strong>監視アラート</span>
                                 <span class="num-chip"><strong>2</strong>Grafana ダッシュボード</span>
-                                <span class="num-chip"><strong>3</strong>復旧計画（未実施含む）</span>
+                                <span class="num-chip"><strong>6</strong>復旧演習（実施済みはD-1のみ）</span>
                             </div>
-                            <p class="plain-summary"><strong>かんたんに言うと</strong>サーバーを1台つくって動かし、人に引き渡すまでの一連の流れを、6つの段階に分けて練習した記録です。</p>
+                            <p class="plain-summary"><strong>かんたんに言うと</strong>サーバーを1台つくって動かし、人に引き渡すまでの一連の流れを、6つの段階に分けて整理した記録です。</p>
                             <p>「設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し」の順で学習内容を整理しました。2026年8月22日に、テストのたびに作り直す一時Ubuntu環境で23項目を確認しました。翌日は前の版へ戻す自動テストにも合格しました。その日ごとの記録は、当時の記録としてそのまま残しています。いま何をどこまで確認できているかは、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>（最新版に付けた確認記録の一覧）を、正式な版として扱います。</p>
                             <ul class="work-points">
                                 <li><strong>構成図：</strong>サーバーやネットワーク機器をどのようにつなぐか、図で整理しました。</li>
@@ -279,8 +279,8 @@
                                 <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>学習した作業の例</h4>
                                 <ul class="usage-list">
                                     <li><strong>状態確認：</strong>サービス、ログ、CPU、メモリ、ディスク、通信状況を同じ順番で確認し、結果を残す。</li>
-                                    <li><strong>新規設定：</strong>Ansibleの設定を一度まとめて適用し、2回目に不要な変更が出ないことを確認する。何度実行しても結果が変わらない状態（冪等性）を確かめるため。Dockerを入れていない最小構成のOSでは未実施です。</li>
-                                    <li><strong>稼働確認：</strong>11個のサービスを起動し、監視通知、アクセス制限、ログの保存を練習環境内で確認する。Slackへの実通知は未実施です。</li>
+                                    <li><strong>新規設定：</strong>Ansibleの設定を一度まとめて適用し、2回目に不要な変更が出ないことを確認する。何度実行しても結果が変わらない状態（冪等性）を確かめるため。監視まで含めた設定全体（<code>site.yml</code>）を、Dockerを入れていない最小構成のOSへ適用するのは未実施です（基本設定とDockerだけの<code>foundation.yml</code>は、2026年9月4日に手元の仮想マシンで適用し、2回目の変更0件を確認）。</li>
+                                    <li><strong>稼働確認：</strong>11個のサービスを起動し、監視通知、アクセス制限、ログの保存を確認する。11個そろえての確認はGitHubの自動テストの一時環境だけです。手元の仮想マシンでは、本人が5〜6個のサービスに分けて確かめました（通知の確認はしていません）。Slackへの実通知は未実施です。</li>
                                     <li><strong>障害復旧：</strong>停止させたサービスの自動復旧と、バックアップからの復元を確認する。別サーバーへの復元は未実施です。</li>
                                     <li><strong>作業後の記録：</strong>起きたこと、影響、原因、対応、残った課題を分けて記録する。</li>
                                 </ul>
@@ -393,7 +393,7 @@
                                 <p>PCの初期設定、利用者アカウント、Microsoft 365、ネットワーク障害などを想定し、確認手順と記録例を作りました。すべて個人学習用の想定ケースで、会社の実環境で使った実績ではありません。</p>
                             </div>
                             <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip"><strong>16</strong>ガイド + README</span>
+                                <span class="num-chip"><strong>15</strong>ガイド + README</span>
                                 <span class="num-chip"><strong>10</strong>スクリプト</span>
                                 <span class="num-chip"><strong>10</strong>障害ケース</span>
                                 <span class="num-chip"><strong>5</strong>JSON + <strong>2</strong>PS1</span>

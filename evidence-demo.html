@@ -43,7 +43,7 @@
       "@type": "TechArticle",
       "headline": "Linuxサーバー構築・運用の動作確認記録",
       "description": "学習用Linuxサーバーで確認したことと、まだ試していないことを分けた記録",
-      "dateModified": "2026-08-26",
+      "dateModified": "2026-10-18",
       "author": { "@type": "Person", "name": "島田則幸", "url": "https://ns7jp.github.io/" },
       "url": "https://ns7jp.github.io/evidence-demo.html",
       "inLanguage": "ja"
@@ -124,7 +124,7 @@
                     <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
                     <div>
                         <strong>日付付きの実測結果（2026年8月22日〜25日）</strong>
-                        <p>構築から復旧までを自動で確かめる23項目の試験を行いました。あわせて、前の版への切り戻し（新しい版に問題が出たときに、ひとつ前の版へ戻す作業）も試しました。ディスク、データベース、ネットワークの練習も行いました。実際に動かして見つけた問題29件と、誤って合格にしていた6件も記録しています。これは、使い捨ての一時的なUbuntu環境、WSL2（WindowsのなかでLinuxを動かす仕組み）、Docker（アプリを小さな箱に入れて動かす仕組み）などで得た結果です。継続して使う独立した対象サーバーでの受け入れ実績ではありません。</p>
+                        <p>構築から復旧までを自動で確かめる23項目の試験を行いました。あわせて、前の版への切り戻し（新しい版に問題が出たときに、ひとつ前の版へ戻す作業）も試しました。ディスク、データベース、ネットワークの演習（AI支援セッションがAI側の作業環境で実行したもの）の記録もあります。実際に動かして見つけた問題29件と、誤って合格にしていた6件も記録しています。これは、使い捨ての一時的なUbuntu環境、WSL2（WindowsのなかでLinuxを動かす仕組み）、Docker（アプリを小さな箱に入れて動かす仕組み）などで得た結果です。継続して使う独立した対象サーバーでの受け入れ実績ではありません。</p>
                     </div>
                 </div>
                 <div class="evidence-legend" aria-label="実装済み、実測済み、未実施の説明">
@@ -212,7 +212,7 @@
                         <span class="step-index">03</span>
                         <div>
                             <span class="status-pill measured">実測済み</span>
-                            <h3>監視に必要な11個のサービスを起動</h3>
+                            <h3>監視用10個と通知確認用1個のサービスを起動</h3>
                             <p>監視に必要な10個のサービスと、通知を受け取るテスト用サービスを起動しました。異常を検知した通知と、復旧した通知の両方を確認しています。テスト環境の中では、異常を知らせる仕組みが動いたと言えます。ただし、Slackへ実際に送信する試験ではありません。</p>
                             <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>Docker / 11サービス</dd></div><div><dt>結果</dt><dd>異常・復旧の通知を確認</dd></div></dl>
                             <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">起動・通知の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
@@ -322,8 +322,8 @@
                     <span class="heading-icon"><i class="fa-solid fa-flask-vial" aria-hidden="true"></i></span>
                     <h2 class="heading-text" id="b-series-title">4つの追加練習 — 2026年8月24日に実行</h2>
                 </div>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>よくあるトラブルをわざと自分で起こして、直す練習をした記録です。B-1からB-4は、その練習に付けた番号です。</p>
-                <p class="evidence-note">ディスク容量の追加、問題が起きた場所の確認、データベースの復元、ネットワーク設定の確認を練習しました。いずれもAI支援を使える学習環境で実行した結果です。下の表にある「220M→457M」は、使える容量が約220メガバイトから約457メガバイトに増えたことを表します。「問題箇所の確認」と「データベース復元」は手元のWSL2とDockerで動かせる構成ですが、本人の環境ではまだ通して実行していません。通して実行した記録ができるまでは、面接で実演できるとは表現しません。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>よくあるトラブルをわざと起こして直す演習を、AI支援セッションがAI側の作業環境で実行した記録です。本人が操作した記録ではありません。B-1からB-4は、その演習に付けた番号です。</p>
+                <p class="evidence-note">ディスク容量の追加、問題が起きた場所の確認、データベースの復元、ネットワーク設定の確認の4つです。いずれもAI支援セッションがAI側の作業環境（仮想ディスク付きのUbuntu、Dockerのコンテナ、Linuxの中の分離した環境）で実行した結果で、本人の操作ではありません。下の表にある「220M→457M」は、使える容量が約220メガバイトから約457メガバイトに増えたことを表します。「問題箇所の確認」と「データベース復元」は手元のWSL2とDockerで動かせる構成ですが、本人の環境ではまだ通して実行していません。通して実行した記録ができるまでは、面接で実演できるとは表現しません。</p>
                 <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるB-1からB-4の演習結果表" tabindex="0">
                     <table class="operation-table evidence-status-table">
                         <caption class="sr-only">2026年8月24日に実行したB-1からB-4の演習結果</caption>
@@ -366,7 +366,7 @@
                     </div>
                 </div>
                 <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/defects-found.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bug" aria-hidden="true"></i> 問題と修正の一覧（29件）</a>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/defects-found.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bug" aria-hidden="true"></i> 問題と修正の一覧（2026年10月時点で49件）</a>
                     <a href="https://github.com/ns7jp/server/tree/main/ansible/roles/common/molecule/el9" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server" aria-hidden="true"></i> Ubuntu以外のテスト設定</a>
                 </div>
             </section>
