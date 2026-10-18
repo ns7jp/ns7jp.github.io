@@ -63,8 +63,8 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
     - 背景画像、プロフィール画像、作品画像、証跡リプレイ動画・字幕、ブラウザタブ用アイコンの役割を確認します。
 17. `support-docs/` / `support-scripts/` / `monitoring-stack/` / `ansible/` / `cloud-lab/` / `infra-evidence/`
     - **HTML 以外** の成果物をまとめた場所です。手順書、PowerShell + bash のスクリプト、Pester（PowerShell用のテスト道具）、Prometheus + Loki + Promtail（サーバーの数値とログを集めて監視する道具）、Ansible playbook（サーバー設定を自動でそろえる手順ファイル）、Terraform（クラウドの構成を設定ファイルから作る道具）、M365 ポリシー JSON、実行証跡が入っています。インフラ運用ポートフォリオの本体です。
-15. `support-docs/slo-error-budget.md` / `support-docs/ticket-taxonomy.md` / `support-docs/office-it-physical-layer.md` / `support-docs/m365-policy-examples/` / `support-docs/interview-faq.md`
-    - **運用品質を数値で語る系**の成果物です。SLO（サービス品質の目標値）と Error Budget（目標を下回ってよい許容量）、ITIL 4（IT運用の代表的な進め方）の区分によるチケット分類、物理層 (ラック / LAN / UPS)、Intune + 条件付きアクセス + Defender ASR（いずれも会社のWindows端末を管理・保護するMicrosoftの機能）の JSON 定義、面接想定 FAQ を確認します。
+15. `support-docs/slo-error-budget.md` / `support-docs/ticket-taxonomy.md` / `support-docs/office-it-physical-layer.md` / `support-docs/m365-policy-examples/`
+    - **運用品質を数値で語る系**の成果物です。SLO（サービス品質の目標値）と Error Budget（目標を下回ってよい許容量）、ITIL 4（IT運用の代表的な進め方）の区分によるチケット分類、物理層 (ラック / LAN / UPS)、Intune + 条件付きアクセス + Defender ASR（いずれも会社のWindows端末を管理・保護するMicrosoftの機能）の JSON 定義を確認します。
 
 ---
 
@@ -295,12 +295,12 @@ A4用紙1ページの履歴書です（印刷して PDF にできます）。`<m
 
 ### `support-docs/`
 
-ITサポートと社内SE（社内のIT担当）の補助を想定した資料をまとめた場所です。内訳は、16本のガイドと README（リポジトリの説明書）、M365 のサンプルJSON 5本、補助のPowerShell 2本です（詳細は [support-docs/README.md](./support-docs/README.md)）。想定手順・架空ケースであり、実運用実績ではありません。
+ITサポートと社内SE（社内のIT担当）の補助を想定した資料をまとめた場所です。内訳は、15本のガイドと README（リポジトリの説明書）、M365 のサンプルJSON 5本、補助のPowerShell 2本です（詳細は [support-docs/README.md](./support-docs/README.md)）。想定手順・架空ケースであり、実運用実績ではありません。
 
 - 標準業務 4本（キッティング / オフボーディング / 共有フォルダ権限 / M365 ライセンス）
 - 障害対応 4本（10ケース事例集 / 重大インシデント・プレイブック / マルウェア対応 / ネットワーク切り分け証跡）
 - 事後分析・運用 6本（架空Postmortemサンプル / Backup・Restore計画 / フェイルオーバーRunbook / SLO・Error Budget / チケット分類 / 物理層設計）
-- その他 3本（AD/M365 変更ケース / 面接想定 FAQ / M365 ポリシー README）
+- その他 2本（AD/M365 変更ケース / M365 ポリシー README）
 
 初学者が見るポイント:
 - すべて Markdown ファイル。GitHub 上でそのまま読める

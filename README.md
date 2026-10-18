@@ -261,7 +261,6 @@ ns7jp.github.io/
 │   ├── slo-error-budget.md                    ... SLO / Error Budget / バーンレート アラート
 │   ├── ticket-taxonomy.md                     ... ITIL 4 区分の受付フローと記入テンプレ
 │   ├── office-it-physical-layer.md            ... 物理層（ラック / LAN / UPS / AP / 複合機）
-│   ├── interview-faq.md                       ... 面接 想定 FAQ（自答メモ）
 │   └── m365-policy-examples/                  ... Intune / 条件付きアクセス / Defender ASR JSON
 │       ├── README.md
 │       ├── intune-windows-compliance-policy.json
