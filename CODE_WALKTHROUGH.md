@@ -44,7 +44,7 @@ HTML は「ページの構造」、CSS は「見た目」、JavaScript は「動
 7. `skills.html`
    - Linux構築・監視・自動化を先頭に、補助的なITサポート、Web制作、Python/PHPの分類を確認します。
 8. `infra-lab.html`
-   - Linuxサーバー案件の10番号付き成果物、構築・監視・復旧マトリクス、実測と未実測の境界を確認します。
+   - Linuxサーバー案件の12個の番号付き成果物（00〜11）、構築・監視・復旧マトリクス、実測と未実測の境界を確認します。
 9. `linux-lab.html`
    - Linux の一次運用（障害が起きたとき、まず最初に行う確認と応急処置）を練習する Lab ページです。systemd / journalctl / SSH / rsync のコマンド早見表を確認します。
 10. `cloud-lab.html`
@@ -300,7 +300,7 @@ ITサポートと社内SE（社内のIT担当）の補助を想定した資料�
 - 標準業務 4本（キッティング / オフボーディング / 共有フォルダ権限 / M365 ライセンス）
 - 障害対応 4本（10ケース事例集 / 重大インシデント・プレイブック / マルウェア対応 / ネットワーク切り分け証跡）
 - 事後分析・運用 6本（架空Postmortemサンプル / Backup・Restore計画 / フェイルオーバーRunbook / SLO・Error Budget / チケット分類 / 物理層設計）
-- その他 2本（AD/M365 変更ケース / M365 ポリシー README）
+- その他 1本（AD/M365 変更ケース）。M365 ポリシーの README は、サンプルJSONと同じ `m365-policy-examples/` フォルダーにあります
 
 初学者が見るポイント:
 - すべて Markdown ファイル。GitHub 上でそのまま読める
@@ -327,9 +327,9 @@ PowerShell + bash + Pester を収めたスクリプト集。
 
 ### `monitoring-stack/`
 
-Prometheus + Grafana（集めた数値をグラフで見せる道具）+ node_exporter（サーバーの状態を数値として出す道具）を組み合わせた、最小構成の監視環境です。docker-compose（複数のコンテナをまとめて起動する仕組み）で動かします。
+Prometheus + Grafana（集めた数値をグラフで見せる道具）+ node_exporter（サーバーの状態を数値として出す道具）に、ログを集める Loki + Promtail を加えた、最小構成の監視環境です。docker-compose（複数のコンテナをまとめて起動する仕組み）で動かします。
 
-- `docker-compose.yml`: 3 コンテナの構成
+- `docker-compose.yml`: 5 コンテナの構成（Prometheus / node_exporter / Grafana / Loki / Promtail）
 - `prometheus/prometheus.yml` + `prometheus/alert.rules.yml`: スクレイプ設定とアラート
 - `grafana/provisioning/`: 起動時に Prometheus データソースとダッシュボードを自動登録
 

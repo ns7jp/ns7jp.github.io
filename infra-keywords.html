@@ -316,7 +316,7 @@ journalctl -p err -n 30 --no-pager       # 直近のエラー記録30行</code><
 <article class="terms-card"><span class="term-kind">考え方</span><h3 id="term-zero-trust">ゼロトラスト</h3><p>「社内ネットワークの中だから安全」とは考えず、すべての通信で毎回確認する考え方です。接続元、利用者、端末の状態を、そのつど検証します。</p></article>
 <article class="terms-card"><span class="term-kind">責任分界</span><h3 id="term-shared-responsibility">責任共有モデル</h3><p>クラウドでは、事業者と利用者で責任の範囲が分かれます。事業者は建物・機械・基盤を守り、利用者は自分が置いたOS・設定・データ・権限を守ります。<span class="term-example"><strong>事故の実例：</strong>ストレージの公開設定を誤って情報が流出する事故は、利用者側の責任範囲で起きます。</span></p></article>
 </div>
-<div class="terms-check"><strong>覚え方：「減・絞・新・見・守」</strong> — 入口を減らす、権限を絞る、更新で新しくする、ログで見る、鍵とデータを守る。この学習で使っている脅威の整理は<a href="learning-docs/security-threat-model.md">セキュリティ脅威モデル</a>にまとめています。</div>
+<div class="terms-check"><strong>覚え方：「減・絞・新・見・守」</strong> — 入口を減らす、権限を絞る、更新で新しくする、ログで見る、鍵とデータを守る。この学習で使っている脅威の整理は<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/security-threat-model.md">セキュリティ脅威モデル</a>にまとめています。</div>
 </section>
 
 <section id="automation" class="terms-section" aria-labelledby="automation-title">
@@ -401,7 +401,7 @@ ansible-playbook playbook.yml                  # 4. もう一度実行し change
 <section id="practice" class="terms-practice" aria-labelledby="practice-title">
 <h2 id="practice-title">15. 覚えるための練習</h2>
 <p>用語は、読むだけでは定着しません。「自分の言葉で説明する」「実際に確認する」「人に伝える形にする」の3段階を回すのが、いちばん近道です。以下は、練習環境（VMやWSL2）だけで完結する演習です。</p>
-<div class="terms-check"><strong>最初の到達点：</strong>まだ練習環境を用意できていなくても構いません。まずは「箱・線・土・番・盾」の5語を言えること、そして<a href="#cheatsheet">早見表</a>の用語を自分の言葉で説明できることを最初の目標にしてください。環境の準備は<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>を見ながら、次のステップとして進めます。</div>
+<div class="terms-check"><strong>最初の到達点：</strong>まだ練習環境を用意できていなくても構いません。まずは「箱・線・土・番・盾」の5語を言えること、そして<a href="#cheatsheet">早見表</a>の用語を自分の言葉で説明できることを最初の目標にしてください。環境の準備は<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/environment-setup.md">学習環境を0から用意する</a>を見ながら、次のステップとして進めます。</div>
 <div class="terms-practice-grid">
 <article class="terms-practice-card"><h3>演習1：5語に仕分ける</h3><p>この用語集から20語を選び、「箱・線・土・番・盾」のどれに属するかを分類します。迷った語は、なぜ迷ったかをメモします。その迷いが、理解が浅い箇所です。</p></article>
 <article class="terms-practice-card"><h3>演習2：自分の環境を採録する</h3><p><code>hostname</code>、<code>ip address</code>、<code>df -h</code>、<code>free -h</code> を実行し、自分の環境の値を1枚の表にまとめます。これが、いちばん小さなパラメータシートになります。</p></article>

@@ -110,7 +110,7 @@
                 <span class="case-label">学習用 / Ubuntu・RHEL系Linux</span>
                 <h2>「サーバーが重い」「ログインできない」ときの確認順序</h2>
                 <p>UbuntuやRHEL系Linux（RHEL/CentOS/Rocky Linux/AlmaLinuxなど、企業でよく使われるLinuxの仲間）で問い合わせを受けたときに、<strong>負荷・空き容量・サービス・ログ・通信・ログイン・ファイアウォール</strong>の順で状態を確認する練習です。ここに掲載した確認コマンドは情報を見るためのもので、設定変更や再起動は別の手順として扱います。</p>
-                <p><strong>対象読者:</strong> Linuxコマンドの経験がない方も対象です。実行環境は2通りあります。1つはUbuntuまたはRHEL系のVM（仮想マシン／パソコンの中に作るもう1台のコンピューター）です。もう1つはWindowsのWSL2（Windowsの中でLinuxを動かす仕組み）と、ターミナル（文字でコマンドを打ち込む画面）です。どちらかを用意してから進めてください。環境をお持ちでない場合は、先に<a href="learning-docs/environment-setup.md">学習環境を0から用意する</a>をご覧ください。</p>
+                <p><strong>対象読者:</strong> Linuxコマンドの経験がない方も対象です。実行環境は2通りあります。1つはUbuntuまたはRHEL系のVM（仮想マシン／パソコンの中に作るもう1台のコンピューター）です。もう1つはWindowsのWSL2（Windowsの中でLinuxを動かす仕組み）と、ターミナル（文字でコマンドを打ち込む画面）です。どちらかを用意してから進めてください。環境をお持ちでない場合は、先に<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/environment-setup.md">学習環境を0から用意する</a>をご覧ください。</p>
                 <div class="lab-badges" aria-label="Labで確認できる領域">
                     <span><i class="fa-solid fa-microchip" aria-hidden="true"></i> systemd</span>
                     <span><i class="fa-solid fa-book" aria-hidden="true"></i> journalctl</span>
@@ -322,7 +322,7 @@ sudo mkdir -p /mnt/backup
 sudo systemctl daemon-reload
 sudo systemctl enable --now daily-backup.timer
 </pre>
-                    <p style="margin-top:14px;">復元手順と確認計画は、別の<a href="support-docs/backup-restore-runbook.md">バックアップ・復元手順</a>にまとめています。</p>
+                    <p style="margin-top:14px;">復元手順と確認計画は、別の<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/backup-restore-runbook.md">バックアップ・復元手順</a>にまとめています。</p>
                 </div>
             </section>
 
@@ -346,12 +346,12 @@ sudo systemctl enable --now daily-backup.timer
                         <span><a href="https://github.com/ns7jp/server/tree/main/labs/three-tier" target="_blank" rel="noopener noreferrer" style="color:inherit;">Web・アプリ・DBの障害切り分け</a></span>
                         <span><a href="https://github.com/ns7jp/server/tree/main/labs/routing" target="_blank" rel="noopener noreferrer" style="color:inherit;">同じ／別ネットワーク間の通信確認</a></span>
                         <span><a href="https://github.com/ns7jp/server/tree/main/ansible/roles/storage" target="_blank" rel="noopener noreferrer" style="color:inherit;">ディスク容量拡張の自動化</a></span>
-                        <span><a href="support-docs/slo-error-budget.md" style="color:inherit;">サービス目標の学習メモ</a></span>
+                        <span><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/slo-error-budget.md" style="color:inherit;">サービス目標の学習メモ</a></span>
                         <span><a href="infra-evidence/" style="color:inherit;">実行結果のサンプル</a></span>
-                        <span><a href="production-readiness.md" style="color:inherit;">実務環境へ進む前の確認事項</a></span>
-                        <span><a href="support-docs/backup-restore-runbook.md" style="color:inherit;">バックアップ・復旧計画</a></span>
-                        <span><a href="support-docs/postmortem-example.md" style="color:inherit;">架空の障害振り返り</a></span>
-                        <span><a href="support-docs/office-it-physical-layer.md" style="color:inherit;">物理層</a></span>
+                        <span><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/production-readiness.md" style="color:inherit;">実務環境へ進む前の確認事項</a></span>
+                        <span><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/backup-restore-runbook.md" style="color:inherit;">バックアップ・復旧計画</a></span>
+                        <span><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/postmortem-example.md" style="color:inherit;">架空の障害振り返り</a></span>
+                        <span><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/support-docs/office-it-physical-layer.md" style="color:inherit;">物理層</a></span>
                     </div>
                 </div>
             </section>

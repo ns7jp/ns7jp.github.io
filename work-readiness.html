@@ -44,7 +44,7 @@
       "@type": "ProfilePage",
       "name": "仕事の進め方 | 入社後に取り組みたいこと",
       "description": "インフラエンジニアを目指す島田則幸の仕事の進め方、AIを使うときの確認方法、今後の実機・仮想マシンでの学習計画",
-      "dateModified": "2026-09-28",
+      "dateModified": "2026-10-18",
       "mainEntity": {
         "@type": "Person",
         "name": "島田則幸",
@@ -119,7 +119,7 @@
                         <span><i class="fa-solid fa-laptop" aria-hidden="true"></i><strong>手元の仮想マシンで確認</strong> 2026年9月、手元のHyper-V上の仮想マシンでWindows Server / ADとUbuntu Serverを構築・試験しました。AIの手順案内を受けながら本人が操作した記録です。</span>
                         <span><i class="fa-solid fa-gears" aria-hidden="true"></i><strong>GitHubで自動確認</strong> GitHub（プログラムを保管し共同作業する場）の機能で、構築から復旧までの23項目と、前の版へ戻す操作を自動で確認しています。</span>
                         <span><i class="fa-solid fa-flask" aria-hidden="true"></i><strong>AI支援の練習環境</strong> 4つの追加演習は、AI支援セッションの作業環境で実行したものです。本人の環境ではまだ再実行していません。</span>
-                        <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i><strong>まだ未実施</strong> AIを使わない再構築、ホスト再起動後の確認、長期稼働、本番変更、第三者レビューは、まだ行っていません。</span>
+                        <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i><strong>まだ未実施</strong> AIを使わない再構築、監視やアプリを載せたホストを本人が再起動した後の確認（OSだけの再起動後の確認は2026年9月7〜8日に実施）、長期稼働、本番変更、第三者レビューは、まだ行っていません。</span>
                     </div>
                 </section>
 
@@ -307,7 +307,7 @@
                         <p>2026年9月7日〜8日に、手元のHyper-V上の仮想マシンへUbuntu Server 24.04を手作業で初期構築しました（固定IP、SSH鍵認証、UFW、時刻同期、自動更新。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-initial-build.md" target="_blank" rel="noopener noreferrer">初期構築の記録</a>）。監視と復元は、その仮想マシンで構成を切り替えた別々の練習です。以下を終えるまで、「独立したサーバーを構築・運用した実績」とは表現しません。</p>
                     </div>
                     <ol class="acceptance-list">
-                        <li><span>01</span><div><strong>監視をまとめて動かす</strong><p>構成を切り替えて別々に試した監視・ログ・通知を、同じ仮想マシンで同時に動かします。そのうえで、アラート（異常を知らせる自動通知）が外部へ届くことを確認します。</p></div></li>
+                        <li><span>01</span><div><strong>監視をまとめて動かす</strong><p>9月に構成を切り替えて別々に試した監視とログに通知を加え、1台の仮想マシンで同時に動かします（9月に使った仮想マシンは残っていないため、新しい仮想マシンで行います）。そのうえで、アラート（異常を知らせる自動通知）が外部へ届くことを確認します。</p></div></li>
                         <li><span>02</span><div><strong>AlmaLinuxの新規構築</strong><p>新しい仮想マシンにAlmaLinux（RHEL系のLinux）を入れ、必要な通信だけを公開する構成を作ります。設定を変える前の最初の状態も記録し、あとで何をどう変えたかを比べられるようにします。</p></div></li>
                         <li><span>03</span><div><strong>再起動・前の版への切り戻し・復元</strong><p>ホスト再起動後の動作、指定した前の版への戻し、別の新しい仮想マシンへの復元、監視とログの再開を確認します。</p></div></li>
                         <li><span>04</span><div><strong>長時間動作と引き継ぎ確認</strong><p>24時間・72時間の連続動作を試します。そのうえで、分かっている制約、復旧条件、引き継ぎチェックリストを、実際の結果に合わせて更新します。AIの案内なしでの再構築と、第三者による手順の確認も残っています。</p></div></li>
