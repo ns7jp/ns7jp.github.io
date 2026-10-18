@@ -19,7 +19,7 @@
 | --- | --- | --- |
 | [主作品 `server` の Level 0〜5](https://github.com/ns7jp/server/blob/main/docs/learning-path.md) | 主作品を起動・監視・自動化・障害対応まで進める実行の道筋 | 主作品を続けるときの基本の入口 |
 | この目次の8段階 | VM本体のOS・SSH・Firewall・設計・引き渡しを補う教材 | 主作品で不足した基礎を練習したいとき |
-| [プロフィールの学習計画](https://github.com/ns7jp/ns7jp/blob/main/docs/learning-plan/README.md) | 学ぶ順番と振り返りを管理する | 計画と次の課題を整理するとき |
+| [教材リポジトリ `learning` の学習計画](https://github.com/ns7jp/learning/blob/main/docs/learning-plan/README.md) | 学ぶ順番と振り返りを管理する | 計画と次の課題を整理するとき |
 
 同じ作業を資料ごとに最初からやり直す必要はありません。日時・環境・対象・期待値・実結果が同じ確認を指すときは、自分の記録にリンクします。ただし、Docker内のWebとVM本体のSSHなど、対象が違う確認は別々に行います。下の表は必要になった資料を探す目次で、全冊を先に読む課題ではありません。
 

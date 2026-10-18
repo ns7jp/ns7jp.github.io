@@ -6,7 +6,7 @@ ITサポート・社内SE・運用監視業務で実際に使われる手順書�
 
 ---
 
-## 📂 収録ドキュメント（全 17 本 + M365 ポリシー定義 7 ファイル）
+## 📂 収録ドキュメント（全 16 本 + M365 ポリシー定義 7 ファイル）
 
 ### 🛠 標準業務 手順書（4 本）
 
@@ -90,17 +90,9 @@ Lab 内サービスを題材に、**SLI 定義 → SLO 値 → Error Budget 計�
 
 ---
 
-### 🎤 面接 / 自答 (1 本)
-
-#### 16. [面接 想定 FAQ](./interview-faq.md)
-
-選考で問われやすい 10 問の自答メモ（製造・物流 約 15 年からなぜ IT、強み弱み、3 ヶ月で何を学ぶか 等）。
-
----
-
 ### 🔐 M365 ポリシー定義サンプル (7 ファイル)
 
-#### 17. [M365 / Intune / Entra ID / Defender ポリシー](./m365-policy-examples/)
+#### 16. [M365 / Intune / Entra ID / Defender ポリシー](./m365-policy-examples/)
 
 Intune Compliance Policy / Configuration Profile、Conditional Access、Defender ASR を **JSON 定義**で公開。Graph SDK 経由で適用する PowerShell サンプル、棚卸しレポートスクリプトも収録。
 
