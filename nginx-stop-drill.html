@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="nginxを自分で止めて、状態・応答・ログの3点で確かめ、元に戻す初心者向けの障害対応練習です。curlの000やExited (0)の読み方、記録の残し方を、実際の演習記録をもとに解説します。">
+    <title>nginxを止めて戻す切り分け練習 | 島田則幸のポートフォリオ</title>
+    <link rel="canonical" href="https://ns7jp.github.io/nginx-stop-drill.html">
+    <meta property="og:title" content="nginxを止めて戻す切り分け練習 | 島田則幸のポートフォリオ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://ns7jp.github.io/nginx-stop-drill.html">
+    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <meta property="og:site_name" content="島田則幸のポートフォリオ">
+    <meta property="og:description" content="Webが応答しないとき、何をどの順で見るか。nginxを止めて戻す練習で、curlの000、Exited (0)、401の読み方を身につけます。">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
+    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <script src="js/main.js?v=20260826-1" defer></script>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css?v=20260828-1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "nginxを止めて戻す切り分け練習",
+      "description": "Docker Composeで動かしたnginxを止め、状態・応答・ログの3点で確かめてから元に戻す練習手順です。",
+      "inLanguage": "ja",
+      "url": "https://ns7jp.github.io/nginx-stop-drill.html",
+      "totalTime": "PT30M",
+      "tool": [
+        { "@type": "HowToTool", "name": "Docker Compose" },
+        { "@type": "HowToTool", "name": "curl" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "name": "正常時の基準を記録する", "url": "https://ns7jp.github.io/nginx-stop-drill.html#baseline" },
+        { "@type": "HowToStep", "name": "nginxだけを止める", "url": "https://ns7jp.github.io/nginx-stop-drill.html#stop" },
+        { "@type": "HowToStep", "name": "状態・応答・ログの3点で確かめる", "url": "https://ns7jp.github.io/nginx-stop-drill.html#observe" },
+        { "@type": "HowToStep", "name": "nginxを起動して元に戻ったことを確かめる", "url": "https://ns7jp.github.io/nginx-stop-drill.html#recover" },
+        { "@type": "HowToStep", "name": "4行で記録する", "url": "https://ns7jp.github.io/nginx-stop-drill.html#record" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Top", "item": "https://ns7jp.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "学習ルート", "item": "https://ns7jp.github.io/learning-path.html" },
+        { "@type": "ListItem", "position": 3, "name": "nginxを止めて戻す切り分け練習", "item": "https://ns7jp.github.io/nginx-stop-drill.html" }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
+    <div class="loader"><div class="loader-content"><div class="loader-spinner"></div><span>Welcome</span></div></div>
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><i class="fa-solid fa-bars" aria-hidden="true"></i><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    <header>
+        <p class="logo"><a href="index.html"><span class="logo-main">島田則幸のポートフォリオ</span><span class="logo-sub">Noriyuki Shimada's Portfolio</span></a></p>
+        <nav id="site-nav"><ul>
+            <li class="active"><a href="infra-lab.html" aria-current="location"><i class="fa-solid fa-server" aria-hidden="true"></i><span>サーバー構築</span></a></li>
+            <li><a href="works.html"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>作品</span></a></li>
+            <li><a href="skills.html"><i class="fa-solid fa-desktop" aria-hidden="true"></i><span>スキル</span></a></li>
+            <li><a href="resume.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i><span>履歴書</span></a></li>
+            <li><a href="me.html"><i class="fa-solid fa-user" aria-hidden="true"></i><span>自己紹介</span></a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-file-signature" aria-hidden="true"></i><span>連絡先</span></a></li>
+        </ul></nav>
+    </header>
+    <main id="main" tabindex="-1">
+        <section class="page-hero infra-hero" style="background-image: url('image/server-monitor.png');"><div class="page-hero-overlay"></div><div class="page-hero-content"><h1 class="page-title"><span class="title-en">Nginx Stop &amp; Recovery Drill</span><span class="title-jp">nginxを止めて戻す切り分け練習</span></h1></div></section>
+        <div class="page-content command-page"><div class="container">
+            <nav class="lab-subnav" aria-label="サーバー学習内の案内">
+                <a href="learning-path.html"><i class="fa-solid fa-route" aria-hidden="true"></i> 初心者向け学習ルート</a>
+                <a href="infra-keywords.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i> インフラ用語集</a>
+                <a href="linux-lab.html"><i class="fa-brands fa-linux" aria-hidden="true"></i> Linux基本確認</a>
+                <a href="linux-commands.html"><i class="fa-solid fa-terminal" aria-hidden="true"></i> Linuxコマンド</a>
+                <a href="nginx-stop-drill.html" class="active" aria-current="page"><i class="fa-solid fa-power-off" aria-hidden="true"></i> nginx停止の練習</a>
+                <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
+            </nav>
+
+            <section class="command-intro" aria-labelledby="intro-title">
+                <span class="case-label">障害対応の練習 / Ubuntu・Docker Compose</span>
+                <h2 id="intro-title">「Webが表示されない」を、自分で起こして自分で戻す</h2>
+                <p>障害対応は、本番で初めて経験すると焦ります。そこで、自分専用の練習環境で<strong>入口のnginxだけを止め</strong>、どこに何が表れるかを先に知っておきます。見るのは<strong>状態・応答・ログ</strong>の3点です。最後に元へ戻し、4行の記録を書いて終わります。</p>
+                <p class="plain-summary"><strong>この練習でできるようになること</strong>「nginxが止まっていて、appは動いている」と、コマンドの表示を根拠に説明できるようになります。<code>curl</code>が<code>000</code>を返したときに、何が起きているかも読めるようになります。</p>
+                <div class="beginner-safety-note"><strong>合格の目安</strong><p>(1) 止める前・止めた後・戻した後の3回分の表示を保存している。(2) 止めた後の<code>000</code>と、戻した後の<code>200</code>の違いを自分の言葉で言える。(3) <a href="#record">4行の記録</a>を、自分の結果で埋められる。</p></div>
+                <div class="beginner-safety-note"><strong>安全な練習場所</strong><p>自分専用のVM（パソコンの中に作るもう1台のコンピューター）かWSL2で行います。会社・学校・公開中のサーバーでは行いません。環境がまだなければ、先に<a href="https://github.com/ns7jp/server/blob/main/docs/beginner-learning-guide.md" target="_blank" rel="noopener noreferrer">主作品の初回手順</a>で、appとnginxの2サービスを起動できる状態にしてください。</p></div>
+                <div class="status-callout validated" role="note">
+                    <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
+                    <div>
+                        <strong>このページの元になった記録と、その範囲</strong>
+                        <p>手順と表示例は、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-10-01-ubuntu-practice01-nginx-manual-recovery.md" target="_blank" rel="noopener noreferrer">2026年10月1日の演習記録</a>をもとにしています。手元のHyper-V上のUbuntu 24.04系の仮想マシンで、AIの手順案内を受けて本人が操作しました。復旧は手動の起動で、自動復旧の確認ではありません。AIの案内なしでの再現、監視通知、長時間の稼働は、この記録には含まれていません。</p>
+                    </div>
+                </div>
+            </section>
+
+            <nav class="command-toc" aria-label="練習の目次"><strong>手順</strong><a href="#structure">1. 構成をつかむ</a><a href="#baseline">2. 正常時を記録</a><a href="#stop">3. nginxを止める</a><a href="#observe">4. 3点で確かめる</a><a href="#recover">5. 元に戻す</a><a href="#record">6. 4行で記録</a><a href="#read-curl">7. curlの読み方</a><a href="#practice">8. 応用問題</a></nav>
+
+            <section class="command-section" id="structure" aria-labelledby="structure-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span><h2 class="heading-text" id="structure-title">1. 構成をつかむ：要求はどこを通るか</h2></div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>ブラウザや<code>curl</code>からの要求は、まず入口のnginxに届きます。nginxは要求を奥のappへ渡し、appが作った返事を返します。nginxが止まると、appが元気でも外からは届きません。</p>
+                <div class="memory-phrase" role="note" style="margin-bottom:24px;">
+                    <strong>流れ：curl → nginx（入口・8080番） → app（返事を作る）</strong>
+                    <span>入口が閉じると、奥が動いていても「つながらない」になります。</span>
+                </div>
+                <p>この練習で使う確認先は2つです。<code>/healthz</code>は「動いているか」だけを返す確認用の場所で、正常なら<code>200</code>が返ります。トップの<code>/</code>はパスワード（Basic認証）が必要なので、認証なしで開くと<code>401</code>が返ります。<strong>401は故障ではなく、想定どおりの結果</strong>です。</p>
+            </section>
+
+            <section class="command-section" id="baseline" aria-labelledby="baseline-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-camera" aria-hidden="true"></i></span><h2 class="heading-text" id="baseline-title">2. 止める前に、正常時の表示を記録する</h2></div>
+                <p>壊す前の姿を残しておかないと、後で「戻った」と言い切れません。次の3つを実行し、表示をメモかファイルに保存します。<code>-p nginx-practice</code>は、操作するまとまり（Composeのプロジェクト名）の指定です。自分の環境の名前に置き換えてください。</p>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>compose ps</code><span class="risk safe">参照</span></header><h3>2つのサービスの状態を見る</h3><pre><code>$ docker compose -p nginx-practice ps --all app nginx</code></pre><p class="check"><b>期待：</b>appが<code>Up (healthy)</code>、nginxが<code>Up</code>。<code>--all</code>を付けると、止まったサービスも一覧に残ります。</p></article>
+                    <article class="command-card"><header><code>curl</code><span class="risk safe">通信</span></header><h3>入口から応答を確かめる</h3><pre><code>$ curl --max-time 10 -sS -o /dev/null \
+    -w '%{http_code}\n' http://127.0.0.1:8080/healthz
+200</code></pre><p class="check"><b>読む：</b><code>-o /dev/null</code>で本文を捨て、<code>-w '%{http_code}'</code>で数字だけを表示します。<code>200</code>なら正常です。</p></article>
+                    <article class="command-card"><header><code>compose logs</code><span class="risk safe">参照</span></header><h3>nginxの直近のログを見る</h3><pre><code>$ docker compose -p nginx-practice logs --tail=20 nginx</code></pre><p class="check"><b>読む：</b>直前の<code>curl</code>の行（<code>GET /healthz</code>と<code>200</code>）が残っていれば、要求がnginxまで届いた証拠です。</p></article>
+                </div>
+            </section>
+
+            <section class="command-section" id="stop" aria-labelledby="stop-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-power-off" aria-hidden="true"></i></span><h2 class="heading-text" id="stop-title">3. nginxだけを止める</h2></div>
+                <p>止めるのはnginxだけです。appには触れません。「どこを止めたか」が1か所に決まっていると、後の観察で原因と結果を結びつけやすくなります。</p>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>compose stop</code><span class="risk warning">停止</span></header><h3>nginxを止める</h3><pre><code>$ date '+%F %T'
+$ docker compose -p nginx-practice stop nginx</code></pre><p class="check"><b>ポイント：</b>止める直前に<code>date</code>で時刻を残します。ログと照らし合わせるときの目印になります。<code>down</code>は箱ごと消すので、この練習では使いません。</p></article>
+                </div>
+            </section>
+
+            <section class="command-section" id="observe" aria-labelledby="observe-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span><h2 class="heading-text" id="observe-title">4. 状態・応答・ログの3点で確かめる</h2></div>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>1つの表示だけで判断しません。「状態は止まっている」「応答は返らない」「ログは止めた時刻で途切れている」と、3つがそろって初めて「nginxが止まっている」と言えます。</p>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>状態</code><span class="risk safe">参照</span></header><h3>nginxはExited、appはUp</h3><pre><code>$ docker compose -p nginx-practice ps --all app nginx</code></pre><p class="check"><b>期待：</b>nginxが<code>Exited (0)</code>、appは<code>Up (healthy)</code>のまま。<code>(0)</code>は「正常に終了した」という終了コードで、自分で止めたときの値です。異常終了なら0以外の数字になります。</p></article>
+                    <article class="command-card"><header><code>応答</code><span class="risk safe">通信</span></header><h3>curlが000を返す</h3><pre><code>$ curl --max-time 10 -sS -o /dev/null \
+    -w '%{http_code}\n' http://127.0.0.1:8080/healthz
+curl: (7) Failed to connect to 127.0.0.1 port 8080 ...
+000
+$ echo $?
+7</code></pre><p class="check"><b>読む：</b><code>000</code>はHTTPの返事が1つも来なかったという意味です。<code>(7)</code>は「接続できなかった」を表す<code>curl</code>の終了コードで、8080番の受付口が閉じていることを示します。</p></article>
+                    <article class="command-card"><header><code>ログ</code><span class="risk safe">参照</span></header><h3>nginxのログが止めた時刻で途切れる</h3><pre><code>$ docker compose -p nginx-practice logs --tail=20 nginx</code></pre><p class="check"><b>読む：</b>止めた後の<code>curl</code>はnginxに届いていないので、ログに新しい行は増えません。「届いていない」ことも、手がかりの1つです。</p></article>
+                </div>
+            </section>
+
+            <section class="command-section" id="recover" aria-labelledby="recover-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></span><h2 class="heading-text" id="recover-title">5. 元に戻して、戻ったことを確かめる</h2></div>
+                <p>起動しただけでは「戻った」とは言えません。<a href="#baseline">手順2</a>と同じ3つを実行し、止める前の表示と比べます。</p>
+                <div class="command-grid">
+                    <article class="command-card"><header><code>compose start</code><span class="risk caution">起動</span></header><h3>nginxを起動する</h3><pre><code>$ docker compose -p nginx-practice start nginx
+$ docker compose -p nginx-practice ps --all app nginx</code></pre><p class="check"><b>期待：</b>nginxが<code>Up</code>に戻り、appは<code>Up (healthy)</code>のまま。</p></article>
+                    <article class="command-card"><header><code>curl</code><span class="risk safe">通信</span></header><h3>200が返ることを確かめる</h3><pre><code>$ curl --max-time 10 -sS -o /dev/null \
+    -w '%{http_code}\n' http://127.0.0.1:8080/healthz
+200</code></pre><p class="check"><b>比べる：</b>手順2と同じ<code>200</code>で、ログにも新しい<code>GET /healthz</code>の行が増えていれば、戻ったと言えます。</p></article>
+                </div>
+            </section>
+
+            <section class="command-section" id="record" aria-labelledby="record-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i></span><h2 class="heading-text" id="record-title">6. 4行で記録する</h2></div>
+                <p>練習は記録を書いて終わりです。<a href="learning-path.html#explain">学習ルートの「4行の記録」</a>と同じ形で、自分の結果を埋めます。下は書き方の例です。</p>
+                <ol class="practice-steps">
+                    <li><b>目的</b><code>nginxが止まったとき、どこに何が表れるかを確かめる</code><span>何のためにやったかを1行で書きます。</span></li>
+                    <li><b>操作</b><code>compose stop nginx → ps / curl / logs → compose start nginx</code><span>実行した順番どおりに書きます。</span></li>
+                    <li><b>根拠</b><code>停止中: Exited (0)・curl 000 (exit 7)／復旧後: Up・200</code><span>自分の画面に出た値を、そのまま写します。</span></li>
+                    <li><b>未実施</b><code>自動復旧、監視からの通知、OS再起動後の確認</code><span>やっていないことを書くと、記録の信頼性が上がります。</span></li>
+                </ol>
+            </section>
+
+            <section class="command-section" id="read-curl" aria-labelledby="read-curl-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-table-list" aria-hidden="true"></i></span><h2 class="heading-text" id="read-curl-title">7. curlの結果の読み方早見表</h2></div>
+                <p>同じ「表示されない」でも、<code>curl</code>の結果で疑う場所が変わります。数字は一律の正解ではなく、次に見る場所を決めるための目安です。</p>
+                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるcurl結果の早見表" tabindex="0">
+                    <table class="operation-table">
+                        <caption class="sr-only">curlの結果と、その意味、次に確かめること</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">curlの結果</th>
+                                <th scope="col">意味</th>
+                                <th scope="col">次に確かめること</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>200</code></td><td>正常に返事が来た</td><td>なし。比較用に記録だけ残す</td></tr>
+                            <tr><td><code>401</code></td><td>認証が必要（この構成のトップページでは想定どおり）</td><td>認証情報を付けたときに200になるか</td></tr>
+                            <tr><td><code>502</code> / <code>504</code></td><td>入口は動いているが、奥のappから返事がない</td><td>appの状態とログ</td></tr>
+                            <tr><td><code>000</code>（終了コード7）</td><td>受付口に接続できない</td><td>入口のサービスが止まっていないか、ポート番号は合っているか</td></tr>
+                            <tr><td><code>000</code>（終了コード28）</td><td>時間内に返事がない（タイムアウト）</td><td>経路やファイアウォール、相手が重くなっていないか</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>終了コードは、<code>curl</code>の直後に<code>echo $?</code>で表示できます。ネットワークの確認方法は<a href="linux-lab.html#first-check-order">Linuxの基本確認</a>の「通」と「壁」も参考にしてください。</p>
+            </section>
+
+            <section class="command-section" id="practice" aria-labelledby="practice-title">
+                <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></span><h2 class="heading-text" id="practice-title">8. 応用問題</h2></div>
+                <p>答えを見る前に、予想を書いてから試します。予想と結果が違ったときこそ、構成の理解が深まります。</p>
+                <details class="quiz"><summary>理解度チェック（答えを見る）</summary><dl>
+                    <dt>Q1. nginxを止めた後、appも止まったと判断してよいですか？</dt><dd>いいえ。<code>ps</code>でappは<code>Up (healthy)</code>のままです。入口が閉じているだけなので、1つの表示だけで判断しないことが大切です。</dd>
+                    <dt>Q2. 認証なしで<code>/</code>を開いて<code>401</code>が返りました。障害ですか？</dt><dd>いいえ。この構成ではトップページにBasic認証がかかっているため、想定どおりです。正しい認証情報を付けて<code>200</code>になるかで確かめます。</dd>
+                    <dt>Q3. 今度はnginxではなくappを止めたら、<code>curl</code>の結果はどう変わると思いますか？</dt><dd>入口のnginxは動いているので、受付口への接続はできるはずです。そのうえで、奥から返事がないことを示す<code>502</code>などに変わると予想できます。実際の値は自分の環境で試して記録してください。終わったら必ず<code>start app</code>で戻します。</dd>
+                    <dt>Q4. 練習の最後に<code>down</code>ではなく<code>stop</code>を使ったのはなぜですか？</dt><dd><code>down</code>はコンテナやネットワークを削除します。この練習の目的は「止めて戻す」なので、削除を伴わない<code>stop</code>と<code>start</code>で十分です。</dd>
+                </dl></details>
+                <div class="next-learning"><h3>次の学習へ</h3><p>止める・確かめる・戻すの流れに慣れたら、問い合わせを想定した「重・空・動・記・通・入・壁」の確認順へ進みます。</p><a href="linux-lab.html#first-check-order" class="btn btn-primary">Linux基本確認へ進む</a><a href="learning-path.html" class="btn btn-outline-dark">学習ルートに戻る</a></div>
+            </section>
+        </div></div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-main">Noriyuki Shimada</span>
+                <span class="logo-sub">Portfolio</span>
+            </div>
+            <div class="footer-nav">
+                <a href="me.html">自己紹介</a>
+                <a href="skills.html">スキル</a>
+                <a href="infra-lab.html">サーバー構築</a>
+                <a href="linux-lab.html">Linux Lab</a>
+                <a href="cli-exercise-pack.html">演習案件パック</a>
+                <a href="works.html">作品</a>
+                <a href="resume.html">履歴書</a>
+                <a href="contact.html">連絡先</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://github.com/ns7jp" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:net7jp@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品は、文章とプログラムの作成を含めてAI（Claude・Codex）の支援を大きく受けて作成しました（範囲は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">職務経歴書 §4-b</a>）。実施者・環境・確認範囲は各証跡に記載しています。個人制作のため、人による第三者レビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#3-つの前提ai-の利用を含む" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
+        </div>
+    </footer>
+</body>
+</html>
