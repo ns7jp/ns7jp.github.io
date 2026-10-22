@@ -19,6 +19,7 @@
         :root {
             --r-primary: #2C3E50;
             --r-accent: #c9a55c;
+            --r-accent-text: #7a5a1a; /* 白背景の文字用。--r-accent は罫線・アイコン用 */
             --r-text: #222;
             --r-muted: #555;
             --r-border: #d6d3ce;
@@ -96,7 +97,7 @@
         }
         .resume-role {
             font-size: 13px;
-            color: var(--r-accent);
+            color: var(--r-accent-text);
             font-weight: 600;
             margin-top: 2px;
         }
@@ -183,7 +184,7 @@
         }
         .resume-works .work-tag {
             font-size: 11px;
-            color: var(--r-accent);
+            color: var(--r-accent-text);
             margin-left: 4px;
         }
         .resume-works .work-desc { color: var(--r-muted); }
@@ -336,7 +337,7 @@
 
     <a class="skip-link" href="#main">メインコンテンツへスキップ</a>
 
-    <div class="resume-toolbar">
+    <nav class="resume-toolbar" aria-label="履歴書の操作">
         <span class="toolbar-info">
             <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
             「印刷」→「PDF として保存」で A4 1 ページの PDF が出力できます
@@ -350,7 +351,7 @@
                 <i class="fa-solid fa-print" aria-hidden="true"></i> 印刷 / PDF保存
             </button>
         </span>
-    </div>
+    </nav>
 
     <main class="resume" id="main" lang="ja" tabindex="-1">
         <header class="resume-header">

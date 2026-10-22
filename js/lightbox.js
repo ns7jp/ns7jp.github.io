@@ -23,12 +23,12 @@
         overlay.className = 'lightbox-overlay';
         overlay.setAttribute('role', 'dialog');
         overlay.setAttribute('aria-modal', 'true');
-        overlay.setAttribute('aria-label', 'Enlarged view');
+        overlay.setAttribute('aria-label', '拡大表示');
         overlay.setAttribute('aria-hidden', 'true');
 
         closeButton.type = 'button';
         closeButton.className = 'lightbox-close';
-        closeButton.setAttribute('aria-label', 'Close enlarged view');
+        closeButton.setAttribute('aria-label', '拡大表示を閉じる');
         closeButton.innerHTML = '&times;';
 
         overlay.appendChild(closeButton);
@@ -40,7 +40,7 @@
 
             return target.getAttribute('alt') ||
                 (caption && caption.textContent.trim()) ||
-                'Image';
+                '画像';
         }
 
         function createContent(target) {
@@ -104,7 +104,7 @@
             target.classList.add('lightbox-trigger');
             target.setAttribute('tabindex', '0');
             target.setAttribute('role', 'button');
-            target.setAttribute('aria-label', 'Open enlarged view: ' + targetLabel(target));
+            target.setAttribute('aria-label', '拡大表示: ' + targetLabel(target));
 
             target.addEventListener('click', function () {
                 openLightbox(target);

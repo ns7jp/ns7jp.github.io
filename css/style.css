@@ -72,7 +72,7 @@
     --accent-copper: #B87333;     /* 装飾用カッパー */
 
     /* 自然な色（緑・オリーブ・茶など、有機的な印象を与える色） */
-    --nature-green: #5D7A5D;      /* リンクの基本色などに使用 */
+    --nature-green: #4A664A;      /* リンクの基本色。淡い背景上でもWCAG AA 4.5:1以上 */
     --nature-sage: #9CAF88;
     --nature-olive: #708238;
     --nature-brown: #8B7355;
@@ -80,7 +80,7 @@
 
     /* テキスト用カラー */
     --text-dark: #2C3E50;         /* 通常の本文テキスト */
-    --text-medium: #5D6D7E;       /* やや薄い説明文用 */
+    --text-medium: #526170;       /* やや薄い説明文用（砂色背景上でもAA 4.5:1以上） */
     --text-light: #FDFBF7;        /* 暗い背景の上に乗せる白系テキスト */
     --text-muted: #5F6B74;        /* 補足情報用のグレー（WCAG AA 4.5:1以上を確保するため濃色化） */
 
@@ -99,6 +99,14 @@
     --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);  /* 滑らか */
     --transition-fast: 0.25s ease;                            /* 素早い */
     --transition-slow: 0.6s ease;                             /* ゆっくり */
+
+    /* フォント - 日本語の見出しと本文を同じゴシック体にそろえる。
+       Playfair Display は日本語の字形を持たないため、見出しに使うと
+       英字だけ明朝風・日本語は端末ごとの代替書体になり、ページ内で書体が混ざる。
+       英字だけのロゴ（フッターの Noriyuki Shimada）にだけ残している。 */
+    --font-base: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+    --font-heading: var(--font-base);
+    --font-brand: 'Playfair Display', serif;
 }
 
 /* ========================================
@@ -114,7 +122,7 @@ html {
 }
 
 body {
-    font-family: 'Noto Sans JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    font-family: var(--font-base);
     font-size: 1.6rem;
     color: var(--text-dark);
     line-height: 1.9;
@@ -176,12 +184,12 @@ img {
 /* ========================================
    3. Typography - 見出しのフォント設定
    ----------------------------------------
-   見出し（h1〜h4）は本文と違うフォント（Playfair Display）を当てて、
-   英字の見出しに上品な印象を出している。
+   見出し（h1〜h4）は本文と同じゴシック体にそろえ、太さと大きさで階層を付ける。
 ======================================== */
 h1, h2, h3, h4 {
-    font-family: 'Playfair Display', 'Noto Serif JP', serif;
+    font-family: var(--font-heading);
     font-weight: 500;
+    line-height: 1.5;
     letter-spacing: 0.02em;
 }
 
@@ -224,7 +232,7 @@ h1, h2, h3, h4 {
 }
 
 .loader-content span {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-brand);
     font-size: 1.4rem;
     letter-spacing: 4px;
     text-transform: uppercase;
@@ -270,7 +278,7 @@ header.scrolled {
 }
 
 .logo-main {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 500;
     color: var(--text-dark);
@@ -456,6 +464,10 @@ header nav ul li a::after {
     background-size: cover;
     background-position: center;
     background-image: url('../image/server-monitor.png');
+    /* 背景のスクリーンショットの文字がタイトルと重なって読めないため、
+       ぼかして模様として見せる。ぼかした端が透けないよう少し拡大する。 */
+    filter: blur(6px) saturate(0.8);
+    transform: scale(1.08);
 }
 
 .hero-overlay {
@@ -466,9 +478,9 @@ header nav ul li a::after {
     height: 100%;
     background: linear-gradient(
         to bottom,
-        rgba(44, 62, 80, 0.3) 0%,
-        rgba(44, 62, 80, 0.5) 50%,
-        rgba(44, 62, 80, 0.7) 100%
+        rgba(26, 37, 47, 0.78) 0%,
+        rgba(26, 37, 47, 0.84) 50%,
+        rgba(26, 37, 47, 0.92) 100%
     );
 }
 
@@ -484,16 +496,16 @@ header nav ul li a::after {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.4rem;
     color: var(--nature-beige);
-    letter-spacing: 6px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     margin-bottom: 30px;
     font-weight: 400;
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 6rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text-light);
     line-height: 1.2;
     margin-bottom: 30px;
@@ -503,8 +515,8 @@ header nav ul li a::after {
     display: block;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.8rem;
-    font-weight: 300;
-    letter-spacing: 12px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
     margin-bottom: 15px;
     color: rgba(255, 255, 255, 0.8);
 }
@@ -628,11 +640,11 @@ header nav ul li a::after {
     align-items: center;
     gap: 12px;
     padding: 16px 40px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.3rem;
+    font-family: 'Montserrat', var(--font-base);
+    font-size: 1.4rem;
     font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    justify-content: center;
     border-radius: 2px;
     cursor: pointer;
     transition: var(--transition-smooth);
@@ -834,6 +846,24 @@ header nav ul li a::after {
     gap: 18px;
     flex-wrap: wrap;
     margin-top: 48px;
+}
+
+/* スマホでは幅がばらばらにならないよう、ボタンを縦一列・同じ幅にそろえる */
+@media (max-width: 640px) {
+    .summary-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .summary-actions .btn {
+        width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 }
 
 .evidence-boundary-strip {
@@ -1386,7 +1416,7 @@ header nav ul li a::after {
 .demo-sources h2 {
     margin: 16px 0 22px;
     color: #1c343b;
-    font-family: 'Playfair Display', 'Noto Sans JP', serif;
+    font-family: var(--font-heading);
     font-size: clamp(2.6rem, 4vw, 4.2rem);
 }
 
@@ -1459,7 +1489,7 @@ header nav ul li a::after {
 }
 
 .demo-fact-grid article span {
-    color: #a57827;
+    color: var(--accent-gold);
     font-family: Montserrat, sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
@@ -1496,7 +1526,7 @@ header nav ul li a::after {
 }
 
 .demo-transcript time {
-    color: #a57827;
+    color: var(--accent-gold);
     font-family: Montserrat, sans-serif;
     font-weight: 700;
 }
@@ -1618,7 +1648,7 @@ header nav ul li a::after {
 }
 
 .work-overlay h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2rem;
     color: var(--text-light);
     font-weight: 400;
@@ -1654,7 +1684,7 @@ header nav ul li a::after {
 }
 
 .cta-content h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 3.5rem;
     font-weight: 400;
     color: var(--text-dark);
@@ -1689,7 +1719,7 @@ footer {
 }
 
 .footer-logo .logo-main {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-brand);
     font-size: 2.2rem;
     color: var(--text-light);
     font-weight: 400;
@@ -1765,6 +1795,16 @@ footer .footer-nav a,
 footer .footer-social a,
 footer .footer-bottom small {
     color: #cbd3d9;
+}
+
+footer .copyright p {
+    color: #cbd3d9;
+}
+
+/* 濃紺のフッター上では本文リンク色（緑）が 3:1 程度まで下がるため、明るい金色に差し替える */
+footer .footer-bottom a {
+    color: var(--accent-gold-light);
+    text-decoration: underline;
 }
 
 @media (max-width: 1300px) {
@@ -1847,6 +1887,8 @@ footer .footer-bottom small {
     position: relative;
     height: clamp(260px, 35vh, 360px);
     min-height: 260px;
+    /* 固定ヘッダー（高さ90px）の下に隠れる分を空け、見えている範囲の中央にタイトルを置く */
+    padding-top: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1900,6 +1942,13 @@ footer .footer-bottom small {
     min-height: auto;
 }
 
+/* スマホではページ見出しの直後に大きな空白ができないよう余白を詰める */
+@media (max-width: 640px) {
+    .page-content {
+        padding: 56px 0;
+    }
+}
+
 .page-content article {
     min-height: auto;
     padding-top: 0;
@@ -1936,7 +1985,7 @@ footer .footer-bottom small {
 }
 
 .heading-text {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.5rem;
     color: var(--text-dark);
     font-weight: 400;
@@ -1970,8 +2019,7 @@ footer .footer-bottom small {
    18. Profile Section (About Page) - me.html プロフィールカード
    ----------------------------------------
    左カラムにプロフィール画像、右カラムに自己紹介文を配置。
-   .image-frame で画像に額縁風の装飾、.profile-decoration で
-   背景に小さな装飾図形を配置している。
+   .image-frame::before で写真の右下にずらした額縁風の線を描く。
 ======================================== */
 .profile-section {
     padding: 60px 0;
@@ -1981,7 +2029,7 @@ footer .footer-bottom small {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 80px;
-    align-items: center;
+    align-items: start;
 }
 
 .profile-image {
@@ -1991,6 +2039,23 @@ footer .footer-bottom small {
 .image-frame {
     position: relative;
     z-index: 2;
+    max-width: 350px;
+}
+
+/* 飾り枠は写真だけを囲む（注記の文字に線が重ならないようにする） */
+.image-frame::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: -20px;
+    bottom: -20px;
+    border: 1px solid var(--accent-gold);
+    z-index: -1;
+}
+
+.image-frame img {
+    display: block;
 }
 
 .image-frame img {
@@ -1999,14 +2064,7 @@ footer .footer-bottom small {
 }
 
 .profile-decoration {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 100%;
-    height: 100%;
-    max-width: 350px;
-    border: 1px solid var(--accent-gold);
-    z-index: 1;
+    display: none;
 }
 
 .profile-name {
@@ -2015,7 +2073,7 @@ footer .footer-bottom small {
 
 .profile-name .name-jp {
     display: block;
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 3rem;
     font-weight: 400;
     color: var(--text-dark);
@@ -2118,7 +2176,7 @@ footer .footer-bottom small {
 }
 
 .timeline-content h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 400;
     color: var(--text-dark);
@@ -2392,9 +2450,10 @@ footer .footer-bottom small {
     letter-spacing: 1px;
 }
 
-.hobby-card p {
+.hobby-card p,
+.page-content .hobby-card p {
     font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.78);
 }
 
 /* ========================================
@@ -2739,7 +2798,7 @@ footer .footer-bottom small {
 }
 
 .ticket-heading h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.1rem;
     color: var(--text-dark);
     margin-bottom: 10px;
@@ -2837,15 +2896,25 @@ footer .footer-bottom small {
     border: 1px solid var(--bg-sand);
 }
 
+.works-intro .intro-image {
+    flex: 0 0 220px;
+}
+
+.works-intro .intro-image::before {
+    display: none;
+}
+
 .works-intro .intro-image img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+    width: 220px;
+    height: 150px;
+    border-radius: 6px;
+    border: 1px solid var(--bg-sand);
     object-fit: cover;
+    object-position: left top;
 }
 
 .works-intro .intro-text h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 400;
     color: var(--text-dark);
@@ -3114,7 +3183,7 @@ footer .footer-bottom small {
 }
 
 .overlay-content h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2rem;
     font-weight: 400;
     margin-bottom: 10px;
@@ -3160,7 +3229,7 @@ footer .footer-bottom small {
 }
 
 .work-details h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 1.8rem;
     font-weight: 400;
     color: var(--text-dark);
@@ -3325,7 +3394,7 @@ footer .footer-bottom small {
     display: inline-block;
     padding: 2px 10px;
     margin-right: 8px;
-    background: var(--accent-bronze);
+    background: #8A4F1D; /* 白文字で AA 4.5:1 以上を確保する濃いブロンズ */
     color: var(--text-light);
     font-size: 1.1rem;
     font-weight: 600;
@@ -3427,7 +3496,7 @@ footer .footer-bottom small {
 }
 
 .lab-intro h2 {
-    font-family: 'Playfair Display', 'Noto Serif JP', serif;
+    font-family: var(--font-heading);
     font-size: 3rem;
     font-weight: 400;
     color: var(--text-dark);
@@ -3568,7 +3637,8 @@ footer .footer-bottom small {
     scrollbar-gutter: stable;
 }
 
-.operation-table-wrap:focus-visible {
+.operation-table-wrap:focus-visible,
+[data-scroll-region]:focus-visible {
     outline: 3px solid var(--accent-gold);
     outline-offset: 3px;
 }
@@ -4029,7 +4099,8 @@ footer .footer-bottom small {
     color: var(--text-light);
 }
 
-.brief-summary-card p {
+.brief-summary-card p,
+.page-content .brief-summary-card p {
     font-size: 1.35rem;
     line-height: 1.85;
     color: rgba(253, 251, 247, 0.76);
@@ -4308,7 +4379,7 @@ footer .footer-bottom small {
 }
 
 .coming-soon-content h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 400;
     color: var(--text-dark);
@@ -4353,15 +4424,16 @@ footer .footer-bottom small {
 }
 
 .contact-info-card h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
-.info-description {
+.info-description,
+.page-content .info-description {
     font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.78);
     margin-bottom: 45px;
 }
 
@@ -4396,7 +4468,7 @@ footer .footer-bottom small {
     display: block;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.72);
     margin-bottom: 5px;
     letter-spacing: 1px;
 }
@@ -4461,7 +4533,7 @@ footer .footer-bottom small {
 }
 
 .contact-form-card h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 2.5rem;
     font-weight: 400;
     color: var(--text-dark);
@@ -4556,14 +4628,11 @@ footer .footer-bottom small {
    <article class="page-content"> 内のpadding・最大幅などの共通設定。
    各サブページの本文エリアの余白を統一する役目。
 ======================================== */
-article {
-    min-height: calc(100vh - 180px);
-    padding-top: 120px;
-    padding-bottom: 80px;
-}
+/* <article> はカードにも使っているため、要素名だけで min-height や
+   上下の余白を付けない（以前はカードが画面の高さ近くまで伸びていた）。 */
 
 article h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-heading);
     font-size: 3.5rem;
     font-weight: 400;
     text-align: center;
@@ -4661,8 +4730,16 @@ article p,
         overflow: hidden;
     }
 
+    /* 右上のメニューボタン（固定配置）とロゴが重ならないよう右側を空ける */
     header {
-        padding: 0 25px;
+        padding: 0 90px 0 25px;
+    }
+
+    /* 狭い画面では英字の副題を和文ロゴの下に回し、横にはみ出さないようにする */
+    .logo a {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.35;
     }
     
     .res-menu {
@@ -4794,20 +4871,22 @@ article p,
     
     .profile-grid {
         grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    /* 写真と氏名だけ中央に置き、本文は左揃えのまま読みやすくする */
+    .profile-image,
+    .profile-name {
         text-align: center;
     }
-    
-    .profile-image {
-        margin-bottom: 30px;
-    }
-    
-    .profile-decoration {
-        display: none;
-    }
-    
-    .image-frame img {
+
+    .image-frame {
         max-width: 250px;
         margin: 0 auto;
+    }
+
+    .image-frame::before {
+        display: none;
     }
     
     .timeline-section,
@@ -4835,9 +4914,22 @@ article p,
         grid-template-columns: 1fr;
     }
     
+    /* 長い説明文は中央揃えだと行頭がそろわず読みにくいため、左揃えにする */
     .works-intro .intro-content {
         flex-direction: column;
-        text-align: center;
+        align-items: stretch;
+        gap: 28px;
+        padding: 28px 22px;
+    }
+
+    .works-intro .intro-image {
+        flex-basis: auto;
+    }
+
+    .works-intro .intro-image img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
     }
 
     .hiring-summary,
@@ -4935,7 +5027,7 @@ article p,
 
 @media (max-width: 480px) {
     header {
-        padding: 0 18px;
+        padding: 0 76px 0 18px;
     }
 
     .logo-main {
@@ -4944,8 +5036,8 @@ article p,
     }
 
     .logo-sub {
-        max-width: 190px;
-        font-size: 0.7rem;
+        max-width: 100%;
+        font-size: 0.9rem;
         letter-spacing: 0.45px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -4958,9 +5050,10 @@ article p,
         height: 46px;
     }
 
+    /* 中身の高さに合わせ、ボタンの下に大きな空白が出ないようにする */
     .hero {
-        min-height: 720px;
-        padding: 76px 0 28px;
+        min-height: 0;
+        padding: 96px 0 48px;
     }
 
     .hero-content {
@@ -4987,7 +5080,7 @@ article p,
 
     .hero-description {
         margin-bottom: 16px;
-        font-size: 1.22rem;
+        font-size: 1.4rem;
         line-height: 1.85;
     }
 
@@ -5028,17 +5121,19 @@ article p,
         display: grid;
         grid-template-columns: 1fr;
         width: 100%;
-        max-width: 260px;
+        max-width: 320px;
         margin: 0 auto;
         gap: 10px;
     }
 
+    /* 指で押しやすい高さ（44px以上）と、読める文字の大きさを保つ */
     .hero-buttons .btn {
         justify-content: center;
         width: 100%;
-        padding: 10px 12px;
-        font-size: 1.05rem;
-        letter-spacing: 1px;
+        min-height: 44px;
+        padding: 12px 16px;
+        font-size: 1.35rem;
+        letter-spacing: 0.04em;
     }
     
     .section-title .title-jp {
@@ -5052,6 +5147,7 @@ article p,
     .page-hero {
         height: clamp(220px, 30vh, 300px);
         min-height: 220px;
+        padding-top: 70px;
     }
     
     .page-title .title-jp {
@@ -5188,7 +5284,7 @@ article p,
 .command-section { scroll-margin-top: 90px; }
 .command-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
 .command-card { overflow: hidden; border: 1px solid #dce1e7; border-radius: 10px; background: #fff; box-shadow: 0 5px 18px rgba(25,42,58,.06); }
-.command-card > header { position: static; display: flex; align-items: center; justify-content: space-between; min-height: auto; padding: 14px 18px; background: #243647; }
+.command-card > header { position: static; display: flex; align-items: center; justify-content: space-between; height: auto; min-height: auto; backdrop-filter: none; border-bottom: 0; padding: 14px 18px; background: #243647; }
 .command-card > header code { color: #ffe09a; font-size: 1.8rem; font-weight: 700; }
 .command-card h3 { margin: 18px 18px 8px; font-size: 1.8rem; }
 .command-card p { margin: 0 18px 16px; font-size: 1.4rem; line-height: 1.75; }
@@ -5652,5 +5748,22 @@ footer .plain-summary {
 .hero .plain-summary strong,
 .page-hero .plain-summary strong,
 footer .plain-summary strong {
+    color: var(--accent-gold-light);
+}
+
+/* ========================================
+   本文中のリンク - 色だけに頼らず下線でも区別する（WCAG 1.4.1）
+   ----------------------------------------
+   リンク色と本文色のコントラストが 3:1 未満になるため、
+   文章の中に置かれたクラスなしのリンクには常に下線を付ける。
+======================================== */
+main :where(p, li, dd, td, figcaption) > a:not([class]),
+main :where(.memory-tip, .terms-note, .terms-warning, .terms-check, .dialect-note, .sql-warning, .sql-check, .ad-note, .ad-warning, .ad-check) > a:not([class]),
+.brief-summary-card p a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.brief-summary-card p a {
     color: var(--accent-gold-light);
 }
