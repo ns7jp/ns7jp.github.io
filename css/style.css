@@ -72,7 +72,7 @@
     --accent-copper: #B87333;     /* 装飾用カッパー */
 
     /* 自然な色（緑・オリーブ・茶など、有機的な印象を与える色） */
-    --nature-green: #5D7A5D;      /* リンクの基本色などに使用 */
+    --nature-green: #4A664A;      /* リンクの基本色。淡い背景上でもWCAG AA 4.5:1以上 */
     --nature-sage: #9CAF88;
     --nature-olive: #708238;
     --nature-brown: #8B7355;
@@ -80,7 +80,7 @@
 
     /* テキスト用カラー */
     --text-dark: #2C3E50;         /* 通常の本文テキスト */
-    --text-medium: #5D6D7E;       /* やや薄い説明文用 */
+    --text-medium: #526170;       /* やや薄い説明文用（砂色背景上でもAA 4.5:1以上） */
     --text-light: #FDFBF7;        /* 暗い背景の上に乗せる白系テキスト */
     --text-muted: #5F6B74;        /* 補足情報用のグレー（WCAG AA 4.5:1以上を確保するため濃色化） */
 
@@ -1459,7 +1459,7 @@ header nav ul li a::after {
 }
 
 .demo-fact-grid article span {
-    color: #a57827;
+    color: var(--accent-gold);
     font-family: Montserrat, sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
@@ -1496,7 +1496,7 @@ header nav ul li a::after {
 }
 
 .demo-transcript time {
-    color: #a57827;
+    color: var(--accent-gold);
     font-family: Montserrat, sans-serif;
     font-weight: 700;
 }
@@ -1765,6 +1765,16 @@ footer .footer-nav a,
 footer .footer-social a,
 footer .footer-bottom small {
     color: #cbd3d9;
+}
+
+footer .copyright p {
+    color: #cbd3d9;
+}
+
+/* 濃紺のフッター上では本文リンク色（緑）が 3:1 程度まで下がるため、明るい金色に差し替える */
+footer .footer-bottom a {
+    color: var(--accent-gold-light);
+    text-decoration: underline;
 }
 
 @media (max-width: 1300px) {
@@ -2392,9 +2402,10 @@ footer .footer-bottom small {
     letter-spacing: 1px;
 }
 
-.hobby-card p {
+.hobby-card p,
+.page-content .hobby-card p {
     font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.78);
 }
 
 /* ========================================
@@ -3325,7 +3336,7 @@ footer .footer-bottom small {
     display: inline-block;
     padding: 2px 10px;
     margin-right: 8px;
-    background: var(--accent-bronze);
+    background: #8A4F1D; /* 白文字で AA 4.5:1 以上を確保する濃いブロンズ */
     color: var(--text-light);
     font-size: 1.1rem;
     font-weight: 600;
@@ -4029,7 +4040,8 @@ footer .footer-bottom small {
     color: var(--text-light);
 }
 
-.brief-summary-card p {
+.brief-summary-card p,
+.page-content .brief-summary-card p {
     font-size: 1.35rem;
     line-height: 1.85;
     color: rgba(253, 251, 247, 0.76);
@@ -4359,9 +4371,10 @@ footer .footer-bottom small {
     margin-bottom: 10px;
 }
 
-.info-description {
+.info-description,
+.page-content .info-description {
     font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.78);
     margin-bottom: 45px;
 }
 
@@ -4396,7 +4409,7 @@ footer .footer-bottom small {
     display: block;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.72);
     margin-bottom: 5px;
     letter-spacing: 1px;
 }
@@ -5652,5 +5665,22 @@ footer .plain-summary {
 .hero .plain-summary strong,
 .page-hero .plain-summary strong,
 footer .plain-summary strong {
+    color: var(--accent-gold-light);
+}
+
+/* ========================================
+   本文中のリンク - 色だけに頼らず下線でも区別する（WCAG 1.4.1）
+   ----------------------------------------
+   リンク色と本文色のコントラストが 3:1 未満になるため、
+   文章の中に置かれたクラスなしのリンクには常に下線を付ける。
+======================================== */
+main :where(p, li, dd, td, figcaption) > a:not([class]),
+main :where(.memory-tip, .terms-note, .terms-warning, .terms-check, .dialect-note, .sql-warning, .sql-check, .ad-note, .ad-warning, .ad-check) > a:not([class]),
+.brief-summary-card p a {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.brief-summary-card p a {
     color: var(--accent-gold-light);
 }

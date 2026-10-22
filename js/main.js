@@ -55,6 +55,37 @@
         }
     });
 
+    /* 横スクロールが発生したコード例・表だけをキーボードでスクロールできるようにする。
+       はみ出していない要素にはタブ移動を増やさないよう、幅を測ってから付け外しする。 */
+    var scrollRegionSelector = 'pre, .ad-table-wrap, .sql-table-wrap, .terms-table-wrap, .xl-table-wrap, .distro-table-wrap';
+    function updateScrollRegions() {
+        document.querySelectorAll(scrollRegionSelector).forEach(function (region, regionIndex) {
+            if (region.closest('.operation-table-wrap')) return;
+            var overflowing = region.scrollWidth > region.clientWidth + 1;
+            if (overflowing && !region.hasAttribute('tabindex')) {
+                region.setAttribute('tabindex', '0');
+                region.setAttribute('role', 'region');
+                // 同じページに複数並ぶため、番号を付けてランドマーク名を区別する
+                region.setAttribute('aria-label', (region.tagName === 'PRE'
+                    ? '横方向にスクロールできるコード例 '
+                    : '横方向にスクロールできる表 ') + (regionIndex + 1));
+                region.setAttribute('data-scroll-region', '');
+            } else if (!overflowing && region.hasAttribute('data-scroll-region')) {
+                region.removeAttribute('tabindex');
+                region.removeAttribute('role');
+                region.removeAttribute('aria-label');
+                region.removeAttribute('data-scroll-region');
+            }
+        });
+    }
+    var scrollRegionTimer = null;
+    updateScrollRegions();
+    window.addEventListener('load', updateScrollRegions);
+    window.addEventListener('resize', function () {
+        window.clearTimeout(scrollRegionTimer);
+        scrollRegionTimer = window.setTimeout(updateScrollRegions, 200);
+    });
+
     /* ===== ローダーの非表示処理 ===== */
     function hideLoader() {
         var loader = document.querySelector('.loader');
