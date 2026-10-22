@@ -3637,7 +3637,8 @@ footer .footer-bottom a {
     scrollbar-gutter: stable;
 }
 
-.operation-table-wrap:focus-visible {
+.operation-table-wrap:focus-visible,
+[data-scroll-region]:focus-visible {
     outline: 3px solid var(--accent-gold);
     outline-offset: 3px;
 }
