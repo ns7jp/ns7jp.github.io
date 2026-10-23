@@ -5,6 +5,8 @@
 .learning-page .page-hero {
     height: auto;
     min-height: 145px;
+    /* main already provides the fixed-header clearance. */
+    padding-top: 0;
     background-attachment: scroll;
 }
 .learning-page .page-title .title-jp {
