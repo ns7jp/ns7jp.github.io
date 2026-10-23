@@ -101,6 +101,7 @@
                     <div>
                         <strong>このページの元になった記録と、その範囲</strong>
                         <p>手順と表示例は、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-10-01-ubuntu-practice01-nginx-manual-recovery.md" target="_blank" rel="noopener noreferrer">2026年10月1日の演習記録</a>をもとにしています。手元のHyper-V上のUbuntu 24.04系の仮想マシンで、AIの手順案内を受けて本人が操作しました。復旧は手動の起動で、自動復旧の確認ではありません。AIの案内なしでの再現、監視通知、長時間の稼働は、この記録には含まれていません。</p>
+                        <p>以下の操作例は、主作品の初回手順で用意する構成に合わせています。元の演習記録とはプロジェクト名やログの設定が異なる場合があるため、今回の結果は自分の環境で確かめて記録してください。</p>
                     </div>
                 </div>
             </section>
@@ -119,13 +120,18 @@
 
             <section class="command-section" id="baseline" aria-labelledby="baseline-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-camera" aria-hidden="true"></i></span><h2 class="heading-text" id="baseline-title">2. 止める前に、正常時の表示を記録する</h2></div>
-                <p>壊す前の姿を残しておかないと、後で「戻った」と言い切れません。次の3つを実行し、表示をメモかファイルに保存します。<code>-p nginx-practice</code>は、操作するまとまり（Composeのプロジェクト名）の指定です。自分の環境の名前に置き換えてください。</p>
+                <p>壊す前の姿を残しておかないと、後で「戻った」と言い切れません。初回手順で起動したときと同じ<code>server</code>ディレクトリ（<code>compose.yaml</code>がある場所）・設定で、次の3つを上から順に実行し、表示をメモかファイルに保存します。初回手順では<code>compose.yaml</code>のプロジェクト名<code>server-monitor-lab</code>を使うので、以下のコマンドに<code>-p</code>は付けません。</p>
+                <p>独自のプロジェクト名を<code>-p</code>や環境変数で指定して起動した場合だけ、そのときと同じ指定を、この後のすべての<code>docker compose</code>コマンドでも使ってください。最初の状態確認でappとnginxが出ない場合は、停止操作に進まず、起動時のディレクトリ・設定・プロジェクト名を確認します。</p>
                 <div class="command-grid">
-                    <article class="command-card"><header><code>compose ps</code><span class="risk safe">参照</span></header><h3>2つのサービスの状態を見る</h3><pre><code>$ docker compose -p nginx-practice ps --all app nginx</code></pre><p class="check"><b>期待：</b>appが<code>Up (healthy)</code>、nginxが<code>Up</code>。<code>--all</code>を付けると、止まったサービスも一覧に残ります。</p></article>
+                    <article class="command-card"><header><code>compose ps</code><span class="risk safe">参照</span></header><h3>2つのサービスの状態を見る</h3><pre><code>$ docker compose ps --all app nginx</code></pre><p class="check"><b>期待：</b>appが<code>Up (healthy)</code>、nginxが<code>Up</code>。<code>--all</code>を付けると、止まったサービスも一覧に残ります。</p></article>
                     <article class="command-card"><header><code>curl</code><span class="risk safe">通信</span></header><h3>入口から応答を確かめる</h3><pre><code>$ curl --max-time 10 -sS -o /dev/null \
     -w '%{http_code}\n' http://127.0.0.1:8080/healthz
 200</code></pre><p class="check"><b>読む：</b><code>-o /dev/null</code>で本文を捨て、<code>-w '%{http_code}'</code>で数字だけを表示します。<code>200</code>なら正常です。</p></article>
-                    <article class="command-card"><header><code>compose logs</code><span class="risk safe">参照</span></header><h3>nginxの直近のログを見る</h3><pre><code>$ docker compose -p nginx-practice logs --tail=20 nginx</code></pre><p class="check"><b>読む：</b>直前の<code>curl</code>の行（<code>GET /healthz</code>と<code>200</code>）が残っていれば、要求がnginxまで届いた証拠です。</p></article>
+                    <article class="command-card"><header><code>curl / compose logs</code><span class="risk safe">通信・参照</span></header><h3>ログに残る要求を送り、直近の記録を見る</h3><pre><code>$ date -u '+%Y-%m-%dT%H:%M:%SZ'
+$ curl --max-time 10 -sS -o /dev/null \
+    -w '%{http_code}\n' http://127.0.0.1:8080/
+401
+$ docker compose logs --timestamps --tail=20 nginx</code></pre><p class="check"><b>読む：</b>この構成では<code>/healthz</code>のアクセスログを抑止しています。ログ確認には認証なしの<code>/</code>への要求を使います。<code>date -u</code>で記録したUTC時刻と、<code>--timestamps</code>で各ログ行に付くUTC時刻（末尾が<code>Z</code>）を比べます。今回の新しい<code>GET /</code>と<code>401</code>のアクセス記録があれば、要求がnginxまで届いた証拠です。以前の行だけで判断しません。</p></article>
                 </div>
             </section>
 
@@ -133,23 +139,30 @@
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-power-off" aria-hidden="true"></i></span><h2 class="heading-text" id="stop-title">3. nginxだけを止める</h2></div>
                 <p>止めるのはnginxだけです。appには触れません。「どこを止めたか」が1か所に決まっていると、後の観察で原因と結果を結びつけやすくなります。</p>
                 <div class="command-grid">
-                    <article class="command-card"><header><code>compose stop</code><span class="risk warning">停止</span></header><h3>nginxを止める</h3><pre><code>$ date '+%F %T'
-$ docker compose -p nginx-practice stop nginx</code></pre><p class="check"><b>ポイント：</b>止める直前に<code>date</code>で時刻を残します。ログと照らし合わせるときの目印になります。<code>down</code>は箱ごと消すので、この練習では使いません。</p></article>
+                    <article class="command-card"><header><code>compose stop</code><span class="risk warning">停止</span></header><h3>nginxを止める</h3><pre><code>$ date -u '+%Y-%m-%dT%H:%M:%SZ'
+$ docker compose stop nginx</code></pre><p class="check"><b>ポイント：</b>止める直前に<code>date -u</code>でUTC時刻を残します。ログと照らし合わせるときの目印になります。<code>down</code>は箱ごと消すので、この練習では使いません。</p></article>
                 </div>
             </section>
 
             <section class="command-section" id="observe" aria-labelledby="observe-title">
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></span><h2 class="heading-text" id="observe-title">4. 状態・応答・ログの3点で確かめる</h2></div>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>1つの表示だけで判断しません。「状態は止まっている」「応答は返らない」「ログは止めた時刻で途切れている」と、3つがそろって初めて「nginxが止まっている」と言えます。</p>
+                <p class="plain-summary"><strong>かんたんに言うと</strong>1つの表示だけで判断しません。「状態は止まっている」「応答は返らない」「同じ要求を送っても新しいアクセス記録が増えない」の3点を合わせて、nginxが止まっていることを確かめます。</p>
                 <div class="command-grid">
-                    <article class="command-card"><header><code>状態</code><span class="risk safe">参照</span></header><h3>nginxはExited、appはUp</h3><pre><code>$ docker compose -p nginx-practice ps --all app nginx</code></pre><p class="check"><b>期待：</b>nginxが<code>Exited (0)</code>、appは<code>Up (healthy)</code>のまま。<code>(0)</code>は「正常に終了した」という終了コードで、自分で止めたときの値です。異常終了なら0以外の数字になります。</p></article>
+                    <article class="command-card"><header><code>状態</code><span class="risk safe">参照</span></header><h3>nginxはExited、appはUp</h3><pre><code>$ docker compose ps --all app nginx</code></pre><p class="check"><b>期待：</b>nginxが<code>Exited (0)</code>、appは<code>Up (healthy)</code>のまま。<code>(0)</code>は「正常に終了した」という終了コードで、自分で止めたときの値です。異常終了なら0以外の数字になります。</p></article>
                     <article class="command-card"><header><code>応答</code><span class="risk safe">通信</span></header><h3>curlが000を返す</h3><pre><code>$ curl --max-time 10 -sS -o /dev/null \
     -w '%{http_code}\n' http://127.0.0.1:8080/healthz
 curl: (7) Failed to connect to 127.0.0.1 port 8080 ...
 000
 $ echo $?
 7</code></pre><p class="check"><b>読む：</b><code>000</code>はHTTPの返事が1つも来なかったという意味です。<code>(7)</code>は「接続できなかった」を表す<code>curl</code>の終了コードで、8080番の受付口が閉じていることを示します。</p></article>
-                    <article class="command-card"><header><code>ログ</code><span class="risk safe">参照</span></header><h3>nginxのログが止めた時刻で途切れる</h3><pre><code>$ docker compose -p nginx-practice logs --tail=20 nginx</code></pre><p class="check"><b>読む：</b>止めた後の<code>curl</code>はnginxに届いていないので、ログに新しい行は増えません。「届いていない」ことも、手がかりの1つです。</p></article>
+                    <article class="command-card"><header><code>ログ</code><span class="risk safe">通信・参照</span></header><h3>同じ要求のアクセス記録が増えないことを見る</h3><pre><code>$ date -u '+%Y-%m-%dT%H:%M:%SZ'
+$ curl --max-time 10 -sS -o /dev/null \
+    -w '%{http_code}\n' http://127.0.0.1:8080/
+curl: (7) Failed to connect to 127.0.0.1 port 8080 ...
+000
+$ echo $?
+7
+$ docker compose logs --timestamps --tail=20 nginx</code></pre><p class="check"><b>読む：</b>手順2と同じ<code>/</code>への要求もnginxに届かないため、今回のUTC時刻に対応する新しい<code>GET /</code>のアクセス記録は増えません。停止処理のメッセージや過去のアクセス記録とは区別し、状態・応答の結果と合わせて判断します。</p></article>
                 </div>
             </section>
 
@@ -157,11 +170,16 @@ $ echo $?
                 <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i></span><h2 class="heading-text" id="recover-title">5. 元に戻して、戻ったことを確かめる</h2></div>
                 <p>起動しただけでは「戻った」とは言えません。<a href="#baseline">手順2</a>と同じ3つを実行し、止める前の表示と比べます。</p>
                 <div class="command-grid">
-                    <article class="command-card"><header><code>compose start</code><span class="risk caution">起動</span></header><h3>nginxを起動する</h3><pre><code>$ docker compose -p nginx-practice start nginx
-$ docker compose -p nginx-practice ps --all app nginx</code></pre><p class="check"><b>期待：</b>nginxが<code>Up</code>に戻り、appは<code>Up (healthy)</code>のまま。</p></article>
+                    <article class="command-card"><header><code>compose start</code><span class="risk caution">起動</span></header><h3>nginxを起動する</h3><pre><code>$ docker compose start nginx
+$ docker compose ps --all app nginx</code></pre><p class="check"><b>期待：</b>nginxが<code>Up</code>に戻り、appは<code>Up (healthy)</code>のまま。</p></article>
                     <article class="command-card"><header><code>curl</code><span class="risk safe">通信</span></header><h3>200が返ることを確かめる</h3><pre><code>$ curl --max-time 10 -sS -o /dev/null \
     -w '%{http_code}\n' http://127.0.0.1:8080/healthz
-200</code></pre><p class="check"><b>比べる：</b>手順2と同じ<code>200</code>で、ログにも新しい<code>GET /healthz</code>の行が増えていれば、戻ったと言えます。</p></article>
+200</code></pre><p class="check"><b>比べる：</b>手順2と同じ<code>200</code>が返ることを確かめます。<code>/healthz</code>はアクセスログに残らないため、ログは次の<code>/</code>への要求で確認します。</p></article>
+                    <article class="command-card"><header><code>curl / compose logs</code><span class="risk safe">通信・参照</span></header><h3>復旧後のアクセス記録を確かめる</h3><pre><code>$ date -u '+%Y-%m-%dT%H:%M:%SZ'
+$ curl --max-time 10 -sS -o /dev/null \
+    -w '%{http_code}\n' http://127.0.0.1:8080/
+401
+$ docker compose logs --timestamps --tail=20 nginx</code></pre><p class="check"><b>比べる：</b>認証なしの<code>/</code>が<code>401</code>を返し、ログ行に付いたUTC時刻で今回の新しい<code>GET /</code>と<code>401</code>のアクセス記録が増えたことを確認します。状態・応答・ログの3点が手順2とそろえば、戻ったと判断できます。</p></article>
                 </div>
             </section>
 
@@ -171,7 +189,7 @@ $ docker compose -p nginx-practice ps --all app nginx</code></pre><p class="chec
                 <ol class="practice-steps">
                     <li><b>目的</b><code>nginxが止まったとき、どこに何が表れるかを確かめる</code><span>何のためにやったかを1行で書きます。</span></li>
                     <li><b>操作</b><code>compose stop nginx → ps / curl / logs → compose start nginx</code><span>実行した順番どおりに書きます。</span></li>
-                    <li><b>根拠</b><code>停止中: Exited (0)・curl 000 (exit 7)／復旧後: Up・200</code><span>自分の画面に出た値を、そのまま写します。</span></li>
+                    <li><b>根拠</b><code>停止中: Exited (0)・curl 000 (exit 7)・今回のアクセス記録なし／復旧後: Up・/healthz 200・/ 401の新規アクセス記録</code><span>自分の画面に出た値と時刻を、そのまま写します。</span></li>
                     <li><b>未実施</b><code>自動復旧、監視からの通知、OS再起動後の確認</code><span>やっていないことを書くと、記録の信頼性が上がります。</span></li>
                 </ol>
             </section>
