@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { retryTransientResponse } = require("./external-link-retry");
 
 const root = process.cwd();
 const htmlFiles = fs.readdirSync(root).filter((file) => file.endsWith(".html"));
@@ -84,13 +85,19 @@ async function request(url, method) {
 }
 
 async function check(url) {
-  let response = await request(url, "HEAD");
-  if ([403, 405].includes(response.status)) response = await request(url, "GET");
-  return {
-    ok: response.status >= 200 && response.status < 400,
-    status: response.status,
-    finalUrl: response.url,
-  };
+  return retryTransientResponse(async () => {
+    let response = await request(url, "HEAD");
+    if ([403, 405].includes(response.status)) response = await request(url, "GET");
+    return {
+      ok: response.status >= 200 && response.status < 400,
+      status: response.status,
+      finalUrl: response.url,
+    };
+  }, {
+    onRetry: ({ status, attempt, maxAttempts, delayMs }) => {
+      console.warn("RETRY " + status + " " + url + " (attempt " + attempt + "/" + maxAttempts + " failed; retrying in " + delayMs + "ms)");
+    },
+  });
 }
 
 const queue = [...references.keys()].sort();
