@@ -1700,8 +1700,8 @@ header nav ul li a::after {
 /* ========================================
    14. Footer - サイト共通の最下部
    ----------------------------------------
-   .footer-content をflexで3カラム（ロゴ・ナビ・SNSアイコン）に配置。
-   スマホ幅では縦積みになるよう flex-direction: column にする。
+   ロゴ・SNSアイコンの下に、ナビ専用の行を確保する。
+   リンクは項目単位で折り返し、狭い画面でも日本語を縦に分断しない。
 ======================================== */
 footer {
     background: var(--primary-dark);
@@ -1709,13 +1709,23 @@ footer {
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "brand social" "nav nav";
     align-items: center;
+    gap: 24px 40px;
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 40px 50px;
+    padding: 0 clamp(24px, 4vw, 40px) 40px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    grid-area: brand;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    line-height: 1.5;
 }
 
 .footer-logo .logo-main {
@@ -1731,16 +1741,24 @@ footer {
 }
 
 .footer-nav {
+    grid-area: nav;
     display: flex;
-    gap: 50px;
+    flex-wrap: wrap;
+    gap: 8px 28px;
 }
 
 .footer-nav a {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    min-height: 44px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--text-muted);
     font-weight: 400;
-    letter-spacing: 1px;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
     transition: var(--transition-smooth);
 }
 
@@ -1749,6 +1767,7 @@ footer {
 }
 
 .footer-social {
+    grid-area: social;
     display: flex;
     gap: 20px;
 }
@@ -1788,8 +1807,7 @@ footer {
 }
 
 /* Footer text sits on --primary-dark, so use a dedicated light neutral instead
-   of the body-muted color. Wrap earlier than the mobile navigation breakpoint
-   to keep every link and social control inside medium-width viewports. */
+   of the body-muted color. */
 footer .footer-logo .logo-sub,
 footer .footer-nav a,
 footer .footer-social a,
@@ -1807,27 +1825,17 @@ footer .footer-bottom a {
     text-decoration: underline;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 640px) {
     .footer-content {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 28px;
-    }
-
-    .footer-logo {
-        flex: 0 0 100%;
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas: "brand" "nav" "social";
+        justify-items: center;
         text-align: center;
     }
 
     .footer-nav {
-        flex: 1 1 680px;
-        flex-wrap: wrap;
         justify-content: center;
-        gap: 16px 28px;
-    }
-
-    .footer-social {
-        flex: 0 0 auto;
+        gap: 4px 20px;
     }
 }
 
@@ -4851,18 +4859,6 @@ article p,
     
     .section-title .title-jp {
         font-size: 3rem;
-    }
-    
-    .footer-content {
-        flex-direction: column;
-        gap: 35px;
-        text-align: center;
-    }
-    
-    .footer-nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 25px;
     }
     
     .page-title .title-jp {
