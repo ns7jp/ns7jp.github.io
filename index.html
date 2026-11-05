@@ -91,7 +91,7 @@
           "@id": "https://ns7jp.github.io/#website",
           "url": "https://ns7jp.github.io/",
           "name": "島田則幸のポートフォリオ",
-          "description": "インフラエンジニア（Linuxサーバーの構築・運用が中心）を第一志望に、Windows Server / ADの構築・運用、入口としてのインフラ監視・運用にも対応し、応募先によってはITサポートも担当できる人のポートフォリオサイト",
+          "description": "Linuxサーバーの構築・運用を担うインフラエンジニアを目指し、最初は手順書と確認者のあるIT事務・キッティング、監視・運用補助などから経験を積むためのポートフォリオサイト",
           "inLanguage": "ja",
           "publisher": { "@id": "https://ns7jp.github.io/#person" }
         },
@@ -176,7 +176,7 @@
                 <span class="line1">Linux Server</span>
                 <span class="line2">作り、確かめ、直す</span>
             </h1>
-            <p class="hero-description animate-fade-in-delay">2026年9月、手元のHyper-V上の仮想マシンでWindows Server 2022のActive Directoryを構築し、2台目のドメインコントローラー、復元、役割の奪取まで確かめました。<br>Ubuntu Serverの初期構築と監視も記録しています。個人の学習記録で、実務経験はまだありません。</p>
+            <p class="hero-description animate-fade-in-delay">Ubuntu Serverの初期設定、監視、設定不備からの復旧を、手元の仮想マシンで学習しています。<br>AIの案内を受けた本人操作と、その確認結果を公開しています。</p>
             <!-- 採用担当者向けの3本の記録、1分サマリ、主作品コードへの入口。 -->
             <div class="hero-buttons animate-fade-in-delay2">
                 <a href="#three-records" class="btn btn-primary"><i class="fa-solid fa-list-check" aria-hidden="true"></i> まず見ていただきたい3本</a>
@@ -197,7 +197,7 @@
                 <span>FIRST CHOICE</span>
                 <strong>インフラエンジニア（Linux中心）</strong>
             </div>
-            <div class="role-strip-item"><i class="fa-brands fa-windows" aria-hidden="true"></i><span>Windows Server / AD、入口の監視・運用にも対応<br>応募先によってはITサポートも可</span></div>
+            <div class="role-strip-item"><i class="fa-brands fa-windows" aria-hidden="true"></i><span>最初は手順書と確認者のある基礎業務から<br>IT事務・キッティング、監視・運用補助</span></div>
             <div class="role-strip-item"><i class="fa-solid fa-route" aria-hidden="true"></i><span>設計 → 構築 → 試験<br>監視 → 復旧 → 引き渡し</span></div>
             <div class="role-strip-item"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>個人学習<br>実務・本番（実際に使われている環境）の実績ではありません</span></div>
         </div>
@@ -210,70 +210,39 @@
                 <span class="title-en">Three Records</span>
                 <span class="title-jp" id="three-records-title">まず見ていただきたい3本</span>
             </h2>
-            <p class="plain-summary"><strong>かんたんに言うと</strong>2026年9月に手元のHyper-V上の仮想マシンで行った記録から、特に説明したいものを3本に絞りました。AIの手順案内を受けながら私が操作し、結果を画面で確かめたものです。</p>
+            <p class="plain-summary"><strong>かんたんに言うと</strong>2026年9月の個人ラボで、AIの手順案内を受けながら私が操作・確認した3例です。本人の独力再現はまだ未確認です。支援の内訳と未実施事項は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">AI支援の範囲</a>にまとめています。</p>
             <div class="value-grid">
                 <article class="value-card">
-                    <i class="fa-solid fa-sitemap" aria-hidden="true"></i>
-                    <h3>ADの2台構成・復元・役割の奪取</h3>
-                    <p>Windows Server 2022でActive Directoryを構築し、試験の必須31項目がすべて合格。2台目のドメインコントローラーで複製を確かめ、バックアップからの復元と、1台を失った想定での役割（FSMO）の奪取まで行いました。奪取の演習の結果、最終的な構成はドメインコントローラー1台です。</p>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ad-fsmo-seize.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <i class="fa-brands fa-linux" aria-hidden="true"></i>
+                    <h3>Ubuntuの設定不備からの復旧</h3>
+                    <p><strong>課題：</strong>SSHに意図的な誤設定を入れ、接続前に検出・修正する。</p>
+                    <p><strong>本人の確認：</strong>構文検査、修正後の再検査、SSH鍵接続を操作。</p>
+                    <p><strong>判断の根拠：</strong>構文検査の終了コード255→0と、別途の接続成功。</p>
+                    <p><strong>結果：</strong>復旧を確認。別の演習では監視値の1→0→1も確認しました。</p>
+                    <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/evidence/featured-evidence.md" target="_blank" rel="noopener noreferrer">結果と原画像を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
                 <article class="value-card">
-                    <i class="fa-brands fa-linux" aria-hidden="true"></i>
-                    <h3>Ubuntuの構築と監視</h3>
-                    <p>固定IP・SSH鍵認証・UFW・時刻同期・自動更新を手作業で設定し、わざと起こした設定不備から復旧。Prometheus / Grafanaで、サービスの停止と復帰が表示に出ることを確かめました。</p>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-initial-build.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <i class="fa-solid fa-sitemap" aria-hidden="true"></i>
+                    <h3>ADの2台構成と復旧</h3>
+                    <p><strong>課題：</strong>認証基盤を構築し、復元とDCを1台失う場合の対応を試す。</p>
+                    <p><strong>本人の確認：</strong>構築試験、複製、System State復元、役割の奪取を操作。</p>
+                    <p><strong>判断の根拠：</strong>試験仕様の期待値と実行結果、復元前後の状態を照合。</p>
+                    <p><strong>結果：</strong>構築の必須31項目PASS。奪取演習後のDCは1台です。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ad-fsmo-seize.md" target="_blank" rel="noopener noreferrer">結果と確認範囲を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
                 <article class="value-card">
                     <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                    <h3>原因の切り分け</h3>
-                    <p>更新配信サーバー（WSUS）の試験が不合格に。承認件数を突き合わせて前日の仮説を否定し、「分類・製品が0件だと絞り込みなしと解釈される」ことを確かめて、手順書を直しました。0件になったきっかけは最有力の候補まで絞り込みましたが、再現はできていません。</p>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <h3>WSUSの試験失敗を調査</h3>
+                    <p><strong>課題：</strong>更新配信サーバーの試験で期待結果を満たさない。</p>
+                    <p><strong>本人の確認：</strong>承認件数と、自動承認ルールの絞り込みを照合。</p>
+                    <p><strong>判断の根拠：</strong>分類・製品が0件だと全件が対象になる仕組みを確認。</p>
+                    <p><strong>結果：</strong>手順を修正。0件になった操作は未特定で、通しの再試験は未実施です。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">調査結果と残課題を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </article>
             </div>
             <div class="summary-actions">
                 <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> すべての記録（検証証跡台帳）</a>
                 <a href="https://github.com/ns7jp/ns7jp" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> プロフィール（GitHub）</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="recruiter-value">
-        <div class="container">
-            <h2 class="section-title center">
-                <span class="title-en">Why This Portfolio</span>
-                <span class="title-jp">採用担当者に確認いただきたい3点</span>
-            </h2>
-            <p class="plain-summary"><strong>かんたんに言うと</strong>このサイトでは、資料や設定を作った段階を「実装済み」、実際に動かして結果を記録した段階を「実測済み」、まだ試していないものを「未実施（NOT RUN）」と書き分けています。</p>
-            <div class="value-grid">
-                <article class="value-card">
-                    <i class="fa-solid fa-folder-tree" aria-hidden="true"></i>
-                    <h3>6工程を一つの主作品で整理</h3>
-                    <p>設計、構築、試験、監視、復旧、引き渡しを、主作品「Server Monitor」の成果物と記録へ結び付けました。</p>
-                    <a href="project-brief.html">制作全体を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-                </article>
-                <article class="value-card">
-                    <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
-                    <h3>できたこと・まだのことを区別</h3>
-                    <p>実行日、使った環境、結果を記録しています。成功だけでなく、失敗から直した内容や未実施の項目も公開しています。</p>
-                    <a href="evidence-demo.html">確認記録を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-                </article>
-                <article class="value-card">
-                    <i class="fa-solid fa-people-group" aria-hidden="true"></i>
-                    <h3>安全な仕事の進め方を意識</h3>
-                    <p>最初は、手順書があり確認者もいる作業を担当します。作業前の記録、作業の承認、作業後の確認、報告を大切にします。</p>
-                    <a href="work-readiness.html">仕事の進め方を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-                </article>
-            </div>
-            <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
-                <span><strong>実装済み</strong> 設計書、パラメータシート（設定値をまとめた一覧表）、Ansible（OSなどの設定を自動化）、Compose（コンテナをまとめて起動）、試験仕様、復旧手順、引き渡し資料を公開</span>
-                <span><strong>実測済み</strong> 日付付きの検証環境で確認。本人PC上のVM、WSL2、一時Ubuntu、Dockerなど、各記録に示した範囲です。本番業務の実績ではありません</span>
-                <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーでの受け入れ確認、72時間の連続稼働、Slackへの実際の通知、AWSでの作成と削除（apply/destroy）、D-2（別サーバーへ復元するホスト障害の復旧演習）、本番環境での変更</span>
-            </div>
-            <div class="summary-actions">
-                <a href="project-brief.html" class="btn btn-primary"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 制作概要を見る</a>
-                <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 確認結果を見る</a>
-                <a href="work-readiness.html" class="btn btn-outline-dark"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
             </div>
         </div>
     </section>
@@ -285,30 +254,30 @@
                 <span class="title-en">One-minute Summary</span>
                 <span class="title-jp" id="one-minute-summary-title">採用担当者向け1分サマリ</span>
             </h2>
-            <p class="plain-summary"><strong>かんたんに言うと</strong>見る場所は3か所だけです。(1) 作ったもの、(2) 仕事の流れ、(3) どこまで実際に動かして確かめたか、の順に見てください。</p>
+            <p class="plain-summary"><strong>かんたんに言うと</strong>目指す仕事、本人が確認したこと、仕事の進め方を短く紹介します。詳しい資料は各リンクから確認できます。</p>
             <div class="summary-grid">
                 <div class="summary-card">
-                    <span class="summary-label">01 / Main Work</span>
-                    <h3>主作品を確認</h3>
+                    <span class="summary-label">01 / Career</span>
+                    <h3>志望と現在の状況</h3>
                     <ul class="time-budget-links">
-                        <li><a href="https://github.com/ns7jp/server" target="_blank" rel="noopener noreferrer">Server Monitor</a><span>Linuxサーバー設計・構築・監視・復旧のコードと資料</span></li>
-                        <li><a href="project-brief.html">制作概要</a><span>6工程、成果物、制約を1ページで確認</span></li>
+                        <li><a href="resume.html">経歴・希望条件</a><span>Linuxの構築・運用を目指し、最初は手順書と確認者のある基礎業務から取り組みます</span></li>
+                        <li><a href="contact.html">就業状況・連絡先</a><span>トライアル就労・社内研修中。勤務開始時期は相談（2026年11月5日確認）</span></li>
                     </ul>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">02 / Workflow</span>
-                    <h3>6工程を確認</h3>
+                    <span class="summary-label">02 / Practice</span>
+                    <h3>本人が確認したこと</h3>
                     <ul class="time-budget-links">
-                        <li><a href="project-brief.html#flow-title">設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し</a><span>工程ごとの成果物と確認状況</span></li>
-                        <li><a href="infra-lab.html">サーバー構築Lab</a><span>設計値、構築資料、確認結果、次の検証</span></li>
+                        <li><a href="https://github.com/ns7jp/ns7jp/blob/main/docs/evidence/featured-evidence.md" target="_blank" rel="noopener noreferrer">代表実績と証拠</a><span>SSHの構文検査、監視値、HTTP応答など、操作と結果を確認</span></li>
+                        <li><a href="evidence-demo.html">実測結果と未実施の範囲</a><span>本人の操作、AIによる実行、自動テストの結果を区別して掲載</span></li>
                     </ul>
                 </div>
                 <div class="summary-card">
-                    <span class="summary-label">03 / Evidence</span>
-                    <h3>証拠の範囲を確認</h3>
+                    <span class="summary-label">03 / Workflow</span>
+                    <h3>仕事の進め方と成果物</h3>
                     <ul class="time-budget-links">
-                        <li><a href="evidence-demo.html">実測結果のまとめ</a><span>日付、環境、結果、失敗、NOT RUNを確認</span></li>
-                        <li><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a><span>main（GitHubの最新版）にある証跡台帳です。実測済み・未実施の最新の状況を、大もとの記録で確認できます</span></li>
+                        <li><a href="work-readiness.html">確認・相談・記録・報告</a><span>最初に担当したい業務と、相談が必要な範囲</span></li>
+                        <li><a href="project-brief.html#flow-title">主作品の設計から引き渡しまで</a><span>構成図、コード、試験・復旧手順と、それぞれの確認範囲</span></li>
                     </ul>
                 </div>
             </div>
@@ -327,9 +296,9 @@
                         <span class="title-en">About</span>
                         <span class="title-jp">私について</span>
                     </h2>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了しました。2026年7月から派遣社員としてIT分野の研修に取り組み、10月7日からは別のIT企業でトライアル就労中です。現在は社内研修に取り組んでいます（2026年11月1日現在）。</p>
+                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了しました。2026年7月から派遣社員としてIT分野の研修に取り組み、10月7日からは別のIT企業でトライアル就労中です。現在は社内研修に取り組んでいます（2026年11月5日確認）。勤務開始時期は相談となります。</p>
                     <p>検証環境でWindows Server・Linuxの構築、利用者アカウント・アクセス権限の設定などを経験しました。現在はAIの補助を受けて学習しており、本番環境での構築・運用実績とは区別しています。</p>
-                    <p>製造・物流や経理補助などに約15年間従事し、前職では動線とチェック帳票を見直して、自分の作業時間を1日約1時間短縮しました。手順遵守と品質確認の姿勢をIT事務やキッティングに活かし、将来はサーバーの運用・保守、構築を担うインフラエンジニアを目指しています。</p>
+                    <p>製造・物流や経理補助などに約15年間従事し、前職では動線とチェック帳票を見直して、自分の作業時間を1日約1時間短縮しました。目標はLinuxサーバーの構築・運用を担うインフラエンジニアです。最初は手順書と確認者のあるIT事務・キッティング、監視・運用補助などから経験を積み、手順遵守と品質確認の姿勢を活かしたいと考えています。</p>
                     <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
                     <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
