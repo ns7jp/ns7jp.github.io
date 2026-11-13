@@ -119,224 +119,47 @@
                     <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
                     <a href="work-readiness.html" class="active" aria-current="page"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
                 </nav>
-
                 <section class="readiness-intro">
-                    <span class="case-label">未経験者向け業務 / 相談して変更 / 記録を重視</span>
-                    <p class="readiness-kicker">難しい技術名より先に、確認・相談・報告をどう行うかを示します。</p>
-                    <h2>入社後、まず担当したいこと</h2>
-                    <p>サーバー構築・運用の実務経験はまだありません。最初は、決められた手順があり、作業を確認してくれる担当者がいる範囲で取り組みたいです。担当したいのは、設定作業の補助、動作確認、監視、ログ確認、作業記録です。判断に迷う変更は一人で進めず、早めに相談します。以下は<strong>仕事を想定した練習内容</strong>であり、実務実績ではありません。</p>
-                    <div class="readiness-boundary" role="note">
-                        <span><i class="fa-solid fa-laptop" aria-hidden="true"></i><strong>手元の仮想マシンで確認</strong> 2026年9月、手元のHyper-V上の仮想マシンでWindows Server / ADとUbuntu Serverを構築・試験しました。AIの手順案内を受けながら本人が操作した記録です。</span>
-                        <span><i class="fa-solid fa-gears" aria-hidden="true"></i><strong>GitHubで自動確認</strong> GitHub（プログラムを保管し共同作業する場）の機能で、構築から復旧までの23項目と、前の版へ戻す操作を自動で確認しています。</span>
-                        <span><i class="fa-solid fa-flask" aria-hidden="true"></i><strong>AI支援の練習環境</strong> 4つの追加演習は、AI支援セッションの作業環境で実行したものです。本人の環境ではまだ再実行していません。</span>
-                        <span><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i><strong>まだ未実施</strong> AIを使わない再構築、監視やアプリを載せたホストを本人が再起動した後の確認（OSだけの再起動後の確認は2026年9月7〜8日に実施）、長期稼働、本番変更、第三者レビューは、まだ行っていません。</span>
-                    </div>
+                    <h2>手順を確認し、結果を記録して報告する</h2>
+                    <p>構築・運用の実務経験はまだありません。最初は手順書と確認者のある範囲で作業し、判断に迷う変更は早めに相談します。以下は<strong>入社後に目指す進め方と、仕事を想定した練習例</strong>です。</p>
                 </section>
-
                 <section class="brief-section" aria-labelledby="entry-work-title">
-                    <div class="section-heading">
-                        <span class="heading-icon"><i class="fa-solid fa-door-open" aria-hidden="true"></i></span>
-                        <h2 class="heading-text" id="entry-work-title">入口として担当したい業務</h2>
-                    </div>
+                    <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-door-open" aria-hidden="true"></i></span><h2 class="heading-text" id="entry-work-title">最初に担当したい業務</h2></div>
                     <div class="readiness-card-grid">
-                        <article class="readiness-card">
-                            <span class="readiness-card-number">01</span>
-                            <h3>設定作業の補助</h3>
-                            <p>設定内容と手順を見比べ、指示された範囲を作業します。変更した内容、結果、残った作業を記録します。</p>
-                        </article>
-                        <article class="readiness-card">
-                            <span class="readiness-card-number">02</span>
-                            <h3>監視と原因の絞り込み</h3>
-                            <p>発生時刻、影響した範囲、直前の変更、監視値、ログを順番に確認し、分かった事実を共有します。</p>
-                        </article>
-                        <article class="readiness-card">
-                            <span class="readiness-card-number">03</span>
-                            <h3>動作確認・記録・引き継ぎ</h3>
-                            <p>期待した動きと実際の結果を比べます。合格だけでなく、失敗、未実施、やり直した結果も同じ形で整理します。</p>
-                        </article>
+                        <article class="readiness-card"><h3>設定作業の補助</h3><p>設定と手順を照合し、指示された範囲を操作。変更内容と残作業を記録します。</p></article>
+                        <article class="readiness-card"><h3>監視・ログ確認</h3><p>発生時刻、影響範囲、直前の変更、状態とログを確認し、事実を共有します。</p></article>
+                        <article class="readiness-card"><h3>動作確認・引き継ぎ</h3><p>期待値と実結果を比較し、失敗・未実施も含めて報告します。</p></article>
                     </div>
                 </section>
-
                 <section class="brief-section" aria-labelledby="case-title">
-                    <div class="section-heading">
-                        <span class="heading-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span>
-                        <h2 class="heading-text" id="case-title">仕事を想定した練習例：Webの異常通知を受けたら</h2>
-                    </div>
-                    <div class="simulation-banner" role="note">
-                        <strong>練習例</strong>
-                        <span>以下は個人学習の障害演習と作業手順書を基にした流れです。顧客環境で対応した実績ではありません。</span>
-                    </div>
-                                        <p class="plain-summary"><strong>かんたんに言うと</strong>「サイトが見られない」という知らせが来たとき、どんな順番で調べて直すかの練習です。実際のお客様の環境で対応した記録ではありません。</p>
-                    <ol class="response-flow">
-                        <li>
-                            <span class="response-step">01</span>
-                            <div><strong>受付・影響確認</strong><p>アラート（異常を知らせる自動通知）が出た時刻、対象のサービス、利用者への影響、直前に行った変更、同時に出ている他のアラートを確認します。まず全体像をつかみ、影響の大きさを見誤らないためです。</p></div>
-                        </li>
-                        <li>
-                            <span class="response-step">02</span>
-                            <div><strong>作業前の状態を記録</strong><p>監視の数値、動いているプログラム、通信の待受（外からの接続を受け付けている状態）、ログ、関連サービスを確認して保存します。あとで「直したことで何がどう変わったか」を比べられるようにするためです。</p></div>
-                        </li>
-                        <li>
-                            <span class="response-step">03</span>
-                            <div><strong>原因の場所を絞る</strong><p>Webの受付、アプリ、サーバー本体、ネットワークのどこで止まっているかを順番に確認します。</p></div>
-                        </li>
-                        <li>
-                            <span class="response-step">04</span>
-                            <div><strong>承認された範囲で対応</strong><p>作業手順書と担当範囲を確認し、再起動や設定変更は必要な承認を得てから行います。よかれと思って行った操作が、別の障害を招くことがあるためです。</p></div>
-                        </li>
-                        <li>
-                            <span class="response-step">05</span>
-                            <div><strong>元に戻ったか確認</strong><p>プログラムの起動だけで終えず、Web画面の応答、監視表示、ログ、関連機能まで再確認します。</p></div>
-                        </li>
-                        <li>
-                            <span class="response-step">06</span>
-                            <div><strong>報告・次への改善</strong><p>起きたこと、影響、原因、対応、復旧時刻、残った心配を報告し、手順や監視の改善案を残します。</p></div>
-                        </li>
+                    <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span><h2 class="heading-text" id="case-title">練習例：Webの異常通知を受けたら</h2></div>
+                    <p class="simulation-banner"><strong>想定例です。顧客環境で対応した実績ではありません。</strong></p>
+                    <ol class="learning-roadmap">
+                        <li class="roadmap-item"><strong class="roadmap-title">受付・記録</strong><span class="roadmap-detail">対象、発生時刻、利用者への影響、直前の変更を聞き、監視値とログを保存します。</span></li>
+                        <li class="roadmap-item"><strong class="roadmap-title">切り分け・相談</strong><span class="roadmap-detail">Web入口・アプリ・OS・ネットワークを順に確認。再起動や設定変更は手順と承認範囲を確認して行います。</span></li>
+                        <li class="roadmap-item"><strong class="roadmap-title">復旧確認・報告</strong><span class="roadmap-detail">起動状態だけでなく応答・監視・ログを再確認し、対応、結果、残課題を報告します。</span></li>
                     </ol>
-                    <div class="summary-actions">
-                        <a href="https://github.com/ns7jp/server/tree/main/docs/runbooks" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> 作業手順書を見る</a>
-                        <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-flask" aria-hidden="true"></i> 障害演習の記録を見る</a>
-                    </div>
+                    <p><a href="https://github.com/ns7jp/server/blob/main/docs/runbooks/README.md">詳細な作業手順書</a>・<a href="https://github.com/ns7jp/server/blob/main/docs/drills/README.md">障害演習の記録</a></p>
                 </section>
-
-                <section class="brief-section" aria-labelledby="change-title">
-                    <div class="section-heading">
-                        <span class="heading-icon"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i></span>
-                        <h2 class="heading-text" id="change-title">変更を安全に進める型</h2>
-                    </div>
-                                        <p class="plain-summary"><strong>かんたんに言うと</strong>設定を変えるときの決まった進め方です。機械による自動の確認で不具合を先に見つけ、問題が出たときは前の状態へ戻せるようにしておきます。</p>
-                    <div class="change-grid">
-                        <article class="change-card">
-                            <span class="status-pill measured">実測済み</span>
-                            <h3>失敗を見つけ、原因を調べて修正</h3>
-                            <p>GitHub上の自動テスト（決めた確認項目を機械が自動で実行する仕組み）で2つの問題を見つけました。修正後、23項目すべてが合格することを確認しました。さらに、同じ手順を2回目に実行しても不要な変更が出ないこと（冪等性／同じ操作を何度実行しても結果が変わらない性質）も確認しました。</p>
-                            <a href="https://github.com/ns7jp/server/pull/75" target="_blank" rel="noopener noreferrer">PR #75を確認 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </article>
-                        <article class="change-card">
-                            <span class="status-pill measured">自動テストで確認済み</span>
-                            <h3>指定した前の版へ戻す</h3>
-                            <p>新しい版を確認したあと、指定した前の版へ正確に戻しました。この作業は切り戻し（問題が出たときに以前の状態へ戻すこと）と呼ばれます。戻したあと、アプリとログが正しく動くことを確認しました。</p>
-                            <a href="https://github.com/ns7jp/server/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">切り戻しの記録を確認 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </article>
-                        <article class="change-card">
-                            <span class="status-pill pending">実務では要レビュー</span>
-                            <h3>本番変更は単独判断しない</h3>
-                            <p>目的、影響範囲、事前確認、実施手順、切り戻し条件、事後確認を、他の人が読んで確認できる形にまとめます。そのうえで、承認と自分の担当範囲を確認してから進めます。</p>
-                        </article>
-                    </div>
-                </section>
-
                 <section class="brief-section" aria-labelledby="collaboration-title">
-                    <div class="section-heading">
-                        <span class="heading-icon"><i class="fa-solid fa-people-arrows" aria-hidden="true"></i></span>
-                        <h2 class="heading-text" id="collaboration-title">チームで働くための準備</h2>
-                    </div>
-                    <p class="section-lead">公開作品は個人制作で、第三者によるコード確認は受けていません。入社後は、次の情報をそろえ、確認や引き継ぎを受けやすい形にします。</p>
+                    <span id="change-title"></span>
+                    <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span><h2 class="heading-text" id="collaboration-title">相談・報告でそろえる情報</h2></div>
                     <div class="collaboration-grid">
-                        <article><i class="fa-solid fa-ticket" aria-hidden="true"></i><h3>依頼内容を整理する</h3><p>目的、対象、終わりの条件、今回行わないことを作業票にまとめます。</p></article>
-                        <article><i class="fa-solid fa-code-branch" aria-hidden="true"></i><h3>変更を小さくする</h3><p>一つの変更に一つの目的を持たせ、確認しやすい大きさに分けます。</p></article>
-                        <article><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i><h3>結果を添える</h3><p>期待した動き、実際の結果、失敗、やり直し、未実施を残します。</p></article>
-                        <article><i class="fa-solid fa-person-circle-check" aria-hidden="true"></i><h3>判断を仰ぐ</h3><p>権限、停止影響、セキュリティ、費用が絡む変更は独断で進めません。</p></article>
+                        <article><h3>作業前</h3><p>目的、対象、完了条件、影響範囲、元に戻す方法を確認します。</p></article>
+                        <article><h3>作業後</h3><p>期待値、実結果、失敗、やり直し、未確認事項を記録します。</p></article>
+                        <article><h3>判断が必要なとき</h3><p>権限・停止影響・セキュリティ・費用に関わる変更は独断で進めません。</p></article>
                     </div>
                 </section>
-
                 <section class="brief-section" aria-labelledby="ai-title">
-                    <div class="section-heading">
-                        <span class="heading-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
-                        <h2 class="heading-text" id="ai-title">AIを使った範囲と、自分で確認したこと</h2>
-                    </div>
-                    <p class="section-lead">このサイトと関連作品では、文章整理だけでなくプログラム作成にもAIを使いました。AIが出した内容を、そのまま自分の実績とは呼びません。公開している記録には、実施者、環境、AI支援の有無を書いています。AIを使わずに再現した記録はまだなく、自分の言葉で説明できるよう練習を続けています。</p>
-                    <div class="ai-boundary-grid">
-                        <article>
-                            <span>AIを使うときに自分で行うこと</span>
-                            <ul>
-                                <li>目的、対象範囲、完了条件を決める</li>
-                                <li>なぜその方法を選んだか説明する</li>
-                                <li>どの環境とコードの版で試したか記録する</li>
-                                <li>結果を確認し、未実施を明記する</li>
-                            </ul>
-                        </article>
-                        <article>
-                            <span>AIに依頼する範囲</span>
-                            <ul>
-                                <li>コード・テスト・文書の案出し</li>
-                                <li>エラー原因の候補を出す</li>
-                                <li>確認項目の漏れを探す</li>
-                                <li>繰り返し作業と文章の整理</li>
-                            </ul>
-                        </article>
-                        <article>
-                            <span>面談で説明・実演できること</span>
-                            <ul>
-                                <li>主要構成を図と言葉で説明する</li>
-                                <li>保存した記録から判断理由を示す</li>
-                                <li>実演は、本人の環境で通して実行した演習に限る</li>
-                                <li>分からない点を分からないと回答する</li>
-                            </ul>
-                        </article>
-                    </div>
-                    <div class="summary-actions">
-                        <a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#3-つの前提ai-の利用を含む" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> AI利用の詳細</a>
-                        <a href="evidence-demo.html" class="btn btn-outline-dark"><i class="fa-solid fa-bug" aria-hidden="true"></i> 実行時に見つけた欠陥と修正</a>
-                    </div>
+                    <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span><h2 class="heading-text" id="ai-title">本人の確認範囲とAI利用</h2></div>
+                    <p>手元のVMではAIの手順案内を受けて本人が操作・確認しました。文章・コード・テストにもAIを利用しています。AIによる実行やCIの結果を本人の操作経験に含めず、<strong>独力再現・説明は未確認</strong>として記録しています。</p>
+                    <h3 id="demo-title">面談に向けて</h3>
+                    <p>保存した記録を使い、操作と結果の根拠を説明する練習をしています。Webの切り分け・DB復元の追加演習（B-2・B-3）はAI側の環境での記録で、本人の通し実演は未実施です。</p>
+                    <h3 id="gap-title">次に確認すること</h3>
+                    <p>小さい構成の理解と再現を進め、その後に監視・通知・復旧、別VMへの復元と長時間稼働を確認します。実施済みの部分結果と計画は補足資料に分けています。</p>
+                    <p><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/work-readiness-reference.md">実習・AI利用・今後の確認の詳細</a>・<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲">AI支援の内訳</a></p>
                 </section>
-
-                <section class="brief-section" aria-labelledby="demo-title">
-                    <div class="section-heading">
-                        <span class="heading-icon"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
-                        <h2 class="heading-text" id="demo-title">面談で確認いただけること</h2>
-                    </div>
-                                        <p class="plain-summary"><strong>かんたんに言うと</strong>面談でご説明できる内容と、手順はあるものの本人の環境ではまだ通して実行していない演習を分けています。</p>
-                    <div class="interview-demo-grid">
-                        <article>
-                            <span class="status-pill pending">手順あり・未実演</span>
-                            <h3>Webサービスの問題箇所を調べる</h3>
-                            <p>Windows上のLinux環境とDocker（アプリを箱に分けて、まとめて動かす仕組み）を使い、Web受付、アプリ、データベースのどこで止まったかを順番に確認します。</p>
-                        </article>
-                        <article>
-                            <span class="status-pill pending">手順あり・未実演</span>
-                            <h3>データベースのバックアップ・復元</h3>
-                            <p>バックアップからデータを戻し、復旧までの時間と、内容が元と一致することを確認します。</p>
-                        </article>
-                        <article>
-                            <span class="status-pill validated">説明可能</span>
-                            <h3>設計判断と失敗事例</h3>
-                            <p>管理画面を外部へ直接公開しない理由を説明します。あわせて、設定を用途ごとに分けた理由、前の版へ戻す条件、失敗から直した内容もお話しします。</p>
-                        </article>
-                    </div>
-                    <p class="evidence-footnote">「手順あり・未実演」の2件は、AI支援セッションの作業環境で実行した演習（B-2・B-3）です。本人の環境で通して実行した記録ができるまでは、面談で実演できるとは表現しません。GitHubの一時テスト環境、継続利用するサーバーでの実演も対象外です。</p>
-                </section>
-
-                <section class="brief-section gap-plan" aria-labelledby="gap-title">
-                    <div class="section-heading">
-                        <span class="heading-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></span>
-                        <h2 class="heading-text" id="gap-title">次に確認したいこと：仮想マシンでの通し確認と長時間稼働</h2>
-                    </div>
-                    <div class="gap-plan-header">
-                        <span class="status-pill pending">未実施</span>
-                        <p>2026年9月7日〜8日に、手元のHyper-V上の仮想マシンへUbuntu Server 24.04を手作業で初期構築しました（固定IP、SSH鍵認証、UFW、時刻同期、自動更新。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-initial-build.md" target="_blank" rel="noopener noreferrer">初期構築の記録</a>）。監視と復元は、その仮想マシンで構成を切り替えた別々の練習です。以下を終えるまで、「独立したサーバーを構築・運用した実績」とは表現しません。</p>
-                    </div>
-                    <ol class="acceptance-list">
-                        <li><span>01</span><div><strong>監視をまとめて動かす</strong><p>9月に構成を切り替えて別々に試した監視とログに通知を加え、1台の仮想マシンで同時に動かします（9月に使った仮想マシンは残っていないため、新しい仮想マシンで行います）。そのうえで、アラート（異常を知らせる自動通知）が外部へ届くことを確認します。</p></div></li>
-                        <li><span>02</span><div><strong>AlmaLinuxの新規構築</strong><p>新しい仮想マシンにAlmaLinux（RHEL系のLinux）を入れ、必要な通信だけを公開する構成を作ります。設定を変える前の最初の状態も記録し、あとで何をどう変えたかを比べられるようにします。</p></div></li>
-                        <li><span>03</span><div><strong>再起動・前の版への切り戻し・復元</strong><p>ホスト再起動後の動作、指定した前の版への戻し、別の新しい仮想マシンへの復元、監視とログの再開を確認します。</p></div></li>
-                        <li><span>04</span><div><strong>長時間動作と引き継ぎ確認</strong><p>24時間・72時間の連続動作を試します。そのうえで、分かっている制約、復旧条件、引き継ぎチェックリストを、実際の結果に合わせて更新します。AIの案内なしでの再構築と、第三者による手順の確認も残っています。</p></div></li>
-                    </ol>
-                    <div class="summary-actions">
-                        <a href="https://github.com/ns7jp/server/blob/main/docs/build-package/10-host-bringup-and-acceptance.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-check" aria-hidden="true"></i> 実機検証手順</a>
-                        <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> 制作概要へ戻る</a>
-                    </div>
-                </section>
-
-                <section class="readiness-cta">
-                    <span>Linuxサーバーの構築・監視・運用</span>
-                    <h2>手順を確認し、分からないことは相談します</h2>
-                    <p>実際に試したこと、学習で準備したこと、まだ経験していないことを分けてお話しします。</p>
-                    <div class="summary-actions">
-                        <a href="resume.html" class="btn btn-primary"><i class="fa-solid fa-id-card" aria-hidden="true"></i> 1ページ履歴書</a>
-                        <a href="contact.html" class="btn btn-secondary"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 連絡先</a>
-                    </div>
-                </section>
+                <section class="readiness-cta"><h2>経歴・応募条件と連絡先</h2><div class="summary-actions"><a href="resume.html" class="btn btn-primary">履歴書</a><a href="contact.html" class="btn btn-secondary">連絡先</a></div></section>
             </div>
         </div>
     </main>

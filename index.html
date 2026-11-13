@@ -162,284 +162,70 @@
     </header>
 
     <main id="main" tabindex="-1">
-    <!-- ===== ヒーローセクション（ページ最上部の大きなビジュアルエリア） ===== -->
     <section class="hero">
-        <!-- 主作品を示す固定背景。複数画像の自動取得を避け、初期表示を軽くする。 -->
         <div class="hero-slider"></div>
-        <!-- 背景画像の上に重ねる半透明のオーバーレイ（文字を読みやすくする） -->
         <div class="hero-overlay"></div>
-        <!-- ヒーローエリアの中央に表示するテキストとボタン -->
         <div class="hero-content">
-            <!-- アニメーションクラス「animate-fade-in」でCSS側でフェードイン演出 -->
             <p class="hero-greeting animate-fade-in">未経験から、インフラエンジニアを目指しています</p>
-            <h1 class="hero-title animate-slide-up">
-                <span class="line1">Linux Server</span>
-                <span class="line2">作り、確かめ、直す</span>
-            </h1>
-            <p class="hero-description animate-fade-in-delay">Ubuntu Serverの初期設定、監視、設定不備からの復旧を、手元の仮想マシンで学習しています。<br>AIの案内を受けた本人操作と、その確認結果を公開しています。</p>
-            <!-- 採用担当者向けの3本の記録、1分サマリ、主作品コードへの入口。 -->
+            <h1 class="hero-title animate-slide-up"><span class="line1">Linux Server</span><span class="line2">作り、確かめ、直す</span></h1>
+            <p class="hero-description animate-fade-in-delay">Ubuntuの初期設定・監視・復旧を、手元の仮想マシンで学習しています。<br>AIの案内を受けた本人操作と、確認結果を公開しています。</p>
             <div class="hero-buttons animate-fade-in-delay2">
-                <a href="#three-records" class="btn btn-primary"><i class="fa-solid fa-list-check" aria-hidden="true"></i> まず見ていただきたい3本</a>
-                <a href="#one-minute-summary" class="btn btn-outline"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> 採用担当者向け1分サマリ</a>
-                <a href="https://github.com/ns7jp/server" class="btn btn-outline" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品のリポジトリ</a>
+                <a href="#three-records" class="btn btn-primary">代表3事例を見る</a>
+                <a href="#one-minute-summary" class="btn btn-outline">経歴・現在の状況</a>
+                <a href="https://github.com/ns7jp/server" class="btn btn-outline" target="_blank" rel="noopener noreferrer">主作品のコード</a>
             </div>
         </div>
-        <!-- 「下にスクロールしてね」と促すアニメーション付きのインジケーター -->
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+        <div class="scroll-indicator"><span>Scroll</span><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></div>
+    </section>
+
+    <section class="quick-intro" id="one-minute-summary" aria-labelledby="one-minute-summary-title">
+        <div class="container intro-grid">
+            <div class="intro-text">
+                <h2 class="section-title"><span class="title-en">About</span><span class="title-jp" id="one-minute-summary-title">島田則幸について</span></h2>
+                <p><strong>Linuxサーバーの構築・運用を志望しています。</strong>手順書と確認者のあるIT事務・キッティング、監視・運用補助から経験を積みたいと考えています。</p>
+                <p>製造・物流などに約15年従事し、動線と帳票の改善で自分の作業時間を1日約1時間短縮しました。2026年10月7日からIT企業でトライアル就労・社内研修中です。勤務開始時期は相談となります（2026年11月5日確認）。</p>
+                <a href="me.html" class="link-more">経歴・資格を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+            <a href="project-brief.html" class="intro-image"><img src="image/server-monitor.png" alt="主作品Server Monitorの監視ダッシュボード。制作概要へ進む" width="1600" height="859" loading="lazy" decoding="async"></a>
         </div>
     </section>
 
-    <section class="role-strip" aria-label="志望と対応できる領域、主作品の概要">
-        <div class="container role-strip-inner">
-            <div class="role-strip-lead">
-                <span>FIRST CHOICE</span>
-                <strong>インフラエンジニア（Linux中心）</strong>
-            </div>
-            <div class="role-strip-item"><i class="fa-brands fa-windows" aria-hidden="true"></i><span>最初は手順書と確認者のある基礎業務から<br>IT事務・キッティング、監視・運用補助</span></div>
-            <div class="role-strip-item"><i class="fa-solid fa-route" aria-hidden="true"></i><span>設計 → 構築 → 試験<br>監視 → 復旧 → 引き渡し</span></div>
-            <div class="role-strip-item"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>個人学習<br>実務・本番（実際に使われている環境）の実績ではありません</span></div>
-        </div>
-    </section>
-
-    <!-- ===== 採用担当者に最初に見ていただきたい3本の記録 ===== -->
     <section class="recruiter-value" id="three-records" aria-labelledby="three-records-title">
         <div class="container">
-            <h2 class="section-title center">
-                <span class="title-en">Three Records</span>
-                <span class="title-jp" id="three-records-title">まず見ていただきたい3本</span>
-            </h2>
-            <p class="plain-summary"><strong>かんたんに言うと</strong>2026年9月の個人ラボで、AIの手順案内を受けながら私が操作・確認した3例です。本人の独力再現はまだ未確認です。支援の内訳と未実施事項は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">AI支援の範囲</a>にまとめています。</p>
+            <h2 class="section-title center"><span class="title-en">Three Records</span><span class="title-jp" id="three-records-title">まず見ていただきたい3本</span></h2>
+            <p class="plain-summary">AIの手順案内を受け、本人がVMを操作・確認した個人学習です。実務経験ではなく、独力での原因特定・再現・説明は未確認です。</p>
             <div class="value-grid">
                 <article class="value-card">
-                    <i class="fa-brands fa-linux" aria-hidden="true"></i>
-                    <h3>Ubuntuの設定不備からの復旧</h3>
-                    <p><strong>課題：</strong>SSHに意図的な誤設定を入れ、接続前に検出・修正する。</p>
-                    <p><strong>本人の確認：</strong>構文検査、修正後の再検査、SSH鍵接続を操作。</p>
-                    <p><strong>判断の根拠：</strong>構文検査の終了コード255→0と、別途の接続成功。</p>
-                    <p><strong>結果：</strong>復旧を確認。別の演習では監視値の1→0→1も確認しました。</p>
-                    <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/evidence/featured-evidence.md" target="_blank" rel="noopener noreferrer">結果と原画像を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <i class="fa-brands fa-linux" aria-hidden="true"></i><h3>Ubuntu：SSHの設定不備から復旧</h3>
+                    <p>意図的な設定不備を検出して復元し、構文検査の終了コード255→0とSSH鍵接続の成功を確認しました。</p>
+                    <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/evidence/featured-evidence.md" target="_blank" rel="noopener noreferrer">結果と原画像</a>
                 </article>
                 <article class="value-card">
-                    <i class="fa-solid fa-sitemap" aria-hidden="true"></i>
-                    <h3>ADの2台構成と復旧</h3>
-                    <p><strong>課題：</strong>認証基盤を構築し、復元とDCを1台失う場合の対応を試す。</p>
-                    <p><strong>本人の確認：</strong>構築試験、複製、System State復元、役割の奪取を操作。</p>
-                    <p><strong>判断の根拠：</strong>試験仕様の期待値と実行結果、復元前後の状態を照合。</p>
-                    <p><strong>結果：</strong>構築の必須31項目PASS。奪取演習後のDCは1台です。</p>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ad-fsmo-seize.md" target="_blank" rel="noopener noreferrer">結果と確認範囲を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <i class="fa-solid fa-sitemap" aria-hidden="true"></i><h3>AD：バックアップ時点への復元</h3>
+                    <p>復元後に目印のOUが消えたことを確認しました。翌日にSYSVOL欠損が判明し、修正手順の実機検証は未完了です。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-02-ad-restore-drill.md" target="_blank" rel="noopener noreferrer">結果と残課題</a>
                 </article>
                 <article class="value-card">
-                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                    <h3>WSUSの試験失敗を調査</h3>
-                    <p><strong>課題：</strong>更新配信サーバーの試験で期待結果を満たさない。</p>
-                    <p><strong>本人の確認：</strong>承認件数と、自動承認ルールの絞り込みを照合。</p>
-                    <p><strong>判断の根拠：</strong>分類・製品が0件だと全件が対象になる仕組みを確認。</p>
-                    <p><strong>結果：</strong>手順を修正。0件になった操作は未特定で、通しの再試験は未実施です。</p>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">調査結果と残課題を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3>WSUS：試験失敗を調べ、手順を修正</h3>
+                    <p>分類・製品が0件の承認ルールの適用範囲を確認。0件になった操作は未特定、通し再試験は未実施で、判定は<strong>FAIL</strong>です。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">原因調査の記録</a>
                 </article>
-            </div>
-            <div class="summary-actions">
-                <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> すべての記録（検証証跡台帳）</a>
-                <a href="https://github.com/ns7jp/ns7jp" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> プロフィール（GitHub）</a>
             </div>
         </div>
     </section>
 
-    <!-- ===== 採用担当者向けの最短導線 ===== -->
-    <section class="time-budget" id="one-minute-summary" aria-labelledby="one-minute-summary-title">
+    <section class="time-budget" aria-labelledby="details-title">
         <div class="container">
-            <h2 class="section-title center">
-                <span class="title-en">One-minute Summary</span>
-                <span class="title-jp" id="one-minute-summary-title">採用担当者向け1分サマリ</span>
-            </h2>
-            <p class="plain-summary"><strong>かんたんに言うと</strong>目指す仕事、本人が確認したこと、仕事の進め方を短く紹介します。詳しい資料は各リンクから確認できます。</p>
+            <h2 class="section-title center"><span class="title-en">Details</span><span class="title-jp" id="details-title">詳しく見る</span></h2>
             <div class="summary-grid">
-                <div class="summary-card">
-                    <span class="summary-label">01 / Career</span>
-                    <h3>志望と現在の状況</h3>
-                    <ul class="time-budget-links">
-                        <li><a href="resume.html">経歴・希望条件</a><span>Linuxの構築・運用を目指し、最初は手順書と確認者のある基礎業務から取り組みます</span></li>
-                        <li><a href="contact.html">就業状況・連絡先</a><span>トライアル就労・社内研修中。勤務開始時期は相談（2026年11月5日確認）</span></li>
-                    </ul>
-                </div>
-                <div class="summary-card">
-                    <span class="summary-label">02 / Practice</span>
-                    <h3>本人が確認したこと</h3>
-                    <ul class="time-budget-links">
-                        <li><a href="https://github.com/ns7jp/ns7jp/blob/main/docs/evidence/featured-evidence.md" target="_blank" rel="noopener noreferrer">代表実績と証拠</a><span>SSHの構文検査、監視値、HTTP応答など、操作と結果を確認</span></li>
-                        <li><a href="evidence-demo.html">実測結果と未実施の範囲</a><span>本人の操作、AIによる実行、自動テストの結果を区別して掲載</span></li>
-                    </ul>
-                </div>
-                <div class="summary-card">
-                    <span class="summary-label">03 / Workflow</span>
-                    <h3>仕事の進め方と成果物</h3>
-                    <ul class="time-budget-links">
-                        <li><a href="work-readiness.html">確認・相談・記録・報告</a><span>最初に担当したい業務と、相談が必要な範囲</span></li>
-                        <li><a href="project-brief.html#flow-title">主作品の設計から引き渡しまで</a><span>構成図、コード、試験・復旧手順と、それぞれの確認範囲</span></li>
-                    </ul>
-                </div>
+                <div class="summary-card"><span class="summary-label">Project</span><h3>何を作ったか</h3><p>主作品の目的・構成・設計の工夫。</p><a href="project-brief.html">制作概要</a></div>
+                <div class="summary-card"><span class="summary-label">Skills</span><h3>どこまで確認したか</h3><p>技術ごとの操作・支援範囲と証拠。</p><a href="skills.html">スキルと確認範囲</a></div>
+                <div class="summary-card"><span class="summary-label">Career</span><h3>経歴と応募条件</h3><p>職歴・資格・希望条件と連絡先。</p><a href="resume.html">履歴書</a> ／ <a href="work-readiness.html">仕事の進め方</a></div>
             </div>
         </div>
     </section>
-
-    <!-- ===== クイック自己紹介セクション ===== -->
-    <!-- 「私について」の概要を簡潔に伝え、me.htmlへの導線を作るブロック。 -->
-    <section class="quick-intro">
-        <div class="container">
-            <!-- 文章エリアと画像エリアを2カラムで横並びにするためのGridレイアウト。 -->
-            <div class="intro-grid">
-                <div class="intro-text">
-                    <h2 class="section-title">
-                        <!-- 英語見出しと日本語見出しを組み合わせた装飾的なタイトル。 -->
-                        <span class="title-en">About</span>
-                        <span class="title-jp">私について</span>
-                    </h2>
-                    <p>こんにちは、島田則幸です。2026年1月に公共職業訓練「情報処理（Pythonエンジニア）コース」を修了しました。2026年7月から派遣社員としてIT分野の研修に取り組み、10月7日からは別のIT企業でトライアル就労中です。現在は社内研修に取り組んでいます（2026年11月5日確認）。勤務開始時期は相談となります。</p>
-                    <p>検証環境でWindows Server・Linuxの構築、利用者アカウント・アクセス権限の設定などを経験しました。現在はAIの補助を受けて学習しており、本番環境での構築・運用実績とは区別しています。</p>
-                    <p>製造・物流や経理補助などに約15年間従事し、前職では動線とチェック帳票を見直して、自分の作業時間を1日約1時間短縮しました。目標はLinuxサーバーの構築・運用を担うインフラエンジニアです。最初は手順書と確認者のあるIT事務・キッティング、監視・運用補助などから経験を積み、手順遵守と品質確認の姿勢を活かしたいと考えています。</p>
-                    <!-- 「詳しく見る」リンクで自己紹介ページへ誘導 -->
-                    <a href="me.html" class="link-more">詳しく見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-                </div>
-                <!-- プロフィール画像。クリックで自己紹介ページへ移動できる。 -->
-                <a href="me.html">
-                <div class="intro-image">
-                    <!-- alt属性は画像が表示されない時に表示する代替テキスト。アクセシビリティ・SEOで重要。 -->
-                    <img src="image/server-monitor.png" alt="サーバー監視ダッシュボードの画面" width="1600" height="859" loading="lazy" decoding="async">
-                </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== スキルプレビューセクション ===== -->
-    <!-- 主要スキルを6枚のカードで表示し、自己評価率ではなく実測証跡で示す。 -->
-    <section class="skills-preview">
-        <div class="container">
-            <h2 class="section-title center">
-                <span class="title-en">Skills</span>
-                <span class="title-jp">スキル</span>
-            </h2>
-            <p class="plain-summary"><strong>かんたんに言うと</strong>6枚のカードは、仕事の流れ（設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し）の順に並べています。それぞれ、どこまで確かめたかを示しています。</p>
-            <!-- 自己評価の割合ではなく、6工程の成果物と証跡で説明する。 -->
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-server" aria-hidden="true"></i>
-                    </div>
-                    <span class="status-pill validated">実装済み</span>
-                    <h3>設計</h3>
-                    <p>基本設計、詳細設計、パラメータシート、ネットワーク設計を作成（AI支援で作成した学習用の文書で、設計工程の実務経験には数えていません）</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-gears" aria-hidden="true"></i>
-                    </div>
-                    <span class="status-pill measured">実測済み</span>
-                    <h3>構築</h3>
-                    <p>AnsibleとComposeを実行し、2回目に不要な変更が出ないことを確認。同じ手順を何度実行しても同じ状態になる、という確認です</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
-                    </div>
-                    <span class="status-pill measured">実測済み</span>
-                    <h3>試験</h3>
-                    <p>GitHubの自動テスト（一時Ubuntu環境）で構築から復旧までの23項目を実行し、結果を記録</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
-                    </div>
-                    <span class="status-pill measured">実測済み</span>
-                    <h3>監視</h3>
-                    <p>Prometheus、Grafana、Loki、Alloy、Alertmanager（数値やログを集めて画面に表示し、異常を知らせる道具）を学習環境で確認</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-heart-pulse" aria-hidden="true"></i>
-                    </div>
-                    <span class="status-pill measured">実測済み</span>
-                    <h3>復旧</h3>
-                    <p>サービス停止からの復旧と、同じ環境への監視データ復元を確認</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">
-                        <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
-                    </div>
-                    <span class="status-pill validated">実装済み</span>
-                    <h3>引き渡し</h3>
-                    <p>チェックリストと切り戻し手順（問題が起きたときに前の状態へ戻す手順）を作成。対象サーバーでの受け入れはNOT RUN</p>
-                </div>
-            </div>
-            <!-- スキル一覧ページへの誘導ボタン -->
-            <div class="section-link">
-                <a href="skills.html" class="btn btn-secondary">すべてのスキルを見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== 作品プレビューセクション ===== -->
-    <!-- 代表作品をカード形式で表示。各カードはworks.htmlの該当作品にアンカーリンクで飛ぶ。 -->
-    <section class="works-preview">
-        <div class="container">
-            <h2 class="section-title center light">
-                <span class="title-en">Works</span>
-                <span class="title-jp">作品</span>
-            </h2>
-            <div class="works-grid">
-                <div class="work-card">
-                    <a href="https://github.com/ns7jp/server" target="_blank" rel="noopener noreferrer">
-                    <div class="work-image" style="background-image: url('image/server-monitor.png')">
-                        <div class="work-overlay">
-                            <span class="work-category">主作品 / Linux Server</span>
-                            <h3>Server Monitor</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="work-card">
-                    <a href="project-brief.html">
-                    <div class="work-image" style="background-image: url('image/grafana-dashboard.svg')">
-                        <div class="work-overlay">
-                            <span class="work-category">設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し</span>
-                            <h3>制作概要と工程成果物</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="work-card">
-                    <a href="evidence-demo.html">
-                    <div class="work-image" style="background-image: url('image/network-vlan.svg')">
-                        <div class="work-overlay">
-                            <span class="work-category">実装済み / 実測済み / NOT RUN</span>
-                            <h3>動作確認と証跡</h3>
-                        </div>
-                    </div>
-                    </a>
-                </div>
-            </div>
-            <!-- 作品ページへの誘導ボタン -->
-            <div class="section-link">
-                <a href="works.html" class="btn btn-light">主な作品と追加学習を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== 連絡先CTA（Call To Action）セクション ===== -->
-    <!-- ページ最後で連絡先ページへ誘導するブロック。 -->
-    <section class="contact-cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>作品や学習内容についてご確認いただけます</h2>
-                <p>応募・面談に関するご連絡は、連絡先ページからお願いいたします。</p>
-                <a href="contact.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 連絡先を見る</a>
-            </div>
-        </div>
-    </section>
-
-    </main>
+    <section class="contact-cta"><div class="container cta-content"><h2>作品・応募についてのご連絡</h2><a href="contact.html" class="btn btn-primary btn-lg">連絡先を見る</a></div></section>
+</main>
 
     <!-- ===== フッター（サイト共通の最下部エリア） ===== -->
     <footer>
