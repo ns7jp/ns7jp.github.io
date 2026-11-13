@@ -188,24 +188,25 @@
     <section class="recruiter-value" id="three-records" aria-labelledby="three-records-title">
         <div class="container">
             <h2 class="section-title center"><span class="title-en">Three Records</span><span class="title-jp" id="three-records-title">まず見ていただきたい3本</span></h2>
-            <p class="plain-summary">AIの手順案内を受け、本人がVMを操作・確認した個人学習です。実務経験ではなく、独力での原因特定・再現・説明は未確認です。</p>
+            <p class="plain-summary">2026年9月にAIの手順案内を受け、本人がVMを操作したLinuxの3事例です。結果と原画像を公開しています。別々の部分演習で、全構成の通し検証や独力での再現・説明は未確認です。</p>
             <div class="value-grid">
                 <article class="value-card">
                     <i class="fa-brands fa-linux" aria-hidden="true"></i><h3>Ubuntu：SSHの設定不備から復旧</h3>
                     <p>意図的な設定不備を検出して復元し、構文検査の終了コード255→0とSSH鍵接続の成功を確認しました。</p>
-                    <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/evidence/featured-evidence.md" target="_blank" rel="noopener noreferrer">結果と原画像</a>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-initial-build.md" target="_blank" rel="noopener noreferrer">SSH復旧の結果と原画像</a>
                 </article>
                 <article class="value-card">
-                    <i class="fa-solid fa-sitemap" aria-hidden="true"></i><h3>AD：バックアップ時点への復元</h3>
-                    <p>復元後に目印のOUが消えたことを確認しました。翌日にSYSVOL欠損が判明し、修正手順の実機検証は未完了です。</p>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-02-ad-restore-drill.md" target="_blank" rel="noopener noreferrer">結果と残課題</a>
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i><h3>監視：停止と再開を画面で確認</h3>
+                    <p>アプリの手動停止・再開に合わせ、Prometheus / Grafanaで収集状態の1→0→1を確認しました。この値はメトリクス収集の成否です。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-monitoring-practice.md" target="_blank" rel="noopener noreferrer">監視の結果と原画像</a>
                 </article>
                 <article class="value-card">
-                    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><h3>WSUS：試験失敗を調べ、手順を修正</h3>
-                    <p>分類・製品が0件の承認ルールの適用範囲を確認。0件になった操作は未特定、通し再試験は未実施で、判定は<strong>FAIL</strong>です。</p>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">原因調査の記録</a>
+                    <i class="fa-solid fa-rotate-right" aria-hidden="true"></i><h3>復旧：アプリの自動再起動を確認</h3>
+                    <p>再起動回数0→1、PIDの変化、HTTP応答の復帰を確認しました。復帰2秒は1回の計測で、監視・通知を含む復旧時間ではありません。</p>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-d1-practice.md" target="_blank" rel="noopener noreferrer">自動再起動の結果と原画像</a>
                 </article>
             </div>
+            <div class="summary-actions"><a href="evidence-demo.html#november-monitoring">11月の監視・ローカル通知・手動復旧</a><a href="evidence-demo.html#windows-lessons">補足：AD・WSUSの失敗から学んだこと</a></div>
         </div>
     </section>
 

@@ -115,8 +115,8 @@
             <section class="lab-intro">
                 <span class="case-label">日付・環境・実行者を分けて掲載</span>
                 <h2>確認結果と、その根拠をたどる</h2>
-                <p>以下は2026年8〜9月の主な記録です。本人がAIの案内を受けた操作と、CI・AI側の実行を区別しています。文書・コードにもAIを利用し、本人の独力再現・説明は未確認です。</p>
-                <p>11月の本人実習など、現在の確認範囲は<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md">検証証跡台帳</a>へ。過去の合格は記録された版・環境での結果で、最新コード全体の合格や本番運用実績には置き換えません。</p>
+                <p>以下は2026年8〜11月の主な記録です。本人がAIの案内を受けた操作と、CI・AI側の実行を区別しています。文書・コードにもAIを利用し、本人の独力再現・説明は未確認です。</p>
+                <p>原画像をたどれる<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/evidence/featured-evidence.md">Linuxの代表3事例</a>と、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md">全件の検証証跡台帳</a>を公開しています。過去の合格は記録された版・環境での結果で、最新コード全体の合格や本番運用実績には置き換えません。</p>
             </section>
             <section class="brief-section" aria-labelledby="snapshot-title">
                 <div class="section-heading">
@@ -145,6 +145,21 @@
                                 <td>9月7〜8日<br>Ubuntu初期構築</td>
                                 <td>本人操作・AI案内<br>Hyper-VのVM</td>
                                 <td>固定IP・SSH・UFW等を設定し、設定不備から復旧。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-initial-build.md">結果と原画像</a>。監視全体の通し検証とは別です。</td>
+                            </tr>
+                            <tr>
+                                <td>9月8日<br>停止・再開の監視</td>
+                                <td>本人操作・AI案内<br>Hyper-VのVM・5サービス</td>
+                                <td>アプリの手動停止・再開に合わせ、メトリクス収集状態の1→0→1を確認。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-monitoring-practice.md">結果と原画像</a>。利用者からの全機能の正常性や外部通知の確認ではありません。</td>
+                            </tr>
+                            <tr>
+                                <td>9月8日<br>アプリの自動再起動</td>
+                                <td>本人操作・AI案内<br>Hyper-VのVM・app / nginx</td>
+                                <td>再起動回数0→1、PID変化、HTTP復帰2秒と後続のhealthy・HTTP 200を確認。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-d1-practice.md">結果と原画像</a>。2秒は1回の計測で、監視・通知込みの復旧時間ではありません。</td>
+                            </tr>
+                            <tr id="november-monitoring">
+                                <td>11月5日<br>監視・通知・手動復旧</td>
+                                <td>本人操作・AI案内<br>KVMのVM・7サービス部分構成</td>
+                                <td>同じ構成で停止→FIRING受信→手動復旧→RESOLVED受信→正常確認を実施。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-11-05-kvm-monitoring-notification.md">操作と確認範囲</a>。通知先は同一VM内で、Slack・メールへの外部通知ではありません。原画像・生ログ・受信JSONは未収録、独力再現・全構成の受け入れは未確認です。</td>
                             </tr>
                             <tr id="test-status-title">
                                 <td>8月22日<br>構築・復旧試験</td>
@@ -181,6 +196,12 @@
                         <p>8月19日のD-1は2回失敗し、条件をそろえた3回目に13秒で復旧。WSL2の記録で実行者が未記載のため、本人操作には加えません。<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/verification-history.md#d-1の失敗と再試行2026-08-19">経緯と原記録</a></p>
                     </article>
                 </div>
+                <h3 id="windows-lessons">補足：AD・WSUSの失敗から学んだこと</h3>
+                <p>以下もAIの案内を受けた本人のVM操作です。Linuxの3事例とは別の学習記録として残しています。</p>
+                <ul>
+                    <li><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-02-ad-restore-drill.md">ADのバックアップ時点への復元</a>：目印のOUが消えたことを確認。翌日にSYSVOL欠損が判明し、修正手順の実機検証は未完了です。</li>
+                    <li><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md">WSUSの原因調査と手順修正</a>：分類・製品が0件の承認ルールの適用範囲を確認。0件になった操作は未特定、通し再試験は未実施で、判定は<strong>FAIL</strong>です。</li>
+                </ul>
                 <p>ほかの失敗・誤判定・修正は<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/defects-found.md">欠陥台帳</a>に保存しています。</p>
             </section>
             <section class="video-status-section" aria-labelledby="video-title">

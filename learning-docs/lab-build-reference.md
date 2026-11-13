@@ -52,7 +52,7 @@ UbuntuまたはRHEL系の練習用VMを用意します。WSL2でも一部を試�
 
 **補助学習：**Windows、Microsoft 365、Active Directoryの問い合わせ対応を想定した設計例です。実際の組織の環境を構築・運用した実績ではありません。Linuxサーバーを中心とする主作品とは分けて掲載しています。
 
-ADの本人実習は[トップページ](https://ns7jp.github.io/index.html#three-records)と[原記録](https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-01-ad-build-validation.md)で案内しています。9月のSystem State復元は翌日にSYSVOL欠損が判明し、修正手順の実機検証は未完了です。この設計例をAD実習の完了証拠として扱いません。
+ADの本人実習は[補足の失敗記録](https://ns7jp.github.io/evidence-demo.html#windows-lessons)と[原記録](https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-01-ad-build-validation.md)で案内しています。9月のSystem State復元は翌日にSYSVOL欠損が判明し、修正手順の実機検証は未完了です。この設計例をAD実習の完了証拠として扱いません。
 
 **かんたんに言うと**下の図は、会社の中のネットワークを用途ごとに部屋分けした設計例です。VLANはその「部屋」にあたる区切りで、外部に見せるサーバー、社内サーバー、社員のパソコン、来客用Wi-Fiを別々にしています。分けておくと、1か所で問題が起きても他へ広がりにくくなります。
 
