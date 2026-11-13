@@ -105,241 +105,61 @@
             </h1>
         </div>
     </section>
-
-    <div class="page-content project-brief-content">
-        <div class="container">
-            <nav class="lab-subnav" aria-label="Linuxサーバー構築学習の案内">
+    <div class="page-content project-brief-content"><div class="container">
+        <nav class="lab-subnav" aria-label="Linuxサーバー構築学習の案内">
                 <a href="project-brief.html" class="active" aria-current="page"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 制作概要</a>
                 <a href="infra-lab.html"><i class="fa-solid fa-server" aria-hidden="true"></i> 構築内容</a>
                 <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
                 <a href="work-readiness.html"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
                 <a href="resume.html"><i class="fa-solid fa-id-card" aria-hidden="true"></i> 履歴書</a>
             </nav>
+        <section class="lab-intro project-intro" aria-labelledby="brief-summary-title">
+            <span class="case-label">Server Monitor / 個人学習</span>
+            <h2 id="brief-summary-title">Linux上のWebアプリを、構築から復旧まで学ぶ</h2>
+            <p>CPUやメモリなどを表示するWebアプリを題材に、設定・認証・監視・復旧手順を用意しました。文書・コード・テストの作成にAIを利用しています。本人の操作、CI、AIによる実行を区別し、独力での再現・説明は未確認です。</p>
+            <div class="summary-actions"><a href="https://github.com/ns7jp/server" class="btn btn-primary" target="_blank" rel="noopener noreferrer">主作品のコード</a><a href="evidence-demo.html" class="btn btn-secondary">動作確認の記録</a></div>
+        </section>
 
-            <section class="lab-intro project-intro">
-                <span class="case-label">Ubuntuを使った個人学習</span>
-                <h2>Linuxの状態を見られるWebアプリを動かし、確かめ、復旧する</h2>
-                <p><strong>学ぶ方へ:</strong> <a href="learning-path.html#first-step">仕組み → 小さい実習 → 結果の確認</a>を順に進め、<a href="learning-path.html#explain">自分の記録で1分説明</a>します。採用担当者の方は、このページで作品の目的と確認範囲をご覧ください。</p>
-                <p>主作品「Server Monitor」は、CPUの使用率やメモリなど、Linuxの状態を確認する学習用のWebアプリです。Ubuntu（OSという土台）の上で、nginx（通信の入口）がapp（応答を作るプログラム）へ要求を渡します。アプリを置くだけでなく、設定・認証・動作確認・復旧・引き継ぎまでを学ぶ題材にしています。実務経験はまだありません。AIによる文章・コード・テストの作成補助を含み、本人の実行範囲は記録で示します。</p>
-                <details class="beginner-answer">
-                    <summary>過去の検証記録：いつ、どの環境で、何を確認したか</summary>
-                <div class="status-callout validated evidence-scope-note" role="note">
-                    <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
-                    <div>
-                        <strong>記録した日付・環境・コードの版に限った結果です</strong>
-                        <p><strong>2026年9月7日〜10月1日の追加記録:</strong> 手元のHyper-V上の仮想マシンで、Ubuntu Serverの手作業での初期構築（固定IP・SSH鍵認証・UFW・時刻同期）、監視の停止と復帰の表示、ログの別ボリュームへの復元、アプリの自動再起動を確かめました。9月30日・10月1日には新しい仮想マシンで、SSH鍵での接続（接続の成功は本人の報告）とDockerの最小構成（appとnginx）を確かめています。いずれもAIの手順案内を受けて本人が操作した記録です（<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">証跡台帳</a>）。</p>
-                        <p><strong>2026年9月4日の追加記録:</strong> 本人PCのHyper-V上で、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md" target="_blank" rel="noopener noreferrer">Ubuntuの基盤構築</a>を実施しました。Ansibleの<code>foundation.yml</code>で基本設定とDockerを用意し、再実行時に不要な変更が出ないことを確認しています。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-el9-build.md" target="_blank" rel="noopener noreferrer">AlmaLinux 9.7の記録</a>は、以前使ったVMへの基盤適用と再実行です。新規構築・SSHだけの最小公開は未証明です。監視システム全体の実行や本番稼働を示すものではありません。</p>
-                        <p>2026年8月22日から25日にかけての記録です。通しでの動作テスト23項目と前の版への切り戻し（変更を前のバージョンに戻す作業）は、GitHubの自動テストが使い捨てのUbuntu（無料で使えるLinuxの一種）環境で実行した結果です。ディスク拡張、問題箇所の調査、データベース復元、ネットワーク確認は、AI支援セッションがAI側の作業環境（仮想ディスク付きのUbuntu、Docker（アプリを箱に入れて動かす仕組み）、Linux内の分離環境）で実行した結果で、本人が操作したものではありません。長く動かし続けている実際のサーバーでの結果ではありません。現在の確認範囲と未実施（NOT RUN）の範囲は、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>を正本（もとになる正しい記録）とします。証跡台帳とは、いつ、どの環境で、何を確認したかを一覧にした記録です。</p>
-                    </div>
-                </div>
-                </details>
-                <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
-                    <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリストを作って公開しました。作成済みであること自体は、稼働実績を意味しません</span>
-                    <span><strong>実測済み</strong> 日付、実行環境、対象の版、結果を記録した確認だけを「実測済み」と表示します。いずれも学習環境の中での確認です</span>
-                    <span><strong>未実施（NOT RUN）</strong> 次はまだ行っていません。独立した対象サーバーでの受け入れ確認、72時間の連続稼働、Slackへの実際の通知、AWS apply/destroy（クラウド上に環境を作って消す操作）、D-2（2つ目の復旧演習）、本番環境の変更です</span>
-                </div>
-                <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> Server Monitorを見る</a>
-                    <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録を見る</a>
-                    <a href="https://github.com/ns7jp/server/tree/main/docs/build-package" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> 構築手順・確認資料</a>
-                    <a href="work-readiness.html" class="btn btn-outline-dark"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
-                </div>
-            </section>
+        <section class="brief-section" aria-labelledby="flow-title">
+            <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span><h2 class="heading-text" id="flow-title">構成と学習の流れ</h2></div>
+            <div class="brief-summary-grid">
+                <article class="brief-summary-card"><span>Request</span><h3>ブラウザ → Nginx → app</h3><p>Ubuntu上でDocker Composeを使って起動し、HTTP応答と認証を確認します。</p></article>
+                <article class="brief-summary-card"><span>Metrics / Logs</span><h3>数値とログをGrafanaで見る</h3><p>Prometheusが数値を取得し、AlloyがLokiへログを送ります。Grafanaから両方を参照します。</p></article>
+                <article class="brief-summary-card"><span>Practice</span><h3>構築 → 確認 → 復旧</h3><p>期待値と実結果を記録し、異常時の確認・復旧・引き継ぎまでを学びます。</p></article>
+            </div>
+            <p>上記は実装した全体構成です。各演習の範囲は異なり、本人による監視・実通知・復旧の一連検証は未完了です。<a href="https://github.com/ns7jp/server/blob/main/docs/architecture.md" target="_blank" rel="noopener noreferrer">詳細な構成図</a></p>
+        </section>
 
-            <section class="brief-section" aria-labelledby="brief-summary-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-bullseye" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="brief-summary-title">取り組みの概要</h2>
-                </div>
-                <div class="brief-summary-grid">
-                    <article class="brief-summary-card">
-                        <span>学習課題</span>
-                        <h3>小規模なWebサービスをUbuntu上で動かす</h3>
-                        <p>Webアプリ、外部からの接続、監視、ログ、異常時の通知を設定します。そのうえで、動作確認、復旧の練習、引き継ぎ資料の作成まで行います。</p>
-                    </article>
-                    <article class="brief-summary-card">
-                        <span>前提・制約</span>
-                        <h3>個人学習／AIの支援を大きく受けて作成</h3>
-                        <p>個人制作です。文章とプログラムの作成、問題の調査に、AI（Claude・Codex）の支援を大きく受けています（範囲は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">職務経歴書 §4-b</a>）。ほかの人によるレビュー（第三者レビュー）は受けていません。手元VMでの基盤構築など、確認済みの範囲は<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">検証証跡台帳</a>に記録しています。監視システム全体について、独立した対象ホストでの受け入れ確認と本番環境の変更は未実施です。</p>
-                    </article>
-                    <article class="brief-summary-card">
-                    <span>目標</span>
-                    <h3>作業の流れと結果を自分の言葉で説明する</h3>
-                    <p>設定内容、作業手順、期待した動き、実際の結果、元に戻す方法、分かっている制約をそろえます。合格だけでなく、失敗、環境上できなかったこと、未実施も記録します。</p>
-                    </article>
-                </div>
-            </section>
+        <section class="brief-section" aria-labelledby="decision-title">
+            <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span><h2 class="heading-text" id="decision-title">設計で工夫したこと</h2></div>
+            <div class="decision-grid">
+                <article class="decision-card"><span class="decision-number">01</span><h3>まずUbuntu 1台に絞る</h3><p>構築から確認・復旧まで、一つの構成を追える学習範囲にしました。</p></article>
+                <article class="decision-card"><span class="decision-number">02</span><h3>自動設定を役割ごとに分ける</h3><p>Ansibleを基本設定・Docker・Web・アプリ・監視・バックアップに分け、変更箇所を追いやすくしました。</p></article>
+                <article class="decision-card"><span class="decision-number">03</span><h3>管理画面の公開範囲を抑える</h3><p>原則としてサーバー内部から接続する構成です。別の管理端末からの接続確認は未実施です。</p></article>
+            </div>
+            <p>数値とログを同じ画面で確認する理由などは、<a href="https://github.com/ns7jp/server/blob/main/docs/design-decisions.md" target="_blank" rel="noopener noreferrer">設計判断の記録</a>にまとめています。</p>
+        </section>
 
-            <section class="brief-section" aria-labelledby="flow-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="flow-title">実務を想定した作業フロー</h2>
-                </div>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>サーバーを1台つくって人に渡すまでを、6つの段階に分けています。設計（何をどう作るか決める）、構築（実際に組み立てる）、試験（決めたとおりに動くか確かめる）、監視（異常に気づく仕組みを入れる）、復旧（壊れたときに元へ戻す練習）、引き渡し（次の人が運用できる状態にする）の順です。</p>
-                <ol class="brief-flow">
-                    <li class="brief-step">
-                        <span>01 / 実装済み</span>
-                        <strong>設計</strong>
-                        <small>要件・基本設計・詳細設計<br>パラメータ・通信を定義</small>
-                    </li>
-                    <li class="brief-step">
-                        <span>02 / 実測済み</span>
-                        <strong>構築</strong>
-                        <small>Ansible（設定作業の自動化ツール）とCompose（複数のコンテナをまとめて起動する仕組み）を実行<br>2回目に不要な差が出ないかも確認しました</small>
-                    </li>
-                    <li class="brief-step">
-                        <span>03 / 実測済み</span>
-                        <strong>試験</strong>
-                        <small>期待値・実測値・環境<br>対象版を記録</small>
-                    </li>
-                    <li class="brief-step">
-                        <span>04 / 実測済み</span>
-                        <strong>監視</strong>
-                        <small>メトリクス（機械の状態を表す数値）・ログ・通知を<br>学習環境の中で確認しました</small>
-                    </li>
-                    <li class="brief-step">
-                        <span>05 / 一部実測済み</span>
-                        <strong>復旧</strong>
-                        <small>D-1（1つ目の復旧演習）で同一環境へ復元<br>D-2（2つ目の復旧演習）はNOT RUN（未実施）</small>
-                    </li>
-                    <li class="brief-step">
-                        <span>06 / 実装済み</span>
-                        <strong>引き渡し</strong>
-                        <small>チェックリストを作成<br>対象ホスト（引き渡し先のサーバー）での受け入れはNOT RUN（未実施）</small>
-                    </li>
-                </ol>
-            </section>
+        <section class="brief-section" aria-labelledby="artifact-title">
+            <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span><h2 class="heading-text" id="artifact-title">作成した資料・コード</h2></div>
+            <p>小さい画面では、表を横にスクロールできます。</p>
+            <div class="operation-table-wrap" role="region" aria-label="成果物一覧。横方向にスクロールできます" tabindex="0">
+                <table class="operation-table"><caption class="sr-only">成果物と読み取れる内容</caption><thead><tr><th scope="col">分野</th><th scope="col">成果物</th><th scope="col">確認できること</th></tr></thead><tbody>
+                    <tr><td>設計・手順</td><td><a href="https://github.com/ns7jp/server/tree/main/docs/build-package" target="_blank" rel="noopener noreferrer">構築案件パック</a></td><td>要件、構成値、構築・試験・引き継ぎの手順。AI支援で作成した学習資料です。</td></tr>
+                    <tr><td>自動化</td><td><a href="https://github.com/ns7jp/server/tree/main/ansible" target="_blank" rel="noopener noreferrer">Ansible</a> ／ <a href="https://github.com/ns7jp/server/blob/main/compose.yaml" target="_blank" rel="noopener noreferrer">Compose</a></td><td>自動設定の範囲とサービス構成。コードの存在と実行結果は分けています。</td></tr>
+                    <tr><td>運用・復旧</td><td><a href="https://github.com/ns7jp/server/tree/main/docs/runbooks" target="_blank" rel="noopener noreferrer">運用手順</a> ／ <a href="https://github.com/ns7jp/server/tree/main/docs/drills" target="_blank" rel="noopener noreferrer">復旧演習</a></td><td>異常時の確認、復旧判断、失敗と改善、未実施の範囲。</td></tr>
+                </tbody></table>
+            </div>
+        </section>
 
-            <section class="brief-section" aria-labelledby="artifact-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-folder-tree" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="artifact-title">作成した資料</h2>
-                </div>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>下の表は「どの工程で、どんな資料を作ったか」と「その資料が、作っただけなのか、実際に動かして確かめたのかどうか」を並べたものです。成果物の欄のリンクから、実物の資料をそのまま読めます。</p>
-                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる工程成果物表" tabindex="0">
-                    <table class="operation-table">
-                        <caption class="sr-only">Linuxサーバー構築学習で作成した資料と確認状況</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">工程</th>
-                                <th scope="col">成果物</th>
-                                <th scope="col">採用担当者が確認できること</th>
-                                <th scope="col">確認状況</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>設計</td>
-                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/build-package/01-basic-design.md" target="_blank" rel="noopener noreferrer">基本設計</a>／<a href="https://github.com/ns7jp/server/blob/main/docs/build-package/02-detailed-design.md" target="_blank" rel="noopener noreferrer">詳細設計</a>／<a href="https://github.com/ns7jp/server/blob/main/docs/build-package/03-parameter-sheet.md" target="_blank" rel="noopener noreferrer">パラメータシート</a></td>
-                                <td>目的、非機能（性能や安全性など）、構成値、ポート、監視、バックアップの考え方</td>
-                                <td><span class="status-pill validated">実装済み（文書）</span></td>
-                            </tr>
-                            <tr>
-                                <td>構築</td>
-                                <td><a href="https://github.com/ns7jp/server/tree/main/ansible" target="_blank" rel="noopener noreferrer">Ansible</a>／<a href="https://github.com/ns7jp/server/blob/main/compose.yaml" target="_blank" rel="noopener noreferrer">Compose</a>／<a href="https://github.com/ns7jp/server/blob/main/docs/build-package/05-build-procedure.md" target="_blank" rel="noopener noreferrer">構築手順</a></td>
-                                <td>同じ手順を繰り返せる設定、自動化した範囲、手作業が必要な範囲</td>
-                                <td><span class="status-pill measured">実測済み<br>2回目は不要な変更なし</span></td>
-                            </tr>
-                            <tr>
-                                <td>試験</td>
-                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/build-package/06-test-specification.md" target="_blank" rel="noopener noreferrer">確認手順</a>／<a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">2026年8月22日の記録</a>／<a href="https://github.com/ns7jp/server/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" target="_blank" rel="noopener noreferrer">以前の記録</a></td>
-                                <td>期待した結果、実際の結果、詳しい記録、未実施の項目</td>
-                                <td><span class="status-pill measured">実測済み<br>一時Ubuntu環境で23項目合格</span></td>
-                            </tr>
-                            <tr>
-                                <td>監視・復旧</td>
-                                <td><a href="https://github.com/ns7jp/server/tree/main/docs/runbooks" target="_blank" rel="noopener noreferrer">復旧手順書</a>／<a href="https://github.com/ns7jp/server/tree/main/docs/drills" target="_blank" rel="noopener noreferrer">障害対応の練習</a></td>
-                                <td>異常を見つけた後の確認、復旧するかの判断、復旧時間、失敗からの改善</td>
-                                <td><span class="status-pill measured">実測済み<br>D-1・同一環境への復元</span> <span class="status-pill pending">D-2はNOT RUN</span></td>
-                            </tr>
-                            <tr>
-                                <td>引き渡し</td>
-                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/build-package/07-handover-checklist.md" target="_blank" rel="noopener noreferrer">引き継ぎチェックリスト</a>／<a href="https://github.com/ns7jp/server/blob/main/docs/build-package/08-change-rollback-plan.md" target="_blank" rel="noopener noreferrer">変更を戻す手順</a></td>
-                                <td>運用開始条件、既知の制約、切り戻し後の確認方法</td>
-                                <td><span class="status-pill validated">資料は実装済み</span> <span class="status-pill pending">対象ホスト受入はNOT RUN</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="brief-section" aria-labelledby="decision-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="decision-title">なぜこの構成にしたか</h2>
-                </div>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>ADRとは、設計で迷ったときに「何をどう決めたか」と「なぜそう決めたか」を残しておく記録のことです。ここでは、5つの決めごとを理由つきで並べています。</p>
-                <div class="decision-grid">
-                    <article class="decision-card">
-                        <span class="decision-number">ADR-01</span>
-                        <h3>まずUbuntu 1台に範囲を固定</h3>
-                        <p>まず1台分を最後まで構築・確認することを優先しました。複数台で止まりにくくする構成は今後の課題です。</p>
-                    </article>
-                    <article class="decision-card">
-                        <span class="decision-number">ADR-02</span>
-                        <h3>自動設定を用途ごとに分ける</h3>
-                        <p>Ansibleの設定を、基本、Docker、Web接続、アプリ、監視、バックアップの6つに分けました。役割ごとに分けたので、変更した場所を見つけやすくなりました。同じ設定を2回実行しても、2回目に不要な変更が出ないことも確認しました。</p>
-                    </article>
-                    <article class="decision-card">
-                        <span class="decision-number">ADR-03</span>
-                        <h3>管理画面を外部へ直接公開しない</h3>
-                        <p>監視画面は、原則としてサーバー内部からだけ接続できる設定にしました。外部に公開すると、誰でも監視画面をのぞける状態になってしまうためです。別の管理端末や独立した実機からの接続は、まだ確認していません。</p>
-                    </article>
-                    <article class="decision-card">
-                        <span class="decision-number">ADR-04</span>
-                        <h3>監視の数値とログを同じ画面へ</h3>
-                        <p>サーバーの数値と同じ時刻のログを行き来して確認できる構成にしました。Windows上のLinux環境で実際のデータ表示を確認しています。</p>
-                    </article>
-                    <article class="decision-card">
-                        <span class="decision-number">ADR-05</span>
-                        <h3>未実施も理由を残す</h3>
-                        <p>まだ試していない項目は「未実施」と理由を記録します。一時的なテスト環境での成功を、独立した実機での成功とは表現しません。</p>
-                    </article>
-                </div>
-            </section>
-
-            <section class="brief-section" aria-labelledby="result-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="result-title">結果・学び・次の一手</h2>
-                </div>
-                <div class="brief-result-grid">
-                    <article class="architecture-notes">
-                        <h3>実際に確認できたこと</h3>
-                        <ul>
-                            <li>GitHubの自動テスト（一時的なUbuntu環境）で設定を2回実行し、2回目に不要な変更が出ないことを確認しました。同じ手順を繰り返しても同じ状態になる、と言えます。</li>
-                            <li>同じ自動テストで、監視用の10個のサービスと、通知を受け取るテスト用の1個（計11個）を起動し、異常と復旧の通知、ログの受け取りを確認。</li>
-                            <li>停止させたサービスの自動復旧と、監視データをバックアップから戻せることを確認。</li>
-                            <li>前の版への切り戻しはGitHubの自動テストで確認。ディスク拡張、データベース復元、通信障害の調査の演習は、AI支援セッションがAI側の作業環境で実行した記録です（同じ演習は、本人の環境ではまだ行っていません）。</li>
-                            <li>実行して初めて見つかった問題を欠陥台帳に記録しています（2026年10月時点で49件。うち、誤って合格と判定していたもの10件）。AI支援セッションや自動テストの実行で見つかったものが多く、手元の仮想マシンでの作業で見つかったものも含みます。</li>
-                        </ul>
-                    </article>
-                    <article class="architecture-notes">
-                        <h3>まだ確認していないこと</h3>
-                        <ul>
-                            <li>継続して使うサーバーでの切り戻し、72時間の連続稼働、再起動後の確認。</li>
-                            <li>監視ツールから実際のSlack（チャットの連絡ツール）へ通知することは、まだ試していません。</li>
-                            <li>AWS上での作成・削除と、別サーバーへの復旧。</li>
-                            <li>独立した管理端末とサーバーを使った構築、接続、運用。</li>
-                        </ul>
-                    </article>
-                </div>
-                <div class="status-callout measured" role="note">
-                    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
-                    <div>
-                        <strong>面接で説明できる改善事例</strong>
-                        <p>D-1演習では2回失敗しました。原因は、障害をわざと起こす方法（障害注入）の誤りと、手元に残っていた古いブランチ（作業用の枝分かれ）だと切り分けました。成功した結果だけでなく、誤った前提、確認に使ったコマンド、修正、やり直した試験まで記録しています。</p>
-                    </div>
-                </div>
-                <div class="summary-actions">
-                    <a href="evidence-demo.html" class="btn btn-primary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録を見る</a>
-                    <a href="work-readiness.html" class="btn btn-secondary"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
-                    <a href="work-readiness.html#gap-title" class="btn btn-outline-dark"><i class="fa-solid fa-list-check" aria-hidden="true"></i> 次の実機検証</a>
-                </div>
-            </section>
-        </div>
-    </div>
-    </main>
+        <section class="brief-section" aria-labelledby="result-title">
+            <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span><h2 class="heading-text" id="result-title">結果と確認範囲</h2></div>
+            <p>本人のVM操作では初期設定・監視・部分的な復旧を確認しました。2026年8月のCIでは一時Ubuntu環境で23項目がPASS。CIやAI実行の結果を、本人の独力技能や本番運用の実績には数えません。</p>
+            <p>長期稼働、実Slack通知、AWS環境の作成・削除、別サーバーへの復元は未完了です。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">検証証跡台帳</a>で日付・実行者・判定を確認できます。</p>
+            <div class="summary-actions"><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/project-validation-notes.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">過去の検証条件・残課題</a><a href="learning-path.html#first-step" class="btn btn-outline-dark">この構成で学習する</a></div>
+        </section>
+    </div></div>
+</main>
 
     <footer>
         <div class="footer-content">
