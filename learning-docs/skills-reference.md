@@ -47,8 +47,8 @@
 
 資料上の区分：登録・表示・編集・削除を実装
 
-- SQLite（1つのファイルで動く軽量なデータベース）。作品「Pulse」（コードは現在非公開）で、PDO（PHPからデータベースを操作する仕組み）と自動生成を使いました。
-- MySQL基礎（掲示板アプリ：XAMPP。コードは現在非公開）
+- SQLite（1つのファイルで動く軽量なデータベース）。作品「Pulse」（[公開コード](https://github.com/ns7jp/works/blob/pulse/index.php)、ライブ動作は未確認）で、PDO（PHPからデータベースを操作する仕組み）と自動生成を使いました。
+- MySQL基礎（掲示板アプリ：XAMPP。[公開コード](https://github.com/ns7jp/works/blob/post/index.php)、ライブ動作は未確認）
 - SQL文と、データの登録・表示・編集・削除
 - テーブル設計・外部キー
 

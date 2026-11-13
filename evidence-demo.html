@@ -115,338 +115,87 @@
                 <a href="work-readiness.html"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
                 <a href="resume.html"><i class="fa-solid fa-id-card" aria-hidden="true"></i> 履歴書</a>
             </nav>
-
-            <section class="lab-intro evidence-intro">
-                <span class="case-label">実装済み・実測済み・未実施を分けて掲載</span>
-                <h2>2分で分かる動作確認のまとめ</h2>
-                <p><strong>読み方:</strong> 「何を確認したか → どの環境か → どの版か → 何が未実施か」の順に見ます。過去の合格は、その記録に書かれた版と環境での結果です。現在のコード全体の再試験結果や、閲覧者自身の実績には置き換えません。<a href="learning-path.html#explain">自分の記録と説明の型</a>も使えます。</p>
-                <div class="status-callout validated evidence-scope-note" role="note">
-                    <i class="fa-solid fa-server" aria-hidden="true"></i>
-                    <div><strong>2026年9月4日：本人PC上のVMへAnsibleの基盤を適用</strong>
-                        <p><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md" target="_blank" rel="noopener noreferrer">Ubuntuの結果票</a>では、Hyper-VのVMへ<code>foundation.yml</code>（基本設定とDocker）を適用し、鍵での接続、Dockerの動作、2回目の不要な変更なしなどを確認しています。対象版は結果票に記載された<code>44cf16a</code>です。</p>
-                        <p><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-el9-build.md" target="_blank" rel="noopener noreferrer">AlmaLinux 9.7の結果票</a>も、同じ基盤の適用と再実行を記録しています。ただし以前使ったVMの再利用で、別用途のサービスが残っています。新規構築・SSHだけの最小公開は未証明です。対象版は結果票の表記どおり<code>537d9be</code>相当です。</p>
-                        <p>いずれも個人学習で、監視構成全体の<code>site.yml</code>適用、72時間稼働、再起動後確認、本番運用の完了を示していません。以下の8月の自動テストとは別の記録です。</p>
-                    </div>
-                </div>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>このページは「作っただけのこと」と「実際に動かして確かめたこと」を分けて書いた記録です。実装済みはコードや資料を用意した状態、実測済みは日付と環境を残して実際に動かした状態、未実施（NOT RUN）はまだ実行していない状態を指します。</p>
-                <p>このページでは、コードや資料を作っただけのことと、実際に動かして確かめたことを分けて書いています。それぞれについて、実行した日、使った環境、対象版（試験に使ったプログラムの版）、実行したコマンド、結果を記録しました。くわしい内容はリンク先で確認できます。なお、このあと出てくる「証跡台帳」とは、いつ何をどこまで確かめたかをまとめた一覧のことです。</p>
-                <div class="status-callout validated evidence-scope-note" role="note">
-                    <i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
-                    <div>
-                        <strong>日付付きの実測結果（2026年8月22日〜25日）</strong>
-                        <p>構築から復旧までを自動で確かめる23項目の試験を行いました。あわせて、前の版への切り戻し（新しい版に問題が出たときに、ひとつ前の版へ戻す作業）も試しました。ディスク、データベース、ネットワークの演習（AI支援セッションがAI側の作業環境で実行したもの）の記録もあります。実際に動かして見つけた問題29件と、誤って合格にしていた6件も記録しています。これは、使い捨ての一時的なUbuntu環境、WSL2（WindowsのなかでLinuxを動かす仕組み）、Docker（アプリを小さな箱に入れて動かす仕組み）などで得た結果です。継続して使う独立した対象サーバーでの受け入れ実績ではありません。</p>
-                    </div>
-                </div>
-                <div class="evidence-legend" aria-label="実装済み、実測済み、未実施の説明">
-                    <span class="status-pill validated"><i class="fa-solid fa-code" aria-hidden="true"></i> 実装済み：コード・資料あり</span>
-                    <span class="status-pill measured"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 実測済み：日付・環境・対象版あり</span>
-                    <span class="status-pill pending"><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> 未実施（NOT RUN）</span>
-                </div>
-                <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-check" aria-hidden="true"></i> 現行mainの証跡台帳</a>
-                    <a href="project-brief.html#flow-title" class="btn btn-secondary"><i class="fa-solid fa-route" aria-hidden="true"></i> 6工程との対応</a>
-                </div>
+            <section class="lab-intro">
+                <span class="case-label">日付・環境・実行者を分けて掲載</span>
+                <h2>確認結果と、その根拠をたどる</h2>
+                <p>以下は2026年8〜9月の主な記録です。本人がAIの案内を受けた操作と、CI・AI側の実行を区別しています。文書・コードにもAIを利用し、本人の独力再現・説明は未確認です。</p>
+                <p>11月の本人実習など、現在の確認範囲は<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md">検証証跡台帳</a>へ。過去の合格は記録された版・環境での結果で、最新コード全体の合格や本番運用実績には置き換えません。</p>
             </section>
-
-            <section class="evidence-overview" aria-labelledby="snapshot-title">
+            <section class="brief-section" aria-labelledby="snapshot-title">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="snapshot-title">2026年8月の主な結果</h2>
+                    <span class="heading-icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span>
+                    <h2 class="heading-text" id="snapshot-title">主な記録と実行環境</h2>
                 </div>
-                <div class="metric-grid">
-                    <a class="metric-card" href="https://github.com/ns7jp/server/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">前の版へ</span>
-                        <strong>切り戻しに合格</strong>
-                        <small>新しい版から指定した前の版へ戻す</small>
-                    </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">23 / 23</span>
-                        <strong>一連の自動テスト</strong>
-                        <small>一時的なUbuntu 24.04環境／すべて合格</small>
-                    </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">変更なし</span>
-                        <strong>設定の2回目実行</strong>
-                        <small>不要な変更が出ないことを確認</small>
-                    </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">10 + 1</span>
-                        <strong>サービスを起動</strong>
-                        <small>監視用10個＋通知確認用1個</small>
-                    </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">3項目</span>
-                        <strong>情報は読取のみ許可</strong>
-                        <small>読み取りは成功、書き込みは拒否、ログは到達しました</small>
-                    </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">1秒</span>
-                        <strong>同じ環境で自動復旧</strong>
-                        <small>目標は5分以内、結果は合格です</small>
-                    </a>
-                    <a class="metric-card" href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">
-                        <span class="metric-value">3種類</span>
-                        <strong>バックアップから復元</strong>
-                        <small>監視データ／合格</small>
-                    </a>
-                </div>
-            </section>
-
-            <section class="evidence-timeline-section" aria-labelledby="digest-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="digest-title">主な確認内容</h2>
-                </div>
-                <div class="evidence-timeline">
-                    <article class="evidence-step">
-                        <span class="step-index">01</span>
-                        <div>
-                            <span class="status-pill measured">実測済み（自動テスト）</span>
-                            <h3>新しい版から前の版へ戻せることを確認</h3>
-                            <p>新しい版を動かしたあと、指定した前の版へ戻しました。戻したあとに、アプリの版が正しく戻ったかを確認しました。不要なファイルが消えていること、管理画面を外部へ直接公開しない設定であることも確かめています。ログを受け取れることも、もう一度確認しました。下に並ぶ長い英数字は、その版を表す記号（コミットID）です。一時的なUbuntu環境での結果で、継続利用するサーバーでは未実施です。</p>
-                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-23</dd></div><div><dt>新しい版</dt><dd><code>84e149254d463a8a27a4cabcd09efa4504d1b47e</code></dd></div><div><dt>戻した版</dt><dd><code>59aa88ed1c8ccb7ba188909f0e079b834e9126c7</code></dd></div></dl>
-                            <a href="https://github.com/ns7jp/server/actions/runs/32611251044" target="_blank" rel="noopener noreferrer">自動テストの詳細を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </div>
-                    </article>
-                    <article class="evidence-step">
-                        <span class="step-index">02</span>
-                        <div>
-                            <span class="status-pill measured">実測済み</span>
-                            <h3>同じ構築手順を2回実行</h3>
-                            <p>同じ自動構築の手順を2回実行し、2回目には不要な変更が発生しないことを確認しました。これは、同じ手順を何度実行しても結果が変わらないことを確かめるためです。2回目で何も変わらなければ、この手順は安心して繰り返せると言えます。使ったのはDockerがあらかじめ入っている一時的なUbuntu環境です。Dockerを最初から導入する部分は、この試験には含まれません。</p>
-                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>GitHub上の一時Ubuntu</dd></div><div><dt>前提</dt><dd>Docker導入済み</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">23項目の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </div>
-                    </article>
-                    <article class="evidence-step">
-                        <span class="step-index">03</span>
-                        <div>
-                            <span class="status-pill measured">実測済み</span>
-                            <h3>監視用10個と通知確認用1個のサービスを起動</h3>
-                            <p>監視に必要な10個のサービスと、通知を受け取るテスト用サービスを起動しました。異常を検知した通知と、復旧した通知の両方を確認しています。テスト環境の中では、異常を知らせる仕組みが動いたと言えます。ただし、Slackへ実際に送信する試験ではありません。</p>
-                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>Docker / 11サービス</dd></div><div><dt>結果</dt><dd>異常・復旧の通知を確認</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">起動・通知の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </div>
-                    </article>
-                    <article class="evidence-step">
-                        <span class="step-index">04</span>
-                        <div>
-                            <span class="status-pill measured">実測済み</span>
-                            <h3>Dockerの情報は読み取りだけ許可</h3>
-                            <p>監視サービスからDockerの情報を読む操作は許可し、設定を変える操作は拒否できることを確認しました。これは、監視に必要な情報だけを渡し、万一乗っ取られたときの被害を小さくするためです。ログも監視画面へ届いています。読み取り権限は残るため、考えられる危険と対策を<a href="https://github.com/ns7jp/server/blob/main/docs/security.md" target="_blank" rel="noopener noreferrer">セキュリティ方針</a>に記録しています。</p>
-                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>対象版</dt><dd><code>7622a9d</code></dd></div><div><dt>結果</dt><dd>読み取り合格・書き込み拒否・ログ到達</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">通信制限の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </div>
-                    </article>
-                    <article class="evidence-step">
-                        <span class="step-index">05</span>
-                        <div>
-                            <span class="status-pill measured">実測済み</span>
-                            <h3>テスト環境内のネットワークを確認</h3>
-                            <p>一時的なUbuntu環境の中で、ネットワークの設定を確認しました。待ち受けポート（外からの通信を受け付ける番号）、ファイアウォール（決めた条件で通信を許可・拒否する関所）、サービス同士の通信も確かめています。別の管理用PCや継続利用するサーバー、社内DNS（社内で名前とアドレスを対応づける仕組み）を使った通信は未実施です。</p>
-                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>環境</dt><dd>GitHub上の一時Ubuntu</dd></div><div><dt>範囲</dt><dd>同じテスト環境内</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">ネットワーク確認の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </div>
-                    </article>
-                    <article class="evidence-step">
-                        <span class="step-index">06</span>
-                        <div>
-                            <span class="status-pill measured">実測済み</span>
-                            <h3>アプリを1秒で復旧し、監視データも復元</h3>
-                            <p>アプリの動作を意図的に止め、1秒で自動復旧することを確認しました。わざと止めるのは、本番で同じことが起きても自動で元に戻せるかを確かめるためです。目標にした5分以内を満たしています。監視データ3種類もバックアップから元に戻せました。</p>
-                            <dl class="evidence-meta"><div><dt>実行日</dt><dd>2026-08-22</dd></div><div><dt>復旧時間</dt><dd>1秒</dd></div><div><dt>復元</dt><dd>監視データ3種類</dd></div></dl>
-                            <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">復旧の記録を見る <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                        </div>
-                    </article>
-                </div>
-            </section>
-
-            <section class="test-status-section" aria-labelledby="test-status-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-vial-circle-check" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="test-status-title">自動テストの結果 — 2026年8月22日 / 23項目すべて合格</h2>
-                </div>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>人が手で操作する代わりに、決められた23項目をコンピューターが順番に試して、すべて合格した記録です。ただし、使い捨ての一時的な環境で行った結果です。</p>
-                <p class="evidence-note">2026年8月22日、特定のコードの版を使って、構築から復旧までの23項目を自動で確認し、すべて合格しました。<a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">詳しい実行記録</a>には、日付、コードの版、確認方法を残しています。8月19日の結果は、以前の確認範囲を示す記録として別に保存しています。</p>
-                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできる自動テスト結果表" tabindex="0">
-                    <table class="operation-table evidence-status-table">
-                        <caption class="sr-only">2026年8月22日の自動テスト結果と、どこまで試したか</caption>
+                <span id="digest-title"></span>
+                <p>小さい画面では、表を横にスクロールできます。</p>
+                <div class="operation-table-wrap" role="region" aria-label="検証結果。横方向にスクロールできます" tabindex="0">
+                    <table class="operation-table">
+                        <caption class="sr-only">過去の検証日、実行者・環境、結果と制約</caption>
                         <thead>
                             <tr>
-                                <th scope="col">区分</th>
-                                <th scope="col">確認済み</th>
-                                <th scope="col">どこまで試したか</th>
-                                <th scope="col">状態</th>
+                                <th scope="col">日付・題材</th>
+                                <th scope="col">実行者・環境</th>
+                                <th scope="col">結果と確認範囲</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>構築・再実行</td>
-                                <td>同じ構築手順を2回実行し、2回目に不要な変更が出ないこと</td>
-                                <td>Docker導入済みの一時Ubuntu環境</td>
-                                <td><span class="status-pill measured">合格</span></td>
+                                <td>9月4日<br>Ansible基盤</td>
+                                <td>本人操作・AI案内<br>Hyper-VのVM</td>
+                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md">Ubuntu</a>・<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-el9-build.md">AlmaLinux</a>に基本設定とDockerを適用。後者は再利用VMで、新規構築・最小公開は未証明。</td>
                             </tr>
                             <tr>
-                                <td>起動・通知</td>
-                                <td>11サービスの起動と、異常・復旧の通知</td>
-                                <td>テスト環境内の通知のみ。Slackへの送信は未実施</td>
-                                <td><span class="status-pill measured">合格</span></td>
+                                <td>9月7〜8日<br>Ubuntu初期構築</td>
+                                <td>本人操作・AI案内<br>Hyper-VのVM</td>
+                                <td>固定IP・SSH・UFW等を設定し、設定不備から復旧。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-initial-build.md">結果と原画像</a>。監視全体の通し検証とは別です。</td>
+                            </tr>
+                            <tr id="test-status-title">
+                                <td>8月22日<br>構築・復旧試験</td>
+                                <td>CI<br>Docker導入済み一時Ubuntu</td>
+                                <td><a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md">23項目合格</a>。11サービス、ローカル通知、通信制限、自動復旧・データ復元を確認。Slack実通知・独立サーバーの受入試験は含みません。</td>
                             </tr>
                             <tr>
-                                <td>Docker情報の読み取り制限</td>
-                                <td>情報は読めるが、設定を変える操作は拒否されること</td>
-                                <td>対象版 <code>7622a9d</code> の自動テスト内</td>
-                                <td><span class="status-pill measured">合格</span></td>
+                                <td>8月23日<br>切り戻し</td>
+                                <td>CI・一時環境</td>
+                                <td><a href="https://github.com/ns7jp/server/actions/runs/32611251044">指定した前の版への復帰を確認</a>。継続利用する独立サーバーでの結果ではありません。</td>
                             </tr>
-                            <tr>
-                                <td>ネットワーク</td>
-                                <td>通信経路、待ち受けポート、ファイアウォール、サービス間通信</td>
-                                <td>同じ一時環境内のみ。別の管理PCや社内DNSは未実施</td>
-                                <td><span class="status-pill measured">合格</span></td>
-                            </tr>
-                            <tr>
-                                <td>障害・データ復旧</td>
-                                <td>アプリを1秒で復旧し、監視データ3種類を復元</td>
-                                <td>サーバー本体の故障と長時間の連続運転は未実施</td>
-                                <td><span class="status-pill measured">合格</span></td>
+                            <tr id="b-series-title">
+                                <td>8月24日<br>B-1〜B-4</td>
+                                <td>AI側の作業環境</td>
+                                <td>ディスク拡張、Web切り分け、DB復元、ネットワーク演習。B-4の3項目は環境制約で未実施。<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/verification-history.md#ai側の作業環境での追加演習2026-08-24">詳細条件と原記録</a>。</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="status-callout pending" role="note">
-                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-                    <div>
-                        <strong>23項目は、Docker導入済みの一時Ubuntu環境で確認した履歴です</strong>
-                        <p>前の版へ戻す試験は、翌日の別の自動テストで合格しました。次のことは未実施（NOT RUN／まだ実行していないという意味）です。独立した対象サーバーでの切り戻しと受け入れ試験、72時間の連続運転、サーバー再起動後の確認、Slackへの実通知、AWS（インターネット越しに借りるサーバー）での構築（apply）と削除（destroy）、演習D-2、別の管理PCや社内DNSからの通信です。新しい最小OSへDockerを導入する確認も含みません。</p>
-                    </div>
-                </div>
-                <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-table-list" aria-hidden="true"></i> 23項目の詳しい記録</a>
-                    <a href="https://github.com/ns7jp/server/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/evidence/2026-08-19-build-validation.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> 8月19日の過去結果</a>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book" aria-hidden="true"></i> 現行mainの証跡台帳</a>
-                </div>
+                <p>実施環境・対象版・未実施項目は<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/verification-history.md">検証履歴の詳細</a>にまとめています。異なる環境の部分結果を合算し、通し試験済みとは表現しません。</p>
             </section>
-
-            <section class="change-story-section" aria-labelledby="b-series-title">
+            <section class="change-story-section">
                 <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-flask-vial" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="b-series-title">4つの追加練習 — 2026年8月24日に実行</h2>
-                </div>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>よくあるトラブルをわざと起こして直す演習を、AI支援セッションがAI側の作業環境で実行した記録です。本人が操作した記録ではありません。B-1からB-4は、その演習に付けた番号です。</p>
-                <p class="evidence-note">ディスク容量の追加、問題が起きた場所の確認、データベースの復元、ネットワーク設定の確認の4つです。いずれもAI支援セッションがAI側の作業環境（仮想ディスク付きのUbuntu、Dockerのコンテナ、Linuxの中の分離した環境）で実行した結果で、本人の操作ではありません。下の表にある「220M→457M」は、使える容量が約220メガバイトから約457メガバイトに増えたことを表します。「問題箇所の確認」と「データベース復元」は手元のWSL2とDockerで動かせる構成ですが、本人の環境ではまだ通して実行していません。通して実行した記録ができるまでは、面接で実演できるとは表現しません。</p>
-                <div class="operation-table-wrap" role="region" aria-label="横方向にスクロールできるB-1からB-4の演習結果表" tabindex="0">
-                    <table class="operation-table evidence-status-table">
-                        <caption class="sr-only">2026年8月24日に実行したB-1からB-4の演習結果</caption>
-                        <thead>
-                            <tr>
-                                <th scope="col">演習</th>
-                                <th scope="col">内容</th>
-                                <th scope="col">結果</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>B-1 ディスク容量の追加</td>
-                                <td>使える領域を作り、容量が足りなくなった状態から領域を広げる</td>
-                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/drills/logs/2026-08-24-B-1.md" target="_blank" rel="noopener noreferrer">5項目合格 / 不合格0</a>（220M→457M）</td>
-                            </tr>
-                            <tr>
-                                <td>B-2 問題が起きた場所の確認</td>
-                                <td>Web・アプリ・データベースのどこで止まっているかを順に確認する</td>
-                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/drills/logs/2026-08-24-B-2.md" target="_blank" rel="noopener noreferrer">9項目合格 / 不合格0</a></td>
-                            </tr>
-                            <tr>
-                                <td>B-3 データベースの復元</td>
-                                <td>バックアップからデータベースを戻し、内容が元と一致するか確認する</td>
-                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/drills/logs/2026-08-24-B-3.md" target="_blank" rel="noopener noreferrer">7項目合格 / 不合格0</a>（復旧0.149秒）</td>
-                            </tr>
-                            <tr>
-                                <td>B-4 ネットワーク設定の確認</td>
-                                <td>同じネットワーク内と、別のネットワーク間の通信設定を確認する</td>
-                                <td><a href="https://github.com/ns7jp/server/blob/main/docs/drills/logs/2026-08-24-B-4.md" target="_blank" rel="noopener noreferrer">6項目合格 / 不合格0 / 環境の制約で3項目は未実施</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="status-callout pending" role="note">
-                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
-                    <div>
-                        <strong>2026年8月25日までの記録では、実行中に見つけた問題は29件です</strong>
-                        <p>書式や文法の確認だけでは見つからず、実行中に初めて分かった問題です。中には、壊れているのにテストが合格と表示する問題も6件ありました。症状、見つけ方、修正内容は<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/defects-found.md" target="_blank" rel="noopener noreferrer">問題と修正の一覧</a>にまとめています。Ubuntu以外のLinux向け自動テストも<a href="https://github.com/ns7jp/server/actions/runs/32811100007" target="_blank" rel="noopener noreferrer">コンテナ内で実施</a>しましたが、この8月の記録はコンテナ内の検証です。9月4日には、上に示した再利用AlmaLinux VMへ基本設定とDockerを適用しました。新規の専用VMでの最小公開と、監視構成全体の適用は別に確認が必要です。</p>
-                    </div>
-                </div>
-                <div class="summary-actions">
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/defects-found.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-bug" aria-hidden="true"></i> 問題と修正の一覧（2026年10月時点で49件）</a>
-                    <a href="https://github.com/ns7jp/server/tree/main/ansible/roles/common/molecule/el9" class="btn btn-outline-dark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-server" aria-hidden="true"></i> Ubuntu以外のテスト設定</a>
-                </div>
-            </section>
-
-            <section class="change-story-section" aria-labelledby="pr75-change-story-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="pr75-change-story-title">自動テストで見つけた失敗から修正まで</h2>
-                </div>
-                <p class="evidence-note">成功した結果だけでなく、自動テストで見つかった問題と修正内容も残しています。詳しい記録には、テストの実行番号とコードの版を記載しています。</p>
-                <div class="decision-grid">
-                    <article class="decision-card">
-                        <span class="decision-number">01</span>
-                        <h3>設定の書き方に誤り</h3>
-                        <p><a href="https://github.com/ns7jp/server/actions/runs/32571650745" target="_blank" rel="noopener noreferrer">最初の自動テスト</a>で、変数を書く位置の誤りを見つけました。正しい位置へ移して修正しました。</p>
-                    </article>
-                    <article class="decision-card">
-                        <span class="decision-number">02</span>
-                        <h3>2回目にも不要な変更が発生</h3>
-                        <p><a href="https://github.com/ns7jp/server/actions/runs/32571890175" target="_blank" rel="noopener noreferrer">次の自動テスト</a>で、一時ファイル（作業の途中で作られる仮のファイル）と、ファイルの内容をそろえる同期処理がぶつかっていることを確認しました。実行方法を変更して解決しました。</p>
-                    </article>
-                    <article class="decision-card">
-                        <span class="decision-number">03</span>
-                        <h3>修正後、23項目すべて合格</h3>
-                        <p><a href="https://github.com/ns7jp/server/actions/runs/32572409469" target="_blank" rel="noopener noreferrer">最後の自動テスト</a>で、再実行、11サービスの起動、通信制限、ネットワーク、アプリ復旧、データ復元をもう一度確認しました。</p>
-                    </article>
-                </div>
-            </section>
-
-            <section class="change-story-section" aria-labelledby="change-story-title">
-                <div class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-code-pull-request" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="change-story-title">2026年8月19日：失敗から原因を考えて確認するまで</h2>
+                    <span class="heading-icon"><i class="fa-solid fa-wrench" aria-hidden="true"></i></span>
+                    <h2 class="heading-text">失敗から修正までの記録</h2>
                 </div>
                 <div class="decision-grid">
                     <article class="decision-card">
-                        <span class="decision-number">01</span>
-                        <h3>現象</h3>
-                        <p>最初はアプリを停止しても自動復旧せず、5分で試験を中止しました。</p>
+                        <h3 id="pr75-change-story-title">CIで設定と再実行の問題を検出</h3>
+                        <p>変数の位置と、一時ファイル・同期処理の競合を修正し、同じ条件で再試験しました。<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/verification-history.md#自動テストで見つけた失敗と修正">失敗した実行と修正後の記録</a></p>
                     </article>
                     <article class="decision-card">
-                        <span class="decision-number">02</span>
-                        <h3>仮説と再試行</h3>
-                        <p>停止方法が自動復旧の動きに影響したと考え、実際のアプリ処理を停止する方法へ変えました。2回目は手元のコードが古いことに気づきました。</p>
-                    </article>
-                    <article class="decision-card">
-                        <span class="decision-number">03</span>
-                        <h3>条件を揃えて合格</h3>
-                        <p>正しいコードを取り直して3回目を実行し、停止から13秒で復旧しました。<a href="https://github.com/ns7jp/server/blob/0d82d6865db8f5198bb16bc44b670b97ffb4726f/docs/drills/logs/2026-08-19-D-1.md" target="_blank" rel="noopener noreferrer">2026年8月19日の記録</a>で、目標にした5分以内の復旧を確認できます。</p>
+                        <h3 id="change-story-title">停止方法とコードの版を見直す</h3>
+                        <p>8月19日のD-1は2回失敗し、条件をそろえた3回目に13秒で復旧。WSL2の記録で実行者が未記載のため、本人操作には加えません。<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/verification-history.md#d-1の失敗と再試行2026-08-19">経緯と原記録</a></p>
                     </article>
                 </div>
-                <p class="evidence-note">2回の失敗、考えた原因、手順の変更、3回目の成功を同じ記録に残しています。13秒は8月19日の結果で、8月22日の自動テストでは1秒で復旧しました。</p>
+                <p>ほかの失敗・誤判定・修正は<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/defects-found.md">欠陥台帳</a>に保存しています。</p>
             </section>
-
             <section class="video-status-section" aria-labelledby="video-title">
                 <div class="section-heading">
                     <span class="heading-icon"><i class="fa-solid fa-video" aria-hidden="true"></i></span>
-                    <h2 class="heading-text" id="video-title">2分15秒の動作確認記録</h2>
+                    <h2 class="heading-text" id="video-title">2分15秒の動作確認動画</h2>
                 </div>
-                <div class="status-callout validated" role="note">
-                    <i class="fa-solid fa-clapperboard" aria-hidden="true"></i>
-                    <div>
-                        <strong>2026年8月18日・19日の画面とログを、2分15秒に編集した動画です</strong>
-                        <p>操作を最初から最後まで連続撮影した動画ではありません。8月22日に行った23項目の自動テストや、Slackへの実際の通知も、この動画には含まれません。</p>
-                    </div>
-                </div>
+                <p>8月18日・19日の画面とログを再構成した映像です。連続した操作録画ではなく、上記のCI試験やSlack実通知も含みません。</p>
                 <div class="summary-actions">
-                    <a href="demo.html" class="btn btn-primary"><i class="fa-solid fa-play" aria-hidden="true"></i> 動作確認動画を見る</a>
-                    <a href="https://github.com/ns7jp/server/blob/main/docs/demo-capture-guide.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-list-ol" aria-hidden="true"></i> 連続撮影の手順案</a>
-                    <a href="project-brief.html" class="btn btn-outline-dark"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 取り組み概要へ</a>
+                    <a href="demo.html" class="btn btn-primary">動画を見る</a>
+                    <a href="https://github.com/ns7jp/server/blob/main/docs/demo-capture-guide.md" class="btn btn-secondary">連続撮影の手順案</a>
+                    <a href="project-brief.html" class="btn btn-outline-dark">制作概要へ</a>
                 </div>
             </section>
         </div>
@@ -455,9 +204,8 @@
     <section class="contact-cta">
         <div class="container">
             <div class="cta-content">
-                <h2>実際に試したことと、まだのことを分けて説明します</h2>
-                <p>面談では、実測した内容だけでなく、失敗した検証と次に埋める項目もお話しできます。</p>
-                <a href="contact.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-envelope" aria-hidden="true"></i> 連絡先を見る</a>
+                <h2>経歴・応募について</h2>
+                <a href="contact.html" class="btn btn-primary btn-lg">連絡先を見る</a>
             </div>
         </div>
     </section>

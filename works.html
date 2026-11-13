@@ -3,14 +3,14 @@
 ========================================================================
   ファイル名 : works.html
   役割       : 作品紹介ページ
-  概要       : 主作品Server Monitor、応募先に応じたITサポート資料、開発学習作品を「成果サマリー・概要・学習ポイント・使用例・トラブルと解決・技術タグ」の
-               構成で詳しく紹介する。フィルターボタンで技術別に絞り込み可能。
+  概要       : 主作品Server Monitor、ITサポート資料、開発学習作品を短い概要と用途例で紹介する。
+               機能・コード例・制作メモは learning-docs/works-reference.md に掲載。技術別に絞り込み可能。
                カテゴリ（第一志望を優先）：Infrastructure / Support / Python / PHP / HTML/CSS
   初学者向けの読み方:
     1. filter-btn の data-filter と作品カードの data-category の対応を見る
     2. work-showcase-item 1つが、1作品分の紹介カードだと理解して読む
     3. Server Monitorを第一志望の作品、ITサポート資料を応募先に応じた補助作品として分けた点を確認する
-    4. 末尾のscriptで、フィルター表示とフェードイン演出を追う
+    4. js/main.js でフィルター表示とフェードイン演出を追う
 ========================================================================
 -->
 <html lang="ja">
@@ -81,7 +81,6 @@
       ]
     }
     </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -139,17 +138,15 @@
         <div class="container">
 
             <!-- ===== 作品紹介イントロ ===== -->
-            <!-- ページ最上部の挨拶文と画像。Support Toolkit と6作品（Webアプリ＋インフラ系含む）を紹介する旨を伝える。 -->
             <section class="works-intro">
                 <div class="intro-content">
                     <div class="intro-image">
                         <img src="image/server-monitor.png" alt="サーバー監視ダッシュボードの画面" width="1600" height="859" loading="lazy" decoding="async">
                     </div>
                     <div class="intro-text">
-                        <h2>第一志望に直結する主作品「Server Monitor」から紹介します</h2>
-                        <p>Linuxサーバーの設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡しを、一つの学習案件として整理しました。続いて、応募先によって担当できるITサポートを想定した資料、その後に開発学習作品を掲載しています。</p>
-                        <p>このページでは、作品の状態を3つに分けて書いています。「実装済み」は、作って形になったものです。「実測済み」は、実際に動かして結果を記録したものです。「未実施（NOT RUN／まだ実行していないこと）」は、まだ試していないものです。個人学習の作品であり、実務実績や人による第三者レビューの実績ではありません。</p>
-                        <p>詳しい日時、実行環境、検証したコードの版（コミットID／コードの変更ひとつずつに付く固有の番号）は、<a href="evidence-demo.html">動作確認の記録</a>にまとめています。</p>
+                        <h2>主作品と、学習を支える補助作品</h2>
+                        <p>Linuxの構築・運用を学ぶ「Server Monitor」を中心に、ITサポート資料と開発学習作品を紹介します。個人学習・訓練の成果物で、実務実績ではありません。</p>
+                        <p>文章・コード作成にはAIを利用し、本人の操作とCI・AIの実行を区別しています。独力での再現・説明は未確認です。実施者と確認範囲は<a href="evidence-demo.html">動作確認の記録</a>をご覧ください。</p>
                     </div>
                 </div>
             </section>
@@ -159,23 +156,11 @@
                 <div class="priority-card">
                     <span class="priority-label">まず見てほしい成果物</span>
                     <div class="priority-links">
-                        <a href="https://github.com/ns7jp/server" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github" aria-hidden="true"></i> 主作品 Server Monitor</a>
-                        <a href="project-brief.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 6工程の制作概要</a>
+                        <a href="#work-server-monitor"><i class="fa-solid fa-server" aria-hidden="true"></i> 主作品</a>
+                        <a href="project-brief.html"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 制作概要</a>
                         <a href="evidence-demo.html"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
-                        <a href="work-readiness.html"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
-                        <a href="#work-server-monitor"><i class="fa-solid fa-server" aria-hidden="true"></i> 主作品の詳細</a>
-                        <a href="#work-monitor"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> サーバー監視</a>
-                        <a href="https://github.com/ns7jp/server/blob/4a292026b569dd1a522c0f2913b4ad40aeccebe7/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> 一連テスト23項目合格</a>
-                        <a href="demo.html" aria-label="2分15秒 動作確認リプレイ（2026年8月18日・19日の動作確認画面と復旧ログを再構成した記録）"><i class="fa-solid fa-video" aria-hidden="true"></i> 2分15秒 動作確認リプレイ</a>
+                        <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-book-open" aria-hidden="true"></i> 機能・制作メモ</a>
                     </div>
-                </div>
-            </section>
-
-            <section class="works-evidence-boundary" aria-label="主作品の動作確認範囲">
-                <div class="evidence-boundary-strip" aria-label="実装済み、実測済み、未実施の区分">
-                    <span><strong>実装済み</strong> 6工程のコード、設定、手順、チェックリスト、作業結果報告書の原本</span>
-                    <span><strong>実測済み</strong> WSL2（Windowsの中でLinuxを動かすしくみ）、一時Ubuntu、Docker等の学習環境で、日付と確認したコードの版を残した確認結果です。</span>
-                    <span><strong>未実施（NOT RUN）</strong> 独立した対象サーバーの受け入れ、72時間の連続稼働、Slackへの実通知、AWSでのapply/destroy（環境の作成と削除）、D-2（別サーバーへ復元する障害復旧演習）、本番変更は行っていません。</span>
                 </div>
             </section>
 
@@ -249,87 +234,12 @@
                                 <span class="category"><i class="fa-solid fa-network-wired" aria-hidden="true"></i> サーバー構築・監視・自動化</span>
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
-                            <h3>Server Monitor — Linuxサーバー設計・構築・運用</h3>
-                            <div class="work-summary">
-                                <div><span>実装済み</span><strong>6工程のコード、設定、手順、結果票、引き渡し資料</strong></div>
-                                <div><span>実測済み</span><strong>一時Ubuntu環境の通し試験（E2E）23項目など、日付付きの学習記録</strong></div>
-                                <div><span>NOT RUN</span><strong>独立した対象host受入、72時間、Slack実通知、AWS、D-2、本番変更</strong></div>
-                            </div>
-                            <div class="support-fit high">
-                                <span class="fit-label">志望職種に最も近い学習作品</span>
-                                <p>Linuxサーバーの設計、設定、動作確認、監視、ログ確認、障害復旧、引き渡し資料をまとめました。練習環境内の通知は確認済みですが、Slackへの実通知、別サーバーへの復元、AWS環境の作成は未実施です。</p>
-                            </div>
-                            <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip"><strong>5</strong>学習テーマ</span>
-                                <span class="num-chip"><strong>23/23</strong>テスト合格</span>
-                                <span class="num-chip"><strong>14</strong>監視アラート</span>
-                                <span class="num-chip"><strong>2</strong>Grafana ダッシュボード</span>
-                                <span class="num-chip"><strong>6</strong>復旧演習（実施済みはD-1のみ）</span>
-                            </div>
-                            <p class="plain-summary"><strong>かんたんに言うと</strong>サーバーを1台つくって動かし、人に引き渡すまでの一連の流れを、6つの段階に分けて整理した記録です。</p>
-                            <p>「設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し」の順で学習内容を整理しました。2026年8月22日に、テストのたびに作り直す一時Ubuntu環境で23項目を確認しました。翌日は前の版へ戻す自動テストにも合格しました。その日ごとの記録は、当時の記録としてそのまま残しています。いま何をどこまで確認できているかは、<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">現行mainの証跡台帳</a>（最新版に付けた確認記録の一覧）を、正式な版として扱います。</p>
-                            <ul class="work-points">
-                                <li><strong>構成図：</strong>サーバーやネットワーク機器をどのようにつなぐか、図で整理しました。</li>
-                                <li><strong>設定の自動化：</strong>Ansible（サーバーの設定を自動で行う道具）を使い、同じ手順を何度でも繰り返せるようにしました。手作業による入力ミスと作業時間を減らすためです。</li>
-                                <li><strong>監視とログ：</strong>Prometheus（数値を集める道具）、Grafana（集めた数値を画面に描く道具）、Loki（動作の記録を集めて検索する道具）を使いました。サーバーの数値と記録（ログ）を、一か所で確認できます。</li>
-                                <li><strong>バックアップと復旧：</strong>復旧までの時間（RTO）と、失ってよいデータ範囲（RPO）を考え、同じ環境への復元を練習しました。</li>
-                                <li><strong>自動テスト：</strong>GitHub Actions（GitHubが用意した自動実行のしくみ）を使います。設定ファイルやスクリプトを変更するたびに、誤りがないかを機械が自動で確認します。</li>
-                            </ul>
-                            <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>学習した作業の例</h4>
-                                <ul class="usage-list">
-                                    <li><strong>状態確認：</strong>サービス、ログ、CPU、メモリ、ディスク、通信状況を同じ順番で確認し、結果を残す。</li>
-                                    <li><strong>新規設定：</strong>Ansibleの設定を一度まとめて適用し、2回目に不要な変更が出ないことを確認する。何度実行しても結果が変わらない状態（冪等性）を確かめるため。監視まで含めた設定全体（<code>site.yml</code>）を、Dockerを入れていない最小構成のOSへ適用するのは未実施です（基本設定とDockerだけの<code>foundation.yml</code>は、2026年9月4日に手元の仮想マシンで適用し、2回目の変更0件を確認）。</li>
-                                    <li><strong>稼働確認：</strong>11個のサービスを起動し、監視通知、アクセス制限、ログの保存を確認する。11個そろえての確認はGitHubの自動テストの一時環境だけです。手元の仮想マシンでは、本人が5〜6個のサービスに分けて確かめました（通知の確認はしていません）。Slackへの実通知は未実施です。</li>
-                                    <li><strong>障害復旧：</strong>停止させたサービスの自動復旧と、バックアップからの復元を確認する。別サーバーへの復元は未実施です。</li>
-                                    <li><strong>作業後の記録：</strong>起きたこと、影響、原因、対応、残った課題を分けて記録する。</li>
-                                </ul>
-                            </div>
-                            <div class="work-architecture">
-                                <h4><i class="fa-solid fa-code-branch" aria-hidden="true"></i> 変更時の自動テスト（CI／変更のたびに機械がまとめて確認するしくみ）</h4>
-                                <div class="mermaid">
-                                flowchart LR
-                                    Commit[コードを変更] --> GHA[GitHub上で自動テスト]
-
-                                    subgraph CIPipeline[自動確認]
-                                        direction TB
-                                        Lint[書き方を確認]
-                                        Test[処理をテスト]
-                                        TF[設定内容を確認]
-                                        Lint --> Test --> TF
-                                    end
-
-                                    GHA --> CIPipeline
-                                    CIPipeline --> Result{合格 / 失敗}
-                                    Result -- 合格 --> Merge[変更を取り込む]
-                                    Result -- 失敗 --> Fix[修正する]
-                                </div>
-                                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text-medium);">
-                                    設定変更による問題を早めに見つけるため、サーバー設定と運用スクリプトをGitHub上で自動確認しています。
-                                </p>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中に困ったことと解決</h4>
-                                <p><span class="trouble-label">課題</span>Windows向けのPowerShellスクリプトを、GitHub上のLinux環境でもテストできるか分かりませんでした。</p>
-                                <p><span class="trouble-label solution">解決</span>OSに依存しない判定処理を別ファイルへ分け、PowerShellのテストツール（Pester）で確認できる形にしました。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>PowerShell</span>
-                                <span>bash</span>
-                                <span>AWS</span>
-                                <span>Terraform</span>
-                                <span>Ansible</span>
-                                <span>Docker Compose</span>
-                                <span>Prometheus</span>
-                                <span>Grafana</span>
-                                <span>Loki / Alloy</span>
-                                <span>node_exporter</span>
-                                <span>運用品質の目標</span>
-                                <span>復旧時間・バックアップ計画</span>
-                                <span>Pester</span>
-                                <span>GitHub Actions</span>
-                                <span>VLAN / DMZ</span>
-                            </div>
+                            <h3>Server Monitor — Linux構築・運用の学習</h3>
+                            <div class="support-fit high"><span class="fit-label">主作品 / 構築から復旧までの全体</span><p>Ubuntu上のWebアプリを題材に、Ansible・Dockerによる構築、Prometheus・Grafana・Lokiによる監視、復旧・引き継ぎ手順をまとめました。</p></div>
+                            <p><strong>想定用途：</strong>異常を見つけたときに、監視値とログを確認し、復旧手順と結果を記録する練習。</p>
+                            <p>23項目PASSは2026年8月の一時Ubuntu上のCI結果です。本人のVM操作やAI側の実行とは区別します。最新の実施状況・残課題は証跡台帳をご覧ください。</p>
+                            <p><a href="https://github.com/ns7jp/server" target="_blank" rel="noopener noreferrer">コード</a> ／ <a href="project-brief.html">制作概要</a> ／ <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">検証証跡台帳</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md#work-server-monitor" target="_blank" rel="noopener noreferrer">機能・制作メモ</a></p>
+                            <div class="tech-tags"><span>Ubuntu</span><span>Ansible</span><span>Docker Compose</span><span>Prometheus / Grafana</span><span>Loki / Alloy</span><span>GitHub Actions</span></div>
                         </div>
                     </div>
 
@@ -383,101 +293,11 @@
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>運用サポート資料集</h3>
-                            <div class="work-summary">
-                                <div><span>目的</span><strong>問い合わせの確認順と、作業記録の書き方をそろえる</strong></div>
-                                <div><span>成果</span><strong>15本のガイド、10本の確認ツール、練習用データと自動テスト</strong></div>
-                                <div><span>学んだこと</span><strong>受付、原因の絞り込み、記録、相談、引き継ぎ</strong></div>
-                            </div>
-                            <div class="support-fit high">
-                                <span class="fit-label">補助作品：応募先によって担当するITサポートを想定した練習</span>
-                                <p>PCの初期設定、利用者アカウント、Microsoft 365、ネットワーク障害などを想定し、確認手順と記録例を作りました。すべて個人学習用の想定ケースで、会社の実環境で使った実績ではありません。</p>
-                            </div>
-                            <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip"><strong>15</strong>ガイド + README</span>
-                                <span class="num-chip"><strong>10</strong>スクリプト</span>
-                                <span class="num-chip"><strong>10</strong>障害ケース</span>
-                                <span class="num-chip"><strong>5</strong>JSON + <strong>2</strong>PS1</span>
-                                <span class="num-chip"><strong>25</strong>自動テスト</span>
-                                <span class="num-chip">安全設定の<strong>自己確認</strong></span>
-                            </div>
-                            <p class="plain-summary"><strong>かんたんに言うと</strong>社内のパソコンや利用者アカウントの困りごとに対して、何をどの順番で確認し、どう記録するかをまとめた資料集です。</p>
-                            <p>想定した環境は、Windows 11、Microsoft 365（メールやファイル共有などをまとめて使えるサービス）、Active Directory（社内アカウント管理）です。この環境で、PC初期設定、退職者アカウント停止、共有フォルダの権限確認、ネットワークの一次確認などをまとめています。公開内容は想定手順、架空のケース、サンプル出力であり、実務での作業記録ではありません。</p>
-                            <ul class="work-points">
-                                <li>問い合わせを受けた後に「何を、どの順番で確認し、何を記録するか」を整理しました。</li>
-                                <li>確認結果をファイルに出力し、作業記録や引き継ぎ資料へ添付しやすくしました。</li>
-                                <li>公開ポートフォリオとして、社内固有情報や認証情報を含めない安全なサンプルにしています。</li>
-                            </ul>
-                            <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>想定した使い方</h4>
-                                <ul class="usage-list">
-                                    <li><strong>新人受け入れ：</strong>PC初期設定の手順書で、検品から社内アカウント設定、Microsoft 365導入、引き渡しまでを確認する。</li>
-                                    <li><strong>退職・異動対応：</strong>アカウントの停止、権限の取り消し、データの引き継ぎ、ライセンスの回収を、時間の順に沿って確認する。退職した人のIDが残ったまま使われるのを防ぐため。</li>
-                                    <li><strong>PC不調の一次確認：</strong>端末情報、イベントログ（Windowsが自動で残す動作の記録）、ディスク、ネットワーク、セキュリティ状態を同じ形式で記録する。上位の担当者へ引き継ぐとき、聞き直しの手間をなくすため。</li>
-                                    <li><strong>引き継ぎ：</strong>対応内容・判断・再発防止をチケットに残し、次回対応を早くする。</li>
-                                </ul>
-                            </div>
-                            <div class="work-architecture">
-                                <h4><i class="fa-solid fa-list-check" aria-hidden="true"></i> 問題を受け付けてから振り返るまで</h4>
-                                <div class="mermaid">
-                                flowchart LR
-                                    A[異常を見つけて記録] --> B[原因を絞る]
-                                    B --> C{解決可能?}
-                                    C -- はい --> D[対応・復旧]
-                                    C -- いいえ --> E[上位担当へ相談]
-                                    E --> D
-                                    D --> F[対応後の振り返り]
-                                    
-                                    style A fill:#e8e0d5,stroke:#2c3e50
-                                    style B fill:#e8e0d5,stroke:#2c3e50
-                                    style D fill:#9caf88,stroke:#2c3e50,color:#fff
-                                    style E fill:#cd853f,stroke:#2c3e50,color:#fff
-                                    style F fill:#e8e0d5,stroke:#2c3e50
-                                </div>
-                                <p style="font-size: 0.9em; margin-top: 10px; color: var(--text-medium);">
-                                    この資料集は、問題の発見・記録と、最初の原因調査を進めるための確認ツールや振り返り用の書式をまとめたものです。
-                                </p>
-                            </div>
-                            <div class="work-architecture">
-                                <h4><i class="fa-solid fa-code" aria-hidden="true"></i> 確認ツールの工夫</h4>
-                                <p class="plain-summary"><strong>かんたんに言うと</strong>下のコードは、CPUとメモリの使用率を受け取り、Healthy（正常）、Warning（注意）、Critical（危険）のどれかを返すだけの短い部品です。</p>
-                                <p style="font-size: 0.9em; margin-bottom: 10px; color: var(--text-medium);">PowerShellの確認ツールは、状態を判定する部分だけを別に分けました。こうすると同じ処理を他でも使い回せて、自動テストもしやすくなります。</p>
-                                <pre><code class="language-powershell">
-function Get-ResourceStatus {
-    [CmdletBinding()]
-    param (
-        [Parameter(Mandatory=$true)][int]$CpuPercent,
-        [Parameter(Mandatory=$true)][int]$MemoryPercent
-    )
-    
-    $status = "Healthy"
-    if ($CpuPercent -ge 90 -or $MemoryPercent -ge 90) {
-        $status = "Critical"
-    } elseif ($CpuPercent -ge 75 -or $MemoryPercent -ge 75) {
-        $status = "Warning"
-    }
-    
-    return [PSCustomObject]@{
-        Timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-        Status    = $status
-        CPU       = $CpuPercent
-        Memory    = $MemoryPercent
-    }
-}
-                                </code></pre>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中に困ったことと解決</h4>
-                                <p><span class="trouble-label">課題</span>実務に近づけようとすると、社内固有のサーバー名・ユーザーID・権限情報のような公開に不向きな情報が混ざりやすい。</p>
-                                <p><span class="trouble-label solution">解決</span>架空のWindows 11、Microsoft 365、Active Directory環境に統一し、確認ツールも読み取り中心の安全な内容にしました。注意事項はREADMEにも記載しています。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>PowerShell</span>
-                                <span>Windows 11</span>
-                                <span>Microsoft 365</span>
-                                <span>Active Directory</span>
-                                <span>作業手順書</span>
-                                <span>対応記録</span>
-                            </div>
+                            <div class="support-fit learning"><span class="fit-label">補助作品 / 想定手順と確認ツール</span><p>PC初期設定、アカウント管理、ネットワーク確認の手順と、PowerShellの確認ツール・出力例をまとめた教材です。</p></div>
+                            <p><strong>想定用途：</strong>PC不調時に端末情報とイベントログを記録し、上位担当へ引き継ぐ場面を想定。</p>
+                            <p>架空のケース・サンプルデータであり、会社の実環境での対応実績ではありません。</p>
+                            <p><a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-docs" target="_blank" rel="noopener noreferrer">手順書</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/tree/main/support-scripts" target="_blank" rel="noopener noreferrer">確認ツール</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md#work-support-toolkit" target="_blank" rel="noopener noreferrer">機能・制作メモ</a></p>
+                            <div class="tech-tags"><span>PowerShell</span><span>Pester</span><span>Windows / AD / M365</span></div>
                         </div>
                     </div>
 
@@ -501,76 +321,11 @@ function Get-ResourceStatus {
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>サーバー監視ダッシュボード</h3>
-                            <div class="work-summary">
-                                <div><span>目的</span><strong>端末・サーバー状態の見える化</strong></div>
-                                <div><span>成果</span><strong>CPU / メモリ / ディスク / プロセス監視</strong></div>
-                                <div><span>活用</span><strong>負荷上昇時の一次確認と説明</strong></div>
-                            </div>
-                            <div class="support-fit high">
-                                <span class="fit-label">主作品内のアプリ実装</span>
-                                <p>CPUやメモリの負荷、ディスク容量、動作中のプログラムを確認し、サーバーの状態を説明する練習に使っています。Linuxサーバー構築案件全体は、このページ先頭のServer Monitorで案内しています。</p>
-                            </div>
-                            <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip"><strong>6</strong>カテゴリ監視</span>
-                                <span class="num-chip"><strong>60</strong>秒履歴</span>
-                                <span class="num-chip">プロセス <strong>TOP15</strong></span>
-                                <span class="num-chip"><strong>3</strong>OS対応</span>
-                            </div>
-                            <p>Pythonで作った監視画面です。CPU、メモリ、ディスク、ネットワーク、動作中のプログラムを一画面で確認できます。負荷が高くなると色が緑から黄、橙、赤へ変わります。</p>
-                            <p>同じ作品では、Ansibleによる設定の自動化、Dockerによる起動、PrometheusとGrafanaによる監視、Lokiによるログ保存も学習しました。AWS向けの設定コードは書き方の検査までで、実際のAWS環境は作成していません。全体は<a href="project-brief.html">制作概要</a>と<a href="infra-lab.html">サーバー構築の内容</a>で確認できます。</p>
-                            <ul class="work-points">
-                                <li>画面を再読み込みしなくても、数秒ごとに新しい情報を取得できるようにしました。</li>
-                                <li>psutilというPythonのライブラリ（よく使う処理をまとめた部品集）を使い、Windows、Linux、macOSの状態を同じ方法で取得します。</li>
-                                <li>Chart.jsを使い、CPUとメモリの直近60秒の変化をグラフにしました。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>想定した使い方</h4>
-                                <ul class="usage-list">
-                                    <li><strong>自分のPCや学習用サーバー：</strong>重い処理を動かしたときに、CPUやメモリがどのように変化するかを見る。</li>
-                                    <li><strong>問題の原因調査：</strong>いつから負荷が上がったかをグラフで確認し、負荷の高いプログラムを探す。</li>
-                                    <li><strong>監視の説明：</strong>サーバー監視で何を確認するのか、色分けされた画面を使って説明する。</li>
-                                </ul>
-                            </div>
-                            <div class="work-architecture">
-                                <h4><i class="fa-solid fa-code" aria-hidden="true"></i> サーバーの状態を画面へ渡す処理</h4>
-                                <p style="font-size: 0.9em; margin-bottom: 10px; color: var(--text-medium);">Flask（PythonでWebの機能を作る道具）が、JSON形式（項目名と値を並べた、機械が読みやすいデータの書き方）で状態を返します。画面はそのままで、数値だけが新しくなります。</p>
-                                <pre><code class="language-python">
-@app.route('/api/stats')
-def api_stats():
-    # CPU使用率 (interval=0で即時取得できるための工夫を内部で実施)
-    cpu_percent = psutil.cpu_percent(interval=0)
-    cpu_cores = psutil.cpu_percent(interval=0, percpu=True)
-    
-    # メモリ情報
-    mem = psutil.virtual_memory()
-    
-    # ディスク情報
-    disk = psutil.disk_usage('/')
-    
-    return jsonify({
-        'cpu': cpu_percent,
-        'cpu_cores': cpu_cores,
-        'memory': mem.percent,
-        'disk': disk.percent,
-        'timestamp': datetime.now().strftime('%H:%M:%S')
-    })
-                                </code></pre>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中に困ったことと解決</h4>
-                                <p><span class="trouble-label">課題</span><code>psutil.cpu_percent()</code> を <code>interval=0</code> で呼ぶと、前回呼び出したときからの差を返します。そのため最初の1回は必ず0%になり、グラフの形が崩れて表示されました。</p>
-                                <p><span class="trouble-label solution">解決</span>全体使用率の取得時のみ <code>interval=0.5</code> で0.5秒ぶんの値を取り、基準点を作ります。その直後に、コアごとの値を <code>interval=0</code> で取得します。これで数値は正しくなり、画面が返ってくるまでの待ち時間も大きくは増えません。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Python</span>
-                                <span>Flask</span>
-                                <span>psutil</span>
-                                <span>Chart.js</span>
-                                <span>Fetch API</span>
-                                <span>SVG</span>
-                                <span>JSON API</span>
-                            </div>
+                            <div class="support-fit learning"><span class="fit-label">主作品内のアプリ実装</span><p>Server Monitorの監視アプリ部分です。FlaskとpsutilでCPU・メモリ・ディスク・プロセス情報を取得し、数値と履歴グラフを表示します。</p></div>
+                            <p><strong>想定用途：</strong>学習用PCで処理を動かし、CPUとメモリの変化を画面で確かめる。</p>
+                            <p>構築・監視基盤・復旧までの全体は、上のServer Monitorで紹介しています。</p>
+                            <p><a href="https://github.com/ns7jp/server" target="_blank" rel="noopener noreferrer">コード</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md#work-monitor" target="_blank" rel="noopener noreferrer">機能・制作メモ</a></p>
+                            <div class="tech-tags"><span>Python</span><span>Flask / psutil</span><span>Chart.js</span></div>
                         </div>
                     </div>
 
@@ -594,43 +349,11 @@ def api_stats():
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>定型文管理アプリ</h3>
-                            <div class="work-summary">
-                                <div><span>目的</span><strong>問い合わせ返信の標準化</strong></div>
-                                <div><span>成果</span><strong>定型文のCRUDとワンクリックコピー</strong></div>
-                                <div><span>活用</span><strong>受付文・案内文・確認項目の品質統一</strong></div>
-                            </div>
-                            <div class="support-fit high">
-                                <span class="fit-label">補助スキル: 定型業務の効率化</span>
-                                <p>問い合わせ返信、受付メモ、案内文を標準化し、回答品質のばらつきと入力時間を減らす用途に向いています。</p>
-                            </div>
-                            <p>Flet（Pythonだけで画面を作れる道具）を使い、パソコンで動く画面付きアプリを作りました。定型文の新規作成・編集・保存・削除ができます。これはCRUD（作成・読み取り・更新・削除という4つの基本操作）と呼ばれます。ボタン1回で文章をコピーでき、そのまま貼り付けられます。データはJSONファイルに保存するので、アプリを閉じても消えません。</p>
-                            <ul class="work-points">
-                                <li>Fletを使い、PythonだけでGUIアプリを作れることを学びました。</li>
-                                <li>定型文の保存・編集・削除という基本的なCRUD操作を実装しました。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>想定した使い方</h4>
-                                <ul class="usage-list">
-                                    <li><strong>カスタマーサポート：</strong>「お問い合わせありがとうございます」「ご返金処理について」など、よくある問い合わせへの返答テンプレートを登録。1クリックでコピーして、メール・チャットへ即貼り付けできる。</li>
-                                    <li><strong>営業メール：</strong>初回挨拶・見積書送付・フォローアップ・受注御礼の各テンプレを登録。商談フェーズに応じて選んで使い回せるため、メール作成時間を大幅短縮。</li>
-                                    <li><strong>採用担当：</strong>書類選考通過連絡・面接日程調整・不採用通知などのテンプレを登録。応募者ごとの差し替え部分だけ手直しして使える。</li>
-                                    <li><strong>講師・教育担当：</strong>頻出の解説文（用語定義・補足説明・参考リンク）を登録し、Q&A対応や教材作成時にすばやく挿入。</li>
-                                    <li><strong>ライター・ブロガー：</strong>記事冒頭の挨拶・SNS告知の定型文・署名・免責事項などを管理。執筆フローのテンプレ化で生産性アップ。</li>
-                                    <li><strong>個人利用：</strong>自宅住所・電話番号・メール署名・よく使うURLなど、何度も入力する個人情報を安全にローカル保存。コピー時のミスタイプを防止できる。</li>
-                                </ul>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中に困ったことと解決</h4>
-                                <p><span class="trouble-label">課題</span>JSON保存時に日本語が <code>\uXXXX</code> 形式でエスケープされ、ファイルを直接開いても内容を確認できない。</p>
-                                <p><span class="trouble-label solution">解決</span><code>json.dump(..., ensure_ascii=False, indent=2)</code> を指定し、日本語のまま整形保存。トラブル時のデータ確認が容易になった。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Python</span>
-                                <span>Flet</span>
-                                <span>JSON</span>
-                                <span>pyperclip</span>
-                            </div>
+                            <div class="support-fit learning"><span class="fit-label">開発学習 / Python・Flet</span><p>定型文の作成・編集・削除と、ワンクリックコピーを実装しました。データはJSONファイルに保存します。</p></div>
+                            <p><strong>想定用途：</strong>問い合わせへの受付文を登録し、必要な箇所を編集してメールに貼り付ける。</p>
+
+                            <p><a href="https://github.com/ns7jp/works/blob/main/teikei_kanri.py" target="_blank" rel="noopener noreferrer">コード</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md#work-teikei" target="_blank" rel="noopener noreferrer">機能・制作メモ</a></p>
+                            <div class="tech-tags"><span>Python</span><span>Flet</span><span>JSON</span></div>
                         </div>
                     </div>
 
@@ -654,43 +377,11 @@ def api_stats():
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>付箋アプリ</h3>
-                            <div class="work-summary">
-                                <div><span>目的</span><strong>対応中タスクの一時メモ化</strong></div>
-                                <div><span>成果</span><strong>複数付箋の保存・復元</strong></div>
-                                <div><span>活用</span><strong>対応メモ、確認待ち、作業中TODO</strong></div>
-                            </div>
-                            <div class="support-fit medium">
-                                <span class="fit-label">補助スキル: データ整理</span>
-                                <p>一時メモや対応中タスクの見える化に有効。機密情報を残さない注意書きも含め、運用上の扱い方まで説明できます。</p>
-                            </div>
-                            <p>Pythonのtkinterで作ったデスクトップ付箋アプリです。複数の付箋を自由に配置・作成・削除でき、内容はJSONファイルに自動保存されます。再起動後も付箋が復元されます。</p>
-                            <ul class="work-points">
-                                <li>tkinterでGUI部品の配置とイベント処理を学習しました。</li>
-                                <li>日常的に使えるツールとして、操作のわかりやすさを重視しました。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>想定した使い方</h4>
-                                <ul class="usage-list">
-                                    <li><strong>今日のTODOリスト：</strong>朝起きてその日にやることを付箋に書き、画面端に貼っておく。完了したら削除して達成感を得る、シンプルなタスク管理。</li>
-                                    <li><strong>瞬発アイデアメモ：</strong>会議中・作業中にひらめいたアイデアや気づきをすぐに書き留められる。Excelやメールソフトを開かなくても、キー1つで付箋を追加できる。</li>
-                                    <li><strong>リマインダー：</strong>「14時に電話」「明日締切の書類」など忘れたくない情報を画面に貼る。自動保存・位置復元のため、PCを再起動しても消えない。</li>
-                                    <li><strong>ショッピングリスト：</strong>家族から頼まれた買い物・週末に買うものを書き出し。スマホがなくてもPCですぐ確認・追加・削除ができる。</li>
-                                    <li><strong>学習用メモ：</strong>覚えたい英単語・公式・ショートカットキーを付箋に貼って画面端に常駐。視界に入る位置に置くことで自然に頭に残る。</li>
-                                    <li><strong>パスワード等の一時メモ：</strong>セッション内で一時的に控えたい数字・コードのメモに（※機密情報の長期保存には不向き）。作業終了後はその場で削除。</li>
-                                    <li><strong>在宅勤務の集中サポート：</strong>「集中タイム中」「会議中」など自分への声かけメモを画面に貼り、気分の切り替えに活用。</li>
-                                </ul>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中に困ったことと解決</h4>
-                                <p><span class="trouble-label">課題</span>付箋を移動して配置を変えても、再起動すると毎回初期位置に戻ってしまう。</p>
-                                <p><span class="trouble-label solution">解決</span>ウィンドウ終了時のイベントで <code>geometry()</code> を取得しJSONに保存、起動時に読み込んで位置を復元する処理に変更。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>Python</span>
-                                <span>tkinter</span>
-                                <span>JSON</span>
-                            </div>
+                            <div class="support-fit learning"><span class="fit-label">開発学習 / Python・tkinter</span><p>複数の付箋を作成・配置・削除するデスクトップアプリです。内容と位置をJSONに保存し、再起動時に復元します。</p></div>
+                            <p><strong>想定用途：</strong>作業中のTODOを画面端に置き、完了したら削除する。機密情報は記録しません。</p>
+
+                            <p><a href="https://github.com/ns7jp/works/blob/main/sticky_notes.py" target="_blank" rel="noopener noreferrer">コード</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md#work-notes" target="_blank" rel="noopener noreferrer">機能・制作メモ</a></p>
+                            <div class="tech-tags"><span>Python</span><span>tkinter</span><span>JSON</span></div>
                         </div>
                     </div>
 
@@ -703,9 +394,9 @@ def api_stats():
                                     <h3>SNSアプリ「Pulse」</h3>
                                     <p>感情ムードで繋がる独自コンセプトのSNS</p>
                                     <div class="overlay-buttons">
-                                        <a href="image/pulse.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="SNSアプリPulseの画面を見る"><i class="fa-solid fa-image" aria-hidden="true"></i> 画面</a>
+                                        <a href="https://github.com/ns7jp/works/blob/pulse/index.php" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="SNSアプリPulseのコードを見る"><i class="fa-brands fa-github" aria-hidden="true"></i> コード</a>
+                                        <a href="image/pulse.png" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer" aria-label="SNSアプリPulseの画面を見る"><i class="fa-solid fa-image" aria-hidden="true"></i> 画面</a>
                                     </div>
-                                    <p class="demo-note">コードは現在非公開です。画面は保存済みスクリーンショットで確認できます。</p>
                                 </div>
                             </div>
                         </div>
@@ -715,50 +406,11 @@ def api_stats():
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>SNSアプリ「Pulse」</h3>
-                            <div class="work-summary">
-                                <div><span>目的</span><strong>認証・投稿・DB連携の学習</strong></div>
-                                <div><span>成果</span><strong>CSRF / XSS / bcryptを意識したWebアプリ</strong></div>
-                                <div><span>活用</span><strong>社内Webシステム理解の基礎</strong></div>
-                            </div>
-                            <div class="support-fit learning">
-                                <span class="fit-label">学習作品: Webアプリ開発</span>
-                                <p>直接のヘルプデスク業務より、認証・入力チェック・DB初期化・公開時の注意点を学んだ開発学習作品として位置付けています。</p>
-                            </div>
-                            <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip"><strong>8</strong>種ムード</span>
-                                <span class="num-chip"><strong>4</strong>独自機能</span>
-                                <span class="num-chip">天気予報 <strong>24</strong>h</span>
-                                <span class="num-chip">感情オーラ <strong>7</strong>日</span>
-                            </div>
-                            <p>「いいね」ではなく「共鳴」で繋がる、感情ムード投稿型のSNSアプリです。投稿時に8種のムードを選ぶと、カードの色がムードに対応して変化します。ささやきモード（匿名投稿）・タイムカプセル（未来日時公開）・感情天気予報（24時間分布）・感情オーラ（7日間傾向）など独自機能を実装しました。</p>
-                            <ul class="work-points">
-                                <li>CSRF（利用者になりすまして勝手に送信させる攻撃）、XSS（他人が見るページに悪い命令を埋め込む攻撃）、SQLインジェクション（入力欄からデータベースを不正に操作する攻撃）への対策を入れました。パスワードはbcrypt（元に戻せない形へ変換する方式）で保存しています。</li>
-                                <li>SQLite（1つのファイルで動く小さなデータベース）を、PDO（PHPからデータベースを扱う共通の窓口）を通して操作しました。データベースのファイルは自動で作られます。そのため、使う人が事前に準備をしなくても動きます。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>想定した使い方</h4>
-                                <ul class="usage-list">
-                                    <li><strong>日々の感情記録：</strong>朝・昼・夜とムードを選んで投稿し、感情オーラ（7日間グラフ）で自分の心の波を振り返る。日記アプリの代わりとして気軽に使える。</li>
-                                    <li><strong>本音の吐き出し：</strong>ささやきモード（匿名投稿）で、職場や学校で言いづらい本音や悩みを誰にも特定されずに吐露。ストレス発散の場として機能する。</li>
-                                    <li><strong>未来へのメッセージ：</strong>タイムカプセル機能で、誕生日や記念日に向けた予約投稿が可能。1年後の自分や友人へのメッセージを今の気持ちで残せる。</li>
-                                    <li><strong>メンタルセルフケア：</strong>感情天気予報（24時間分布）で「いつ気分が落ちやすいか」を可視化し、生活リズムの改善や受診の参考データに活用できる。</li>
-                                    <li><strong>共感ベースのコミュニティ：</strong>同じムードを選んだ人の投稿が並ぶことで、似た気持ちの相手と自然に繋がれる。「いいね数」競争にならない、穏やかなSNS体験を提供する。</li>
-                                </ul>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中に困ったことと解決</h4>
-                                <p><span class="trouble-label">課題</span>開発環境と本番サーバーでSQLiteファイルの初期化挙動が異なり、デプロイ直後に「DBが存在しない」エラーが発生。</p>
-                                <p><span class="trouble-label solution">解決</span>起動時にDBファイルの有無を確認し、無ければスキーマを自動生成する処理を追加。環境ごとの手動セットアップが不要となった。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>PHP</span>
-                                <span>SQLite</span>
-                                <span>PDO</span>
-                                <span>CSRF対策</span>
-                                <span>bcrypt</span>
-                                <span>JavaScript</span>
-                            </div>
+                            <div class="support-fit learning"><span class="fit-label">開発学習 / PHP・SQLite</span><p>ムードに応じて投稿カードの色が変わるSNSです。認証・投稿・DB連携、入力値の扱いを学びました。</p></div>
+                            <p><strong>想定用途：</strong>日々の気分を投稿し、過去の記録を振り返る。</p>
+                            <p>コードと保存済み画面を公開しています。ライブ動作は未確認です。</p>
+                            <p><a href="https://github.com/ns7jp/works/blob/pulse/index.php" target="_blank" rel="noopener noreferrer">コード</a> ／ <a href="image/pulse.png">保存済み画面</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md#work-pulse" target="_blank" rel="noopener noreferrer">機能・制作メモ</a></p>
+                            <div class="tech-tags"><span>PHP</span><span>SQLite / PDO</span><span>JavaScript</span></div>
                         </div>
                     </div>
 
@@ -771,9 +423,9 @@ def api_stats():
                                     <h3>掲示板アプリ</h3>
                                     <p>ユーザー認証・投稿・返信機能を備えた掲示板</p>
                                     <div class="overlay-buttons">
-                                        <a href="image/post.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="掲示板アプリの画面を見る"><i class="fa-solid fa-image" aria-hidden="true"></i> 画面</a>
+                                        <a href="https://github.com/ns7jp/works/blob/post/index.php" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="掲示板アプリのコードを見る"><i class="fa-brands fa-github" aria-hidden="true"></i> コード</a>
+                                        <a href="image/post.png" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer" aria-label="掲示板アプリの画面を見る"><i class="fa-solid fa-image" aria-hidden="true"></i> 画面</a>
                                     </div>
-                                    <p class="demo-note">コードは現在非公開です。画面は保存済みスクリーンショットで確認できます。</p>
                                 </div>
                             </div>
                         </div>
@@ -783,49 +435,11 @@ def api_stats():
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>掲示板アプリ</h3>
-                            <div class="work-summary">
-                                <div><span>目的</span><strong>社内FAQ・ナレッジ掲示板の原型</strong></div>
-                                <div><span>成果</span><strong>登録・ログイン・投稿・返信機能</strong></div>
-                                <div><span>活用</span><strong>ナレッジ共有とWebアプリ保守理解</strong></div>
-                            </div>
-                            <div class="support-fit medium">
-                                <span class="fit-label">学習作品: PHP / SQL</span>
-                                <p>社内FAQ・ナレッジ掲示板の原型として説明できます。権限管理、投稿履歴、入力値対策の基礎も示せます。</p>
-                            </div>
-                            <div class="work-numbers" aria-label="主要スペック">
-                                <span class="num-chip">基本機能 <strong>4</strong>種</span>
-                                <span class="num-chip">セキュリティ対策 <strong>2</strong>種</span>
-                                <span class="num-chip">DB: <strong>MySQL</strong></span>
-                                <span class="num-chip"><strong>PDO</strong>プリペアド</span>
-                            </div>
-                            <p>PHPとMySQLを使った掲示板アプリです。ユーザー登録・ログイン・投稿・返信の基本機能を実装しました。不正な入力への対策も入れました。PDOのプリペアドステートメント（値を後から当てはめる、安全な問い合わせ方法）でSQLインジェクションを防いでいます。またhtmlspecialcharsという関数で、入力された文字を画面に出す前に無害な形へ変え、XSSを防いでいます。</p>
-                            <ul class="work-points">
-                                <li>ログイン・投稿・返信などWebアプリに必要な基本機能を一通り実装しました。</li>
-                                <li>PDO・セッション管理・入力値サニタイズなど、バックエンドのセキュリティ基礎を学びました。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>想定した使い方</h4>
-                                <ul class="usage-list">
-                                    <li><strong>部活・サークルの情報共有：</strong>会員登録制でクローズドな掲示板として運用。練習日程の連絡・出欠確認・反省会のスレッドなど、SNSに乗せにくい内輪向け情報の共有に使える。</li>
-                                    <li><strong>社内ナレッジ掲示板：</strong>業務手順・FAQ・トラブル対応事例をスレッドごとに整理。検索性が高く、新人教育や引き継ぎ資料としても活用できる。</li>
-                                    <li><strong>趣味コミュニティ：</strong>ゲーム攻略・読書感想・推し活など、テーマ別スレッドで深く語り合うニッチコミュニティ用の交流場として最適。</li>
-                                    <li><strong>学習グループのQ&A：</strong>勉強会メンバー間で質問・回答・解説をスレッド化。返信機能で議論が枝分かれし、過去ログとして学習資産にもなる。</li>
-                                    <li><strong>イベント参加者交流：</strong>勉強会・オフ会・ワークショップ参加者向けの限定掲示板。事前の自己紹介、当日の感想シェア、アフターフォローに利用可能。</li>
-                                </ul>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中に困ったことと解決</h4>
-                                <p><span class="trouble-label">課題</span>DB認証情報を db.php に直接記述しており、GitHub公開時に漏洩リスクがあることが判明。</p>
-                                <p><span class="trouble-label solution">解決</span>db.php は .gitignore（公開しないファイルを指定する設定）に書いて、公開の対象から外しました。かわりに、値を仮の文字に置き換えた db.example.php を用意しました。READMEに準備の手順を書き、他の人が自分のパソコンで安全に動かせるようにしました。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>PHP</span>
-                                <span>MySQL</span>
-                                <span>PDO</span>
-                                <span>XSS対策</span>
-                                <span>セッション認証</span>
-                            </div>
+                            <div class="support-fit learning"><span class="fit-label">開発学習 / PHP・MySQL</span><p>ユーザー登録・ログイン・投稿・返信を実装し、PDOによるDB操作とセッション管理を学びました。</p></div>
+                            <p><strong>想定用途：</strong>学習グループの質問と回答を、スレッドごとに残す。</p>
+                            <p>コードと保存済み画面を公開しています。ライブ動作は未確認です。</p>
+                            <p><a href="https://github.com/ns7jp/works/blob/post/index.php" target="_blank" rel="noopener noreferrer">コード</a> ／ <a href="image/post.png">保存済み画面</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md#work-post" target="_blank" rel="noopener noreferrer">機能・制作メモ</a></p>
+                            <div class="tech-tags"><span>PHP</span><span>MySQL / PDO</span><span>セッション認証</span></div>
                         </div>
                     </div>
 
@@ -838,9 +452,9 @@ def api_stats():
                                     <h3>サンプル企業サイト</h3>
                                     <p>デザインカンプからコーディングしたレスポンシブサイト</p>
                                     <div class="overlay-buttons">
-                                        <a href="image/magic.png" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="サンプル企業サイトの保存済み画面を見る"><i class="fa-solid fa-image" aria-hidden="true"></i> 画面</a>
+                                        <a href="https://github.com/ns7jp/works/blob/magic/index.html" class="btn btn-sm btn-light" target="_blank" rel="noopener noreferrer" aria-label="サンプル企業サイトのコードを見る"><i class="fa-brands fa-github" aria-hidden="true"></i> コード</a>
+                                        <a href="image/magic.png" class="btn btn-sm btn-outline-light" target="_blank" rel="noopener noreferrer" aria-label="サンプル企業サイトの保存済み画面を見る"><i class="fa-solid fa-image" aria-hidden="true"></i> 画面</a>
                                     </div>
-                                    <p class="demo-note">公開デモとコードの参照先は現在確認できていません。表示するのは保存済みスクリーンショットです。</p>
                                 </div>
                             </div>
                         </div>
@@ -850,44 +464,11 @@ def api_stats():
                                 <span class="date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 2026</span>
                             </div>
                             <h3>サンプル企業サイト</h3>
-                            <div class="work-summary">
-                                <div><span>目的</span><strong>静的サイトの保守・改善スキル証明</strong></div>
-                                <div><span>成果</span><strong>レスポンシブ、DOM操作、軽量公開</strong></div>
-                                <div><span>活用</span><strong>社内ポータルや手順書ページの更新</strong></div>
-                            </div>
-                            <div class="support-fit learning">
-                                <span class="fit-label">学習作品: HTML / CSS</span>
-                                <p>社内ポータルや手順書ページの保守に必要なHTML/CSS/JSの基礎を示す作品。ITサポートでは補助スキルとして活かせます。</p>
-                            </div>
-                            <p>訓練校から渡されたデザインカンプ（完成イメージの見本）のPDFを見ながら、架空企業「MagicMoon」の会社紹介サイトを作りました。画面には4つの動きを付けました。三本線のメニュー、なめらかに移動するスクロール、背景がずれて動く演出（パララックス）、ふわりと現れる演出です。これらはVanilla JS（道具を足さない、素のJavaScript）だけで書き、jQueryという道具は使っていません。事例ページではLightbox2によるギャラリーも実装しています。</p>
-                            <ul class="work-points">
-                                <li>Flexbox・CSS Gridによるレスポンシブレイアウトと、モバイルファーストのCSS設計を学びました。</li>
-                                <li>jQuery不使用でVanilla JSによるDOM操作・IntersectionObserverを活用しました。</li>
-                            </ul>
-                            <!-- 使用例・活用シーン -->
-                            <div class="work-usage">
-                                <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i>想定した使い方</h4>
-                                <ul class="usage-list">
-                                    <li><strong>中小企業のコーポレートサイト：</strong>会社概要・事業内容・実績紹介・お問い合わせの基本構成が一通り含まれており、テンプレートとして即座にカスタマイズできる。HTML/CSS/JSのみで動くため、PHPサーバー不要で安価に運用可能。</li>
-                                    <li><strong>制作会社・デザイン事務所の実績ページ：</strong>事例ページのLightbox2ギャラリーは、施工事例・制作実績・撮影ポートフォリオなどの画像を美しく見せる用途に応用可。クリックで拡大表示できるため、訴求力が高い。</li>
-                                    <li><strong>採用サイトのテンプレート：</strong>ヒーロー画像・ミッション紹介・事業説明の構成を流用し、企業の採用LP（応募を集めるための1ページの紹介サイト）としても使える。フェードインアニメで応募者の印象に残るページ作りができる。</li>
-                                    <li><strong>イベント・キャンペーンLP：</strong>1ページ完結型の構成を活かし、新商品発表・期間限定キャンペーン・展示会告知など短期運用LPの土台として有効。</li>
-                                    <li><strong>HTML/CSS/JS学習教材：</strong>Flexbox・Grid・レスポンシブ・スムーススクロール・IntersectionObserverなど現代Web制作の基本技術を網羅。コードを読んで模写することで、初学者の実践的な学習素材になる。</li>
-                                    <li><strong>学習成果：</strong>見本のデザインを読み取り、HTMLとCSSで再現する練習として制作しました。</li>
-                                </ul>
-                            </div>
-                            <div class="work-troubleshoot">
-                                <h4><i class="fa-solid fa-wrench" aria-hidden="true"></i>制作中に困ったことと解決</h4>
-                                <p><span class="trouble-label">課題</span>モバイルでハンバーガーメニューを開いたまま画面幅を変えると、メニューが閉じずレイアウトが崩れる。</p>
-                                <p><span class="trouble-label solution">解決</span><code>resize</code> イベントを監視し、PC幅に戻った時点でメニュー状態をリセットする処理を追加。複数ブレイクポイントで動作確認を実施。</p>
-                            </div>
-                            <div class="tech-tags">
-                                <span>HTML5</span>
-                                <span>CSS3</span>
-                                <span>Vanilla JS</span>
-                                <span>Lightbox2</span>
-                                <span>レスポンシブ</span>
-                            </div>
+                            <div class="support-fit learning"><span class="fit-label">訓練校の制作 / HTML・CSS・JavaScript</span><p>訓練校のデザイン見本から、架空企業「MagicMoon」のサイトを制作しました。レスポンシブ表示、メニュー操作、画像ギャラリーを実装しました。</p></div>
+                            <p><strong>想定用途：</strong>見本に合わせた会社紹介ページを作る、HTML・CSSの練習。</p>
+                            <p>コードと保存済み画面を公開しています。ライブ動作は未確認です。</p>
+                            <p><a href="https://github.com/ns7jp/works/blob/magic/index.html" target="_blank" rel="noopener noreferrer">コード</a> ／ <a href="image/magic.png">保存済み画面</a> ／ <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/works-reference.md#work-magic" target="_blank" rel="noopener noreferrer">機能・制作メモ</a></p>
+                            <div class="tech-tags"><span>HTML / CSS</span><span>Vanilla JS</span><span>Lightbox2</span></div>
                         </div>
                     </div>
                 </div>
@@ -895,13 +476,7 @@ def api_stats():
 
             <!-- ===== Coming Soonセクション ===== -->
             <!-- 「今後も作品を追加予定」というメッセージで継続的な学習意欲を表現 -->
-            <section class="coming-soon">
-                <div class="coming-soon-content">
-                    <i class="fa-solid fa-rocket" aria-hidden="true"></i>
-                    <h2>今後も学習作品を追加します</h2>
-                    <p>新しい内容を学び、自分の言葉で説明できる状態になったものから追加します。</p>
-                </div>
-            </section>
+
         </div>
     </div>
     </main>
@@ -936,11 +511,6 @@ def api_stats():
      ページ固有のJavaScriptはなし。ローダー・メニュー開閉・スクロール演出は
      js/main.js（vanilla JS）に集約している。
 ============================================================ -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.8/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true, theme:'base', themeVariables: { primaryColor: '#fdfbf7', lineColor: '#2c3e50', textColor: '#2c3e50' }});</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="js/lightbox.js?v=20261022-1"></script>
 </body>
 </html>
