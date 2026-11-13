@@ -67,7 +67,7 @@
     <!-- ブラウザ標準スタイルをリセットするCSS。表示崩れを防ぐ目的で先に読み込む。 -->
     <link rel="stylesheet" href="css/reset.css">
     <!-- このサイト独自のスタイルシート。色・レイアウト・アニメーションを定義。 -->
-    <link rel="stylesheet" href="css/style.css?v=20261101-1">
+    <link rel="stylesheet" href="css/style.css?v=20261113-1">
     <link rel="stylesheet" href="css/work-readiness.css?v=20260826-1">
     <!-- アイコンフォントFont Awesome（CDN経由）。<i class="fa-..."></i>でアイコンを表示できる。 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,12 +131,7 @@
     <!-- ===== モバイル用メニュー切替ボタン（ハンバーガーメニュー） ===== -->
     <!-- スマホ画面のときだけ表示される。タップするとナビゲーションが開閉する。
          button要素 + aria-expanded/aria-controls でキーボード・スクリーンリーダーからも操作できる。 -->
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <!-- 三本線（メニューを開くアイコン） -->
-        <i class="fa-solid fa-bars" aria-hidden="true"></i>
-        <!-- バツ印（メニューを閉じるアイコン）。CSSで切替表示する。 -->
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-    </button>
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><svg class="menu-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path class="menu-icon-open" d="M4 6H20M4 12H20M4 18H20"></path><path class="menu-icon-close" d="M6 6L18 18M6 18L18 6"></path></svg></button>
 
     <!-- ===== ヘッダー（サイト共通の上部エリア） ===== -->
     <header>

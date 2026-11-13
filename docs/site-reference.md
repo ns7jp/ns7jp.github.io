@@ -320,11 +320,11 @@ ns7jp.github.io/
 | ③ | Support Toolkit | Markdown / PowerShell / bash | 補助成果 | 15ガイド+README、10確認スクリプト、M365サンプル、架空ケース | [support-docs](../support-docs/) / [support-scripts](../support-scripts/) |
 | ④ | 定型文管理アプリ | Python / Flet | 補助スキル | よく使う文章を保存し、ワンクリックでコピーするデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
 | ⑤ | 付箋アプリ | Python / Tkinter | 補助スキル | 複数の付箋を作成・保存・復元できるデスクトップアプリ | [ns7jp/works](https://github.com/ns7jp/works) |
-| ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | 学習作品 | 感情ムードを選んで投稿するSNS | [保存済み画面](../image/pulse.png)（コードは現在非公開） |
-| ⑦ | 掲示板アプリ | PHP / MySQL | 学習作品 | ユーザー登録、投稿、返信ができる掲示板 | [保存済み画面](../image/post.png)（コードは現在非公開） |
-| ⑧ | サンプル企業サイト | HTML / CSS / JavaScript | 学習作品 | 架空企業のレスポンシブ対応コーポレートサイト | [保存済み画面](../image/magic.png)（公開コードの参照先は未確認） |
+| ⑥ | SNSアプリ「Pulse」 | PHP / SQLite / JavaScript | 学習作品 | 感情ムードを選んで投稿するSNS | [公開コード](https://github.com/ns7jp/works/blob/pulse/index.php) ／ [保存済み画面](../image/pulse.png)（ライブ動作は未確認） |
+| ⑦ | 掲示板アプリ | PHP / MySQL | 学習作品 | ユーザー登録、投稿、返信ができる掲示板 | [公開コード](https://github.com/ns7jp/works/blob/post/index.php) ／ [保存済み画面](../image/post.png)（ライブ動作は未確認） |
+| ⑧ | サンプル企業サイト | HTML / CSS / JavaScript | 学習作品 | 架空企業のレスポンシブ対応コーポレートサイト | [公開コード](https://github.com/ns7jp/works/blob/magic/index.html) ／ [保存済み画面](../image/magic.png)（ライブ動作は未確認） |
 
-作品ページでは、単に「何を作ったか」だけでなく、「どんな場面で使えるか」「作る中で何に困ったか」「どう解決したか」も記載しています。これは、完成物だけでなく、問題解決の過程も伝えるためです。
+作品ページでは、概要・想定用途と公開コード／保存済み画面を案内しています。詳しい機能や制作上の課題は[機能・制作メモ](../learning-docs/works-reference.md)にまとめ、コード公開とライブ動作の確認を区別しています。
 
 ---
 

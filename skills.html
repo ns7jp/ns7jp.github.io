@@ -45,7 +45,7 @@
     <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
     <script src="js/main.js?v=20261022-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20261101-1">
+    <link rel="stylesheet" href="css/style.css?v=20261113-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -78,10 +78,7 @@
     </div>
 
     <!-- ===== モバイル用メニュー切替ボタン ===== -->
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars" aria-hidden="true"></i>
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-    </button>
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><svg class="menu-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path class="menu-icon-open" d="M4 6H20M4 12H20M4 18H20"></path><path class="menu-icon-close" d="M6 6L18 18M6 18L18 6"></path></svg></button>
 
     <!-- ===== ヘッダー（全ページ共通） ===== -->
     <header>
@@ -129,7 +126,8 @@
                 <table class="operation-table"><caption class="sr-only">技術、記録された操作、支援・実行環境、根拠</caption><thead><tr><th scope="col">技術</th><th scope="col">操作・確認したこと</th><th scope="col">実行者・支援範囲</th><th scope="col">記録</th></tr></thead><tbody>
                     <tr><td>Ubuntu / SSH / UFW</td><td>固定IP・鍵認証等を設定。意図的なSSH設定不備を復元し、構文検査と鍵接続を確認。</td><td>AIの案内を受けた本人のVM操作。</td><td><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-initial-build.md" target="_blank" rel="noopener noreferrer">初期構築</a> ／ <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/evidence/featured-evidence.md" target="_blank" rel="noopener noreferrer">SSH復旧</a></td></tr>
                     <tr><td>Windows Server / AD / WSUS</td><td>AD構築試験と復元を操作。復元後のSYSVOL欠損が残課題。WSUSは手順修正後の通し再試験が未実施でFAIL。</td><td>AIの案内を受けた本人のVM操作。独力での障害切り分けは未確認。</td><td><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-02-ad-restore-drill.md" target="_blank" rel="noopener noreferrer">AD復元</a> ／ <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-wsus-sit04-sit06-root-cause.md" target="_blank" rel="noopener noreferrer">WSUS調査</a></td></tr>
-                    <tr><td>Docker / Prometheus / Grafana / Loki</td><td>サービスの起動・停止・再開、監視値の1→0→1、ログ検索と同じVM内の復元を別々の演習で確認。</td><td>AIの案内を受けた本人のVM操作。実通知や一連の運用試験は未完了。</td><td><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-monitoring-practice.md" target="_blank" rel="noopener noreferrer">監視</a> ／ <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-loki-practice.md" target="_blank" rel="noopener noreferrer">ログ検索</a> ／ <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-restore-practice.md" target="_blank" rel="noopener noreferrer">復元</a></td></tr>
+                    <tr><td>Docker / Prometheus / Grafana / Loki</td><td>9月の別々の演習で、起動・停止・再開、監視値の1→0→1、ログ検索と同じVM内の復元を確認。</td><td>AIの案内を受けた本人のVM操作。この9月の記録には通知受信や一連の運用試験を含みません。</td><td><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-monitoring-practice.md" target="_blank" rel="noopener noreferrer">監視</a> ／ <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-loki-practice.md" target="_blank" rel="noopener noreferrer">ログ検索</a> ／ <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-08-lab-base01-restore-practice.md" target="_blank" rel="noopener noreferrer">復元</a></td></tr>
+                    <tr><td>Prometheus / Alertmanager</td><td>11月5日、KVMの7サービス部分構成で監視・ローカル通知・手動復旧・復旧通知を確認。</td><td>AI案内による本人操作。原画像・生ログは未収録。外部通知・全構成・独力再現・長期稼働は未確認。</td><td><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-11-05-kvm-monitoring-notification.md" target="_blank" rel="noopener noreferrer">11月の監視・通知</a></td></tr>
                     <tr><td>Ansible</td><td>VMで基盤設定の適用・再実行を記録。監視全体の構築とは別の検証。</td><td>AI支援を含むVM実測。独力再現は未確認。</td><td><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-09-04-ansible-foundation-build.md" target="_blank" rel="noopener noreferrer">Ubuntu基盤</a></td></tr>
                     <tr><td>GitHub Actions</td><td>2026年8月22日に構築・復旧等の23項目PASS。</td><td>使い捨てUbuntu上のCI実行。本人のVM操作や長期運用の実績には含めません。</td><td><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-08-22-full-stack-e2e.md" target="_blank" rel="noopener noreferrer">CIの実行条件</a></td></tr>
                 </tbody></table>

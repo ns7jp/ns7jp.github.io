@@ -29,7 +29,7 @@
 
     <script src="js/main.js?v=20261022-1" defer></script>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css?v=20261101-1">
+    <link rel="stylesheet" href="css/style.css?v=20261113-1">
     <link rel="stylesheet" href="css/work-readiness.css?v=20260826-1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,10 +71,7 @@
         </div>
     </div>
 
-    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-        <i class="fa-solid fa-bars" aria-hidden="true"></i>
-        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-    </button>
+    <button type="button" class="res-menu" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く"><svg class="menu-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path class="menu-icon-open" d="M4 6H20M4 12H20M4 18H20"></path><path class="menu-icon-close" d="M6 6L18 18M6 18L18 6"></path></svg></button>
 
     <header>
         <p class="logo">
@@ -127,7 +124,7 @@
                 <article class="brief-summary-card"><span>Metrics / Logs</span><h3>数値とログをGrafanaで見る</h3><p>Prometheusが数値を取得し、AlloyがLokiへログを送ります。Grafanaから両方を参照します。</p></article>
                 <article class="brief-summary-card"><span>Practice</span><h3>構築 → 確認 → 復旧</h3><p>期待値と実結果を記録し、異常時の確認・復旧・引き継ぎまでを学びます。</p></article>
             </div>
-            <p>上記は実装した全体構成です。各演習の範囲は異なり、本人による監視・実通知・復旧の一連検証は未完了です。<a href="https://github.com/ns7jp/server/blob/main/docs/architecture.md" target="_blank" rel="noopener noreferrer">詳細な構成図</a></p>
+            <p>上記は実装した全体構成です。11月5日には、AIの案内を受けた本人操作で、KVM上の7サービス部分構成の監視・ローカル通知・手動復旧・復旧通知を確認しました。原画像・生ログは未収録です。外部通知、全構成の通し検証、独力再現・長期稼働は未確認です。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-11-05-kvm-monitoring-notification.md" target="_blank" rel="noopener noreferrer">11月5日の確認範囲</a> ／ <a href="https://github.com/ns7jp/server/blob/main/docs/architecture.md" target="_blank" rel="noopener noreferrer">詳細な構成図</a></p>
         </section>
 
         <section class="brief-section" aria-labelledby="decision-title">
@@ -135,7 +132,7 @@
             <div class="decision-grid">
                 <article class="decision-card"><span class="decision-number">01</span><h3>まずUbuntu 1台に絞る</h3><p>構築から確認・復旧まで、一つの構成を追える学習範囲にしました。</p></article>
                 <article class="decision-card"><span class="decision-number">02</span><h3>自動設定を役割ごとに分ける</h3><p>Ansibleを基本設定・Docker・Web・アプリ・監視・バックアップに分け、変更箇所を追いやすくしました。</p></article>
-                <article class="decision-card"><span class="decision-number">03</span><h3>管理画面の公開範囲を抑える</h3><p>原則としてサーバー内部から接続する構成です。別の管理端末からの接続確認は未実施です。</p></article>
+                <article class="decision-card"><span class="decision-number">03</span><h3>管理画面の公開範囲を抑える</h3><p>11月5日にはAIの案内を受け、本人PCからSSHポート転送でGrafanaへ接続し、表示を確認しました。原画像・生ログは未収録で、独立した受け入れ試験の完了とは区別します。<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-11-05-kvm-grafana-loki-practice.md" target="_blank" rel="noopener noreferrer">接続と表示の記録</a></p></article>
             </div>
             <p>数値とログを同じ画面で確認する理由などは、<a href="https://github.com/ns7jp/server/blob/main/docs/design-decisions.md" target="_blank" rel="noopener noreferrer">設計判断の記録</a>にまとめています。</p>
         </section>

@@ -313,7 +313,7 @@ header nav ul li a {
     font-weight: 500;
     letter-spacing: 1px;
     border-radius: 4px;
-    transition: var(--transition-smooth);
+    transition: color var(--transition-smooth);
     position: relative;
 }
 
@@ -387,7 +387,7 @@ header nav ul li a::after {
 /* ========================================
    6. Mobile Menu - スマホ用ハンバーガーメニュー
    ----------------------------------------
-   .res-menu は三本線/×アイコンを切り替えるトグルボタン。
+   .res-menu はHTML内のSVGで三本線/×を表示し、外部フォントに依存しない。
    PC幅では display: none で隠し、スマホ幅でだけ表示する。
    JSで .show / .show2 クラスを付け外しして開閉する仕組み。
 ======================================== */
@@ -424,15 +424,20 @@ header nav ul li a::after {
     outline-offset: 2px;
 }
 
-.res-menu i:last-child {
+.res-menu .menu-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.res-menu .menu-icon-close {
     display: none;
 }
 
-.show2 i:first-child {
+.res-menu.show2 .menu-icon-open {
     display: none;
 }
 
-.show2 i:last-child {
+.res-menu.show2 .menu-icon-close {
     display: block;
 }
 
@@ -4769,7 +4774,8 @@ article p,
         overflow-y: auto;
         overscroll-behavior: contain;
         padding: 90px 20px 30px;
-        transition: var(--transition-slow);
+        /* 表示状態は即時切替し、開いた直後のリンクへのフォーカスを妨げない。 */
+        transition: top var(--transition-slow);
         visibility: hidden;
         pointer-events: none;
     }
@@ -5423,7 +5429,7 @@ article p,
     *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: 0s !important;
         scroll-behavior: auto !important;
     }
 }
