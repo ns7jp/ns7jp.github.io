@@ -281,7 +281,7 @@
         }
 
         @media print {
-            body { background: #fff; padding: 0; font-size: 11.5px; line-height: 1.4; }
+            body { background: #fff; padding: 0; font-size: 12.5px; line-height: 1.5; }
             .resume-toolbar,
             .skip-link { display: none !important; }
             .resume {
@@ -296,31 +296,30 @@
             .resume-role { font-size: 12px; margin-top: 0; }
             .resume-contact { font-size: 11px; line-height: 1.45; }
             .resume-conditions { font-size: 11px; margin: -2px 0 4px; }
-            .resume-summary { padding: 5px 8px; margin-bottom: 6px; font-size: 11.5px; line-height: 1.45; }
+            .resume-summary { padding: 6px 8px; margin-bottom: 8px; font-size: 12.5px; line-height: 1.5; }
             .resume-header { padding-bottom: 3px; margin-bottom: 4px; }
-            .resume-section h2 { font-size: 11.5px; padding-bottom: 2px; margin-bottom: 4px; }
+            .resume-section h2 { font-size: 12.5px; padding-bottom: 3px; margin-bottom: 6px; }
             .resume-section h2.resume-subhead { margin-top: 5px; }
-            .resume-section table td { padding: 1px 0; font-size: 11px; }
+            .resume-section table td { padding: 2px 0; font-size: 12px; }
             .resume-section td.year { width: 56px; }
-            .resume-skills div { font-size: 11px; margin-bottom: 1px; }
+            .resume-skills div { font-size: 12px; margin-bottom: 3px; }
             .resume-skills strong { min-width: 80px; }
-            .resume-works .work-item { font-size: 11px; margin-bottom: 2px; }
-            .resume-works .work-name { font-size: 11px; }
-            .resume-works .work-desc { line-height: 1.35; }
+            .resume-works .work-item { font-size: 12px; margin-bottom: 4px; }
+            .resume-works .work-name { font-size: 12px; }
+            .resume-works .work-desc { line-height: 1.5; }
             .resume-readiness { margin-top: 0; }
             .resume-readiness th,
             .resume-readiness td { padding: 2px 4px; font-size: 10.75px; line-height: 1.35; }
             .resume-readiness td.task { font-size: 10.75px; }
             .resume-readiness th { font-size: 10.75px; }
-            .resume-production-note { padding: 4px 7px; font-size: 10.75px; line-height: 1.35; }
+            .resume-production-note { padding: 6px 8px; font-size: 11.5px; line-height: 1.45; }
             .resume-roadmap { margin-top: 0; }
             .roadmap-track { gap: 3px; }
             .roadmap-step { padding: 1px 3px; font-size: 10px; }
             .roadmap-step .step-period { font-size: 10px; margin-bottom: 0; }
             .roadmap-step .step-name { font-size: 10px; }
-            .resume-body { gap: 6px; }
-            /* 印刷時はサイト戻りの誘導が不要なので footer を隠して 1 ページに必ず収める。
-               画面表示時にはそのまま表示される。 */
+            .resume-body { gap: 10px; }
+            /* 印刷時はサイトへの戻りリンクを省略する。本文の参照リンクは残す。 */
             .resume-footer { display: none; }
             @page { size: A4 portrait; margin: 0; }
         }
@@ -370,7 +369,7 @@
         <p class="resume-conditions"><strong>希望条件</strong>東京都内通勤可能圏 ／ 24/365監視のシフト勤務（夜勤・交代制）可 ／ SES可 ／ 正社員としてのインフラ職を志望 ／ 希望年収は応相談 ／ 普通自動車免許なし</p>
 
         <section class="resume-summary">
-            <strong>インフラエンジニアを志望</strong>し、現在はIT企業でトライアル就労として社内研修に取り組んでいます（2026年11月5日確認）。勤務開始時期は相談となります。2026年9月、手元のHyper-V上の仮想マシンでADの構築・試験・復元・2台目のDCと役割の奪取、WSUSの構築（判定FAIL・原因調査）、Ubuntu Serverの手作業での初期構築を行いました（AIの手順案内を受けて本人が操作）。これらは個人の検証環境での学習です。今後の実務ではまず、決められた手順があり、作業結果を確認してくれる担当者がいる基礎業務から取り組みます。
+            現在はIT企業でトライアル就労・社内研修中です（2026年11月5日確認）。<strong>Linuxサーバーの構築・運用を担うインフラエンジニア</strong>を目指し、手順書と確認者のあるIT事務・キッティング、監視・運用補助から経験を積みたいと考えています。勤務開始時期は相談となります。顧客環境での構築・運用経験はありません。
         </section>
 
         <div class="resume-body">
@@ -386,7 +385,7 @@
                     <tr>
                         <td class="year">〜2025</td>
                         <td>製造・物流・経理補助などに約15年従事<br>
-                            <span style="color:#666;font-size:11px;">手順遵守・品質確認と正確な作業・記録を重視。動線とチェック帳票の見直しで、自分の作業時間を1日約1時間短縮</span></td>
+                            <span style="color:#666;font-size:11px;">同僚の助言を受けて動線とチェック帳票を見直し、計測した自分の作業時間を1日約1時間短縮</span></td>
                     </tr>
                 </table>
             </section>
@@ -398,8 +397,8 @@
                     <tr><td class="year">2026-01</td><td>PHP8技術者認定初級試験 合格</td></tr>
                     <tr><td class="year">2025-12</td><td>Python3エンジニア認定基礎試験 合格</td></tr>
                     <tr><td class="year">2026-06</td><td>ITパスポート 合格</td></tr>
-                    <tr><td class="year">学習中</td><td>基本情報技術者試験（FE／ITの基礎を問う国家試験。現在の最優先で、2026年12月までの受験を目標）</td></tr>
-                    <tr><td class="year">保留中</td><td>LinuC-1 101 / 102（LPI-Japanが実施する、Linuxの基本操作を問う認定資格。FEの受験後に再開を判断）</td></tr>
+                    <tr><td class="year">学習中</td><td>基本情報技術者試験（最優先／2026年12月までの受験が目標）</td></tr>
+                    <tr><td class="year">保留中</td><td>LinuC-1 101 / 102（FE受験後に再開を判断）</td></tr>
                 </table>
                 <h2 class="resume-subhead"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>EDUCATION &amp; TRAINING / 学歴・職業訓練</h2>
                 <table>
@@ -410,82 +409,48 @@
             </section>
 
             <section class="resume-section">
-                <h2><i class="fa-solid fa-laptop-code" aria-hidden="true"></i>SKILLS / スキル</h2>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>学習と研修で実際に手を動かした範囲です。「NOT RUN」は、まだ試していないことを示します。</p>
+                <h2><i class="fa-solid fa-laptop-code" aria-hidden="true"></i>SKILLS / 学習で扱った技術・工程</h2>
                 <div class="resume-skills">
-                    <div><strong>設計</strong>基本設計、詳細設計、パラメータシート（設定値をまとめた一覧表）、ネットワーク設計を作成（AI支援で作成した学習用の文書で、設計工程の実務経験には数えていません）</div>
-                    <div><strong>構築・試験</strong>手元のHyper-V上でUbuntu Server・Windows Serverを構築し、試験仕様書に沿って確認。Ansible（設定を自動で行う道具）とDocker Composeも使用</div>
-                    <div><strong>監視・復旧</strong>サーバーの状態、ログ（動作の記録）、サービス復旧、同一環境へのデータ復元を確認（異常の通知はGitHubの自動テストでのみ確認）</div>
-                    <div><strong>引き渡し</strong>チェックリストと切り戻し手順（問題が起きたときに元の状態へ戻す手順）を作成。対象ホストの受け入れはNOT RUN（未実施）</div>
-                    <div><strong>その他</strong>Python / PowerShell / Git / Terraform（AWS適用はNOT RUN）</div>
+                    <div><strong>構築・試験</strong>検証VMでUbuntu / Windows Server / AD / WSUSを設定・試験。Ansible、Docker Composeも使用。</div>
+                    <div><strong>監視・復旧</strong>Prometheus / Grafana / Lokiで状態・ログを確認。サービス停止・復帰、同一環境内のデータ復元を学習。</div>
+                    <div><strong>設計・引継ぎ</strong>設計書、設定値一覧、試験・切り戻し・引き継ぎ手順をAI支援で作成。実案件の設計・受け入れ経験には含めません。</div>
+                    <div><strong>補助技術</strong>Python / PowerShell / Git / Terraform（実AWS環境への適用は未実施）。</div>
                 </div>
+                <p><a href="skills.html">技術別の確認範囲</a> ／ <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/skill-sheet.md">スキルシート</a></p>
             </section>
 
             <section class="resume-section">
-                <h2><i class="fa-solid fa-briefcase" aria-hidden="true"></i>SELECTED WORKS / 主な成果物</h2>
+                <h2><i class="fa-solid fa-briefcase" aria-hidden="true"></i>SELECTED WORKS / 主な学習記録</h2>
                 <div class="resume-works">
+                    <p class="work-desc">以下の9月の記録は、AIの手順案内を受けた本人のVM操作です。</p>
                     <div class="work-item">
-                        <span class="work-name">Windows Server 2022 / AD（2026-09-01〜04）</span>
-                        <div class="work-desc">手元のHyper-V上でADを構築し、試験の必須31項目がPASS。System State復元、2台目のDCと複製（失敗0/5）、1台を失った想定でのFSMO役割の奪取まで実施（最終構成はDC 1台）。</div>
+                        <span class="work-name">Ubuntu初期構築・SSH復旧（2026-09-07〜08）</span>
+                        <div class="work-desc">固定IP・鍵認証・UFW等を設定。意図的なSSH設定不備を復元し、構文検査と鍵接続を確認。</div>
                     </div>
                     <div class="work-item">
-                        <span class="work-name">WSUSの構築（2026-09-07〜08）</span>
-                        <div class="work-desc">必須28項目中26 PASSで判定はFAIL。残った2件を調べて最有力の原因を突き止め、手順書を修正（再現と通しの再試験は未実施）。</div>
+                        <span class="work-name">AD構築・復元（2026-09-01〜04）</span>
+                        <div class="work-desc">構築試験の必須31項目PASS、System State復元を確認。翌日SYSVOL欠損が判明し、修正手順の実機検証は未完了。</div>
                     </div>
                     <div class="work-item">
-                        <span class="work-name">Ubuntu Server 24.04の初期構築（2026-09-07〜08）</span>
-                        <div class="work-desc">固定IP、SSH鍵認証、sudo、UFW、時刻同期、自動更新を手作業で設定。わざと起こした設定不備を、ログの照合で復旧。</div>
+                        <span class="work-name">WSUSの試験・原因調査（2026-09-07〜08）</span>
+                        <div class="work-desc">分類・製品0件の承認ルールの適用範囲を調べ、手順を修正。0件になった操作は未特定、通し再試験は未実施で判定FAIL。</div>
                     </div>
                     <div class="work-item">
-                        <span class="work-name">Server Monitor — Linuxサーバー設計・構築・運用</span>
-                        <span class="work-tag">設計 → 構築 → 試験 → 監視 → 復旧 → 引き渡し</span>
-                        <div class="work-desc">6工程のコード、設定、手順、確認記録を公開。GitHub上の一時Ubuntu環境で23項目PASS（2026-08-22）。</div>
+                        <span class="work-name">Server Monitorの自動テスト（2026-08-22）</span>
+                        <div class="work-desc">構築・監視・復旧の学習資料とコードを公開。一時Ubuntu環境でCIが23項目PASS。本人の操作実績とは区別。</div>
                     </div>
-                    <div class="work-desc">9月の記録はAIの手順案内を受けて本人が操作したもの。AIなしの再構築、長期稼働、本番環境での変更はNOT RUN。</div>
                 </div>
-            </section>
-
-            <section class="resume-section resume-readiness">
-                <h2><i class="fa-solid fa-table-list" aria-hidden="true"></i>READINESS / 想定業務 × 学習で取り組んだこと</h2>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>この表は、インフラ運用の仕事でよくある作業に対して、学習でどこまで試したか、どこが未実施かを並べたものです。</p>
-                <table>
-                    <caption class="sr-only">想定業務に対する学習内容と、どこまで試したか</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">想定業務</th>
-                            <th scope="col">学習内容と未実施の範囲</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="task">設計</td>
-                            <td class="evidence"><strong>実装済み：</strong><a href="project-brief.html">制作概要</a>と<a href="https://github.com/ns7jp/server/tree/main/docs/build-package">設計・構築・確認資料</a>を個人学習で作成（AI支援で作成した学習用の文書で、設計工程の実務経験には数えていません）。</td>
-                        </tr>
-                        <tr>
-                            <td class="task">構築 / 試験</td>
-                            <td class="evidence"><strong>実測済み：</strong>手元の仮想マシンでUbuntu Serverを手作業で初期構築し、ADとWSUSを試験仕様書に沿って確認（2026-09）。一時Ubuntu環境では設定を2回実行し、2回目に不要な変更が出ないことを確認（2026-08）。</td>
-                        </tr>
-                        <tr>
-                            <td class="task">監視 / 復旧</td>
-                            <td class="evidence"><strong>実測済み：</strong>学習環境で状態とログを確認し、サービス停止、同一環境へのデータ復元を練習。ADではSystem State復元と、DC 1台停止中の継続を確認。</td>
-                        </tr>
-                        <tr>
-                            <td class="task">引き渡し</td>
-                            <td class="evidence"><strong>実装済み：</strong>チェックリストと切り戻し手順を作成。<strong>NOT RUN：</strong>独立した対象サーバーの受け入れ、長期稼働、本番環境での作業。</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <p><a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume-evidence.md">各記録の詳細</a> ／ <a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md">最新の検証証跡台帳</a></p>
             </section>
 
             <aside class="resume-production-note">
-                <strong>仕事の進め方・制作体制：</strong>作業前に手順を確認します。必要な相談と承認を得てから進めます。作業の前後で結果を確かめ、記録して報告します。この4点を大切にしています。このポートフォリオは、AI（Claude・Codex）の支援を大きく受けて作成しました。手順・コード・設計書の案はAIが作り、本人が手元のVMなどで実行して結果を確かめ、採否を決めています。ポートフォリオの点検と作業計画づくりにも、AIが作った自動化ツールを使いました。範囲は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">職務経歴書 §4-b</a>に記載しています。個人制作のため、第三者によるレビューは受けていません。詳細は<a href="work-readiness.html">仕事の進め方</a>。
+                <strong>制作体制と確認範囲：</strong>文書・コードの生成と操作案内にClaude・Codexを利用し、本人操作とAI・CI実行を分けて記録しています。独力再現・説明、長期稼働、本番運用は未確認です。個人制作で、人による第三者レビューは受けていません。<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/ai-usage.md">AI支援の内訳</a> ／ <a href="work-readiness.html">相談・報告の進め方</a>
             </aside>
 
         </div>
 
         <footer class="resume-footer">
-            学習用の構築資料、Linux確認手順、動作確認の記録は <a href="https://ns7jp.github.io/">ns7jp.github.io</a> に公開 / 最終更新 2026-11-05
-            <br>このポートフォリオは、文章とプログラムの作成を含めてAI（Claude・Codex）の支援を大きく受けて作成しました（範囲は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">職務経歴書 §4-b</a>）。実施者・環境・確認範囲は各証跡に記載しています。
+            <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md">詳しい職務経歴書</a> ／ <a href="https://ns7jp.github.io/">ポートフォリオ</a> ／ 最終更新 2026-11-13
         </footer>
     </main>
 
