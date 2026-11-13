@@ -4,9 +4,9 @@
   ファイル名 : contact.html
   役割       : 連絡先（お問い合わせ）ページ
   概要       : メール・GitHub・所在地などの連絡情報をカード表示し、
-               採用担当者向けメッセージとFAQも掲載する。
+               現在の就業状況、勤務開始時期、希望条件と履歴書へのリンクを掲載する。
   初学者向けの読み方:
-    1. 連絡先カード、採用担当者向けメッセージ、FAQのsectionを分けて読む
+    1. 連絡情報と就業状況を、左右のカードに分けた構成を見る
     2. Font Awesome（アイコンを表示するための外部サービス）のアイコン用のclass属性が、各連絡手段を見つけやすくしている点を見る
     3. mailtoリンクやGitHubリンクなど、外部連絡導線の作り方を確認する
     4. ローダーやメニュー開閉などの動きは、共通ファイル js/main.js にまとめられている点を確認する
@@ -17,7 +17,7 @@
     <!-- 文字コードと表示設定 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="インフラエンジニアを志望する島田則幸の連絡先。取り組み概要、動作確認の記録、1ページ履歴書、GitHubへのリンクを掲載しています。">
+    <meta name="description" content="島田則幸のメール・GitHub・所在地、現在の就業状況と勤務開始時期を掲載。職務経歴書の希望条件と1ページ履歴書も確認できます。">
     <title>お問い合わせ | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/contact.html">
 
@@ -30,7 +30,7 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="島田則幸への連絡先。メール、GitHub、1ページ履歴書を確認できます。Linuxサーバーの構築・運用を目指し、最初は手順書と確認者のある基礎業務から経験を積みたいと考えています。勤務開始時期は相談です。">
+    <meta property="og:description" content="島田則幸の連絡先と就業状況。勤務開始時期は相談となります。職務経歴書の希望条件と1ページ履歴書へのリンクを掲載しています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -130,27 +130,17 @@
         </div>
     </section>
 
-    <!-- ===== メインコンテンツ ===== -->
     <div class="page-content">
         <div class="container">
-
-            <!-- ===== 連絡先イントロ ===== -->
             <section class="contact-intro">
                 <h2>連絡先</h2>
-                <p>作品や学習内容について確認したいことがあれば、お気軽にご連絡ください。応募や面談についてのご連絡も、以下の連絡先までお願いいたします。</p>
+                <p>応募・面談や、作品についてのご連絡はメールでお願いいたします。</p>
             </section>
 
-            <!-- ===== 連絡先カードセクション ===== -->
             <section class="contact-section">
-                <!-- 左：連絡情報カード／右：採用担当者向けメッセージカードの2カラム構成 -->
                 <div class="contact-grid">
-
-                    <!-- ----- 左：連絡情報カード（Email・GitHub・所在地） ----- -->
                     <div class="contact-info-card">
-                        <h3>Contact Information</h3>
-                        <p class="info-description">現在確認できる連絡先を掲載しています</p>
-
-                        <!-- 連絡情報の一覧。アイコン＋ラベル＋値 の形式で並べる -->
+                        <h3>連絡先・所在地</h3>
                         <div class="contact-info-items">
                             <!-- メール -->
                             <div class="info-item">
@@ -184,98 +174,17 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- ソーシャルリンク（再掲。アイコンボタン形式） -->
-                        <div class="social-links">
-                            <h4>Links</h4>
-                            <div class="social-icons">
-                                <!-- aria-labelはスクリーンリーダー用の代替テキスト（アクセシビリティ対応） -->
-                                <a href="https://github.com/ns7jp" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-                                <a href="mailto:net7jp@gmail.com" class="social-icon" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
                     </div>
 
-                                        <!-- ----- 右：採用担当者向けメッセージカード ----- -->
                     <div class="contact-form-card contact-message-card">
-                        <h3>採用担当者の方へ</h3>
-                        <p class="plain-summary"><strong>かんたんに言うと</strong>第一志望はインフラエンジニア（Linuxサーバーの構築・運用が中心）です。入社後はまず補助的な作業から始めたいと考えています。分からないことは自分だけで判断せず、相談・報告します。</p>
-                        <p>目標は<strong>Linuxサーバーの構築・運用を担うインフラエンジニア</strong>です。最初は手順書と確認者のあるIT事務・キッティング、監視・運用補助などから経験を積みたいと考えています。Windows Server / Active Directoryも学習しています。</p>
-                        <p>入社後は、手順を確認しながら作業を進めます。まずはサーバー設定の補助、動作確認、監視、ログ（機器やソフトが自動で残す動作の記録）の確認、作業記録などから取り組みたいです。分からない点や影響の大きい作業は、自分だけで判断せず、早めに相談・報告します。</p>
-                        <p>作品は個人の学習環境で作成し、文章とプログラムの作成を含めてAI（Claude・Codex）の支援を大きく受けています（範囲は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">職務経歴書 §4-b</a>）。第三者によるレビュー（自分以外の人が内容を点検すること）は受けていません。詳しい<a href="work-readiness.html">仕事の進め方</a>も公開しています。</p>
-                        <!-- アクションボタン：メール送信／履歴書PDF／作品ページ -->
+                        <h3>現在の就業状況</h3>
+                        <p>2026年10月7日からIT企業でトライアル就労・社内研修中です（2026年11月5日確認）。</p>
+                        <p><strong>勤務開始時期は相談となります。</strong>就業先の社名は面談時にお伝えします。</p>
+                        <p>希望する雇用形態・勤務地・勤務時間帯は、職務経歴書にまとめています。</p>
                         <div class="contact-actions">
                             <a href="mailto:net7jp@gmail.com" class="btn btn-primary"><i class="fa-solid fa-envelope" aria-hidden="true"></i> メールを送る</a>
+                            <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#3-希望条件働き方" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> 職務経歴書の希望条件</a>
                             <a href="resume.html" class="btn btn-secondary"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> 1ページ履歴書（PDF保存可）</a>
-                            <a href="work-readiness.html" class="btn btn-secondary"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
-                            <a href="evidence-demo.html" class="btn btn-secondary"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i> 動作確認の記録</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ===== FAQセクション ===== -->
-            <!-- よくある質問をQ&A形式で表示。アイコンで質問・回答を視覚的に区別。 -->
-            <section class="faq-section">
-                <h3 class="section-heading">
-                    <span class="heading-icon"><i class="fa-solid fa-circle-question" aria-hidden="true"></i></span>
-                    <span class="heading-text">よくある質問</span>
-                </h3>
-                <p class="plain-summary"><strong>かんたんに言うと</strong>ここから下は、よく聞かれる質問とその答えです。連絡方法、コードの公開場所、実務経験がどこまであるか、現在の就業状況をまとめています。</p>
-                <div class="faq-grid">
-                    <!-- FAQ項目1 -->
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fa-solid fa-q" aria-hidden="true"></i>
-                            <span>連絡方法は何ですか？</span>
-                        </div>
-                        <div class="faq-answer">
-                            <i class="fa-solid fa-a" aria-hidden="true"></i>
-                            <span>メールでのご連絡をお願いいたします。</span>
-                        </div>
-                    </div>
-                    <!-- FAQ項目2 -->
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fa-solid fa-q" aria-hidden="true"></i>
-                            <span>作品のコードは確認できますか？</span>
-                        </div>
-                        <div class="faq-answer">
-                            <i class="fa-solid fa-a" aria-hidden="true"></i>
-                            <span>作成したコードや設定ファイル、動作確認の記録をGitHub（ギットハブ／プログラムや設定ファイルを保存して公開できるサービス）で公開しています。学習用の資料や作品は、実際の仕事での実績と誤解されないように分けて掲載しています。</span>
-                        </div>
-                    </div>
-                    <!-- FAQ項目3 -->
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fa-solid fa-q" aria-hidden="true"></i>
-                            <span>実務未経験ですが、どのように評価すればよいですか？</span>
-                        </div>
-                        <div class="faq-answer">
-                            <i class="fa-solid fa-a" aria-hidden="true"></i>
-                            <span>サーバー構築・運用の実務経験はまだありません。そのため、個人学習で取り組んだ範囲と、まだ試していない範囲を<a href="https://github.com/ns7jp/server/blob/main/docs/evidence/README.md" target="_blank" rel="noopener noreferrer">動作確認の一覧</a>で分けて示しています。確認・相談・記録・報告をどのように行ったかは、<a href="work-readiness.html">仕事の進め方</a>のページにまとめています。AIをどこまで使ったかも、同じページに書いています。</span>
-                        </div>
-                    </div>
-                    <!-- FAQ項目4 -->
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fa-solid fa-q" aria-hidden="true"></i>
-                            <span>現在の就業状況は？</span>
-                        </div>
-                        <div class="faq-answer">
-                            <i class="fa-solid fa-a" aria-hidden="true"></i>
-                            <span>2026年10月7日からIT企業でトライアル就労中で、社内研修に取り組んでいます（2026年11月5日確認）。勤務開始時期は相談となります。就業先の社名は面談時にお伝えします。</span>
-                        </div>
-                    </div>
-                    <!-- FAQ項目5 -->
-                    <div class="faq-item">
-                        <div class="faq-question">
-                            <i class="fa-solid fa-q" aria-hidden="true"></i>
-                            <span>希望する雇用形態・勤務地・勤務時間帯は？</span>
-                        </div>
-                        <div class="faq-answer">
-                            <i class="fa-solid fa-a" aria-hidden="true"></i>
-                            <span>正社員としてのインフラ職を志望しています。客先常駐（SES）も可能です。勤務地は東京都内に通勤できる範囲を希望します。24時間365日の監視業務のシフト勤務（夜勤・交代制）にも対応できます。希望年収は応相談です。普通自動車運転免許は持っていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#3-希望条件働き方" target="_blank" rel="noopener noreferrer">職務経歴書の希望条件</a>をご覧ください。</span>
                         </div>
                     </div>
                 </div>
@@ -307,7 +216,7 @@
         </div>
         <div class="footer-bottom">
             <small>&copy; 2026 Noriyuki Shimada's Portfolio. All rights reserved.</small>
-            <small class="footer-ai-disclosure">このサイトと関連作品は、文章とプログラムの作成を含めてAI（Claude・Codex）の支援を大きく受けて作成しました（範囲は<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">職務経歴書 §4-b</a>）。実施者・環境・確認範囲は各証跡に記載しています。個人制作のため、人による第三者レビューは受けていません。詳しくは<a href="https://github.com/ns7jp/ns7jp/blob/main/README.md#3-つの前提ai-の利用を含む" target="_blank" rel="noopener noreferrer">プロフィールREADME</a>をご覧ください。</small>
+            <small class="footer-ai-disclosure">このサイトと関連作品は、文書・コードの作成にAI（Claude・Codex）の支援を大きく受けています。<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/ai-usage.md" target="_blank" rel="noopener noreferrer">AIの支援範囲と確認状況</a></small>
         </div>
     </footer>
 
