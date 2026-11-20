@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="未経験からインフラエンジニアを目指す島田則幸の仕事の進め方。作業前の確認、相談、動作確認、記録、報告と、今後の学習内容をまとめています。">
+    <meta name="description" content="社内ヘルプデスクを志望する島田則幸の仕事の進め方。受付時に確かめたいこと、利用者への案内、担当者への引き継ぎを紹介します。">
     <meta name="author" content="Noriyuki Shimada">
     <meta name="theme-color" content="#2C3E50">
     <meta name="robots" content="index, follow">
@@ -12,18 +12,18 @@
     <meta property="og:title" content="仕事の進め方 | 入社後に取り組みたいこと">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/work-readiness.html">
-    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <meta property="og:image" content="https://ns7jp.github.io/image/me.jpg">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="716">
+    <meta property="og:image:alt" content="青とオレンジの光の筋が中央に集まる、ポートフォリオのイメージ画像">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="作業前の確認、変更、動作確認、報告、AIを使うときの確認方法、今後試したい実機・仮想マシンでの学習を紹介します。">
+    <meta property="og:description" content="共有フォルダを開けない方の例を通して、業務の期限を聞き取るところから、権限担当への依頼、利用者への途中連絡までを紹介します。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="仕事の進め方 | 入社後に取り組みたいこと">
-    <meta name="twitter:description" content="手順確認、相談、動作確認、記録、報告と、今後の学習内容を紹介します。">
-    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <meta name="twitter:description" content="共有フォルダを開けない方の例を通して、業務の期限を聞き取るところから、権限担当への依頼、利用者への途中連絡までを紹介します。">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/me.jpg">
+    <meta name="twitter:image:alt" content="青とオレンジの光の筋が中央に集まる、ポートフォリオのイメージ画像">
 
     <title>仕事の進め方 | 島田則幸のポートフォリオ</title>
 
@@ -43,13 +43,13 @@
       "@context": "https://schema.org",
       "@type": "ProfilePage",
       "name": "仕事の進め方 | 入社後に取り組みたいこと",
-      "description": "インフラエンジニアを目指す島田則幸の仕事の進め方、AIを使うときの確認方法、今後の実機・仮想マシンでの学習計画",
-      "dateModified": "2026-10-18",
+      "description": "社内ヘルプデスクを志望する島田則幸の問い合わせ対応の練習例、AI支援の範囲と個人学習の記録",
+      "dateModified": "2026-11-20",
       "mainEntity": {
         "@type": "Person",
         "name": "島田則幸",
         "url": "https://ns7jp.github.io/",
-        "jobTitle": "インフラエンジニア志望"
+        "jobTitle": "社内ヘルプデスク志望"
       },
       "url": "https://ns7jp.github.io/work-readiness.html",
       "inLanguage": "ja"
@@ -117,26 +117,26 @@
                     <a href="work-readiness.html" class="active" aria-current="page"><i class="fa-solid fa-people-group" aria-hidden="true"></i> 仕事の進め方</a>
                 </nav>
                 <section class="readiness-intro">
-                    <h2>手順を確認し、結果を記録して報告する</h2>
-                    <p>構築・運用の実務経験はまだありません。最初は手順書と確認者のある範囲で作業し、判断に迷う変更は早めに相談します。以下は<strong>入社後に目指す進め方と、仕事を想定した練習例</strong>です。</p>
+                    <h2>利用者が仕事を再開するまでの一次対応</h2>
+                    <p>入社後は、利用者が何に困っていて、いつまでに解決が必要かを最初に確認したいです。手順書に沿って確認できる範囲と、担当者に依頼することを分ける練習をしています。</p>
                 </section>
                 <section class="brief-section" aria-labelledby="entry-work-title">
                     <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-door-open" aria-hidden="true"></i></span><h2 class="heading-text" id="entry-work-title">最初に担当したい業務</h2></div>
                     <div class="readiness-card-grid">
-                        <article class="readiness-card"><h3>設定作業の補助</h3><p>設定と手順を照合し、指示された範囲を操作。変更内容と残作業を記録します。</p></article>
-                        <article class="readiness-card"><h3>監視・ログ確認</h3><p>発生時刻、影響範囲、直前の変更、状態とログを確認し、事実を共有します。</p></article>
-                        <article class="readiness-card"><h3>動作確認・引き継ぎ</h3><p>期待値と実結果を比較し、失敗・未実施も含めて報告します。</p></article>
+                        <article class="readiness-card"><h3>問い合わせの受付</h3><p>どの作業で困っているか、いつからか、画面に何が表示されるかを伺います。業務上の期限も記録します。</p></article>
+                        <article class="readiness-card"><h3>手順に沿った確認</h3><p>同じ作業がほかの端末や利用者でも止まっているかを確かめます。確認した操作と、その結果を担当者に渡します。</p></article>
+                        <article class="readiness-card"><h3>途中連絡と完了確認</h3><p>担当者からの回答を待つ間も、約束した時刻に進捗をお伝えします。元の作業を再開できたかを利用者に確かめ、記録を閉じます。</p></article>
                     </div>
                 </section>
                 <section class="brief-section" aria-labelledby="case-title">
-                    <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span><h2 class="heading-text" id="case-title">練習例：Webの異常通知を受けたら</h2></div>
-                    <p class="simulation-banner"><strong>想定例です。顧客環境で対応した実績ではありません。</strong></p>
+                    <div class="section-heading"><span class="heading-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span><h2 class="heading-text" id="case-title">練習例　会議で使う共有フォルダが開けない</h2></div>
+                    <p class="simulation-banner">AIの支援で作成した模擬チケットの例です。</p>
                     <ol class="learning-roadmap">
-                        <li class="roadmap-item"><strong class="roadmap-title">受付・記録</strong><span class="roadmap-detail">対象、発生時刻、利用者への影響、直前の変更を聞き、監視値とログを保存します。</span></li>
-                        <li class="roadmap-item"><strong class="roadmap-title">切り分け・相談</strong><span class="roadmap-detail">Web入口・アプリ・OS・ネットワークを順に確認。再起動や設定変更は手順と承認範囲を確認して行います。</span></li>
-                        <li class="roadmap-item"><strong class="roadmap-title">復旧確認・報告</strong><span class="roadmap-detail">起動状態だけでなく応答・監視・ログを再確認し、対応、結果、残課題を報告します。</span></li>
+                        <li class="roadmap-item"><strong class="roadmap-title">受付・記録</strong><span class="roadmap-detail">10時の会議で必要な資料名と、画面に表示された「アクセスが拒否されました」という文言を記録します。</span></li>
+                        <li class="roadmap-item"><strong class="roadmap-title">切り分け・相談</strong><span class="roadmap-detail">同じフォルダを同僚が開けたことを聞き取り、異動後の権限申請とグループの設定を担当者に確認してもらいます。</span></li>
+                        <li class="roadmap-item"><strong class="roadmap-title">復旧確認・報告</strong><span class="roadmap-detail">利用者に進捗を連絡し、担当者の回答に沿ってサインインし直す手順を案内します。ご本人が会議の資料を開けた時点で対応完了を記録します。</span></li>
                     </ol>
-                    <p><a href="https://github.com/ns7jp/server/blob/main/docs/runbooks/README.md">詳細な作業手順書</a>・<a href="https://github.com/ns7jp/server/blob/main/docs/drills/README.md">障害演習の記録</a></p>
+                    <p><a href="https://github.com/ns7jp/ns7jp/blob/main/docs/helpdesk-intake.md">利用者への返信と引き継ぎ票を読む</a></p>
                 </section>
                 <section class="brief-section" aria-labelledby="collaboration-title">
                     <span id="change-title"></span>

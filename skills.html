@@ -3,15 +3,7 @@
 ========================================================================
   ファイル名 : skills.html
   役割       : スキル一覧ページ
-  概要       : 技術スキル（Office・HTML/CSS・JS・Python・PHP・DB）、
-               第一志望のインフラエンジニア（Linuxサーバー設計・構築が中心）を先頭に、応募先に応じたITサポート、
-               開発・ツール・ソフトスキルを証拠区分付きで表示する。
-               各スキルは星評価＋進捗バー＋習得項目で構成。
-  初学者向けの読み方:
-    1. Linuxサーバー設計・構築、ITサポート、開発、ツール、ソフトスキルの順を確認する
-    2. skill-detail-card の繰り返し構造で、カードUIの作り方を見る
-    3. 星評価や進捗バーがHTMLとCSSの組み合わせで表現される点を見る
-    4. 末尾のscriptで、スクロール時にカードへvisibleを付ける処理を見る
+  概要       : 社内ヘルプデスクの模擬対応、研修・個人学習での操作、技術の確認範囲を示す。
 ========================================================================
 -->
 <html lang="ja">
@@ -21,26 +13,26 @@
     <!-- スマホ対応のviewport設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 検索エンジン用の説明文 -->
-    <meta name="description" content="島田則幸のスキルページ。第一志望のインフラエンジニアに向けて、中心となるLinuxサーバー設計・構築のスキルを、設計から引き渡しまでの6工程と証跡区分で紹介します。Windows Server / ADも学習中です。最初は手順書と確認者のある基礎業務から経験を積みたいと考えています。">
-    <title>Linuxサーバー設計・構築スキル | 島田則幸のポートフォリオ</title>
+    <meta name="description" content="問い合わせの一次対応を学ぶ島田則幸のスキル資料。模擬チケット、Windowsの共有フォルダを本人が確認した記録、サイトの接続トラブルの切り分け例を掲載しています。">
+    <title>社内ITサポートの学習とスキル | 島田則幸のポートフォリオ</title>
     <link rel="canonical" href="https://ns7jp.github.io/skills.html">
 
     <!-- ===== OGP / Twitter カード ===== -->
-    <meta property="og:title" content="Linuxサーバー設計・構築スキル | 島田則幸">
+    <meta property="og:title" content="社内ITサポートの学習とスキル | 島田則幸">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/skills.html">
-    <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <meta property="og:image" content="https://ns7jp.github.io/image/me.jpg">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="716">
+    <meta property="og:image:alt" content="青とオレンジの光の筋が中央に集まる、ポートフォリオのイメージ画像">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="Linuxサーバーの6工程を、実装済み・実測済み・未実施に分けて掲載。応募先に応じたITサポートの資料は補助成果として区別しています。">
+    <meta property="og:description" content="社内ヘルプデスクの模擬対応と、Windows・Linuxの検証環境で実際に確認した操作を掲載しています。">
     <meta property="og:locale" content="ja_JP">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Linuxサーバー設計・構築スキル | 島田則幸">
-    <meta name="twitter:description" content="設計、構築、試験、監視、復旧、引き渡しを、実装済み・実測済み・未実施に分けて掲載。">
-    <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
-    <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
+    <meta name="twitter:title" content="社内ITサポートの学習とスキル | 島田則幸">
+    <meta name="twitter:description" content="社内ヘルプデスクの模擬対応と、Windows・Linuxの検証環境で実際に確認した操作を掲載しています。">
+    <meta name="twitter:image" content="https://ns7jp.github.io/image/me.jpg">
+    <meta name="twitter:image:alt" content="青とオレンジの光の筋が中央に集まる、ポートフォリオのイメージ画像">
 
     <!-- サイト共通スクリプト（vanilla JS）とスタイル類の読み込み -->
     <script src="js/main.js?v=20261022-1" defer></script>
@@ -115,8 +107,18 @@
     </section>
     <div class="page-content"><div class="container">
         <section class="skills-overview">
-            <p class="overview-text"><strong>Linuxを中心に、構築・監視・復旧を学習しています。</strong>以下は研修・個人学習の範囲です。AIの手順案内による本人操作と、CI・AI実行の結果を区別しています。文書・コード生成にもAIを利用し、本人の独力再現・説明は未確認です。</p>
+            <p class="overview-text"><strong>社内ITサポートに向けて、問い合わせの聞き取り、設定の確認、記録を学んでいます。</strong>以下は研修・個人学習の範囲です。AIの手順案内による本人操作と、CI・AI実行の結果を区別しています。文書・コード生成にもAIを利用し、本人の独力再現・説明は未確認です。</p>
             <p><a href="https://github.com/ns7jp/ns7jp/blob/main/docs/skill-sheet.md" target="_blank" rel="noopener noreferrer">経歴を含むスキルシート</a> ／ <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/resume.md#4-b-ポートフォリオにおける-ai-支援の範囲" target="_blank" rel="noopener noreferrer">AI支援の内訳</a></p>
+        </section>
+
+        <section class="support-cases-section" id="support-cases" aria-labelledby="support-cases-title">
+            <h2 class="section-heading"><span class="heading-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></span><span class="heading-text" id="support-cases-title">問い合わせの聞き取り・確認・引き継ぎ</span></h2>
+            <div class="soft-skills-grid" id="ticket-examples">
+                <div class="soft-skill-item"><h3>利用者への案内</h3><p>共有フォルダを開けない方に、必要な資料と期限を聞く模擬チケットです。権限担当への依頼内容と次に連絡する時刻を伝え、本人が資料を開けたかを確認します。</p><a href="https://github.com/ns7jp/ns7jp/blob/main/docs/helpdesk-intake.md">会話と対応記録の見本</a></div>
+                <div class="soft-skill-item"><h3>Windowsの共有アクセス</h3><p>AIの案内を受けて本人が仮想環境で操作しました。各部署の一般利用者でサインインし、自部署のファイルを作成・読み取りできることと、他部署の共有へのアクセス拒否を確かめました。</p><a href="https://github.com/ns7jp/server/blob/main/docs/evidence/2026-11-10-kvm-ad-client-access-gpo.md">アカウント別の試験結果</a></div>
+                <div class="soft-skill-item"><h3>ネットワークの一次切り分け</h3><p>サイト名で開けない場合と、接続先を指定して開ける場合を比較したCodexの検証です。利用者に何を伝え、担当者に何を依頼するかを整理しています。</p><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/network-triage-lab.md">接続条件の比較と連絡例</a></div>
+            </div>
+            <p><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/support-scenarios.md">PCの動作が遅い場合など、その他の想定問い合わせと対応ログ例</a></p>
         </section>
 
         <section class="technical-skills" aria-labelledby="technical-skills-title">
@@ -143,13 +145,6 @@
                 <div class="soft-skill-item"><h3>Office・作業記録</h3><p>文書作成、Excel関数・マクロの基礎を学習。前職では仕様書に沿った動作確認・不具合報告を経験しました。</p><a href="me.html">経歴</a></div>
             </div>
             <p><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/skills-reference.md" target="_blank" rel="noopener noreferrer">技術名・ツール・補助経験の詳細</a> ／ <a href="infra-keywords.html">インフラ用語集</a></p>
-        </section>
-
-        <section class="support-cases-section" id="support-cases" aria-labelledby="support-cases-title">
-            <h2 class="section-heading"><span class="heading-icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span><span class="heading-text" id="support-cases-title">問い合わせ対応の練習資料</span></h2>
-            <p id="ticket-examples">PCの遅さ、通信障害など5つの想定問い合わせと3つの対応ログ例を、学習資料にまとめています。<strong>架空のシナリオであり、顧客対応や本人の実測実績ではありません。</strong></p>
-            <a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/support-scenarios.md" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">想定対応例と記録の書き方</a>
-            <p><a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/network-triage-lab.md">社内サイトが開けないときの切り分け</a>では、Codexが検証環境で測った結果と、別の実習で本人がどう判断したかを読めます。</p>
         </section>
     </div></div>
 </main>
