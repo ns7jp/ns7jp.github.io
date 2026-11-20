@@ -4,7 +4,7 @@
 
 [共有フォルダが開けないときの模擬チケット](https://github.com/ns7jp/ns7jp/blob/main/docs/helpdesk-intake.md)では、打ち合わせの期限を聞き、権限担当に引き継ぎ、利用者が資料を開けるまで連絡を続ける流れを紹介しています。
 
-**[公開サイトを見る](https://ns7jp.github.io/)** ／ 主作品：[サーバー構築・監視ラボ `server`](https://github.com/ns7jp/server)
+**[公開サイトを見る](https://ns7jp.github.io/)** ／ 技術実習：[サーバー構築・監視ラボ `server`](https://github.com/ns7jp/server)
 
 [![Static site check](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/static-check.yml)
 [![Infrastructure checks](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml/badge.svg)](https://github.com/ns7jp/ns7jp.github.io/actions/workflows/infra-check.yml)
@@ -13,7 +13,9 @@
 
 | 採用向けに確認したいこと | ページ |
 | --- | --- |
-| サイトが開けないとき、何を確かめるか | [ネットワークの切り分け事例と実測結果](learning-docs/network-triage-lab.md) |
+| 共有フォルダを開けない利用者に、何を聞き、どう案内するか | [受付から業務再開までの模擬チケット](https://github.com/ns7jp/ns7jp/blob/main/docs/helpdesk-intake.md) |
+| Windowsの検証環境で本人が何を確かめたか | [AIの案内による部署別の共有アクセス試験](https://github.com/ns7jp/server/blob/main/docs/evidence/2026-11-10-kvm-ad-client-access-gpo.md) |
+| サイトが開けないとき、何を確かめるか | [Codexによるネットワークの測定と利用者への連絡例](learning-docs/network-triage-lab.md) |
 | 何を作り、どこまで取り組んだか | [制作概要](https://ns7jp.github.io/project-brief.html) |
 | 実際の結果・失敗・未確認範囲 | [動作確認の記録](https://ns7jp.github.io/evidence-demo.html) |
 | 経歴・資格・応募情報 | [履歴書](https://ns7jp.github.io/resume.html)・[自己紹介](https://ns7jp.github.io/me.html) |

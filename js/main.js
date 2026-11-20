@@ -231,15 +231,6 @@
     if (filterButtons.length) {
         var showcaseItems = document.querySelectorAll('.work-showcase-item');
         var filterStatus = document.querySelector('#filter-status');
-        var preferredFilterButton = document.querySelector('.filter-btn[data-filter="infra"]');
-        if (preferredFilterButton) {
-            filterButtons.forEach(function (button) {
-                button.classList.remove('active');
-                button.setAttribute('aria-pressed', 'false');
-            });
-            preferredFilterButton.classList.add('active');
-            preferredFilterButton.setAttribute('aria-pressed', 'true');
-        }
         filterButtons.forEach(function (button) {
             button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
         });
