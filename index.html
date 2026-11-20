@@ -3,7 +3,7 @@
 ========================================================================
   ファイル名 : index.html
   役割       : ポートフォリオサイトのトップページ
-  概要       : Linuxサーバー構築・運用の主な作品、動作確認の記録、履歴書へ
+  概要       : 社内ヘルプデスクの模擬対応、Linuxの実習記録、履歴書へ
                採用担当者を最短で案内するトップページ。
   初学者向けの読み方:
     1. head でSEO、CSS、共通スクリプト（js/main.js）の読み込みを確認する
@@ -25,11 +25,11 @@
 
     <!-- ===== SEO関連 meta情報 ===== -->
     <!-- 検索結果に表示される説明文（SEOで最重要） -->
-    <meta name="description" content="未経験からインフラエンジニアを目指す島田則幸のポートフォリオ。Server Monitorを題材に、設計、構築、試験、監視、復旧、引き渡しを学んだ成果と証跡を公開しています。">
+    <meta name="description" content="社内ヘルプデスクを志望する島田則幸のポートフォリオ。物流現場での新人支援、共有フォルダの問い合わせを想定した模擬チケット、Linuxサーバーの実習記録を紹介します。">
     <!-- 作者情報 -->
     <meta name="author" content="Noriyuki Shimada">
     <!-- 検索キーワード（補助的SEO） -->
-    <meta name="keywords" content="ポートフォリオ,Linux,サーバー構築,インフラ構築,インフラ運用,Ansible,Docker,Prometheus,Grafana,Terraform,サーバー監視,転職,島田則幸,Noriyuki Shimada">
+    <meta name="keywords" content="ポートフォリオ,社内ヘルプデスク,問い合わせ一次対応,Linux,サーバー構築,インフラ運用,島田則幸,Noriyuki Shimada">
     <!-- スマホブラウザのアドレスバー色（ブランドカラーを反映） -->
     <meta name="theme-color" content="#2C3E50">
     <!-- 検索エンジン向けのインデックス指示（通常は省略可だが明示するとよい） -->
@@ -39,7 +39,7 @@
 
     <!-- ===== OGP（Open Graph Protocol）設定 ===== -->
     <!-- SNSなどでURLが共有された時に表示されるタイトル・画像・説明文を指定する。 -->
-    <meta property="og:title" content="島田則幸のポートフォリオ - インフラエンジニア志望">
+    <meta property="og:title" content="島田則幸のポートフォリオ - 社内ヘルプデスク志望">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ns7jp.github.io/">
     <meta property="og:image" content="https://ns7jp.github.io/image/og-card.png">
@@ -47,18 +47,18 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
     <meta property="og:site_name" content="島田則幸のポートフォリオ">
-    <meta property="og:description" content="Server Monitorを題材に、Linuxサーバーの設計、構築、試験、監視、復旧、引き渡しを学んだ成果を、実装済み・実測済み・未実施に分けて公開しています。">
+    <meta property="og:description" content="物流現場での新人支援、共有フォルダの問い合わせを想定した模擬チケット、Linuxサーバーの実習記録を紹介します。">
     <meta property="og:locale" content="ja_JP">
 
     <!-- ===== Twitter カード設定（X 上で大きな画像付きカード表示） ===== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="島田則幸のポートフォリオ">
-    <meta name="twitter:description" content="Linuxサーバーの設計、構築、試験、監視、復旧、引き渡しを学んだ記録です。">
+    <meta name="twitter:description" content="物流現場での新人支援、社内ヘルプデスクの模擬チケット、Linuxサーバーの実習記録を紹介します。">
     <meta name="twitter:image" content="https://ns7jp.github.io/image/og-card.png">
     <meta name="twitter:image:alt" content="Linuxサーバー構築・運用の学習 — 島田則幸のポートフォリオ">
 
     <!-- ブラウザのタブに表示されるページタイトル（他のページと「Top | サイト名」形式で統一） -->
-    <title>Top | 島田則幸のポートフォリオ - インフラエンジニア志望</title>
+    <title>Top | 島田則幸のポートフォリオ - 社内ヘルプデスク志望</title>
 
     <!-- ===== 外部スクリプト・CSSの読み込み ===== -->
     <!-- サイト共通スクリプト（vanilla JS、外部ライブラリ非依存）。ローダー解除・メニュー開閉・
@@ -91,7 +91,7 @@
           "@id": "https://ns7jp.github.io/#website",
           "url": "https://ns7jp.github.io/",
           "name": "島田則幸のポートフォリオ",
-          "description": "Linuxサーバーの構築・運用を担うインフラエンジニアを目指し、最初は手順書と確認者のあるIT事務・キッティング、監視・運用補助などから経験を積むためのポートフォリオサイト",
+          "description": "社内ヘルプデスクの模擬チケット、物流現場での新人支援、Linuxサーバーの構築・運用を学んだ記録を紹介するポートフォリオサイト",
           "inLanguage": "ja",
           "publisher": { "@id": "https://ns7jp.github.io/#person" }
         },
@@ -101,8 +101,8 @@
           "name": "島田則幸",
           "alternateName": "Noriyuki Shimada",
           "url": "https://ns7jp.github.io/",
-          "jobTitle": "インフラエンジニア志望",
-          "description": "未経験からインフラエンジニアを目指し、Server Monitorを題材に設計、構築、試験、監視、復旧、引き渡しを扱うポートフォリオを公開しています。",
+          "jobTitle": "社内ヘルプデスク志望",
+          "description": "物流現場で新人向けの地図とチェックリストを作成。社内ヘルプデスクを志望し、問い合わせの一次対応とLinuxサーバーの構築・運用を学んでいます。",
           "email": "mailto:net7jp@gmail.com",
           "sameAs": ["https://github.com/ns7jp"],
           "knowsAbout": ["Linux", "Ubuntu", "Windows Server", "Active Directory", "Ansible", "Docker", "Nginx", "Prometheus", "Grafana", "Loki", "Terraform", "Python", "サーバー構築", "インフラ運用"]
@@ -161,9 +161,8 @@
         <div class="hero-slider"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <p class="hero-greeting animate-fade-in">未経験から、インフラエンジニアを目指しています</p>
-            <h1 class="hero-title animate-slide-up"><span class="line1">Linux Server</span><span class="line2">作り、確かめ、直す</span></h1>
-            <p class="hero-description animate-fade-in-delay">Ubuntuの初期設定・監視・復旧を、手元の仮想マシンで学習しています。<br>AIの案内を受けた本人操作と、確認結果を公開しています。</p>
+            <h1 class="hero-title animate-slide-up"><span class="line1">島田 則幸</span><span class="line2">社内ヘルプデスク志望</span></h1>
+            <p class="hero-description animate-fade-in-delay">物流の現場で、新人が商品を探せるよう、倉庫の地図とチェックリストを作りました。<br>この経験を生かし、ITで困った方にも、仕事を再開するまで分かりやすく案内したいと考えています。</p>
             <div class="hero-buttons animate-fade-in-delay2">
                 <a href="https://github.com/ns7jp/ns7jp/blob/main/docs/helpdesk-intake.md" class="btn btn-primary">ヘルプデスクの模擬チケット</a>
                 <a href="#three-records" class="btn btn-outline">Linuxの実習3例</a>
@@ -177,8 +176,9 @@
         <div class="container intro-grid">
             <div class="intro-text">
                 <h2 class="section-title"><span class="title-en">About</span><span class="title-jp" id="one-minute-summary-title">島田則幸について</span></h2>
-                <p><strong>第一志望はLinuxサーバーの構築・運用です。</strong>社内ヘルプデスクの一次対応も希望しています。物流現場では、新人が商品を探せるよう、場所を示す地図とチェックリストを作りました。</p>
-                <p>製造・物流などに約15年従事し、動線と帳票の改善で自分の作業時間を1日約1時間短縮しました。手順書と確認者のあるIT事務・キッティング、監視・運用補助も希望しています。2026年10月7日からIT企業でトライアル就労・社内研修中です。勤務開始時期は相談となります（2026年11月5日確認）。</p>
+                <p>製造・物流などに約15年従事しました。物流の現場では、同僚の助言を受けて動線と帳票を見直し、自分の作業時間を1日約1時間短縮しました。<a href="https://github.com/ns7jp/ns7jp/blob/main/docs/business-improvement/picking-improvement.md">物流現場の改善記録</a></p>
+                <p>問い合わせの一次対応を学ぶため、共有フォルダが開けない方への聞き取り、担当者への引き継ぎ、業務再開の確認を模擬チケットにまとめました。<a href="https://github.com/ns7jp/ns7jp.github.io/blob/main/learning-docs/network-triage-lab.md">ネットワークの切り分け例（Codexによる検証）</a>も公開しています。</p>
+                <p>将来はLinuxサーバーの構築・運用にも携わりたいと考えています。手順書と確認者のあるIT事務・キッティング、監視・運用補助も希望しています。2026年10月7日からIT企業でトライアル就労・社内研修中です。勤務開始時期は相談となります（2026年11月5日確認）。</p>
                 <a href="me.html" class="link-more">経歴・資格を見る <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
             <a href="project-brief.html" class="intro-image"><img src="image/server-monitor.png" alt="主作品Server Monitorの監視ダッシュボード。制作概要へ進む" width="1600" height="859" loading="lazy" decoding="async"></a>
