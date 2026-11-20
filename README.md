@@ -1,6 +1,8 @@
 # 島田則幸のポートフォリオサイト
 
-Linuxサーバーの構築・運用を目指す学習と、経歴・資格を公開する静的サイトです。HTML / CSS / JavaScriptで作成し、GitHub Pagesで公開しています。
+物流現場で新人向けの地図とチェックリストを作った経験を、社内ヘルプデスクの一次対応に生かしたいと考えています。[応募用の自己紹介](https://ns7jp.github.io/resume.html#helpdesk-intro)に、志望理由をまとめました。
+
+[共有フォルダが開けないときの模擬チケット](https://github.com/ns7jp/ns7jp/blob/main/docs/helpdesk-intake.md)では、打ち合わせの期限を聞き、権限担当に引き継ぎ、利用者が資料を開けるまで連絡を続ける流れを紹介しています。
 
 **[公開サイトを見る](https://ns7jp.github.io/)** ／ 主作品：[サーバー構築・監視ラボ `server`](https://github.com/ns7jp/server)
 
@@ -11,6 +13,7 @@ Linuxサーバーの構築・運用を目指す学習と、経歴・資格を公
 
 | 採用向けに確認したいこと | ページ |
 | --- | --- |
+| サイトが開けないとき、何を確かめるか | [ネットワークの切り分け事例と実測結果](learning-docs/network-triage-lab.md) |
 | 何を作り、どこまで取り組んだか | [制作概要](https://ns7jp.github.io/project-brief.html) |
 | 実際の結果・失敗・未確認範囲 | [動作確認の記録](https://ns7jp.github.io/evidence-demo.html) |
 | 経歴・資格・応募情報 | [履歴書](https://ns7jp.github.io/resume.html)・[自己紹介](https://ns7jp.github.io/me.html) |
