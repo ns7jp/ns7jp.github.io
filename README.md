@@ -1,6 +1,6 @@
 # 島田則幸のポートフォリオサイト
 
-物流現場で新人向けの地図とチェックリストを作った経験を、社内ヘルプデスクの一次対応に生かしたいと考えています。[応募用の自己紹介](https://ns7jp.github.io/resume.html#helpdesk-intro)に、志望理由をまとめました。
+物流現場で新人向けの地図とチェックリストを作った経験を、社内ヘルプデスクの一次対応に生かしたいと考えています。利用者がどこで困るかを知り、将来は障害の原因調査や業務ツールの改善にも携わりたいです。[応募用の自己紹介](https://ns7jp.github.io/resume.html#helpdesk-intro) ／ [運用・自動化・アプリ開発につながる学習例](https://ns7jp.github.io/skills.html#engineering-paths)
 
 [共有フォルダが開けないときの模擬チケット](https://github.com/ns7jp/ns7jp/blob/main/docs/helpdesk-intake.md)では、打ち合わせの期限を聞き、権限担当に引き継ぎ、利用者が資料を開けるまで連絡を続ける流れを紹介しています。
 
